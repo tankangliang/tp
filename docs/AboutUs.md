@@ -34,7 +34,7 @@ You can reach us at the email `university@rocketmail.com`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)] 
+[[github](http://github.com/leeenhao)] 
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
@@ -44,7 +44,7 @@ You can reach us at the email `university@rocketmail.com`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/raysonkoh)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
@@ -54,7 +54,7 @@ You can reach us at the email `university@rocketmail.com`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/rtshkmr)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
