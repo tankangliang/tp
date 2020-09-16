@@ -5,11 +5,11 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `university@rocketmail.com`
 
 ## Project team
 
-### Kang Liang
+### Tan Kang Liang
 
 <img src="images/johndoe.png" width="200px">
 
@@ -17,38 +17,30 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/tankangliang)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Project Advisor
-
-### Jane Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Team Lead
-* Responsibilities: UI
-
-### Johnny Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
-
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: ?
 
-### Jean Doe
+### qwoprocks
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/johndoe)]
+[[github](http://github.com/qwoprocks)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: Dev Ops + Threading
+* Responsibilities: ?
 
-### James Doe
+### kengondor
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)] 
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: ?
+
+### raysonkoh
 
 <img src="images/johndoe.png" width="200px">
 
@@ -56,4 +48,14 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
-* Responsibilities: UI
+* Responsibilities: ?
+
+### rtshkmr
+
+<img src="images/johndoe.png" width="200px">
+
+[[github](http://github.com/johndoe)]
+[[portfolio](team/johndoe.md)]
+
+* Role: Developer
+* Responsibilities: ?
