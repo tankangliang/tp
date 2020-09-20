@@ -271,12 +271,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                              | delete a person                          | remove entries that I no longer need                                   |
 | `* * *`  | user                              | note down and be reminded when my clients have their noteworthy moments (dates) | congratulate them in a timely manner |
 | `* *`    | long-time user                    | archive/hide unused data                 | not be distracted by irrelevant data                                   |
-| `* *`    | user                              | hide private contact details             | minimize chance of someone else seeing them by accident                |
 | `* *`    | user                              | manage my flight bookings across countries |                                                                      |
 | `* *`    | user                              | manage my hotel bookings in a particular country |                                                                |
 | `* *`    | user                              | visualize my flight and hotel bookings on a timeline |                                                            |
 | `* *`    | user                              | filter business contacts by country and state |                                                                   |
 | `* *`    | user                              | undo and redo                                 | correct my mistakes easily                                        |
+| `*`      | user                              | hide private contact details             | minimize chance of someone else seeing them by accident                |
 | `*`      | user                              | find clients nearest to my current location   | find someone near me to meet                                      |
 | `*`      | user                              | customize the GUI   | make it more intuitive to use or more visually appealing                                    |
 | `*`      | proficient CLI user               | type out my emails straight from the application without moving to the browser | have a faster workflow           |
