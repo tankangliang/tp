@@ -287,6 +287,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Saving data**
+
+**MSS**
+
+1.  User enters a valid command that alters data (`client add`, `client delete`, `client note add`, etc).
+2.  Modified data gets stored in the existing data file.
+3.  TBM shows a message indicating command has been executed successfully.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Cannot write modified data to the existing data file.
+
+    * 2a1. TBM goes back to the stable state before the command was issued. 
+    * 2a2. TBM shows an error message.
+
+  Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
