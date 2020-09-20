@@ -250,15 +250,36 @@ _{Explain here how the data archiving feature will be implemented}_
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| -------- | --------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | potential user                    | see the App populated with sample data   | easily see how the App will look like when it is in use                |
+| `* * *`  | user ready to start using the App | purge all current data                   | get rid of sample/experimental data I used to explore the app          |
+| `* * *`  | new user                          | see usage instructions                   | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                              | add contact details of business contacts |                                                                        |
+| `* * *`  | user                              | add personal preferences of existing business contacts | keep track of them                                       |
+| `* * *`  | user                              | add meeting notes after meeting with existing business contacts | keep track of my meetings                       |
+| `* * *`  | user                              | add information on business deals and contract expiration dates | let TBM keep track of them                      |
+| `* * *`  | user                              | filter business contacts by country      |                                                                        |
+| `* * *`  | user                              | add cultural or relevant notes regarding a specific country | refer to these notes in the future                  |
+| `* * *`  | user                              | view my previously added information regarding a country |                                                        |
+| `* * *`  | user                              | see and search for all my clients        | easily find and view information on my clients without having to go through the entire list |
+| `* * *`  | user                              | update my clients' information           |                                                                        |
+| `* * *`  | user                              | save the information I enter             |                                                                        |
+| `* * *`  | user                              | transfer my data across different computers |                                                                     |
+| `* * *`  | user                              | manage the priority of business aspects regarding my clients (e.g. expiring contracts) |                          |
+| `* * *`  | user                              | receive suggestions on which clients to catch up on if I have not done so for quite long | maintain my relationship with my clients |
+| `* * *`  | user                              | view who is likely to be free in other timezones currently | contact them and catch up with them                  |
+| `* * *`  | user                              | delete a person                          | remove entries that I no longer need                                   |
+| `* * *`  | user                              | note down and be reminded when my clients have their noteworthy moments (dates) | congratulate them in a timely manner |
+| `* *`    | long-time user                    | archive/hide unused data                 | not be distracted by irrelevant data                                   |
+| `* *`    | user                              | hide private contact details             | minimize chance of someone else seeing them by accident                |
+| `* *`    | user                              | manage my flight bookings across countries |                                                                      |
+| `* *`    | user                              | manage my hotel bookings in a particular country |                                                                |
+| `* *`    | user                              | visualize my flight and hotel bookings on a timeline |                                                            |
+| `* *`    | user                              | filter business contacts by country and state |                                                                   |
+| `* *`    | user                              | undo and redo                                 | correct my mistakes easily                                        |
+| `*`      | user                              | find clients nearest to my current location   | find someone near me to meet                                      |
+| `*`      | user                              | customize the GUI   | make it more intuitive to use or more visually appealing                                    |
+| `*`      | proficient CLI user               | type out my emails straight from the application without moving to the browser | have a faster workflow           |
 
 ### Use cases
 
