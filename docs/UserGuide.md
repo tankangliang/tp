@@ -136,25 +136,27 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+### Adding notes for a country: `country note`
 
-Clears all entries from the address book.
+Format: `country note c/COUNTRY NOTE_STRING`
+
+* COUNTRY follows the ISO3166 Format, which can be in the form of a 2, 3 or 4 letter country code. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+
+Examples:
+
+* `country note c/SG people love to queue for things`
+
+### Clearing all entries: `clear`
+
+Deletes all information from the application, you will start from a clean slate.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
-
-### Saving the data
-
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Archiving data files `[coming in v2.0]`
-
-_{explain the feature here}_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -170,9 +172,11 @@ _{explain the feature here}_
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Country Note** | `country note c/COUNTRY NOTE_STRING` <br> e.g., `country note c/SG people love to queue for things`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Help** | `help`
+**Exit** | `exit`
