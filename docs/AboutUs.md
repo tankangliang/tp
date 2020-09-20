@@ -42,13 +42,13 @@ You can reach us at the email `university@rocketmail.com`
 
 ### raysonkoh
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/raysonkoh.png" width="200px">
 
 [[github](http://github.com/raysonkoh)]
 [[portfolio](team/johndoe.md)]
 
-* Role: Developer
-* Responsibilities: ?
+* Role: In charge of testing
+* Responsibilities: Ensures the testing of the project is done properly and on time
 
 ### rtshkmr
 
