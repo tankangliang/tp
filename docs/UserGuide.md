@@ -5,36 +5,45 @@ title: User Guide
 
 AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
-* Table of Contents
-{:toc}
+## Table of contents
+
+- [Quickstart](#Quickstart)
+- [Features](#Features)
+    - [Viewing help](#Viewing-help-help)
+    - [Adding clients](#Adding-a-client-client-add)
+    - [Viewing clients](#Viewing-clients-client-view)
+    - [Finding clients](#Finding-clients-client-find)
+    - [Updating clients](#Updating-a-client-client-update)
+    - [Deleting clients](#Deleting-a-client-client-delete)
+    - [Saving data](#Saving-data)
+    - [Adding notes](#Adding-notes-for-a-country)
+    - [Deleting notes](#Deleting-a-client-client-delete)
+    - [Updating client notes](#Updating-client-notes-client-note-update)
+    - [Filtering by country](#Filtering-clients-by-country-country-filter)
+    - [Adding country notes](#Adding-notes-for-a-country-country-note)
+    - [Clearing all entries](#Clearing-all-entries-clear)
+    - [Exiting the program](#Exiting-the-program--exit)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quickstart
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java 11
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the application file (.jar file) from [here](#https://github.com/AY2021S1-CS2103T-F11-4/tp/releases)
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Double-click the file to start the app
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Type any command in the command box and press Enter to execute it. e.g. typing [`help`](#Viewing-help-help) and
+pressing Enter will open the help window
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+5. (Recommended) The [`help`](#Viewing-help-help) command will show a quick page of some commonly used commands to get
+you started in using TBM
 
-   * **`list`** : Lists all contacts.
+   * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+   open the help window.<br>
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
-
-   * **`exit`** : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -58,29 +67,23 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help` 
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
+### Adding a client: `client add` 
 
-### Adding a person: `add`
+Adds a new client to the app.
 
-Adds a person to the address book.
+Format: `client add n/NAME p/PHONE e/EMAIL a/ADDRESS c/COUNTRY tz/TIMEZONE`
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Examples: 
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
+* `client add 5 n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RUS tz/GMT+3`
+<br> This adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok,
+Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**.
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
