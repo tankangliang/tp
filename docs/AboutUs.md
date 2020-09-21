@@ -30,15 +30,16 @@ You can reach us at the email `university@rocketmail.com`
 * Role: Integration
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
 
-### kengondor
+### Lee En Hao
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/leeenhao)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/leeenhao)] 
+[[portfolio](team/leeenhao.md)]
 
-* Role: Developer
-* Responsibilities: ?
+* Role: In charge of documentation and scheduling
+* Responsibilities: In charge of defining, assigning, and tracking project tasks as well as 
+the quality of various project documents.
 
 ### raysonkoh
 
