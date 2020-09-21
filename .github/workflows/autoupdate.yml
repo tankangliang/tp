@@ -10,5 +10,5 @@ jobs:
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           MERGE_MSG: "Branch was auto-updated."
-          RETRY_COUNT: "10"
-          RETRY_SLEEP: "500"
+          RETRY_COUNT: "2"
+          RETRY_SLEEP: "1000"
