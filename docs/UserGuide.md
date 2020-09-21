@@ -34,8 +34,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 3. Double-click the file to start the app
 
-4. Type any command in the command box and press Enter to execute it. e.g. typing [`help`](#Viewing-help-help) and
-pressing `Enter` will show all available commands that you can take
+4. Type any command in the command box and press Enter to execute it.
 
 5. (Recommended) The [`help`](#Viewing-help-help) command will show a quick page of some commonly used commands to get
 you started quickly, if you are a new user of TBM
