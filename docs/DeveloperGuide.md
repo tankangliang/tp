@@ -331,11 +331,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1.  **TBM** should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4.  **TBM** should be able to recover its previous stable state from the data file if it crashes.
+3.  The data file should be stored locally in a human-editable text file.
+4.  **TBM** should be used by a single user.
+5.  **TBM** should be able to hold up to 1000 business contacts without a noticeable sluggishness in performance for typical usage.
+6.  **TBM** should be able to hold up to 5000 total client notes without a noticeable sluggishness in performance for typical usage.
+7.  **TBM** can handle at most 10000 business contacts and at most 50000 total client notes.
+8.  **TBM** will only accept countries that are specified by the [ISO3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) specification.
+9.  **TBM** will only accept [GMT](https://en.wikipedia.org/wiki/Greenwich_Mean_Time) timezones. 
+10. **TBM** is not required to validate that the timezone of a business contact correctly matches his/her country.
+11. **TBM** should retain all functionalities even when it is not connected to the internet.
+12. The size of the **TBM** _JAR_ file should not exceed 100Mb.
 
 ### Glossary
 
