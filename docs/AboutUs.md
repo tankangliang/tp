@@ -34,7 +34,7 @@ You can reach us at the email `university@rocketmail.com`
 
 <img src="images/johndoe.png" width="200px">
 
-[[github](http://github.com/leeenhao)] 
+[[github](http://github.com/leeenhao)]
 [[portfolio](team/johndoe.md)]
 
 * Role: Developer
