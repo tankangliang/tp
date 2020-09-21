@@ -146,21 +146,25 @@ Examples:
 * `client note add 2 t/pref prefers emails to calls`
 * `client note add 4 t/meeting need to slowly convince him to sign the contract`
 
-### Clearing all entries : `clear`
+### Adding notes for a country: `country note`
 
-Clears all entries from the address book.
+Format: `country note c/COUNTRY NOTE_STRING`
 
-Format: `clear`
+* COUNTRY follows the ISO3166 Format, which can be in the form of a 2, 3 or 4 letter country code. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
 
-### Exiting the program : `exit`
+Examples:
+
+* `country note c/SG people love to queue for things`
+
+### Clearing all entries: `clear`
+
+Deletes all information from the application, you will start from a clean slate.
+
+### Exiting the program: `exit`
 
 Exits the program.
 
 Format: `exit`
-
-### Archiving data files `[coming in v2.0]`
-
-_{explain the feature here}_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -176,10 +180,12 @@ _{explain the feature here}_
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Country Note** | `country note c/COUNTRY NOTE_STRING` <br> e.g., `country note c/SG people love to queue for things`
 **Clear** | `clear`
 **Delete client** | `client delete INDEX`<br> e.g., `client delete 3`
 **Add client note** | `client note add CLIENT_INDEX t/TAG NOTE_STRING` <br> e.g., `client note add 4 t/meeting need to slowly convince him to sign the contract`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Exit** | `exit`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
 **Help** | `help`
+**List** | `list`
