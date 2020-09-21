@@ -5,14 +5,14 @@ title: Rayson Koh's Project Portfolio Page
 
 ## Project: Travelling Businessman
 
-Travelling Businessman is a desktop application that manages notes and contacts across multiple 
+Travelling Businessman is a desktop application that manages notes and contacts across multiple
 countries and timezones for businessmen who travels a lot.
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
 
-* **Code contributed**: [RepoSense link]() 
+* **Code contributed**: [RepoSense link]()
 
 * **Project management**:
 
@@ -23,4 +23,3 @@ Given below are my contributions to the project.
   * Developer Guide:
 
 * **Tools**:
-
