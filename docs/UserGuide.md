@@ -32,7 +32,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 2. Download the application file (.jar file) from [here](#https://github.com/AY2021S1-CS2103T-F11-4/tp/releases)
 
-3. Move file to a directory of your choice and run `java -jar ______.jar`
+3. Move file to a directory of your choice and run `java -jar tbm.jar`
 
 4. Type any command in the command box and press Enter to execute it.
 
