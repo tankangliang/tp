@@ -35,15 +35,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 3. Double-click the file to start the app
 
 4. Type any command in the command box and press Enter to execute it. e.g. typing [`help`](#Viewing-help-help) and
-pressing Enter will open the help window
+pressing `Enter` will show all available commands that you can take
 
 5. (Recommended) The [`help`](#Viewing-help-help) command will show a quick page of some commonly used commands to get
-you started in using TBM
+you started quickly, if you are a new user of TBM
 
    * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Alternatively, you can refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -69,7 +69,7 @@ you started in using TBM
 
 ### Viewing help: `help` 
 
-Shows a message explaining how to access the help page.
+Shows a available commands for TBM.
 
 Format: `help`
 
@@ -77,7 +77,7 @@ Format: `help`
 
 Adds a new client to the app.
 
-Format: `client add n/NAME p/PHONE e/EMAIL a/ADDRESS c/COUNTRY tz/TIMEZONE`
+Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY tz/TIMEZONE`
 
 Examples: 
 
