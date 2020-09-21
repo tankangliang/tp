@@ -122,19 +122,29 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a client: `client delete`
 
-Deletes the specified person from the address book.
+Deletes a client by their index in the list view.
 
-Format: `delete INDEX`
+Format: `client delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Examples: 
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `client delete 5`
+
+### Saving data
+
+Automatically saved after every change.
+
+### Adding client notes: `client note add`
+
+Format: `client note add CLIENT_INDEX t/TAG NOTE_STRING`
+
+Examples: 
+
+* `client note add 1 t/pref wants meetings to be as short as possible (preferably 30 mins)`
+* `client note add 2 t/pref prefers emails to calls`
+* `client note add 4 t/meeting need to slowly convince him to sign the contract`
 
 ### Adding notes for a country: `country note`
 
@@ -150,8 +160,6 @@ Examples:
 
 Deletes all information from the application, you will start from a clean slate.
 
-Format: `clear`
-
 ### Exiting the program: `exit`
 
 Exits the program.
@@ -163,7 +171,7 @@ Format: `exit`
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TBM home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -174,7 +182,8 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Add Country Note** | `country note c/COUNTRY NOTE_STRING` <br> e.g., `country note c/SG people love to queue for things`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete client** | `client delete INDEX`<br> e.g., `client delete 3`
+**Add client note** | `client note add CLIENT_INDEX t/TAG NOTE_STRING` <br> e.g., `client note add 4 t/meeting need to slowly convince him to sign the contract`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Exit** | `exit`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
