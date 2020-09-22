@@ -327,6 +327,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: Clearing all entries from TBM**
+
+**MSS**
+
+1.  User requests to clear all entries
+2.  TBM asks the user to confirm
+3.  User confirms that they want to clear all entries
+4.  TBM clears all entries
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There are no entries.
+
+  Use case ends.
+
+* 3a. User decides not to clear all entries.
+
+  Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements
