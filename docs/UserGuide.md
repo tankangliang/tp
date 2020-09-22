@@ -68,7 +68,7 @@ you started quickly, if you are a new user of TBM
 
 ### Viewing help: `help` 
 
-Shows a available commands for TBM.
+Shows commonly used commands for TBM.
 
 Format: `help`
 
