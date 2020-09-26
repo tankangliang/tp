@@ -83,46 +83,54 @@ Examples:
 * `client add 5 n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RUS tz/GMT+3`
 <br> This adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok,
 Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**.
+
+### Viewing clients: `client view`
+
+View the client specified by the index. If no index is specified, all clients will be listed.
+
+Format: `client view [INDEX]`
+
+Examples:
+* `client view 2` Views information for client at index 2
+* `client view` Lists all clients
+
+### Finding clients: `client find`
+
+Searches for clients that matches the given name.
+
+Format: `client find n/NAME`
+* The search is case-insensitive. e.g hans will match Hans
+* The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
+* Only the name is searched.
+* Only full words will be matched e.g. Han will not match Hans
+* Persons matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo Yang
+
+Examples: 
+
+* `client find n/katya` Finds all clients with names that matches **katya**.
+
+
+### Updating a client: `client update`
+
+Updates a client's information by their index in the list view.
+
+Format: `client update INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY] [tz/TIMEZONE]`
+* COUNTRY follows the ISO3166 Format, which can be in the form of a 2, 3 or 4 letter country code. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+
+Examples: 
+
+* `client update 5 n/Katya` Only updates **name**, other fields remain the same
+* `client update 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg` Updates **name**, **phone number** and **email**, other fields remain the same.
+
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
 
-### Editing a person : `edit`
 
-Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
-
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-### Locating persons by name: `find`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a client: `client delete`
 
