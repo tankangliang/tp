@@ -97,9 +97,9 @@ Examples:
 
 ### Finding clients: `client find`
 
-Searches for clients that matches the given name.
+Finds clients whose names contain any of the given keywords.
 
-Format: `client find n/NAME`
+Format: `client find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g hans will match Hans
 * The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
 * Only the name is searched.
@@ -108,7 +108,7 @@ Format: `client find n/NAME`
 
 Examples: 
 
-* `client find n/katya` Finds all clients with names that matches **katya**.
+* `client find katya` Finds all clients with names that matches **katya**.
 
 
 ### Updating a client: `client update`
