@@ -9,7 +9,7 @@ Travelling Businessman is a desktop address book application for managing client
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
 
 * **Code contributed**: [RepoSense link]()
 
@@ -25,7 +25,7 @@ Given below are my contributions to the project.
     * Added the list of user stories and labelled their priorities [\#38]()
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): 
+  * PRs reviewed (with non-trivial review comments):
   * Contributed to forum discussions (examples: )
   * Reported bugs and suggestions for other teams in the class (examples: )
 
