@@ -308,6 +308,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Finding Clients**
+
+**MSS**
+
+1.  User requests to find a client
+2.  TBM shows a list of clients that match user's query
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list of clients is empty.
+
+  Use case ends.
+
 **Use case: Saving data**
 
 **MSS**
