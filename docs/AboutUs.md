@@ -22,7 +22,7 @@ You can reach us at the email `university@rocketmail.com`
 
 ### Lim Ming Chong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/qwoprocks.png" width="200px">
 
 [[github](http://github.com/qwoprocks)]
 [[portfolio](team/qwoprocks.md)]
