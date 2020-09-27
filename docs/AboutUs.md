@@ -51,12 +51,12 @@ the quality of various project documents.
 * Role: In charge of testing
 * Responsibilities: Ensures the testing of the project is done properly and on time
 
-### rtshkmr
+### Ritesh Kumar
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rtshkmr.png" width="200px">
 
 [[github](http://github.com/rtshkmr)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/rtshkmr.md)]
 
-* Role: Developer
-* Responsibilities: ?
+* Role: Team Lead, In charge of Code Quality
+* Responsibilities: Responsible for overall project coordination and looks after code quality, ensures adherence to coding standards.
