@@ -11,14 +11,13 @@ You can reach us at the email `university@rocketmail.com`
 
 ### Tan Kang Liang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tankangliang.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/tankangliang)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/tankangliang.md)]
 
-* Role: Developer
-* Responsibilities: ?
+* Role: Deliverables and Deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
 ### Lim Ming Chong
 
