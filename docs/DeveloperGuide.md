@@ -327,6 +327,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: Filtering by country**
+
+**MSS**
+
+1. User inputs a country as filter
+2. TBM shows all clients belonging to that country
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. Invalid country is given
+    
+    * 1a1. TBM shows an error message
+    
+      Use case ends.
+      
 *{More to be added}*
 
 ### Non-Functional Requirements
