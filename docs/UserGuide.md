@@ -109,6 +109,8 @@ Format: `client find KEYWORD [MORE_KEYWORDS]`
 Examples: 
 
 * `client find katya` Finds all clients with names that matches **katya**.
+* `client find Russia` Finds all clients associated to the country of **Russia** 
+* `client find Katya Russia` Finds all clients who are either named **katya** or are associated to **Russia** 
 
 
 ### Updating a client: `client update`
