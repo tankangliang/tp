@@ -172,6 +172,36 @@ Notes:
 1. Loves dogs [tag: pref]
 ```
 
+### Updating client notes: `client note update`
+
+
+Format: `client note update CLIENT_INDEX NOTE_INDEX NOTE_STRING t/TAG`
+
+Examples:
+
+Given a list of notes:
+
+```
+Client: 3
+Notes:
+1. Loves dogs [tag: pref]
+1. Hates cats [tag: pref]
+1. Apprehensive of resigning contract [tag: meeting]
+```
+
+* `client note update 3 2 Loves cats` 
+ 
+The original note containing "Hates cats" will be changed to "Loves cats" while retaining its original tag. The resulting list will look like
+
+```
+Client: 3
+Notes:
+1. Loves dogs [tag: pref]
+1. Loves cats [tag: pref]
+1. Apprehensive of resigning contract [tag: meeting]
+```
+
+
 ### Adding notes for a country: `country note`
 
 Format: `country note c/COUNTRY NOTE_STRING`
