@@ -16,7 +16,7 @@ You can reach us at the email `university@rocketmail.com`
 [[github](https://github.com/tankangliang)]
 [[portfolio](team/tankangliang.md)]
 
-* Role: Deliverables and Deadlines
+* Role: In charge of deliverables and deadlines
 * Responsibilities: Ensure project deliverables are done on time and in the right format.
 
 ### Lim Ming Chong
@@ -26,7 +26,7 @@ You can reach us at the email `university@rocketmail.com`
 [[github](http://github.com/qwoprocks)]
 [[portfolio](team/qwoprocks.md)]
 
-* Role: Integration
+* Role: In charge of integration
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
 
 ### Lee En Hao
@@ -57,5 +57,5 @@ the quality of various project documents.
 [[github](http://github.com/rtshkmr)]
 [[portfolio](team/rtshkmr.md)]
 
-* Role: Team Lead, In charge of Code Quality
+* Role: Team Lead, In charge of code quality
 * Responsibilities: Responsible for overall project coordination and looks after code quality, ensures adherence to coding standards.
