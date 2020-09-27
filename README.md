@@ -7,3 +7,5 @@
    * It is **written in OOP fashion**.
    * It has **user and developer documentation**
    * For detailed documentation, please refer to the **[TBM Website](https://ay2021s1-cs2103t-f11-4.github.io/tp/)**.
+
+This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
