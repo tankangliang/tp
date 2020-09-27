@@ -148,6 +148,30 @@ Examples:
 * `client note add 2 t/pref prefers emails to calls`
 * `client note add 4 t/meeting need to slowly convince him to sign the contract`
 
+### Deleting client notes: `client note delete`
+
+Format: `client note delete CLIENT_INDEX NOTE_INDEX`
+
+Examples:
+
+Given a list of notes:
+
+```
+Client: 3
+Notes:
+1. Loves dogs [tag: pref]
+2. Hates cats [tag: pref]
+```
+
+`client note delete 3 2` 
+
+The above command deletes the note regarding "Hates cats". The resulting information will look like
+```
+Client: 3
+Notes:
+1. Loves dogs [tag: pref]
+```
+
 ### Adding notes for a country: `country note`
 
 Format: `country note c/COUNTRY NOTE_STRING`
