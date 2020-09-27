@@ -233,15 +233,15 @@ _{Explain here how the data archiving feature will be implemented}_
 
 ### Product scope
 
-**Target user profile**:
+**Target user profile**: Businesspeople who travel a lot
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
+* has a need to manage a significant number of clients that span multiple timezones
+* prefers desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+**Value proposition**: Manages notes, client contact details and preferences across multiple countries and timezones
 
 
 ### User stories
@@ -337,6 +337,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2a. Cannot write modified data to the existing data file.
     * 2a1. TBM goes back to the stable state before the command was issued. 
     * 2a2. TBM shows an error message.
+
+  Use case ends.
+
+**Use case: Clearing all entries from TBM**
+
+**MSS**
+
+1.  User requests to clear all entries
+2.  TBM asks the user to confirm
+3.  User confirms that they want to clear all entries
+4.  TBM clears all entries
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. There are no entries.
+
+  Use case ends.
+
+* 3a. User decides not to clear all entries.
 
   Use case ends.
 

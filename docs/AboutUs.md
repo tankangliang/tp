@@ -11,23 +11,22 @@ You can reach us at the email `university@rocketmail.com`
 
 ### Tan Kang Liang
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tankangliang.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/tankangliang)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/tankangliang.md)]
 
-* Role: Developer
-* Responsibilities: ?
+* Role: In charge of deliverables and deadlines
+* Responsibilities: Ensure project deliverables are done on time and in the right format.
 
 ### Lim Ming Chong
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/qwoprocks.png" width="200px">
 
 [[github](http://github.com/qwoprocks)]
 [[portfolio](team/qwoprocks.md)]
 
-* Role: Integration
+* Role: In charge of integration
 * Responsibilities: In charge of versioning of the code, maintaining the code repository, integrating various parts of the software to create a whole.
 
 ### Lee En Hao
@@ -51,12 +50,12 @@ the quality of various project documents.
 * Role: In charge of testing
 * Responsibilities: Ensures the testing of the project is done properly and on time
 
-### rtshkmr
+### Ritesh Kumar
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/rtshkmr.png" width="200px">
 
 [[github](http://github.com/rtshkmr)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/rtshkmr.md)]
 
-* Role: Developer
-* Responsibilities: ?
+* Role: Team Lead, In charge of code quality
+* Responsibilities: Responsible for overall project coordination and looks after code quality, ensures adherence to coding standards.

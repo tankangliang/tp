@@ -17,7 +17,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
     - [Deleting clients](#Deleting-a-client-client-delete)
     - [Saving data](#Saving-data)
     - [Adding notes](#Adding-notes-for-a-country)
-    - [Deleting notes](#Deleting-a-client-client-delete)
+    - [Deleting notes](#Deleting-client-notes-client-note-delete)
     - [Updating client notes](#Updating-client-notes-client-note-update)
     - [Filtering by country](#Filtering-clients-by-country-country-filter)
     - [Adding country notes](#Adding-notes-for-a-country-country-note)
@@ -30,19 +30,19 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java 11
 
-2. Download the application file (.jar file) from [here](#https://github.com/AY2021S1-CS2103T-F11-4/tp/releases)
+1. Download the application file (.jar file) from [here](#https://github.com/AY2021S1-CS2103T-F11-4/tp/releases)
 
-3. Move file to a directory of your choice and run `java -jar tbm.jar`
+1. Move file to a directory of your choice and run `java -jar tbm.jar`
 
-4. Type any command in the command box and press Enter to execute it.
+1. Type any command in the command box and press Enter to execute it.
 
-5. (Recommended) The [`help`](#Viewing-help-help) command will show a quick page of some commonly used commands to get
+1. (Recommended) The [`help`](#Viewing-help-help) command will show a quick page of some commonly used commands to get
 you started quickly, if you are a new user of TBM
 
    * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
    open the help window.<br>
 
-6. Alternatively, you can refer to the [Features](#features) below for details of each command.
+1. Alternatively, you can refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -147,6 +147,75 @@ Examples:
 * `client note add 1 t/pref wants meetings to be as short as possible (preferably 30 mins)`
 * `client note add 2 t/pref prefers emails to calls`
 * `client note add 4 t/meeting need to slowly convince him to sign the contract`
+
+### Deleting client notes: `client note delete`
+
+Deletes a note of a client (denoted by client's index) by the note's index.
+
+Format: `client note delete CLIENT_INDEX NOTE_INDEX`
+
+Examples:
+
+Given a list of notes:
+
+```
+Client: 3
+Notes:
+1. Loves dogs [tag: pref]
+2. Hates cats [tag: pref]
+```
+
+`client note delete 3 2` 
+
+The above command deletes the note regarding "Hates cats". The resulting information will look like
+```
+Client: 3
+Notes:
+1. Loves dogs [tag: pref]
+```
+
+### Updating client notes: `client note update`
+
+Updates a note of a client (denoted by client's index) by the note's index.
+
+Format: `client note update CLIENT_INDEX NOTE_INDEX NOTE_STRING t/TAG`
+
+Examples:
+
+Given a list of notes:
+
+```
+Client: 3
+Notes:
+1. Loves dogs [tag: pref]
+2. Hates cats [tag: pref]
+3. Apprehensive of resigning contract [tag: meeting]
+```
+
+* `client note update 3 2 Loves cats` 
+ 
+The original note containing "Hates cats" will be changed to "Loves cats" while retaining its original tag. The resulting list will look like
+
+```
+Client: 3
+Notes:
+1. Loves dogs [tag: pref]
+2. Loves cats [tag: pref]
+3. Apprehensive of resigning contract [tag: meeting]
+```
+
+### Filtering clients by country: `country filter`
+
+Filters the list of clients by a specified country.
+
+Format: `country filter [c/COUNTRY]`
+
+* COUNTRY follows the ISO3166 Format, which can be in the form of a 2, 3 or 4 letter country code. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+
+Examples: 
+
+* `country filter c/SG` or `filter c/SGP` Filters by contacts in Singapore
+* `country filter c/RU` or `filter c/RUS` Filters by contacts in Russia
 
 ### Adding notes for a country: `country note`
 
