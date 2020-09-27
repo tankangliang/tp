@@ -3,16 +3,16 @@ layout: page
 title: Lee En Hao's Project Portfolio Page
 ---
 
-## Project: Travelling Businessman 
+## Project: Travelling Businessman
 
-Travelling Businessman is a desktop application that manages notes and contacts across multiple 
+Travelling Businessman is a desktop application that manages notes and contacts across multiple
 countries and timezones for businessmen who travels a lot.
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
 
-* **New Feature**: 
+* **New Feature**:
   * Adding clients to the TBM
 
 * **Code contributed**: [RepoSense link]()
