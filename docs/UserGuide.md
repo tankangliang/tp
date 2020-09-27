@@ -150,6 +150,8 @@ Examples:
 
 ### Deleting client notes: `client note delete`
 
+Deletes a note of a client (denoted by client's index) by the note's index.
+
 Format: `client note delete CLIENT_INDEX NOTE_INDEX`
 
 Examples:
@@ -174,6 +176,7 @@ Notes:
 
 ### Updating client notes: `client note update`
 
+Updates a note of a client (denoted by client's index) by the note's index.
 
 Format: `client note update CLIENT_INDEX NOTE_INDEX NOTE_STRING t/TAG`
 
@@ -203,16 +206,16 @@ Notes:
 
 ### Filtering clients by country: `country filter`
 
+Filters the list of clients by a specified country.
+
 Format: `country filter [c/COUNTRY]`
 
 * COUNTRY follows the ISO3166 Format, which can be in the form of a 2, 3 or 4 letter country code. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
-
 
 Examples: 
 
 * `country filter c/SG` or `filter c/SGP` Filters by contacts in Singapore
 * `country filter c/RU` or `filter c/RUS` Filters by contacts in Russia
-
 
 ### Adding notes for a country: `country note`
 
