@@ -66,19 +66,19 @@ you started quickly, if you are a new user of TBM
 
 </div>
 
-### Viewing help: `help` 
+### Viewing help: `help`
 
 Shows commonly used commands for TBM.
 
 Format: `help`
 
-### Adding a client: `client add` 
+### Adding a client: `client add`
 
 Adds a new client to the app.
 
 Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY tz/TIMEZONE`
 
-Examples: 
+Examples:
 
 * `client add 5 n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RUS tz/GMT+3`
 <br> This adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok,
@@ -130,7 +130,7 @@ Deletes a client by their index in the list view.
 
 Format: `client delete INDEX`
 
-Examples: 
+Examples:
 
 * `client delete 5`
 
@@ -142,7 +142,7 @@ Automatically saved after every change.
 
 Format: `client note add CLIENT_INDEX t/TAG NOTE_STRING`
 
-Examples: 
+Examples:
 
 * `client note add 1 t/pref wants meetings to be as short as possible (preferably 30 mins)`
 * `client note add 2 t/pref prefers emails to calls`

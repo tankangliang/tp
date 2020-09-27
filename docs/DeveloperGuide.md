@@ -67,7 +67,6 @@ The sections below give more details of each component.
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
-
 The `UI` component,
 
 * Executes user commands using the `Logic` component.
@@ -308,6 +307,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Finding Clients**
+
+**MSS**
+
+1.  User requests to find a client
+2.  TBM shows a list of clients that match user's query
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list of clients is empty.
+
+  Use case ends.
+
 **Use case: Saving data**
 
 **MSS**
@@ -321,7 +335,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. Cannot write modified data to the existing data file.
-
     * 2a1. TBM goes back to the stable state before the command was issued. 
     * 2a2. TBM shows an error message.
 
@@ -378,7 +391,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6.  **TBM** should be able to hold up to 5000 total client notes without a noticeable sluggishness in performance for typical usage.
 7.  **TBM** can handle at most 10000 business contacts and at most 50000 total client notes.
 8.  **TBM** will only accept countries that are specified by the [ISO3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) specification.
-9.  **TBM** will only accept [GMT](https://en.wikipedia.org/wiki/Greenwich_Mean_Time) timezones. 
+9.  **TBM** will only accept [GMT](https://en.wikipedia.org/wiki/Greenwich_Mean_Time) timezones.
 10. **TBM** is not required to validate that the timezone of a business contact correctly matches his/her country.
 11. **TBM** should retain all functionalities even when it is not connected to the internet.
 12. The size of the **TBM** _JAR_ file should not exceed 100Mb.
