@@ -17,7 +17,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
     - [Deleting clients](#Deleting-a-client-client-delete)
     - [Saving data](#Saving-data)
     - [Adding notes](#Adding-notes-for-a-country)
-    - [Deleting notes](#Deleting-a-client-client-delete)
+    - [Deleting notes](#Deleting-client-notes-client-note-delete)
     - [Updating client notes](#Updating-client-notes-client-note-update)
     - [Filtering by country](#Filtering-clients-by-country-country-filter)
     - [Adding country notes](#Adding-notes-for-a-country-country-note)
