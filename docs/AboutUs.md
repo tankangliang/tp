@@ -31,7 +31,7 @@ You can reach us at the email `university@rocketmail.com`
 
 ### Lee En Hao
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/leeenhao.png" width="200px">
 
 [[github](http://github.com/leeenhao)]
 [[portfolio](team/leeenhao.md)]
