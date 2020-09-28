@@ -14,8 +14,8 @@ title: Travelling BusinessMan User Guide
         being just a simple contact management application.
     </p> 
     <p>
-        <strong><i>TBM</i></strong> sorts and organises your clients for you, streamlines your workflow
-        and business efficiency and so much more. All this at the convenience of the Command-Line Interface.
+        <strong><i>TBM</i></strong> sorts and organises your clients for you, streamlines your workflow,
+        improves business efficiency and so much more. All this is at the convenience of the Command-Line Interface.
         <strong><i>TBM</i></strong> does more than just tracking your clients!<br>
     </p>
 </div>
