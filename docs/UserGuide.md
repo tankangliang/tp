@@ -99,11 +99,11 @@ Examples:
 Finds clients whose names contain any of the given keywords.
 
 Format: `client find KEYWORD [MORE_KEYWORDS]`
-* The search is case-insensitive. e.g hans will match Hans
-* The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
-* Only the name is searched.
-* Only full words will be matched e.g. Han will not match Hans
-* Persons matching at least one keyword will be returned (i.e. OR search). e.g. Hans Bo will return Hans Gruber, Bo Yang
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name and country are searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo Russia` will return `Hans Gruber`, `Bo Yang`, `Alice Katya`
 
 Examples: 
 
