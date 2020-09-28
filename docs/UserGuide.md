@@ -45,11 +45,7 @@ title: Travelling BusinessMan User Guide
 
 ## Quickstart
 
-<<<<<<< HEAD
 <p>Before you start using <strong><i>TBM</i></strong>, </p>
-=======
-<p>Before you start using <strong><i>TBM</i></strong> </p>
->>>>>>> 4a8e912... Add Introduction
 
 1. Ensure you have Java 11
 
