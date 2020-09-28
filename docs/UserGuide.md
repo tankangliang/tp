@@ -11,12 +11,12 @@ title: Travelling BusinessMan User Guide
     </p>
     <p>
         <strong><i>Travelling BusinessMan</i></strong>, <strong><i>TBM</i></strong>, is a companion that goes beyond 
-        just a simple contact management application. <strong><i>TBM</i></strong> does more than just tracking your 
-        clients!<br>
+        being just a simple contact management application.
     </p> 
     <p>
         <strong><i>TBM</i></strong> sorts and organises your clients for you, streamlines your workflow
-        and business efficiency and so much more. All this at the convenience of the Command-Line Interface.<br>
+        and business efficiency and so much more. All this at the convenience of the Command-Line Interface.
+        <strong><i>TBM</i></strong> does more than just tracking your clients!<br>
     </p>
 </div>
 
@@ -45,7 +45,7 @@ title: Travelling BusinessMan User Guide
 
 ## Quickstart
 
-<p>Before you start using <strong><i>TBM</i></strong> </p>
+<p>Before you start using <strong><i>TBM</i></strong>, </p>
 
 1. Ensure you have Java 11
 
@@ -261,7 +261,7 @@ Format: `exit`
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TBM home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TBM home folder.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
