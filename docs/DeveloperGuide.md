@@ -284,20 +284,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Adding a Client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User meets secures a new business client.
+2.  User checks TBM to see if the client is somebody he knows previously.
+3.  User adds the new client information into TBM.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. The client is somebody he knew beforehand, which shows up as an entry in TBM.
+
+    * 2a1. User can choose to update/edit the client information.
 
   Use case ends.
 
@@ -311,8 +312,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to find a client
-2.  TBM shows a list of clients that match user's query
+1.  User requests to find a client.
+2.  TBM shows a list of clients that match user's query.
 
     Use case ends.
 
@@ -344,16 +345,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User inputs a country as filter
-2. TBM shows all clients belonging to that country
+1. User inputs a country as filter.
+2. TBM shows all clients belonging to that country.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Invalid country is given
+* 1a. Invalid country is given.
     
-    * 1a1. TBM shows an error message
+    * 1a1. TBM shows an error message.
     
       Use case ends.
       
@@ -361,10 +362,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to clear all entries
-2.  TBM asks the user to confirm
-3.  User confirms that they want to clear all entries
-4.  TBM clears all entries
+1.  User requests to clear all entries.
+2.  TBM asks the user to confirm.
+3.  User confirms that they want to clear all entries.
+4.  TBM clears all entries.
 
     Use case ends.
 
