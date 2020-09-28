@@ -96,7 +96,7 @@ Examples:
 
 ### Finding clients: `client find`
 
-Finds clients whose names contain any of the given keywords.
+Finds clients whose names contain any of the given keywords, or whose country of residence contains any of the given keywords.
 
 Format: `client find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
