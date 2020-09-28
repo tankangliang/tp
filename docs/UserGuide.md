@@ -20,8 +20,6 @@ title: Travelling BusinessMan User Guide
     </p>
 </div>
 
-
-
 ## Table of contents
 
 - [Quickstart](#Quickstart)
