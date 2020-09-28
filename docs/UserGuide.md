@@ -124,16 +124,6 @@ Examples:
 * `client update 5 n/Katya` Only updates **name**, other fields remain the same
 * `client update 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg` Updates **name**, **phone number** and **email**, other fields remain the same.
 
-
-### Listing all persons : `list`
-
-Shows a list of all persons in the address book.
-
-Format: `list`
-
-
-
-
 ### Deleting a client: `client delete`
 
 Deletes a client by their index in the list view.
