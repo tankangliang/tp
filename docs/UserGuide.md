@@ -18,9 +18,11 @@ title: Travelling BusinessMan User Guide
         improves business efficiency and so much more. All this is at the convenience of the Command-Line Interface.
         <strong><i>TBM</i></strong> does more than just tracking your clients!<br>
     </p>
+    <p>
+        This user guide will be a starting point for you in getting yourself oriented with how
+        <strong><i>TBM</i></strong> works and how you can integrate it into your professional journey!
+    </p>
 </div>
-
-
 
 ## Table of contents
 
