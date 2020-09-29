@@ -1,9 +1,28 @@
 ---
 layout: page
-title: User Guide
+title: Travelling BusinessMan User Guide
 ---
-
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+<div>
+    <div>
+        <img src="images/TBM.png" width="160px">
+    </div>
+    <p>
+        <h3><i>Welcome to the Travelling BusinessMan User Guide!</i></h3>
+    </p>
+    <p>
+        <strong><i>Travelling BusinessMan</i></strong>, <strong><i>TBM</i></strong>, is a companion that goes beyond 
+        being just a simple contact management application.
+    </p> 
+    <p>
+        <strong><i>TBM</i></strong> sorts and organises your clients for you, streamlines your workflow,
+        improves business efficiency and so much more. All this is at the convenience of the Command-Line Interface.
+        <strong><i>TBM</i></strong> does more than just tracking your clients!<br>
+    </p>
+    <p>
+        This user guide will be a starting point for you in getting yourself oriented with how
+        <strong><i>TBM</i></strong> works and how you can integrate it into your professional journey!
+    </p>
+</div>
 
 ## Table of contents
 
@@ -27,6 +46,8 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quickstart
+
+<p>Before you start using <strong><i>TBM</i></strong>, </p>
 
 1. Ensure you have Java 11
 
@@ -242,7 +263,7 @@ Format: `exit`
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TBM home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TBM home folder.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -282,37 +282,33 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `TBM` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Adding a Client**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User meets secures a new business deal/client
+2.  User attempts to add the all associated parties and their information into TBM.
+3.  User successfully adds the all new information into TBM.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. A party has a prior entry in TBM, which shows that User has a previous professional encounter with the party. 
+
+    * 2a1. User does not add the new party as it will duplicate entries in the TBM.
+    * 2a2. User can choose to update/edit the client information instead.
 
   Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
 
 **Use case: Finding Clients**
 
 **MSS**
 
-1.  User requests to find a client
-2.  TBM shows a list of clients that match user's query
+1.  User requests to find a client.
+2.  TBM shows a list of clients that match user's query.
 
     Use case ends.
 
@@ -335,6 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. Cannot write modified data to the existing data file.
+
     * 2a1. TBM goes back to the stable state before the command was issued. 
     * 2a2. TBM shows an error message.
 
@@ -344,16 +341,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User inputs a country as filter
-2. TBM shows all clients belonging to that country
+1. User inputs a country as filter.
+2. TBM shows all clients belonging to that country.
 
    Use case ends.
 
 **Extensions**
 
-* 1a. Invalid country is given
+* 1a. Invalid country is given.
     
-    * 1a1. TBM shows an error message
+    * 1a1. TBM shows an error message.
     
       Use case ends.
       
@@ -361,10 +358,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to clear all entries
-2.  TBM asks the user to confirm
-3.  User confirms that they want to clear all entries
-4.  TBM clears all entries
+1.  User requests to clear all entries.
+2.  TBM asks the user to confirm.
+3.  User confirms that they want to clear all entries.
+4.  TBM clears all entries.
 
     Use case ends.
 
