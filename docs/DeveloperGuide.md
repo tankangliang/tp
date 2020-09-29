@@ -1,7 +1,18 @@
 ---
 layout: page
-title: Developer Guide
+title: Travelling BusinessMan, TBM Developer Guide
 ---
+
+## **Introduction**
+
+### Purpose
+
+This documentation specifies the architecture and deisgn decisions for the application, <strong><i>Travelling BusinessMan</i></strong>.
+
+### Scope
+
+This describes the software architecture and software design decisions for the implementation of <strong><i>TBM</i></strong>. The intended audience is the develeopers, designers and testers for the application. 
+
 * Table of Contents
 {:toc}
 
