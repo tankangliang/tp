@@ -288,25 +288,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User meets secures a new business client.
-2.  User checks TBM to see if the client is somebody he knows previously.
-3.  User adds the new client information into TBM.
+1.  User meets secures a new business deal/client
+2.  User attempts to add the all associated parties and their information into TBM.
+3.  User successfully adds the all new information into TBM.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The client is somebody he knew beforehand, which shows up as an entry in TBM.
+* 2a. A party has a prior entry in TBM, which shows that User has a previous professional encounter with the party. 
 
-    * 2a1. User can choose to update/edit the client information.
+    * 2a1. User does not add the new party as it will duplicate entries in the TBM.
+    * 2a2. User can choose to update/edit the client information instead.
 
   Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. AddressBook shows an error message.
-
-      Use case resumes at step 2.
 
 **Use case: Finding Clients**
 
@@ -336,6 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. Cannot write modified data to the existing data file.
+
     * 2a1. TBM goes back to the stable state before the command was issued. 
     * 2a2. TBM shows an error message.
 
