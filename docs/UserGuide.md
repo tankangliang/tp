@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Travelling BusinessMan User Guide
+title: User Guide
 ---
 <div>
     <div>
@@ -26,25 +26,7 @@ title: Travelling BusinessMan User Guide
 
 ## Table of contents
 
-- [Table of contents](#table-of-contents)
-- [Quickstart](#quickstart)
-- [Features](#features)
-  - [Viewing help: `help`](#viewing-help-help)
-  - [Adding a client: `client add`](#adding-a-client-client-add)
-  - [Viewing clients: `client view`](#viewing-clients-client-view)
-  - [Finding clients: `client find`](#finding-clients-client-find)
-  - [Updating a client: `client update`](#updating-a-client-client-update)
-  - [Deleting a client: `client delete`](#deleting-a-client-client-delete)
-  - [Saving data](#saving-data)
-  - [Adding client notes: `client note add`](#adding-client-notes-client-note-add)
-  - [Deleting client notes: `client note delete`](#deleting-client-notes-client-note-delete)
-  - [Updating client notes: `client note update`](#updating-client-notes-client-note-update)
-  - [Filtering clients by country: `country filter`](#filtering-clients-by-country-country-filter)
-  - [Adding notes for a country: `country note`](#adding-notes-for-a-country-country-note)
-  - [Clearing all entries: `clear`](#clearing-all-entries-clear)
-  - [Exiting the program: `exit`](#exiting-the-program-exit)
-- [FAQ](#faq)
-- [Command summary](#command-summary)
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
