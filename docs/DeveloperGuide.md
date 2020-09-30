@@ -1,7 +1,41 @@
 ---
 layout: page
-title: Travelling BusinessMan, TBM Developer Guide
+title: Travelling BusinessMan(TBM) Developer Guide
 ---
+
+
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [**Introduction**](#introduction)
+  - [Purpose](#purpose)
+  - [Scope](#scope)
+- [**Setting up, getting started**](#setting-up-getting-started)
+- [**Design**](#design)
+  - [Architecture](#architecture)
+  - [UI component](#ui-component)
+  - [Logic component](#logic-component)
+  - [Model component](#model-component)
+  - [Storage component](#storage-component)
+  - [Common classes](#common-classes)
+- [**Implementation**](#implementation)
+  - [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
+    - [Proposed Implementation](#proposed-implementation)
+    - [Design consideration:](#design-consideration)
+      - [Aspect: How undo & redo executes](#aspect-how-undo--redo-executes)
+  - [\[Proposed\] Data archiving](#proposed-data-archiving)
+- [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
+- [**Appendix: Requirements**](#appendix-requirements)
+  - [Product scope](#product-scope)
+  - [User stories](#user-stories)
+  - [Use cases](#use-cases)
+  - [Non-Functional Requirements](#non-functional-requirements)
+  - [Glossary](#glossary)
+- [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
+  - [Launch and shutdown](#launch-and-shutdown)
+  - [Deleting a person](#deleting-a-person)
+  - [Saving data](#saving-data)
+
 
 ## **Introduction**
 
