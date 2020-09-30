@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Travelling BusinessMan, TBM Developer Guide
+title: Developer Guide
 ---
 
 ## **Introduction**
@@ -407,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **TBM**: Initialism for Travelling Businessman
+* **TBM**: Initialism for Travelling BusinessMan
 * **Client**: Refers to a person whom the user is conducting his/her business with
 * **Business Contact**: Synonymous with **Client**
 * **GMT**: [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time)

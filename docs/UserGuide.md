@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Travelling BusinessMan User Guide
+title: User Guide
 ---
 <div>
     <div>
@@ -24,24 +24,10 @@ title: Travelling BusinessMan User Guide
     </p>
 </div>
 
-## Table of contents
+## Table of contents  
 
-- [Quickstart](#Quickstart)
-- [Features](#Features)
-    - [Viewing help](#Viewing-help-help)
-    - [Adding clients](#Adding-a-client-client-add)
-    - [Viewing clients](#Viewing-clients-client-view)
-    - [Finding clients](#Finding-clients-client-find)
-    - [Updating clients](#Updating-a-client-client-update)
-    - [Deleting clients](#Deleting-a-client-client-delete)
-    - [Saving data](#Saving-data)
-    - [Adding notes](#Adding-notes-for-a-country)
-    - [Deleting notes](#Deleting-client-notes-client-note-delete)
-    - [Updating client notes](#Updating-client-notes-client-note-update)
-    - [Filtering by country](#Filtering-clients-by-country-country-filter)
-    - [Adding country notes](#Adding-notes-for-a-country-country-note)
-    - [Clearing all entries](#Clearing-all-entries-clear)
-    - [Exiting the program](#Exiting-the-program--exit)
+* Table of Contents
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
