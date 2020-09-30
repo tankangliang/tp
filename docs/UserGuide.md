@@ -24,8 +24,9 @@ title: User Guide
     </p>
 </div>
 
-## Table of contents
+## Table of contents  
 
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
