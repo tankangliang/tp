@@ -295,7 +295,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `TBM` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Adding a Client**
+**UC1 - Adding a Client**
 
 **MSS**
 
@@ -314,7 +314,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Finding Clients**
+**UC2 - Finding Clients**
 
 **MSS**
 
@@ -329,7 +329,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Saving data**
+**UC3 - Saving data**
 
 **MSS**
 
@@ -348,7 +348,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Filtering by country**
+**UC4 - Filtering by country**
 
 **MSS**
 
@@ -365,7 +365,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
       
-**Use case: Clearing all entries from TBM**
+**UC5 - Clearing all entries from TBM**
 
 **MSS**
 
