@@ -333,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User enters a valid command that alters data (eg <ins>`adding a client (UC1)`</ins>).
+1.  User enters a valid command that alters data (E.g. <u>`adding a client (UC1)`</u>).
 2.  Modified data gets stored in the existing data file.
 3.  TBM shows a message indicating command has been executed successfully.
 
