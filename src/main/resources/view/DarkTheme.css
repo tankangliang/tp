@@ -350,3 +350,19 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#helpContent #commonCommands {
+    -fx-font-size: 12pt;
+    -fx-font-family: "Consolas";
+    -fx-text-fill: #DDDDDD;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1pt;
+}
+
+#helpContent #helpTitle {
+    -fx-font-size: 16pt;
+}
+
+#helpContent #userGuideUrl {
+    -fx-font-size: 11pt;
+}
