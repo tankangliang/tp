@@ -14,12 +14,14 @@ import seedu.address.model.note.Note;
  * name. It contains a list of country notes.
  */
 public class Country {
+
     private final String countryName;
     private final String countryCode;
     private final ArrayList<Note> countryNotes;
 
     /**
      * Initializes a Country by its countryCode.
+     *
      * @param countryCode The ISO3166 2-letter country code of the country to be initialized.
      */
     public Country(String countryCode) {
@@ -30,6 +32,7 @@ public class Country {
 
     /**
      * Gets the list of country notes associated with this country.
+     *
      * @return The list of country notes associated with this country.
      */
     public List<Note> getCountryNotes() {
@@ -38,6 +41,7 @@ public class Country {
 
     /**
      * Adds a country note for this country.
+     *
      * @param countryNote The country note to be added.
      */
     public void addCountryNote(Note countryNote) {
@@ -47,6 +51,7 @@ public class Country {
 
     /**
      * Gets the country name of this country.
+     *
      * @return The country name of this country.
      */
     public String getCountryName() {
@@ -55,6 +60,7 @@ public class Country {
 
     /**
      * Gets the country code of this country.
+     *
      * @return The country code of this country.
      */
     public String getCountryCode() {

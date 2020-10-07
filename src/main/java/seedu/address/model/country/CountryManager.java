@@ -7,6 +7,7 @@ import java.util.Locale;
  * A high-level class responsible for mapping ISO3166 2-letter country codes to countries.
  */
 public class CountryManager {
+
     //TODO: Should include checking for 3-letter Country Code?
     private final HashMap<String, Country> countryCodeMap;
 
@@ -17,8 +18,18 @@ public class CountryManager {
         countryCodeMap = initCountryCodeMap();
     }
 
+    private static HashMap<String, Country> initCountryCodeMap() {
+        HashMap<String, Country> countryCodeMap = new HashMap<>();
+        String[] countryCodes = Locale.getISOCountries();
+        for (String countryCode : countryCodes) {
+            countryCodeMap.put(countryCode, new Country(countryCode));
+        }
+        return countryCodeMap;
+    }
+
     /**
      * Returns the country that is identified by the given country code.
+     *
      * @param countryCode The ISO3166 2-letter country code of the particular country.
      * @return The country that is identified by the given country code.
      */
@@ -28,15 +39,6 @@ public class CountryManager {
         } else {
             throw new NullPointerException();
         }
-    }
-
-    private static HashMap<String, Country> initCountryCodeMap() {
-        HashMap<String, Country> countryCodeMap = new HashMap<>();
-        String[] countryCodes = Locale.getISOCountries();
-        for (String countryCode : countryCodes) {
-            countryCodeMap.put(countryCode, new Country(countryCode));
-        }
-        return countryCodeMap;
     }
 
 }

@@ -8,6 +8,7 @@ import java.util.Locale;
 import org.junit.jupiter.api.Test;
 
 public class CountryManagerTest {
+
     //TODO: Add more tests if decide to include checking for 3-letter Country Code
     private static final String[] countryCodes = Locale.getISOCountries();
 

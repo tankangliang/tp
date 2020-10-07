@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.note.Note;
 
 public class CountryTest {
+
     private static final String[] countryCodes = Locale.getISOCountries();
 
     @Test
@@ -47,7 +48,7 @@ public class CountryTest {
 
     @Test
     public void addCountryNotes_nullNote_throwsNullPointerException() {
-        for (String countryCode: countryCodes) {
+        for (String countryCode : countryCodes) {
             Country country = new Country(countryCode);
             assertThrows(NullPointerException.class, () -> {
                 NoteStub genericNote = null;
@@ -60,5 +61,6 @@ public class CountryTest {
      * A stub of Note which is an empty class
      */
     private static class NoteStub extends Note {
+
     }
 }
