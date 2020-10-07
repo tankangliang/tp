@@ -56,11 +56,4 @@ public class CountryTest {
             });
         }
     }
-
-    /**
-     * A stub of Note which is an empty class
-     */
-    private static class NoteStub extends Note {
-
-    }
 }

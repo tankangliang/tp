@@ -1,5 +1,6 @@
 package seedu.address.model.country;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -19,6 +20,26 @@ public class CountryManagerTest {
         for (String countryCode : countryCodes) {
             Country country = countryManager.getCountryFromCode(countryCode);
             assertNotNull(country);
+        }
+    }
+
+    @Test
+    public void getCountryFromCode_multipleRefSameCountry_reflectChanges() {
+        CountryManager countryManager = new CountryManager();
+        for (String countryCode : countryCodes) {
+            Country countryFirstRef = countryManager.getCountryFromCode(countryCode);
+            Country countrySecondRef = countryManager.getCountryFromCode(countryCode);
+
+            assertEquals(0, countryFirstRef.getCountryNotes().size());
+            assertEquals(0, countrySecondRef.getCountryNotes().size());
+
+            countryFirstRef.addCountryNote(new NoteStub());
+            assertEquals(1, countryFirstRef.getCountryNotes().size());
+            assertEquals(1, countrySecondRef.getCountryNotes().size());
+
+            countrySecondRef.addCountryNote(new NoteStub());
+            assertEquals(2, countryFirstRef.getCountryNotes().size());
+            assertEquals(2, countrySecondRef.getCountryNotes().size());
         }
     }
 
