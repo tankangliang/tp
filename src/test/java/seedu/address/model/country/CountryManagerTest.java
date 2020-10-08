@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Test;
 public class CountryManagerTest {
 
     //TODO: Add more tests if decide to include checking for 3-letter Country Code
-    private static final String[] countryCodes = Locale.getISOCountries();
+    private static final String[] COUNTRY_CODES = Locale.getISOCountries();
 
     @Test
     public void getCountryFromCode_validCode_validCountry() {
         CountryManager countryManager = new CountryManager();
 
-        for (String countryCode : countryCodes) {
+        for (String countryCode : COUNTRY_CODES) {
             Country country = countryManager.getCountryFromCode(countryCode);
             assertNotNull(country);
         }
@@ -26,7 +26,7 @@ public class CountryManagerTest {
     @Test
     public void getCountryFromCode_multipleRefSameCountry_reflectChanges() {
         CountryManager countryManager = new CountryManager();
-        for (String countryCode : countryCodes) {
+        for (String countryCode : COUNTRY_CODES) {
             Country countryFirstRef = countryManager.getCountryFromCode(countryCode);
             Country countrySecondRef = countryManager.getCountryFromCode(countryCode);
 

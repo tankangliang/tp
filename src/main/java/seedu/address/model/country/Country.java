@@ -2,10 +2,10 @@ package seedu.address.model.country;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Locale;
+import java.util.Set;
 
 import seedu.address.model.note.Note;
 
@@ -17,7 +17,7 @@ public class Country {
 
     private final String countryName;
     private final String countryCode;
-    private final ArrayList<Note> countryNotes;
+    private final LinkedHashSet<Note> countryNotes;
 
     /**
      * Initializes a Country by its countryCode.
@@ -26,8 +26,8 @@ public class Country {
      */
     public Country(String countryCode) {
         this.countryCode = countryCode;
-        this.countryName = new Locale("", countryCode).getDisplayCountry();
-        this.countryNotes = new ArrayList<>();
+        this.countryName = new Locale("", countryCode).getDisplayName();
+        this.countryNotes = new LinkedHashSet<>();
     }
 
     /**
@@ -35,8 +35,8 @@ public class Country {
      *
      * @return The list of country notes associated with this country.
      */
-    public List<Note> getCountryNotes() {
-        return Collections.unmodifiableList(this.countryNotes);
+    public Set<Note> getCountryNotes() {
+        return Collections.unmodifiableSet(this.countryNotes);
     }
 
     /**

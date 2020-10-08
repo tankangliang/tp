@@ -40,5 +40,4 @@ public class CountryManager {
             throw new NullPointerException();
         }
     }
-
 }
