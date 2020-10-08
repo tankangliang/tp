@@ -26,7 +26,7 @@ public class Country {
      */
     public Country(String countryCode) {
         this.countryCode = countryCode;
-        this.countryName = new Locale("", countryCode).getDisplayName();
+        this.countryName = new Locale("", countryCode).getDisplayCountry();
         this.countryNotes = new ArrayList<>();
     }
 
