@@ -20,40 +20,40 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.client.Client;
+import seedu.address.testutil.ClientBuilder;
 
 public class ClientAddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullClient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ClientAddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_clientAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingClientAdded modelStub = new ModelStubAcceptingClientAdded();
+        Client validClient = new ClientBuilder().build();
 
-        CommandResult commandResult = new ClientAddCommand(validPerson).execute(modelStub);
+        CommandResult commandResult = new ClientAddCommand(validClient).execute(modelStub);
 
-        assertEquals(String.format(ClientAddCommand.MESSAGE_SUCCESS, validPerson), commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(ClientAddCommand.MESSAGE_SUCCESS, validClient), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validClient), modelStub.clientsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person validPerson = new PersonBuilder().build();
-        ClientAddCommand clientAddCommand = new ClientAddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateClient_throwsCommandException() {
+        Client validClient = new ClientBuilder().build();
+        ClientAddCommand addCommand = new ClientAddCommand(validClient);
+        ModelStub modelStub = new ModelStubWithClient(validClient);
 
-        assertThrows(CommandException.class, ClientAddCommand.MESSAGE_DUPLICATE_PERSON, () -> clientAddCommand.execute(modelStub));
+        assertThrows(CommandException.class, ClientAddCommand.MESSAGE_DUPLICATE_CLIENT, () -> addCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
+        Client alice = new ClientBuilder().withName("Alice").build();
+        Client bob = new ClientBuilder().withName("Bob").build();
         ClientAddCommand addAliceCommand = new ClientAddCommand(alice);
         ClientAddCommand addBobCommand = new ClientAddCommand(bob);
 
@@ -70,7 +70,7 @@ public class ClientAddCommandTest {
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
-        // different person -> returns false
+        // different client -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
@@ -109,7 +109,7 @@ public class ClientAddCommandTest {
         }
 
         @Override
-        public void addPerson(Person person) {
+        public void addClient(Client client) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -124,65 +124,65 @@ public class ClientAddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Person person) {
+        public boolean hasClient(Client client) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Person target) {
+        public void deleteClient(Client target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setPerson(Person target, Person editedPerson) {
+        public void setClient(Client target, Client editedClient) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Person> getFilteredPersonList() {
+        public ObservableList<Client> getFilteredClientList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Person> predicate) {
+        public void updateFilteredClientList(Predicate<Client> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single client.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithClient extends ModelStub {
+        private final Client client;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithClient(Client client) {
+            requireNonNull(client);
+            this.client = client;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasClient(Client client) {
+            requireNonNull(client);
+            return this.client.isSameClient(client);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the client being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingClientAdded extends ModelStub {
+        final ArrayList<Client> clientsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasClient(Client client) {
+            requireNonNull(client);
+            return clientsAdded.stream().anyMatch(client::isSameClient);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addClient(Client client) {
+            requireNonNull(client);
+            clientsAdded.add(client);
         }
 
         @Override

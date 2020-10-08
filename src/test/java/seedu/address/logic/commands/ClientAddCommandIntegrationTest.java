@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,8 +10,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.client.Client;
+import seedu.address.testutil.ClientBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code ClientAddCommand}.
@@ -26,20 +26,19 @@ public class ClientAddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+    public void execute_newClient_success() {
+        Client validClient = new ClientBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
-
-        assertCommandSuccess(new ClientAddCommand(validPerson), model,
-                String.format(ClientAddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+        expectedModel.addClient(validClient);
+        assertCommandSuccess(new ClientAddCommand(validClient), model,
+                String.format(ClientAddCommand.MESSAGE_SUCCESS, validClient), expectedModel);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new ClientAddCommand(personInList), model, ClientAddCommand.MESSAGE_DUPLICATE_PERSON);
+    public void execute_duplicateClient_throwsCommandException() {
+        Client clientInList = model.getAddressBook().getClientList().get(0);
+        assertCommandFailure(new ClientAddCommand(clientInList), model, ClientAddCommand.MESSAGE_DUPLICATE_CLIENT);
     }
 
 }
