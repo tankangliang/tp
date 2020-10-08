@@ -39,7 +39,8 @@ public class EditCommandParser implements Parser<ClientEditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientEditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ClientEditCommand.MESSAGE_USAGE), pe);
         }
 
         EditClientDescriptor editClientDescriptor = new EditClientDescriptor();
