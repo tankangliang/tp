@@ -14,9 +14,9 @@ import seedu.address.model.client.Client;
 import seedu.address.testutil.ClientBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code AddCommand}.
+ * Contains integration tests (interaction with the Model) for {@code ClientAddCommand}.
  */
-public class AddCommandIntegrationTest {
+public class ClientAddCommandIntegrationTest {
 
     private Model model;
 
@@ -31,15 +31,14 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addClient(validClient);
-
-        assertCommandSuccess(new AddCommand(validClient), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validClient), expectedModel);
+        assertCommandSuccess(new ClientAddCommand(validClient), model,
+                String.format(ClientAddCommand.MESSAGE_SUCCESS, validClient), expectedModel);
     }
 
     @Test
     public void execute_duplicateClient_throwsCommandException() {
         Client clientInList = model.getAddressBook().getClientList().get(0);
-        assertCommandFailure(new AddCommand(clientInList), model, AddCommand.MESSAGE_DUPLICATE_CLIENT);
+        assertCommandFailure(new ClientAddCommand(clientInList), model, ClientAddCommand.MESSAGE_DUPLICATE_CLIENT);
     }
 
 }

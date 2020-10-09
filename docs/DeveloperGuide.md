@@ -272,7 +272,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                              | add cultural or relevant notes regarding a specific country | refer to these notes in the future                  |
 | `* * *`  | user                              | view my previously added information regarding a country |                                                        |
 | `* * *`  | user                              | see and search for all my clients        | easily find and view information on my clients without having to go through the entire list |
-| `* * *`  | user                              | update my clients' information           |                                                                        |
+| `* * *`  | user                              | edit my clients' information           |                                                                        |
 | `* * *`  | user                              | save the information I enter             |                                                                        |
 | `* * *`  | user                              | transfer my data across different computers |                                                                     |
 | `* * *`  | user                              | manage the priority of business aspects regarding my clients (e.g. expiring contracts) |                          |

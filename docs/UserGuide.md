@@ -119,17 +119,17 @@ Examples:
 * `client find Katya Russia` Finds all clients who are either named **katya** or are associated to **Russia** 
 
 
-### Updating a client: `client update`
+### Editing a client: `client edit`
 
-Updates a client's information by their index in the list view.
+Edits a client's information by their index in the list view.
 
-Format: `client update INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY] [tz/TIMEZONE]`
+Format: `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY] [tz/TIMEZONE]`
 * COUNTRY follows the ISO3166 Format, which can be in the form of a 2, 3 or 4 letter country code. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
 
 Examples: 
 
-* `client update 5 n/Katya` Only updates **name**, other fields remain the same
-* `client update 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg` Updates **name**, **phone number** and **email**, other fields remain the same.
+* `client edit 5 n/Katya` Only edits **name**, other fields remain the same
+* `client edit 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg` Edits **name**, **phone number** and **email**, other fields remain the same.
 
 ### Deleting a client: `client delete`
 
@@ -181,11 +181,11 @@ Notes:
 1. Loves dogs [tag: pref]
 ```
 
-### Updating client notes: `client note update`
+### Editing client notes: `client note edit`
 
-Updates a note of a client (denoted by client's index) by the note's index.
+Edits a note of a client (denoted by client's index) by the note's index.
 
-Format: `client note update CLIENT_INDEX NOTE_INDEX NOTE_STRING t/TAG`
+Format: `client note edit CLIENT_INDEX NOTE_INDEX NOTE_STRING t/TAG`
 
 Examples:
 
@@ -199,7 +199,7 @@ Notes:
 3. Apprehensive of resigning contract [tag: meeting]
 ```
 
-* `client note update 3 2 Loves cats` 
+* `client note edit 3 2 Loves cats` 
  
 The original note containing "Hates cats" will be changed to "Loves cats" while retaining its original tag. The resulting list will look like
 
