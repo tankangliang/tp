@@ -13,6 +13,12 @@ public class CountryNoteCommand extends Command {
     private final Country country;
     private final Note countryNote;
 
+    /**
+     * Initializes a CountryNoteCommand.
+     *
+     * @param country     The country where the countryNote will be associated to.
+     * @param countryNote The countryNote to be added.
+     */
     public CountryNoteCommand(Country country, Note countryNote) {
         this.country = country;
         this.countryNote = countryNote;
@@ -32,7 +38,8 @@ public class CountryNoteCommand extends Command {
     public boolean equals(Object obj) {
         if (obj instanceof CountryNoteCommand) {
             CountryNoteCommand other = (CountryNoteCommand) obj;
-            return country.getCountryCode().equals(other.country.getCountryCode()) && countryNote.equals(other.countryNote);
+            return country.getCountryCode().equals(other.country.getCountryCode()) && countryNote
+                    .equals(other.countryNote);
         }
         return false;
     }

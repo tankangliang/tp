@@ -5,9 +5,14 @@ import static java.util.Objects.requireNonNull;
 public class Note {
 
     // TODO: Add implementation
-    public static String MESSAGE_CONSTRAINTS = "message contraints for note";
+    public static final String MESSAGE_CONSTRAINTS = "message contraints for note";
     protected final String noteContents;
 
+    /**
+     * To be added.
+     *
+     * @param content to be added
+     */
     public Note(String content) {
         requireNonNull(content);
         noteContents = content;
@@ -21,13 +26,13 @@ public class Note {
         }
         return false;
     }
-//    @Override
-//    public String toString() {
-//        return noteContents;
-//    }
 
-//    @Override
-//    public int hashCode() {
-//
-//    }
+    //  @Override
+    //  public String toString() {
+    //      return noteContents;
+    //  }
+
+    //  @Override
+    //  public int hashCode() {
+    //  }
 }

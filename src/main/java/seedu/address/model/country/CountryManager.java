@@ -23,6 +23,11 @@ public class CountryManager {
         countryCodeMap = initCountryCodeMap();
     }
 
+    /**
+     * Checks if countryCode is a valid ISO3166 code.
+     * @param countryCode The country code.
+     * @return Whether countryCode is a valid ISO3166 code.
+     */
     public static boolean isValidCode(String countryCode) {
         for (int i = 0; i < COUNTRY_CODES.length; i++) {
             if (COUNTRY_CODES[i].equals(countryCode)) {
@@ -32,6 +37,12 @@ public class CountryManager {
         return false;
     }
 
+    /**
+     * Checks if {@code country} contains {@code countryNote}.
+     * @param country The country to be checked.
+     * @param countryNote The note to be checked.
+     * @return Whether {@code country} contains {@code countryNote}.
+     */
     public boolean hasCountryNote(Country country, Note countryNote) {
         if (!isValidCode(country.getCountryCode())) {
             return false;
@@ -39,6 +50,11 @@ public class CountryManager {
         return countryCodeMap.get(country.getCountryCode()).hasCountryNote(countryNote);
     }
 
+    /**
+     * Adds the {@code countryNote} to the {@code country}.
+     * @param country The country where the countryNote will be added.
+     * @param countryNote The country note to be added.
+     */
     public void addCountryNote(Country country, Note countryNote) {
         if (isValidCode(country.getCountryCode())) {
             countryCodeMap.get(country.getCountryCode()).addCountryNote(countryNote);
