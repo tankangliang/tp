@@ -4,10 +4,12 @@ import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
+import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 
 /**
@@ -15,37 +17,64 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class HelpWindow extends UiPart<Stage> {
 
-    public static final String USERGUIDE_URL = "https://se-education.org/addressbook-level3/UserGuide.html";
-    public static final String HELP_MESSAGE = "Refer to the user guide: " + USERGUIDE_URL;
+    public static final String USERGUIDE_URL = "https://ay2021s1-cs2103t-f11-4.github.io/tp/UserGuide.html";
+    public static final String USERGUIDE_MESSAGE = "For more information, refer to the user guide: ";
+    public static final String HELP_TITLE = "Commonly used commands";
+    public static final String COMMON_COMMANDS =
+            "client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY tz/TIMEZONE\n"
+            + "client view [INDEX]\n"
+            + "client find KEYWORD [MORE_KEYWORDS]\n"
+            + "client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY] [tz/TIMEZONE]\n"
+            + "client delete INDEX\n"
+            + "client note add CLIENT_INDEX t/TAG NOTE_STRING\n"
+            + "client note delete CLIENT_INDEX NOTE_INDEX\n"
+            + "client note update CLIENT_INDEX NOTE_INDEX NOTE_STRING t/TAG\n"
+            + "country filter [c/COUNTRY]\n"
+            + "country note c/COUNTRY NOTE_STRING";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
-    private Button copyButton;
+    private Label helpTitle;
 
     @FXML
-    private Label helpMessage;
+    private Label commonCommands;
+
+    @FXML
+    private Label userGuideMessage;
+
+    @FXML
+    private Hyperlink userGuideUrl;
+
+    @FXML
+    private Button copyButton;
 
     /**
      * Creates a new HelpWindow.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root    Stage to use as the root of the HelpWindow.
+     * @param mainApp The main application instance, used for the getHostServices() method.
      */
-    public HelpWindow(Stage root) {
+    public HelpWindow(Stage root, MainApp mainApp) {
         super(FXML, root);
-        helpMessage.setText(HELP_MESSAGE);
+        helpTitle.setText(HELP_TITLE);
+        commonCommands.setText(COMMON_COMMANDS);
+        userGuideMessage.setText(USERGUIDE_MESSAGE);
+        userGuideUrl.setText(USERGUIDE_URL);
+        userGuideUrl.setOnAction(t -> mainApp.getHostServices().showDocument(userGuideUrl.getText()));
     }
 
     /**
      * Creates a new HelpWindow.
      */
-    public HelpWindow() {
-        this(new Stage());
+    public HelpWindow(MainApp mainApp) {
+        this(new Stage(), mainApp);
     }
 
     /**
      * Shows the help window.
+     *
      * @throws IllegalStateException
      * <ul>
      *     <li>

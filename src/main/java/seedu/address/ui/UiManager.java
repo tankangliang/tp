@@ -23,14 +23,16 @@ public class UiManager implements Ui {
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
     private Logic logic;
+    private MainApp mainApp;
     private MainWindow mainWindow;
 
     /**
      * Creates a {@code UiManager} with the given {@code Logic}.
      */
-    public UiManager(Logic logic) {
+    public UiManager(Logic logic, MainApp mainApp) {
         super();
         this.logic = logic;
+        this.mainApp = mainApp;
     }
 
     @Override
@@ -41,7 +43,7 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic);
+            mainWindow = new MainWindow(primaryStage, logic, mainApp);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 
