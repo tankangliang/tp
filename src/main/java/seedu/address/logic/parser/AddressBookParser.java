@@ -6,13 +6,13 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClientAddCommand;
+import seedu.address.logic.commands.ClientDeleteCommand;
+import seedu.address.logic.commands.ClientEditCommand;
+import seedu.address.logic.commands.ClientFindCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,9 +23,17 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class AddressBookParser {
 
     /**
-     * Used for initial separation of command word and args.
+     * Different command type separators
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final String CLIENT_TYPE = "client";
+    private static final String COUNTRY_TYPE = "country";
+    private static final String NOTE_TYPE = "note";
+
+    /**
+     * Used for initial separation of command type and rest of command.
+     */
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandType>\\S+)(?<restOfCommand>.*)");
+    private static final Pattern SECONDARY_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
@@ -40,24 +48,15 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
-        final String arguments = matcher.group("arguments");
-        switch (commandWord) {
+        final String commandType = matcher.group("commandType");
+        final String restOfCommand = matcher.group("restOfCommand");
+        switch (commandType) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
-
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case CLIENT_TYPE:
+            return parseClientCommands(restOfCommand);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -67,6 +66,41 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
+
+    /**
+     * Parses input given that command is of CLIENT_TYPE (starts with "client")
+     *
+     * @param input user input with "client" stripped
+     * @return command relating to client functions
+     * @throws ParseException if input does not conform to expected format
+     */
+    private Command parseClientCommands(String input) throws ParseException {
+        final Matcher secondaryMatcher = SECONDARY_COMMAND_FORMAT.matcher(input.trim());
+        if (!secondaryMatcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        String commandWord = secondaryMatcher.group("commandWord");
+        final String arguments = secondaryMatcher.group("arguments");
+
+        commandWord = CLIENT_TYPE + " " + commandWord;
+        switch (commandWord) {
+        case ClientAddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
+
+        case ClientEditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
+
+        case ClientDeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
+
+        case ClientFindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
