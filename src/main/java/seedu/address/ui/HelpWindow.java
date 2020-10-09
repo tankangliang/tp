@@ -24,7 +24,7 @@ public class HelpWindow extends UiPart<Stage> {
             "client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY tz/TIMEZONE\n"
             + "client view [INDEX]\n"
             + "client find KEYWORD [MORE_KEYWORDS]\n"
-            + "client update INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY] [tz/TIMEZONE]\n"
+            + "client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY] [tz/TIMEZONE]\n"
             + "client delete INDEX\n"
             + "client note add CLIENT_INDEX t/TAG NOTE_STRING\n"
             + "client note delete CLIENT_INDEX NOTE_INDEX\n"
