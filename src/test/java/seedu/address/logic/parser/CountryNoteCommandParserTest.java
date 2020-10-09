@@ -12,8 +12,9 @@ import seedu.address.model.country.Country;
 import seedu.address.model.country.NoteStub;
 
 public class CountryNoteCommandParserTest {
+
     //TODO: add more fine-grained tests and abstract out string literals
-    private CountryNoteCommandParser parser = new CountryNoteCommandParser();
+    private final CountryNoteCommandParser parser = new CountryNoteCommandParser();
 
     @Test
     public void parse_noCountrynoNote_throwsParseException() {
@@ -33,7 +34,8 @@ public class CountryNoteCommandParserTest {
     @Test
     public void parse_validCountryhasNote_equalsExpected() {
         try {
-            CountryNoteCommand expected = new CountryNoteCommand(new Country("SG"), new NoteStub("random string"));
+            CountryNoteCommand expected = new CountryNoteCommand(new Country("SG"),
+                    new NoteStub("random string"));
             assertEquals(expected, parser.parse(" c/SG nt/random string"));
         } catch (ParseException e) {
             fail();

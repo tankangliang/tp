@@ -18,7 +18,7 @@ import seedu.address.model.country.NoteStub;
 public class CountryNoteCommandTest {
     //TODO: Add more fine-grained tests
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_duplicateCountryNote_throwsCommandException() {

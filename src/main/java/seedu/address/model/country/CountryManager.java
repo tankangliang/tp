@@ -25,6 +25,7 @@ public class CountryManager {
 
     /**
      * Checks if countryCode is a valid ISO3166 code.
+     *
      * @param countryCode The country code.
      * @return Whether countryCode is a valid ISO3166 code.
      */
@@ -37,9 +38,18 @@ public class CountryManager {
         return false;
     }
 
+    private static Map<String, Country> initCountryCodeMap() {
+        Map<String, Country> countryCodeMap = new HashMap<>();
+        for (String countryCode : COUNTRY_CODES) {
+            countryCodeMap.put(countryCode, new Country(countryCode));
+        }
+        return countryCodeMap;
+    }
+
     /**
      * Checks if {@code country} contains {@code countryNote}.
-     * @param country The country to be checked.
+     *
+     * @param country     The country to be checked.
      * @param countryNote The note to be checked.
      * @return Whether {@code country} contains {@code countryNote}.
      */
@@ -52,7 +62,8 @@ public class CountryManager {
 
     /**
      * Adds the {@code countryNote} to the {@code country}.
-     * @param country The country where the countryNote will be added.
+     *
+     * @param country     The country where the countryNote will be added.
      * @param countryNote The country note to be added.
      */
     public void addCountryNote(Country country, Note countryNote) {
@@ -73,13 +84,5 @@ public class CountryManager {
         } else {
             throw new NullPointerException();
         }
-    }
-
-    private static Map<String, Country> initCountryCodeMap() {
-        Map<String, Country> countryCodeMap = new HashMap<>();
-        for (String countryCode : COUNTRY_CODES) {
-            countryCodeMap.put(countryCode, new Country(countryCode));
-        }
-        return countryCodeMap;
     }
 }
