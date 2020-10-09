@@ -27,4 +27,13 @@ public class CountryNoteCommand extends Command {
         model.addCountryNote(country, countryNote);
         return new CommandResult(MESSAGE_SUCCESS); // TODO: dynamically format success message
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof CountryNoteCommand) {
+            CountryNoteCommand other = (CountryNoteCommand) obj;
+            return country.getCountryCode().equals(other.country.getCountryCode()) && countryNote.equals(other.countryNote);
+        }
+        return false;
+    }
 }

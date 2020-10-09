@@ -15,6 +15,9 @@ public class CountryNoteCommandParser implements Parser<CountryNoteCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COUNTRY, PREFIX_NOTE);
 
+        if (argMultimap.getValue(PREFIX_COUNTRY).isEmpty() || argMultimap.getValue(PREFIX_NOTE).isEmpty()) {
+            throw new ParseException("invalid message"); // TODO: better messages
+        }
         Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).get());
         Note countryNote = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
 
