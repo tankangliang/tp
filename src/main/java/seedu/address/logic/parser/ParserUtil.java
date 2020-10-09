@@ -13,6 +13,9 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.country.Country;
+import seedu.address.model.country.CountryManager;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +123,24 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static Country parseCountry(String rawCountryCode) throws ParseException {
+        requireNonNull(rawCountryCode);
+        String trimmedCountryCode = rawCountryCode.trim();
+        if (!CountryManager.isValidCode(trimmedCountryCode)) {
+            throw new ParseException(CountryManager.MESSAGE_CONSTRAINTS);
+        }
+        return new Country(trimmedCountryCode);
+    }
+
+    public static Note parseNote(String noteString) throws ParseException {
+        requireNonNull(noteString);
+        String trimmedNoteString = noteString.trim();
+        if (trimmedNoteString.length() == 0) {
+            throw new ParseException(Note.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Note(noteString);
     }
 }

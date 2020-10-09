@@ -41,12 +41,17 @@ public class Country {
 
     /**
      * Adds a country note for this country.
+     * Method is protected as it is not intended for use outside of this package.
      *
      * @param countryNote The country note to be added.
      */
-    public void addCountryNote(Note countryNote) {
+    protected void addCountryNote(Note countryNote) {
         requireNonNull(countryNote);
         this.countryNotes.add(countryNote);
+    }
+
+    protected boolean hasCountryNote(Note countryNote) {
+        return countryNotes.contains(countryNote);
     }
 
     /**

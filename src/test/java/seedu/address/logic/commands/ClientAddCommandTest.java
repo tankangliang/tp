@@ -21,6 +21,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
+import seedu.address.model.country.Country;
+import seedu.address.model.note.Note;
 import seedu.address.testutil.ClientBuilder;
 
 public class ClientAddCommandTest {
@@ -136,6 +138,16 @@ public class ClientAddCommandTest {
 
         @Override
         public void setClient(Client target, Client editedClient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasCountryNote(Country country, Note countryNote) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCountryNote(Country country, Note countryNote) {
             throw new AssertionError("This method should not be called.");
         }
 

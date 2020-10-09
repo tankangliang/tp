@@ -7,4 +7,7 @@ import seedu.address.model.note.Note;
  */
 class NoteStub extends Note {
 
+    public NoteStub(String content) {
+        super(content);
+    }
 }

@@ -6,6 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
+import seedu.address.model.country.Country;
+import seedu.address.model.note.Note;
 
 /**
  * The API of the Model component.
@@ -75,6 +77,10 @@ public interface Model {
      * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
      */
     void setClient(Client target, Client editedClient);
+
+    boolean hasCountryNote(Country country, Note countryNote);
+
+    void addCountryNote(Country country, Note countryNote);
 
     /** Returns an unmodifiable view of the filtered client list */
     ObservableList<Client> getFilteredClientList();
