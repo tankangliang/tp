@@ -17,7 +17,7 @@ public class Country {
 
     private final String countryName;
     private final String countryCode;
-    private final LinkedHashSet<Note> countryNotes;
+    private final Set<Note> countryNotes;
 
     /**
      * Initializes a Country by its countryCode.
