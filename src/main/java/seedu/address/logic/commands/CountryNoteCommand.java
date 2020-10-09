@@ -7,6 +7,7 @@ import seedu.address.model.note.Note;
 
 public class CountryNoteCommand extends Command {
 
+    public static final String COMMAND_WORD = "country note";
     private static final String MESSAGE_DUPLICATE_COUNTRY_NOTE = "The country note already exists";
     private static final String MESSAGE_SUCCESS = "Successfully added country note";
 
