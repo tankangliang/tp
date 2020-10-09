@@ -4,15 +4,15 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.client.CountryMatchesCodePredicate;
+import seedu.address.model.client.CountryMatchesInputCountryPredicate;
 
 public class CountryFilterCommand extends Command {
 
     public static final String COMMAND_WORD = "country filter";
 
-    private final CountryMatchesCodePredicate predicate;
+    private final CountryMatchesInputCountryPredicate predicate;
 
-    public CountryFilterCommand(CountryMatchesCodePredicate predicate) {
+    public CountryFilterCommand(CountryMatchesInputCountryPredicate predicate) {
         this.predicate = predicate;
     }
 
