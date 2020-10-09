@@ -22,4 +22,12 @@ public class CountryFilterCommand extends Command {
         model.updateFilteredClientList(predicate);
         return new CommandResult("filtered according to country"); //TODO: add better msg
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof CountryFilterCommand)) {
+            return false;
+        }
+        return predicate.equals(((CountryFilterCommand) obj).predicate);
+    }
 }

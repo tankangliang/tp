@@ -72,4 +72,11 @@ public class Country {
         return countryCode;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Country)) {
+            return false;
+        }
+        return countryCode.equals(((Country) obj).countryCode);
+    }
 }
