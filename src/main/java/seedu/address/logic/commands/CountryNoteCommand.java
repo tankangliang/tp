@@ -33,6 +33,7 @@ public class CountryNoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
         if (model.hasCountryNote(country, countryNote)) {
             throw new CommandException(MESSAGE_DUPLICATE_COUNTRY_NOTE);
         }
