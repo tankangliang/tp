@@ -8,9 +8,19 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
 
+/**
+ * Parses input arguments and creates a new CountryNoteCommand object.
+ */
 public class CountryNoteCommandParser implements Parser<CountryNoteCommand> {
 
-    @Override
+    /**
+     * Parses the given {@code arg} of arguments in the context of the CountryNoteCommand and returns a
+     * CountryNoteCommand object for execution.
+     *
+     * @param args The user input string.
+     * @return A CountryNoteCommand object which corresponds to the user input string.
+     * @throws ParseException If user input string is invalid.
+     */
     public CountryNoteCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COUNTRY, PREFIX_NOTE);
