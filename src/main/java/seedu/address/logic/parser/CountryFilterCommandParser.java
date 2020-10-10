@@ -7,9 +7,19 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.CountryMatchesInputCountryPredicate;
 import seedu.address.model.country.Country;
 
+/**
+ * Parses input arguments and creates a new CountryFilterCommand object.
+ */
 public class CountryFilterCommandParser implements Parser<CountryFilterCommand> {
 
-    @Override
+    /**
+     * Parses the given {@code arg} of arguments in the context of the CountryFilterCommand and returns a
+     * CountryFilterCommand object for execution.
+     *
+     * @param args The user input string.
+     * @return A CountryFilterCommand object which corresponds to the user input string.
+     * @throws ParseException If user input string is invalid.
+     */
     public CountryFilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COUNTRY);
