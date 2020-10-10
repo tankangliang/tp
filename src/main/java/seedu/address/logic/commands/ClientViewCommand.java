@@ -47,7 +47,14 @@ public class ClientViewCommand extends Command {
         }
 
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
-        model.showViewClient()
-        return new CommandResult(String.format(MESSAGE_TEMPORARY));
+        model.showViewClient(clientToView);
+        return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, clientToView));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ClientViewCommand // instanceof handles nulls
+                && targetIndex.equals(((ClientViewCommand) other).targetIndex)); // state check
     }
 }
