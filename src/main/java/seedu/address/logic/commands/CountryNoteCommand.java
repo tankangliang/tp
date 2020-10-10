@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.country.Country;
@@ -44,12 +45,20 @@ public class CountryNoteCommand extends Command {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof CountryNoteCommand) {
-            CountryNoteCommand other = (CountryNoteCommand) obj;
-            return country.getCountryCode().equals(other.country.getCountryCode()) && countryNote
-                    .equals(other.countryNote);
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
         }
-        return false;
+
+        // instanceof handles nulls
+        if (!(other instanceof CountryNoteCommand)) {
+            return false;
+        }
+
+        // state check
+        CountryNoteCommand c = (CountryNoteCommand) other;
+
+        return country.equals(c.country) && countryNote.equals(c.countryNote);
     }
 }
