@@ -2,9 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.ClientCountryMatchesInputCountryPredicate;
+import seedu.address.model.country.Country;
 
 /**
  * Filters the client list based on their country.
@@ -33,10 +35,20 @@ public class CountryFilterCommand extends Command {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof CountryFilterCommand)) {
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CountryFilterCommand)) {
             return false;
         }
-        return predicate.equals(((CountryFilterCommand) obj).predicate);
+
+        // state check
+        CountryFilterCommand c = (CountryFilterCommand) other;
+
+        return predicate.equals(c.predicate);
     }
 }
