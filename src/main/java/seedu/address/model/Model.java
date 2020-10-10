@@ -71,6 +71,15 @@ public interface Model {
 
     /**
      * Adds the given client. {@code client} must not already exist in the address book.
+     *
+     * Views the given client.
+     */
+    Client showViewClient(Client target);
+
+    /**
+     * Adds the given client.
+     *
+     * {@code client} must not already exist in the address book.
      */
     void addClient(Client client);
 

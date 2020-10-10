@@ -47,6 +47,7 @@ public class ClientViewCommand extends Command {
         }
 
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
+        model.showViewClient()
         return new CommandResult(String.format(MESSAGE_TEMPORARY));
     }
 }

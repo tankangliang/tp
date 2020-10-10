@@ -106,6 +106,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Client showViewClient(Client target) {
+        //TODO: throw target to view box in GUI
+        return target;
+    }
+
+    @Override
     public void addClient(Client client) {
         addressBook.addClient(client);
         updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
