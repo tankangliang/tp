@@ -19,9 +19,6 @@ public class CountryFilterCommandParser implements Parser<CountryFilterCommand> 
             throw new ParseException("invalid message"); // TODO: better messages
         }
         String countryCode = argMultimap.getValue(PREFIX_COUNTRY).get();
-        if (!CountryManager.isValidCode(countryCode)) {
-            throw new ParseException("invalid message"); // TODO: better messages
-        }
 
         Country country = ParserUtil.parseCountry(countryCode);
         return new CountryFilterCommand(new CountryMatchesInputCountryPredicate(country));
