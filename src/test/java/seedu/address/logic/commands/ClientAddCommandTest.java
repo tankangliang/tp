@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
+import seedu.address.model.widget.WidgetObject;
 import seedu.address.testutil.ClientBuilder;
 
 public class ClientAddCommandTest {
@@ -136,8 +137,29 @@ public class ClientAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * Sets the widget box contents to the given content.
+         *
+         * @param content
+         */
         @Override
-        public Client showViewClient(Client target) {
+        public void setWidgetContent(Object content) {
+            throw new AssertionError("this method should not be called.");
+        }
+
+        /**
+         * <<<<<<< HEAD
+         * Retrives the widget content object to be displayed in the widget.
+         *
+         * @return WidgetObject.
+         */
+        @Override
+        public WidgetObject showWidgetContent() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public WidgetObject getWidgetContent() {
             throw new AssertionError("This method should not be called.");
         }
 

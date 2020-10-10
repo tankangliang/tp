@@ -12,7 +12,7 @@ import seedu.address.model.client.Client;
 
 public class ClientViewCommand extends Command {
 
-    /*Client command in the form client view index, where index points to the index of teh client at current location
+    /*Client command in the form client view index, where index points to the index of the client at current location
     of the rendered */
     public static final String COMMAND_WORD = "client view";
 
@@ -23,7 +23,6 @@ public class ClientViewCommand extends Command {
 
     public static final String MESSAGE_VIEW_CLIENT_SUCCESS = "Viewing client: %1$s";
 
-    private static final String MESSAGE_TEMPORARY = "Viewing Client: Lorem Ipsum";
     private final Index targetIndex;
 
     public ClientViewCommand(Index targetIndex) {
@@ -47,7 +46,8 @@ public class ClientViewCommand extends Command {
         }
 
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
-        model.showViewClient(clientToView);
+        // TODO: ViewCommand should not interfere or interact with the logic/data of the application, test
+        model.setWidgetContent(clientToView);
         return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, clientToView));
     }
 

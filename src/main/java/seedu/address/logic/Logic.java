@@ -9,6 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.widget.WidgetObject;
 
 /**
  * API of the Logic component
@@ -29,6 +30,12 @@ public interface Logic {
      * @see seedu.address.model.Model#getAddressBook()
      */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * Returns the content of the widget view box.
+     * @return
+     */
+    WidgetObject getWidgetContent();
 
     /** Returns an unmodifiable view of the filtered list of clients */
     ObservableList<Client> getFilteredClientList();

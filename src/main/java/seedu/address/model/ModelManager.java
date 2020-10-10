@@ -15,6 +15,8 @@ import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryManager;
 import seedu.address.model.note.Note;
+import seedu.address.model.widget.WidgetModel;
+import seedu.address.model.widget.WidgetObject;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -27,6 +29,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
     private final CountryManager countryManager;
+    private final WidgetModel widget;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +42,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.widget = WidgetModel.initWidget();
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
         this.countryManager = new CountryManager();
     }
@@ -106,10 +110,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Client showViewClient(Client target) {
-        //TODO: throw target to view box in GUI
-        return target;
+    public void setWidgetContent(Object content) {
+        widget.setContent(content);
     }
+
+    @Override
+    public WidgetObject getWidgetContent() {
+        return widget.getWidgetConten();
+    }
+
 
     @Override
     public void addClient(Client client) {
