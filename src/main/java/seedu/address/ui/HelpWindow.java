@@ -22,7 +22,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String HELP_TITLE = "Commonly used commands";
     public static final String COMMON_COMMANDS =
             "client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY tz/TIMEZONE\n"
-            + "client view [INDEX]\n"
+            + "client view INDEX\n"
             + "client find KEYWORD [MORE_KEYWORDS]\n"
             + "client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY] [tz/TIMEZONE]\n"
             + "client delete INDEX\n"

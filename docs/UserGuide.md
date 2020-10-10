@@ -73,6 +73,12 @@ you started quickly, if you are a new user of TBM
 
 </div>
 
+### Viewing all saved clients: `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
+
 ### Viewing help: `help`
 
 Shows commonly used commands for TBM.
@@ -93,13 +99,13 @@ Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**.
 
 ### Viewing clients: `client view`
 
-View the client specified by the index. If no index is specified, all clients will be listed.
+View the client specified by the index.
 
-Format: `client view [INDEX]`
+Format: `client view INDEX`
 
 Examples:
-* `client view 2` Views information for client at index 2
-* `client view` Lists all clients
+
+* `client view 2` Views information for client at index 2 of the list panel
 
 ### Finding clients: `client find`
 
