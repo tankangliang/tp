@@ -13,6 +13,7 @@ public class CountryFilterCommand extends Command {
     private final CountryMatchesInputCountryPredicate predicate;
 
     public CountryFilterCommand(CountryMatchesInputCountryPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 
