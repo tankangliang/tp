@@ -7,6 +7,9 @@ import seedu.address.model.Model;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
 
+/**
+ * Adds a Country-specific Note.
+ */
 public class CountryNoteCommand extends Command {
 
     private static final String MESSAGE_DUPLICATE_COUNTRY_NOTE = "The country note already exists";
