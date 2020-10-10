@@ -72,4 +72,34 @@ public class Country {
         return countryCode;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Country)) {
+            return false;
+        }
+
+        // state check
+        Country c = (Country) other;
+
+        for (Note note: countryNotes) {
+            if (!c.countryNotes.contains(note)) {
+                return false;
+            }
+        }
+
+        for (Note note: c.countryNotes) {
+            if (!countryNotes.contains(note)) {
+                return false;
+            }
+        }
+
+        return countryCode.equals(c.countryCode) && countryName.equals(c.countryName);
+    }
+
 }
