@@ -7,7 +7,7 @@ import seedu.address.model.country.Country;
 /**
  * Tests that a {@code Client}'s {@code Country} matches the given Country.
  */
-public class CountryMatchesInputCountryPredicate implements Predicate<Client> {
+public class ClientCountryMatchesInputCountryPredicate implements Predicate<Client> {
 
     private final Country country;
 
@@ -16,7 +16,7 @@ public class CountryMatchesInputCountryPredicate implements Predicate<Client> {
      *
      * @param country The country to be matched
      */
-    public CountryMatchesInputCountryPredicate(Country country) {
+    public ClientCountryMatchesInputCountryPredicate(Country country) {
         this.country = country;
     }
 
@@ -28,8 +28,8 @@ public class CountryMatchesInputCountryPredicate implements Predicate<Client> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof CountryMatchesInputCountryPredicate // instanceof handles nulls
-                && country.equals(((CountryMatchesInputCountryPredicate) other).country)); // state check
+                || (other instanceof ClientCountryMatchesInputCountryPredicate // instanceof handles nulls
+                && country.equals(((ClientCountryMatchesInputCountryPredicate) other).country)); // state check
     }
 
 }

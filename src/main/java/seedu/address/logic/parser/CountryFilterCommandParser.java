@@ -4,7 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 
 import seedu.address.logic.commands.CountryFilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.client.CountryMatchesInputCountryPredicate;
+import seedu.address.model.client.ClientCountryMatchesInputCountryPredicate;
 import seedu.address.model.country.Country;
 
 /**
@@ -30,6 +30,6 @@ public class CountryFilterCommandParser implements Parser<CountryFilterCommand> 
         String countryCode = argMultimap.getValue(PREFIX_COUNTRY).get();
 
         Country country = ParserUtil.parseCountry(countryCode);
-        return new CountryFilterCommand(new CountryMatchesInputCountryPredicate(country));
+        return new CountryFilterCommand(new ClientCountryMatchesInputCountryPredicate(country));
     }
 }

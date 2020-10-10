@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CountryFilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.client.CountryMatchesInputCountryPredicate;
+import seedu.address.model.client.ClientCountryMatchesInputCountryPredicate;
 import seedu.address.model.country.Country;
 
 public class CountryFilterCommandParserTest {
@@ -29,7 +29,7 @@ public class CountryFilterCommandParserTest {
     public void parse_validCountryCode_throwsParseException() {
         try {
             CountryFilterCommand expected = new CountryFilterCommand(
-                    new CountryMatchesInputCountryPredicate(new Country("SG")));
+                    new ClientCountryMatchesInputCountryPredicate(new Country("SG")));
             assertEquals(expected, parser.parse(" c/SG"));
         } catch (ParseException e) {
             fail();
