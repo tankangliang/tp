@@ -132,7 +132,7 @@ public class ParserUtil {
     public static Country parseCountry(String rawCountryCode) throws ParseException {
         requireNonNull(rawCountryCode);
         String trimmedCountryCode = rawCountryCode.trim();
-        if (!CountryManager.isValidCode(trimmedCountryCode)) {
+        if (!CountryManager.isValidCountryCode(trimmedCountryCode)) {
             throw new ParseException(CountryManager.MESSAGE_CONSTRAINTS);
         }
         return new Country(trimmedCountryCode);

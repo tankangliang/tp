@@ -18,16 +18,16 @@ public class CountryManagerTest {
     @Test
     public void isValidCode_validCode_returnTrue() {
         for (String countryCode : COUNTRY_CODES) {
-            assertTrue(CountryManager.isValidCode(countryCode));
+            assertTrue(CountryManager.isValidCountryCode(countryCode));
         }
     }
 
     @Test
     public void isValidCode_invalidCode_returnFalse() {
-        assertFalse(CountryManager.isValidCode("ZZ"));
-        assertFalse(CountryManager.isValidCode("12"));
-        assertFalse(CountryManager.isValidCode("az"));
-        assertFalse(CountryManager.isValidCode("bd"));
+        assertFalse(CountryManager.isValidCountryCode("ZZ"));
+        assertFalse(CountryManager.isValidCountryCode("12"));
+        assertFalse(CountryManager.isValidCountryCode("az"));
+        assertFalse(CountryManager.isValidCountryCode("bd"));
     }
 
     @Test

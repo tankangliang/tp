@@ -29,7 +29,7 @@ public class CountryManager {
      * @param countryCode The country code.
      * @return Whether countryCode is a valid ISO3166 code.
      */
-    public static boolean isValidCode(String countryCode) {
+    public static boolean isValidCountryCode(String countryCode) {
         for (int i = 0; i < COUNTRY_CODES.length; i++) {
             if (COUNTRY_CODES[i].equals(countryCode)) {
                 return true;
@@ -54,7 +54,7 @@ public class CountryManager {
      * @return Whether {@code country} contains {@code countryNote}.
      */
     public boolean hasCountryNote(Country country, Note countryNote) {
-        if (!isValidCode(country.getCountryCode())) {
+        if (!isValidCountryCode(country.getCountryCode())) {
             return false;
         }
         return countryCodeMap.get(country.getCountryCode()).hasCountryNote(countryNote);
@@ -67,7 +67,7 @@ public class CountryManager {
      * @param countryNote The country note to be added.
      */
     public void addCountryNote(Country country, Note countryNote) {
-        if (isValidCode(country.getCountryCode())) {
+        if (isValidCountryCode(country.getCountryCode())) {
             countryCodeMap.get(country.getCountryCode()).addCountryNote(countryNote);
         }
     }
@@ -79,7 +79,7 @@ public class CountryManager {
      * @return The country that is identified by the given country code.
      */
     public Country getCountryFromCode(String countryCode) {
-        if (isValidCode(countryCode)) {
+        if (isValidCountryCode(countryCode)) {
             return countryCodeMap.get(countryCode);
         } else {
             throw new NullPointerException();
