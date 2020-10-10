@@ -6,12 +6,20 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.CountryMatchesInputCountryPredicate;
 
+/**
+ * Filters the client list based on their country.
+ */
 public class CountryFilterCommand extends Command {
 
     public static final String COMMAND_WORD = "country filter";
 
     private final CountryMatchesInputCountryPredicate predicate;
 
+    /**
+     * Initializes CountryFilterCommand with a predicate of Client.
+     *
+     * @param predicate The Country predicate to filter clients by.
+     */
     public CountryFilterCommand(CountryMatchesInputCountryPredicate predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;

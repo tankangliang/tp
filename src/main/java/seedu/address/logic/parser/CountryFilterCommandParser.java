@@ -6,7 +6,6 @@ import seedu.address.logic.commands.CountryFilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.CountryMatchesInputCountryPredicate;
 import seedu.address.model.country.Country;
-import seedu.address.model.country.CountryManager;
 
 public class CountryFilterCommandParser implements Parser<CountryFilterCommand> {
 
