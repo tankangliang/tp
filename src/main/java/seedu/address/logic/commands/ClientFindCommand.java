@@ -22,6 +22,7 @@ public class ClientFindCommand extends Command {
     private final NameContainsKeywordsPredicate predicate;
 
     public ClientFindCommand(NameContainsKeywordsPredicate predicate) {
+        requireNonNull(predicate);
         this.predicate = predicate;
     }
 
