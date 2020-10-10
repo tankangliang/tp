@@ -2,11 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.ClientCountryMatchesInputCountryPredicate;
-import seedu.address.model.country.Country;
 
 /**
  * Filters the client list based on their country.
