@@ -2,6 +2,9 @@ package seedu.address.model.note;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Generic Note class for country and client notes.
+ */
 public class Note {
 
     // TODO: Add implementation
