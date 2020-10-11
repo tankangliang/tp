@@ -17,8 +17,14 @@ public class WidgetModelManager implements WidgetModel {
         return new WidgetModelManager();
     }
     /**
-     * Sets the content to be displayed in the view box to be of that content. Breaks
-     * down the content into a standardised format in specified in WidgetOject.
+     * <p>Sets the content to be displayed in the view box to be of that content. Break down the content into a
+     * standardised format in specified in {@code WidgetOject}.</p>
+     *
+     * <p>In creating the widget object, the values for each of the widget object fields can be set to a String value.
+     * In order to do so, the targeted object to be displayed, needs to have its contents/fields/members stringified.
+     * After stringifying the attributes, call {@link WidgetObject#set(String...) set}, where args is an ordered set of
+     * Strings. Hence, the first String will be set as the value for the header field of the widget object, the second
+     * String will be set to the div1 field of the widget object so on and so forth.</p>
      *
      * @param content
      */
@@ -70,7 +76,8 @@ public class WidgetModelManager implements WidgetModel {
         String div3 = curr.getPhone().toString();
         String div4 = "Notes:\n- Angel Investor\n- China Scholar";
 
-        newObj.set(header, div1, "", div2, "", div3, "", div4);
+        newObj.set(/*header*/ header, /*div1*/ div1, /*text1*/ "", /*div2*/ div2, /*text2*/ "",
+                /*div3*/ div3, /*text3*/ "", /*div4*/ div4);
         return newObj;
     }
 

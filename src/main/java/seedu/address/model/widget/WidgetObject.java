@@ -25,7 +25,11 @@ import java.util.Optional;
  */
 public class WidgetObject {
 
-    // [header, div1, text1, div2, text2, div3, text3, div4, text4, div5, text5, div6, text6, footer]
+    /**
+     * Array is a collection of the fields to be mapped to the widget Ui component.
+     *
+     * [header, div1, text1, div2, text2, div3, text3, div4, text4, div5, text5, div6, text6, footer]
+     */
     private final String[] divs;
 
     /**
