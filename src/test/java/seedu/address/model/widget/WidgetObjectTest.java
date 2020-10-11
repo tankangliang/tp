@@ -14,6 +14,10 @@ class WidgetObjectTest {
     }
 
     @Test
-    void testEquals() {
+    void test_Equals() {
+    }
+
+    @Test
+    void test_Not_Equals() {
     }
 }
