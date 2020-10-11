@@ -399,5 +399,7 @@
       <property name="ignoreMethodNamesRegex" value="(set.*|get.*)"/>
     </module>
 
+    <module name="MissingJavadocType"/>
+
   </module>
 </module>
