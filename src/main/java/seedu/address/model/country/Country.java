@@ -87,19 +87,9 @@ public class Country {
         // state check
         Country c = (Country) other;
 
-        for (Note note: countryNotes) {
-            if (!c.countryNotes.contains(note)) {
-                return false;
-            }
-        }
-
-        for (Note note: c.countryNotes) {
-            if (!countryNotes.contains(note)) {
-                return false;
-            }
-        }
-
-        return countryCode.equals(c.countryCode) && countryName.equals(c.countryName);
+        return countryCode.equals(c.countryCode)
+                && countryName.equals(c.countryName)
+                && countryNotes.equals(c.countryNotes);
     }
 
 }
