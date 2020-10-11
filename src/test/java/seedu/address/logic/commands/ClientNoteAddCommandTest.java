@@ -1,6 +1,13 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -10,15 +17,13 @@ import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
 import seedu.address.testutil.TypicalClients;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 public class ClientNoteAddCommandTest {
 
+    private static final String NOTE_CONTENT_1 = "client note content 1";
+    private static final String NOTE_CONTENT_2 = "client note content 2";
+
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private final String NOTE_CONTENT_1 = "client note content 1";
-    private final String NOTE_CONTENT_2 = "client note content 2";
 
     @Test
     public void execute_duplicateClientNote_throwsCommandException() throws CommandException {

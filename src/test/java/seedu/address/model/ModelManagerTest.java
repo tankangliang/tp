@@ -21,7 +21,6 @@ import seedu.address.model.country.Country;
 import seedu.address.model.country.NoteStub;
 import seedu.address.model.note.Note;
 import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.TypicalClients;
 
 public class ModelManagerTest {
 
