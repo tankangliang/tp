@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -72,6 +73,15 @@ public class Client {
         return otherClient != null
                 && otherClient.getName().equals(getName())
                 && (otherClient.getPhone().equals(getPhone()) || otherClient.getEmail().equals(getEmail()));
+    }
+
+    /**
+     * To be updated.
+     *
+     * @return To be updated.
+     */
+    public Country getCountry() {
+        return new Country("SG"); //TODO: Update to reflect the country field in Client
     }
 
     /**

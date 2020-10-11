@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.country.Country;
+import seedu.address.model.country.NoteStub;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -86,6 +88,16 @@ public class ModelManagerTest {
     public void hasClient_clientInAddressBook_returnsTrue() {
         modelManager.addClient(ALICE);
         assertTrue(modelManager.hasClient(ALICE));
+    }
+
+    @Test
+    public void addAndHasCountryNote_validCountry_updatesCorrectly() {
+        Country country = new Country("SG");
+        NoteStub genericNote = new NoteStub("generic note");
+        assertFalse(modelManager.hasCountryNote(country, genericNote));
+
+        modelManager.addCountryNote(country, genericNote);
+        assertTrue(modelManager.hasCountryNote(country, genericNote));
     }
 
     @Test
