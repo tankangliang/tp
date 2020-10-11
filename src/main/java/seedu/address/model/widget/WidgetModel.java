@@ -12,7 +12,7 @@ public interface WidgetModel {
     /**
      * Static factory.
      *
-     * @return
+     * @return WidgetModel implemented by WidgetModelMoanager.
      */
     static WidgetModel initWidget() {
         return WidgetModelManager.initWidget();

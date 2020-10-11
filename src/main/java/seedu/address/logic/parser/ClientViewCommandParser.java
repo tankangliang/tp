@@ -9,7 +9,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new ClientViewCommand object
  */
-public class ViewCommandParser implements Parser<ClientViewCommand> {
+public class ClientViewCommandParser implements Parser<ClientViewCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ClientViewCommand
      * and returns a ClientViewCommand object for execution.

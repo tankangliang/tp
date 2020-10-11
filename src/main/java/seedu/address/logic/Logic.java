@@ -33,7 +33,8 @@ public interface Logic {
 
     /**
      * Returns the content of the widget view box.
-     * @return
+     *
+     * @return WidgetObject.
      */
     WidgetObject getWidgetContent();
 

@@ -11,7 +11,7 @@ import seedu.address.logic.commands.ClientViewCommand;
 
 public class ClientViewCommandParserTest {
 
-    private ViewCommandParser parser = new ViewCommandParser();
+    private ClientViewCommandParser parser = new ClientViewCommandParser();
 
     @Test
     public void parse_validArgs_returnsViewCommand() {

@@ -139,7 +139,7 @@ public class AddressBookParser {
             return new FindCommandParser().parse(arguments);
 
         case ClientViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
+            return new ClientViewCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
