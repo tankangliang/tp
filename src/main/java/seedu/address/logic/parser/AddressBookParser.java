@@ -55,10 +55,6 @@ public class AddressBookParser {
         final String commandType = matcher.group("commandType");
         final String restOfCommand = matcher.group("restOfCommand");
         switch (commandType) {
-
-        case CLIENT_NOTE_TYPE:
-            return parseClientNoteCommands(restOfCommand);
-
         case CLIENT_TYPE:
             return parseClientCommands(restOfCommand);
 
@@ -107,26 +103,6 @@ public class AddressBookParser {
 
         case CountryFilterCommand.COMMAND_WORD:
             return new CountryFilterCommandParser().parse(arguments);
-
-        default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-        }
-    }
-
-    private Command parseClientNoteCommands(String input) throws ParseException {
-        final Matcher secondaryMatcher = SECONDARY_COMMAND_FORMAT.matcher(input.trim());
-        if (!secondaryMatcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
-        }
-
-        String commandWord = secondaryMatcher.group("commandWord");
-        final String arguments = secondaryMatcher.group("arguments");
-
-        commandWord = CLIENT_TYPE + " " + commandWord;
-        switch (commandWord) {
-        case ClientNoteAddCommand.COMMAND_WORD:
-            // todo: Ritesh add ClientNoteAddCommandParser()
-            return new ClientNoteAddCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

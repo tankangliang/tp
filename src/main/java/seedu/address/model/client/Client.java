@@ -83,7 +83,6 @@ public class Client {
     /**
      * Adds a client note for this client.
      *
-     *
      * @param clientNote The client note to be added.
      */
     public void addClientNote(Note clientNote) {
