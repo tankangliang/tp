@@ -3,6 +3,7 @@ package seedu.address.model.client;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNTRY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -41,16 +42,17 @@ public class ClientTest {
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new ClientBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withCountry(VALID_COUNTRY_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameClient(editedAlice));
 
         // same name, same email, different attributes -> returns true
         editedAlice = new ClientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+                .withCountry(VALID_COUNTRY_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameClient(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .withCountry(VALID_COUNTRY_BOB).build();
         assertTrue(ALICE.isSameClient(editedAlice));
     }
 
@@ -86,6 +88,10 @@ public class ClientTest {
 
         // different address -> returns false
         editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different country -> returns false
+        editedAlice = new ClientBuilder(ALICE).withCountry(VALID_COUNTRY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
