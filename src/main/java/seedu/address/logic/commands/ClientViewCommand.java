@@ -10,6 +10,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 
+/**
+ * Views a client identified by its displayed index. Displayed on the widget view box.
+ */
 public class ClientViewCommand extends Command {
 
     /*Client command in the form client view index, where index points to the index of the client at current location
@@ -46,7 +49,7 @@ public class ClientViewCommand extends Command {
         }
 
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
-        // TODO: ViewCommand should not interfere or interact with the logic/data of the application, test
+        // TODO: Test
         model.setWidgetContent(clientToView);
         return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, clientToView));
     }

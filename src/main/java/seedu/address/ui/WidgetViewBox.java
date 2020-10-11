@@ -6,6 +6,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.widget.WidgetObject;
 
+/**
+ *
+ */
 public class WidgetViewBox extends UiPart<Region> {
     private static final String FXML = "WidgetViewBox.fxml";
     private final WidgetObject widgetObject;
@@ -40,6 +43,9 @@ public class WidgetViewBox extends UiPart<Region> {
     @FXML
     private Label footer;
 
+    /**
+     * Creates a {@code WidgetViewBox} with the given {@code WidgetObject}.
+     */
     public WidgetViewBox(WidgetObject widgetObject) {
         super(FXML);
         this.widgetObject = widgetObject;
