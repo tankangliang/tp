@@ -15,7 +15,7 @@ import seedu.address.model.client.Client;
  */
 public class ClientViewCommand extends Command {
 
-    /**Client command in the form client view index, where index points to the index of the client at current location
+    /** Client command in the form client view index, where index points to the index of the client at current location
     of the rendered */
     public static final String COMMAND_WORD = "client view";
 
