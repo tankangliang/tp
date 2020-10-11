@@ -26,7 +26,7 @@ import java.util.Optional;
 public class WidgetObject {
 
     // [header, div1, text1, div2, text2, div3, text3, div4, text4, div5, text5, div6, text6, footer]
-    private String[] divs;
+    private final String[] divs;
 
     /**
      * Constructor for a widget object.
@@ -195,6 +195,7 @@ public class WidgetObject {
                     return false;
                 }
             }
+            i++;
         }
         return true;
     }
