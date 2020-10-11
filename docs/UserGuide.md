@@ -81,7 +81,7 @@ Format: `list`
 
 ### Viewing help: `help`
 
-Shows commonly used commands for TBM.
+Shows commonly used commands for TBM in a new help window, pressing Esc will close this window.
 
 Format: `help`
 

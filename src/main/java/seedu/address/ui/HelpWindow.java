@@ -8,6 +8,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
@@ -63,6 +65,13 @@ public class HelpWindow extends UiPart<Stage> {
         userGuideMessage.setText(USERGUIDE_MESSAGE);
         userGuideUrl.setText(USERGUIDE_URL);
         userGuideUrl.setOnAction(t -> mainApp.getHostServices().showDocument(userGuideUrl.getText()));
+
+        // Hides the help window when the Esc key is pressed
+        root.addEventHandler(KeyEvent.KEY_PRESSED, keyEvent -> {
+            if (keyEvent.getCode() == KeyCode.ESCAPE) {
+                this.hide();
+            }
+        });
     }
 
     /**
