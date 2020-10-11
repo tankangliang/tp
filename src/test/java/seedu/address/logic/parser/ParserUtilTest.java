@@ -1,9 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
@@ -200,17 +198,25 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCountry_validCountryCode_returnCountry() {
-        try {
-            Country country = ParserUtil.parseCountry(VALID_COUNTRY_CODE);
-            assertNotNull(country);
-        } catch (ParseException e) {
-            fail();
-        }
+    public void parseCountry_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCountry((String) null));
     }
 
     @Test
-    public void parseCountry_invalidCountryCode_throwParseException() {
+    public void parseCountry_invalidValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseCountry(INVALID_COUNTRY_CODE));
+    }
+
+    @Test
+    public void parseCountry_validValueWithoutWhitespace_returnsCountry() throws Exception {
+        Country expectedCountry = new Country(VALID_COUNTRY_CODE);
+        assertEquals(expectedCountry, ParserUtil.parseCountry(VALID_COUNTRY_CODE));
+    }
+
+    @Test
+    public void parseCountry_validValueWithWhitespace_returnsTrimmedCountry() throws Exception {
+        String countryWithWhitespace = WHITESPACE + VALID_COUNTRY_CODE + WHITESPACE;
+        Country expectedCountry = new Country(VALID_COUNTRY_CODE);
+        assertEquals(expectedCountry, ParserUtil.parseCountry(countryWithWhitespace));
     }
 }

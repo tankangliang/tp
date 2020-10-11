@@ -127,10 +127,10 @@ public class AddressBookParser {
         commandWord = CLIENT_TYPE + " " + commandWord;
         switch (commandWord) {
         case ClientAddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new ClientAddCommandParser().parse(arguments);
 
         case ClientEditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            return new ClientEditCommandParser().parse(arguments);
 
         case ClientDeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);

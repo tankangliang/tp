@@ -39,6 +39,8 @@ public class ClientCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label country;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -52,6 +54,7 @@ public class ClientCard extends UiPart<Region> {
         phone.setText(client.getPhone().value);
         address.setText(client.getAddress().value);
         email.setText(client.getEmail().value);
+        country.setText(client.getCountry().getCountryName());
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

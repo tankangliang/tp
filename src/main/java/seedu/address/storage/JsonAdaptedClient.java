@@ -15,6 +15,8 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.country.Country;
+import seedu.address.model.country.CountryManager;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,6 +30,7 @@ class JsonAdaptedClient {
     private final String phone;
     private final String email;
     private final String address;
+    private final String country;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -36,11 +39,13 @@ class JsonAdaptedClient {
     @JsonCreator
     public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("country") String country,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.country = country;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -54,6 +59,7 @@ class JsonAdaptedClient {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        country = source.getCountry().getCountryCode();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -102,8 +108,16 @@ class JsonAdaptedClient {
         }
         final Address modelAddress = new Address(address);
 
+        if (country == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName()));
+        }
+        if (!CountryManager.isValidCountryCode(country)) {
+            throw new IllegalValueException(CountryManager.MESSAGE_CONSTRAINTS);
+        }
+        final Country modelCountry = new Country(country);
+
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTags);
     }
 
 }

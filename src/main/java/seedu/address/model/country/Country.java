@@ -87,9 +87,17 @@ public class Country {
         // state check
         Country c = (Country) other;
 
-        return countryCode.equals(c.countryCode)
-                && countryName.equals(c.countryName)
-                && countryNotes.equals(c.countryNotes);
+        return countryCode.equals(c.countryCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return countryCode.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return countryCode;
     }
 
 }
