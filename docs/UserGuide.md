@@ -75,7 +75,7 @@ you started quickly, if you are a new user of TBM
 
 ### Viewing help: `help`
 
-Shows commonly used commands for TBM.
+Shows commonly used commands for TBM in a new help window, pressing Esc will close this window.
 
 Format: `help`
 
