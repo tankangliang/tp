@@ -67,7 +67,7 @@ public class WidgetModelManager implements WidgetModel {
         String div3 = curr.getPhone().toString();
         String div4 = "Notes:\n- Angel Investor\n- China Scholar";
 
-        newObj.set(header, div1, div2, div3, div4);
+        newObj.set(header, div1, "", div2, "", div3, "", div4);
         return newObj;
     }
 

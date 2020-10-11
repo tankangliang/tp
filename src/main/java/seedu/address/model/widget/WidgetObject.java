@@ -5,7 +5,7 @@ import java.util.Optional;
 /**
  * A standardise way to render content on the widget view box.
  * Truncates anything that does not fit into the defined 8 divisions/sections for the displaying in the view box.
- * Defined format for displaying is:
+ * Defined format for fields to be displayed is:
  * <ol>
  *     <li>Header</li>
  *     <li>Div 1</li>
@@ -38,7 +38,7 @@ public class WidgetObject {
     /**
      * Sets the content of the widget object.
      *
-     * @param args
+     * @param args All the fields to be set.
      */
     public void set(String ...args) {
         for (int i = 0; i < Math.min(args.length, 14); i++) {
