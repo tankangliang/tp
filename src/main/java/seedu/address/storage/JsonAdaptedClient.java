@@ -108,6 +108,9 @@ class JsonAdaptedClient {
         }
         final Address modelAddress = new Address(address);
 
+        if (country == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName()));
+        }
         if (!CountryManager.isValidCountryCode(country)) {
             throw new IllegalValueException(CountryManager.MESSAGE_CONSTRAINTS);
         }

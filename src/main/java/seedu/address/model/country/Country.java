@@ -87,9 +87,7 @@ public class Country {
         // state check
         Country c = (Country) other;
 
-        return countryCode.equals(c.countryCode)
-                && countryName.equals(c.countryName)
-                && countryNotes.equals(c.countryNotes);
+        return countryCode.equals(c.countryCode);
     }
 
     @Override
