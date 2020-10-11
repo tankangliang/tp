@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClientAddCommand;
 import seedu.address.logic.commands.ClientDeleteCommand;
@@ -100,7 +101,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_View() throws Exception {
+    public void parseCommand_view() throws Exception {
         ClientViewCommand command = (ClientViewCommand) parser.parseCommand(
                 ClientViewCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased());
         assertEquals(new ClientViewCommand(INDEX_FIRST_CLIENT), command);
