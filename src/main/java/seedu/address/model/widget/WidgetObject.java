@@ -172,4 +172,31 @@ public class WidgetObject {
         return Optional.ofNullable(divs[13]);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof WidgetObject)) {
+            return false;
+        }
+
+        // state check
+        WidgetObject other1 = (WidgetObject) other;
+        int i = 0;
+        for (String s: divs) {
+            if (s == null && other1.divs[i] != null) {
+                return false;
+            } else {
+                if (!s.equals(other1.divs[i])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 }
