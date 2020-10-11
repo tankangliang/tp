@@ -1,5 +1,8 @@
 package seedu.address.model.note;
 
+/**
+ * Generic Note class for country and client notes.
+ */
 public class Note {
     // TODO: Add implementation
 //    private final String noteContents;

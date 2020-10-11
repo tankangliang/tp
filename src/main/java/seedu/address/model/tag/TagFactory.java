@@ -1,5 +1,8 @@
 package seedu.address.model.tag;
 
+/**
+ * Manages the relationship between Tags and Notes.
+ */
 public class TagFactory {
 //    TODO: Add implementation
 //    public static final Set<Tag> TAG_LIST = new HashSet<>();
