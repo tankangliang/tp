@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -9,8 +11,6 @@ import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
 
-import java.util.List;
-import java.util.Set;
 
 
 /**
@@ -50,7 +50,7 @@ public class ClientNoteAddCommand extends Command {
         requireNonNull(model);
         List<Client> lastShownList = model.getFilteredClientList();
 
-        if(targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
 

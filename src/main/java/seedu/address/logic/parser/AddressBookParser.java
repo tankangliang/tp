@@ -7,7 +7,6 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.sun.source.tree.ReturnTree;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClientAddCommand;
 import seedu.address.logic.commands.ClientDeleteCommand;
@@ -84,7 +83,6 @@ public class AddressBookParser {
     }
 
 
-
     /**
      * Parses input given that command is of COUNTRY_TYPE (starts with "country")
      *
@@ -151,7 +149,7 @@ public class AddressBookParser {
         String commandWord = secondaryMatcher.group("commandWord");
         String arguments = secondaryMatcher.group("arguments");
 
-        commandWord = CLIENT_TYPE + " "+ commandWord;
+        commandWord = CLIENT_TYPE + " " + commandWord;
 
         StringTokenizer stringTokenizer = new StringTokenizer(arguments);
         String nextWord = stringTokenizer.nextToken();
