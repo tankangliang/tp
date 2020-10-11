@@ -91,6 +91,11 @@ public class Country {
     }
 
     @Override
+    public int hashCode() {
+        return countryCode.hashCode();
+    }
+
+    @Override
     public String toString() {
         return countryCode;
     }
