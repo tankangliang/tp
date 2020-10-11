@@ -147,17 +147,6 @@ public class ClientAddCommandTest {
             throw new AssertionError("this method should not be called.");
         }
 
-        /**
-         * <<<<<<< HEAD
-         * Retrives the widget content object to be displayed in the widget.
-         *
-         * @return WidgetObject.
-         */
-        @Override
-        public WidgetObject showWidgetContent() {
-            throw new AssertionError("This method should not be called.");
-        }
-
         @Override
         public WidgetObject getWidgetContent() {
             throw new AssertionError("This method should not be called.");
