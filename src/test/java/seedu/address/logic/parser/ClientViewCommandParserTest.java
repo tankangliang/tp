@@ -10,8 +10,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.ClientViewCommand;
 
 public class ClientViewCommandParserTest {
+
     private ViewCommandParser parser = new ViewCommandParser();
-    //TODO: @LeeEnHao
+
     @Test
     public void parse_validArgs_returnsViewCommand() {
         assertParseSuccess(parser, "1", new ClientViewCommand(INDEX_FIRST_CLIENT));
