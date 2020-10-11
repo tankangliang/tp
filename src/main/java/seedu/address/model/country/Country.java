@@ -41,12 +41,17 @@ public class Country {
 
     /**
      * Adds a country note for this country.
+     * Method is protected as it is not intended for use outside of this package.
      *
      * @param countryNote The country note to be added.
      */
-    public void addCountryNote(Note countryNote) {
+    protected void addCountryNote(Note countryNote) {
         requireNonNull(countryNote);
         this.countryNotes.add(countryNote);
+    }
+
+    protected boolean hasCountryNote(Note countryNote) {
+        return countryNotes.contains(countryNote);
     }
 
     /**
@@ -66,4 +71,25 @@ public class Country {
     public String getCountryCode() {
         return countryCode;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Country)) {
+            return false;
+        }
+
+        // state check
+        Country c = (Country) other;
+
+        return countryCode.equals(c.countryCode)
+                && countryName.equals(c.countryName)
+                && countryNotes.equals(c.countryNotes);
+    }
+
 }

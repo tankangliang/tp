@@ -1,28 +1,38 @@
 package seedu.address.model.note;
 
+import static java.util.Objects.requireNonNull;
+
 public class Note {
+
     // TODO: Add implementation
-//    private final String noteContents;
-//
-//    public Note(String content) {
-//        requireNonNull(content)
-//        noteContents = content;
-//    }
-//    @Override
-//    public String toString() {
-//        return noteContents;
-//    }
-//    @Override
-//    public boolean equals(Object other) {
-//        if (other == this) {
-//            return true;
-//        }
-//        if (!(other instanceof Note)) {
-//            return false;
-//        }
-//    }
-//    @Override
-//    public int hashCode() {
-//
-//    }
+    public static final String MESSAGE_CONSTRAINTS = "message contraints for note";
+    protected final String noteContents;
+
+    /**
+     * To be added.
+     *
+     * @param content to be added
+     */
+    public Note(String content) {
+        requireNonNull(content);
+        noteContents = content;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Note) {
+            Note other = (Note) obj;
+            return noteContents.equals(other.noteContents);
+        }
+        return false;
+    }
+
+    //  @Override
+    //  public String toString() {
+    //      return noteContents;
+    //  }
+
+    //  @Override
+    //  public int hashCode() {
+    //  }
 }
