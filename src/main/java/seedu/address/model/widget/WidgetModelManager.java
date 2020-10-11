@@ -62,7 +62,7 @@ public class WidgetModelManager implements WidgetModel {
         WidgetObject newObj = new WidgetObject();
         Client curr = (Client) content;
         String header = curr.getName().toString();
-        String div1 = curr.getAddress().toString();
+        String div1 = curr.getCountry().getCountryName() + ", " + curr.getAddress().toString();
         String div2 = curr.getEmail().toString();
         String div3 = curr.getPhone().toString();
         String div4 = "Notes:\n- Angel Investor\n- China Scholar";
