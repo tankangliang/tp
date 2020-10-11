@@ -54,6 +54,9 @@ public class WidgetModelManager implements WidgetModel {
         widgetObject = wo;
     }
 
+    /**
+     * Maps content of the given object to different fields of the widget object.
+     */
     @SuppressWarnings("unchecked")
     private WidgetObject clientParser(Object content) {
         assert content instanceof Client;
