@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -17,12 +18,13 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new ClientAddCommand object
  */
-public class AddCommandParser implements Parser<ClientAddCommand> {
+public class ClientAddCommandParser implements Parser<ClientAddCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ClientAddCommand
@@ -31,9 +33,10 @@ public class AddCommandParser implements Parser<ClientAddCommand> {
      */
     public ClientAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_COUNTRY, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientAddCommand.MESSAGE_USAGE));
         }
@@ -42,9 +45,10 @@ public class AddCommandParser implements Parser<ClientAddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Client client = new Client(name, phone, email, address, tagList);
+        Client client = new Client(name, phone, email, address, country, tagList);
 
         return new ClientAddCommand(client);
     }

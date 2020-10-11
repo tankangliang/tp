@@ -92,4 +92,9 @@ public class Country {
                 && countryNotes.equals(c.countryNotes);
     }
 
+    @Override
+    public String toString() {
+        return countryCode;
+    }
+
 }

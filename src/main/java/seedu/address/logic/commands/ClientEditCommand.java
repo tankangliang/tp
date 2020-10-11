@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -24,6 +25,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -41,6 +43,7 @@ public class ClientEditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_COUNTRY + "COUNTRY] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -98,9 +101,10 @@ public class ClientEditCommand extends Command {
         Phone updatedPhone = editClientDescriptor.getPhone().orElse(clientToEdit.getPhone());
         Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
+        Country updatedCountry = editClientDescriptor.getCountry().orElse(clientToEdit.getCountry());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
 
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedTags);
     }
 
     @Override
@@ -130,6 +134,7 @@ public class ClientEditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Country country;
         private Set<Tag> tags;
 
         public EditClientDescriptor() {}
@@ -143,6 +148,7 @@ public class ClientEditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setCountry(toCopy.country);
             setTags(toCopy.tags);
         }
 
@@ -185,6 +191,14 @@ public class ClientEditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setCountry(Country ccountry) {
+            this.country = country;
+        }
+
+        public Optional<Country> getCountry() {
+            return Optional.ofNullable(country);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -221,6 +235,7 @@ public class ClientEditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getCountry().equals(e.getCountry())
                     && getTags().equals(e.getTags());
         }
     }
