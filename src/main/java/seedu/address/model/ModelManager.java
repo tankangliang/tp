@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryManager;
@@ -125,11 +126,25 @@ public class ModelManager implements Model {
         return countryManager.hasCountryNote(country, countryNote);
     }
 
+    // todo: Ritesh implement hasClientNote
+    @Override
+    public boolean hasClientNote(Client target, Note clientNote) {
+        requireAllNonNull(target, clientNote);
+        return target.hasClientNote(clientNote);
+    }
+
     @Override
     public void addCountryNote(Country country, Note countryNote) {
         requireAllNonNull(country, countryNote);
 
         countryManager.addCountryNote(country, countryNote);
+    }
+
+    // tood: Ritesh implement addClientNote
+    @Override
+    public void addClientNote(Client target, Note clientNote) {
+        requireAllNonNull(target, clientNote);
+        target.addClientNote(clientNote);
     }
 
     //=========== Filtered Client List Accessors =============================================================

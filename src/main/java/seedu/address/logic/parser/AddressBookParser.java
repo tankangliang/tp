@@ -3,14 +3,17 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.sun.source.tree.ReturnTree;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClientAddCommand;
 import seedu.address.logic.commands.ClientDeleteCommand;
 import seedu.address.logic.commands.ClientEditCommand;
 import seedu.address.logic.commands.ClientFindCommand;
+import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CountryFilterCommand;
 import seedu.address.logic.commands.CountryNoteCommand;
@@ -29,7 +32,7 @@ public class AddressBookParser {
      */
     private static final String CLIENT_TYPE = "client";
     private static final String COUNTRY_TYPE = "country";
-    private static final String NOTE_TYPE = "note";
+    private static final String CLIENT_NOTE_TYPE = "client note";
 
     /**
      * Used for initial separation of command type and rest of command.
@@ -54,6 +57,9 @@ public class AddressBookParser {
         final String restOfCommand = matcher.group("restOfCommand");
         switch (commandType) {
 
+        case CLIENT_NOTE_TYPE:
+            return parseClientNoteCommands(restOfCommand);
+
         case CLIENT_TYPE:
             return parseClientCommands(restOfCommand);
 
@@ -76,6 +82,8 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
+
+
 
     /**
      * Parses input given that command is of COUNTRY_TYPE (starts with "country")
@@ -107,6 +115,26 @@ public class AddressBookParser {
         }
     }
 
+    private Command parseClientNoteCommands(String input) throws ParseException {
+        final Matcher secondaryMatcher = SECONDARY_COMMAND_FORMAT.matcher(input.trim());
+        if (!secondaryMatcher.matches()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        String commandWord = secondaryMatcher.group("commandWord");
+        final String arguments = secondaryMatcher.group("arguments");
+
+        commandWord = CLIENT_TYPE + " " + commandWord;
+        switch (commandWord) {
+        case ClientNoteAddCommand.COMMAND_WORD:
+            // todo: Ritesh add ClientNoteAddCommandParser()
+            return new ClientNoteAddCommandParser().parse(arguments);
+
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
+
     /**
      * Parses input given that command is of CLIENT_TYPE (starts with "client")
      *
@@ -121,10 +149,26 @@ public class AddressBookParser {
         }
 
         String commandWord = secondaryMatcher.group("commandWord");
-        final String arguments = secondaryMatcher.group("arguments");
+        String arguments = secondaryMatcher.group("arguments");
 
-        commandWord = CLIENT_TYPE + " " + commandWord;
+        commandWord = CLIENT_TYPE + " "+ commandWord;
+
+        StringTokenizer stringTokenizer = new StringTokenizer(arguments);
+        String nextWord = stringTokenizer.nextToken();
+        if (nextWord.equals("add")) {
+            // gather rest of the arguments:
+            StringBuilder stringBuilder = new StringBuilder();
+            while (stringTokenizer.hasMoreTokens()) {
+                stringBuilder.append(stringTokenizer.nextToken()).append(" ");
+            }
+
+            commandWord += (" " + nextWord);
+            arguments = " " + stringBuilder.toString();
+        }
+
         switch (commandWord) {
+        case ClientNoteAddCommand.COMMAND_WORD:
+            return new ClientNoteAddCommandParser().parse(arguments);
         case ClientAddCommand.COMMAND_WORD:
             return new ClientAddCommandParser().parse(arguments);
 

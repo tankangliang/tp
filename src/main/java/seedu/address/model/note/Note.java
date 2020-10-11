@@ -30,10 +30,10 @@ public class Note {
         return false;
     }
 
-    //  @Override
-    //  public String toString() {
-    //      return noteContents;
-    //  }
+    @Override
+    public String toString() {
+        return noteContents;
+    }
 
     //  @Override
     //  public int hashCode() {

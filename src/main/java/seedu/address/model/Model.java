@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
@@ -83,7 +84,11 @@ public interface Model {
 
     boolean hasCountryNote(Country country, Note countryNote);
 
+    boolean hasClientNote(Client client, Note clientNote);
+
     void addCountryNote(Country country, Note countryNote);
+
+    void addClientNote(Client client, Note clientNote);
 
     /**
      * Returns an unmodifiable view of the filtered client list

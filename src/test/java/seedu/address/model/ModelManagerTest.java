@@ -15,10 +15,13 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.NoteStub;
+import seedu.address.model.note.Note;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.TypicalClients;
 
 public class ModelManagerTest {
 
@@ -104,6 +107,17 @@ public class ModelManagerTest {
     public void getFilteredClientList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredClientList().remove(0));
     }
+
+
+    @Test
+    public void addAndHasClientNote_validSyntax_updatesCorrectly() {
+        Client client = ALICE;
+        Note clientNote = new Note("this be a client note");
+        assertFalse(modelManager.hasClientNote(client, clientNote));
+        modelManager.addClientNote(client, clientNote);
+        assertTrue(modelManager.hasClientNote(client, clientNote));
+    }
+
 
     @Test
     public void equals() {

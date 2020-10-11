@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -146,8 +147,21 @@ public class ClientAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+
+        @Override
+        public boolean hasClientNote(Client client, Note clientNote) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void addCountryNote(Country country, Note countryNote) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+
+        @Override
+        public void addClientNote(Client client, Note clientNote) {
             throw new AssertionError("This method should not be called.");
         }
 

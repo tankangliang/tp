@@ -1,5 +1,6 @@
 package seedu.address.model.client;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -8,6 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.country.Country;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -25,6 +27,7 @@ public class Client {
     private final Address address;
     private final Country country;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Note> clientNotes = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -65,6 +68,31 @@ public class Client {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+
+    /**
+     * Gets the list of client notes associated with this client.
+     *
+     * @return The list of client notes associated with this client.
+     */
+    public Set<Note> getClientNotes() {
+        return Collections.unmodifiableSet(this.clientNotes);
+    }
+
+    /**
+     * Adds a client note for this client.
+     *
+     *
+     * @param clientNote The client note to be added.
+     */
+    public void addClientNote(Note clientNote) {
+        requireNonNull(clientNote);
+        this.clientNotes.add(clientNote);
+    }
+
+    public boolean hasClientNote(Note clientNote) {
+        return clientNotes.contains(clientNote);
     }
 
     /**
