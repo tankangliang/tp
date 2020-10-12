@@ -32,16 +32,11 @@ public class WidgetModelManager implements WidgetModel {
      */
     @Override
     public void setContent(Object content) {
-        //Temporary implementation for testing
-        java.lang.reflect.Field[] fields = content.getClass().getDeclaredFields();
-        java.util.stream.Stream.of(fields).forEach(f -> {
-            try {
-                StringBuilder sb = new StringBuilder().append(f.getName()).append(": ").append(f.get(content));
-                widgetObject.set(sb.toString());
-            } catch (IllegalAccessException ex) {
-                System.out.println(Arrays.toString(ex.getStackTrace()));
-            }
-        });
+        if (content instanceof Client) {
+            widgetObject = clientParser(content);
+        } else {
+            widgetObject = handle(content);
+        }
 
     }
 
@@ -78,15 +73,34 @@ public class WidgetModelManager implements WidgetModel {
         // TODO: Extract information out from client object
         WidgetObject newObj = new WidgetObject();
         Client curr = (Client) content;
-        String header = curr.getName().toString();
-        String div1 = curr.getCountry().getCountryName() + ", " + curr.getAddress().toString();
-        String div2 = curr.getEmail().toString();
+        String name = curr.getName().toString();
+        String location = curr.getAddress().toString() + ", " +
+                curr.getCountry().getCountryName() + ", " + curr.getTimezone().toString();
+        String email = curr.getEmail().toString();
         String div3 = curr.getPhone().toString();
         String div4 = "Notes:\n- Angel Investor\n- China Scholar";
 
-        newObj.set(/*header*/ header, /*div1*/ div1, /*text1*/ "", /*div2*/ div2, /*text2*/ "",
+        newObj.set(/*header*/ name, /*div1*/ location, /*text1*/ "", /*div2*/ "", /*text2*/ email,
                 /*div3*/ div3, /*text3*/ "", /*div4*/ div4);
         return newObj;
+    }
+
+    /**
+     * Temporary method to handle objects of any class.
+     */
+    private WidgetObject handle(Object content) {
+        WidgetObject wo = new WidgetObject();
+        java.lang.reflect.Field[] fields = content.getClass().getDeclaredFields();
+        java.util.stream.Stream.of(fields).forEach(f -> {
+            try {
+                f.setAccessible(true);
+                StringBuilder sb = new StringBuilder().append(f.getName()).append(": ").append(f.get(content));
+                wo.set(sb.toString());
+            } catch (IllegalAccessException ex) {
+                System.out.println(Arrays.toString(ex.getStackTrace()));
+            }
+        });
+        return wo;
     }
 
 }
