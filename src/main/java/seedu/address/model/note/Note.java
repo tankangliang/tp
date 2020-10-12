@@ -2,6 +2,9 @@ package seedu.address.model.note;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Objects;
+
+
 /**
  * Generic Note class for country and client notes.
  */
@@ -42,7 +45,8 @@ public class Note {
         return noteContents;
     }
 
-    //  @Override
-    //  public int hashCode() {
-    //  }
+    @Override
+    public int hashCode() {
+        return Objects.hash(noteContents);
+    }
 }

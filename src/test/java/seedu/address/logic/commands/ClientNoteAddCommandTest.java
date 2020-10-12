@@ -22,6 +22,7 @@ public class ClientNoteAddCommandTest {
 
     private static final String NOTE_CONTENT_1 = "client note content 1";
     private static final String NOTE_CONTENT_2 = "client note content 2";
+    private static final String NOTE_CONTENT_3 = "client note content 3";
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -40,15 +41,15 @@ public class ClientNoteAddCommandTest {
         try {
             Client client = TypicalClients.ALICE;
             Index idx = Index.fromOneBased(1);
-            Note clientNote1 = new Note(NOTE_CONTENT_1);
             Note clientNote2 = new Note(NOTE_CONTENT_2);
-            assertFalse(model.hasClientNote(client, clientNote1));
-            ClientNoteAddCommand clientNoteAddCommand1 = new ClientNoteAddCommand(idx, clientNote1);
+            Note clientNote3 = new Note(NOTE_CONTENT_3);
+            assertFalse(model.hasClientNote(client, clientNote2));
             ClientNoteAddCommand clientNoteAddCommand2 = new ClientNoteAddCommand(idx, clientNote2);
-            clientNoteAddCommand1.execute(model);
+            ClientNoteAddCommand clientNoteAddCommand3 = new ClientNoteAddCommand(idx, clientNote3);
             clientNoteAddCommand2.execute(model);
-            assertTrue(model.hasClientNote(client, clientNote1));
+            clientNoteAddCommand3.execute(model);
             assertTrue(model.hasClientNote(client, clientNote2));
+            assertTrue(model.hasClientNote(client, clientNote3));
         } catch (CommandException e) {
             fail();
         }
