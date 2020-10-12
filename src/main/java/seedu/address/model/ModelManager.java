@@ -139,12 +139,22 @@ public class ModelManager implements Model {
 
         return countryManager.hasCountryNote(country, countryNote);
     }
+    @Override
+    public boolean hasClientNote(Client target, Note clientNote) {
+        requireAllNonNull(target, clientNote);
+        return target.hasClientNote(clientNote);
+    }
 
     @Override
     public void addCountryNote(Country country, Note countryNote) {
         requireAllNonNull(country, countryNote);
 
         countryManager.addCountryNote(country, countryNote);
+    }
+    @Override
+    public void addClientNote(Client target, Note clientNote) {
+        requireAllNonNull(target, clientNote);
+        target.addClientNote(clientNote);
     }
 
     //=========== Filtered Client List Accessors =============================================================

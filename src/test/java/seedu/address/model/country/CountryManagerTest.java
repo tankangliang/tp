@@ -85,7 +85,7 @@ public class CountryManagerTest {
             assertEquals(1, countryFirstRef.getCountryNotes().size());
             assertEquals(1, countrySecondRef.getCountryNotes().size());
 
-            countrySecondRef.addCountryNote(new NoteStub("something"));
+            countrySecondRef.addCountryNote(new NoteStub("something else"));
             assertEquals(2, countryFirstRef.getCountryNotes().size());
             assertEquals(2, countrySecondRef.getCountryNotes().size());
         }
