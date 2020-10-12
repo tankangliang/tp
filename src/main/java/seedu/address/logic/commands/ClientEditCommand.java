@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEZONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import java.util.Collections;
@@ -25,6 +26,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 
@@ -44,6 +46,7 @@ public class ClientEditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_COUNTRY + "COUNTRY] "
+            + "[" + PREFIX_TIMEZONE + "TIMEZONE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -102,9 +105,11 @@ public class ClientEditCommand extends Command {
         Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Country updatedCountry = editClientDescriptor.getCountry().orElse(clientToEdit.getCountry());
+        Timezone updatedTimezone = editClientDescriptor.getTimezone().orElse(clientToEdit.getTimezone());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
 
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedTags);
+        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedTimezone,
+                updatedTags);
     }
 
     @Override
@@ -135,6 +140,7 @@ public class ClientEditCommand extends Command {
         private Email email;
         private Address address;
         private Country country;
+        private Timezone timezone;
         private Set<Tag> tags;
 
         public EditClientDescriptor() {}
@@ -149,6 +155,7 @@ public class ClientEditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setCountry(toCopy.country);
+            setTimezone(toCopy.timezone);
             setTags(toCopy.tags);
         }
 
@@ -191,12 +198,20 @@ public class ClientEditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setCountry(Country ccountry) {
+        public void setCountry(Country country) {
             this.country = country;
         }
 
         public Optional<Country> getCountry() {
             return Optional.ofNullable(country);
+        }
+
+        public void setTimezone(Timezone timezone) {
+            this.timezone = timezone;
+        }
+
+        public Optional<Timezone> getTimezone() {
+            return Optional.ofNullable(timezone);
         }
 
         /**
@@ -236,6 +251,7 @@ public class ClientEditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getCountry().equals(e.getCountry())
+                    && getTimezone().equals(e.getTimezone())
                     && getTags().equals(e.getTags());
         }
     }

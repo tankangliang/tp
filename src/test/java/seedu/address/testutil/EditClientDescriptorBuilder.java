@@ -10,6 +10,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 
@@ -38,6 +39,7 @@ public class EditClientDescriptorBuilder {
         descriptor.setEmail(client.getEmail());
         descriptor.setAddress(client.getAddress());
         descriptor.setCountry(client.getCountry());
+        descriptor.setTimezone(client.getTimezone());
         descriptor.setTags(client.getTags());
     }
 
@@ -78,6 +80,14 @@ public class EditClientDescriptorBuilder {
      */
     public EditClientDescriptorBuilder withCountry(String country) {
         descriptor.setCountry(new Country(country));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Timezone} of the {@code EditClientDescriptor} that we are building.
+     */
+    public EditClientDescriptorBuilder withTimezone(String timezone) {
+        descriptor.setTimezone(new Timezone(timezone));
         return this;
     }
 
