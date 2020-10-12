@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,19 +27,22 @@ public class Client {
     // Data fields
     private final Address address;
     private final Country country;
+    private final Timezone timezone;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<Note> clientNotes = new HashSet<>();
+    private final Set<Note> clientNotes = new LinkedHashSet<>(); // todo: initialise this iff client has notes
 
     /**
      * Every field must be present and not null.
      */
-    public Client(Name name, Phone phone, Email email, Address address, Country country, Set<Tag> tags) {
+    public Client(Name name, Phone phone, Email email, Address address, Country country, Timezone timezone,
+                  Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.country = country;
+        this.timezone = timezone;
         this.tags.addAll(tags);
     }
 
@@ -60,6 +64,10 @@ public class Client {
 
     public Country getCountry() {
         return country;
+    }
+
+    public Timezone getTimezone() {
+        return timezone;
     }
 
     /**
@@ -90,6 +98,12 @@ public class Client {
         this.clientNotes.add(clientNote);
     }
 
+    /**
+     * Checks whether the client has a given note in collection or not.
+     *
+     * @param clientNote The note, to be checked if client has it in collection.
+     * @return True if Client has that note in the collection.
+     */
     public boolean hasClientNote(Note clientNote) {
         return clientNotes.contains(clientNote);
     }
@@ -128,13 +142,14 @@ public class Client {
                 && otherClient.getEmail().equals(getEmail())
                 && otherClient.getAddress().equals(getAddress())
                 && otherClient.getCountry().equals(getCountry())
+                && otherClient.getTimezone().equals(getTimezone())
                 && otherClient.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, country, tags);
+        return Objects.hash(name, phone, email, address, country, timezone, tags);
     }
 
     @Override
@@ -149,6 +164,8 @@ public class Client {
                 .append(getAddress())
                 .append(" Country: ")
                 .append(getCountry())
+                .append(" Timezone: ")
+                .append(getTimezone())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

@@ -8,6 +8,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -22,12 +23,14 @@ public class ClientBuilder {
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_COUNTRY = "SG";
+    public static final String DEFAULT_TIMEZONE = "GMT+8";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Country country;
+    private Timezone timezone;
     private Set<Tag> tags;
 
     /**
@@ -39,6 +42,7 @@ public class ClientBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         country = new Country(DEFAULT_COUNTRY);
+        timezone = new Timezone(DEFAULT_TIMEZONE);
         tags = new HashSet<>();
     }
 
@@ -51,6 +55,7 @@ public class ClientBuilder {
         email = clientToCopy.getEmail();
         address = clientToCopy.getAddress();
         country = clientToCopy.getCountry();
+        timezone = clientToCopy.getTimezone();
         tags = new HashSet<>(clientToCopy.getTags());
     }
 
@@ -102,8 +107,16 @@ public class ClientBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Timezone} of the {@code Client} that we are building.
+     */
+    public ClientBuilder withTimezone(String timezone) {
+        this.timezone = new Timezone(timezone);
+        return this;
+    }
+
     public Client build() {
-        return new Client(name, phone, email, address, country, tags);
+        return new Client(name, phone, email, address, country, timezone, tags);
     }
 
 }

@@ -6,13 +6,11 @@ import static java.util.Objects.requireNonNull;
  * Generic Note class for country and client notes.
  */
 public class Note {
-
-    // TODO: Add implementation
     public static final String MESSAGE_CONSTRAINTS = "message contraints for note";
     protected final String noteContents;
 
     /**
-     * To be added.
+     * Constructs a Note object with some content in it.
      *
      * @param content to be added
      */
@@ -23,11 +21,20 @@ public class Note {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Note) {
-            Note other = (Note) obj;
-            return noteContents.equals(other.noteContents);
+        // short circuit if same object
+        if (obj == this) {
+            return true;
         }
-        return false;
+
+        // instanceof handles nulls
+        if (!(obj instanceof Note)) {
+            return false;
+        }
+
+        // state check
+        Note c = (Note) obj;
+
+        return this.noteContents.equals(c.noteContents);
     }
 
     @Override

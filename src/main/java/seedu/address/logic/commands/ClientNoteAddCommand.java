@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
 import java.util.List;
 
@@ -12,23 +13,19 @@ import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
 
 
-
 /**
- * todo: add javadocs for ClientNoteAddCommand
+ * Adds a Client-specific Note to list of notes associated with a client.
  */
 public class ClientNoteAddCommand extends Command {
 
     public static final String COMMAND_WORD = "client note add";
-    private static final String MESSAGE_DUPLICATE_CLIENT_NOTE = "The client note already exists";
-    private static final String MESSAGE_SUCCESS = "Successfully added client note";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note associated to a client "
             + "by the index number used in the displayed client list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            // + "[" + PREFIX_TAG + "TAG]...\n"
-            + "NOTE_STRING"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + "client note content";
+            + "Parameters: INDEX " + PREFIX_NOTE + "NOTE_STRING\n"
+            + "Example: " + COMMAND_WORD + " 1 " + "client note content";
+    private static final String MESSAGE_DUPLICATE_CLIENT_NOTE = "The client note already exists";
+    private static final String MESSAGE_SUCCESS = "Successfully added client note";
     private final Index targetIndex;
     private final Note clientNote;
 

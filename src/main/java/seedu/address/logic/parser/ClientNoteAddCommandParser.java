@@ -26,12 +26,10 @@ public class ClientNoteAddCommandParser implements Parser<ClientNoteAddCommand> 
         requireNonNull(userInput);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(userInput, /* PREFIX_TAG,*/ PREFIX_NOTE);
-        Index index;
-        if (!arePrefixesPresent(argMultimap, PREFIX_NOTE)
-                || argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NOTE) || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientNoteAddCommand.MESSAGE_USAGE));
         }
-
+        Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {

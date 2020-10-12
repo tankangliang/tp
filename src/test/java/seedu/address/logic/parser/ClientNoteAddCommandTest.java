@@ -40,7 +40,6 @@ public class ClientNoteAddCommandTest {
             ClientNoteAddCommand expected = new ClientNoteAddCommand(Index.fromOneBased(1),
                     new Note(NOTE_STRING));
             ClientNoteAddCommand actual = parser.parse(HAS_INDEX_HAS_NOTE);
-            System.out.println("hell");
             assertEquals(expected, actual);
         } catch (ParseException e) {
             fail();
