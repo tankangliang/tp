@@ -9,9 +9,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
 
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         title="Travelling BusinessMan" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         title="Travelling BusinessMan" minWidth="800" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/TBM.png" />
   </icons>
@@ -23,7 +24,7 @@
       </stylesheets>
 
       <VBox>
-        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER" styleClass="menubar">
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
@@ -44,14 +45,20 @@
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>
         </StackPane>
-
-        <VBox fx:id="clientList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+        <HBox VBox.vgrow="ALWAYS" >
+          <VBox fx:id="" styleClass="pane-with-border" prefWidth="340" VBox.vgrow="ALWAYS" HBox.hgrow="NEVER">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+            <StackPane fx:id="widgetPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+          <VBox fx:id="clientList" styleClass="pane-with-border" minWidth="350" prefWidth="340" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+            <padding>
+              <Insets top="10" right="10" bottom="10" left="10" />
+            </padding>
+          <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS" />
         </VBox>
-
+        </HBox>
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

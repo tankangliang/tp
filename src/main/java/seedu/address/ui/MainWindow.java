@@ -36,7 +36,8 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private WidgetViewBox widgetViewBox;
-
+    @FXML
+    private StackPane widgetPlaceholder;
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -112,6 +113,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        widgetViewBox = new WidgetViewBox();
+        widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
+
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
         clientListPanelPlaceholder.getChildren().add(clientListPanel.getRoot());
 
@@ -179,6 +183,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            widgetViewBox.update(logic.getWidgetContent());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -188,6 +193,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            //TODO: commandresult check for view command
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

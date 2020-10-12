@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalClients.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.client.Client;
+import seedu.address.model.country.Country;
 import seedu.address.testutil.ClientBuilder;
 
 public class WidgetModelManagerTest {
@@ -47,5 +48,12 @@ public class WidgetModelManagerTest {
         assertNotEquals(widgetModelManager1.getWidgetContent(), widgetModelManager2.getWidgetContent());
     }
 
+    @Test
+    public void setContent_notAClient_noExceptionsThrown() {
+        Country country = new Country("SG");
+        WidgetModelManager widgetModelManager = WidgetModelManager.initWidget();
+        widgetModelManager.setContent(country);
+        assertNotEquals(1, 0);
+    }
 
 }

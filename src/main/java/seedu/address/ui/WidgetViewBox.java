@@ -1,9 +1,18 @@
 package seedu.address.ui;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.TimeZone;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import seedu.address.model.widget.WidgetObject;
 
 /**
@@ -11,7 +20,6 @@ import seedu.address.model.widget.WidgetObject;
  */
 public class WidgetViewBox extends UiPart<Region> {
     private static final String FXML = "WidgetViewBox.fxml";
-    private final WidgetObject widgetObject;
     @FXML
     private VBox viewBox;
     @FXML
@@ -25,44 +33,76 @@ public class WidgetViewBox extends UiPart<Region> {
     @FXML
     private Label textTwo;
     @FXML
-    private Label divThree;
-    @FXML
     private Label textThree;
     @FXML
-    private Label divFour;
+    private Label divThree;
     @FXML
     private Label textFour;
     @FXML
-    private Label divFive;
-    @FXML
-    private Label textFive;
-    @FXML
-    private Label divSix;
-    @FXML
-    private Label textSix;
-    @FXML
     private Label footer;
+    private WidgetObject widgetObject;
+    private Timeline textClock;
 
     /**
      * Creates a {@code WidgetViewBox} with the given {@code WidgetObject}.
      */
-    public WidgetViewBox(WidgetObject widgetObject) {
+    public WidgetViewBox() {
         super(FXML);
-        this.widgetObject = widgetObject;
-        header.setText(widgetObject.header());
-        divOne.setText(widgetObject.divOne());
-        divTwo.setText(widgetObject.divTwo());
-        divThree.setText(widgetObject.divThree());
-        divFour.setText(widgetObject.divFour());
-        divFive.setText(widgetObject.divFive());
-        divSix.setText(widgetObject.divSix());
-        textOne.setText(widgetObject.textOne());
-        textTwo.setText(widgetObject.textTwo());
-        textThree.setText(widgetObject.textThree());
-        textFour.setText(widgetObject.textFour());
-        textFive.setText(widgetObject.textFive());
-        textSix.setText(widgetObject.textSix());
-        footer.setText(widgetObject.footer());
+        this.textClock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+            LocalTime localTime = LocalTime.now();
+            header.setText(localTime.format(formatter));
+        }), new KeyFrame(Duration.seconds(1)));
+        textClock.setCycleCount(Animation.INDEFINITE);
+        textClock.play();
+        divOne.setText(Locale.getDefault().getDisplayCountry());
+        textOne.setText(TimeZone.getDefault().getDisplayName());
+        divTwo.setText("Travelling BusinessMan");
+        textTwo.setText("");
+        textThree.setText("");
+        divThree.setText("");
+        textFour.setText("");
+        footer.setText("Made in NUS");
+    }
+
+    /**
+     * Private constructor for testing purposes.
+     *
+     * @param object Widget Object to be used in testing.
+     */
+    private WidgetViewBox(WidgetObject object) {
+        super(FXML);
+        this.widgetObject = object;
+    }
+
+
+    /**
+     * Updates the current content of the widget view box to the given content.
+     *
+     * @param other The new content.
+     */
+    public void update(WidgetObject other) {
+        this.widgetObject = other;
+        textClock.pause();
+        header.setText(other.header());
+        divOne.setText(other.divOne());
+        textOne.setText(other.textOne());
+        divTwo.setText(other.divTwo());
+        textTwo.setText(other.textTwo());
+        textThree.setText(other.textThree());
+        divThree.setText(other.divThree());
+        textFour.setText(other.textFour());
+        footer.setText(other.footer());
+    }
+
+    /**
+     * Initialiser to bypass static initialising problem in Non-FXML testing of this class.
+     *
+     * @param object Any Widget Object to be used in testing.
+     * @return WidgeViewBox.
+     */
+    public static WidgetViewBox init(WidgetObject object) {
+        return new WidgetViewBox(object);
     }
 
     @Override
@@ -81,4 +121,5 @@ public class WidgetViewBox extends UiPart<Region> {
         WidgetViewBox other1 = (WidgetViewBox) other;
         return widgetObject.equals(other1.widgetObject);
     }
+
 }
