@@ -110,8 +110,8 @@ public class JsonAdaptedClientTest {
 
     @Test
     public void toModelType_invalidCountry_throwsIllegalValueException() {
-        JsonAdaptedClient client =
-                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_COUNTRY, VALID_TIMEZONE, VALID_TAGS);
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                INVALID_COUNTRY, VALID_TIMEZONE, VALID_TAGS);
         String expectedMessage = CountryManager.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
     }
