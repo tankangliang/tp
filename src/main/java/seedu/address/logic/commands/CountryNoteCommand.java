@@ -15,13 +15,13 @@ import seedu.address.model.note.Note;
 public class CountryNoteCommand extends Command {
 
     public static final String COMMAND_WORD = "country note";
-    private static final String MESSAGE_DUPLICATE_COUNTRY_NOTE = "This country note already exists in TBM";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a note that is associated with the user input country.\n"
             + "Parameters: "
             + PREFIX_COUNTRY + "COUNTRY_CODE "
             + PREFIX_NOTE + "NOTE_STRING\n"
             + "Example: " + COMMAND_WORD + " c/SG nt/likes laksa";
+    private static final String MESSAGE_DUPLICATE_COUNTRY_NOTE = "This country note already exists in TBM";
     private static final String MESSAGE_SUCCESS = "Successfully added country note for %1$s: %2$s";
 
     private final Country country;
