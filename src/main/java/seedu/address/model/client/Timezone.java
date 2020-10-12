@@ -34,7 +34,7 @@ public class Timezone {
      * Returns true if a given string is a valid timezone.
      */
     public static boolean isValidTimezone(String test) {
-        return test.toLowerCase().matches(VALIDATION_REGEX);
+        return test.toUpperCase().matches(VALIDATION_REGEX);
     }
 
 

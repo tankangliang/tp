@@ -15,6 +15,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryManager;
 import seedu.address.model.tag.Tag;
@@ -31,6 +32,7 @@ class JsonAdaptedClient {
     private final String email;
     private final String address;
     private final String country;
+    private final String timezone;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -39,13 +41,14 @@ class JsonAdaptedClient {
     @JsonCreator
     public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("country") String country,
+                             @JsonProperty("country") String country, @JsonProperty("timezone") String timezone,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.country = country;
+        this.timezone = timezone;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -60,6 +63,7 @@ class JsonAdaptedClient {
         email = source.getEmail().value;
         address = source.getAddress().value;
         country = source.getCountry().getCountryCode();
+        timezone = source.getTimezone().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -116,8 +120,16 @@ class JsonAdaptedClient {
         }
         final Country modelCountry = new Country(country);
 
+        if (timezone == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Timezone.class.getSimpleName()));
+        }
+        if (!Timezone.isValidTimezone(timezone)) {
+            throw new IllegalValueException(Timezone.MESSAGE_CONSTRAINTS);
+        }
+        final Timezone modelTimezone = new Timezone(timezone);
+
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTags);
+        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTimezone, modelTags);
     }
 
 }

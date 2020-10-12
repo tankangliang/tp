@@ -24,18 +24,21 @@ public class Client {
     // Data fields
     private final Address address;
     private final Country country;
+    private final Timezone timezone;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Client(Name name, Phone phone, Email email, Address address, Country country, Set<Tag> tags) {
+    public Client(Name name, Phone phone, Email email, Address address, Country country, Timezone timezone,
+                  Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.country = country;
+        this.timezone = timezone;
         this.tags.addAll(tags);
     }
 
@@ -57,6 +60,10 @@ public class Client {
 
     public Country getCountry() {
         return country;
+    }
+
+    public Timezone getTimezone() {
+        return timezone;
     }
 
     /**
@@ -101,13 +108,14 @@ public class Client {
                 && otherClient.getEmail().equals(getEmail())
                 && otherClient.getAddress().equals(getAddress())
                 && otherClient.getCountry().equals(getCountry())
+                && otherClient.getTimezone().equals(getTimezone())
                 && otherClient.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, country, tags);
+        return Objects.hash(name, phone, email, address, country, timezone, tags);
     }
 
     @Override
@@ -122,6 +130,8 @@ public class Client {
                 .append(getAddress())
                 .append(" Country: ")
                 .append(getCountry())
+                .append(" Timezone: ")
+                .append(getTimezone())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
