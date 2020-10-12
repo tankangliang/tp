@@ -46,6 +46,9 @@ public class Timezone {
             matcher.find();
             final String sign = matcher.group("sign");
             final String numberString = matcher.group("number");
+            if (numberString.length() > 2) {
+                return false;
+            }
             final int number = Integer.parseInt(numberString);
             final int offset = sign.equals("+") ? LARGEST_POSITIVE_OFFSET : SMALLEST_NEGATIVE_OFFSET;
 
