@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIMEZONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -30,6 +31,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMEZONE_BOB;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalClients.AMY;
@@ -43,6 +45,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Timezone;
 import seedu.address.model.country.CountryManager;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ClientBuilder;
@@ -84,6 +87,11 @@ public class ClientAddCommandParserTest {
                 + COUNTRY_DESC_AMY + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_FRIEND,
                 new ClientAddCommand(expectedClient));
 
+        // multiple timezones - last timezone accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + COUNTRY_DESC_BOB + TIMEZONE_DESC_AMY + TIMEZONE_DESC_BOB + TAG_DESC_FRIEND,
+                new ClientAddCommand(expectedClient));
+
         // multiple tags - all accepted
         Client expectedClientMultipleTags = new ClientBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
@@ -107,27 +115,31 @@ public class ClientAddCommandParserTest {
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_BOB, expectedMessage);
+                + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB, expectedMessage);
 
         // missing phone prefix
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_BOB, expectedMessage);
+                + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB, expectedMessage);
 
         // missing email prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_BOB, expectedMessage);
+                + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB, expectedMessage);
 
         // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
-                + COUNTRY_DESC_BOB, expectedMessage);
+                + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB, expectedMessage);
 
         // missing country prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + VALID_COUNTRY_BOB, expectedMessage);
+                + VALID_COUNTRY_BOB + TIMEZONE_DESC_BOB, expectedMessage);
+
+        // missing timezone prefix
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + COUNTRY_DESC_BOB + VALID_TIMEZONE_BOB, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
-                + VALID_COUNTRY_BOB, expectedMessage);
+                + VALID_COUNTRY_BOB + VALID_TIMEZONE_BOB, expectedMessage);
     }
 
     @Test
@@ -153,6 +165,11 @@ public class ClientAddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_COUNTRY_DESC + TIMEZONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 CountryManager.MESSAGE_CONSTRAINTS);
+
+        // invalid timezone
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                        + COUNTRY_DESC_BOB + INVALID_TIMEZONE_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                Timezone.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
