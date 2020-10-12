@@ -77,7 +77,7 @@ public class CountryNoteCommandTest {
     }
 
     @Test
-    public void equals_SameCountryDiffNote_returnFalse() {
+    public void equals_sameCountryDiffNote_returnFalse() {
         CountryNoteCommand countryNoteCommandFirst = new CountryNoteCommand(new Country("SG"),
                 new NoteStub("generic"));
         CountryNoteCommand countryNoteCommandSecond = new CountryNoteCommand(new Country("SG"),
@@ -87,7 +87,7 @@ public class CountryNoteCommandTest {
     }
 
     @Test
-    public void equals_SameCountrySameNote_returnTrue() {
+    public void equals_sameCountrySameNote_returnTrue() {
         CountryNoteCommand countryNoteCommandFirst = new CountryNoteCommand(new Country("SG"),
                 new NoteStub("generic"));
         CountryNoteCommand countryNoteCommandSecond = new CountryNoteCommand(new Country("SG"),
