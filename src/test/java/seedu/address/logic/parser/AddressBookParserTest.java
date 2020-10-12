@@ -19,6 +19,7 @@ import seedu.address.logic.commands.ClientDeleteCommand;
 import seedu.address.logic.commands.ClientEditCommand;
 import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
 import seedu.address.logic.commands.ClientFindCommand;
+import seedu.address.logic.commands.ClientViewCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -97,5 +98,12 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        ClientViewCommand command = (ClientViewCommand) parser.parseCommand(
+                ClientViewCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased());
+        assertEquals(new ClientViewCommand(INDEX_FIRST_CLIENT), command);
     }
 }
