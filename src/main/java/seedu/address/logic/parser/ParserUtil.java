@@ -148,7 +148,7 @@ public class ParserUtil {
      */
     public static Timezone parseTimezone(String timezone) throws ParseException {
         requireNonNull(timezone);
-        String trimmedTimezone = timezone.trim();
+        String trimmedTimezone = timezone.trim().toUpperCase();
         if (!Timezone.isValidTimezone(trimmedTimezone)) {
             throw new ParseException(Timezone.MESSAGE_CONSTRAINTS);
         }
