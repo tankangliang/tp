@@ -79,4 +79,40 @@ public class CountryTest {
             assertFalse(country.hasCountryNote(otherNote));
         }
     }
+
+    @Test
+    public void equals_sameObj_returnTrue() {
+        for (String countryCode : COUNTRY_CODES) {
+            Country countryFirst = new Country(countryCode);
+            Country countrySecond = new Country(countryCode);
+            assertTrue(countryFirst.equals(countrySecond));
+        }
+    }
+
+    @Test
+    public void equals_notACountry_returnFalse() {
+        for (String countryCode : COUNTRY_CODES) {
+            Country countryFirst = new Country(countryCode);
+            Object obj = new Object();
+            assertFalse(countryFirst.equals(obj));
+        }
+    }
+
+    @Test
+    public void equals_diffCountry_returnFalse() {
+        for (int i = 0; i < COUNTRY_CODES.length - 1; i++) {
+            Country countryFirst = new Country(COUNTRY_CODES[i]);
+            Country countrySecond = new Country(COUNTRY_CODES[i + 1]);
+            assertFalse(countryFirst.equals(countrySecond));
+        }
+    }
+
+    @Test
+    public void equals_sameCountry_returnTrue() {
+        for (String countryCode : COUNTRY_CODES) {
+            Country countryFirst = new Country(countryCode);
+            Country countrySecond = new Country(countryCode);
+            assertTrue(countryFirst.equals(countrySecond));
+        }
+    }
 }
