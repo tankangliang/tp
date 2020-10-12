@@ -30,7 +30,7 @@ public class ClientCountryMatchesInputCountryPredicate implements Predicate<Clie
      *
      * @return The string representation of the user-input country.
      */
-    public String getInputCountryRepr() {
+    public String getInputCountryStringRepresentation() {
         return country.toString();
     }
 
