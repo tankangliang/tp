@@ -55,9 +55,9 @@ Client *--> Email
 Client *--> Address
 Client *--> "*" Tag
 
-WidgetModel -[hidden]right->WidgetModelManager
-WidgetModelManager -[hidden]right->WidgetObject
-WidgetModelManager .left.|> WidgetModel
+
+WidgetModelManager ..|> WidgetModel
+WidgetModelManager *-right->"1" WidgetObject
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
