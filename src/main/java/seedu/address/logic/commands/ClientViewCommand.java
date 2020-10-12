@@ -50,6 +50,7 @@ public class ClientViewCommand extends Command {
 
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
         model.setWidgetContent(clientToView);
+
         return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, clientToView.getName()),
                 false, false, true);
     }
