@@ -13,6 +13,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryManager;
 import seedu.address.model.note.Note;
@@ -137,6 +138,22 @@ public class ParserUtil {
             throw new ParseException(CountryManager.MESSAGE_CONSTRAINTS);
         }
         return new Country(trimmedCountryCode);
+    }
+
+    /**
+     * Parses {@code String timezone} into a {@code Timezone}.
+     *
+     * @param timezone String to be parsed into timezone.
+     * @return The timezone associated with the input string.
+     * @throws ParseException If timezone is invalid.
+     */
+    public static Timezone parseTimezone(String timezone) throws ParseException {
+        requireNonNull(timezone);
+        String trimmedTimezone = timezone.trim().toUpperCase();
+        if (!Timezone.isValidTimezone(trimmedTimezone)) {
+            throw new ParseException(Timezone.MESSAGE_CONSTRAINTS);
+        }
+        return new Timezone(trimmedTimezone);
     }
 
     /**

@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEZONE;
 
 import java.util.Set;
 
@@ -37,6 +38,7 @@ public class ClientUtil {
         sb.append(PREFIX_EMAIL + client.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + client.getAddress().value + " ");
         sb.append(PREFIX_COUNTRY + client.getCountry().getCountryCode() + " ");
+        sb.append(PREFIX_TIMEZONE + client.getTimezone().value + " ");
         client.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -54,6 +56,7 @@ public class ClientUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getCountry().ifPresent(country -> sb.append(PREFIX_COUNTRY).append(country.getCountryCode())
                 .append(" "));
+        descriptor.getTimezone().ifPresent(timezone -> sb.append(PREFIX_TIMEZONE).append(timezone.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
+import seedu.address.model.widget.WidgetObject;
 
 /**
  * The API of the Model component.
@@ -70,7 +71,22 @@ public interface Model {
     void deleteClient(Client target);
 
     /**
-     * Adds the given client. {@code client} must not already exist in the address book.
+     * Sets the widget box contents to the given content.
+     */
+    void setWidgetContent(Object content);
+
+    /**
+     * Retrives the widget content object to be displayed in the widget.
+     *
+     * @return WidgetObject.
+     */
+    WidgetObject getWidgetContent();
+
+
+    /**
+     * Adds the given client.
+     *
+     * {@code client} must not already exist in the address book.
      */
     void addClient(Client client);
 

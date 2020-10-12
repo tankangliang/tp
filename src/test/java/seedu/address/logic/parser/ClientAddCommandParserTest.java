@@ -21,6 +21,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.TIMEZONE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.TIMEZONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNTRY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -54,33 +56,39 @@ public class ClientAddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TAG_DESC_FRIEND, new ClientAddCommand(expectedClient));
+                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_FRIEND,
+                new ClientAddCommand(expectedClient));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TAG_DESC_FRIEND, new ClientAddCommand(expectedClient));
+                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_FRIEND,
+                new ClientAddCommand(expectedClient));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TAG_DESC_FRIEND, new ClientAddCommand(expectedClient));
+                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_FRIEND,
+                new ClientAddCommand(expectedClient));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TAG_DESC_FRIEND, new ClientAddCommand(expectedClient));
+                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_FRIEND,
+                new ClientAddCommand(expectedClient));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TAG_DESC_FRIEND, new ClientAddCommand(expectedClient));
+                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_FRIEND,
+                new ClientAddCommand(expectedClient));
 
         // multiple countries - last country accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_AMY + COUNTRY_DESC_BOB + TAG_DESC_FRIEND, new ClientAddCommand(expectedClient));
+                + COUNTRY_DESC_AMY + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_FRIEND,
+                new ClientAddCommand(expectedClient));
 
         // multiple tags - all accepted
         Client expectedClientMultipleTags = new ClientBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 new ClientAddCommand(expectedClientMultipleTags));
     }
 
@@ -89,7 +97,7 @@ public class ClientAddCommandParserTest {
         // zero tags
         Client expectedClient = new ClientBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + COUNTRY_DESC_AMY,
+                        + COUNTRY_DESC_AMY + TIMEZONE_DESC_AMY,
                 new ClientAddCommand(expectedClient));
     }
 
@@ -126,36 +134,38 @@ public class ClientAddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+                + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+                + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+                + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
 
         // invalid address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + COUNTRY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+                + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                Address.MESSAGE_CONSTRAINTS);
 
         // invalid country
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_COUNTRY_DESC + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, CountryManager.MESSAGE_CONSTRAINTS);
+                + INVALID_COUNTRY_DESC + TIMEZONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                CountryManager.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+                + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + INVALID_COUNTRY_DESC,
+                + INVALID_COUNTRY_DESC + TIMEZONE_DESC_BOB,
                 Name.MESSAGE_CONSTRAINTS);
 
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientAddCommand.MESSAGE_USAGE));
     }
 }
