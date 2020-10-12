@@ -1,5 +1,8 @@
 package seedu.address.model.client;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -10,12 +13,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Timezone {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Timezone should be in the form \"GMT+X\" or \"GMT-X\" where X is a number.";
+            "Timezone should be in the form \"GMT+X\" or \"GMT-X\" where X is a number.\n"
+            + "Largest offset is GMT+14 and smallest offset is GMT-12";
 
-    /*
-     * Timezone must start with "GMT"
-     */
-    public static final String VALIDATION_REGEX = "^GMT[+-][\\d+]";
+    /** Timezone must start with "GMT" */
+    public static final String VALIDATION_REGEX = "^GMT(?<sign>[+-])(?<number>[\\d]+)";
+
+    private static final Pattern TIMEZONE_FORMAT = Pattern.compile(VALIDATION_REGEX);
+
+    private static final int SMALLEST_OFFSET = 12;
+    private static final int LARGEST_OFFSET = 14;
 
     public final String value;
 
@@ -34,7 +41,19 @@ public class Timezone {
      * Returns true if a given string is a valid timezone.
      */
     public static boolean isValidTimezone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (test.matches(VALIDATION_REGEX)) {
+            final Matcher matcher = TIMEZONE_FORMAT.matcher(test);
+            matcher.find();
+            final String sign = matcher.group("sign");
+            final String numberString = matcher.group("number");
+            final int number = Integer.parseInt(numberString);
+            final int offset = sign.equals("+") ? LARGEST_OFFSET : SMALLEST_OFFSET;
+
+            if (number <= offset) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
