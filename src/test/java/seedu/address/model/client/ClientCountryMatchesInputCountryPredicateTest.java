@@ -1,6 +1,8 @@
 package seedu.address.model.client;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Locale;
@@ -38,7 +40,7 @@ public class ClientCountryMatchesInputCountryPredicateTest {
     public void equals_sameObj_returnTrue() {
         ClientCountryMatchesInputCountryPredicate pred = new ClientCountryMatchesInputCountryPredicate(
                 new Country("SG"));
-        assertTrue(pred.equals(pred));
+        assertEquals(pred, pred);
     }
 
     @Test
@@ -46,7 +48,7 @@ public class ClientCountryMatchesInputCountryPredicateTest {
         ClientCountryMatchesInputCountryPredicate pred = new ClientCountryMatchesInputCountryPredicate(
                 new Country("SG"));
         Object obj = new Object();
-        assertFalse(pred.equals(obj));
+        assertNotEquals(pred, obj);
     }
 
     @Test
@@ -55,8 +57,8 @@ public class ClientCountryMatchesInputCountryPredicateTest {
                 new Country("SG"));
         ClientCountryMatchesInputCountryPredicate predSecond = new ClientCountryMatchesInputCountryPredicate(
                 new Country("MY"));
-        assertFalse(predFirst.equals(predSecond));
-        assertFalse(predSecond.equals(predFirst));
+        assertNotEquals(predFirst, predSecond);
+        assertNotEquals(predSecond, predFirst);
     }
 
     @Test
@@ -65,7 +67,7 @@ public class ClientCountryMatchesInputCountryPredicateTest {
                 new Country("SG"));
         ClientCountryMatchesInputCountryPredicate predSecond = new ClientCountryMatchesInputCountryPredicate(
                 new Country("SG"));
-        assertTrue(predFirst.equals(predSecond));
-        assertTrue(predSecond.equals(predFirst));
+        assertEquals(predFirst, predSecond);
+        assertEquals(predSecond, predFirst);
     }
 }

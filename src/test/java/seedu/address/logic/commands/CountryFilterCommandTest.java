@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
@@ -28,11 +28,7 @@ public class CountryFilterCommandTest {
     @Test
     public void execute_validCountries_matchesExpectedFilterResult() {
         try {
-            List<Client> initialClientList = new ArrayList<>();
-
-            for (Client client : model.getFilteredClientList()) {
-                initialClientList.add(client);
-            }
+            List<Client> initialClientList = new ArrayList<>(model.getFilteredClientList());
 
             for (String countryCode : COUNTRY_CODES) {
                 Country country = new Country(countryCode);
@@ -46,7 +42,7 @@ public class CountryFilterCommandTest {
 
                 int i = 0;
                 for (Client client : model.getFilteredClientList()) {
-                    assertTrue(client.equals(expectedFilteredClientList.get(i)));
+                    assertEquals(expectedFilteredClientList.get(i), client);
                     i++;
                 }
             }
@@ -61,7 +57,7 @@ public class CountryFilterCommandTest {
         ClientCountryMatchesInputCountryPredicate pred = new ClientCountryMatchesInputCountryPredicate(
                 country);
         CountryFilterCommand countryFilterCommand = new CountryFilterCommand(pred);
-        assertTrue(countryFilterCommand.equals(countryFilterCommand));
+        assertEquals(countryFilterCommand, countryFilterCommand);
     }
 
     @Test
@@ -71,7 +67,7 @@ public class CountryFilterCommandTest {
                 country);
         CountryFilterCommand countryFilterCommand = new CountryFilterCommand(pred);
         Object obj = new Object();
-        assertFalse(countryFilterCommand.equals(obj));
+        assertNotEquals(countryFilterCommand, obj);
     }
 
     @Test
@@ -84,8 +80,8 @@ public class CountryFilterCommandTest {
                 countrySecond);
         CountryFilterCommand countryFilterCommandFirst = new CountryFilterCommand(predFirst);
         CountryFilterCommand countryFilterCommandSecond = new CountryFilterCommand(predSecond);
-        assertFalse(countryFilterCommandFirst.equals(countryFilterCommandSecond));
-        assertFalse(countryFilterCommandSecond.equals(countryFilterCommandFirst));
+        assertNotEquals(countryFilterCommandFirst, countryFilterCommandSecond);
+        assertNotEquals(countryFilterCommandSecond, countryFilterCommandFirst);
     }
 
     @Test
@@ -98,8 +94,8 @@ public class CountryFilterCommandTest {
                 countrySecond);
         CountryFilterCommand countryFilterCommandFirst = new CountryFilterCommand(predFirst);
         CountryFilterCommand countryFilterCommandSecond = new CountryFilterCommand(predSecond);
-        assertTrue(countryFilterCommandFirst.equals(countryFilterCommandSecond));
-        assertTrue(countryFilterCommandSecond.equals(countryFilterCommandFirst));
+        assertEquals(countryFilterCommandFirst, countryFilterCommandSecond);
+        assertEquals(countryFilterCommandSecond, countryFilterCommandFirst);
     }
 
 }
