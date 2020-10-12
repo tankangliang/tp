@@ -15,6 +15,12 @@ Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
+Package Widget {
+Interface WidgetModel <<Interface>>
+Class WidgetModelManager
+Class WidgetObject
+}
+
 Package Client {
 Class Client
 Class Address
@@ -38,6 +44,7 @@ ModelManager .up.|> Model
 Model .right.> ObservableList
 ModelManager o--> "1" AddressBook
 ModelManager o-left-> "1" UserPrefs
+ModelManager *-right->"1" WidgetModel
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueClientList
@@ -47,6 +54,10 @@ Client *--> Phone
 Client *--> Email
 Client *--> Address
 Client *--> "*" Tag
+
+
+WidgetModelManager ..|> WidgetModel
+WidgetModelManager *-right->"1" WidgetObject
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address

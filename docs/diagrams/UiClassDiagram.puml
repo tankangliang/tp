@@ -15,6 +15,7 @@ Class ClientListPanel
 Class ClientCard
 Class StatusBarFooter
 Class CommandBox
+Class WidgetViewBox
 }
 
 package Model <<Rectangle>> {
@@ -33,6 +34,7 @@ UiManager -down-> MainWindow
 MainWindow --> HelpWindow
 MainWindow *-down-> CommandBox
 MainWindow *-down-> ResultDisplay
+MainWindow *-down-> WidgetViewBox
 MainWindow *-down-> ClientListPanel
 MainWindow *-down-> StatusBarFooter
 
@@ -47,7 +49,8 @@ ClientCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow -down-|> UiPart
 
-ClientCard ..> Model
+WidgetViewBox .right.> Model
+ClientCard .right.> Model
 UiManager -right-> Logic
 MainWindow -left-> Logic
 

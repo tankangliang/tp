@@ -10,17 +10,14 @@ title: User Guide
         <h3><i>Welcome to the Travelling BusinessMan User Guide!</i></h3>
     </p>
     <p>
-        <strong><i>Travelling BusinessMan</i></strong>, <strong><i>TBM</i></strong>, is a companion that goes beyond 
-        being just a simple contact management application.
+        <strong><i>Travelling BusinessMan</i></strong>, <strong><i>TBM</i></strong>, is a companion that goes beyond being just a simple contact management application.
     </p> 
     <p>
-        <strong><i>TBM</i></strong> sorts and organises your clients for you, streamlines your workflow,
-        improves business efficiency and so much more. All this is at the convenience of the Command-Line Interface.
+        <strong><i>TBM</i></strong> sorts and organises your clients for you, streamlines your workflow, improves business efficiency and so much more. All this is at the convenience of the Command-Line Interface.
         <strong><i>TBM</i></strong> does more than just tracking your clients!<br>
     </p>
     <p>
-        This user guide will be a starting point for you in getting yourself oriented with how
-        <strong><i>TBM</i></strong> works and how you can integrate it into your professional journey!
+        This user guide will be a starting point for you in getting yourself oriented with how <strong><i>TBM</i></strong> works and how you can integrate it into your professional journey!
     </p>
 </div>
 
