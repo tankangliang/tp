@@ -1,5 +1,6 @@
 package seedu.address.model.widget;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 /**
@@ -206,18 +207,7 @@ public class WidgetObject {
 
         // state check
         WidgetObject other1 = (WidgetObject) other;
-        int i = 0;
-        for (String s: divs) {
-            if (s == null && other1.divs[i] != null) {
-                return false;
-            } else {
-                if (!s.equals(other1.divs[i])) {
-                    return false;
-                }
-            }
-            i++;
-        }
-        return true;
+        return Arrays.equals(this.divs, other1.divs);
     }
 
 }
