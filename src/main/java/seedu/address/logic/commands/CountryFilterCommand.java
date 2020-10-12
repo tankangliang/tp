@@ -14,8 +14,7 @@ public class CountryFilterCommand extends Command {
     public static final String COMMAND_WORD = "country filter";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all clients whose country matches "
             + "the specified country-code and displays them as a list with index numbers.\n"
-            + "Parameters: "
-            + PREFIX_COUNTRY + "COUNTRY_CODE\n"
+            + "Parameters: " + PREFIX_COUNTRY + "COUNTRY_CODE\n"
             + "Example: " + COMMAND_WORD + " c/SG";
     public static final String MESSAGE_FILTER_CLIENT_BY_COUNTRY_SUCCESS = "Showing %1$s clients that are from: %2$s";
 
@@ -37,7 +36,7 @@ public class CountryFilterCommand extends Command {
         model.updateFilteredClientList(predicate);
         return new CommandResult(
                 String.format(MESSAGE_FILTER_CLIENT_BY_COUNTRY_SUCCESS, model.getFilteredClientList().size(),
-                        predicate.getInputCountryRepr()));
+                        predicate.getInputCountryStringRepresentation()));
     }
 
     @Override
