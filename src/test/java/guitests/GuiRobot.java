@@ -1,9 +1,6 @@
 package guitests;
 
-import static org.testfx.api.FxToolkit.registerPrimaryStage;
-
 import java.util.Optional;
-import java.util.concurrent.TimeoutException;
 import java.util.function.BooleanSupplier;
 
 import org.testfx.api.FxRobot;
