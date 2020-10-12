@@ -21,8 +21,8 @@ public class Timezone {
 
     private static final Pattern TIMEZONE_FORMAT = Pattern.compile(VALIDATION_REGEX);
 
-    private static final int SMALLEST_OFFSET = 12;
-    private static final int LARGEST_OFFSET = 14;
+    private static final int SMALLEST_NEGATIVE_OFFSET = 12;
+    private static final int LARGEST_POSITIVE_OFFSET = 14;
 
     public final String value;
 
@@ -47,7 +47,7 @@ public class Timezone {
             final String sign = matcher.group("sign");
             final String numberString = matcher.group("number");
             final int number = Integer.parseInt(numberString);
-            final int offset = sign.equals("+") ? LARGEST_OFFSET : SMALLEST_OFFSET;
+            final int offset = sign.equals("+") ? LARGEST_POSITIVE_OFFSET : SMALLEST_NEGATIVE_OFFSET;
 
             if (number <= offset) {
                 return true;

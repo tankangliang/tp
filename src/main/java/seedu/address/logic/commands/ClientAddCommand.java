@@ -27,6 +27,7 @@ public class ClientAddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_COUNTRY + "COUNTRY "
+            + PREFIX_TIMEZONE + "TIMEZONE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
