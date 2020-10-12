@@ -116,7 +116,7 @@ public class ModelManager implements Model {
 
     @Override
     public WidgetObject getWidgetContent() {
-        return widget.getWidgetConten();
+        return widget.getWidgetContent();
     }
 
 

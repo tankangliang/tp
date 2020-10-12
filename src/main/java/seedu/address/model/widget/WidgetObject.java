@@ -45,8 +45,24 @@ public class WidgetObject {
      * @param args All the fields to be set.
      */
     public void set(String ...args) {
+        // Sets all fields from start to end order.
         for (int i = 0; i < Math.min(args.length, 14); i++) {
             divs[i] = args[i];
+        }
+    }
+
+    /**
+     * Sets the first null field to the given String value.
+     *
+     * @param arg The String value to be set to the first null field.
+     */
+    public void set(String arg) {
+        System.out.println(arg);
+        for (int i = 0; i < divs.length; i++) {
+            if (divs[i] == null) {
+                divs[i] = arg;
+                return;
+            }
         }
     }
 

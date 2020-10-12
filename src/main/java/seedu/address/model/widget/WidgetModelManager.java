@@ -1,5 +1,7 @@
 package seedu.address.model.widget;
 
+import java.util.Arrays;
+
 import seedu.address.model.client.Client;
 
 /**
@@ -30,11 +32,17 @@ public class WidgetModelManager implements WidgetModel {
      */
     @Override
     public void setContent(Object content) {
-        if (content.getClass() == Client.class) {
-            widgetObject = clientParser(content);
-        } else {
-            return;
-        }
+        //Temporary implementation for testing
+        java.lang.reflect.Field[] fields = content.getClass().getDeclaredFields();
+        java.util.stream.Stream.of(fields).forEach(f -> {
+            try {
+                StringBuilder sb = new StringBuilder().append(f.getName()).append(": ").append(f.get(content));
+                widgetObject.set(sb.toString());
+            } catch (IllegalAccessException ex) {
+                System.out.println(Arrays.toString(ex.getStackTrace()));
+            }
+        });
+
     }
 
     /**
@@ -43,7 +51,7 @@ public class WidgetModelManager implements WidgetModel {
      * @return WidgetObject.
      */
     @Override
-    public WidgetObject getWidgetConten() {
+    public WidgetObject getWidgetContent() {
         return widgetObject;
     }
 
