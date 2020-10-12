@@ -15,6 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.widget.WidgetObject;
 import seedu.address.storage.Storage;
 
 /**
@@ -57,6 +58,11 @@ public class LogicManager implements Logic {
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();
+    }
+
+    @Override
+    public WidgetObject getWidgetContent() {
+        return model.getWidgetContent();
     }
 
     @Override
