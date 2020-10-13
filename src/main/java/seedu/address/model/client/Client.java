@@ -1,13 +1,16 @@
 package seedu.address.model.client;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.country.Country;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +29,7 @@ public class Client {
     private final Country country;
     private final Timezone timezone;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Note> clientNotes = new LinkedHashSet<>(); // todo: initialise this iff client has notes
 
     /**
      * Every field must be present and not null.
@@ -72,6 +76,36 @@ public class Client {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+
+    /**
+     * Gets the list of client notes associated with this client.
+     *
+     * @return The list of client notes associated with this client.
+     */
+    public Set<Note> getClientNotes() {
+        return Collections.unmodifiableSet(this.clientNotes);
+    }
+
+    /**
+     * Adds a client note for this client.
+     *
+     * @param clientNote The client note to be added.
+     */
+    public void addClientNote(Note clientNote) {
+        requireNonNull(clientNote);
+        this.clientNotes.add(clientNote);
+    }
+
+    /**
+     * Checks whether the client has a given note in collection or not.
+     *
+     * @param clientNote The note, to be checked if client has it in collection.
+     * @return True if Client has that note in the collection.
+     */
+    public boolean hasClientNote(Note clientNote) {
+        return clientNotes.contains(clientNote);
     }
 
     /**

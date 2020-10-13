@@ -71,7 +71,6 @@ public class ClientEditCommandParser implements Parser<ClientEditCommand> {
         }
 
         return new ClientEditCommand(index, editClientDescriptor);
-
     }
 
     /**
