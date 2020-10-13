@@ -17,7 +17,6 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.country.Country;
-import seedu.address.model.country.CountryManager;
 
 public class JsonAdaptedClientTest {
     private static final String INVALID_NAME = "R@chel";
@@ -112,7 +111,7 @@ public class JsonAdaptedClientTest {
     public void toModelType_invalidCountry_throwsIllegalValueException() {
         JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 INVALID_COUNTRY, VALID_TIMEZONE, VALID_TAGS);
-        String expectedMessage = CountryManager.MESSAGE_CONSTRAINTS;
+        String expectedMessage = Country.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
     }
 
