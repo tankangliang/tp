@@ -40,6 +40,11 @@ public class CountryManager {
         return false;
     }
 
+    /**
+     * Initializes mapping from country to its countryNotes.
+     *
+     * @return The Mapping from country to its countryNotes.
+     */
     private static Map<Country, Set<Note>> initCountryNotesMap() {
         Map<Country, Set<Note>> newCountryNotesMap = new LinkedHashMap<>();
         for (String countryCode : COUNTRY_CODES) {
