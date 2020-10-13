@@ -216,7 +216,7 @@ Notes:
 
 Filters the list of clients by a specified country.
 
-Format: `country filter [c/COUNTRY_CODE]`
+Format: `country filter c/COUNTRY_CODE`
 
 * COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
 
