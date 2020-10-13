@@ -75,7 +75,7 @@ public class WidgetObject {
      * @return Header.
      */
     public String header() {
-        return divs[0];
+        return Optional.ofNullable(divs[0]).orElse("");
     }
 
     /**
@@ -84,7 +84,7 @@ public class WidgetObject {
      * @return Div1.
      */
     public String divOne() {
-        return divs[1];
+        return Optional.ofNullable(divs[1]).orElse("");
     }
 
     /**
@@ -93,7 +93,7 @@ public class WidgetObject {
      * @return Text1.
      */
     public String textOne() {
-        return divs[2];
+        return Optional.ofNullable(divs[2]).orElse("");
     }
 
     /**
@@ -102,7 +102,7 @@ public class WidgetObject {
      * @return Div2.
      */
     public String divTwo() {
-        return divs[3];
+        return Optional.ofNullable(divs[3]).orElse("");
     }
 
     /**
@@ -111,7 +111,7 @@ public class WidgetObject {
      * @return Text2.
      */
     public String textTwo() {
-        return divs[4];
+        return Optional.ofNullable(divs[4]).orElse("");
     }
 
     /**
@@ -120,7 +120,7 @@ public class WidgetObject {
      * @return Div3.
      */
     public String divThree() {
-        return divs[5];
+        return Optional.ofNullable(divs[5]).orElse("");
     }
 
     /**
@@ -129,7 +129,7 @@ public class WidgetObject {
      * @return Text3.
      */
     public String textThree() {
-        return divs[6];
+        return Optional.ofNullable(divs[6]).orElse("");
     }
 
     /**
@@ -138,7 +138,7 @@ public class WidgetObject {
      * @return Div4.
      */
     public String divFour() {
-        return divs[7];
+        return Optional.ofNullable(divs[7]).orElse("");
     }
 
     /**
@@ -147,7 +147,7 @@ public class WidgetObject {
      * @return Text4.
      */
     public String textFour() {
-        return divs[8];
+        return Optional.ofNullable(divs[8]).orElse("");
     }
 
     /**
@@ -156,7 +156,7 @@ public class WidgetObject {
      * @return Div5.
      */
     public String divFive() {
-        return divs[9];
+        return Optional.ofNullable(divs[9]).orElse("");
     }
 
     /**
@@ -165,7 +165,7 @@ public class WidgetObject {
      * @return Text5.
      */
     public String textFive() {
-        return divs[10];
+        return Optional.ofNullable(divs[10]).orElse("");
     }
 
     /**
@@ -174,7 +174,7 @@ public class WidgetObject {
      * @return Div6.
      */
     public String divSix() {
-        return divs[11];
+        return Optional.ofNullable(divs[11]).orElse("");
     }
 
     /**
@@ -183,7 +183,7 @@ public class WidgetObject {
      * @return Text6.
      */
     public String textSix() {
-        return divs[12];
+        return Optional.ofNullable(divs[12]).orElse("");
     }
 
     /**
@@ -192,7 +192,7 @@ public class WidgetObject {
      * @return Footer.
      */
     public String footer() {
-        return divs[13];
+        return Optional.ofNullable(divs[13]).orElse("");
     }
 
     @Override

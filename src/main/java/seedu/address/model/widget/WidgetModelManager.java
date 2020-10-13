@@ -3,6 +3,7 @@ package seedu.address.model.widget;
 import java.util.Arrays;
 
 import seedu.address.commons.core.LogsCenter;
+
 import seedu.address.model.client.Client;
 
 /**
@@ -80,10 +81,12 @@ public class WidgetModelManager implements WidgetModel {
 
         newObj.set(/*header*/ name, /*div1*/ location, /*text1*/ "", /*div2*/ "", /*text2*/ email,
                 /*div3*/ phone, /*text3*/ "", /*div4*/ tags);
+
         return newObj;
     }
 
     /**
+<<<<<<< HEAD
      * Fail safe method to change any unhandled object into a WidgetObject.
      *
      * @param content An object of any type, Country, Note,... etc that is not handled.
@@ -103,7 +106,7 @@ public class WidgetModelManager implements WidgetModel {
                 wo.set(sb.toString());
             } catch (IllegalAccessException ex) {
                 // This path will never be reached
-                System.err.println(Arrays.toString(ex.getStackTrace()));
+                System.out.println(Arrays.toString(ex.getStackTrace()));
             }
         });
         return wo;
