@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.model.note;
 
 
 import java.util.Collections;
@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 
