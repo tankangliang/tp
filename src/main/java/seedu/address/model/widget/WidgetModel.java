@@ -30,5 +30,5 @@ public interface WidgetModel {
      *
      * @return WidgetObject
      */
-    WidgetObject getWidgetConten();
+    WidgetObject getWidgetContent();
 }
