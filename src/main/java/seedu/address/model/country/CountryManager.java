@@ -14,7 +14,6 @@ import seedu.address.model.note.Note;
 public class CountryManager {
 
     //TODO: Should include checking for 3-letter Country Code?
-    public static final String MESSAGE_CONSTRAINTS = "Country code must be a valid 2-letter ISO3166 country code";
     private static final String[] COUNTRY_CODES = Locale.getISOCountries();
     private final Map<Country, Set<Note>> countryNotesMap;
 
