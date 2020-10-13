@@ -14,7 +14,7 @@ import seedu.address.testutil.ClientBuilder;
 public class WidgetModelManagerTest {
 
     @Test
-    void test_setContent_sameClient() {
+    public void setContent_sameClient_isEqual() {
         WidgetModel widgetModelManager1 = WidgetModel.initWidget();
         WidgetModel widgetModelManager2 = WidgetModel.initWidget();
 
@@ -34,7 +34,7 @@ public class WidgetModelManagerTest {
     }
 
     @Test
-    void test_setContent_diffClient() {
+    public void setContent_diffClient_notEqual() {
         // diff client should not be the same.
         WidgetModel widgetModelManager1 = WidgetModel.initWidget();
         WidgetModel widgetModelManager2 = WidgetModel.initWidget();
