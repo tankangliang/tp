@@ -11,12 +11,10 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.client.Client;
 import seedu.address.testutil.ClientBuilder;
 
-
-
 class WidgetModelManagerTest {
 
     @Test
-    void testSetContentSameClient() {
+    void test_setContent_sameClient() {
         WidgetModel widgetModelManager1 = WidgetModel.initWidget();
         WidgetModel widgetModelManager2 = WidgetModel.initWidget();
 
@@ -36,7 +34,7 @@ class WidgetModelManagerTest {
     }
 
     @Test
-    void testSetContentDiffClient() {
+    void test_setContent_diffClient() {
         // diff client should not be the same.
         WidgetModel widgetModelManager1 = WidgetModel.initWidget();
         WidgetModel widgetModelManager2 = WidgetModel.initWidget();
