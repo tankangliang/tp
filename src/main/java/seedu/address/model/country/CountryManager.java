@@ -1,8 +1,10 @@
 package seedu.address.model.country;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import seedu.address.model.note.Note;
 
@@ -12,15 +14,14 @@ import seedu.address.model.note.Note;
 public class CountryManager {
 
     //TODO: Should include checking for 3-letter Country Code?
-    public static final String MESSAGE_CONSTRAINTS = "Country code must be a valid 2-letter ISO3166 country code";
     private static final String[] COUNTRY_CODES = Locale.getISOCountries();
-    private final Map<String, Country> countryCodeMap;
+    private final Map<Country, Set<Note>> countryNotesMap;
 
     /**
      * Initializes a CountryManager with a Map that maps ISO3166 2-letter country codes to countries.
      */
     public CountryManager() {
-        countryCodeMap = initCountryCodeMap();
+        countryNotesMap = initCountryNotesMap();
     }
 
     /**
@@ -38,12 +39,17 @@ public class CountryManager {
         return false;
     }
 
-    private static Map<String, Country> initCountryCodeMap() {
-        Map<String, Country> countryCodeMap = new HashMap<>();
+    /**
+     * Initializes mapping from country to its countryNotes.
+     *
+     * @return The Mapping from country to its countryNotes.
+     */
+    private static Map<Country, Set<Note>> initCountryNotesMap() {
+        Map<Country, Set<Note>> newCountryNotesMap = new LinkedHashMap<>();
         for (String countryCode : COUNTRY_CODES) {
-            countryCodeMap.put(countryCode, new Country(countryCode));
+            newCountryNotesMap.put(new Country(countryCode), new LinkedHashSet<>());
         }
-        return countryCodeMap;
+        return newCountryNotesMap;
     }
 
     /**
@@ -54,10 +60,11 @@ public class CountryManager {
      * @return Whether {@code country} contains {@code countryNote}.
      */
     public boolean hasCountryNote(Country country, Note countryNote) {
-        if (!isValidCountryCode(country.getCountryCode())) {
+        if (!countryNotesMap.containsKey(country)) {
             return false;
         }
-        return countryCodeMap.get(country.getCountryCode()).hasCountryNote(countryNote);
+
+        return countryNotesMap.get(country).contains(countryNote);
     }
 
     /**
@@ -67,22 +74,10 @@ public class CountryManager {
      * @param countryNote The country note to be added.
      */
     public void addCountryNote(Country country, Note countryNote) {
-        if (isValidCountryCode(country.getCountryCode())) {
-            countryCodeMap.get(country.getCountryCode()).addCountryNote(countryNote);
+        if (!countryNotesMap.containsKey(country)) {
+            return;
         }
-    }
 
-    /**
-     * Returns the country that is identified by the given country code.
-     *
-     * @param countryCode The ISO3166 2-letter country code of the particular country.
-     * @return The country that is identified by the given country code.
-     */
-    public Country getCountryFromCode(String countryCode) {
-        if (isValidCountryCode(countryCode)) {
-            return countryCodeMap.get(countryCode);
-        } else {
-            throw new NullPointerException();
-        }
+        countryNotesMap.get(country).add(countryNote);
     }
 }

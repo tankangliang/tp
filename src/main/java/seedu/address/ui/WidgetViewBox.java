@@ -49,20 +49,20 @@ public class WidgetViewBox extends UiPart<Region> {
     public WidgetViewBox(WidgetObject widgetObject) {
         super(FXML);
         this.widgetObject = widgetObject;
-        header.setText(widgetObject.header().orElse(""));
-        divOne.setText(widgetObject.divOne().orElse(""));
-        divTwo.setText(widgetObject.divTwo().orElse(""));
-        divThree.setText(widgetObject.divThree().orElse(""));
-        divFour.setText(widgetObject.divFour().orElse(""));
-        divFive.setText(widgetObject.divFive().orElse(""));
-        divSix.setText(widgetObject.divSix().orElse(""));
-        textOne.setText(widgetObject.textOne().orElse(""));
-        textTwo.setText(widgetObject.textTwo().orElse(""));
-        textThree.setText(widgetObject.textThree().orElse(""));
-        textFour.setText(widgetObject.textFour().orElse(""));
-        textFive.setText(widgetObject.textFive().orElse(""));
-        textSix.setText(widgetObject.textSix().orElse(""));
-        footer.setText(widgetObject.footer().orElse(""));
+        header.setText(widgetObject.header());
+        divOne.setText(widgetObject.divOne());
+        divTwo.setText(widgetObject.divTwo());
+        divThree.setText(widgetObject.divThree());
+        divFour.setText(widgetObject.divFour());
+        divFive.setText(widgetObject.divFive());
+        divSix.setText(widgetObject.divSix());
+        textOne.setText(widgetObject.textOne());
+        textTwo.setText(widgetObject.textTwo());
+        textThree.setText(widgetObject.textThree());
+        textFour.setText(widgetObject.textFour());
+        textFive.setText(widgetObject.textFive());
+        textSix.setText(widgetObject.textSix());
+        footer.setText(widgetObject.footer());
     }
 
     @Override
