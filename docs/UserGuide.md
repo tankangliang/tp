@@ -10,17 +10,13 @@ title: User Guide
         <h3><i>Welcome to the Travelling BusinessMan User Guide!</i></h3>
     </p>
     <p>
-        <strong><i>Travelling BusinessMan</i></strong>, <strong><i>TBM</i></strong>, is a companion that goes beyond 
-        being just a simple contact management application.
+        <strong><i>Travelling BusinessMan</i></strong>, <strong><i>TBM</i></strong>, is a companion that goes beyond being just a simple contact management application.
     </p> 
     <p>
-        <strong><i>TBM</i></strong> sorts and organises your clients for you, streamlines your workflow,
-        improves business efficiency and so much more. All this is at the convenience of the Command-Line Interface.
-        <strong><i>TBM</i></strong> does more than just tracking your clients!<br>
+        <strong><i>TBM</i></strong> sorts and organises your clients for you, streamlines your workflow, improves business efficiency and so much more. All this is at the convenience of the Command-Line Interface. <strong><i>TBM</i></strong> does more than just tracking your clients!<br>
     </p>
     <p>
-        This user guide will be a starting point for you in getting yourself oriented with how
-        <strong><i>TBM</i></strong> works and how you can integrate it into your professional journey!
+        This user guide will be a starting point for you in getting yourself oriented with how <strong><i>TBM</i></strong> works and how you can integrate it into your professional journey!
     </p>
 </div>
 
@@ -43,11 +39,9 @@ title: User Guide
 
 1. Type any command in the command box and press Enter to execute it.
 
-1. (Recommended) The [`help`](#Viewing-help-help) command will show a quick page of some commonly used commands to get
-you started quickly, if you are a new user of TBM
+1. (Recommended) The [`help`](#Viewing-help-help) command will show a quick page of some commonly used commands to get you started quickly, if you are a new user of TBM
 
-   * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
-   open the help window.<br>
+   * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 1. Alternatively, you can refer to the [Features](#features) below for details of each command.
 
@@ -93,9 +87,8 @@ Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY tz/TIMEZON
 
 Examples:
 
-* `client add 5 n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RUS tz/GMT+3`
-<br> This adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok,
-Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**.
+* `client add 5 n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RUS tz/GMT+3`<br>
+  This adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok, Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**.
 
 ### Viewing clients: `client view`
 
@@ -112,6 +105,7 @@ Examples:
 Finds clients whose names contain any of the given keywords, or whose country of residence contains any of the given keywords.
 
 Format: `client find KEYWORD [MORE_KEYWORDS]`
+
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name and country are searched.
@@ -130,6 +124,7 @@ Examples:
 Edits a client's information by their index in the list view.
 
 Format: `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY] [tz/TIMEZONE]`
+
 * COUNTRY follows the ISO3166 Format, which can be in the form of a 2, 3 or 4 letter country code. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
 
 Examples: 
@@ -221,24 +216,26 @@ Notes:
 
 Filters the list of clients by a specified country.
 
-Format: `country filter [c/COUNTRY]`
+Format: `country filter [c/COUNTRY_CODE]`
 
-* COUNTRY follows the ISO3166 Format, which can be in the form of a 2, 3 or 4 letter country code. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
 
 Examples: 
 
-* `country filter c/SG` or `filter c/SGP` Filters by contacts in Singapore
-* `country filter c/RU` or `filter c/RUS` Filters by contacts in Russia
+* `country filter c/SG` Filters by contacts in Singapore
+* `country filter c/RU` Filters by contacts in Russia
 
 ### Adding notes for a country: `country note`
 
-Format: `country note c/COUNTRY NOTE_STRING`
+Format: `country note c/COUNTRY_CODE nt/NOTE_STRING`
 
-* COUNTRY follows the ISO3166 Format, which can be in the form of a 2, 3 or 4 letter country code. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
 
 Examples:
 
-* `country note c/SG people love to queue for things`
+* `country note c/SG nt/has one of the lowest coporate taxes in the world`
+* `country note c/CN nt/building good relations (guanxi) is important when conducting business here`
+* `country note c/IN nt/is world's fastest growing economy`
 
 ### Clearing all entries: `clear`
 
