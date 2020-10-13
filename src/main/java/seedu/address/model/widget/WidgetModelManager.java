@@ -100,7 +100,10 @@ public class WidgetModelManager implements WidgetModel {
         java.util.stream.Stream.of(fields).forEach(f -> {
             try {
                 f.setAccessible(true);
-                StringBuilder sb = new StringBuilder().append(f.getName()).append(": ").append(f.get(content));
+                String fieldName = f.getName();
+                String fieldValue = f.get(content).toString();
+                logger.info(fieldName + ": " + fieldValue);
+                StringBuilder sb = new StringBuilder().append(fieldName).append(": ").append(fieldValue);
                 wo.set(sb.toString());
             } catch (IllegalAccessException ex) {
                 // This path will never be reached

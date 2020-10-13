@@ -59,7 +59,6 @@ public class WidgetObject {
      * @param arg The String value to be set to the first null field.
      */
     public void set(String arg) {
-        System.out.println(arg);
         for (int i = 0; i < divs.length; i++) {
             if (divs[i] == null) {
                 divs[i] = arg;
