@@ -116,7 +116,7 @@ class JsonAdaptedClient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName()));
         }
         if (!CountryManager.isValidCountryCode(country)) {
-            throw new IllegalValueException(CountryManager.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(Country.MESSAGE_CONSTRAINTS);
         }
         final Country modelCountry = new Country(country);
 
