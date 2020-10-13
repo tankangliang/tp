@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -27,27 +25,23 @@ public class CountryFilterCommandTest {
 
     @Test
     public void execute_validCountries_matchesExpectedFilterResult() {
-        try {
-            List<Client> initialClientList = new ArrayList<>(model.getFilteredClientList());
+        List<Client> initialClientList = new ArrayList<>(model.getFilteredClientList());
 
-            for (String countryCode : COUNTRY_CODES) {
-                Country country = new Country(countryCode);
-                ClientCountryMatchesInputCountryPredicate pred = new ClientCountryMatchesInputCountryPredicate(
-                        country);
-                CountryFilterCommand countryFilterCommand = new CountryFilterCommand(pred);
-                countryFilterCommand.execute(model);
+        for (String countryCode : COUNTRY_CODES) {
+            Country country = new Country(countryCode);
+            ClientCountryMatchesInputCountryPredicate pred = new ClientCountryMatchesInputCountryPredicate(
+                    country);
+            CountryFilterCommand countryFilterCommand = new CountryFilterCommand(pred);
+            countryFilterCommand.execute(model);
 
-                List<Client> expectedFilteredClientList = initialClientList.stream().filter(pred)
-                        .collect(Collectors.toList());
+            List<Client> expectedFilteredClientList = initialClientList.stream().filter(pred)
+                    .collect(Collectors.toList());
 
-                int i = 0;
-                for (Client client : model.getFilteredClientList()) {
-                    assertEquals(expectedFilteredClientList.get(i), client);
-                    i++;
-                }
+            int i = 0;
+            for (Client client : model.getFilteredClientList()) {
+                assertEquals(expectedFilteredClientList.get(i), client);
+                i++;
             }
-        } catch (CommandException e) {
-            fail();
         }
     }
 
