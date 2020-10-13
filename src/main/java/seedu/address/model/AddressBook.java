@@ -9,6 +9,7 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
+import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagSet;
 
@@ -20,6 +21,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueClientList clients;
     private final UniqueTagSet tags;
+    private final TagNoteMap tagNoteMap;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -31,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         clients = new UniqueClientList();
         tags = new UniqueTagSet();
+        tagNoteMap = new TagNoteMap();
     }
 
     public AddressBook() {}
@@ -52,6 +55,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setClients(List<Client> clients) {
         this.clients.setClients(clients);
+        this.tagNoteMap.initMapUsingClients(clients);
 
         Set<Tag> allClientTags = new HashSet<>();
         for (Client client : clients) {

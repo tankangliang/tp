@@ -1,7 +1,7 @@
 package seedu.address.model.note;
 
 import org.junit.jupiter.api.Test;
-
+//TODO: ritesh add tests when done
 class NoteTest {
 
     @Test
@@ -14,5 +14,9 @@ class NoteTest {
 
     @Test
     void testHashCode() {
+    }
+
+    @Test
+    void addTag() {
     }
 }

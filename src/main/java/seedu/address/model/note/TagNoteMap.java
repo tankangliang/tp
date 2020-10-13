@@ -4,9 +4,12 @@ package seedu.address.model.note;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import seedu.address.model.client.Client;
+import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 
 
@@ -16,13 +19,47 @@ import seedu.address.model.tag.Tag;
 
 public class TagNoteMap {
     //    TODO: Add implementation
-    public static final Set<Tag> TAG_LIST = new HashSet<>();
+    public static final Set<Tag> TAG_LIST = new HashSet<>(); // probably redundant todo: remove later
     public static final Set<Note> NOTE_LIST = new HashSet<>();
     public static final Map<Tag, Set<Note>> TAG_TO_NOTES_MAP = new HashMap<>();
     public static final Map<Note, Set<Tag>> NOTE_TO_TAGS_MAP = new HashMap<>();
 
-    public void initializeLists() {
-        // TODO: get tags and notes from data file
+    /**
+     * Initialises the TagNoteMap with a list of clients.
+     *
+     * @param clients The list of clients containing ClientNotes and associated tags.
+     */
+    public void initMapUsingClients(List<Client> clients) { // todo: make init work when passed in a list of countries
+        for (Client client : clients) {
+            Set<Note> clientNotes = client.getClientNotes();
+            NOTE_LIST.addAll(clientNotes);
+            for (Note clientNote : clientNotes) {
+                Set<Tag> tags = clientNote.getTags();
+                TAG_LIST.addAll(tags);
+                updateTagsForNote(tags, clientNote);
+            }
+        }
+        // todo: how to remove old entries to the map?
+    }
+
+    /**
+     * Initialises the TagNoteMap with a list of countries.
+     *
+     * @param countries The list of clients containing ClientNotes and associated tags.
+     */
+    public void initMapUsingCountries(List<Country> countries) {
+        // todo: make init work when passed in a list of countries
+        for (Country country : countries) {
+            Set<Note> countryNotes = country.getCountryNotes();
+            NOTE_LIST.addAll(countryNotes);
+            for (Note countryNote : countryNotes) {
+                Set<Tag> tags = countryNote.getTags();
+                TAG_LIST.addAll(tags);
+                updateTagsForNote(tags, countryNote);
+            }
+        }
+        // todo: how to remove old entries to the map? <== need to do this to "sync"
+        //       with the current model right?
     }
 
     public Set<Tag> getTagsForNote(Note note) {
