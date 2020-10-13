@@ -49,8 +49,8 @@ public class TagNoteMap {
      */
     public void initMapUsingCountries(List<Country> countries) {
         // todo: make init work when passed in a list of countries
-        for (Country country : countries) {
-            Set<Note> countryNotes = country.getCountryNotes();
+        for (Country myCountry : countries) {
+            Set<Note> countryNotes = myCountry.getCountryNotes();
             NOTE_LIST.addAll(countryNotes);
             for (Note countryNote : countryNotes) {
                 Set<Tag> tags = countryNote.getTags();
