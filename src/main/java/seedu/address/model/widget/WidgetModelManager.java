@@ -3,7 +3,6 @@ package seedu.address.model.widget;
 import java.util.Arrays;
 
 import seedu.address.commons.core.LogsCenter;
-
 import seedu.address.model.client.Client;
 
 /**
