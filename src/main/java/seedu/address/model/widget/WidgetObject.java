@@ -1,7 +1,6 @@
 package seedu.address.model.widget;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 /**
  * A standardise way to render content on the widget view box.
