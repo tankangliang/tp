@@ -99,7 +99,11 @@ public interface Model {
 
     boolean hasCountryNote(Country country, Note countryNote);
 
+    boolean hasClientNote(Client client, Note clientNote);
+
     void addCountryNote(Country country, Note countryNote);
+
+    void addClientNote(Client client, Note clientNote);
 
     /**
      * Returns an unmodifiable view of the filtered client list
