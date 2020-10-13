@@ -2,6 +2,7 @@ package seedu.address.model.widget;
 
 import java.util.Arrays;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 
 /**
@@ -33,7 +34,7 @@ public class WidgetModelManager implements WidgetModel {
     @Override
     public void setContent(Object content) {
         if (content instanceof Client) {
-            widgetObject = clientParser(content);
+            widgetObject = clientParser((Client) content);
         } else {
             widgetObject = handle(content);
         }
@@ -66,30 +67,33 @@ public class WidgetModelManager implements WidgetModel {
     /**
      * Maps content of the given object to different fields of the widget object.
      */
-    @SuppressWarnings("unchecked")
-    private WidgetObject clientParser(Object content) {
-        assert content instanceof Client;
-
-        // TODO: Extract information out from client object
+    private WidgetObject clientParser(Client client) {
+        // TODO: Figure out an optimal display for all of client's fields
         WidgetObject newObj = new WidgetObject();
-        Client curr = (Client) content;
-        String name = curr.getName().toString();
-        String location = curr.getAddress().toString() + ", "
-                + curr.getCountry().getCountryName() + ", "
-                + curr.getTimezone().toString();
-        String email = curr.getEmail().toString();
-        String div3 = curr.getPhone().toString();
-        String div4 = "Notes:\n- Angel Investor\n- China Scholar";
+        String name = client.getName().toString();
+        String location = client.getAddress().toString() + ", "
+                + client.getCountry().getCountryName();
+        String timezone = client.getTimezone().toString();
+        String email = client.getEmail().toString();
+        String phone = client.getPhone().toString();
+        String tags = client.getTags().toString();
 
         newObj.set(/*header*/ name, /*div1*/ location, /*text1*/ "", /*div2*/ "", /*text2*/ email,
-                /*div3*/ div3, /*text3*/ "", /*div4*/ div4);
+                /*div3*/ phone, /*text3*/ "", /*div4*/ tags);
         return newObj;
     }
 
     /**
-     * Temporary method to handle objects of any class.
+     * Fail safe method to change any unhandled object into a WidgetObject.
+     *
+     * @param content An object of any type, Country, Note,... etc that is not handled.
+     * @return WidgetObject.
      */
     private WidgetObject handle(Object content) {
+        // TODO: v1.3 || v1.4 deprecate this method.
+        java.util.logging.Logger logger = LogsCenter.getLogger(getClass());
+        // Logs the unknown object being passed to this method
+        logger.info(String.valueOf(content.getClass()));
         WidgetObject wo = new WidgetObject();
         java.lang.reflect.Field[] fields = content.getClass().getDeclaredFields();
         java.util.stream.Stream.of(fields).forEach(f -> {
@@ -98,7 +102,8 @@ public class WidgetModelManager implements WidgetModel {
                 StringBuilder sb = new StringBuilder().append(f.getName()).append(": ").append(f.get(content));
                 wo.set(sb.toString());
             } catch (IllegalAccessException ex) {
-                System.out.println(Arrays.toString(ex.getStackTrace()));
+                // This path will never be reached
+                System.err.println(Arrays.toString(ex.getStackTrace()));
             }
         });
         return wo;
