@@ -103,7 +103,7 @@ public class Country {
 
     @Override
     public String toString() {
-        return countryCode;
+        return countryName + " (" + countryCode + ")";
     }
 
 }
