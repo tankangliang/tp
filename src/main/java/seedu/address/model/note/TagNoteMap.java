@@ -61,7 +61,7 @@ public class TagNoteMap {
      * Links a new set of notes to a tag.
      *
      * @param newNotes The notes to associate with a particular tag.
-     * @param tag    The tag to associate the notes with.
+     * @param tag      The tag to associate the notes with.
      */
     public void updateNotesForTag(Set<Note> newNotes, Tag tag) {
         NOTE_LIST.addAll(newNotes);
