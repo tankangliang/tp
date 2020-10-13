@@ -85,7 +85,6 @@ public class WidgetModelManager implements WidgetModel {
     }
 
     /**
-<<<<<<< HEAD
      * Fail safe method to change any unhandled object into a WidgetObject.
      *
      * @param content An object of any type, Country, Note,... etc that is not handled.
