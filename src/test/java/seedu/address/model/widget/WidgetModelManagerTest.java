@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.client.Client;
 import seedu.address.testutil.ClientBuilder;
 
-class WidgetModelManagerTest {
+public class WidgetModelManagerTest {
 
     @Test
     void test_setContent_sameClient() {
