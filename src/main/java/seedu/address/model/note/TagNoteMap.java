@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.Set;
 
 import seedu.address.model.client.Client;
-import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 
 
@@ -29,7 +28,7 @@ public class TagNoteMap {
      *
      * @param clients The list of clients containing ClientNotes and associated tags.
      */
-    public void initMapUsingClients(List<Client> clients) { // todo: make init work when passed in a list of countries
+    public void initMapFromClients(List<Client> clients) {
         for (Client client : clients) {
             Set<Note> clientNotes = client.getClientNotes();
             NOTE_LIST.addAll(clientNotes);
@@ -45,23 +44,19 @@ public class TagNoteMap {
     /**
      * Initialises the TagNoteMap with a list of countries.
      *
-     * @param countries The list of clients containing ClientNotes and associated tags.
+     * @param countryNotes The set of countries containing ClientNotes and associated tags.
      */
-    public void initMapUsingCountries(List<Country> countries) {
+    public void initMapFromCountries(Set<Note> countryNotes) {
         // todo: make init work when passed in a list of countries
-        for (Country myCountry : countries) {
-            Set<Note> countryNotes = myCountry.getCountryNotes();
-            NOTE_LIST.addAll(countryNotes);
-            for (Note countryNote : countryNotes) {
-                Set<Tag> tags = countryNote.getTags();
-                TAG_LIST.addAll(tags);
-                updateTagsForNote(tags, countryNote);
-            }
+        NOTE_LIST.addAll(countryNotes);
+        for (Note countryNote : countryNotes) {
+            Set<Tag> tags = countryNote.getTags();
+            TAG_LIST.addAll(tags);
+            updateTagsForNote(tags, countryNote);
         }
-        // todo: how to remove old entries to the map? <== need to do this to "sync"
-        //       with the current model right?
     }
-
+    // todo: how to remove old entries to the map? <== need to do this to "sync"
+    //       with the current model right?
     public Set<Tag> getTagsForNote(Note note) {
         return Collections.unmodifiableSet(NOTE_TO_TAGS_MAP.getOrDefault(note, new HashSet<>()));
     }

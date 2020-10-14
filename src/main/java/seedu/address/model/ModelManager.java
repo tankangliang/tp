@@ -15,6 +15,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryManager;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.widget.WidgetModel;
 import seedu.address.model.widget.WidgetObject;
 
@@ -30,6 +31,7 @@ public class ModelManager implements Model {
     private final FilteredList<Client> filteredClients;
     private final CountryManager countryManager;
     private final WidgetModel widget;
+    private final TagNoteMap tagNoteMap;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -45,6 +47,7 @@ public class ModelManager implements Model {
         this.widget = WidgetModel.initWidget();
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
         this.countryManager = new CountryManager();
+        this.tagNoteMap = new TagNoteMap();
     }
 
     public ModelManager() {
@@ -139,6 +142,7 @@ public class ModelManager implements Model {
 
         return countryManager.hasCountryNote(country, countryNote);
     }
+
     @Override
     public boolean hasClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
@@ -151,10 +155,19 @@ public class ModelManager implements Model {
 
         countryManager.addCountryNote(country, countryNote);
     }
+
     @Override
     public void addClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
         target.addClientNote(clientNote);
+    }
+
+    /**
+     * Initialises TagNoteMap from Clients notes and Country notes.
+     */
+    public void initialiseTagNoteMap() {
+        this.tagNoteMap.initMapFromClients(this.addressBook.getClientList());
+        this.countryManager.getAllCountryNotes().forEach(this.tagNoteMap::initMapFromCountries);
     }
 
     //=========== Filtered Client List Accessors =============================================================

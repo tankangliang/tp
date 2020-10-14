@@ -1,5 +1,6 @@
 package seedu.address.model.country;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Locale;
@@ -80,4 +81,23 @@ public class CountryManager {
 
         countryNotesMap.get(country).add(countryNote);
     }
+
+    /**
+     * Returns the set of notes associated to a particular country.
+     *
+     * @param country The country from which we get CountryNotes.
+     */
+    public Set<Note> getCountryNote(Country country) {
+        return this.countryNotesMap.get(country);
+    }
+
+    /**
+     * Returns all Country Notes currently in the map.
+     *
+     * @return Set of all country notes in the map.
+     */
+    public Collection<Set<Note>> getAllCountryNotes() {
+        return this.countryNotesMap.values();
+    }
+
 }
