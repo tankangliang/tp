@@ -17,14 +17,14 @@ import seedu.address.model.tag.Tag;
 class TagNoteMapTest {
 
     private static final Tag TAG = new Tag("tagName");
-    private static Client client = ALICE;
-    private static Note taggedNote = new Note("jurong hill was a nice place");
+    private Client client = ALICE;
+    private Note taggedNote = new Note("jurong hill was a nice place");
     private TagNoteMap tagNoteMap = new TagNoteMap();
 
     @Test
     void initMapFromCients_addClientWithTaggedNotes_returnsTrue() {
         taggedNote.addTag(TAG);
-        TagNoteMapTest.client.addClientNote(taggedNote);
+        this.client.addClientNote(taggedNote);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
         assertDoesNotThrow(() -> tagNoteMap.initMapFromClients(clients));
@@ -52,7 +52,7 @@ class TagNoteMapTest {
     @Test
     void getNotesForTag_usesInitialisedMap_returnsTrue() {
         taggedNote.addTag(TAG);
-        TagNoteMapTest.client.addClientNote(taggedNote);
+        this.client.addClientNote(taggedNote);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
         tagNoteMap.initMapFromClients(clients);
@@ -60,7 +60,6 @@ class TagNoteMapTest {
         expectedNotes.add(taggedNote);
         assertEquals(tagNoteMap.getNotesForTag(TAG), expectedNotes);
     }
-
 
     @Test
     void getTagsForNote() {

@@ -160,7 +160,7 @@ public class ModelManagerTest {
     @Test
     public void initializeTagNoteMap_validInputs_returnsTrue() {
         Tag tag = new Tag("tagName");
-        Note taggedNote = new Note("this note will be tagged");
+        Note taggedNote = new Note("jurong hill was a nice place");
         taggedNote.addTag(tag);
         Client aliceTagged = ALICE;
         aliceTagged.addClientNote(taggedNote);
