@@ -45,8 +45,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.client.Timezone;
-import seedu.address.model.country.CountryManager;
+import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ClientBuilder;
 
@@ -164,7 +163,7 @@ public class ClientAddCommandParserTest {
         // invalid country
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + INVALID_COUNTRY_DESC + TIMEZONE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                CountryManager.MESSAGE_CONSTRAINTS);
+                Country.MESSAGE_CONSTRAINTS);
 
         // invalid timezone
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

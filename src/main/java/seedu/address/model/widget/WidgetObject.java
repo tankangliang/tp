@@ -1,6 +1,6 @@
 package seedu.address.model.widget;
 
-import java.util.Optional;
+import java.util.Arrays;
 
 /**
  * A standardise way to render content on the widget view box.
@@ -25,6 +25,8 @@ import java.util.Optional;
  */
 public class WidgetObject {
 
+    public static final int NUMBER_OF_FIELDS = 14;
+
     /**
      * Array is a collection of the fields to be mapped to the widget Ui component.
      *
@@ -40,13 +42,28 @@ public class WidgetObject {
     }
 
     /**
-     * Sets the content of the widget object.
+     * Sets the content of the widget object. Any fields not set will be an empty string.
      *
      * @param args All the fields to be set.
      */
-    public void set(String ...args) {
-        for (int i = 0; i < Math.min(args.length, 14); i++) {
+    public void set(String... args) {
+        // Sets all fields from start to end order.
+        for (int i = 0; i < Math.min(args.length, NUMBER_OF_FIELDS); i++) {
             divs[i] = args[i];
+        }
+    }
+
+    /**
+     * Sets the first null field to the given String value. Any fields not set will be an empty string.
+     *
+     * @param arg The String value to be set to the first null field.
+     */
+    public void set(String arg) {
+        for (int i = 0; i < divs.length; i++) {
+            if (divs[i] == null) {
+                divs[i] = arg;
+                return;
+            }
         }
     }
 
@@ -55,8 +72,8 @@ public class WidgetObject {
      *
      * @return Header.
      */
-    public Optional<String> header() {
-        return Optional.ofNullable(divs[0]);
+    public String header() {
+        return divs[0] == null ? "" : divs[0];
     }
 
     /**
@@ -64,8 +81,8 @@ public class WidgetObject {
      *
      * @return Div1.
      */
-    public Optional<String> divOne() {
-        return Optional.ofNullable(divs[1]);
+    public String divOne() {
+        return divs[1] == null ? "" : divs[1];
     }
 
     /**
@@ -73,8 +90,8 @@ public class WidgetObject {
      *
      * @return Text1.
      */
-    public Optional<String> textOne() {
-        return Optional.ofNullable(divs[2]);
+    public String textOne() {
+        return divs[2] == null ? "" : divs[2];
     }
 
     /**
@@ -82,8 +99,8 @@ public class WidgetObject {
      *
      * @return Div2.
      */
-    public Optional<String> divTwo() {
-        return Optional.ofNullable(divs[3]);
+    public String divTwo() {
+        return divs[3] == null ? "" : divs[3];
     }
 
     /**
@@ -91,8 +108,8 @@ public class WidgetObject {
      *
      * @return Text2.
      */
-    public Optional<String> textTwo() {
-        return Optional.ofNullable(divs[4]);
+    public String textTwo() {
+        return divs[4] == null ? "" : divs[4];
     }
 
     /**
@@ -100,8 +117,8 @@ public class WidgetObject {
      *
      * @return Div3.
      */
-    public Optional<String> divThree() {
-        return Optional.ofNullable(divs[5]);
+    public String divThree() {
+        return divs[5] == null ? "" : divs[5];
     }
 
     /**
@@ -109,8 +126,8 @@ public class WidgetObject {
      *
      * @return Text3.
      */
-    public Optional<String> textThree() {
-        return Optional.ofNullable(divs[6]);
+    public String textThree() {
+        return divs[6] == null ? "" : divs[6];
     }
 
     /**
@@ -118,8 +135,8 @@ public class WidgetObject {
      *
      * @return Div4.
      */
-    public Optional<String> divFour() {
-        return Optional.ofNullable(divs[7]);
+    public String divFour() {
+        return divs[7] == null ? "" : divs[7];
     }
 
     /**
@@ -127,8 +144,8 @@ public class WidgetObject {
      *
      * @return Text4.
      */
-    public Optional<String> textFour() {
-        return Optional.ofNullable(divs[8]);
+    public String textFour() {
+        return divs[8] == null ? "" : divs[8];
     }
 
     /**
@@ -136,8 +153,8 @@ public class WidgetObject {
      *
      * @return Div5.
      */
-    public Optional<String> divFive() {
-        return Optional.ofNullable(divs[9]);
+    public String divFive() {
+        return divs[9] == null ? "" : divs[9];
     }
 
     /**
@@ -145,8 +162,8 @@ public class WidgetObject {
      *
      * @return Text5.
      */
-    public Optional<String> textFive() {
-        return Optional.ofNullable(divs[10]);
+    public String textFive() {
+        return divs[10] == null ? "" : divs[10];
     }
 
     /**
@@ -154,8 +171,8 @@ public class WidgetObject {
      *
      * @return Div6.
      */
-    public Optional<String> divSix() {
-        return Optional.ofNullable(divs[11]);
+    public String divSix() {
+        return divs[11] == null ? "" : divs[11];
     }
 
     /**
@@ -163,8 +180,8 @@ public class WidgetObject {
      *
      * @return Text6.
      */
-    public Optional<String> textSix() {
-        return Optional.ofNullable(divs[12]);
+    public String textSix() {
+        return divs[12] == null ? "" : divs[12];
     }
 
     /**
@@ -172,8 +189,8 @@ public class WidgetObject {
      *
      * @return Footer.
      */
-    public Optional<String> footer() {
-        return Optional.ofNullable(divs[13]);
+    public String footer() {
+        return divs[13] == null ? "" : divs[13];
     }
 
     @Override
@@ -190,18 +207,7 @@ public class WidgetObject {
 
         // state check
         WidgetObject other1 = (WidgetObject) other;
-        int i = 0;
-        for (String s: divs) {
-            if (s == null && other1.divs[i] != null) {
-                return false;
-            } else {
-                if (!s.equals(other1.divs[i])) {
-                    return false;
-                }
-            }
-            i++;
-        }
-        return true;
+        return Arrays.equals(this.divs, other1.divs);
     }
 
 }
