@@ -20,7 +20,7 @@ public class AppParametersTest {
     private final AppParameters expected = new AppParameters();
 
     @Test
-    public void getConfigPath_returnsCorrectConfigPath() {
+    public void getConfigPath_returnsSetConfigPath() {
         expected.setConfigPath(Paths.get("config.json"));
         assertEquals(expected.getConfigPath(), Paths.get("config.json"));
     }
