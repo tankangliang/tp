@@ -49,8 +49,9 @@ public class Note {
 
         // state check
         Note c = (Note) obj;
+        boolean hasSameTags = this.tags.equals(c.tags);
 
-        return this.noteContents.equals(c.noteContents);
+        return this.noteContents.equals(c.noteContents) && hasSameTags;
     }
     @Override
     public String toString() {
