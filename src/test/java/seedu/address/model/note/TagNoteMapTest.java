@@ -21,7 +21,6 @@ class TagNoteMapTest {
     private static Note taggedNote = new Note("jurong hill was a nice place");
     private TagNoteMap tagNoteMap = new TagNoteMap();
 
-
     @Test
     void initMapFromCients_addClientWithTaggedNotes_returnsTrue() {
         taggedNote.addTag(TAG);
@@ -31,24 +30,24 @@ class TagNoteMapTest {
         assertDoesNotThrow(() -> tagNoteMap.initMapFromClients(clients));
     }
 
-    @Test
-    void initMapFromCountries_addTaggedClient_addSuccessfully() {
-        Tag tag = new Tag("tagName");
-        Note taggedNote = new Note("this note will be tagged");
-        taggedNote.addTag(tag);
-        /* todo: generate country init
-                Country
-
-                Client aliceTagged = ALICE;
-                aliceTagged.addClientNote(taggedNote);
-                List<Client> clients = new ArrayList<>();
-                clients.add(aliceTagged);
-                tagNoteMap.initMapFromClients(clients);
-                Set<Note> expectedNotes = new HashSet<>();
-                expectedNotes.add(taggedNote);
-                assertTrue(expectedNotes.equals(tagNoteMap.getNotesForTag(tag)));
-        */
-    }
+    //    @Test
+    //    void initMapFromCountries_addTaggedClient_addSuccessfully() {
+    //        Tag tag = new Tag("tagName");
+    //        Note taggedNote = new Note("this note will be tagged");
+    //        taggedNote.addTag(tag);
+    //        /* todo: generate country init
+    //                Country
+    //
+    //                Client aliceTagged = ALICE;
+    //                aliceTagged.addClientNote(taggedNote);
+    //                List<Client> clients = new ArrayList<>();
+    //                clients.add(aliceTagged);
+    //                tagNoteMap.initMapFromClients(clients);
+    //                Set<Note> expectedNotes = new HashSet<>();
+    //                expectedNotes.add(taggedNote);
+    //                assertTrue(expectedNotes.equals(tagNoteMap.getNotesForTag(tag)));
+    //        */
+    //    }
 
     @Test
     void getNotesForTag_usesInitialisedMap_returnsTrue() {

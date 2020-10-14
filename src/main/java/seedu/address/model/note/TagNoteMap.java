@@ -23,6 +23,7 @@ public class TagNoteMap {
     public final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
     public final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>();
 
+
     /**
      * Initialises the TagNoteMap with a list of clients.
      *
