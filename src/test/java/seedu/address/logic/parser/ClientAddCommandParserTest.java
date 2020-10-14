@@ -45,6 +45,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ClientBuilder;
