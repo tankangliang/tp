@@ -11,7 +11,7 @@ title: User Guide
     </p>
     <p>
         <strong><i>Travelling BusinessMan</i></strong>, <strong><i>TBM</i></strong>, is a companion that goes beyond being just a simple contact management application.
-    </p> 
+    </p>
     <p>
         <strong><i>TBM</i></strong> sorts and organises your clients for you, streamlines your workflow, improves business efficiency and so much more. All this is at the convenience of the Command-Line Interface. <strong><i>TBM</i></strong> does more than just tracking your clients!<br>
     </p>
@@ -20,7 +20,7 @@ title: User Guide
     </p>
 </div>
 
-## Table of contents  
+## Table of contents
 
 * Table of Contents
 {:toc}
@@ -112,11 +112,11 @@ Format: `client find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Clients matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo Russia` will return `Hans Gruber`, `Bo Yang`, `Alice Katya`
 
-Examples: 
+Examples:
 
 * `client find katya` Finds all clients with names that matches **katya**.
-* `client find Russia` Finds all clients associated to the country of **Russia** 
-* `client find Katya Russia` Finds all clients who are either named **katya** or are associated to **Russia** 
+* `client find Russia` Finds all clients associated to the country of **Russia**
+* `client find Katya Russia` Finds all clients who are either named **katya** or are associated to **Russia**
 
 
 ### Editing a client: `client edit`
@@ -127,7 +127,7 @@ Format: `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY] 
 
 * COUNTRY follows the ISO3166 Format, which can be in the form of a 2, 3 or 4 letter country code. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
 
-Examples: 
+Examples:
 
 * `client edit 5 n/Katya` Only edits **name**, other fields remain the same
 * `client edit 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg` Edits **name**, **phone number** and **email**, other fields remain the same.
@@ -173,7 +173,7 @@ Notes:
 2. Hates cats [tag: pref]
 ```
 
-`client note delete 3 2` 
+`client note delete 3 2`
 
 The above command deletes the note regarding "Hates cats". The resulting information will look like
 ```
@@ -200,8 +200,8 @@ Notes:
 3. Apprehensive of resigning contract [tag: meeting]
 ```
 
-* `client note edit 3 2 Loves cats` 
- 
+* `client note edit 3 2 Loves cats`
+
 The original note containing "Hates cats" will be changed to "Loves cats" while retaining its original tag. The resulting list will look like
 
 ```
@@ -220,7 +220,7 @@ Format: `country filter c/COUNTRY_CODE`
 
 * COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
 
-Examples: 
+Examples:
 
 * `country filter c/SG` Filters by contacts in Singapore
 * `country filter c/RU` Filters by contacts in Russia
