@@ -149,10 +149,10 @@ public class AddressBookParser {
             return new ClientEditCommandParser().parse(arguments);
 
         case ClientDeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new ClientDeleteCommandParser().parse(arguments);
 
         case ClientFindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            return new ClientFindCommandParser().parse(arguments);
 
         case ClientViewCommand.COMMAND_WORD:
             return new ClientViewCommandParser().parse(arguments);
