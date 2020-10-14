@@ -45,7 +45,7 @@ public class ClientEditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_COUNTRY + "COUNTRY] "
+            + "[" + PREFIX_COUNTRY + "COUNTRY_CODE] "
             + "[" + PREFIX_TIMEZONE + "TIMEZONE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
