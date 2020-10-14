@@ -83,7 +83,7 @@ Format: `help`
 
 Adds a new client to the app.
 
-Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY tz/TIMEZONE`
+Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE`
 
 Examples:
 
@@ -123,14 +123,15 @@ Examples:
 
 Edits a client's information by their index in the list view.
 
-Format: `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY] [tz/TIMEZONE]`
+Format: `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY_CODE] [tz/TIMEZONE]`
 
-* COUNTRY follows the ISO3166 Format, which can be in the form of a 2, 3 or 4 letter country code. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+* COUNTRY follows the ISO3166 Format of two-letter country codes. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
 
 Examples:
 
 * `client edit 5 n/Katya` Only edits **name**, other fields remain the same
 * `client edit 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg` Edits **name**, **phone number** and **email**, other fields remain the same.
+* `client edit 3 c/JP tz/GMT+7` Edits **country** to Japan and **timezone** to GMT+7
 
 ### Deleting a client: `client delete`
 
