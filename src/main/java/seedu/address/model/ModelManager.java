@@ -170,6 +170,10 @@ public class ModelManager implements Model {
         this.countryManager.getAllCountryNotes().forEach(this.tagNoteMap::initMapFromCountries);
     }
 
+    public TagNoteMap getTagNoteMap() {
+        return this.tagNoteMap;
+    }
+
     //=========== Filtered Client List Accessors =============================================================
 
     /**
@@ -201,6 +205,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
+        // todo: @everyone, need to update the equality check for model manager?
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredClients.equals(other.filteredClients);

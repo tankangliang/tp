@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -13,13 +14,13 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
-
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.NoteStub;
 import seedu.address.model.note.Note;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -154,4 +155,16 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
+    @Test
+    public void initializeTagNoteMap_validInputs_returnsTrue() {
+        Tag tag = new Tag("tagName");
+        Note taggedNote = new Note("this note will be tagged");
+        taggedNote.addTag(tag);
+        Client aliceTagged = ALICE;
+        aliceTagged.addClientNote(taggedNote);
+        this.modelManager.addClient(aliceTagged);
+        assertDoesNotThrow(() -> this.modelManager.initialiseTagNoteMap());
+    }
+
 }

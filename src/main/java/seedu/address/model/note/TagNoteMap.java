@@ -18,10 +18,10 @@ import seedu.address.model.tag.Tag;
 
 public class TagNoteMap {
     //    TODO: Add implementation
-    public static final Set<Tag> TAG_LIST = new HashSet<>(); // probably redundant todo: remove later
-    public static final Set<Note> NOTE_LIST = new HashSet<>();
-    public static final Map<Tag, Set<Note>> TAG_TO_NOTES_MAP = new HashMap<>();
-    public static final Map<Note, Set<Tag>> NOTE_TO_TAGS_MAP = new HashMap<>();
+    public final Set<Tag> TAG_LIST = new HashSet<>(); // probably redundant todo: remove later
+    public final Set<Note> NOTE_LIST = new HashSet<>();
+    public final Map<Tag, Set<Note>> TAG_TO_NOTES_MAP = new HashMap<>();
+    public final Map<Note, Set<Tag>> NOTE_TO_TAGS_MAP = new HashMap<>();
 
     /**
      * Initialises the TagNoteMap with a list of clients.
@@ -55,6 +55,7 @@ public class TagNoteMap {
             updateTagsForNote(tags, countryNote);
         }
     }
+
     // todo: how to remove old entries to the map? <== need to do this to "sync"
     //       with the current model right?
     public Set<Tag> getTagsForNote(Note note) {
@@ -72,6 +73,7 @@ public class TagNoteMap {
      * @param note    The note to associate the tag with.
      */
     public void updateTagsForNote(Set<Tag> newTags, Note note) {
+        TAG_LIST.addAll(newTags);
         TAG_LIST.addAll(newTags);
 
         // update the notes set for each of the tags:
