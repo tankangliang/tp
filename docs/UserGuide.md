@@ -148,13 +148,13 @@ Automatically saved after every change.
 
 ### Adding client notes: `client note add`
 
-Format: `client note add CLIENT_INDEX t/TAG NOTE_STRING`
+Format: `client note add CLIENT_INDEX t/TAG nt/NOTE_STRING`
 
 Examples:
 
-* `client note add 1 t/pref wants meetings to be as short as possible (preferably 30 mins)`
-* `client note add 2 t/pref prefers emails to calls`
-* `client note add 4 t/meeting need to slowly convince him to sign the contract`
+* `client note add 1 t/pref nt/wants meetings to be as short as possible (preferably 30 mins)`
+* `client note add 2 t/pref nt/prefers emails to calls`
+* `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
 
 ### Deleting client notes: `client note delete`
 
