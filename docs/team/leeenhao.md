@@ -24,7 +24,7 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Update and move “Introduction”, “Quickstart”, “Viewing help”, and 
+    * Update and move “Introduction”, “Quickstart”, “Viewing help”, and
     “Adding clients” sections to the User Guide page
   * Developer Guide:
     * Add “Adding a client” and "Viewing help" to use cases
@@ -32,4 +32,3 @@ Given below are my contributions to the project.
 * **Community**:
 
 * **Tools**:
-
