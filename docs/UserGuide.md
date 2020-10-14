@@ -149,6 +149,7 @@ Automatically saved after every change.
 
 ### Adding client notes: `client note add`
 
+
 Format: `client note add CLIENT_INDEX [t/TAG] nt/NOTE_STRING`
 
 Examples:
