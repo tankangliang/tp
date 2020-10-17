@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.stream.Stream;
 
@@ -10,6 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.note.Note;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new ClientNoteAddCommand object.
@@ -25,20 +27,28 @@ public class ClientNoteAddCommandParser implements Parser<ClientNoteAddCommand> 
     public ClientNoteAddCommand parse(String userInput) throws ParseException {
         requireNonNull(userInput);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(userInput, /* PREFIX_TAG,*/ PREFIX_NOTE);
+                ArgumentTokenizer.tokenize(userInput, PREFIX_TAG, PREFIX_NOTE);
         if (!arePrefixesPresent(argMultimap, PREFIX_NOTE) || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientNoteAddCommand.MESSAGE_USAGE));
         }
         Index index;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            String[] preambleWords = argMultimap.getPreamble().split(" "); // todo: ask if there's a better way?
+            index = ParserUtil.parseIndex(preambleWords[preambleWords.length - 1]);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ClientNoteAddCommand.MESSAGE_USAGE), pe);
         }
+        Tag tag;
+        try {
+            tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).orElse("untagged"));
+        } catch (ParseException pe) {
+            tag = ParserUtil.parseTag("untagged"); // tagging a note should be optional
+        }
         Note clientNote = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE)
                 .orElseThrow(() -> new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ClientNoteAddCommand.MESSAGE_USAGE))));
+        clientNote.addTag(tag);
         return new ClientNoteAddCommand(index, clientNote);
     }
 

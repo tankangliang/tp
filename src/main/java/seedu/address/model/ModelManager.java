@@ -171,6 +171,7 @@ public class ModelManager implements Model {
     }
 
     public TagNoteMap getTagNoteMap() {
+        // todo: urgent! need to pass the TagNoteMap around properly for the ClientNoteAddCommandParser to update it
         return this.tagNoteMap;
     }
 
