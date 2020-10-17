@@ -75,8 +75,6 @@ public class TagNoteMap {
      */
     public void updateTagsForNote(Set<Tag> newTags, Note note) {
         tagList.addAll(newTags);
-        tagList.addAll(newTags);
-
         // update the notes set for each of the tags:
         for (Tag newTag : newTags) {
             if (tagToNotesMap.containsKey(newTag)) { // if that tag exists
@@ -89,7 +87,8 @@ public class TagNoteMap {
         }
         // update the tags set for the note:
         Set<Tag> currentTags = noteToTagsMap.getOrDefault(note, new HashSet<>());
-        currentTags.addAll(newTags); // todo: check that this should work, right
+        currentTags.addAll(newTags);
+        noteToTagsMap.put(note, currentTags);
     }
 
     /**

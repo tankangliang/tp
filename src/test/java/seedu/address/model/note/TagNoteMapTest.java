@@ -2,6 +2,7 @@ package seedu.address.model.note;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalClients.ALICE;
 
 import java.util.ArrayList;
@@ -18,11 +19,11 @@ class TagNoteMapTest {
 
     private static final Tag TAG = new Tag("tagName");
     private Client client = ALICE;
-    private Note taggedNote = new Note("jurong hill was a nice place");
-    private TagNoteMap tagNoteMap = new TagNoteMap();
+    private final Note taggedNote = new Note("jurong hill was a nice place");
+    private final TagNoteMap tagNoteMap = new TagNoteMap();
 
     @Test
-    void initMapFromCients_addClientWithTaggedNotes_returnsTrue() {
+    void initMapFromClients_addClientWithTaggedNotes_returnsTrue() {
         taggedNote.addTag(TAG);
         this.client.addClientNote(taggedNote);
         List<Client> clients = new ArrayList<>();
@@ -35,7 +36,7 @@ class TagNoteMapTest {
     //        Tag tag = new Tag("tagName");
     //        Note taggedNote = new Note("this note will be tagged");
     //        taggedNote.addTag(tag);
-    //        /* todo: generate country init
+    //        /* todo: test  country init
     //                Country
     //
     //                Client aliceTagged = ALICE;
@@ -62,18 +63,19 @@ class TagNoteMapTest {
     }
 
     @Test
-    void getTagsForNote() {
-    }
-
-    @Test
-    void getNotesForTag() {
-    }
-
-    @Test
-    void updateTagsForNote() {
-    }
-
-    @Test
-    void updateNotesForTag() {
+    void getTagsForNote_useNoteWithTwoTags_returnsTrue() {
+        Tag tag2 = new Tag("tag2");
+        taggedNote.addTag(TAG);
+        taggedNote.addTag(tag2);
+        this.client = ALICE;
+        this.client.addClientNote(taggedNote);
+        List<Client> clients = new ArrayList<>();
+        clients.add(client);
+        tagNoteMap.initMapFromClients(clients);
+        Set<Tag> expectedTags = new HashSet<>();
+        expectedTags.add(tag2);
+        expectedTags.add(TAG);
+        Set<Tag> actualTags = tagNoteMap.getTagsForNote(taggedNote);
+        assertTrue(expectedTags.equals(actualTags));
     }
 }
