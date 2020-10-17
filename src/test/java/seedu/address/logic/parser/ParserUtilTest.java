@@ -18,6 +18,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 
@@ -28,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_COUNTRY_CODE = "ZZ";
+    private static final String INVALID_TIMEZONE = "GT+8";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -36,6 +38,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_COUNTRY_CODE = "SG";
+    private static final String VALID_TIMEZONE = "GMT+8";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -218,5 +221,28 @@ public class ParserUtilTest {
         String countryWithWhitespace = WHITESPACE + VALID_COUNTRY_CODE + WHITESPACE;
         Country expectedCountry = new Country(VALID_COUNTRY_CODE);
         assertEquals(expectedCountry, ParserUtil.parseCountry(countryWithWhitespace));
+    }
+
+    @Test
+    public void parseTimezone_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTimezone((String) null));
+    }
+
+    @Test
+    public void parseTimezone_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTimezone(INVALID_TIMEZONE));
+    }
+
+    @Test
+    public void parseTimezone_validValueWithoutWhitespace_returnsTimezone() throws Exception {
+        Timezone expectedTimezone = new Timezone(VALID_TIMEZONE);
+        assertEquals(expectedTimezone, ParserUtil.parseTimezone(VALID_TIMEZONE));
+    }
+
+    @Test
+    public void parseTimezone_validValueWithWhitespace_returnsTrimmedTimezone() throws Exception {
+        String timezoneWithWhitespace = WHITESPACE + VALID_TIMEZONE + WHITESPACE;
+        Timezone expectedTimezone = new Timezone(VALID_TIMEZONE);
+        assertEquals(expectedTimezone, ParserUtil.parseTimezone(timezoneWithWhitespace));
     }
 }

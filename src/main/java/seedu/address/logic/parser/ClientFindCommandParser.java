@@ -11,7 +11,7 @@ import seedu.address.model.client.NameContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new ClientFindCommand object
  */
-public class FindCommandParser implements Parser<ClientFindCommand> {
+public class ClientFindCommandParser implements Parser<ClientFindCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ClientFindCommand

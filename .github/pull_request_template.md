@@ -2,7 +2,7 @@
 
 Please include a summary of the change and which issue is fixed. Include details on which features have been implemented and are now available.
 
-Fixes # 
+Fixes #
 
 ## Testing
 

@@ -11,7 +11,7 @@ This documentation specifies the architecture and deisgn decisions for the appli
 
 ### Scope
 
-This describes the software architecture and software design decisions for the implementation of <strong><i>TBM</i></strong>. The intended audience is the develeopers, designers and testers for the application. 
+This describes the software architecture and software design decisions for the implementation of <strong><i>TBM</i></strong>. The intended audience is the develeopers, designers and testers for the application.
 
 * Table of Contents
 {:toc}
@@ -307,7 +307,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. A party has a prior entry in TBM, which shows that User has a previous professional encounter with the party. 
+* 2a. A party has a prior entry in TBM, which shows that User has a previous professional encounter with the party.
 
     * 2a1. User does not add the new party as it will duplicate entries in the TBM.
     * 2a2. User can choose to update/edit the client information instead.
@@ -343,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. An error occurred while saving the modified data to the existing data file.
 
-    * 2a1. TBM reloads the data from the existing data file. 
+    * 2a1. TBM reloads the data from the existing data file.
     * 2a2. TBM shows an error message.
 
   Use case ends.
@@ -360,11 +360,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. Invalid country is given.
-    
+
     * 1a1. TBM shows an error message.
-    
+
       Use case ends.
-      
+
 **UC5 - Clearing all entries from TBM**
 
 **MSS**
