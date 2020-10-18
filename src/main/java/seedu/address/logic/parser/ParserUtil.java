@@ -191,7 +191,7 @@ public class ParserUtil {
 
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> suggestionTypes} into a {@code Set<SuggestionType>}.
      */
     public static Set<SuggestionType> parseSuggestionTypes(Collection<String> suggestionTypes) throws ParseException {
         requireNonNull(suggestionTypes);

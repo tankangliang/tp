@@ -252,7 +252,7 @@ Examples:
 * `suggest by/available` Obtains a list of clients where the time is 1800-2200 in the client's timezone (off work hours).
 * `suggest by/frequency` Obtains a list of clients based on the last time their details were edited in TBM. Clients who have not been contacted for a longer period will be the first in the list.
 * `suggest by/contract` Obtains a list of clients based on their current contract details. Clients whose contracts are expiring will be shown first.
-* `suggest by/contract by/available` Similar to `suggestion by/priority` but only available clients will be shown.
+* `suggest by/contract by/available` Similar to `suggest by/contract` but only available clients will be shown.
 
 
 ### Clearing all entries: `clear`
