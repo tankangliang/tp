@@ -14,5 +14,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_COUNTRY = new Prefix("c/");
     public static final Prefix PREFIX_TIMEZONE = new Prefix("tz/");
     public static final Prefix PREFIX_NOTE = new Prefix("nt/");
+    public static final Prefix PREFIX_SUGGESTION = new Prefix("by/");
 
 }

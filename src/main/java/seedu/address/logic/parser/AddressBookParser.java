@@ -20,6 +20,7 @@ import seedu.address.logic.commands.CountryNoteCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SuggestionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -60,6 +61,9 @@ public class AddressBookParser {
 
         case COUNTRY_TYPE:
             return parseCountryCommands(restOfCommand);
+
+        case SuggestionCommand.COMMAND_WORD:
+            return new SuggestionCommandParser().parse(restOfCommand);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
