@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUGGESTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUGGEST;
 
 import java.util.Set;
 
@@ -11,37 +11,38 @@ import seedu.address.model.client.SuggestionType;
 /**
  * Suggests a list of clients based on the specified suggestion types
  */
-public class SuggestionCommand extends Command {
+public class SuggestCommand extends Command {
 
-    public static final String COMMAND_WORD = "suggestion";
+    public static final String COMMAND_WORD = "suggest";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Suggests a list of all clients based on the "
             + "suggestion types specified in the arguments.\n"
-            + "Parameters: " + PREFIX_SUGGESTION + "SUGGESTION_TYPE\n"
+            + "Parameters: " + PREFIX_SUGGEST + "SUGGESTION_TYPE\n"
             + "Example: " + COMMAND_WORD + " by/contact\n"
             + "Example: " + COMMAND_WORD + " by/available\n"
             + "Example: " + COMMAND_WORD + " by/priority";
-    public static final String MESSAGE_SUGGESTION_SUCCESS = "Showing clients based on suggestion criteria";
+    public static final String MESSAGE_SUGGEST_SUCCESS = "Showing clients based on suggestion criteria";
 
-    private final Set<SuggestionType> suggestionType;
+    private final Set<SuggestionType> suggestionTypes;
 
     /**
-     * Initializes SuggestionCommand with a SuggestionType
+     * Initializes SuggestCommand with a SuggestionType
      * TODO: Modify to handle multiple suggestions
      */
-    public SuggestionCommand(Set<SuggestionType> suggestionType) {
-        this.suggestionType = suggestionType;
+    public SuggestCommand(Set<SuggestionType> suggestionTypes) {
+        this.suggestionTypes = suggestionTypes;
     }
 
     @Override
     public CommandResult execute(Model model) {
+        // TODO: Handle meaningful execution here
         requireNonNull(model);
-        return new CommandResult(MESSAGE_SUGGESTION_SUCCESS);
+        return new CommandResult(MESSAGE_SUGGEST_SUCCESS);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SuggestionCommand // instanceof handles nulls
-                && suggestionType.equals(((SuggestionCommand) other).suggestionType)); // state check
+                || (other instanceof SuggestCommand // instanceof handles nulls
+                && suggestionTypes.equals(((SuggestCommand) other).suggestionTypes)); // state check
     }
 }

@@ -45,8 +45,8 @@ public class ParserUtilTest {
     private static final String VALID_TIMEZONE = "GMT+8";
     private static final String VALID_NOTE_STRING = "likes cats";
     private static final String VALID_SUGGESTION_TYPE_1 = "available";
-    private static final String VALID_SUGGESTION_TYPE_2 = "contact";
-    private static final String VALID_SUGGESTION_TYPE_3 = "priority";
+    private static final String VALID_SUGGESTION_TYPE_2 = "frequency";
+    private static final String VALID_SUGGESTION_TYPE_3 = "contract";
 
     private static final String WHITESPACE = " \t\r\n";
 

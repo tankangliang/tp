@@ -9,8 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class SuggestionType {
 
+    public static final String BY_FREQUENCY = "frequency";
+    public static final String BY_AVAILABLE = "available";
+    public static final String BY_CONTRACT = "contract";
     public static final String MESSAGE_CONSTRAINTS = "Suggestion type can only be of the following "
-        + "\"contact\", \"available\", \"priority\"";
+        + BY_FREQUENCY + " " + BY_AVAILABLE + " " + BY_CONTRACT;
 
     public final String suggestionString;
 
@@ -29,7 +32,7 @@ public class SuggestionType {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidSuggestionType(String test) {
-        return test.equals("contact") || test.equals("available") || test.equals("priority");
+        return test.equals(BY_FREQUENCY) || test.equals(BY_AVAILABLE) || test.equals(BY_CONTRACT);
     }
 
     @Override
