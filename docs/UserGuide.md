@@ -239,6 +239,22 @@ Examples:
 * `country note c/CN nt/building good relations (guanxi) is important when conducting business here`
 * `country note c/IN nt/is world's fastest growing economy`
 
+### Getting suggestions on clients: `suggestion`
+
+Obtains a list of clients based on the suggestion type(s) passed in.
+
+Format: `suggestion by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]`
+
+* SUGGESTION_TYPE must be one of the following: `contact`, `available` or `priority`
+
+Examples:
+
+* `suggestion by/available` Obtains a list of clients where the time is 1800-2200 in the client's timezone (off work hours).
+* `suggestion by/contact` Obtains a list of clients based on the last time their details were edited in TBM. Clients who have not been contacted for a longer period will be the first in the list.
+* `suggestion by/priority` Obtains a list of clients based on their current contract details. Clients whose contracts are expiring will be shown first.
+* `suggestion by/priority by/available` Similar to `suggestion by/priority` but only available clients will be shown.
+
+
 ### Clearing all entries: `clear`
 
 Deletes all information from the application, you will start from a clean slate.
@@ -273,6 +289,7 @@ Action | Format, Examples
 **Edit client note** | `client note edit CLIENT_INDEX NOTE_INDEX [nt/NOTE_STRING] [t/TAG]` <br> e.g., `client note edit 3 2 nt/Loves cats`
 **Filter by country** | `country filter c/COUNTRY_CODE` <br> e.g., `country filter c/SG`
 **Add country note** | `country note c/COUNTRY nt/NOTE_STRING` <br> e.g., `country note c/SG nt/people love to queue for things`
+**Get suggestions** | `suggestion by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]` <br> e.g., `suggestion by/available by/contact`
 **Clear** | `clear`
 **Exit** | `exit`
 **Help** | `help`
