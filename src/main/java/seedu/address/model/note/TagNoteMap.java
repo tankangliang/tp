@@ -25,9 +25,9 @@ public class TagNoteMap {
 
 
     /**
-     * Initialises the TagNoteMap with a list of clients.
+     * Initialises the TagNoteMap from a list of clients.
      *
-     * @param clients The list of clients containing ClientNotes and associated tags.
+     * @param clients The list of clients, each containing their notes and associated tags.
      */
     public void initMapFromClients(List<Client> clients) {
         for (Client client : clients) {
@@ -43,9 +43,9 @@ public class TagNoteMap {
     }
 
     /**
-     * Initialises the TagNoteMap with a list of countries.
+     * Initialises the TagNoteMap from a list of countries.
      *
-     * @param countryNotes The set of countries containing ClientNotes and associated tags.
+     * @param countryNotes The set of countries, each containing their notes and associated tags.
      */
     public void initMapFromCountries(Set<Note> countryNotes) {
         // todo: make init work when passed in a list of countries
