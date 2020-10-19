@@ -64,4 +64,16 @@ class ClientNoteAddCommandParserTest {
         ClientNoteAddCommand actualCommand = parser.parse(userInput);
         assertEquals(expectedCommand, actualCommand);
     }
+    
+    @Test
+    void parse_emptyTagStringUntaggedNote_returnsTrue() throws ParseException {
+        Note expectedClientNote = new Note(NOTE_STRING);
+        expectedClientNote.addTag(UNTAGGED_TAG);
+        ClientNoteAddCommand expectedCommand = new ClientNoteAddCommand(Index.fromOneBased(1), expectedClientNote);
+        String userInput = PREAMBLE + SPACE + INDEX_STRING + SPACE + PREFIX_TAG + SPACE + PREFIX_NOTE + NOTE_STRING;
+        ClientNoteAddCommandParser parser = new ClientNoteAddCommandParser();
+        assertDoesNotThrow(() -> parser.parse(userInput));
+        ClientNoteAddCommand actualCommand = parser.parse(userInput);
+        assertEquals(expectedCommand, actualCommand);
+    }
 }

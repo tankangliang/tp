@@ -2,6 +2,7 @@ package seedu.address.model.note;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -13,9 +14,9 @@ import seedu.address.model.tag.Tag;
  * Generic Note class for country and client notes.
  */
 public class Note {
-    public static final String MESSAGE_CONSTRAINTS = "message constraints for note";
-    protected final String noteContents;
-    protected final Set<Tag> tags = new HashSet<>();
+    public static final String MESSAGE_CONSTRAINTS = "Notes should not be blank";
+    private final String noteContents;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Constructs a Note object with some content in it.
@@ -60,9 +61,9 @@ public class Note {
 
     @Override
     public int hashCode() {
-        return Objects.hash(noteContents);
+        return Objects.hash(noteContents, tags);
     }
     public Set<Tag> getTags() {
-        return tags;
+        return Collections.unmodifiableSet(tags);
     }
 }

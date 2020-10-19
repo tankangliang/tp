@@ -14,16 +14,17 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.client.Client;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.ClientBuilder;
 
 class TagNoteMapTest {
 
     private static final Tag TAG = new Tag("tagName");
-    private Client client = ALICE;
+    private Client client = new ClientBuilder(ALICE).build();
     private final Note taggedNote = new Note("jurong hill was a nice place");
     private final TagNoteMap tagNoteMap = new TagNoteMap();
 
     @Test
-    void initMapFromClients_addClientWithTaggedNotes_returnsTrue() {
+    void initMapFromClients_addClientWithTaggedNotes_success() {
         taggedNote.addTag(TAG);
         this.client.addClientNote(taggedNote);
         List<Client> clients = new ArrayList<>();
@@ -67,7 +68,7 @@ class TagNoteMapTest {
         Tag tag2 = new Tag("tag2");
         taggedNote.addTag(TAG);
         taggedNote.addTag(tag2);
-        this.client = ALICE;
+        this.client = new ClientBuilder(ALICE).build();;
         this.client.addClientNote(taggedNote);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
