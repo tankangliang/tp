@@ -1,18 +1,12 @@
 package seedu.address.ui;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 import seedu.address.model.widget.WidgetObject;
 
 /**
@@ -41,19 +35,14 @@ public class WidgetViewBox extends UiPart<Region> {
     @FXML
     private Label footer;
     private WidgetObject widgetObject;
-    private Timeline textClock;
+    private TextClock textClock;
 
     /**
      * Creates a {@code WidgetViewBox} with the given {@code WidgetObject}.
      */
     public WidgetViewBox() {
         super(FXML);
-        this.textClock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-            LocalTime localTime = LocalTime.now();
-            header.setText(localTime.format(formatter));
-        }), new KeyFrame(Duration.seconds(1)));
-        textClock.setCycleCount(Animation.INDEFINITE);
+        textClock = new TextClock(header);
         textClock.play();
         divOne.setText(Locale.getDefault().getDisplayCountry());
         textOne.setText(TimeZone.getDefault().getDisplayName());
