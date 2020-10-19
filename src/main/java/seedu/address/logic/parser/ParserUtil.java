@@ -13,6 +13,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.SuggestionType;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryManager;
@@ -170,6 +171,34 @@ public class ParserUtil {
             throw new ParseException(Note.MESSAGE_CONSTRAINTS);
         }
 
-        return new Note(noteString);
+        return new Note(trimmedNoteString);
+    }
+
+    /**
+     * Parses a {@code String suggestionType} into a {@code SuggestionType}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code suggestionType} is invalid.
+     */
+    public static SuggestionType parseSuggestionType(String suggestionType) throws ParseException {
+        requireNonNull(suggestionType);
+        String trimmedSuggestionType = suggestionType.trim();
+        if (!SuggestionType.isValidSuggestionType(trimmedSuggestionType)) {
+            throw new ParseException(SuggestionType.MESSAGE_CONSTRAINTS);
+        }
+        return new SuggestionType(trimmedSuggestionType);
+    }
+
+
+    /**
+     * Parses {@code Collection<String> suggestionTypes} into a {@code Set<SuggestionType>}.
+     */
+    public static Set<SuggestionType> parseSuggestionTypes(Collection<String> suggestionTypes) throws ParseException {
+        requireNonNull(suggestionTypes);
+        final Set<SuggestionType> suggestionSet = new HashSet<>();
+        for (String suggestionType : suggestionTypes) {
+            suggestionSet.add(parseSuggestionType(suggestionType));
+        }
+        return suggestionSet;
     }
 }
