@@ -41,6 +41,7 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
+        //TODO: For storing JSON notes
         //notes.addAll(source.getNoteList().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
     }
 
@@ -59,6 +60,7 @@ class JsonSerializableAddressBook {
             addressBook.addClient(client);
         }
 
+        //TODO: For storing JSON notes
         for (JsonAdaptedNote note: notes) {
             if (note.isClientNote()) {
                 // handle client note

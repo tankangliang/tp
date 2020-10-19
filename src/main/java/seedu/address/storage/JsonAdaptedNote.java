@@ -10,18 +10,22 @@ import seedu.address.model.note.Note;
  */
 class JsonAdaptedNote {
 
+    //TODO: For storing JSON notes
     @JsonCreator
     public JsonAdaptedNote(Note note) {
     }
 
+    //TODO: For storing JSON notes
     public boolean isClientNote() {
         return true;
     }
 
+    //TODO: For storing JSON notes
     public Country getModelCountry() {
         return new Country("SG");
     }
 
+    //TODO: For storing JSON notes
     public Note getModelNote() {
         return new Note("some note content");
     }

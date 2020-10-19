@@ -162,6 +162,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return clients.asUnmodifiableObservableList();
     }
 
+    //TODO: For storing JSON notes
     @Override
     public ObservableList<Note> getNoteList() {
         return null;
