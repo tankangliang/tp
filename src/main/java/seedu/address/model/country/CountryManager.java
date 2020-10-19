@@ -94,10 +94,11 @@ public class CountryManager {
 
     /**
      * Returns all Country Notes currently in the map.
+     * Returning a collection of sets prevents deep-copying.
      *
-     * @return Set of all country notes in the map.
+     * @return Collection of sets of country notes in the map.
      */
-    public Collection<Set<Note>> getAllCountryNotes() {
+    public Collection<Set<Note>> getAllCountryNotesAsCollectionOfSets() {
         return Collections.unmodifiableCollection(this.countryNotesMap.values());
     }
 

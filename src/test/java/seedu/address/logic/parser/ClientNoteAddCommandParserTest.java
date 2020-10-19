@@ -27,21 +27,21 @@ class ClientNoteAddCommandParserTest {
     private static final String HAS_INDEX_HAS_NOTE = INDEX_STRING + SPACE + PREFIX_NOTE + NOTE_STRING;
 
     @Test
-    void parse_invalidFormatNoNote_returnsFalse() throws ParseException {
+    void parse_invalidFormatNoNote_throwsParseException() throws ParseException {
         String userInput = PREAMBLE + SPACE + INDEX_STRING + SPACE;
         ClientNoteAddCommandParser parser = new ClientNoteAddCommandParser();
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 
     @Test
-    void parse_invalidFormatNoIndex_returnsFalse() throws ParseException {
+    void parse_invalidFormatNoIndex_throwsParseException() throws ParseException {
         String userInput = PREAMBLE + SPACE + PREFIX_NOTE + NOTE_STRING;
         ClientNoteAddCommandParser parser = new ClientNoteAddCommandParser();
         assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 
     @Test
-    void parse_validFormatUntaggedNote_returnsTrue() throws ParseException {
+    void parse_validFormatUntaggedNote_successful() throws ParseException {
         Note expectedClientNote = new Note(NOTE_STRING);
         expectedClientNote.addTag(UNTAGGED_TAG);
         ClientNoteAddCommand expectedCommand = new ClientNoteAddCommand(Index.fromOneBased(1), expectedClientNote);
@@ -53,7 +53,7 @@ class ClientNoteAddCommandParserTest {
     }
 
     @Test
-    void parse_validFormatTaggedNote_returnsTrue() throws ParseException {
+    void parse_validFormatTaggedNote_doesNotThrowExceptionAndCreatesCorrectCommand() throws ParseException {
         Note expectedClientNote = new Note(NOTE_STRING);
         expectedClientNote.addTag(TAG);
         ClientNoteAddCommand expectedCommand = new ClientNoteAddCommand(Index.fromOneBased(1), expectedClientNote);
@@ -64,9 +64,8 @@ class ClientNoteAddCommandParserTest {
         ClientNoteAddCommand actualCommand = parser.parse(userInput);
         assertEquals(expectedCommand, actualCommand);
     }
-    
     @Test
-    void parse_emptyTagStringUntaggedNote_returnsTrue() throws ParseException {
+    void parse_emptyTagStringUntaggedNote_doesNotThrowExceptionAndCreatesCorrectCommand() throws ParseException {
         Note expectedClientNote = new Note(NOTE_STRING);
         expectedClientNote.addTag(UNTAGGED_TAG);
         ClientNoteAddCommand expectedCommand = new ClientNoteAddCommand(Index.fromOneBased(1), expectedClientNote);

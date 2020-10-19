@@ -18,65 +18,62 @@ import seedu.address.testutil.ClientBuilder;
 
 class TagNoteMapTest {
 
-    private static final Tag TAG = new Tag("tagName");
+    private final Tag tag = new Tag("tagName");
     private Client client = new ClientBuilder(ALICE).build();
     private final Note taggedNote = new Note("jurong hill was a nice place");
     private final TagNoteMap tagNoteMap = new TagNoteMap();
 
     @Test
-    void initMapFromClients_addClientWithTaggedNotes_success() {
-        taggedNote.addTag(TAG);
+    void initTagNoteMapFromClients_addClientWithTaggedNotes_doesNotThrowException() {
+        taggedNote.addTag(tag);
         this.client.addClientNote(taggedNote);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
-        assertDoesNotThrow(() -> tagNoteMap.initMapFromClients(clients));
+        assertDoesNotThrow(() -> tagNoteMap.initTagNoteMapFromClients(clients));
     }
 
-    //    @Test
-    //    void initMapFromCountries_addTaggedClient_addSuccessfully() {
-    //        Tag tag = new Tag("tagName");
-    //        Note taggedNote = new Note("this note will be tagged");
-    //        taggedNote.addTag(tag);
-    //        /* todo: test  country init
-    //                Country
-    //
-    //                Client aliceTagged = ALICE;
-    //                aliceTagged.addClientNote(taggedNote);
-    //                List<Client> clients = new ArrayList<>();
-    //                clients.add(aliceTagged);
-    //                tagNoteMap.initMapFromClients(clients);
-    //                Set<Note> expectedNotes = new HashSet<>();
-    //                expectedNotes.add(taggedNote);
-    //                assertTrue(expectedNotes.equals(tagNoteMap.getNotesForTag(tag)));
-    //        */
-    //    }
+    @Test
+    void initTagNoteMapFromCountryNotes_validSetOfTaggedCountryNotes_doesNotThrowException() {
+        Set<Note> inputSet = new HashSet<>();
+        Tag tag = new Tag("tagName");
+        Note countryNote1 = new Note("this country note will be tagged");
+        countryNote1.addTag(tag);
+        inputSet.add(countryNote1);
+        assertDoesNotThrow(() -> this.tagNoteMap.initTagNoteMapFromCountryNotes(inputSet));
+    }
 
     @Test
     void getNotesForTag_usesInitialisedMap_returnsTrue() {
-        taggedNote.addTag(TAG);
+        taggedNote.addTag(tag);
         this.client.addClientNote(taggedNote);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
-        tagNoteMap.initMapFromClients(clients);
+        tagNoteMap.initTagNoteMapFromClients(clients);
         Set<Note> expectedNotes = new HashSet<>();
         expectedNotes.add(taggedNote);
-        assertEquals(tagNoteMap.getNotesForTag(TAG), expectedNotes);
+        assertEquals(tagNoteMap.getNotesForTag(tag), expectedNotes);
     }
 
     @Test
     void getTagsForNote_useNoteWithTwoTags_returnsTrue() {
         Tag tag2 = new Tag("tag2");
-        taggedNote.addTag(TAG);
+        taggedNote.addTag(tag);
         taggedNote.addTag(tag2);
         this.client = new ClientBuilder(ALICE).build();;
         this.client.addClientNote(taggedNote);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
-        tagNoteMap.initMapFromClients(clients);
+        tagNoteMap.initTagNoteMapFromClients(clients);
         Set<Tag> expectedTags = new HashSet<>();
         expectedTags.add(tag2);
-        expectedTags.add(TAG);
+        expectedTags.add(tag);
         Set<Tag> actualTags = tagNoteMap.getTagsForNote(taggedNote);
         assertTrue(expectedTags.equals(actualTags));
     }
+
+    /*  Future test cases:
+    *  1. test constructor and other methods for ensuring the code coverage
+    *  2.
+    *
+    * */
 }

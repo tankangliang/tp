@@ -166,8 +166,9 @@ public class ModelManager implements Model {
      * Initialises TagNoteMap from Clients notes and Country notes.
      */
     public void initialiseTagNoteMap() {
-        this.tagNoteMap.initMapFromClients(this.addressBook.getClientList());
-        this.countryManager.getAllCountryNotes().forEach(this.tagNoteMap::initMapFromCountries);
+        this.tagNoteMap.initTagNoteMapFromClients(this.addressBook.getClientList());
+        this.countryManager.getAllCountryNotesAsCollectionOfSets()
+                .forEach(this.tagNoteMap::initTagNoteMapFromCountryNotes);
     }
 
     public TagNoteMap getTagNoteMap() {

@@ -1,6 +1,8 @@
 package seedu.address.model.note;
 
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,10 +17,9 @@ import seedu.address.model.tag.Tag;
 /**
  * Manages the relationship between Tags and Notes.
  */
-
 public class TagNoteMap {
     //    TODO: Add implementation
-    public final Set<Tag> tagList = new HashSet<>(); // probably redundant todo: remove later
+    public final Set<Tag> tagSet = new HashSet<>(); // probably redundant todo: remove later
     public final Set<Note> noteSet = new HashSet<>();
     public final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
     public final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>();
@@ -29,13 +30,14 @@ public class TagNoteMap {
      *
      * @param clients The list of clients, each containing their notes and associated tags.
      */
-    public void initMapFromClients(List<Client> clients) {
+    public void initTagNoteMapFromClients(List<Client> clients) {
+        requireAllNonNull(clients);
         for (Client client : clients) {
             Set<Note> clientNotes = client.getClientNotes();
             noteSet.addAll(clientNotes);
             for (Note clientNote : clientNotes) {
                 Set<Tag> tags = clientNote.getTags();
-                tagList.addAll(tags);
+                tagSet.addAll(tags);
                 updateTagsForNote(tags, clientNote);
             }
         }
@@ -47,12 +49,13 @@ public class TagNoteMap {
      *
      * @param countryNotes The set of countries, each containing their notes and associated tags.
      */
-    public void initMapFromCountries(Set<Note> countryNotes) {
-        // todo: make init work when passed in a list of countries
+    public void initTagNoteMapFromCountryNotes(Set<Note> countryNotes) {
+        // todo: make init work when passed in a list of countryNotes
+        requireAllNonNull(countryNotes);
         noteSet.addAll(countryNotes);
         for (Note countryNote : countryNotes) {
             Set<Tag> tags = countryNote.getTags();
-            tagList.addAll(tags);
+            tagSet.addAll(tags);
             updateTagsForNote(tags, countryNote);
         }
     }
@@ -73,8 +76,9 @@ public class TagNoteMap {
      * @param newTags The tags to associate with a particular note.
      * @param note    The note to associate the tag with.
      */
-    public void updateTagsForNote(Set<Tag> newTags, Note note) {
-        tagList.addAll(newTags);
+    private void updateTagsForNote(Set<Tag> newTags, Note note) {
+        requireAllNonNull(newTags, note);
+        tagSet.addAll(newTags);
         // update the notes set for each of the tags:
         for (Tag newTag : newTags) {
             if (tagToNotesMap.containsKey(newTag)) { // if that tag exists
@@ -89,28 +93,5 @@ public class TagNoteMap {
         Set<Tag> currentTags = noteToTagsMap.getOrDefault(note, new HashSet<>());
         currentTags.addAll(newTags);
         noteToTagsMap.put(note, currentTags);
-    }
-
-    /**
-     * Links a new set of notes to a tag.
-     *
-     * @param newNotes The notes to associate with a particular tag.
-     * @param tag      The tag to associate the notes with.
-     */
-    public void updateNotesForTag(Set<Note> newNotes, Tag tag) {
-        noteSet.addAll(newNotes);
-        // update the tags set for each of the notes:
-        for (Note newNote : newNotes) {
-            if (noteToTagsMap.containsKey(newNote)) {
-                noteToTagsMap.get(newNote).add(tag);
-            } else { // new note:
-                Set<Tag> tags = new HashSet<>();
-                tags.add(tag);
-                noteToTagsMap.put(newNote, tags);
-            }
-        }
-        //update the notes set for the tag:
-        Set<Note> currentNotes = tagToNotesMap.getOrDefault(tag, new HashSet<>());
-        currentNotes.addAll(newNotes);
     }
 }
