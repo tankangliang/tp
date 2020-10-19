@@ -22,13 +22,16 @@ class JsonSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
 
     private final List<JsonAdaptedClient> clients = new ArrayList<>();
+    private final List<JsonAdaptedNote> notes = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given clients.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients) {
+    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients,
+            @JsonProperty("notes") List<JsonAdaptedNote> notes) {
         this.clients.addAll(clients);
+        this.notes.addAll(notes);
     }
 
     /**
@@ -38,6 +41,8 @@ class JsonSerializableAddressBook {
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
+        //TODO: For storing JSON notes
+        //notes.addAll(source.getNoteList().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
     }
 
     /**
@@ -53,6 +58,16 @@ class JsonSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CLIENT);
             }
             addressBook.addClient(client);
+        }
+
+        //TODO: For storing JSON notes
+        for (JsonAdaptedNote note: notes) {
+            if (note.isClientNote()) {
+                // handle client note
+            } else {
+                // note is countryNote
+                addressBook.addCountryNote(note.getModelCountry(), note.getModelNote());
+            }
         }
         return addressBook;
     }
