@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -16,6 +17,7 @@ import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryManager;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.widget.WidgetModel;
 import seedu.address.model.widget.WidgetObject;
 
@@ -127,6 +129,11 @@ public class ModelManager implements Model {
     public void addClient(Client client) {
         addressBook.addClient(client);
         updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+        Set<Note> clientNotes = client.getClientNotes();
+        for (Note note : clientNotes) {
+            Set<Tag> tags = note.getTags();
+            updateTagNoteMapWithNote(tags, note);
+        }
     }
 
     @Override
@@ -160,6 +167,14 @@ public class ModelManager implements Model {
     public void addClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
         target.addClientNote(clientNote);
+        // update the TagNoteMap:
+        Set<Tag> newTags = clientNote.getTags();
+        this.tagNoteMap.updateTagsForNote(newTags, clientNote);
+    }
+
+    @Override
+    public void updateTagNoteMapWithNote(Set<Tag> newTags, Note note) {
+        this.tagNoteMap.updateTagsForNote(newTags, note);
     }
 
     /**

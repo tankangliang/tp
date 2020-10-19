@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -8,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.widget.WidgetObject;
 
 /**
@@ -85,7 +87,7 @@ public interface Model {
 
     /**
      * Adds the given client.
-     *
+     * <p>
      * {@code client} must not already exist in the address book.
      */
     void addClient(Client client);
@@ -116,4 +118,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredClientList(Predicate<Client> predicate);
+
+    /**
+     * Updates its {@code TagNoteMap} to map a note with a new set of tags.
+     *
+     * @param newTags The tags to associate with a particular note.
+     * @param note    The note to associate the tag with.
+     */
+    void updateTagNoteMapWithNote(Set<Tag> newTags, Note note);
 }

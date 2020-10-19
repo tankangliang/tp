@@ -21,6 +21,7 @@ import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.NoteStub;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -117,6 +118,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.hasClientNote(client, clientNote));
         modelManager.addClientNote(client, clientNote);
         assertTrue(modelManager.hasClientNote(client, clientNote));
+    }
+
+    @Test
+    public void getTagNoteMap_returnUninitialisedTagNoteMap_returnsTrue() {
+        TagNoteMap expected = new TagNoteMap();
+        assertTrue(modelManager.getTagNoteMap().equals(expected));
     }
 
 

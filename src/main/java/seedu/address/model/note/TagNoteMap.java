@@ -72,11 +72,13 @@ public class TagNoteMap {
 
     /**
      * Links a new set of tags to a note.
+     * Method is public for ModelManager to use.
+     * //todo doublecheck if this is unsafe.
      *
      * @param newTags The tags to associate with a particular note.
      * @param note    The note to associate the tag with.
      */
-    private void updateTagsForNote(Set<Tag> newTags, Note note) {
+    public void updateTagsForNote(Set<Tag> newTags, Note note) {
         requireAllNonNull(newTags, note);
         tagSet.addAll(newTags);
         // update the notes set for each of the tags:
@@ -93,5 +95,23 @@ public class TagNoteMap {
         Set<Tag> currentTags = noteToTagsMap.getOrDefault(note, new HashSet<>());
         currentTags.addAll(newTags);
         noteToTagsMap.put(note, currentTags);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object:
+        if (obj == this) {
+            return true;
+        }
+        // instance of handles nulls
+        if (!(obj instanceof TagNoteMap)) {
+            return false;
+        }
+        // state check:
+        TagNoteMap other = (TagNoteMap) obj;
+        return this.tagSet.equals(other.tagSet)
+                && this.noteSet.equals(other.noteSet)
+                && this.tagToNotesMap.equals(other.tagToNotesMap)
+                && this.noteToTagsMap.equals(other.noteToTagsMap);
     }
 }

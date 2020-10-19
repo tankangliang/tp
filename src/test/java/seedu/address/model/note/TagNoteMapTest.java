@@ -2,6 +2,7 @@ package seedu.address.model.note;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalClients.ALICE;
 
@@ -59,7 +60,7 @@ class TagNoteMapTest {
         Tag tag2 = new Tag("tag2");
         taggedNote.addTag(tag);
         taggedNote.addTag(tag2);
-        this.client = new ClientBuilder(ALICE).build();;
+        this.client = new ClientBuilder(ALICE).build();
         this.client.addClientNote(taggedNote);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
@@ -71,9 +72,19 @@ class TagNoteMapTest {
         assertTrue(expectedTags.equals(actualTags));
     }
 
+    @Test
+    void equals_variousEqualityChecks_returnsTrueIfSameObjectOrState() {
+        TagNoteMap emptyTagNoteMap = new TagNoteMap();
+        TagNoteMap sameObject = this.tagNoteMap;
+        Object randomObject = new Object();
+        assertEquals(sameObject, this.tagNoteMap);
+        assertEquals(emptyTagNoteMap, this.tagNoteMap);
+        assertNotEquals(randomObject, this.tagNoteMap);
+    }
+
     /*  Future test cases:
-    *  1. test constructor and other methods for ensuring the code coverage
-    *  2.
-    *
-    * */
+     *  1. test constructor and other methods for ensuring the code coverage
+     *  2.
+     *
+     * */
 }
