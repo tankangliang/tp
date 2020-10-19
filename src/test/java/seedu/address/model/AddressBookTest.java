@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.exceptions.DuplicateClientException;
+import seedu.address.model.note.Note;
 import seedu.address.testutil.ClientBuilder;
 
 public class AddressBookTest {
@@ -96,6 +97,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Client> getClientList() {
             return clients;
+        }
+
+        @Override
+        public ObservableList<Note> getNoteList() {
+            return null;
         }
     }
 
