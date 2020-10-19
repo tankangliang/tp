@@ -13,7 +13,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
-import seedu.address.model.country.CountryManager;
 import seedu.address.model.note.Note;
 import seedu.address.model.widget.WidgetModel;
 import seedu.address.model.widget.WidgetObject;
