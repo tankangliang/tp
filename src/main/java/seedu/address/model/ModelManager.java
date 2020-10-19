@@ -28,7 +28,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
-    private final CountryManager countryManager;
     private final WidgetModel widget;
 
     /**
@@ -44,7 +43,6 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         this.widget = WidgetModel.initWidget();
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
-        this.countryManager = new CountryManager();
     }
 
     public ModelManager() {
@@ -137,7 +135,7 @@ public class ModelManager implements Model {
     public boolean hasCountryNote(Country country, Note countryNote) {
         requireAllNonNull(country, countryNote);
 
-        return countryManager.hasCountryNote(country, countryNote);
+        return addressBook.hasCountryNote(country, countryNote);
     }
     @Override
     public boolean hasClientNote(Client target, Note clientNote) {
@@ -149,7 +147,7 @@ public class ModelManager implements Model {
     public void addCountryNote(Country country, Note countryNote) {
         requireAllNonNull(country, countryNote);
 
-        countryManager.addCountryNote(country, countryNote);
+        addressBook.addCountryNote(country, countryNote);
     }
     @Override
     public void addClientNote(Client target, Note clientNote) {
