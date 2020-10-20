@@ -3,6 +3,8 @@ package seedu.address.model.client;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.function.Predicate;
+
 /**
  * Represents a SuggestionType in the address book.
  * Guarantees: immutable; suggestion type is valid as declared in {@link #isValidSuggestionType(String)}
@@ -12,8 +14,8 @@ public class SuggestionType {
     public static final String BY_FREQUENCY = "frequency";
     public static final String BY_AVAILABLE = "available";
     public static final String BY_CONTRACT = "contract";
-    public static final String MESSAGE_CONSTRAINTS = "Suggestion type can only be of the following "
-        + BY_FREQUENCY + " " + BY_AVAILABLE + " " + BY_CONTRACT;
+    public static final String MESSAGE_CONSTRAINTS = "Suggestion type can only be of the following: "
+        + BY_FREQUENCY + ", " + BY_AVAILABLE + ", " + BY_CONTRACT;
 
     public final String suggestionString;
 
@@ -26,6 +28,21 @@ public class SuggestionType {
         requireNonNull(suggestionString);
         checkArgument(isValidSuggestionType(suggestionString), MESSAGE_CONSTRAINTS);
         this.suggestionString = suggestionString;
+    }
+
+    public Predicate<Client> getSuggestionPredicate() {
+        switch (suggestionString) {
+        case BY_AVAILABLE:
+            return new SuggestAvailabilityPredicate();
+        case BY_CONTRACT:
+            break;
+        case BY_FREQUENCY:
+            break;
+        default:
+        }
+
+        assert false; // code execution will never reach here
+        return null;
     }
 
     /**
