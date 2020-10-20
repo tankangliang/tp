@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTRACT_EXPIRY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -40,6 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_COUNTRY_BOB = "MY";
     public static final String VALID_TIMEZONE_AMY = "GMT+8";
     public static final String VALID_TIMEZONE_BOB = "GMT+7";
+    public static final String VALID_CONTRACT_EXPIRY_DATE_AMY = "1-1-2022";
+    public static final String VALID_CONTRACT_EXPIRY_DATE_BOB = "13-12-2021";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -55,6 +58,10 @@ public class CommandTestUtil {
     public static final String COUNTRY_DESC_BOB = " " + PREFIX_COUNTRY + VALID_COUNTRY_BOB;
     public static final String TIMEZONE_DESC_AMY = " " + PREFIX_TIMEZONE + VALID_TIMEZONE_AMY;
     public static final String TIMEZONE_DESC_BOB = " " + PREFIX_TIMEZONE + VALID_TIMEZONE_BOB;
+    public static final String CONTRACT_EXPIRY_DATE_DESC_AMY =
+            " " + PREFIX_CONTRACT_EXPIRY_DATE + VALID_CONTRACT_EXPIRY_DATE_AMY;
+    public static final String CONTRACT_EXPIRY_DATE_DESC_BOB =
+            " " + PREFIX_CONTRACT_EXPIRY_DATE + VALID_CONTRACT_EXPIRY_DATE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -65,6 +72,8 @@ public class CommandTestUtil {
     public static final String INVALID_COUNTRY_DESC = " " + PREFIX_COUNTRY + "ZZ"; // not a valid country code
     public static final String INVALID_TIMEZONE_DESC = " " + PREFIX_TIMEZONE + "GT+8"; // not a valid timezone input
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_CONTRACT_EXPIRY_DATE_DESC =
+            " " + PREFIX_CONTRACT_EXPIRY_DATE + "31-2-2020"; // 31st of Feb is not a valid date
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -76,10 +85,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withCountry(VALID_COUNTRY_AMY)
-                .withTimezone(VALID_TIMEZONE_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withTimezone(VALID_TIMEZONE_AMY).withContractExpiryDate(VALID_CONTRACT_EXPIRY_DATE_AMY)
+                .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withCountry(VALID_COUNTRY_BOB)
-                .withTimezone(VALID_TIMEZONE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withTimezone(VALID_TIMEZONE_BOB).withContractExpiryDate(VALID_CONTRACT_EXPIRY_DATE_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

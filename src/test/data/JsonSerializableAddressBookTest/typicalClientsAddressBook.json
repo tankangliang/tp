@@ -7,6 +7,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "country" : "SG",
     "timezone": "GMT+8",
+    "contractExpiryDate": "1-4-2021",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -15,6 +16,7 @@
     "address" : "311, Clementi Ave 2, #02-25",
     "country" : "SG",
     "timezone": "GMT+8",
+    "contractExpiryDate": "3-12-2022",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +25,7 @@
     "address" : "wall street",
     "country" : "US",
     "timezone": "GMT-4",
+    "contractExpiryDate": "30-1-2022",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -31,6 +34,7 @@
     "address" : "10th street",
     "country" : "SG",
     "timezone": "GMT+8",
+    "contractExpiryDate": "28-2-2021",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -39,6 +43,7 @@
     "address" : "michegan ave",
     "country" : "GB",
     "timezone": "GMT+1",
+    "contractExpiryDate": "10-10-2024",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -47,6 +52,7 @@
     "address" : "little tokyo",
     "country" : "JP",
     "timezone": "GMT+9",
+    "contractExpiryDate": "9-11-2022",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
@@ -55,6 +61,7 @@
     "address" : "4th street",
     "country" : "US",
     "timezone": "GMT-4",
+    "contractExpiryDate": "2-8-2021",
     "tagged" : [ ]
   } ],
   "notes": []

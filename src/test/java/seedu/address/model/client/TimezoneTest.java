@@ -20,7 +20,7 @@ public class TimezoneTest {
     }
 
     @Test
-    public void isValidName() {
+    public void isValidTimezone() {
         // null timezone
         assertThrows(NullPointerException.class, () -> Timezone.isValidTimezone(null));
 
