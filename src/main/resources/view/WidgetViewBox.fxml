@@ -9,7 +9,7 @@
       <children>
                <StackPane prefHeight="79.0" prefWidth="337.0">
             <children>
-               <Label fx:id="header" alignment="CENTER" prefHeight="46.0" prefWidth="249.0" styleClass="widget_header" />
+               <Label fx:id="header" alignment="CENTER" prefHeight="46.0" prefWidth="249.0" styleClass="widget_header"/>
             </children></StackPane>
                <StackPane prefHeight="50.0" prefWidth="337.0">
             <children>
