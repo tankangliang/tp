@@ -3,7 +3,7 @@ package seedu.address.model.widget;
 import java.util.Arrays;
 
 /**
- * A standardise way to render content on the widget view box.
+ * A standardised way to render content on the widget view box.
  * Truncates anything that does not fit into the defined 8 divisions/sections for the displaying in the view box.
  * Defined format for fields to be displayed is:
  * <ol>
