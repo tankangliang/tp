@@ -169,7 +169,7 @@
 
 .widget-pane {
      -fx-background-color: derive(-LIGHTGREY, 40%);
-     -fx-background-radius: 20, 20;
+     -fx-background-radius: 15, 15;
      -fx-padding: 15 20 20 15;
 }
 
@@ -357,7 +357,7 @@
 }
 
 #clientListView {
-    -fx-background-radius: 10, 10;
+    -fx-background-radius: 5, 5;
     -fx-padding: 0 0 0 17;
 }
 

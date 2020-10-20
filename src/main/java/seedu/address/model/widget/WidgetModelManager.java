@@ -73,12 +73,9 @@ public class WidgetModelManager implements WidgetModel {
         String tags = Stream.of(client.getTags()).map(Object::toString).reduce("", (accString, tagStr) -> {
             return accString.replace("[", "").replace("]", "") + " " + tagStr.replace("[", "").replace("]", "");
         });
-        String notes = Stream.of(client.getClientNotes()).map(Object::toString).reduce("", (accString, noteStr) -> {
-            return accString.replace("[", "").replace("]", "") + " " + noteStr.replace("[", "").replace("]", "");
-        });
 
         newObj.set(/*header*/ name, /*div1*/ country, /*text1*/ timezone, /*div2*/ "", /*text2*/ email,
-                /*text3*/ phone, /*div3*/ "", /*text4*/ notes, /*footer*/ tags);
+                /*text3*/ phone, /*div3*/ "", /*text4*/ "", /*footer*/ tags);
 
         return newObj;
     }
