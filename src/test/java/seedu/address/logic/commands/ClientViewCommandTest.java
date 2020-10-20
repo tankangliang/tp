@@ -19,7 +19,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
 
 public class ClientViewCommandTest {
-    //TODO: Implement
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -70,6 +69,7 @@ public class ClientViewCommandTest {
 
         assertCommandFailure(clientViewCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
     }
+
     @Test
     public void equals() {
         ClientViewCommand viewFirstCommand = new ClientViewCommand(INDEX_FIRST_CLIENT);
