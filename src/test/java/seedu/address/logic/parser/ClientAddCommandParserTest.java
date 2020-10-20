@@ -28,7 +28,6 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TIMEZONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.TIMEZONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTRACT_EXPIRY_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTRACT_EXPIRY_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNTRY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
