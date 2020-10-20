@@ -41,9 +41,10 @@ public class ClientNoteAddCommandParser implements Parser<ClientNoteAddCommand> 
         }
         Tag tag;
         try {
-            tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).orElse("untagged"));
+            tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG)
+                    .orElseThrow(() -> new ParseException("missing tag")));
         } catch (ParseException pe) {
-            tag = ParserUtil.parseTag("untagged"); // tagging a note should be optional
+            tag = Tag.UNTAGGED; // tagging a note should be optional
         }
         Note clientNote = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE)
                 .orElseThrow(() -> new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

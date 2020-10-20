@@ -9,7 +9,6 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
-
 /**
  * Generic Note class for country and client notes.
  */
@@ -30,12 +29,14 @@ public class Note {
 
     /**
      * Adds a tag for this note into its list of tags.
+     *
      * @param tag The tag to be added.
      */
     public void addTag(Tag tag) {
         requireNonNull(tag);
         this.tags.add(tag);
     }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -54,6 +55,7 @@ public class Note {
 
         return this.noteContents.equals(c.noteContents) && hasSameTags;
     }
+
     @Override
     public String toString() {
         return noteContents;
@@ -63,6 +65,7 @@ public class Note {
     public int hashCode() {
         return Objects.hash(noteContents, tags);
     }
+
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }

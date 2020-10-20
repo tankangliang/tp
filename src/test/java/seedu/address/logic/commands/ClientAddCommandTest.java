@@ -33,7 +33,6 @@ import seedu.address.testutil.ClientBuilder;
 // @formatter:on
 
 
-
 public class ClientAddCommandTest {
 
     private static final Index HUGE_OUT_OF_INDEX_VALUE = Index.fromOneBased(10000000);
@@ -81,8 +80,6 @@ public class ClientAddCommandTest {
         modelManager.addClientNote(client, clientNote);
         ClientNoteAddCommand command = new ClientNoteAddCommand(Index.fromOneBased(1), clientNote);
         assertThrows(CommandException.class, () -> command.execute(modelManager));
-        ;
-        System.out.println("hello");
     }
 
     @Test

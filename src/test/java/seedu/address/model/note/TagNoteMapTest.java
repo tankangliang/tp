@@ -82,9 +82,9 @@ class TagNoteMapTest {
         assertNotEquals(randomObject, this.tagNoteMap);
     }
 
-    /*  Future test cases:
-     *  1. test constructor and other methods for ensuring the code coverage
-     *  2.
+    /*  todo Future test cases:
+     *      1. test constructor and other methods for ensuring the code coverage
+     *      2.
      *
      * */
 }
