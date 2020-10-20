@@ -32,6 +32,12 @@ Class UniqueClientList
 
 Package Tag {
 Class Tag
+Class UniqueTagSet
+}
+
+Package Note {
+Class Note
+Class TagNoteMap
 }
 
 Package Country {
