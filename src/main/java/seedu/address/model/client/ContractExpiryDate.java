@@ -1,6 +1,7 @@
 package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -31,18 +32,26 @@ public class ContractExpiryDate implements Comparable<ContractExpiryDate> {
     /**
      * Constructs a date object.
      */
-    public ContractExpiryDate(LocalDate date) {
+    public ContractExpiryDate(String date) {
         requireNonNull(date);
-        this.date = date;
-        this.value = date.format(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT));
+        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
+        this.date = LocalDate.parse(date, DATE_FORMATTER);
+        this.value = this.date.format(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT));
     }
 
     /**
-     * Returns true if the String follows the correct date format.
-     * This does not check for valid dates (e.g. 31st Feb will return true).
+     * Returns true if the String follows the correct date format and is a valid date.
      */
     public static boolean isValidDate(String test) {
-        return test.matches(VALIDATION_REGEX);
+        if (test.matches(VALIDATION_REGEX)) {
+            try {
+                LocalDate.parse(test, DATE_FORMATTER);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        return false;
     }
 
     @Override

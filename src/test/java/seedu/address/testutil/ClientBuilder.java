@@ -3,8 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ContractExpiryDate;
@@ -48,11 +46,7 @@ public class ClientBuilder {
         address = new Address(DEFAULT_ADDRESS);
         country = new Country(DEFAULT_COUNTRY);
         timezone = new Timezone(DEFAULT_TIMEZONE);
-        try {
-            contractExpiryDate = ParserUtil.parseContractExpiryDate(DEFAULT_CONTRACT_EXPIRY_DATE);
-        } catch (ParseException ignored) {
-            // Intentionally left empty, since if contractExpiryDate fails to initialize, other tests will fail as well.
-        }
+        contractExpiryDate = new ContractExpiryDate(DEFAULT_CONTRACT_EXPIRY_DATE);
         tags = new HashSet<>();
     }
 
@@ -130,11 +124,7 @@ public class ClientBuilder {
      * Sets the {@code ContractExpiryDate} of the {@code Client} that we are building.
      */
     public ClientBuilder withContractExpiryDate(String contractExpiryDate) {
-        try {
-            this.contractExpiryDate = ParserUtil.parseContractExpiryDate(contractExpiryDate);
-        } catch (ParseException ignored) {
-            // Intentionally left empty, since if contractExpiryDate fails to initialize, other tests will fail as well.
-        }
+        this.contractExpiryDate = new ContractExpiryDate(contractExpiryDate);
         return this;
     }
 

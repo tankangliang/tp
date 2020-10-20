@@ -6,15 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 
 public class ContractExpiryDateTest {
 
-    private static final LocalDate TEST_DATE_1 = LocalDate.of(2020, 12, 11);
-    private static final String TEST_DATE_1_STRING = "11-12-2020";
-    private static final LocalDate TEST_DATE_2 = LocalDate.of(2019, 1, 30);
+    private static final String TEST_DATE_1 = "11-12-2020";
+    private static final String TEST_DATE_2 = "30-1-2019";
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -50,15 +47,15 @@ public class ContractExpiryDateTest {
     @Test
     public void toString_test() {
         ContractExpiryDate contractExpiryDate = new ContractExpiryDate(TEST_DATE_1);
-        assertEquals(contractExpiryDate.toString(), TEST_DATE_1_STRING);
+        assertEquals(contractExpiryDate.toString(), TEST_DATE_1);
     }
 
     @Test
     public void isValidDate() {
-        // null timezone
+        // null dates
         assertThrows(NullPointerException.class, () -> ContractExpiryDate.isValidDate(null));
 
-        // invalid timezone
+        // invalid dates
         assertFalse(ContractExpiryDate.isValidDate("")); // empty string
         assertFalse(ContractExpiryDate.isValidDate(" ")); // spaces only
         assertFalse(ContractExpiryDate.isValidDate("30")); // number only
@@ -73,9 +70,12 @@ public class ContractExpiryDateTest {
         assertFalse(ContractExpiryDate.isValidDate("32-12-2020")); // day is 32
         assertFalse(ContractExpiryDate.isValidDate("12-13-2023")); // month is 13
         assertFalse(ContractExpiryDate.isValidDate("30/1/2021")); // slashes are used
+        assertFalse(ContractExpiryDate.isValidDate("30-2-2021")); // 30th Feb
+        assertFalse(ContractExpiryDate.isValidDate("29-2-2021")); // 29th Feb on non-leap year
 
-        // valid timezone
+        // valid dates
         assertTrue(ContractExpiryDate.isValidDate("12-12-20")); // valid date
+        assertTrue(ContractExpiryDate.isValidDate("29-2-2020")); // 29th Feb on leap year
         assertTrue(ContractExpiryDate.isValidDate("1-1-0000")); // smallest possible date
         assertTrue(ContractExpiryDate.isValidDate("31-12-9999")); // largest possible date
     }

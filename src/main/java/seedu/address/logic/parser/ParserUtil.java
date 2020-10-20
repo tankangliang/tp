@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -212,12 +211,6 @@ public class ParserUtil {
         if (!ContractExpiryDate.isValidDate(trimmedDateString)) {
             throw new ParseException(ContractExpiryDate.MESSAGE_CONSTRAINTS);
         }
-        LocalDate date;
-        try {
-            date = LocalDate.parse(trimmedDateString, ContractExpiryDate.DATE_FORMATTER);
-        } catch (Exception e) {
-            throw new ParseException(ContractExpiryDate.MESSAGE_CONSTRAINTS);
-        }
-        return new ContractExpiryDate(date);
+        return new ContractExpiryDate(trimmedDateString);
     }
 }

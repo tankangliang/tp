@@ -5,10 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -98,11 +97,7 @@ public class EditClientDescriptorBuilder {
      * Sets the {@code contractExpiryDate} of the {@code EditClientDescriptor} that we are building.
      */
     public EditClientDescriptorBuilder withContractExpiryDate(String contractExpiryDate) {
-        try {
-            descriptor.setContractExpiryDate(ParserUtil.parseContractExpiryDate(contractExpiryDate));
-        } catch (ParseException ignored) {
-            // Intentionally left empty, since if contractExpiryDate fails to initialize, other tests will fail as well.
-        }
+        descriptor.setContractExpiryDate(new ContractExpiryDate(contractExpiryDate));
         return this;
     }
 
