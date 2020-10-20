@@ -56,5 +56,6 @@
     "country" : "US",
     "timezone": "GMT-4",
     "tagged" : [ ]
-  } ]
+  } ],
+  "notes": []
 }
