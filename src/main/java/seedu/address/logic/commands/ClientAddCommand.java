@@ -38,7 +38,7 @@ public class ClientAddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_COUNTRY + "SG "
             + PREFIX_TIMEZONE + "GMT+8 "
-            + PREFIX_CONTRACT_EXPIRY_DATE + "30/1/2023 "
+            + PREFIX_CONTRACT_EXPIRY_DATE + "30-1-2023 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
