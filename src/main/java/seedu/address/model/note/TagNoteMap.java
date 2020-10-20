@@ -29,6 +29,13 @@ public class TagNoteMap {
     public final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
     public final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
 
+    /**
+     * Constructor ensures that the uniqueTagMap already has the UNTAGGED tag object.
+     */
+    public TagNoteMap() {
+        uniqueTagMap.put(Tag.UNTAGGED, Tag.UNTAGGED);
+    }
+
     private void initTagNoteMapFromNotes(Set<Note> notes) {
         noteSet.addAll(notes);
         for (Note clientNote : notes) {
@@ -111,10 +118,11 @@ public class TagNoteMap {
         //  for each oldtags: remove this note from the tag to notes map. So if the hashset is empty
         requireAllNonNull(newTags, note);
         for (Tag newTag : newTags) {
-            uniqueTagMap.put(newTag, newTag);
-        }
-        // update the notes set for each of the tags:
-        for (Tag newTag : newTags) {
+            // update our uniqueTagMap
+            if (!uniqueTagMap.containsKey(newTag)) {
+                uniqueTagMap.put(newTag, newTag);
+            }
+            // update the notes set for each of the tags:
             if (tagToNotesMap.containsKey(newTag)) { // if that tag exists
                 tagToNotesMap.get(newTag).add(note);
             } else { // new tag:
