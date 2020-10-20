@@ -35,9 +35,9 @@ public class SuggestionType {
         case BY_AVAILABLE:
             return new SuggestAvailabilityPredicate();
         case BY_CONTRACT:
-            break;
+            return client -> true;
         case BY_FREQUENCY:
-            break;
+            return client -> true;
         default:
         }
 

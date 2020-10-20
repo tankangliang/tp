@@ -35,7 +35,6 @@ public class SuggestCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        // TODO: Handle meaningful execution here
         requireNonNull(model);
         model.updateFilteredClientList(
             client -> suggestionTypePredicateList.stream().allMatch(pred -> pred.test(client)));

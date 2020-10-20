@@ -12,7 +12,7 @@ public class SuggestAvailabilityPredicate implements Predicate<Client> {
     @Override
     public boolean test(Client client) {
         int currHour = client.getTimezone().getCurrHourInTimezone();
-        return (currHour >= AVAILABLE_STARTING_HOUR && currHour <= AVAILABLE_ENDING_HOUR);
+        return (currHour >= AVAILABLE_STARTING_HOUR && currHour < AVAILABLE_ENDING_HOUR);
     }
 
 }

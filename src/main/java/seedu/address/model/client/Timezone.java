@@ -3,6 +3,8 @@ package seedu.address.model.client;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,7 +28,6 @@ public class Timezone {
     private static final int LARGEST_POSITIVE_OFFSET = 14;
 
     public final String value;
-    public final int timezoneOffset;
 
     /**
      * Constructs a {@code Timezone}.
@@ -37,22 +38,6 @@ public class Timezone {
         requireNonNull(timezone);
         checkArgument(isValidTimezone(timezone), MESSAGE_CONSTRAINTS);
         value = timezone;
-        timezoneOffset = extractTimezoneOffset(timezone);
-    }
-
-    private static int extractTimezoneOffset(String test) {
-        final Matcher matcher = TIMEZONE_FORMAT.matcher(test);
-        matcher.find();
-
-        final String numberString = matcher.group("number");
-        return Integer.parseInt(numberString);
-    }
-
-    private static String extractSign(String test) {
-        final Matcher matcher = TIMEZONE_FORMAT.matcher(test);
-        matcher.find();
-
-        return matcher.group("sign");
     }
 
     /**
@@ -79,26 +64,14 @@ public class Timezone {
 
     /**
      * Gets the current hour in this timezone.
-     * Code adapted from https://www.w3resource.com/java-exercises/datatypes/java-datatype-exercise-5.php
      *
      * @return The current hour in this timezone.
      */
     public int getCurrHourInTimezone() {
-        long totalMilliseconds = System.currentTimeMillis();
+        TimeZone tz = TimeZone.getTimeZone(value);
+        Calendar calendar = Calendar.getInstance(tz);
 
-        long totalSeconds = totalMilliseconds / 1000;
-
-        long currentSecond = totalSeconds % 60;
-
-        long totalMinutes = totalSeconds / 60;
-
-        long currentMinute = totalMinutes % 60;
-
-        long totalHours = totalMinutes / 60;
-
-        long currentHour = ((totalHours + timezoneOffset) % 24);
-
-        return (int) currentHour;
+        return calendar.get(Calendar.HOUR_OF_DAY);
     }
 
 
