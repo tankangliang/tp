@@ -23,6 +23,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.Date;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -106,10 +107,12 @@ public class ClientEditCommand extends Command {
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Country updatedCountry = editClientDescriptor.getCountry().orElse(clientToEdit.getCountry());
         Timezone updatedTimezone = editClientDescriptor.getTimezone().orElse(clientToEdit.getTimezone());
+        Date updatedContractExpiryDate =
+                editClientDescriptor.getContractExpiryDate().orElse(clientToEdit.getContractExpiryDate());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedTimezone,
-                updatedTags);
+                updatedContractExpiryDate, updatedTags);
     }
 
     @Override
@@ -141,6 +144,7 @@ public class ClientEditCommand extends Command {
         private Address address;
         private Country country;
         private Timezone timezone;
+        private Date contractExpiryDate;
         private Set<Tag> tags;
 
         public EditClientDescriptor() {}
@@ -156,6 +160,7 @@ public class ClientEditCommand extends Command {
             setAddress(toCopy.address);
             setCountry(toCopy.country);
             setTimezone(toCopy.timezone);
+            setContractExpiryDate(toCopy.contractExpiryDate);
             setTags(toCopy.tags);
         }
 
@@ -163,7 +168,8 @@ public class ClientEditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, country, timezone, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, country, timezone,
+                    contractExpiryDate, tags);
         }
 
         public void setName(Name name) {
@@ -214,6 +220,14 @@ public class ClientEditCommand extends Command {
             return Optional.ofNullable(timezone);
         }
 
+        public void setContractExpiryDate(Date contractExpiryDate) {
+            this.contractExpiryDate = contractExpiryDate;
+        }
+
+        public Optional<Date> getContractExpiryDate() {
+            return Optional.ofNullable(contractExpiryDate);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -252,6 +266,7 @@ public class ClientEditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getCountry().equals(e.getCountry())
                     && getTimezone().equals(e.getTimezone())
+                    && getContractExpiryDate().equals(e.getContractExpiryDate())
                     && getTags().equals(e.getTags());
         }
     }

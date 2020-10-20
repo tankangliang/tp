@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Date;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -112,7 +114,6 @@ public class ParserUtil {
         return new Tag(trimmedTag);
     }
 
-
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
@@ -200,5 +201,23 @@ public class ParserUtil {
             suggestionSet.add(parseSuggestionType(suggestionType));
         }
         return suggestionSet;
+    }
+
+    /**
+     * Parses a {@code String dateString} into a {@code Date}.
+     */
+    public static Date parseContractExpiryDate(String dateString) throws ParseException {
+        requireNonNull(dateString);
+        String trimmedDateString = dateString.trim();
+        if (!Date.isValidDate(trimmedDateString)) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        LocalDate date;
+        try {
+            date = LocalDate.parse(trimmedDateString, Date.DATE_FORMATTER);
+        } catch (Exception e) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+        return new Date(date);
     }
 }
