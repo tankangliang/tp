@@ -92,8 +92,8 @@ public class WidgetModelManager implements WidgetModel {
     private WidgetObject handle(Object content) {
         // TODO: v1.3 || v1.4 deprecate this method.
         // Logs the unknown object being passed to this method
-        logger.info("=============================[ Client object was not passed as content ]=========================="
-                + "=");
+        logger.info("=============================[ Client object was not passed as content ]"
+                + "=============================");
         logger.info("Setting content of widget to: " + content.getClass());
         WidgetObject wo = new WidgetObject();
         java.lang.reflect.Field[] fields = content.getClass().getDeclaredFields();
