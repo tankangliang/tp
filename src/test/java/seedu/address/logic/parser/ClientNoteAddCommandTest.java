@@ -5,12 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
 
 
@@ -22,10 +26,15 @@ public class ClientNoteAddCommandTest {
     private static final String NO_INDEX_NO_NOTE = "just an empty string here";
     private static final String HAS_INDEX_NO_NOTE = INDEX_STRING + " nope no note here";
     private static final String HAS_INDEX_HAS_NOTE = INDEX_STRING + SPACE + PREFIX_NOTE + NOTE_STRING;
-    private static final Tag UNTAGGED_TAG = new Tag("untagged");
 
-    private final ClientNoteAddCommandParser parser = new ClientNoteAddCommandParser();
+    private final TagNoteMap tagNoteMap = new TagNoteMap();
+    private final ClientNoteAddCommandParser parser = new ClientNoteAddCommandParser(tagNoteMap);
+    private final Set<Tag> untaggedTags;
 
+    {
+        untaggedTags = new HashSet<>();
+        untaggedTags.add(Tag.UNTAGGED);
+    }
 
     @Test
     public void parse_noIndexNoNote_throwsParseException() {
@@ -42,7 +51,7 @@ public class ClientNoteAddCommandTest {
     public void parse_hasIndexHasNote_equalsExpected() {
         try {
             Note expectedClientNote = new Note(NOTE_STRING);
-            expectedClientNote.addTag(UNTAGGED_TAG);
+            expectedClientNote.setTags(untaggedTags);
             ClientNoteAddCommand expected = new ClientNoteAddCommand(Index.fromOneBased(1), expectedClientNote);
             ClientNoteAddCommand actual = parser.parse(HAS_INDEX_HAS_NOTE);
             assertEquals(expected, actual);

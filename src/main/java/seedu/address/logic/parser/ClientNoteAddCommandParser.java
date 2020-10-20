@@ -5,18 +5,26 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new ClientNoteAddCommand object.
  */
 public class ClientNoteAddCommandParser implements Parser<ClientNoteAddCommand> {
+
+    private final TagNoteMap tagNoteMap;
+
+    public ClientNoteAddCommandParser(TagNoteMap tagNoteMap) {
+        this.tagNoteMap = tagNoteMap;
+    }
 
     /**
      * @param userInput The user input String.
@@ -39,17 +47,14 @@ public class ClientNoteAddCommandParser implements Parser<ClientNoteAddCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ClientNoteAddCommand.MESSAGE_USAGE), pe);
         }
-        Tag tag;
-        try {
-            tag = ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG)
-                    .orElseThrow(() -> new ParseException("missing tag")));
-        } catch (ParseException pe) {
-            tag = Tag.UNTAGGED; // tagging a note should be optional
-        }
+
+        Set<Tag> tags = tagNoteMap.getUniqueTags(argMultimap.getAllValues(PREFIX_TAG));
+
         Note clientNote = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE)
                 .orElseThrow(() -> new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ClientNoteAddCommand.MESSAGE_USAGE))));
-        clientNote.addTag(tag);
+        clientNote.setTags(tags);
+        tagNoteMap.updateTagsForNote(tags, clientNote);
         return new ClientNoteAddCommand(index, clientNote);
     }
 

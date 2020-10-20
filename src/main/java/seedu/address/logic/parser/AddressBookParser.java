@@ -22,6 +22,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SuggestCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.note.TagNoteMap;
 
 /**
  * Parses user input.
@@ -39,6 +40,12 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandType>\\S+)(?<restOfCommand>.*)");
     private static final Pattern SECONDARY_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    private final TagNoteMap tagNoteMap;
+
+    public AddressBookParser(TagNoteMap tagNoteMap) {
+        this.tagNoteMap = tagNoteMap;
+    }
 
     /**
      * Parses user input into command for execution.
@@ -145,7 +152,8 @@ public class AddressBookParser {
 
         switch (commandWord) {
         case ClientNoteAddCommand.COMMAND_WORD:
-            return new ClientNoteAddCommandParser().parse(arguments);
+            return new ClientNoteAddCommandParser(tagNoteMap).parse(arguments);
+
         case ClientAddCommand.COMMAND_WORD:
             return new ClientAddCommandParser().parse(arguments);
 

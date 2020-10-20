@@ -9,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.widget.WidgetObject;
 
@@ -99,12 +100,24 @@ public interface Model {
      */
     void setClient(Client target, Client editedClient);
 
+    /**
+     * Returns true if {@code country} contains the {@code countryNote} specified.
+     */
     boolean hasCountryNote(Country country, Note countryNote);
 
-    boolean hasClientNote(Client client, Note clientNote);
-
+    /**
+     * Adds the given country note to the given country.
+     */
     void addCountryNote(Country country, Note countryNote);
 
+    /**
+     * Returns true if {@code client} contains the {@code clientNote} specified.
+     */
+    boolean hasClientNote(Client client, Note clientNote);
+
+    /**
+     * Adds the given client note to the given client.
+     */
     void addClientNote(Client client, Note clientNote);
 
     /**
@@ -118,6 +131,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredClientList(Predicate<Client> predicate);
+
+    /**
+     * Returns the tag note map.
+     */
+    TagNoteMap getTagNoteMap();
 
     /**
      * Updates its {@code TagNoteMap} to map a note with a new set of tags.

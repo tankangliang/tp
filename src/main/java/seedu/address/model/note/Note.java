@@ -1,6 +1,7 @@
 package seedu.address.model.note;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -28,13 +29,18 @@ public class Note {
     }
 
     /**
-     * Adds a tag for this note into its list of tags.
+     * Sets the tags of this note to the {@code tags} passed in.
      *
-     * @param tag The tag to be added.
+     * @param tags The tag to be added.
      */
-    public void addTag(Tag tag) {
-        requireNonNull(tag);
-        this.tags.add(tag);
+    public void setTags(Set<Tag> tags) {
+        requireAllNonNull(tags);
+        this.tags.clear();
+        this.tags.addAll(tags);
+    }
+
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     @Override
@@ -64,9 +70,5 @@ public class Note {
     @Override
     public int hashCode() {
         return Objects.hash(noteContents, tags);
-    }
-
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
     }
 }

@@ -19,14 +19,20 @@ import seedu.address.testutil.ClientBuilder;
 
 class TagNoteMapTest {
 
-    private final Tag tag = new Tag("tagName");
     private Client client = new ClientBuilder(ALICE).build();
     private final Note taggedNote = new Note("jurong hill was a nice place");
     private final TagNoteMap tagNoteMap = new TagNoteMap();
+    private final Tag testTag = new Tag("tagName");
+    private final Set<Tag> tags;
+
+    public TagNoteMapTest() {
+        tags = new HashSet<>();
+        tags.add(testTag);
+    }
 
     @Test
     void initTagNoteMapFromClients_addClientWithTaggedNotes_doesNotThrowException() {
-        taggedNote.addTag(tag);
+        taggedNote.setTags(tags);
         this.client.addClientNote(taggedNote);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
@@ -38,28 +44,28 @@ class TagNoteMapTest {
         Set<Note> inputSet = new HashSet<>();
         Tag tag = new Tag("tagName");
         Note countryNote1 = new Note("this country note will be tagged");
-        countryNote1.addTag(tag);
+        countryNote1.setTags(tags);
         inputSet.add(countryNote1);
         assertDoesNotThrow(() -> this.tagNoteMap.initTagNoteMapFromCountryNotes(inputSet));
     }
 
     @Test
     void getNotesForTag_usesInitialisedMap_returnsTrue() {
-        taggedNote.addTag(tag);
+        taggedNote.setTags(tags);
         this.client.addClientNote(taggedNote);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
         tagNoteMap.initTagNoteMapFromClients(clients);
         Set<Note> expectedNotes = new HashSet<>();
         expectedNotes.add(taggedNote);
-        assertEquals(tagNoteMap.getNotesForTag(tag), expectedNotes);
+        assertEquals(tagNoteMap.getNotesForTag(testTag), expectedNotes);
     }
 
     @Test
     void getTagsForNote_useNoteWithTwoTags_returnsTrue() {
         Tag tag2 = new Tag("tag2");
-        taggedNote.addTag(tag);
-        taggedNote.addTag(tag2);
+        tags.add(tag2);
+        taggedNote.setTags(tags);
         this.client = new ClientBuilder(ALICE).build();
         this.client.addClientNote(taggedNote);
         List<Client> clients = new ArrayList<>();
@@ -67,7 +73,7 @@ class TagNoteMapTest {
         tagNoteMap.initTagNoteMapFromClients(clients);
         Set<Tag> expectedTags = new HashSet<>();
         expectedTags.add(tag2);
-        expectedTags.add(tag);
+        expectedTags.add(testTag);
         Set<Tag> actualTags = tagNoteMap.getTagsForNote(taggedNote);
         assertTrue(expectedTags.equals(actualTags));
     }

@@ -12,6 +12,8 @@ import static seedu.address.testutil.TypicalClients.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -166,9 +168,10 @@ public class ModelManagerTest {
 
     @Test
     public void initializeTagNoteMap_validInputs_successful() {
-        Tag tag = new Tag("tagName");
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("tagName"));
         Note taggedNote = new Note("jurong hill was a nice place");
-        taggedNote.addTag(tag);
+        taggedNote.setTags(tags);
         Client aliceTagged = ALICE;
         aliceTagged.addClientNote(taggedNote);
         this.modelManager.addClient(aliceTagged);

@@ -27,6 +27,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.widget.WidgetObject;
 import seedu.address.testutil.ClientBuilder;
@@ -217,6 +218,11 @@ public class ClientAddCommandTest {
 
         @Override
         public void updateFilteredClientList(Predicate<Client> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public TagNoteMap getTagNoteMap() {
             throw new AssertionError("This method should not be called.");
         }
     }
