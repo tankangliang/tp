@@ -21,7 +21,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.country.Country;
-import seedu.address.model.country.NoteStub;
+import seedu.address.model.country.CountryNoteStub;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
@@ -100,11 +100,11 @@ public class ModelManagerTest {
     @Test
     public void addAndHasCountryNote_validCountry_updatesCorrectly() {
         Country country = new Country("SG");
-        NoteStub genericNote = new NoteStub("generic note");
-        assertFalse(modelManager.hasCountryNote(country, genericNote));
+        CountryNoteStub genericNote = new CountryNoteStub("generic note", country);
+        assertFalse(modelManager.hasCountryNote(genericNote));
 
-        modelManager.addCountryNote(country, genericNote);
-        assertTrue(modelManager.hasCountryNote(country, genericNote));
+        modelManager.addCountryNote(genericNote);
+        assertTrue(modelManager.hasCountryNote(genericNote));
     }
 
     @Test

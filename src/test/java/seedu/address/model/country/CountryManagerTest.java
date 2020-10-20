@@ -33,9 +33,9 @@ public class CountryManagerTest {
         CountryManager countryManager = new CountryManager();
         for (String countryCode : COUNTRY_CODES) {
             Country country = new Country(countryCode);
-            NoteStub genericNote = new NoteStub("generic note");
-            countryManager.addCountryNote(country, genericNote);
-            assertTrue(countryManager.hasCountryNote(country, genericNote));
+            CountryNoteStub genericNote = new CountryNoteStub("generic note", country);
+            countryManager.addCountryNote(genericNote);
+            assertTrue(countryManager.hasCountryNote(genericNote));
         }
     }
 
@@ -43,8 +43,8 @@ public class CountryManagerTest {
     public void hasCountryNote_notDuplicateNote_returnFalse() {
         CountryManager countryManager = new CountryManager();
         for (String countryCode : COUNTRY_CODES) {
-            NoteStub genericNote = new NoteStub("generic note");
-            assertFalse(countryManager.hasCountryNote(new Country(countryCode), genericNote));
+            CountryNoteStub genericNote = new CountryNoteStub("generic note", new Country(countryCode));
+            assertFalse(countryManager.hasCountryNote(genericNote));
         }
     }
 
@@ -53,10 +53,10 @@ public class CountryManagerTest {
         CountryManager countryManager = new CountryManager();
         for (String countryCode : COUNTRY_CODES) {
             Country country = new Country(countryCode);
-            NoteStub genericNote = new NoteStub("generic note");
-            assertFalse(countryManager.hasCountryNote(country, genericNote));
-            countryManager.addCountryNote(new Country(countryCode), genericNote);
-            assertTrue(countryManager.hasCountryNote(country, genericNote));
+            CountryNoteStub genericNote = new CountryNoteStub("generic note", country);
+            assertFalse(countryManager.hasCountryNote(genericNote));
+            countryManager.addCountryNote(genericNote);
+            assertTrue(countryManager.hasCountryNote(genericNote));
         }
     }
 
