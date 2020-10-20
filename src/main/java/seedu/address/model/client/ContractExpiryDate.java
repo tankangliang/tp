@@ -1,5 +1,7 @@
 package seedu.address.model.client;
 
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
@@ -30,6 +32,7 @@ public class ContractExpiryDate implements Comparable<ContractExpiryDate> {
      * Constructs a date object.
      */
     public ContractExpiryDate(LocalDate date) {
+        requireNonNull(date);
         this.date = date;
         this.value = date.format(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT));
     }
