@@ -196,7 +196,6 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            //TODO: commandresult check for view command
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
