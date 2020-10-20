@@ -39,10 +39,20 @@ public class Note {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Gets the content of the note.
+     *
+     * @return The content of the note.
+     */
     public String getNoteContents() {
         return noteContents;
     }
 
+    /**
+     * Returns whether this note is a client note.
+     *
+     * @return True if this note is a client note, false otherwise.
+     */
     public boolean isClientNote() {
         return true;
     }

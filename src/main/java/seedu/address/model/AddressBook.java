@@ -68,6 +68,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
+    /**
+     * Replaces all notes in addressbook with the given list of notes.
+     *
+     * @param notes The given list of notes.
+     */
     public void setNotes(List<? extends Note> notes) {
         for (Note note: notes) {
             if (note.isClientNote()) {

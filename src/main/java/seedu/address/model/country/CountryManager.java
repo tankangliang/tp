@@ -11,7 +11,7 @@ import java.util.Set;
 import seedu.address.model.note.CountryNote;
 
 /**
- * A high-level class responsible for mapping ISO3166 2-letter country codes to countries.
+ * A high-level class responsible for mapping ISO3166 countries to countryNotes.
  */
 public class CountryManager {
 
@@ -56,17 +56,17 @@ public class CountryManager {
     }
 
     /**
-     * Checks if {@code country} contains {@code countryNote}.
+     * Checks if {@code countryNote} already exists.
      *
      * @param countryNote The note to be checked.
-     * @return Whether {@code country} contains {@code countryNote}.
+     * @return Whether {@code countryNote} already exists.
      */
     public boolean hasCountryNote(CountryNote countryNote) {
         return countryNoteSet.contains(countryNote);
     }
 
     /**
-     * Adds the {@code countryNote} to the {@code country}.
+     * Adds the {@code countryNote}.
      *
      * @param countryNote The country note to be added.
      */
@@ -89,10 +89,10 @@ public class CountryManager {
     }
 
     /**
-     * Returns all Country Notes currently in the map.
-     * Returning a collection of sets prevents deep-copying.
+     * Returns all Country Notes.
+     * Returning a list of all country notes prevents deep-copying.
      *
-     * @return Collection of sets of country notes in the map.
+     * @return List of all country notes.
      */
     public List<CountryNote> getAllCountryNotesAsList() {
         return new ArrayList<>(countryNoteSet);
