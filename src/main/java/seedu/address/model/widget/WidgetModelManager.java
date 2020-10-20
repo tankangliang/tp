@@ -106,9 +106,11 @@ public class WidgetModelManager implements WidgetModel {
                 StringBuilder sb = new StringBuilder().append(fieldName).append(": ").append(fieldValue);
                 wo.set(sb.toString());
             } catch (IllegalAccessException ex) {
-                // This path will never be reached
-                logger.info("----- [ Fatal Error: Accessing private fields of unknown object ] -----");
-                System.out.println(Arrays.toString(ex.getStackTrace()));
+                logger.severe("----- [ Fatal Error: Accessing private fields of unknown object ] -----");
+                logger.severe(Arrays.toString(ex.getStackTrace()));
+            } catch (Exception e) {
+                logger.severe("----- [ Fatal Error ] -----");
+                logger.severe(Arrays.toString(e.getStackTrace()));
             }
         });
         return wo;
