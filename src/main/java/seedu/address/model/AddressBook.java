@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.List;
@@ -9,7 +10,9 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
-import seedu.address.model.note.TagNoteMap;
+import seedu.address.model.country.Country;
+import seedu.address.model.country.CountryManager;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagSet;
 
@@ -21,8 +24,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueClientList clients;
     private final UniqueTagSet tags;
-    private final TagNoteMap tagNoteMap;
-
+    private final CountryManager countryMananger;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -33,7 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         clients = new UniqueClientList();
         tags = new UniqueTagSet();
-        tagNoteMap = new TagNoteMap();
+        countryMananger = new CountryManager();
     }
 
     public AddressBook() {}
@@ -55,8 +57,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setClients(List<Client> clients) {
         this.clients.setClients(clients);
-        this.tagNoteMap.initMapUsingClients(clients);
-
         Set<Tag> allClientTags = new HashSet<>();
         for (Client client : clients) {
             allClientTags.addAll(client.getTags());
@@ -116,11 +116,34 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
      */
     public void removeClient(Client key) {
         clients.remove(key);
+    }
+
+    /**
+     * Checks whether the given country has the given countryNote.
+     *
+     * @param country     The given country.
+     * @param countryNote The given countryNote
+     * @return True if the given country has the given countryNote.
+     */
+    public boolean hasCountryNote(Country country, Note countryNote) {
+        requireAllNonNull(country, countryNote);
+
+        return countryMananger.hasCountryNote(country, countryNote);
+    }
+
+    /**
+     * Adds the given countryNote to the given country.
+     *
+     * @param country     The given country.
+     * @param countryNote The given countryNote
+     */
+    public void addCountryNote(Country country, Note countryNote) {
+        requireAllNonNull(country, countryNote);
+        countryMananger.addCountryNote(country, countryNote);
     }
 
     //// util methods
@@ -134,6 +157,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Client> getClientList() {
         return clients.asUnmodifiableObservableList();
+    }
+
+    //TODO: For storing JSON notes
+    @Override
+    public ObservableList<Note> getNoteList() {
+        return null;
     }
 
     @Override

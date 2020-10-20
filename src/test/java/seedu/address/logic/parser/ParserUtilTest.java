@@ -18,7 +18,10 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
+import seedu.address.model.client.SuggestionType;
+import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -28,6 +31,9 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_COUNTRY_CODE = "ZZ";
+    private static final String INVALID_TIMEZONE = "GT+8";
+    private static final String INVALID_NOTE_STRING = " ";
+    private static final String INVALID_SUGGESTION_TYPE = "name";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -36,6 +42,11 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_COUNTRY_CODE = "SG";
+    private static final String VALID_TIMEZONE = "GMT+8";
+    private static final String VALID_NOTE_STRING = "likes cats";
+    private static final String VALID_SUGGESTION_TYPE_1 = "available";
+    private static final String VALID_SUGGESTION_TYPE_2 = "frequency";
+    private static final String VALID_SUGGESTION_TYPE_3 = "contract";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -218,5 +229,101 @@ public class ParserUtilTest {
         String countryWithWhitespace = WHITESPACE + VALID_COUNTRY_CODE + WHITESPACE;
         Country expectedCountry = new Country(VALID_COUNTRY_CODE);
         assertEquals(expectedCountry, ParserUtil.parseCountry(countryWithWhitespace));
+    }
+
+    @Test
+    public void parseTimezone_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTimezone((String) null));
+    }
+
+    @Test
+    public void parseTimezone_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTimezone(INVALID_TIMEZONE));
+    }
+
+    @Test
+    public void parseTimezone_validValueWithoutWhitespace_returnsTimezone() throws Exception {
+        Timezone expectedTimezone = new Timezone(VALID_TIMEZONE);
+        assertEquals(expectedTimezone, ParserUtil.parseTimezone(VALID_TIMEZONE));
+    }
+
+    @Test
+    public void parseTimezone_validValueWithWhitespace_returnsTrimmedTimezone() throws Exception {
+        String timezoneWithWhitespace = WHITESPACE + VALID_TIMEZONE + WHITESPACE;
+        Timezone expectedTimezone = new Timezone(VALID_TIMEZONE);
+        assertEquals(expectedTimezone, ParserUtil.parseTimezone(timezoneWithWhitespace));
+    }
+
+    @Test
+    public void parseNote_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseNote((String) null));
+    }
+
+    @Test
+    public void parseNote_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseNote(INVALID_NOTE_STRING));
+    }
+
+    @Test
+    public void parseNote_validValueWithoutWhitespace_returnsNote() throws Exception {
+        Note expectedNote = new Note(VALID_NOTE_STRING);
+        assertEquals(expectedNote, ParserUtil.parseNote(VALID_NOTE_STRING));
+    }
+
+    @Test
+    public void parseNote_validValueWithWhitespace_returnsTrimmedNote() throws Exception {
+        String noteWithWhitespace = WHITESPACE + VALID_NOTE_STRING + WHITESPACE;
+        Note expectedNote = new Note(VALID_NOTE_STRING);
+        assertEquals(expectedNote, ParserUtil.parseNote(noteWithWhitespace));
+    }
+
+    @Test
+    public void parseSuggestionType_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSuggestionType((String) null));
+    }
+
+    @Test
+    public void parseSuggestionType_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSuggestionType(INVALID_SUGGESTION_TYPE));
+    }
+
+    @Test
+    public void parseSuggestionType_validValueWithoutWhitespace_returnsSuggestionType() throws Exception {
+        SuggestionType expectedSuggestionType = new SuggestionType(VALID_SUGGESTION_TYPE_1);
+        assertEquals(expectedSuggestionType, ParserUtil.parseSuggestionType(VALID_SUGGESTION_TYPE_1));
+    }
+
+    @Test
+    public void parseSuggestionType_validValueWithWhitespace_returnsTrimmedSuggestionType() throws Exception {
+        String suggestionTypeWithWhitespace = WHITESPACE + VALID_SUGGESTION_TYPE_1 + WHITESPACE;
+        SuggestionType expectedSuggestionType = new SuggestionType(VALID_SUGGESTION_TYPE_1);
+        assertEquals(expectedSuggestionType, ParserUtil.parseSuggestionType(suggestionTypeWithWhitespace));
+    }
+
+    @Test
+    public void parseSuggestionTypes_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSuggestionTypes(null));
+    }
+
+    @Test
+    public void parseSuggestionTypes_collectionWithInvalidSuggestionTypes_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSuggestionTypes(Arrays.asList(VALID_SUGGESTION_TYPE_1,
+                INVALID_SUGGESTION_TYPE)));
+    }
+
+    @Test
+    public void parseSuggestionTypes_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseSuggestionTypes(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseSuggestionTypes_collectionWithValidSuggestionTypes_returnsSuggestionTypeSet() throws Exception {
+        Set<SuggestionType> actualSuggestionTypeSet = ParserUtil.parseSuggestionTypes(Arrays.asList(
+                VALID_SUGGESTION_TYPE_1, VALID_SUGGESTION_TYPE_2, VALID_SUGGESTION_TYPE_3));
+        Set<SuggestionType> expectedSuggestionTypeSet = new HashSet<>(Arrays.asList(
+                new SuggestionType(VALID_SUGGESTION_TYPE_1), new SuggestionType(VALID_SUGGESTION_TYPE_2),
+                new SuggestionType((VALID_SUGGESTION_TYPE_3))));
+
+        assertEquals(expectedSuggestionTypeSet, actualSuggestionTypeSet);
     }
 }

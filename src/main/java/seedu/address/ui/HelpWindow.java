@@ -28,11 +28,11 @@ public class HelpWindow extends UiPart<Stage> {
             + "client find KEYWORD [MORE_KEYWORDS]\n"
             + "client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY] [tz/TIMEZONE]\n"
             + "client delete INDEX\n"
-            + "client note add CLIENT_INDEX t/TAG NOTE_STRING\n"
+            + "client note add CLIENT_INDEX t/TAG nt/NOTE_STRING\n"
             + "client note delete CLIENT_INDEX NOTE_INDEX\n"
             + "client note update CLIENT_INDEX NOTE_INDEX NOTE_STRING t/TAG\n"
-            + "country filter [c/COUNTRY]\n"
-            + "country note c/COUNTRY NOTE_STRING";
+            + "country filter c/COUNTRY_CODE\n"
+            + "country note c/COUNTRY_CODE nt/NOTE_STRING";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";

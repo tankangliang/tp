@@ -1,5 +1,6 @@
 package seedu.address.model.note;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,112 +9,142 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
-import seedu.address.model.country.Country;
 import seedu.address.model.tag.Tag;
 
 
 /**
  * Manages the relationship between Tags and Notes.
  */
-
 public class TagNoteMap {
-    //    TODO: Add implementation
-    public static final Set<Tag> TAG_LIST = new HashSet<>(); // probably redundant todo: remove later
-    public static final Set<Note> NOTE_LIST = new HashSet<>();
-    public static final Map<Tag, Set<Note>> TAG_TO_NOTES_MAP = new HashMap<>();
-    public static final Map<Note, Set<Tag>> NOTE_TO_TAGS_MAP = new HashMap<>();
 
+    public final Set<Note> noteSet = new HashSet<>(); // TODO: not really needed
     /**
-     * Initialises the TagNoteMap with a list of clients.
-     *
-     * @param clients The list of clients containing ClientNotes and associated tags.
+     * A map that contains the mapping from any tag to a unique tag.
+     * A map is used instead of a set because the set does not offer the option of getting objects inside it.
      */
-    public void initMapUsingClients(List<Client> clients) { // todo: make init work when passed in a list of countries
-        for (Client client : clients) {
-            Set<Note> clientNotes = client.getClientNotes();
-            NOTE_LIST.addAll(clientNotes);
-            for (Note clientNote : clientNotes) {
-                Set<Tag> tags = clientNote.getTags();
-                TAG_LIST.addAll(tags);
-                updateTagsForNote(tags, clientNote);
+    public final Map<Tag, Tag> uniqueTagMap = new HashMap<>();
+    public final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
+    public final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
+
+    private void initTagNoteMapFromNotes(Set<Note> notes) {
+        noteSet.addAll(notes);
+        for (Note clientNote : notes) {
+            Set<Tag> tags = clientNote.getTags();
+            for (Tag tag : tags) {
+                uniqueTagMap.put(tag, tag);
             }
+            updateTagsForNote(tags, clientNote);
         }
-        // todo: how to remove old entries to the map?
     }
 
     /**
-     * Initialises the TagNoteMap with a list of countries.
+     * Initialises the TagNoteMap from a list of clients.
      *
-     * @param countries The list of clients containing ClientNotes and associated tags.
+     * @param clients The list of clients, each containing their notes and associated tags.
      */
-    public void initMapUsingCountries(List<Country> countries) {
-        // todo: make init work when passed in a list of countries
-        for (Country myCountry : countries) {
-            Set<Note> countryNotes = myCountry.getCountryNotes();
-            NOTE_LIST.addAll(countryNotes);
-            for (Note countryNote : countryNotes) {
-                Set<Tag> tags = countryNote.getTags();
-                TAG_LIST.addAll(tags);
-                updateTagsForNote(tags, countryNote);
+    public void initTagNoteMapFromClients(List<Client> clients) {
+        requireAllNonNull(clients);
+        for (Client client : clients) {
+            Set<Note> clientNotes = client.getClientNotes();
+            initTagNoteMapFromNotes(clientNotes);
+        }
+    }
+
+    /**
+     * Initialises the TagNoteMap from a list of countries.
+     *
+     * @param countryNotes The set of countries, each containing their notes and associated tags.
+     */
+    public void initTagNoteMapFromCountryNotes(Set<Note> countryNotes) {
+        // todo: make init work when passed in a list of countryNotes
+        requireAllNonNull(countryNotes);
+        initTagNoteMapFromNotes(countryNotes);
+    }
+
+    /**
+     * Get a set of unique tag objects, based on the tagStrings.
+     * If any tag is not inside the tag set, we add it to the tag set.
+     */
+    public Set<Tag> getUniqueTags(List<String> tagStrings) throws ParseException {
+        Set<Tag> uniqueTags = new HashSet<>();
+        if (tagStrings.isEmpty()) {
+            uniqueTags.add(Tag.UNTAGGED);
+            return uniqueTags;
+        }
+        for (String tagString : tagStrings) {
+            Tag tag = ParserUtil.parseTag(tagString);
+            if (uniqueTagMap.containsKey(tag)) {
+                uniqueTags.add(uniqueTagMap.get(tag));
+            } else {
+                uniqueTagMap.put(tag, tag);
+                uniqueTags.add(tag);
             }
         }
-        // todo: how to remove old entries to the map? <== need to do this to "sync"
-        //       with the current model right?
+        return Collections.unmodifiableSet(uniqueTags);
     }
 
     public Set<Tag> getTagsForNote(Note note) {
-        return Collections.unmodifiableSet(NOTE_TO_TAGS_MAP.getOrDefault(note, new HashSet<>()));
+        return Collections.unmodifiableSet(noteToTagsMap.getOrDefault(note, new HashSet<>()));
     }
 
     public Set<Note> getNotesForTag(Tag tag) {
-        return Collections.unmodifiableSet(TAG_TO_NOTES_MAP.getOrDefault(tag, new HashSet<>()));
+        return Collections.unmodifiableSet(tagToNotesMap.getOrDefault(tag, new HashSet<>()));
     }
+
+    // TODO: DELETE NOTE METHOD
 
     /**
      * Links a new set of tags to a note.
+     * Method is public for ModelManager to use.
+     * //todo doublecheck if this is unsafe.
      *
      * @param newTags The tags to associate with a particular note.
      * @param note    The note to associate the tag with.
      */
     public void updateTagsForNote(Set<Tag> newTags, Note note) {
-        TAG_LIST.addAll(newTags);
-
-        // update the notes set for each of the tags:
+        // TODO: note is inside note to tags map
+        //  between old tags and new tags
+        //  oldtags.removeAll(new tags)
+        //  for each oldtags: remove this note from the tag to notes map. So if the hashset is empty
+        requireAllNonNull(newTags, note);
         for (Tag newTag : newTags) {
-            if (TAG_TO_NOTES_MAP.containsKey(newTag)) { // if that tag exists
-                TAG_TO_NOTES_MAP.get(newTag).add(note);
+            // update our uniqueTagMap
+            if (!uniqueTagMap.containsKey(newTag)) {
+                uniqueTagMap.put(newTag, newTag);
+            }
+            // update the notes set for each of the tags:
+            if (tagToNotesMap.containsKey(newTag)) { // if that tag exists
+                tagToNotesMap.get(newTag).add(note);
             } else { // new tag:
                 Set<Note> notes = new HashSet<>();
                 notes.add(note);
-                TAG_TO_NOTES_MAP.put(newTag, notes);
+                tagToNotesMap.put(newTag, notes);
             }
         }
         // update the tags set for the note:
-        Set<Tag> currentTags = NOTE_TO_TAGS_MAP.getOrDefault(note, new HashSet<>());
-        currentTags.addAll(newTags); // todo: check that this should work, right
+        Set<Tag> currentTags = noteToTagsMap.getOrDefault(note, new HashSet<>());
+        currentTags.addAll(newTags);
+        noteToTagsMap.put(note, currentTags);
     }
 
-    /**
-     * Links a new set of notes to a tag.
-     *
-     * @param newNotes The notes to associate with a particular tag.
-     * @param tag      The tag to associate the notes with.
-     */
-    public void updateNotesForTag(Set<Note> newNotes, Tag tag) {
-        NOTE_LIST.addAll(newNotes);
-        // update the tags set for each of the notes:
-        for (Note newNote : newNotes) {
-            if (NOTE_TO_TAGS_MAP.containsKey(newNote)) {
-                NOTE_TO_TAGS_MAP.get(newNote).add(tag);
-            } else { // new note:
-                Set<Tag> tags = new HashSet<>();
-                tags.add(tag);
-                NOTE_TO_TAGS_MAP.put(newNote, tags);
-            }
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object:
+        if (obj == this) {
+            return true;
         }
-        //update the notes set for the tag:
-        Set<Note> currentNotes = TAG_TO_NOTES_MAP.getOrDefault(tag, new HashSet<>());
-        currentNotes.addAll(newNotes);
+        // instance of handles nulls
+        if (!(obj instanceof TagNoteMap)) {
+            return false;
+        }
+        // state check:
+        TagNoteMap other = (TagNoteMap) obj;
+        return this.uniqueTagMap.equals(other.uniqueTagMap)
+                && this.noteSet.equals(other.noteSet)
+                && this.tagToNotesMap.equals(other.tagToNotesMap)
+                && this.noteToTagsMap.equals(other.noteToTagsMap);
     }
 }

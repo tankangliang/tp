@@ -5,28 +5,36 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalClients.ALICE;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.TagNoteMap;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.widget.WidgetObject;
 import seedu.address.testutil.ClientBuilder;
 
 public class ClientAddCommandTest {
+
+    private static final Index HUGE_OUT_OF_INDEX_VALUE = Index.fromOneBased(10000000);
 
     @Test
     public void constructor_nullClient_throwsNullPointerException() {
@@ -52,6 +60,25 @@ public class ClientAddCommandTest {
 
         assertThrows(CommandException.class,
                 ClientAddCommand.MESSAGE_DUPLICATE_CLIENT, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_invalidClientIndex_throwsCommandException() {
+        Note clientNote = new Note("dummyNote");
+        ClientNoteAddCommand failingCommand = new ClientNoteAddCommand(HUGE_OUT_OF_INDEX_VALUE, clientNote);
+        assertThrows(CommandException.class, () -> failingCommand.execute(new ModelManager()));
+    }
+
+    @Test
+    public void execute_duplicateClientNote_throwsCommandException() throws CommandException {
+        Note clientNote = new Note("dummyNote");
+        ModelManager modelManager = new ModelManager();
+        Client client = new ClientBuilder(ALICE).build();
+        client.addClientNote(clientNote);
+        modelManager.addClient(client);
+        modelManager.addClientNote(client, clientNote);
+        ClientNoteAddCommand command = new ClientNoteAddCommand(Index.fromOneBased(1), clientNote);
+        assertThrows(CommandException.class, () -> command.execute(modelManager));
     }
 
     @Test
@@ -84,6 +111,11 @@ public class ClientAddCommandTest {
     private class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateTagNoteMapWithNote(Set<Tag> newTags, Note note) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -184,6 +216,11 @@ public class ClientAddCommandTest {
 
         @Override
         public void updateFilteredClientList(Predicate<Client> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public TagNoteMap getTagNoteMap() {
             throw new AssertionError("This method should not be called.");
         }
     }
