@@ -7,7 +7,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.Date;
+import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -35,7 +35,7 @@ public class ClientBuilder {
     private Address address;
     private Country country;
     private Timezone timezone;
-    private Date contractExpiryDate;
+    private ContractExpiryDate contractExpiryDate;
     private Set<Tag> tags;
 
     /**
@@ -127,7 +127,7 @@ public class ClientBuilder {
     }
 
     /**
-     * Sets the {@code Date} of the {@code Client} that we are building.
+     * Sets the {@code ContractExpiryDate} of the {@code Client} that we are building.
      */
     public ClientBuilder withContractExpiryDate(String contractExpiryDate) {
         try {

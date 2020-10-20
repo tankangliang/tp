@@ -46,7 +46,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.ClientAddCommand;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.Date;
+import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -204,7 +204,7 @@ public class ClientAddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + INVALID_CONTRACT_EXPIRY_DATE_DESC
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                Date.MESSAGE_CONSTRAINTS);
+                ContractExpiryDate.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB

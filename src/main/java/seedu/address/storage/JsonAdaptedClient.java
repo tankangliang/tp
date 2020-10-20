@@ -13,7 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.Date;
+import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -137,16 +137,17 @@ class JsonAdaptedClient {
 
         if (contractExpiryDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Date.class.getSimpleName()));
+                    ContractExpiryDate.class.getSimpleName()));
         }
-        if (!Date.isValidDate(contractExpiryDate)) {
-            throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
+        if (!ContractExpiryDate.isValidDate(contractExpiryDate)) {
+            throw new IllegalValueException(ContractExpiryDate.MESSAGE_CONSTRAINTS);
         }
-        final Date modelContractExpiryDate = ParserUtil.parseContractExpiryDate(contractExpiryDate);
+        final ContractExpiryDate modelContractExpiryContractExpiryDate =
+                ParserUtil.parseContractExpiryDate(contractExpiryDate);
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
         return new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTimezone,
-                modelContractExpiryDate, modelTags);
+                modelContractExpiryContractExpiryDate, modelTags);
     }
 
 }

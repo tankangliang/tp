@@ -23,7 +23,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.Date;
+import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -107,12 +107,12 @@ public class ClientEditCommand extends Command {
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Country updatedCountry = editClientDescriptor.getCountry().orElse(clientToEdit.getCountry());
         Timezone updatedTimezone = editClientDescriptor.getTimezone().orElse(clientToEdit.getTimezone());
-        Date updatedContractExpiryDate =
+        ContractExpiryDate updatedContractExpiryContractExpiryDate =
                 editClientDescriptor.getContractExpiryDate().orElse(clientToEdit.getContractExpiryDate());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedTimezone,
-                updatedContractExpiryDate, updatedTags);
+                updatedContractExpiryContractExpiryDate, updatedTags);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class ClientEditCommand extends Command {
         private Address address;
         private Country country;
         private Timezone timezone;
-        private Date contractExpiryDate;
+        private ContractExpiryDate contractExpiryDate;
         private Set<Tag> tags;
 
         public EditClientDescriptor() {}
@@ -220,11 +220,11 @@ public class ClientEditCommand extends Command {
             return Optional.ofNullable(timezone);
         }
 
-        public void setContractExpiryDate(Date contractExpiryDate) {
+        public void setContractExpiryDate(ContractExpiryDate contractExpiryDate) {
             this.contractExpiryDate = contractExpiryDate;
         }
 
-        public Optional<Date> getContractExpiryDate() {
+        public Optional<ContractExpiryDate> getContractExpiryDate() {
             return Optional.ofNullable(contractExpiryDate);
         }
 

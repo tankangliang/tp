@@ -28,7 +28,7 @@ public class Client {
     private final Address address;
     private final Country country;
     private final Timezone timezone;
-    private final Date contractExpiryDate;
+    private final ContractExpiryDate contractExpiryDate;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Note> clientNotes = new LinkedHashSet<>(); // todo: initialise this iff client has notes
 
@@ -36,7 +36,7 @@ public class Client {
      * Every field must be present and not null.
      */
     public Client(Name name, Phone phone, Email email, Address address, Country country, Timezone timezone,
-                  Date contractExpiryDate, Set<Tag> tags) {
+                  ContractExpiryDate contractExpiryDate, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -72,7 +72,7 @@ public class Client {
         return timezone;
     }
 
-    public Date getContractExpiryDate() {
+    public ContractExpiryDate getContractExpiryDate() {
         return contractExpiryDate;
     }
 
@@ -180,7 +180,7 @@ public class Client {
                 .append(getCountry())
                 .append(" Timezone: ")
                 .append(getTimezone())
-                .append(" Contract Expiry Date: ")
+                .append(" Contract Expiry ContractExpiryDate: ")
                 .append(getContractExpiryDate())
                 .append(" Tags: ");
         getTags().forEach(builder::append);

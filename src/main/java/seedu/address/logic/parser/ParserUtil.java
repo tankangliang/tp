@@ -11,7 +11,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
-import seedu.address.model.client.Date;
+import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -204,20 +204,20 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String dateString} into a {@code Date}.
+     * Parses a {@code String dateString} into a {@code ContractExpiryDate}.
      */
-    public static Date parseContractExpiryDate(String dateString) throws ParseException {
+    public static ContractExpiryDate parseContractExpiryDate(String dateString) throws ParseException {
         requireNonNull(dateString);
         String trimmedDateString = dateString.trim();
-        if (!Date.isValidDate(trimmedDateString)) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        if (!ContractExpiryDate.isValidDate(trimmedDateString)) {
+            throw new ParseException(ContractExpiryDate.MESSAGE_CONSTRAINTS);
         }
         LocalDate date;
         try {
-            date = LocalDate.parse(trimmedDateString, Date.DATE_FORMATTER);
+            date = LocalDate.parse(trimmedDateString, ContractExpiryDate.DATE_FORMATTER);
         } catch (Exception e) {
-            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            throw new ParseException(ContractExpiryDate.MESSAGE_CONSTRAINTS);
         }
-        return new Date(date);
+        return new ContractExpiryDate(date);
     }
 }

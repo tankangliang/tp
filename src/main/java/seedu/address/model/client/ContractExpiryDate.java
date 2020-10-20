@@ -6,15 +6,15 @@ import java.time.format.ResolverStyle;
 import java.util.Objects;
 
 /**
- * Represents a date.
+ * Represents a contract expiry date.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
-public class Date implements Comparable<Date> {
+public class ContractExpiryDate implements Comparable<ContractExpiryDate> {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Date should be in the format day-month-year, where day is between 1 and 31 and month is between 1-12.";
+    public static final String MESSAGE_CONSTRAINTS = "ContractExpiryDate should be in the format day-month-year,"
+            + " where day is between 1 and 31 and month is between 1-12.";
     /*
-     * Date should be in the format day-month-year separating the digits.
+     * ContractExpiryDate should be in the format day-month-year separating the digits.
      * Day should be in the range 1-31, month should be in the range 1-12, and year can be from 0000-9999.
      */
     public static final String VALIDATION_REGEX =
@@ -29,7 +29,7 @@ public class Date implements Comparable<Date> {
     /**
      * Constructs a date object.
      */
-    public Date(LocalDate date) {
+    public ContractExpiryDate(LocalDate date) {
         this.date = date;
         this.value = date.format(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT));
     }
@@ -45,8 +45,8 @@ public class Date implements Comparable<Date> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                && date.equals(((Date) other).date)); // state check
+                || (other instanceof ContractExpiryDate // instanceof handles nulls
+                && date.equals(((ContractExpiryDate) other).date)); // state check
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Date implements Comparable<Date> {
     }
 
     @Override
-    public int compareTo(Date other) {
+    public int compareTo(ContractExpiryDate other) {
         return date.compareTo(other.date);
     }
 }
