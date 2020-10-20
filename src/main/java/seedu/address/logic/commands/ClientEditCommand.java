@@ -107,12 +107,12 @@ public class ClientEditCommand extends Command {
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         Country updatedCountry = editClientDescriptor.getCountry().orElse(clientToEdit.getCountry());
         Timezone updatedTimezone = editClientDescriptor.getTimezone().orElse(clientToEdit.getTimezone());
-        ContractExpiryDate updatedContractExpiryContractExpiryDate =
+        ContractExpiryDate updatedContractExpiryDate =
                 editClientDescriptor.getContractExpiryDate().orElse(clientToEdit.getContractExpiryDate());
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedTimezone,
-                updatedContractExpiryContractExpiryDate, updatedTags);
+                updatedContractExpiryDate, updatedTags);
     }
 
     @Override

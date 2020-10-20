@@ -180,7 +180,7 @@ public class Client {
                 .append(getCountry())
                 .append(" Timezone: ")
                 .append(getTimezone())
-                .append(" Contract Expiry ContractExpiryDate: ")
+                .append(" Contract Expiry Date: ")
                 .append(getContractExpiryDate())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
