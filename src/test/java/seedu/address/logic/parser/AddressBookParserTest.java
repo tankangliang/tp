@@ -26,13 +26,15 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.note.TagNoteMap;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.ClientUtil;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 
 public class AddressBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final TagNoteMap tagNoteMap = new TagNoteMap();
+    private final AddressBookParser parser = new AddressBookParser(tagNoteMap);
 
     @Test
     public void parseCommand_add() throws Exception {
