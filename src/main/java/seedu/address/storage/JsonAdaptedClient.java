@@ -10,8 +10,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -33,6 +35,7 @@ class JsonAdaptedClient {
     private final String address;
     private final String country;
     private final String timezone;
+    private final String contractExpiryDate;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -42,6 +45,7 @@ class JsonAdaptedClient {
     public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("country") String country, @JsonProperty("timezone") String timezone,
+                             @JsonProperty("contractExpiryDate") String contractExpiryDate,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
@@ -49,6 +53,7 @@ class JsonAdaptedClient {
         this.address = address;
         this.country = country;
         this.timezone = timezone;
+        this.contractExpiryDate = contractExpiryDate;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -64,6 +69,7 @@ class JsonAdaptedClient {
         address = source.getAddress().value;
         country = source.getCountry().getCountryCode();
         timezone = source.getTimezone().value;
+        contractExpiryDate = source.getContractExpiryDate().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -129,8 +135,19 @@ class JsonAdaptedClient {
         }
         final Timezone modelTimezone = new Timezone(timezone);
 
+        if (contractExpiryDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ContractExpiryDate.class.getSimpleName()));
+        }
+        if (!ContractExpiryDate.isValidDate(contractExpiryDate)) {
+            throw new IllegalValueException(ContractExpiryDate.MESSAGE_CONSTRAINTS);
+        }
+        final ContractExpiryDate modelContractExpiryContractExpiryDate =
+                ParserUtil.parseContractExpiryDate(contractExpiryDate);
+
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTimezone, modelTags);
+        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTimezone,
+                modelContractExpiryContractExpiryDate, modelTags);
     }
 
 }
