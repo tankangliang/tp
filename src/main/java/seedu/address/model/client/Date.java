@@ -12,7 +12,7 @@ import java.util.Objects;
 public class Date implements Comparable<Date> {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should be in the format date-month-year";
+            "Date should be in the format day-month-year, where day is between 1 and 31 and month is between 1-12.";
     /*
      * Date should be in the format day-month-year separating the digits.
      * Day should be in the range 1-31, month should be in the range 1-12, and year can be from 0000-9999.
@@ -20,9 +20,9 @@ public class Date implements Comparable<Date> {
     public static final String VALIDATION_REGEX =
             "^([0]?[1-9]|[1|2][0-9]|[3][0|1])[-]([0]?[1-9]|[1][0-2])[-]([0-9]{4}|[0-9]{2})$";
 
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d-M-u")
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d-M-[uuuu][uu]")
             .withResolverStyle(ResolverStyle.STRICT);
-    public static final String DEFAULT_DATE_FORMAT = "d-M-u";
+    public static final String DEFAULT_DATE_FORMAT = "d-M-uuuu";
     public final String value;
     private final LocalDate date;
 
@@ -52,6 +52,11 @@ public class Date implements Comparable<Date> {
     @Override
     public int hashCode() {
         return Objects.hash(date);
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 
     @Override
