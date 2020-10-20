@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.country.Country;
-import seedu.address.model.country.CountryNoteStub;
+import seedu.address.model.note.CountryNote;
 
 public class CountryNoteCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -21,7 +21,7 @@ public class CountryNoteCommandTest {
     @Test
     public void execute_duplicateCountryNote_throwsCommandException() {
         Country country = new Country("SG");
-        CountryNoteStub genericNote = new CountryNoteStub("generic note", country);
+        CountryNote genericNote = new CountryNote("generic note", country);
         model.addCountryNote(genericNote);
         CountryNoteCommand countryNoteCommand = new CountryNoteCommand(genericNote);
         assertThrows(CommandException.class, () -> countryNoteCommand.execute(model));
@@ -31,7 +31,7 @@ public class CountryNoteCommandTest {
     public void execute_notDuplicateCountryNote_successfullyAddsCountryNote() {
         try {
             Country country = new Country("SG");
-            CountryNoteStub genericNote = new CountryNoteStub("generic note", country);
+            CountryNote genericNote = new CountryNote("generic note", country);
             assertFalse(model.hasCountryNote(genericNote));
             CountryNoteCommand countryNoteCommand = new CountryNoteCommand(genericNote);
             countryNoteCommand.execute(model);
@@ -44,14 +44,14 @@ public class CountryNoteCommandTest {
     @Test
     public void equals_sameObj_returnTrue() {
         CountryNoteCommand countryNoteCommand = new CountryNoteCommand(
-                new CountryNoteStub("generic", new Country("SG")));
+                new CountryNote("generic", new Country("SG")));
         assertTrue(countryNoteCommand.equals(countryNoteCommand));
     }
 
     @Test
     public void equals_notCountryNoteCommand_returnFalse() {
         CountryNoteCommand countryNoteCommand = new CountryNoteCommand(
-                new CountryNoteStub("generic", new Country("SG")));
+                new CountryNote("generic", new Country("SG")));
         Object obj = new Object();
         assertFalse(countryNoteCommand.equals(obj));
     }
@@ -59,9 +59,9 @@ public class CountryNoteCommandTest {
     @Test
     public void equals_diffCountryDiffNote_returnFalse() {
         CountryNoteCommand countryNoteCommandFirst = new CountryNoteCommand(
-                new CountryNoteStub("generic", new Country("SG")));
+                new CountryNote("generic", new Country("SG")));
         CountryNoteCommand countryNoteCommandSecond = new CountryNoteCommand(
-                new CountryNoteStub("generic2", new Country("MY")));
+                new CountryNote("generic2", new Country("MY")));
         assertFalse(countryNoteCommandFirst.equals(countryNoteCommandSecond));
         assertFalse(countryNoteCommandSecond.equals(countryNoteCommandFirst));
     }
@@ -69,9 +69,9 @@ public class CountryNoteCommandTest {
     @Test
     public void equals_diffCountrySameNote_returnFalse() {
         CountryNoteCommand countryNoteCommandFirst = new CountryNoteCommand(
-                new CountryNoteStub("generic", new Country("SG")));
+                new CountryNote("generic", new Country("SG")));
         CountryNoteCommand countryNoteCommandSecond = new CountryNoteCommand(
-                new CountryNoteStub("generic", new Country("MY")));
+                new CountryNote("generic", new Country("MY")));
         assertFalse(countryNoteCommandFirst.equals(countryNoteCommandSecond));
         assertFalse(countryNoteCommandSecond.equals(countryNoteCommandFirst));
     }
@@ -79,9 +79,9 @@ public class CountryNoteCommandTest {
     @Test
     public void equals_sameCountryDiffNote_returnFalse() {
         CountryNoteCommand countryNoteCommandFirst = new CountryNoteCommand(
-                new CountryNoteStub("generic", new Country("SG")));
+                new CountryNote("generic", new Country("SG")));
         CountryNoteCommand countryNoteCommandSecond = new CountryNoteCommand(
-                new CountryNoteStub("generic2", new Country("SG")));
+                new CountryNote("generic2", new Country("SG")));
         assertFalse(countryNoteCommandFirst.equals(countryNoteCommandSecond));
         assertFalse(countryNoteCommandSecond.equals(countryNoteCommandFirst));
     }
@@ -89,9 +89,9 @@ public class CountryNoteCommandTest {
     @Test
     public void equals_sameCountrySameNote_returnTrue() {
         CountryNoteCommand countryNoteCommandFirst = new CountryNoteCommand(
-                new CountryNoteStub("generic", new Country("SG")));
+                new CountryNote("generic", new Country("SG")));
         CountryNoteCommand countryNoteCommandSecond = new CountryNoteCommand(
-                new CountryNoteStub("generic", new Country("SG")));
+                new CountryNote("generic", new Country("SG")));
         assertTrue(countryNoteCommandFirst.equals(countryNoteCommandSecond));
         assertTrue(countryNoteCommandSecond.equals(countryNoteCommandFirst));
     }

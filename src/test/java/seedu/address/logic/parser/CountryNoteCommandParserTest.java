@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.CountryNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.country.Country;
-import seedu.address.model.country.CountryNoteStub;
+import seedu.address.model.note.CountryNote;
 
 public class CountryNoteCommandParserTest {
 
@@ -39,7 +39,7 @@ public class CountryNoteCommandParserTest {
     public void parse_validCountryHasNote_equalsExpected() {
         try {
             CountryNoteCommand expected = new CountryNoteCommand(
-                new CountryNoteStub("random string", new Country("SG")));
+                new CountryNote("random string", new Country("SG")));
             assertEquals(expected, parser.parse(" c/SG nt/random string"));
         } catch (ParseException e) {
             fail();

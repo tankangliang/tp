@@ -7,6 +7,8 @@ import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.note.CountryNote;
+
 public class CountryManagerTest {
 
     //TODO: Add more tests if decide to include checking for 3-letter Country Code
@@ -33,7 +35,7 @@ public class CountryManagerTest {
         CountryManager countryManager = new CountryManager();
         for (String countryCode : COUNTRY_CODES) {
             Country country = new Country(countryCode);
-            CountryNoteStub genericNote = new CountryNoteStub("generic note", country);
+            CountryNote genericNote = new CountryNote("generic note", country);
             countryManager.addCountryNote(genericNote);
             assertTrue(countryManager.hasCountryNote(genericNote));
         }
@@ -43,7 +45,7 @@ public class CountryManagerTest {
     public void hasCountryNote_notDuplicateNote_returnFalse() {
         CountryManager countryManager = new CountryManager();
         for (String countryCode : COUNTRY_CODES) {
-            CountryNoteStub genericNote = new CountryNoteStub("generic note", new Country(countryCode));
+            CountryNote genericNote = new CountryNote("generic note", new Country(countryCode));
             assertFalse(countryManager.hasCountryNote(genericNote));
         }
     }
@@ -53,7 +55,7 @@ public class CountryManagerTest {
         CountryManager countryManager = new CountryManager();
         for (String countryCode : COUNTRY_CODES) {
             Country country = new Country(countryCode);
-            CountryNoteStub genericNote = new CountryNoteStub("generic note", country);
+            CountryNote genericNote = new CountryNote("generic note", country);
             assertFalse(countryManager.hasCountryNote(genericNote));
             countryManager.addCountryNote(genericNote);
             assertTrue(countryManager.hasCountryNote(genericNote));
