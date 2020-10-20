@@ -7,11 +7,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
-import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryManager;
+import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagSet;
@@ -67,12 +68,23 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
     }
 
+    public void setNotes(List<? extends Note> notes) {
+        for (Note note: notes) {
+            if (note.isClientNote()) {
+                // handle client notes
+            } else {
+                countryMananger.addCountryNote((CountryNote) note);
+            }
+        }
+    }
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setClients(newData.getClientList());
+        setNotes(newData.getNoteList());
     }
 
     //// client-level operations
@@ -125,25 +137,23 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Checks whether the given country has the given countryNote.
      *
-     * @param country     The given country.
      * @param countryNote The given countryNote
      * @return True if the given country has the given countryNote.
      */
-    public boolean hasCountryNote(Country country, Note countryNote) {
-        requireAllNonNull(country, countryNote);
+    public boolean hasCountryNote(CountryNote countryNote) {
+        requireAllNonNull(countryNote);
 
-        return countryMananger.hasCountryNote(country, countryNote);
+        return countryMananger.hasCountryNote(countryNote);
     }
 
     /**
      * Adds the given countryNote to the given country.
      *
-     * @param country     The given country.
      * @param countryNote The given countryNote
      */
-    public void addCountryNote(Country country, Note countryNote) {
-        requireAllNonNull(country, countryNote);
-        countryMananger.addCountryNote(country, countryNote);
+    public void addCountryNote(CountryNote countryNote) {
+        requireAllNonNull(countryNote);
+        countryMananger.addCountryNote(countryNote);
     }
 
     //// util methods
@@ -159,10 +169,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return clients.asUnmodifiableObservableList();
     }
 
-    //TODO: For storing JSON notes
+    //TODO: add client notes also. NOTE: THIS ONLY RETURNS COUNTRY NOTES FOR NOW.
     @Override
-    public ObservableList<Note> getNoteList() {
-        return null;
+    public ObservableList<? extends Note> getNoteList() {
+        return FXCollections.observableList(countryMananger.getAllCountryNotesAsList());
     }
 
     @Override

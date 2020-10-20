@@ -1,29 +1,30 @@
 package seedu.address.model.country;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import seedu.address.model.note.Note;
+import seedu.address.model.note.CountryNote;
 
 /**
  * A high-level class responsible for mapping ISO3166 2-letter country codes to countries.
  */
 public class CountryManager {
 
-    //TODO: Should include checking for 3-letter Country Code?
     private static final String[] COUNTRY_CODES = Locale.getISOCountries();
-    private final Map<Country, Set<Note>> countryNotesMap;
+    private final Map<Country, Set<CountryNote>> countryToCountryNoteMap;
+    private final Set<CountryNote> countryNoteSet;
 
     /**
      * Initializes a CountryManager with a Map that maps ISO3166 2-letter country codes to countries.
      */
     public CountryManager() {
-        countryNotesMap = initCountryNotesMap();
+        countryToCountryNoteMap = initCountryToCountryNotesMap();
+        countryNoteSet = new LinkedHashSet<>();
     }
 
     /**
@@ -46,8 +47,8 @@ public class CountryManager {
      *
      * @return The Mapping from country to its countryNotes.
      */
-    private static Map<Country, Set<Note>> initCountryNotesMap() {
-        Map<Country, Set<Note>> newCountryNotesMap = new LinkedHashMap<>();
+    private static Map<Country, Set<CountryNote>> initCountryToCountryNotesMap() {
+        Map<Country, Set<CountryNote>> newCountryNotesMap = new LinkedHashMap<>();
         for (String countryCode : COUNTRY_CODES) {
             newCountryNotesMap.put(new Country(countryCode), new LinkedHashSet<>());
         }
@@ -57,30 +58,25 @@ public class CountryManager {
     /**
      * Checks if {@code country} contains {@code countryNote}.
      *
-     * @param country     The country to be checked.
      * @param countryNote The note to be checked.
      * @return Whether {@code country} contains {@code countryNote}.
      */
-    public boolean hasCountryNote(Country country, Note countryNote) {
-        if (!countryNotesMap.containsKey(country)) {
-            return false;
-        }
-
-        return countryNotesMap.get(country).contains(countryNote);
+    public boolean hasCountryNote(CountryNote countryNote) {
+        return countryNoteSet.contains(countryNote);
     }
 
     /**
      * Adds the {@code countryNote} to the {@code country}.
      *
-     * @param country     The country where the countryNote will be added.
      * @param countryNote The country note to be added.
      */
-    public void addCountryNote(Country country, Note countryNote) {
-        if (!countryNotesMap.containsKey(country)) {
+    public void addCountryNote(CountryNote countryNote) {
+        if (!countryToCountryNoteMap.containsKey(countryNote.getCountry())) {
             return;
         }
 
-        countryNotesMap.get(country).add(countryNote);
+        countryToCountryNoteMap.get(countryNote.getCountry()).add(countryNote);
+        countryNoteSet.add(countryNote);
     }
 
     /**
@@ -88,8 +84,8 @@ public class CountryManager {
      *
      * @param country The country from which we get CountryNotes.
      */
-    public Set<Note> getCountryNote(Country country) {
-        return this.countryNotesMap.get(country);
+    public Set<CountryNote> getCountryNote(Country country) {
+        return this.countryToCountryNoteMap.get(country);
     }
 
     /**
@@ -98,8 +94,8 @@ public class CountryManager {
      *
      * @return Collection of sets of country notes in the map.
      */
-    public Collection<Set<Note>> getAllCountryNotesAsCollectionOfSets() {
-        return Collections.unmodifiableCollection(this.countryNotesMap.values());
+    public List<CountryNote> getAllCountryNotesAsList() {
+        return new ArrayList<>(countryNoteSet);
     }
 
 }

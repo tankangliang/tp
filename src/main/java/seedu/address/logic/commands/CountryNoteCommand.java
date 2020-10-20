@@ -6,8 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.country.Country;
-import seedu.address.model.note.Note;
+import seedu.address.model.note.CountryNote;
 
 /**
  * Adds a Country-specific Note.
@@ -24,31 +23,27 @@ public class CountryNoteCommand extends Command {
     private static final String MESSAGE_DUPLICATE_COUNTRY_NOTE = "This country note already exists in TBM";
     private static final String MESSAGE_SUCCESS = "Successfully added country note for %1$s: %2$s";
 
-    private final Country country;
-    private final Note countryNote;
+    private final CountryNote countryNote;
 
     /**
      * Initializes a CountryNoteCommand.
      *
-     * @param country     The country where the countryNote will be associated to.
      * @param countryNote The countryNote to be added.
      */
-    public CountryNoteCommand(Country country, Note countryNote) {
-        requireNonNull(country);
+    public CountryNoteCommand(CountryNote countryNote) {
         requireNonNull(countryNote);
-        this.country = country;
         this.countryNote = countryNote;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (model.hasCountryNote(country, countryNote)) {
+        if (model.hasCountryNote(countryNote)) {
             throw new CommandException(MESSAGE_DUPLICATE_COUNTRY_NOTE);
         }
 
-        model.addCountryNote(country, countryNote);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, country, countryNote));
+        model.addCountryNote(countryNote);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, countryNote.getCountry(), countryNote));
     }
 
     @Override
@@ -66,6 +61,6 @@ public class CountryNoteCommand extends Command {
         // state check
         CountryNoteCommand c = (CountryNoteCommand) other;
 
-        return country.equals(c.country) && countryNote.equals(c.countryNote);
+        return countryNote.equals(c.countryNote);
     }
 }

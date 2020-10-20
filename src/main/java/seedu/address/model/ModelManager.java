@@ -13,7 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
-import seedu.address.model.country.Country;
+import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
@@ -141,10 +141,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasCountryNote(Country country, Note countryNote) {
-        requireAllNonNull(country, countryNote);
+    public boolean hasCountryNote(CountryNote countryNote) {
+        requireNonNull(countryNote);
 
-        return addressBook.hasCountryNote(country, countryNote);
+        return addressBook.hasCountryNote(countryNote);
     }
 
     @Override
@@ -154,10 +154,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addCountryNote(Country country, Note countryNote) {
-        requireAllNonNull(country, countryNote);
+    public void addCountryNote(CountryNote countryNote) {
+        requireNonNull(countryNote);
 
-        addressBook.addCountryNote(country, countryNote);
+        addressBook.addCountryNote(countryNote);
     }
 
     @Override

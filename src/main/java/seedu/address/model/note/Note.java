@@ -39,6 +39,14 @@ public class Note {
         this.tags.addAll(tags);
     }
 
+    public String getNoteContents() {
+        return noteContents;
+    }
+
+    public boolean isClientNote() {
+        return true;
+    }
+
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }

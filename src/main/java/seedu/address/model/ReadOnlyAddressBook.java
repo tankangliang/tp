@@ -19,5 +19,5 @@ public interface ReadOnlyAddressBook {
      * Returns an unmodifiable view of the notes list.
      * This list will not contain any duplicate notes.
      */
-    ObservableList<Note> getNoteList();
+    ObservableList<? extends Note> getNoteList();
 }

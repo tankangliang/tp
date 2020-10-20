@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.commons.util.PairUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Address;
@@ -15,6 +14,7 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
+import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
@@ -47,10 +47,18 @@ public class SampleDataUtil {
         };
     }
 
-    public static ArrayList<PairUtil<Country, Note>> getSampleCountryNotes() {
+    public static ArrayList<CountryNote> getSampleCountryNotes() {
         return new ArrayList<>(Arrays.asList(
-            new PairUtil<>(new Country("SG"), new Note("this is a note")),
-            new PairUtil<>(new Country("MY"), new Note("this is another note"))));
+            new CountryNote("This is a country note", new Country("SG")),
+            new CountryNote("This is anotehr country note", new Country("MY"))
+        ));
+    }
+
+    public static ArrayList<Note> getSampleClientNotes() {
+        return new ArrayList<>(Arrays.asList(
+            new Note("This is a regular note"),
+            new Note("This is anotehr regular note")
+        ));
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
@@ -59,8 +67,12 @@ public class SampleDataUtil {
             sampleAb.addClient(sampleClient);
         }
 
-        for (PairUtil<Country, Note> countryNote : getSampleCountryNotes()) {
-            sampleAb.addCountryNote(countryNote.getFirst(), countryNote.getSecond());
+        //TODO: have method to add client notes to AddressBook
+        for (Note note: getSampleClientNotes()) {
+        }
+
+        for (CountryNote countryNote : getSampleCountryNotes()) {
+            sampleAb.addCountryNote(countryNote);
         }
 
         return sampleAb;
