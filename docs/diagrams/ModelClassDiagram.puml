@@ -33,7 +33,13 @@ Class UniqueClientList
 Package Tag {
 Class Tag
 }
+
+Package Country {
+Class Country
+Class CountryManager
 }
+}
+
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
