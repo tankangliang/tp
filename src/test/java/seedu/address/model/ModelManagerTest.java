@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,6 +12,8 @@ import static seedu.address.testutil.TypicalClients.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +23,8 @@ import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.NoteStub;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.TagNoteMap;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -107,7 +112,6 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredClientList().remove(0));
     }
 
-
     @Test
     public void addAndHasClientNote_validSyntax_updatesCorrectly() {
         Client client = ALICE;
@@ -117,6 +121,11 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasClientNote(client, clientNote));
     }
 
+    @Test
+    public void getTagNoteMap_returnUninitialisedTagNoteMap_returnsTrue() {
+        TagNoteMap expected = new TagNoteMap();
+        assertTrue(modelManager.getTagNoteMap().equals(expected));
+    }
 
     @Test
     public void equals() {
@@ -154,4 +163,17 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
+    @Test
+    public void initializeTagNoteMap_validInputs_successful() {
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("tagName"));
+        Note taggedNote = new Note("jurong hill was a nice place");
+        taggedNote.setTags(tags);
+        Client aliceTagged = ALICE;
+        aliceTagged.addClientNote(taggedNote);
+        this.modelManager.addClient(aliceTagged);
+        assertDoesNotThrow(() -> this.modelManager.initialiseTagNoteMap());
+    }
+
 }
