@@ -18,9 +18,6 @@ public class WidgetModelManager implements WidgetModel {
 
     private WidgetModelManager() {
         widgetObject = new WidgetObject();
-        widgetObject.set("Welcome to TBM", "This is the label of id divOne", "This has id textOne",
-                "This has id divTwo", "This has id textTwo", "This has id textThree", "This has id divThree",
-                "This has id textFour", "Copyright@ArthurBarbavsky");
     }
 
     static WidgetModelManager initWidget() {
