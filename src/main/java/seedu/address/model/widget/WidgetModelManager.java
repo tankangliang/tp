@@ -12,7 +12,6 @@ import seedu.address.model.client.Client;
  * the filtered client list.
  */
 public class WidgetModelManager implements WidgetModel {
-    // The logger is to log the
     private static final Logger logger = LogsCenter.getLogger(WidgetModelManager.class);
     private WidgetObject widgetObject;
 
@@ -21,7 +20,7 @@ public class WidgetModelManager implements WidgetModel {
     }
 
     static WidgetModelManager initWidget() {
-        logger.info("Initialising WidgetModelManager...");
+        logger.info("----------------[ Creating WidgetModelManager ]");
         WidgetModelManager view = new WidgetModelManager();
         return new WidgetModelManager();
     }
