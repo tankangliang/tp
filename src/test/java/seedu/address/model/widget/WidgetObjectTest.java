@@ -13,7 +13,7 @@ public class WidgetObjectTest {
         WidgetObject wo = new WidgetObject();
         wo.set("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16");
 
-        assertEquals(wo.footer(), "8");
+        assertEquals(wo.getFooter(), "8");
     }
 
     @Test
@@ -40,14 +40,14 @@ public class WidgetObjectTest {
         o1.set("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16");
         WidgetObject o2 = new WidgetObject();
         o2.set("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
-        assertAll("Fields Equality", () -> assertEquals(o1.header(), o2.header()), () ->
-                        assertEquals(o1.divOne(), o2.divOne()), () ->
-                        assertEquals(o1.textOne(), o2.textOne()), () ->
-                        assertEquals(o1.divTwo(), o2.divTwo()), () ->
-                        assertEquals(o1.textTwo(), o2.textTwo()), () ->
-                        assertEquals(o1.textThree(), o2.textThree()), () ->
-                        assertEquals(o1.divThree(), o2.divThree()), () ->
-                        assertEquals(o1.textFour(), o2.textFour()), () ->
-                assertEquals(o1.footer(), o2.footer()));
+        assertAll("Fields Equality", () -> assertEquals(o1.getHeader(), o2.getHeader()), () ->
+                        assertEquals(o1.getDivOne(), o2.getDivOne()), () ->
+                        assertEquals(o1.getTextOne(), o2.getTextOne()), () ->
+                        assertEquals(o1.getDivTwo(), o2.getDivTwo()), () ->
+                        assertEquals(o1.getTextTwo(), o2.getTextTwo()), () ->
+                        assertEquals(o1.getTextThree(), o2.getTextThree()), () ->
+                        assertEquals(o1.getDivThree(), o2.getDivThree()), () ->
+                        assertEquals(o1.getTextFour(), o2.getTextFour()), () ->
+                assertEquals(o1.getFooter(), o2.getFooter()));
     }
 }

@@ -73,15 +73,15 @@ public class WidgetViewBox extends UiPart<Region> {
     public void update(WidgetObject other) {
         this.widgetObject = other;
         textClock.pause();
-        header.setText(other.header());
-        divOne.setText(other.divOne());
-        textOne.setText(other.textOne());
-        divTwo.setText(other.divTwo());
-        textTwo.setText(other.textTwo());
-        textThree.setText(other.textThree());
-        divThree.setText(other.divThree());
-        textFour.setText(other.textFour());
-        footer.setText(other.footer());
+        header.setText(other.getHeader());
+        divOne.setText(other.getDivOne());
+        textOne.setText(other.getTextOne());
+        divTwo.setText(other.getDivTwo());
+        textTwo.setText(other.getTextTwo());
+        textThree.setText(other.getTextThree());
+        divThree.setText(other.getDivThree());
+        textFour.setText(other.getTextFour());
+        footer.setText(other.getFooter());
     }
 
     /**

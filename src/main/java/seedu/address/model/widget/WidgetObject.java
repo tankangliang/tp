@@ -21,6 +21,16 @@ import java.util.Arrays;
 public class WidgetObject {
 
     public static final int NUMBER_OF_FIELDS = 9;
+    private static final int HEADER_POS = 0;
+    private static final int DIVONE_POS = 1;
+    private static final int TEXTONE_POS = 2;
+    private static final int DIVTWO_POS = 3;
+    private static final int TEXTTWO_POS = 4;
+    private static final int TEXTTHREE_POS = 5;
+    private static final int DIVTHREE_POS = 6;
+    private static final int TEXTFOUR_POS = 7;
+    private static final int FOOTER_POS = 8;
+
 
     /**
      * Array is a collection of the fields to be mapped to the widget Ui component.
@@ -79,8 +89,8 @@ public class WidgetObject {
      *
      * @return Header.
      */
-    public String header() {
-        return divs[0] == null ? "" : divs[0];
+    public String getHeader() {
+        return divs[HEADER_POS] == null ? "" : divs[HEADER_POS];
     }
 
     /**
@@ -88,8 +98,8 @@ public class WidgetObject {
      *
      * @return Div1.
      */
-    public String divOne() {
-        return divs[1] == null ? "" : divs[1];
+    public String getDivOne() {
+        return divs[DIVONE_POS] == null ? "" : divs[DIVONE_POS];
     }
 
     /**
@@ -97,8 +107,8 @@ public class WidgetObject {
      *
      * @return Text1.
      */
-    public String textOne() {
-        return divs[2] == null ? "" : divs[2];
+    public String getTextOne() {
+        return divs[TEXTONE_POS] == null ? "" : divs[TEXTONE_POS];
     }
 
     /**
@@ -106,8 +116,8 @@ public class WidgetObject {
      *
      * @return Div2.
      */
-    public String divTwo() {
-        return divs[3] == null ? "" : divs[3];
+    public String getDivTwo() {
+        return divs[DIVTWO_POS] == null ? "" : divs[DIVTWO_POS];
     }
 
     /**
@@ -115,8 +125,8 @@ public class WidgetObject {
      *
      * @return Text2.
      */
-    public String textTwo() {
-        return divs[4] == null ? "" : divs[4];
+    public String getTextTwo() {
+        return divs[TEXTTWO_POS] == null ? "" : divs[TEXTTWO_POS];
     }
 
     /**
@@ -124,8 +134,8 @@ public class WidgetObject {
      *
      * @return Text3.
      */
-    public String textThree() {
-        return divs[5] == null ? "" : divs[5];
+    public String getTextThree() {
+        return divs[TEXTTHREE_POS] == null ? "" : divs[TEXTTHREE_POS];
     }
 
     /**
@@ -133,8 +143,8 @@ public class WidgetObject {
      *
      * @return Div3.
      */
-    public String divThree() {
-        return divs[6] == null ? "" : divs[6];
+    public String getDivThree() {
+        return divs[DIVTHREE_POS] == null ? "" : divs[DIVTHREE_POS];
     }
 
     /**
@@ -142,8 +152,8 @@ public class WidgetObject {
      *
      * @return Text4.
      */
-    public String textFour() {
-        return divs[7] == null ? "" : divs[7];
+    public String getTextFour() {
+        return divs[TEXTFOUR_POS] == null ? "" : divs[TEXTFOUR_POS];
     }
 
     /**
@@ -151,8 +161,8 @@ public class WidgetObject {
      *
      * @return Footer.
      */
-    public String footer() {
-        return divs[8] == null ? "" : divs[8];
+    public String getFooter() {
+        return divs[FOOTER_POS] == null ? "" : divs[FOOTER_POS];
     }
 
     @Override
