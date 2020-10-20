@@ -29,13 +29,6 @@ public class TagNoteMap {
     public final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
     public final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
 
-    /**
-     * Constructor ensures that the uniqueTagMap already has the UNTAGGED tag object.
-     */
-    public TagNoteMap() {
-        uniqueTagMap.put(Tag.UNTAGGED, Tag.UNTAGGED);
-    }
-
     private void initTagNoteMapFromNotes(Set<Note> notes) {
         noteSet.addAll(notes);
         for (Note clientNote : notes) {
