@@ -112,7 +112,6 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredClientList().remove(0));
     }
 
-
     @Test
     public void addAndHasClientNote_validSyntax_updatesCorrectly() {
         Client client = ALICE;
@@ -127,7 +126,6 @@ public class ModelManagerTest {
         TagNoteMap expected = new TagNoteMap();
         assertTrue(modelManager.getTagNoteMap().equals(expected));
     }
-
 
     @Test
     public void equals() {

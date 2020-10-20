@@ -20,8 +20,12 @@ import seedu.address.model.tag.Tag;
  */
 public class TagNoteMap {
 
-    public final Set<Note> noteSet = new HashSet<>();
-    public final Map<Tag, Tag> tagSet = new HashMap<>();
+    public final Set<Note> noteSet = new HashSet<>(); // TODO: not really needed
+    /**
+     * A map that contains the mapping from any tag to a unique tag.
+     * A map is used instead of a set because the set does not offer the option of getting objects inside it.
+     */
+    public final Map<Tag, Tag> uniqueTagMap = new HashMap<>();
     public final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
     public final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
 
@@ -30,7 +34,7 @@ public class TagNoteMap {
         for (Note clientNote : notes) {
             Set<Tag> tags = clientNote.getTags();
             for (Tag tag : tags) {
-                tagSet.put(tag, tag);
+                uniqueTagMap.put(tag, tag);
             }
             updateTagsForNote(tags, clientNote);
         }
@@ -72,10 +76,10 @@ public class TagNoteMap {
         }
         for (String tagString : tagStrings) {
             Tag tag = ParserUtil.parseTag(tagString);
-            if (tagSet.containsKey(tag)) {
-                uniqueTags.add(tagSet.get(tag));
+            if (uniqueTagMap.containsKey(tag)) {
+                uniqueTags.add(uniqueTagMap.get(tag));
             } else {
-                tagSet.put(tag, tag);
+                uniqueTagMap.put(tag, tag);
                 uniqueTags.add(tag);
             }
         }
@@ -107,7 +111,7 @@ public class TagNoteMap {
         //  for each oldtags: remove this note from the tag to notes map. So if the hashset is empty
         requireAllNonNull(newTags, note);
         for (Tag newTag : newTags) {
-            tagSet.put(newTag, newTag);
+            uniqueTagMap.put(newTag, newTag);
         }
         // update the notes set for each of the tags:
         for (Tag newTag : newTags) {
@@ -137,7 +141,7 @@ public class TagNoteMap {
         }
         // state check:
         TagNoteMap other = (TagNoteMap) obj;
-        return this.tagSet.equals(other.tagSet)
+        return this.uniqueTagMap.equals(other.uniqueTagMap)
                 && this.noteSet.equals(other.noteSet)
                 && this.tagToNotesMap.equals(other.tagToNotesMap)
                 && this.noteToTagsMap.equals(other.noteToTagsMap);
