@@ -1,4 +1,5 @@
 /*MAKESHIFT DARKTHEME*/
+/*MAKESHIFT DARKTHEME*/
 
 .root {
     -MAINGREY: #1C1C1C; /*DARK GREY*/
@@ -168,13 +169,12 @@
 
 .widget-pane {
      -fx-background-color: derive(-LIGHTGREY, 40%);
-     -fx-background-radius: 30, 30;
-     -fx-border-radius: 30, 30;
+     -fx-background-radius: 20, 20;
      -fx-padding: 15 20 20 15;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(-MAINGREY, 20%); /*TODO: change back to color*/
+     -fx-background-color: derive(-MAINGREY, 20%);
      -fx-border-color: derive(-MAINGREY, 20%);
      -fx-border-top-width: 1px;
      -fx-padding: 10;
@@ -357,8 +357,12 @@
 }
 
 #clientListView {
-    -fx-background-radius: 30, 30;
+    -fx-background-radius: 10, 10;
     -fx-padding: 0 0 0 17;
+}
+
+#clientListView .scroll-bar .thumb {
+    -fx-background-color: derive(-MAINGREY, 40%);
 }
 
 #filterField, #clientListPanel, #clientWebpage {
