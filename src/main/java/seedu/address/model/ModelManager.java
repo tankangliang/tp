@@ -136,14 +136,12 @@ public class ModelManager implements Model {
     @Override
     public void setClient(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
-
         addressBook.setClient(target, editedClient);
     }
 
     @Override
     public boolean hasCountryNote(CountryNote countryNote) {
         requireNonNull(countryNote);
-
         return addressBook.hasCountryNote(countryNote);
     }
 
@@ -156,7 +154,6 @@ public class ModelManager implements Model {
     @Override
     public void addCountryNote(CountryNote countryNote) {
         requireNonNull(countryNote);
-
         addressBook.addCountryNote(countryNote);
     }
 

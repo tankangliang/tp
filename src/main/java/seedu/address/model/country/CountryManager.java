@@ -16,14 +16,14 @@ import seedu.address.model.note.CountryNote;
 public class CountryManager {
 
     private static final String[] COUNTRY_CODES = Locale.getISOCountries();
-    private final Map<Country, Set<CountryNote>> countryToCountryNoteMap;
+    private final Map<Country, Set<CountryNote>> countryToCountryNotesMap;
     private final Set<CountryNote> countryNoteSet;
 
     /**
      * Initializes a CountryManager with a Map that maps ISO3166 2-letter country codes to countries.
      */
     public CountryManager() {
-        countryToCountryNoteMap = initCountryToCountryNotesMap();
+        countryToCountryNotesMap = initCountryToCountryNotesMap();
         countryNoteSet = new LinkedHashSet<>();
     }
 
@@ -71,11 +71,11 @@ public class CountryManager {
      * @param countryNote The country note to be added.
      */
     public void addCountryNote(CountryNote countryNote) {
-        if (!countryToCountryNoteMap.containsKey(countryNote.getCountry())) {
+        if (!countryToCountryNotesMap.containsKey(countryNote.getCountry())) {
             return;
         }
 
-        countryToCountryNoteMap.get(countryNote.getCountry()).add(countryNote);
+        countryToCountryNotesMap.get(countryNote.getCountry()).add(countryNote);
         countryNoteSet.add(countryNote);
     }
 
@@ -85,7 +85,7 @@ public class CountryManager {
      * @param country The country from which we get CountryNotes.
      */
     public Set<CountryNote> getCountryNote(Country country) {
-        return this.countryToCountryNoteMap.get(country);
+        return this.countryToCountryNotesMap.get(country);
     }
 
     /**
