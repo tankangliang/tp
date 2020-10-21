@@ -57,6 +57,11 @@ public class Note {
         return true;
     }
 
+    /**
+     * Gets the set of tags that is related to this Note.
+     *
+     * @return The set of tags that is related to this Note.
+     */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }

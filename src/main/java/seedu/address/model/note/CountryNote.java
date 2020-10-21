@@ -1,5 +1,7 @@
 package seedu.address.model.note;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Objects;
 
 import seedu.address.model.country.Country;
@@ -19,6 +21,8 @@ public class CountryNote extends Note {
      */
     public CountryNote(String content, Country country) {
         super(content);
+
+        requireNonNull(country);
         this.country = country;
     }
 

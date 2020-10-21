@@ -11,7 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
-import seedu.address.model.country.CountryManager;
+import seedu.address.model.country.CountryNotesManager;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
@@ -25,7 +25,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueClientList clients;
     private final UniqueTagSet tags;
-    private final CountryManager countryMananger;
+    private final CountryNotesManager countryNotesManager;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -36,7 +36,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         clients = new UniqueClientList();
         tags = new UniqueTagSet();
-        countryMananger = new CountryManager();
+        countryNotesManager = new CountryNotesManager();
     }
 
     public AddressBook() {}
@@ -78,7 +78,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             if (note.isClientNote()) {
                 // handle client notes
             } else {
-                countryMananger.addCountryNote((CountryNote) note);
+                countryNotesManager.addCountryNote((CountryNote) note);
             }
         }
     }
@@ -146,9 +146,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @return True if the given country has the given countryNote.
      */
     public boolean hasCountryNote(CountryNote countryNote) {
-        requireAllNonNull(countryNote);
-
-        return countryMananger.hasCountryNote(countryNote);
+        requireNonNull(countryNote);
+        return countryNotesManager.hasCountryNote(countryNote);
     }
 
     /**
@@ -157,8 +156,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @param countryNote The given countryNote
      */
     public void addCountryNote(CountryNote countryNote) {
-        requireAllNonNull(countryNote);
-        countryMananger.addCountryNote(countryNote);
+        requireNonNull(countryNote);
+        countryNotesManager.addCountryNote(countryNote);
     }
 
     //// util methods
@@ -176,8 +175,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //TODO: add client notes also. NOTE: THIS ONLY RETURNS COUNTRY NOTES FOR NOW.
     @Override
-    public ObservableList<? extends Note> getNoteList() {
-        return FXCollections.observableList(countryMananger.getAllCountryNotesAsList());
+    public ObservableList<Note> getNoteList() {
+        return FXCollections.observableArrayList(countryNotesManager.getAllCountryNotesAsList());
     }
 
     @Override
