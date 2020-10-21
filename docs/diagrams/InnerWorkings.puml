@@ -1,0 +1,16 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Package Country {
+Class Country
+Class CountryManager
+}
+
+Package Note {
+Class Note
+Class TagNoteMap
+}
+@enduml

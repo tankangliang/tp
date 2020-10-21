@@ -30,6 +30,10 @@ Class Phone
 Class UniqueClientList
 }
 
+Package Note {
+Class Note
+Class TagNoteMap
+}
 Package Tag {
 Class Tag
 Class UniqueTagSet
