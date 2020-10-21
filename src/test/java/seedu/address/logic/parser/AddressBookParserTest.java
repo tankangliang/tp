@@ -88,6 +88,8 @@ public class AddressBookParserTest {
     @Test
     public void parseClientCommands_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("client"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("client "));
     }
 
@@ -95,6 +97,8 @@ public class AddressBookParserTest {
     public void parseClientCommands_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
                 parser.parseCommand("client unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("client unknownCommand "));
     }
 
     @Test
@@ -120,6 +124,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCountryCommands_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("country"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("country "));
     }
 
@@ -127,6 +133,8 @@ public class AddressBookParserTest {
     public void parseCountryCommands_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
                 parser.parseCommand("country unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("country unknownCommand "));
     }
 
     @Test
@@ -145,6 +153,8 @@ public class AddressBookParserTest {
     @Test
     public void parseClientNoteCommands_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("client note"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("client note "));
     }
 
@@ -152,8 +162,9 @@ public class AddressBookParserTest {
     public void parseClientNoteCommands_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
                 parser.parseCommand("client note unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("client note unknownCommand "));
     }
-
 
     @Test
     public void parseCommand_clear() throws Exception {
@@ -189,10 +200,4 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
-
-
-
-
-
-
 }
