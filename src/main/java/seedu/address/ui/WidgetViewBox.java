@@ -31,8 +31,9 @@ public class WidgetViewBox extends UiPart<Region> {
     private Label textThree;
     @FXML
     private Label divThree;
+    //TODO: This is a stop gap to display everything about the client's notes.
     @FXML
-    private TextArea textFour;  //TODO: This is a stop gap to display everything about the client's notes.
+    private TextArea textFour;
     @FXML
     private Label footer;
     private WidgetObject widgetObject;
