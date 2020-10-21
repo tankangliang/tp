@@ -3,10 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUGGEST;
 
-import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.SuggestCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -35,11 +33,12 @@ public class SuggestCommandParser implements Parser<SuggestCommand> {
         Set<SuggestionType> suggestionTypeList =
             ParserUtil.parseSuggestionTypes(argMultimap.getAllValues(PREFIX_SUGGEST));
 
-        List<Predicate<Client>> suggestionTypePredicateList = suggestionTypeList.stream()
-            .map(suggestionType -> suggestionType.getSuggestionPredicate()).collect(
-                Collectors.toList());
+        Predicate<Client> combinedSuggestionPredicate = suggestionTypeList
+            .stream()
+            .map(SuggestionType::getSuggestionPredicate)
+            .reduce(client -> true, (x, y) -> client -> x.test(client) && y.test(client));
 
-        return new SuggestCommand(suggestionTypePredicateList);
+        return new SuggestCommand(combinedSuggestionPredicate);
     }
 
 }

@@ -39,10 +39,9 @@ public class SuggestionType {
         case BY_FREQUENCY:
             return client -> true;
         default:
+            assert false; // code execution will never reach here
+            return null;
         }
-
-        assert false; // code execution will never reach here
-        return null;
     }
 
     /**
