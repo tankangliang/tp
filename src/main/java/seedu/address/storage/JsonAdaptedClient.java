@@ -122,7 +122,7 @@ class JsonAdaptedClient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName()));
         }
         if (!CountryCodeVerifier.isValidCountryCode(country)) {
-            throw new IllegalValueException(Country.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(CountryCodeVerifier.MESSAGE_CONSTRAINTS);
         }
         final Country modelCountry = new Country(country);
 

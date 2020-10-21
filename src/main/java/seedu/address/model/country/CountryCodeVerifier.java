@@ -6,6 +6,8 @@ import java.util.Locale;
  * Class that is responsible for verification of ISO3166 country-codes.
  */
 public class CountryCodeVerifier {
+
+    public static final String MESSAGE_CONSTRAINTS = "Country code must be a valid 2-letter ISO3166 country code";
     private static final String[] COUNTRY_CODES = Locale.getISOCountries();
 
     /**
