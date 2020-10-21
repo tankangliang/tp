@@ -70,6 +70,7 @@ public class WidgetModelManager implements WidgetModel {
         String timezone = client.getTimezone().toString();
         String email = client.getEmail().toString();
         String phone = client.getPhone().toString();
+        String notes = client.getClientNotes().toString();
         String tags = Stream.of(client.getTags())
                 .map(Object::toString)
                 .collect(Collectors.joining())

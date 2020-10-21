@@ -5,6 +5,7 @@ import java.util.TimeZone;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.widget.WidgetObject;
@@ -31,7 +32,7 @@ public class WidgetViewBox extends UiPart<Region> {
     @FXML
     private Label divThree;
     @FXML
-    private Label textFour;
+    private TextArea textFour;  //TODO: This is a stop gap to display everything about the client's notes.
     @FXML
     private Label footer;
     private WidgetObject widgetObject;

@@ -173,6 +173,10 @@
      -fx-padding: 15 20 20 15;
 }
 
+.notes .content{
+    -fx-background-color: derive(-LIGHTGREY, 40%);
+}
+
 .pane-with-border {
      -fx-background-color: derive(-MAINGREY, 20%);
      -fx-border-color: derive(-MAINGREY, 20%);
