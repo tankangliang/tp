@@ -1,6 +1,9 @@
 package seedu.address.model.widget;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
@@ -10,13 +13,15 @@ import seedu.address.model.client.Client;
  * the filtered client list.
  */
 public class WidgetModelManager implements WidgetModel {
+    private static final Logger logger = LogsCenter.getLogger(WidgetModelManager.class);
     private WidgetObject widgetObject;
 
-    private WidgetModelManager() {}
+    private WidgetModelManager() {
+        widgetObject = new WidgetObject();
+    }
 
     static WidgetModelManager initWidget() {
-        WidgetModelManager view = new WidgetModelManager();
-        view.defaultContent();
+        logger.info("----------------[ Creating WidgetModelManager ]");
         return new WidgetModelManager();
     }
     /**
@@ -54,32 +59,25 @@ public class WidgetModelManager implements WidgetModel {
     /* ============================================================================================================== */
 
     /**
-     * Stub for the default content rendered on the widget.
-     */
-    private void defaultContent() {
-        // TODO: Initialise the widget to a default content - weather, locale, local time
-        WidgetObject wo = new WidgetObject();
-        wo.set("Hello World! This is a header!", "Div 1", "Div2", "Div 3",
-                "Div 4", "Div 5", "Div 6", "Copyright@ArthurBarbavsky");
-        widgetObject = wo;
-    }
-
-    /**
      * Maps content of the given object to different fields of the widget object.
      */
     private WidgetObject clientParser(Client client) {
-        // TODO: Figure out an optimal display for all of client's fields
+        logger.info("Setting content of widget to client: " + client.getName().toString());
         WidgetObject newObj = new WidgetObject();
         String name = client.getName().toString();
-        String location = client.getAddress().toString() + ", "
-                + client.getCountry().getCountryName();
+        String country = client.getCountry().getCountryName();
         String timezone = client.getTimezone().toString();
         String email = client.getEmail().toString();
         String phone = client.getPhone().toString();
-        String tags = client.getTags().toString();
+        String notes = client.getClientNotes().toString(); //TODO: Temporary display for the client notes
+        String tags = Stream.of(client.getTags())
+                .map(Object::toString)
+                .collect(Collectors.joining())
+                .replace("[", "")
+                .replace("]", "");
 
-        newObj.set(/*header*/ name, /*div1*/ location, /*text1*/ "", /*div2*/ "", /*text2*/ email,
-                /*div3*/ phone, /*text3*/ "", /*div4*/ tags);
+        newObj.set(/*header*/ name, /*div1*/ country, /*text1*/ timezone, /*div2*/ "", /*text2*/ email,
+                /*text3*/ phone, /*div3*/ "", /*text4 SCROLLABLE VIEW*/ notes, /*footer*/ tags);
 
         return newObj;
     }
@@ -92,9 +90,10 @@ public class WidgetModelManager implements WidgetModel {
      */
     private WidgetObject handle(Object content) {
         // TODO: v1.3 || v1.4 deprecate this method.
-        java.util.logging.Logger logger = LogsCenter.getLogger(getClass());
         // Logs the unknown object being passed to this method
-        logger.info(String.valueOf(content.getClass()));
+        logger.info("=============================[ Client object was not passed as content ]"
+                + "=============================");
+        logger.info("Setting content of widget to: " + content.getClass());
         WidgetObject wo = new WidgetObject();
         java.lang.reflect.Field[] fields = content.getClass().getDeclaredFields();
         java.util.stream.Stream.of(fields).forEach(f -> {
@@ -102,12 +101,15 @@ public class WidgetModelManager implements WidgetModel {
                 f.setAccessible(true);
                 String fieldName = f.getName();
                 String fieldValue = f.get(content).toString();
-                logger.info(fieldName + ": " + fieldValue);
+                logger.info("----- [ Warning! Object passed is not a client! ] -----" + fieldName + ": " + fieldValue);
                 StringBuilder sb = new StringBuilder().append(fieldName).append(": ").append(fieldValue);
                 wo.set(sb.toString());
             } catch (IllegalAccessException ex) {
-                // This path will never be reached
-                System.out.println(Arrays.toString(ex.getStackTrace()));
+                logger.severe("----- [ Fatal Error: Accessing private fields of unknown object ] -----");
+                logger.severe(Arrays.toString(ex.getStackTrace()));
+            } catch (Exception e) {
+                logger.severe("----- [ Fatal Error ] -----");
+                logger.severe(Arrays.toString(e.getStackTrace()));
             }
         });
         return wo;
