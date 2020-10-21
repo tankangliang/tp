@@ -33,6 +33,7 @@
       <Label fx:id="email" styleClass="cell_small_label" text="\$email"/>
       <Label fx:id="country" styleClass="cell_small_label" text="\$country"/>
       <Label fx:id="timezone" styleClass="cell_small_label" text="\$timezone"/>
+      <Label fx:id="contractExpiryDate" styleClass="cell_small_label" text="\$contractExpiryDate"/>
     </VBox>
   </GridPane>
 </HBox>
