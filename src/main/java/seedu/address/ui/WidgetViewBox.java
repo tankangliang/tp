@@ -1,7 +1,11 @@
 package seedu.address.ui;
 
+import java.util.Locale;
+import java.util.TimeZone;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.widget.WidgetObject;
@@ -11,7 +15,6 @@ import seedu.address.model.widget.WidgetObject;
  */
 public class WidgetViewBox extends UiPart<Region> {
     private static final String FXML = "WidgetViewBox.fxml";
-    private final WidgetObject widgetObject;
     @FXML
     private VBox viewBox;
     @FXML
@@ -25,44 +28,72 @@ public class WidgetViewBox extends UiPart<Region> {
     @FXML
     private Label textTwo;
     @FXML
-    private Label divThree;
-    @FXML
     private Label textThree;
     @FXML
-    private Label divFour;
+    private Label divThree;
+    //TODO: This is a stop gap to display everything about the client's notes.
     @FXML
-    private Label textFour;
-    @FXML
-    private Label divFive;
-    @FXML
-    private Label textFive;
-    @FXML
-    private Label divSix;
-    @FXML
-    private Label textSix;
+    private TextArea textFour;
     @FXML
     private Label footer;
+    private WidgetObject widgetObject;
+    private TextClock textClock;
 
     /**
      * Creates a {@code WidgetViewBox} with the given {@code WidgetObject}.
      */
-    public WidgetViewBox(WidgetObject widgetObject) {
+    public WidgetViewBox() {
         super(FXML);
-        this.widgetObject = widgetObject;
-        header.setText(widgetObject.header());
-        divOne.setText(widgetObject.divOne());
-        divTwo.setText(widgetObject.divTwo());
-        divThree.setText(widgetObject.divThree());
-        divFour.setText(widgetObject.divFour());
-        divFive.setText(widgetObject.divFive());
-        divSix.setText(widgetObject.divSix());
-        textOne.setText(widgetObject.textOne());
-        textTwo.setText(widgetObject.textTwo());
-        textThree.setText(widgetObject.textThree());
-        textFour.setText(widgetObject.textFour());
-        textFive.setText(widgetObject.textFive());
-        textSix.setText(widgetObject.textSix());
-        footer.setText(widgetObject.footer());
+        textClock = new TextClock(header);
+        textClock.play();
+        divOne.setText(Locale.getDefault().getDisplayCountry());
+        textOne.setText(TimeZone.getDefault().getDisplayName());
+        divTwo.setText("Travelling BusinessMan");
+        textTwo.setText("");
+        textThree.setText("");
+        divThree.setText("");
+        textFour.setText("");
+        footer.setText("Made in NUS");
+    }
+
+    /**
+     * Private constructor for testing purposes.
+     *
+     * @param object Widget Object to be used in testing.
+     */
+    private WidgetViewBox(WidgetObject object) {
+        super(FXML);
+        this.widgetObject = object;
+    }
+
+
+    /**
+     * Updates the current content of the widget view box to the given content.
+     *
+     * @param other The new content.
+     */
+    public void update(WidgetObject other) {
+        this.widgetObject = other;
+        textClock.pause();
+        header.setText(other.getHeader());
+        divOne.setText(other.getDivOne());
+        textOne.setText(other.getTextOne());
+        divTwo.setText(other.getDivTwo());
+        textTwo.setText(other.getTextTwo());
+        textThree.setText(other.getTextThree());
+        divThree.setText(other.getDivThree());
+        textFour.setText(other.getTextFour());
+        footer.setText(other.getFooter());
+    }
+
+    /**
+     * Initialiser to bypass static initialising problem in Non-FXML testing of this class.
+     *
+     * @param object Any Widget Object to be used in testing.
+     * @return WidgeViewBox.
+     */
+    public static WidgetViewBox init(WidgetObject object) {
+        return new WidgetViewBox(object);
     }
 
     @Override
@@ -81,4 +112,5 @@ public class WidgetViewBox extends UiPart<Region> {
         WidgetViewBox other1 = (WidgetViewBox) other;
         return widgetObject.equals(other1.widgetObject);
     }
+
 }
