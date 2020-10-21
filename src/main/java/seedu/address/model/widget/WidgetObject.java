@@ -3,7 +3,7 @@ package seedu.address.model.widget;
 import java.util.Arrays;
 
 /**
- * A standardise way to render content on the widget view box.
+ * A standardised way to render content on the widget view box.
  * Truncates anything that does not fit into the defined 8 divisions/sections for the displaying in the view box.
  * Defined format for fields to be displayed is:
  * <ol>
@@ -12,25 +12,30 @@ import java.util.Arrays;
  *     <li>Text 1</li>
  *     <li>Div 2</li>
  *     <li>Text 2</li>
- *     <li>Div 3</li>
  *     <li>Text 3</li>
- *     <li>Div 4</li>
+ *     <li>Div 3</li>
  *     <li>Text 4</li>
- *     <li>Div 5</li>
- *     <li>Text 5</li>
- *     <li>Div 6</li>
- *     <li>Text 6</li>
  *     <li>Footer</li>
  * </ol>
  */
 public class WidgetObject {
 
-    public static final int NUMBER_OF_FIELDS = 14;
+    public static final int NUMBER_OF_FIELDS = 9;
+    private static final int HEADER_POS = 0;
+    private static final int DIVONE_POS = 1;
+    private static final int TEXTONE_POS = 2;
+    private static final int DIVTWO_POS = 3;
+    private static final int TEXTTWO_POS = 4;
+    private static final int TEXTTHREE_POS = 5;
+    private static final int DIVTHREE_POS = 6;
+    private static final int TEXTFOUR_POS = 7;
+    private static final int FOOTER_POS = 8;
+
 
     /**
      * Array is a collection of the fields to be mapped to the widget Ui component.
      *
-     * [header, div1, text1, div2, text2, div3, text3, div4, text4, div5, text5, div6, text6, footer]
+     * [header, div1, text1, div2, text2, text3, div3, text4, footer]
      */
     private final String[] divs;
 
@@ -38,11 +43,23 @@ public class WidgetObject {
      * Constructor for a widget object.
      */
     public WidgetObject() {
-        divs = new String[14];
+        divs = new String[NUMBER_OF_FIELDS];
     }
 
     /**
      * Sets the content of the widget object. Any fields not set will be an empty string.
+     * Fields set are in the following order:
+     * <ol>
+     *     <li>Header</li>
+     *     <li>Div 1</li>
+     *     <li>Text 1</li>
+     *     <li>Div 2</li>
+     *     <li>Text 2</li>
+     *     <li>Text 3</li>
+     *     <li>Div 3</li>
+     *     <li>Text 4</li>
+     *     <li>Footer</li>
+     * </ol>
      *
      * @param args All the fields to be set.
      */
@@ -72,8 +89,8 @@ public class WidgetObject {
      *
      * @return Header.
      */
-    public String header() {
-        return divs[0] == null ? "" : divs[0];
+    public String getHeader() {
+        return divs[HEADER_POS] == null ? "" : divs[HEADER_POS];
     }
 
     /**
@@ -81,8 +98,8 @@ public class WidgetObject {
      *
      * @return Div1.
      */
-    public String divOne() {
-        return divs[1] == null ? "" : divs[1];
+    public String getDivOne() {
+        return divs[DIVONE_POS] == null ? "" : divs[DIVONE_POS];
     }
 
     /**
@@ -90,8 +107,8 @@ public class WidgetObject {
      *
      * @return Text1.
      */
-    public String textOne() {
-        return divs[2] == null ? "" : divs[2];
+    public String getTextOne() {
+        return divs[TEXTONE_POS] == null ? "" : divs[TEXTONE_POS];
     }
 
     /**
@@ -99,8 +116,8 @@ public class WidgetObject {
      *
      * @return Div2.
      */
-    public String divTwo() {
-        return divs[3] == null ? "" : divs[3];
+    public String getDivTwo() {
+        return divs[DIVTWO_POS] == null ? "" : divs[DIVTWO_POS];
     }
 
     /**
@@ -108,17 +125,8 @@ public class WidgetObject {
      *
      * @return Text2.
      */
-    public String textTwo() {
-        return divs[4] == null ? "" : divs[4];
-    }
-
-    /**
-     * Getter for 'attributes'.
-     *
-     * @return Div3.
-     */
-    public String divThree() {
-        return divs[5] == null ? "" : divs[5];
+    public String getTextTwo() {
+        return divs[TEXTTWO_POS] == null ? "" : divs[TEXTTWO_POS];
     }
 
     /**
@@ -126,17 +134,17 @@ public class WidgetObject {
      *
      * @return Text3.
      */
-    public String textThree() {
-        return divs[6] == null ? "" : divs[6];
+    public String getTextThree() {
+        return divs[TEXTTHREE_POS] == null ? "" : divs[TEXTTHREE_POS];
     }
 
     /**
      * Getter for 'attributes'.
      *
-     * @return Div4.
+     * @return Div3.
      */
-    public String divFour() {
-        return divs[7] == null ? "" : divs[7];
+    public String getDivThree() {
+        return divs[DIVTHREE_POS] == null ? "" : divs[DIVTHREE_POS];
     }
 
     /**
@@ -144,44 +152,8 @@ public class WidgetObject {
      *
      * @return Text4.
      */
-    public String textFour() {
-        return divs[8] == null ? "" : divs[8];
-    }
-
-    /**
-     * Getter for 'attributes'.
-     *
-     * @return Div5.
-     */
-    public String divFive() {
-        return divs[9] == null ? "" : divs[9];
-    }
-
-    /**
-     * Getter for 'attributes'.
-     *
-     * @return Text5.
-     */
-    public String textFive() {
-        return divs[10] == null ? "" : divs[10];
-    }
-
-    /**
-     * Getter for 'attributes'.
-     *
-     * @return Div6.
-     */
-    public String divSix() {
-        return divs[11] == null ? "" : divs[11];
-    }
-
-    /**
-     * Getter for 'attributes'.
-     *
-     * @return Text6.
-     */
-    public String textSix() {
-        return divs[12] == null ? "" : divs[12];
+    public String getTextFour() {
+        return divs[TEXTFOUR_POS] == null ? "" : divs[TEXTFOUR_POS];
     }
 
     /**
@@ -189,8 +161,8 @@ public class WidgetObject {
      *
      * @return Footer.
      */
-    public String footer() {
-        return divs[13] == null ? "" : divs[13];
+    public String getFooter() {
+        return divs[FOOTER_POS] == null ? "" : divs[FOOTER_POS];
     }
 
     @Override
