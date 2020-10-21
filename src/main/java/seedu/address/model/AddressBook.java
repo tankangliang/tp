@@ -72,7 +72,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * @param notes The given list of notes.
      */
-    public void setNotes(List<? extends Note> notes) {
+    public void setNotes(List<Note> notes) {
         for (Note note: notes) {
             if (note.isClientNote()) {
                 // handle client notes
