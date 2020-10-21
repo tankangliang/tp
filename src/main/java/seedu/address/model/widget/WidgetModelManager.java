@@ -78,7 +78,7 @@ public class WidgetModelManager implements WidgetModel {
                 .replace("]", "");
 
         newObj.set(/*header*/ name, /*div1*/ country, /*text1*/ timezone, /*div2*/ "", /*text2*/ email,
-                /*text3*/ phone, /*div3*/ "", /*text4*/ "", /*footer*/ tags);
+                /*text3*/ phone, /*div3*/ "", /*text4 SCROLLABLE VIEW*/ notes, /*footer*/ tags);
 
         return newObj;
     }

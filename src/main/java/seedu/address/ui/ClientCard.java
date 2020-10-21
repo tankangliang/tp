@@ -60,7 +60,8 @@ public class ClientCard extends UiPart<Region> {
         email.setText(client.getEmail().value);
         country.setText(client.getCountry().getCountryName());
         timezone.setText(client.getTimezone().value);
-        contractExpiryDate.setText(client.getContractExpiryDate().value);
+        // TODO: This is throwing null pointer excpetion
+//        contractExpiryDate.setText(client.getContractExpiryDate().value);
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
