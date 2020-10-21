@@ -26,7 +26,7 @@ public class ClientNoteAddCommand extends Command {
             + "by the index number used in the displayed client list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX " + PREFIX_NOTE + "NOTE_STRING [" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 " + "client note content";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NOTE + "client note content";
     private static final String MESSAGE_DUPLICATE_CLIENT_NOTE = "The client note already exists";
     private static final String MESSAGE_SUCCESS = "Successfully added client note";
     private final Index targetIndex;
