@@ -29,6 +29,7 @@ public class ClientNoteAddCommandTest {
     @Test
     public void execute_duplicateClientNote_throwsCommandException() throws CommandException {
         Client client = TypicalClients.ALICE;
+        // todo: question: how come if I modify it to ClientBuilder().build(), it will fail this test?
         Index idx = Index.fromOneBased(1);
         Note clientNote = new Note(NOTE_CONTENT_1);
         model.addClientNote(client, clientNote);

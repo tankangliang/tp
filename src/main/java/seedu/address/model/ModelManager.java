@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -154,6 +155,13 @@ public class ModelManager implements Model {
         target.addClientNote(clientNote);
     }
 
+    @Override
+    public void deleteClientNote(Client associatedClient, Note noteToDelete) {
+        requireAllNonNull(associatedClient, noteToDelete);
+        // todo: Ritesh implement delete in the Client class
+        // associatedClient.deleteClientNote(noteToDelete);
+    }
+
     //=========== Filtered Client List Accessors =============================================================
 
     /**
@@ -163,6 +171,13 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Client> getFilteredClientList() {
         return filteredClients;
+    }
+
+    @Override
+    public ObservableList<Note> getFilteredClientNotesList() {
+        // todo: Ritesh filtered client notes list used by ClientNoteDeleteCommand
+        ObservableList<Note> stubList = FXCollections.observableArrayList();
+        return stubList;
     }
 
     @Override
