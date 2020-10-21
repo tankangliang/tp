@@ -121,6 +121,14 @@ public class ClientBuilder {
     }
 
     /**
+     * Sets the {@code Timezone} of the {@code Client} that we are building.
+     */
+    public ClientBuilder withTimezone(Timezone timezone) {
+        this.timezone = timezone;
+        return this;
+    }
+
+    /**
      * Sets the {@code ContractExpiryDate} of the {@code Client} that we are building.
      */
     public ClientBuilder withContractExpiryDate(String contractExpiryDate) {
