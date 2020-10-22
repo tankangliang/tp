@@ -39,6 +39,29 @@ public class Note {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Gets the content of the note.
+     *
+     * @return The content of the note.
+     */
+    public String getNoteContents() {
+        return noteContents;
+    }
+
+    /**
+     * Returns whether this note is a client note.
+     *
+     * @return True if this note is a client note, false otherwise.
+     */
+    public boolean isClientNote() {
+        return true;
+    }
+
+    /**
+     * Gets the set of tags that is related to this Note.
+     *
+     * @return The set of tags that is related to this Note.
+     */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }

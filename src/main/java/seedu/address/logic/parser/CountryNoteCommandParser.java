@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import seedu.address.logic.commands.CountryNoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.country.Country;
+import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 
 /**
@@ -31,8 +32,9 @@ public class CountryNoteCommandParser implements Parser<CountryNoteCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CountryNoteCommand.MESSAGE_USAGE));
         }
         Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).get());
-        Note countryNote = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
+        Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
+        CountryNote countryNote = new CountryNote(note.getNoteContents(), country);
 
-        return new CountryNoteCommand(country, countryNote);
+        return new CountryNoteCommand(countryNote);
     }
 }

@@ -12,6 +12,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.note.CountryNote;
+import seedu.address.model.note.Note;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -42,7 +44,7 @@ class JsonSerializableAddressBook {
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
         clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
         //TODO: For storing JSON notes
-        //notes.addAll(source.getNoteList().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
+        notes.addAll(source.getNoteList().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
     }
 
     /**
@@ -62,11 +64,12 @@ class JsonSerializableAddressBook {
 
         //TODO: For storing JSON notes
         for (JsonAdaptedNote note: notes) {
+            Note modelNote = note.toModelType();
             if (note.isClientNote()) {
                 // handle client note
             } else {
                 // note is countryNote
-                addressBook.addCountryNote(note.getModelCountry(), note.getModelNote());
+                addressBook.addCountryNote((CountryNote) modelNote);
             }
         }
         return addressBook;
