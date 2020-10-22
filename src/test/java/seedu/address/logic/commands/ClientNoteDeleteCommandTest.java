@@ -1,8 +1,9 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,19 @@ class ClientNoteDeleteCommandTest {
 
     private static final String NOTE_CONTENT_1 = "client note content 1";
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void execute_validCommand_doesNotThrowException() {
+        Client client = TypicalClients.ALICE;
+        Index idx = Index.fromOneBased(1);
+        Note clientNote = new Note(NOTE_CONTENT_1);
+        model.addClientNote(client, clientNote);
+        ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(idx, idx);
+        assertDoesNotThrow(() -> clientNoteDeleteCommand.execute(model));
+    }
+
+
+
 
     @Test
     public void execute_invalidClientIndex_throwsCommandException() {
@@ -51,18 +65,22 @@ class ClientNoteDeleteCommandTest {
                 new ClientNoteDeleteCommand(Index.fromOneBased(2), Index.fromOneBased(1));
         ClientNoteDeleteCommand clientNoteDeleteCommand1ClientNote2 =
                 new ClientNoteDeleteCommand(Index.fromOneBased(1), Index.fromOneBased(2));
+        Object randomObject = new Object();
+
+        // random object -> returns false
+        assertFalse(clientNoteDeleteCommand1.equals(randomObject));
 
         // same object -> returns true
-        assertEquals(clientNoteDeleteCommand1, clientNoteDeleteCommand1);
+        assertTrue(clientNoteDeleteCommand1.equals(clientNoteDeleteCommand1));
 
         // same values -> returns true
-        assertEquals(clientNoteDeleteCommand1, clientNoteDeleteCommand1Duplicate);
+        assertTrue(clientNoteDeleteCommand1.equals(clientNoteDeleteCommand1Duplicate));
 
         // diff values (diff client) --> returns false
-        assertNotEquals(clientNoteDeleteCommand1, clientNoteDeleteCommandClient2);
+        assertFalse(clientNoteDeleteCommand1.equals(clientNoteDeleteCommandClient2));
 
         // diff values (diff client note) --> returns false
-        assertNotEquals(clientNoteDeleteCommand1, clientNoteDeleteCommand1ClientNote2);
+        assertFalse(clientNoteDeleteCommand1.equals(clientNoteDeleteCommand1ClientNote2));
 
     }
 }

@@ -87,7 +87,6 @@ class TagNoteMapTest {
         assertTrue(tagNoteMap.getNotesForTag(testTag).equals(expectedNotesSet));
         tagNoteMap.deleteNote(taggedNote);
         assertFalse(tagNoteMap.getNotesForTag(testTag).equals(expectedNotesSet));
-        System.out.println("hello");
     }
 
     @Test
