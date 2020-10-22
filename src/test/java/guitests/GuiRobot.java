@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 /**
  * Robot used to simulate user actions on the GUI.
  * Extends {@link FxRobot} by adding some customized functionality and workarounds.
+ *
+ * Acknowledgements:
+ * <a href="https://github.com/se-edu/addressbook-level4/tree/master/src/test/java/guitests">Source</a>
  */
 public class GuiRobot extends FxRobot {
 

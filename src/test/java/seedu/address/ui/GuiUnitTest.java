@@ -13,6 +13,7 @@ import seedu.address.ui.testutil.UiPartExtension;
  * A GUI unit test class for AddressBook.
  */
 public abstract class GuiUnitTest {
+
     // TODO: Remove this workaround after using JavaFX version 13 or above
     // This is a workaround to solve headless test failure on Windows OS
     // Refer to https://github.com/javafxports/openjdk-jfx/issues/66 for more details.

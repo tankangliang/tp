@@ -22,12 +22,13 @@ public class ResultDisplayTest extends GuiUnitTest {
     }
 
     @Test
-    public void display() {
+    public void display_correctDisplayText() {
         // default result text
         guiRobot.pauseForHuman();
         assertEquals("", resultDisplayHandle.getText());
 
         // new result received
+        guiRobot.pauseForHuman();
         guiRobot.interact(() -> resultDisplay.setFeedbackToUser("Dummy feedback to user"));
         guiRobot.pauseForHuman();
         assertEquals("Dummy feedback to user", resultDisplayHandle.getText());
