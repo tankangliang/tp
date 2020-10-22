@@ -25,11 +25,12 @@ class ClientNoteDeleteCommandTest {
     @Test
     public void execute_validCommand_doesNotThrowException() throws CommandException {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Index idx = Index.fromOneBased(1);
+        Index clientIdx = Index.fromOneBased(2);
+        Index clientNoteIdx = Index.fromOneBased(1);
         Note clientNote = new Note(NOTE_CONTENT_1);
-        ClientNoteAddCommand addCommand = new ClientNoteAddCommand(idx, clientNote);
+        ClientNoteAddCommand addCommand = new ClientNoteAddCommand(clientIdx, clientNote);
         addCommand.execute(model);
-        ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(idx, idx);
+        ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(clientIdx, clientNoteIdx);
         assertDoesNotThrow(() -> clientNoteDeleteCommand.execute(model));
     }
 
