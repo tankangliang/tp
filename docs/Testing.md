@@ -22,7 +22,7 @@ There are three ways to run tests.
   * Open a console and run the command `gradlew clean test` (Mac/Linux: `./gradlew clean test`)
 * **Method 3: Using Gradle (headless)**
   * Open a console and run command `gradlew clean headlessTest` (Mac/Linux: `./gradlew clean headlessTest`)
-  * Alternatively, to configure the test task to run in headless mode, refer to the bottom section [Default headless](#-default-headless)
+  * Alternatively, to configure the test task to run in headless mode, refer to the bottom section [Default headless](#default-headless)
 
 <div markdown="span" class="alert alert-secondary">:link: **Link**: Read [this Gradle Tutorial from the se-edu/guides](https://se-education.org/guides/tutorials/gradle.html) to learn more about using Gradle.
 </div>
