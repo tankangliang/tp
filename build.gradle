@@ -57,6 +57,8 @@ test {
         } else {
             if (runHeadless) {
                 println "Running gui test in headless environment"
+            } else {
+                println "Running gui test without headless environment"
             }
             jvmArgs "-Dheadless=${project.hasProperty('headless') ? project.headless : runHeadless}"
         }
