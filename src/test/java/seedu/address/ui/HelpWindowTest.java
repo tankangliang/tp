@@ -59,7 +59,7 @@ public class HelpWindowTest extends GuiUnitTest {
     @Test
     public void copyUrl_userGuideUrl_copiesCorrectly() throws Exception {
         // Clipboard access in headless environment will throw an error.
-        assumeFalse(guiRobot.isHeadlessMode());
+        assumeFalse(guiRobot.isHeadlessMode(), "Test skipped in headless mode.");
 
         FxToolkit.showStage();
 
@@ -76,7 +76,7 @@ public class HelpWindowTest extends GuiUnitTest {
         // This test is to increase coverage. Somehow IDEA does not
         // pickup the copyURL method from the previous test.
         // Two tests are needed in fact.
-        assumeFalse(guiRobot.isHeadlessMode());
+        assumeFalse(guiRobot.isHeadlessMode(), "Test skipped in headless mode.");
 
         FxToolkit.showStage();
 
