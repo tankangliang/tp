@@ -1,56 +1,61 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.model.country.Country;
+import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 
 /**
  * Jackson-friendly version of {@link Note}.
  */
 class JsonAdaptedNote {
+    private static final String NULL_COUNTRY_CODE = "NULL_CC";
+    private final String contents;
+    private final String countryCode;
 
-    //TODO: For storing JSON notes
     @JsonCreator
+    public JsonAdaptedNote(@JsonProperty("contents") String contents,
+        @JsonProperty("countryCode") String countryCode) {
+        this.contents = contents;
+        this.countryCode = countryCode;
+    }
+
+    /**
+     * Initializes this json note with the Note that it is representing.
+     *
+     * @param note The note that this json note will be representing.
+     */
     public JsonAdaptedNote(Note note) {
+        this.contents = note.getNoteContents();
+        if (note.isClientNote()) {
+            this.countryCode = NULL_COUNTRY_CODE;
+        } else {
+            this.countryCode = ((CountryNote) note).getCountry().getCountryCode();
+        }
     }
 
-    //TODO: For storing JSON notes
+    /**
+     * Returns whether this json note represents a client or country note.
+     *
+     * @return True if this json note represents a client note.
+     */
     public boolean isClientNote() {
-        return true;
+        return countryCode.equals(NULL_COUNTRY_CODE);
     }
 
-    //TODO: For storing JSON notes
-    public Country getModelCountry() {
-        return new Country("SG");
+    /**
+     * Returns the correct Note object being represented by this json note.
+     *
+     * @return The correct Note object being represented by this json note.
+     */
+    public Note toModelType() {
+        if (isClientNote()) {
+            return new Note(contents);
+        } else {
+            return new CountryNote(contents, new Country(countryCode));
+        }
     }
 
-    //TODO: For storing JSON notes
-    public Note getModelNote() {
-        return new Note("some note content");
-    }
-
-    //    /**
-    //     * Converts a given {@code Tag} into this class for Jackson use.
-    //     */
-    //    public JsonAdaptedTag(Tag source) {
-    //        tagName = source.tagName;
-    //    }
-    //
-    //    @JsonValue
-    //    public String getTagName() {
-    //        return tagName;
-    //    }
-    //
-    //    /**
-    //     * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
-    //     *
-    //     * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
-    //     */
-    //    public Tag toModelType() throws IllegalValueException {
-    //        if (!Tag.isValidTagName(tagName)) {
-    //            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
-    //        }
-    //        return new Tag(tagName);
-    //    }
 }
