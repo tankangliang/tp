@@ -27,6 +27,7 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class Timezone
 Class UniqueClientList
 Class ContractExpiryDate
 Class Timezone
@@ -35,6 +36,10 @@ Class Timezone
 Package Note {
 Class Note
 Class TagNoteMap
+}
+
+Package Country {
+Class Country
 }
 
 Package Tag {
