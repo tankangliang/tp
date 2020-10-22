@@ -30,6 +30,7 @@ public class SuggestCommand extends Command {
      * Initializes SuggestCommand with a SuggestionType
      */
     public SuggestCommand(List<Predicate<Client>> suggestionTypePredicateList) {
+        requireNonNull(suggestionTypePredicateList);
         this.suggestionTypePredicateList = suggestionTypePredicateList;
     }
 
