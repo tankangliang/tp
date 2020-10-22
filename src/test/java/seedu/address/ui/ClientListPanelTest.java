@@ -47,8 +47,11 @@ public class ClientListPanelTest extends GuiUnitTest {
         }
     }
 
-    // TODO: This is probably useless as TBM has no interactions of significance concerning the ListView.
-    // However the this test is a good benchmark should we attempt more changes to this Client list panel
+    /*
+     * This is probably useless as TBM has almost no significant interaction with the ListView.
+     * However the this test is a good benchmark should we refactor the ListView. According to
+     * changes suggested in displaying notes, more performance test may be needed for this specific ListView.
+     */
     /**
      * Verifies that creating and deleting large number of persons in {@code PersonListPanel} requires lesser than
      * {@code CARD_CREATION_AND_DELETION_TIMEOUT} milliseconds to execute.
