@@ -1,17 +1,13 @@
 package seedu.address.ui;
 
-import static org.testfx.api.FxToolkit.registerPrimaryStage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.testfx.api.FxRobot;
-import org.testfx.assertions.api.Assertions;
-import org.testfx.framework.junit5.Start;
 
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
+import guitests.guihandles.WidgetViewBoxHandle;
 import seedu.address.model.widget.WidgetObject;
 /**
  * GUI unit test for WidgetViewBox. Test done to ensure the integrity of content displayed does not regress in future
@@ -19,71 +15,76 @@ import seedu.address.model.widget.WidgetObject;
  */
 public class WidgetViewBoxTest extends GuiUnitTest {
 
-    private WidgetObject TEST_OBJECT;
-    private String FIRST_LINE;
-    private String SECOND_LINE;
-    private String THIRD_LINE;
-    private String FOURTH_LINE;
-    private String FIFTH_LINE;
-    private String SIXTH_LINE;
-    private String SEVENTH_LINE;
-    private String EIGHTH_LINE;
-    private String NINTH_LINE;
+    private static final WidgetObject TEST_OBJECT = new WidgetObject();
+    private static final String FIRST_LINE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,";
+    private static final String SECOND_LINE = "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+    private static final String THIRD_LINE = "Ut enim ad minim veniam,";
+    private static final String FOURTH_LINE = "quis nostrud exercitation ullamco laboris nisi ut aliquip ex consequat.";
 
-    @BeforeEach
-    public void setupSpecs() throws Exception {
-        // Widget Object
-        TEST_OBJECT = new WidgetObject();
-        FIRST_LINE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,";
-        SECOND_LINE = "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-        THIRD_LINE = "Ut enim ad minim veniam,";
-        FOURTH_LINE = "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-        FIFTH_LINE = "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla"
-                + "pariatur.";
-        SIXTH_LINE = "Excepteur sint occaecat cupidatat non proident,";
-        SEVENTH_LINE = "sunt in culpa qui officia deserunt mollit anim id est laborum.";
-        EIGHTH_LINE = "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque"
-                + "laudantium,";
+    private static final String FIFTH_LINE = "Duis aute irure dolor in reprehenderit in voluptate vesse cillum dolore.";
 
-        NINTH_LINE = "totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto"
-                + "beatae vitae dicta sunt explicabo.";
+    private static final String SIXTH_LINE = "Excepteur sint occaecat cupidatat non proident,";
+    private static final String SEVENTH_LINE = "sunt in culpa qui officia deserunt mollit anim id est laborum.";
+    private static final String EIGHTH_LINE = "Sed ut perspiciatis unde omnis iste error sit voluptatem accusantium.";
+    private static final String NINTH_LINE = "totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et.";
+
+    @BeforeAll
+    public static void setupObject() {
         TEST_OBJECT.set(FIRST_LINE, SECOND_LINE, THIRD_LINE, FOURTH_LINE, FIFTH_LINE, SIXTH_LINE, SEVENTH_LINE,
                 EIGHTH_LINE, NINTH_LINE);
     }
 
-    /**
-     * Will be called with {@code @Before} semantics, i. e. before each test method.
-     *
-     * @param stage - Will be injected by the test runner.
-     */
-    @Start
-    private void start(Stage stage) {
+    @Test
+    public void display() {
+        WidgetViewBox widgetViewBox = WidgetViewBox.init(TEST_OBJECT);
+        uiPartExtension.setUiPart(widgetViewBox);
 
-        // Stage initialisation
-        WidgetViewBox widgetViewBox = new WidgetViewBox();
-        widgetViewBox.update(TEST_OBJECT);
-        StackPane stackPane = new StackPane();
-        stackPane.getChildren().add(widgetViewBox.getRoot());
-        stage.setScene(new Scene(stackPane, 100, 100));
-        stage.show();
+        assertViewBoxDisplay(widgetViewBox, TEST_OBJECT);
+
     }
 
     /**
-     * Test text contents rendered matches what was passed.
-     *
-     * @param robot - Will be injected by the test runner.
+     * This test checks your time, country and timezone.
+     * Since this is a manual eyeballing test. It will be skipped in headless.
      */
     @Test
-    public void update_matchingContent(FxRobot robot) {
-        Assertions.assertThat(robot.lookup("#header").queryLabeled()).hasText(FIRST_LINE);
-        Assertions.assertThat(robot.lookup("#divOne").queryLabeled()).hasText(SECOND_LINE);
-        Assertions.assertThat(robot.lookup("#textOne").queryLabeled()).hasText(THIRD_LINE);
-        Assertions.assertThat(robot.lookup("#divTwo").queryLabeled()).hasText(FOURTH_LINE);
-        Assertions.assertThat(robot.lookup("#textTwo").queryLabeled()).hasText(FIFTH_LINE);
-        Assertions.assertThat(robot.lookup("#textThree").queryLabeled()).hasText(SIXTH_LINE);
-        Assertions.assertThat(robot.lookup("#divThree").queryLabeled()).hasText(SEVENTH_LINE);
-        Assertions.assertThat(robot.lookup("#textFour").queryTextInputControl()).hasText(EIGHTH_LINE);
-        Assertions.assertThat(robot.lookup("#footer").queryLabeled()).hasText(NINTH_LINE);
+    public void displayDefault() {
+        /*
+        * Issue was raised by @rtshkmr where his JVM has correct timezone and time but wrong country.
+        * Locale.getDefault().getDisplayCountry() returns United States for him.
+        */
+        assumeFalse(guiRobot.isHeadlessMode(), "Test skipped in headless mode.");
+
+        WidgetViewBox widgetViewBox = new WidgetViewBox();
+
+        uiPartExtension.setUiPart(widgetViewBox);
+        guiRobot.pauseForHuman();
+        guiRobot.pauseForHuman();
+
+    }
+
+    @Test
+    public void updateContentToEmptyObject_updatesProperly_newObjectIsSuccessfullyUpdated() {
+        // This is primarily testing that the textclock does not show itself during an update.
+        WidgetViewBox widgetViewBox = WidgetViewBox.init(TEST_OBJECT);
+        WidgetObject newObj = new WidgetObject();
+        widgetViewBox.update(newObj);
+        uiPartExtension.setUiPart(widgetViewBox);
+
+        assertViewBoxDisplay(widgetViewBox, newObj);
+    }
+
+    private void assertViewBoxDisplay(WidgetViewBox widgetViewBox , WidgetObject expectedObject) {
+        guiRobot.pauseForHuman();
+
+        WidgetViewBoxHandle widgetViewBoxHandle = new WidgetViewBoxHandle(widgetViewBox.getRoot());
+
+        // Testing using the equals method of handler.
+        if (!widgetViewBoxHandle.equals(expectedObject)) {
+            fail();
+        } else {
+            assertEquals(1, 1);
+        }
     }
 
 }

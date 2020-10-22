@@ -37,7 +37,7 @@ public class ClientCardTest extends GuiUnitTest {
     public void contructor_badClient_throwsException() {
         // faulty clients contact
         try {
-            // TODO: Remove after adding systems test. Will modify JVM baheviour.
+            // TODO: Since this will remove JVM runtime behaviour, remove after adding assertions.
             Client faultyClient = new ClientBuilder().build();
             Field badCountry = faultyClient.getClass().getDeclaredField("country");
             badCountry.setAccessible(true);
@@ -47,8 +47,10 @@ public class ClientCardTest extends GuiUnitTest {
             badCountry.set(faultyClient, null);
             ClientCard faultyCard = new ClientCard(faultyClient, 1);
             fail(" Client card is accepting a faulty client ");
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             assertEquals(1, 1);
+        } catch (IllegalAccessException | NoSuchFieldException ie) {
+            fail();
         }
 
         // null client

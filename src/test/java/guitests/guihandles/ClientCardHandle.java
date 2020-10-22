@@ -88,7 +88,7 @@ public class ClientCardHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if this handle contains {@code person}.
+     * Returns true if this handle contains {@code client}.
      */
     public boolean equals(Client client) {
         return getName().equals(client.getName().fullName)

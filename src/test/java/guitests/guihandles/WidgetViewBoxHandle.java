@@ -5,7 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import seedu.address.model.widget.WidgetObject;
 
-public class WidgetViewBoxHandle extends NodeHandle<Node>  {
+/**
+ * Provides a handler to the widget view box.
+ */
+public class WidgetViewBoxHandle extends NodeHandle<Node> {
     private static final String HEADER_FIELD_ID = "#header";
     private static final String DIVONE_FIELD_ID = "#divOne";
     private static final String TEXTONE_FIELD_ID = "#textOne";
@@ -27,6 +30,12 @@ public class WidgetViewBoxHandle extends NodeHandle<Node>  {
 
 
     //TODO: Change label of TextArea according to changes in widgetviewbox
+
+    /**
+     * Constructor for handler.
+     *
+     * @param widgetNode
+     */
     public WidgetViewBoxHandle(Node widgetNode) {
         super(widgetNode);
 
@@ -41,6 +50,9 @@ public class WidgetViewBoxHandle extends NodeHandle<Node>  {
         footerLabel = getChildNode(FOOTER_FIELD_ID);
     }
 
+    /**
+     * Returns true if this handle contains a {@code otherObject}.
+     */
     public boolean equals(WidgetObject otherObject) {
         return headerLabel.getText().equals(otherObject.getHeader())
                 && divOneLabel.getText().equals(otherObject.getDivOne())
