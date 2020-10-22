@@ -115,7 +115,7 @@ The `Model`,
 * stores the address book data.
 * exposes an unmodifiable `ObservableList<Client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
-* contains a `UniqueTagSet` to prevent duplication of `Tag` objects between
+* contains a `UniqueTagSet` to prevent duplication of `Tag` objects.
 
 #### Inner Workings of TBM
 

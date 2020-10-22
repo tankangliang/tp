@@ -55,5 +55,3 @@ CountryManager --> "*" Note : creates mapping >
 
 Client -[hidden]right- AddressBook
 @enduml
-
-
