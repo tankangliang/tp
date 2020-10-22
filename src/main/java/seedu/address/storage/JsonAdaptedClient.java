@@ -68,7 +68,7 @@ class JsonAdaptedClient {
         email = source.getEmail().value;
         address = source.getAddress().value;
         country = source.getCountry().getCountryCode();
-        timezone = source.getTimezone().value;
+        timezone = source.getTimezone().toString();
         contractExpiryDate = source.getContractExpiryDate().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)

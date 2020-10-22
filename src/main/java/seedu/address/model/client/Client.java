@@ -37,7 +37,7 @@ public class Client {
      */
     public Client(Name name, Phone phone, Email email, Address address, Country country, Timezone timezone,
                   ContractExpiryDate contractExpiryDate, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, country, timezone, contractExpiryDate, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -163,7 +163,7 @@ public class Client {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, country, timezone, tags);
+        return Objects.hash(name, phone, email, address, country, timezone, contractExpiryDate, tags);
     }
 
     @Override

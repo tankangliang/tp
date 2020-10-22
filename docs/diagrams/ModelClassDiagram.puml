@@ -28,6 +28,7 @@ Class Email
 Class Name
 Class Phone
 Class UniqueClientList
+Class ContractExpiryDate
 }
 
 Package Tag {
@@ -53,6 +54,7 @@ Client *--> Name
 Client *--> Phone
 Client *--> Email
 Client *--> Address
+Client *--> ContractExpiryDate
 Client *--> "*" Tag
 
 
