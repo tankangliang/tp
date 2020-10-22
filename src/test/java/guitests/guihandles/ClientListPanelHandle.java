@@ -1,6 +1,5 @@
 package guitests.guihandles;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,46 +19,6 @@ public class ClientListPanelHandle extends NodeHandle<ListView<Client>> {
 
     public ClientListPanelHandle(ListView<Client> clientListPanelNode) {
         super(clientListPanelNode);
-    }
-
-    /**
-     * Returns a handle to the selected {@code PersonCardHandle}.
-     * A maximum of 1 item can be selected at any time.
-     * @throws AssertionError if no card is selected, or more than 1 card is selected.
-     * @throws IllegalStateException if the selected card is currently not in the scene graph.
-     */
-    public ClientCardHandle getHandleToSelectedCard() {
-        List<Client> selectedPersonList = getRootNode().getSelectionModel().getSelectedItems();
-
-        if (selectedPersonList.size() != 1) {
-            throw new AssertionError("Person list size expected 1.");
-        }
-
-        return getAllCardNodes().stream()
-                .map(ClientCardHandle::new)
-                .filter(handle -> handle.equals(selectedPersonList.get(0)))
-                .findFirst()
-                .orElseThrow(IllegalStateException::new);
-    }
-
-    /**
-     * Returns the index of the selected card.
-     */
-    public int getSelectedCardIndex() {
-        return getRootNode().getSelectionModel().getSelectedIndex();
-    }
-
-    /**
-     * Returns true if a card is currently selected.
-     */
-    public boolean isAnyCardSelected() {
-        List<Client> selectedCardsList = getRootNode().getSelectionModel().getSelectedItems();
-
-        if (selectedCardsList.size() > 1) {
-            throw new AssertionError("Card list size expected 0 or 1.");
-        }
-
-        return !selectedCardsList.isEmpty();
     }
 
     /**
@@ -91,13 +50,6 @@ public class ClientListPanelHandle extends NodeHandle<ListView<Client>> {
     }
 
     /**
-     * Selects the {@code ClientCard} at {@code index} in the list.
-     */
-    public void select(int index) {
-        getRootNode().getSelectionModel().select(index);
-    }
-
-    /**
      * Returns the client card handle of a client associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
@@ -120,34 +72,6 @@ public class ClientListPanelHandle extends NodeHandle<ListView<Client>> {
      */
     private Set<Node> getAllCardNodes() {
         return guiRobot.lookup(CARD_PANE_ID).queryAll();
-    }
-
-    /**
-     * Remembers the selected {@code ClientCard} in the list.
-     */
-    public void rememberSelectedClientCard() {
-        List<Client> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
-
-        if (selectedItems.size() == 0) {
-            lastRememberedSelectedClientCard = Optional.empty();
-        } else {
-            lastRememberedSelectedClientCard = Optional.of(selectedItems.get(0));
-        }
-    }
-
-    /**
-     * Returns true if the selected {@code ClientCard} is different from the value remembered by the most recent
-     * {@code rememberSelectedClientCard()} call.
-     */
-    public boolean isSelectedPersonCardChanged() {
-        List<Client> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
-
-        if (selectedItems.size() == 0) {
-            return lastRememberedSelectedClientCard.isPresent();
-        } else {
-            return !lastRememberedSelectedClientCard.isPresent()
-                    || !lastRememberedSelectedClientCard.get().equals(selectedItems.get(0));
-        }
     }
 
     /**

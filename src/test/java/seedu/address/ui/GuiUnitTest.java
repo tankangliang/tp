@@ -15,6 +15,7 @@ import seedu.address.ui.testutil.UiPartExtension;
  * NTS: Either use this or FxRobot and ApplicationTest extension for the testing of GUI.
  */
 public abstract class GuiUnitTest {
+    // It crashed on my windows with an exact log file, so I'm leaving it here.
 
     // TODO: Remove this workaround after using JavaFX version 13 or above
     // This is a workaround to solve headless test failure on Windows OS
