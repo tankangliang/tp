@@ -27,9 +27,9 @@ public class GuiTestAssert {
     }
 
     /**
-     * Asserts that {@code actualCard} displays the details of {@code expectedPerson}.
+     * Asserts that {@code actualCard} displays the details of {@code expectedClient}.
      */
-    public static void assertCardDisplaysPerson(Client expectedClient, ClientCardHandle actualCard) {
+    public static void assertCardDisplaysClient(Client expectedClient, ClientCardHandle actualCard) {
         assertEquals(expectedClient.getName().fullName, actualCard.getName());
         assertEquals(expectedClient.getPhone().value, actualCard.getPhone());
         assertEquals(expectedClient.getEmail().value, actualCard.getEmail());
@@ -39,18 +39,18 @@ public class GuiTestAssert {
     }
 
     /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
+     * Asserts that the list in {@code clientListPanelHandle} displays the details of {@code clients} correctly and
      * in the correct order.
      */
     public static void assertListMatching(ClientListPanelHandle clientListPanelHandle, Client... clients) {
         for (int i = 0; i < clients.length; i++) {
             clientListPanelHandle.navigateToCard(i);
-            assertCardDisplaysPerson(clients[i], clientListPanelHandle.getClientCardHandle(i));
+            assertCardDisplaysClient(clients[i], clientListPanelHandle.getClientCardHandle(i));
         }
     }
 
     /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
+     * Asserts that the list in {@code clientListPanelHandle} displays the details of {@code clients} correctly and
      * in the correct order.
      */
     public static void assertListMatching(ClientListPanelHandle clientListPanelHandle, List<Client> clients) {
@@ -58,7 +58,7 @@ public class GuiTestAssert {
     }
 
     /**
-     * Asserts the size of the list in {@code personListPanelHandle} equals to {@code size}.
+     * Asserts the size of the list in {@code clientListPanelHandle} equals to {@code size}.
      */
     public static void assertListSize(ClientListPanelHandle clientListPanelHandle, int size) {
         int numberOfPeople = clientListPanelHandle.getListSize();
