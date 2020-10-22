@@ -29,12 +29,15 @@ Class Name
 Class Phone
 Class UniqueClientList
 Class ContractExpiryDate
+<<<<<<< HEAD
 Class Timezone
 }
 
 Package Note {
 Class Note
 Class TagNoteMap
+=======
+>>>>>>> 09922755719020b9bb0a840eb1737180c568b1c0
 }
 
 Package Tag {
@@ -76,10 +79,14 @@ Client *--> Phone
 Client *--> Email
 Client *--> Address
 Client *--> ContractExpiryDate
+<<<<<<< HEAD
 Client *-up-> "*" Tag
 Client --> Country
 Client --> Timezone
 Client -->"*" Note
+=======
+Client *--> "*" Tag
+>>>>>>> 09922755719020b9bb0a840eb1737180c568b1c0
 
 
 WidgetModelManager ..|> WidgetModel
