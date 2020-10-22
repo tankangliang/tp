@@ -11,6 +11,7 @@ public class CountryManagerTest {
 
     //TODO: Add more tests if decide to include checking for 3-letter Country Code
     private static final String[] COUNTRY_CODES = Locale.getISOCountries();
+    private static final String INVALID_COUNTRY_CODE = "ZZ";
 
     @Test
     public void isValidCode_validCode_returnTrue() {
@@ -49,6 +50,15 @@ public class CountryManagerTest {
     }
 
     @Test
+    public void hasCountryNote_invalidCountry_returnFalse() {
+        CountryManager countryManager = new CountryManager();
+        Country invalidCountry = new Country(INVALID_COUNTRY_CODE);
+        NoteStub genericNote = new NoteStub("generic note");
+        assertFalse(countryManager.hasCountryNote(invalidCountry, genericNote));
+
+    }
+
+    @Test
     public void addCountryNote_validNote_updatesCorrectly() {
         CountryManager countryManager = new CountryManager();
         for (String countryCode : COUNTRY_CODES) {
@@ -58,6 +68,17 @@ public class CountryManagerTest {
             countryManager.addCountryNote(new Country(countryCode), genericNote);
             assertTrue(countryManager.hasCountryNote(country, genericNote));
         }
+    }
+
+    @Test
+    public void addCountryNote_invalidCountry_noUpdates() {
+        CountryManager countryManager = new CountryManager();
+        Country invalidCountry = new Country(INVALID_COUNTRY_CODE);
+        NoteStub genericNote = new NoteStub("generic note");
+        assertFalse(countryManager.hasCountryNote(invalidCountry, genericNote));
+        countryManager.addCountryNote(invalidCountry, genericNote);
+        assertFalse(countryManager.hasCountryNote(invalidCountry, genericNote));
+
     }
 
 }

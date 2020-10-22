@@ -5,7 +5,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClientAddCommand;
 import seedu.address.logic.commands.ClientDeleteCommand;
@@ -28,6 +30,8 @@ import seedu.address.model.note.TagNoteMap;
  */
 public class AddressBookParser {
 
+    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+
     /**
      * Different command type separators
      */
@@ -41,6 +45,7 @@ public class AddressBookParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandType>\\S+)(?<restOfCommand>.*)");
 
     private final TagNoteMap tagNoteMap;
+
 
     public AddressBookParser(TagNoteMap tagNoteMap) {
         this.tagNoteMap = tagNoteMap;
@@ -61,6 +66,7 @@ public class AddressBookParser {
 
         final String commandType = matcher.group("commandType");
         final String restOfCommand = matcher.group("restOfCommand");
+        logger.info("Command Type: " + commandType + " Rest of command: " + restOfCommand);
         switch (commandType) {
         case CLIENT_TYPE:
             return parseClientCommands(restOfCommand);
@@ -105,6 +111,7 @@ public class AddressBookParser {
 
         final String commandType = matcher.group("commandType");
         final String restOfCommand = matcher.group("restOfCommand");
+        logger.info("Command Type: " + commandType + " Rest of command: " + restOfCommand);
 
         String commandWord = COUNTRY_TYPE + " " + commandType;
         switch (commandWord) {
@@ -134,6 +141,7 @@ public class AddressBookParser {
 
         final String commandType = matcher.group("commandType");
         final String restOfCommand = matcher.group("restOfCommand");
+        logger.info("Command Type: " + commandType + " Rest of command: " + restOfCommand);
 
         if (commandType.equals(NOTE_TYPE)) {
             return parseClientNoteCommands(restOfCommand);
@@ -178,6 +186,7 @@ public class AddressBookParser {
 
         final String commandType = matcher.group("commandType");
         final String restOfCommand = matcher.group("restOfCommand");
+        logger.info("Command Type: " + commandType + " Rest of command: " + restOfCommand);
 
         String commandWord = CLIENT_TYPE + " " + NOTE_TYPE + " " + commandType;
 

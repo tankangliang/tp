@@ -143,7 +143,7 @@ public class AddressBookParserTest {
         final String commandString = ClientNoteAddCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                 + " " + PREFIX_NOTE + noteString;
         TagNoteMap tagNoteMap = new TagNoteMap();
-        Set<Tag> tags = tagNoteMap.getUniqueTags(Collections.EMPTY_LIST);
+        Set<Tag> tags = tagNoteMap.getUniqueTags(Collections.emptyList());
         final Note note = new Note(noteString);
         note.setTags(tags);
         ClientNoteAddCommand command = (ClientNoteAddCommand) parser.parseCommand(commandString);
