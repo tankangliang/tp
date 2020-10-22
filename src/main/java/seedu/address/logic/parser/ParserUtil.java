@@ -10,13 +10,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.SuggestionType;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
-import seedu.address.model.country.CountryManager;
+import seedu.address.model.country.CountryCodeVerifier;
 import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
@@ -112,7 +113,6 @@ public class ParserUtil {
         return new Tag(trimmedTag);
     }
 
-
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
@@ -135,8 +135,8 @@ public class ParserUtil {
     public static Country parseCountry(String rawCountryCode) throws ParseException {
         requireNonNull(rawCountryCode);
         String trimmedCountryCode = rawCountryCode.trim();
-        if (!CountryManager.isValidCountryCode(trimmedCountryCode)) {
-            throw new ParseException(Country.MESSAGE_CONSTRAINTS);
+        if (!CountryCodeVerifier.isValidCountryCode(trimmedCountryCode)) {
+            throw new ParseException(CountryCodeVerifier.MESSAGE_CONSTRAINTS);
         }
         return new Country(trimmedCountryCode);
     }
@@ -200,5 +200,17 @@ public class ParserUtil {
             suggestionSet.add(parseSuggestionType(suggestionType));
         }
         return suggestionSet;
+    }
+
+    /**
+     * Parses a {@code String dateString} into a {@code ContractExpiryDate}.
+     */
+    public static ContractExpiryDate parseContractExpiryDate(String dateString) throws ParseException {
+        requireNonNull(dateString);
+        String trimmedDateString = dateString.trim();
+        if (!ContractExpiryDate.isValidDate(trimmedDateString)) {
+            throw new ParseException(ContractExpiryDate.MESSAGE_CONSTRAINTS);
+        }
+        return new ContractExpiryDate(trimmedDateString);
     }
 }

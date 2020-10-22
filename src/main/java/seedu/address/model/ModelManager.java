@@ -4,16 +4,19 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
-import seedu.address.model.country.Country;
+import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
@@ -130,21 +133,20 @@ public class ModelManager implements Model {
         for (Note note : clientNotes) {
             Set<Tag> tags = note.getTags();
             updateTagNoteMapWithNote(tags, note);
+            updateTagNoteMapWithNote(tags, note);
         }
     }
 
     @Override
     public void setClient(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
-
         addressBook.setClient(target, editedClient);
     }
 
     @Override
-    public boolean hasCountryNote(Country country, Note countryNote) {
-        requireAllNonNull(country, countryNote);
-
-        return addressBook.hasCountryNote(country, countryNote);
+    public boolean hasCountryNote(CountryNote countryNote) {
+        requireNonNull(countryNote);
+        return addressBook.hasCountryNote(countryNote);
     }
 
     @Override
@@ -154,10 +156,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addCountryNote(Country country, Note countryNote) {
-        requireAllNonNull(country, countryNote);
-
-        addressBook.addCountryNote(country, countryNote);
+    public void addCountryNote(CountryNote countryNote) {
+        requireNonNull(countryNote);
+        addressBook.addCountryNote(countryNote);
     }
 
     @Override
@@ -188,6 +189,15 @@ public class ModelManager implements Model {
         return this.tagNoteMap;
     }
 
+    @Override
+    public void deleteClientNote(Client associatedClient, Note noteToDelete) {
+        requireAllNonNull(associatedClient, noteToDelete);
+        // update tagNoteMap
+        // todo: Ritesh implement delete in the Client class and add tests to cover this method
+        this.tagNoteMap.deleteNote(noteToDelete);
+        associatedClient.deleteClientNote(noteToDelete);
+    }
+
     //=========== Filtered Client List Accessors =============================================================
 
     /**
@@ -197,6 +207,17 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Client> getFilteredClientList() {
         return filteredClients;
+    }
+
+    @Override
+    public ObservableList<Note> getFilteredClientNotesList() {
+        // todo: depends on UI display of client notes and their index
+        ObservableList<Client> currentClients = this.getFilteredClientList();
+        List<Note> clientNotes = new ArrayList<>();
+        for (Client client : currentClients) {
+            clientNotes.addAll(client.getClientNotes());
+        }
+        return FXCollections.observableList(clientNotes);
     }
 
     @Override

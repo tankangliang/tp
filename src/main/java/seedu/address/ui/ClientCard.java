@@ -43,6 +43,8 @@ public class ClientCard extends UiPart<Region> {
     @FXML
     private Label timezone;
     @FXML
+    private Label contractExpiryDate;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -57,7 +59,8 @@ public class ClientCard extends UiPart<Region> {
         address.setText(client.getAddress().value);
         email.setText(client.getEmail().value);
         country.setText(client.getCountry().getCountryName());
-        timezone.setText(client.getTimezone().value);
+        timezone.setText(client.getTimezone().toString());
+        contractExpiryDate.setText(client.getContractExpiryDate().value);
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

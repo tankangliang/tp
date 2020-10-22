@@ -3,16 +3,18 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.util.StringTokenizer;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClientAddCommand;
 import seedu.address.logic.commands.ClientDeleteCommand;
 import seedu.address.logic.commands.ClientEditCommand;
 import seedu.address.logic.commands.ClientFindCommand;
 import seedu.address.logic.commands.ClientNoteAddCommand;
+import seedu.address.logic.commands.ClientNoteDeleteCommand;
 import seedu.address.logic.commands.ClientViewCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CountryFilterCommand;
@@ -29,17 +31,19 @@ import seedu.address.model.note.TagNoteMap;
  */
 public class AddressBookParser {
 
+    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+
     /**
      * Different command type separators
      */
     private static final String CLIENT_TYPE = "client";
     private static final String COUNTRY_TYPE = "country";
+    private static final String NOTE_TYPE = "note";
 
     /**
-     * Used for initial separation of command type and rest of command.
+     * Used for separation of command type and rest of command.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandType>\\S+)(?<restOfCommand>.*)");
-    private static final Pattern SECONDARY_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
     private final TagNoteMap tagNoteMap;
 
@@ -62,6 +66,7 @@ public class AddressBookParser {
 
         final String commandType = matcher.group("commandType");
         final String restOfCommand = matcher.group("restOfCommand");
+        logger.info("Command Type: " + commandType + " Rest of command: " + restOfCommand);
         switch (commandType) {
         case CLIENT_TYPE:
             return parseClientCommands(restOfCommand);
@@ -98,22 +103,23 @@ public class AddressBookParser {
      * @throws ParseException if input does not conform to expected format
      */
     private Command parseCountryCommands(String input) throws ParseException {
-        final Matcher secondaryMatcher = SECONDARY_COMMAND_FORMAT.matcher(input.trim());
-        if (!secondaryMatcher.matches()) {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
+        if (!matcher.matches()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        String commandWord = secondaryMatcher.group("commandWord");
-        final String arguments = secondaryMatcher.group("arguments");
+        final String commandType = matcher.group("commandType");
+        final String restOfCommand = matcher.group("restOfCommand");
+        logger.info("Command Type: " + commandType + " Rest of command: " + restOfCommand);
 
-        commandWord = COUNTRY_TYPE + " " + commandWord;
+        String commandWord = COUNTRY_TYPE + " " + commandType;
         switch (commandWord) {
         case CountryNoteCommand.COMMAND_WORD:
-            return new CountryNoteCommandParser().parse(arguments);
+            return new CountryNoteCommandParser().parse(restOfCommand);
 
         case CountryFilterCommand.COMMAND_WORD:
-            return new CountryFilterCommandParser().parse(arguments);
+            return new CountryFilterCommandParser().parse(restOfCommand);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -128,50 +134,69 @@ public class AddressBookParser {
      * @throws ParseException if input does not conform to expected format
      */
     private Command parseClientCommands(String input) throws ParseException {
-        final Matcher secondaryMatcher = SECONDARY_COMMAND_FORMAT.matcher(input.trim());
-        if (!secondaryMatcher.matches()) {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
+        if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        String commandWord = secondaryMatcher.group("commandWord");
-        String arguments = secondaryMatcher.group("arguments");
-        commandWord = CLIENT_TYPE + " " + commandWord;
-        // todo: abstract away this parsing logic or use better regex matcher
-        StringTokenizer stringTokenizer = new StringTokenizer(arguments);
-        String nextWord = stringTokenizer.nextToken();
-        if (nextWord.equals("add")) {
-            // gather rest of the arguments:
-            StringBuilder stringBuilder = new StringBuilder();
-            while (stringTokenizer.hasMoreTokens()) {
-                stringBuilder.append(stringTokenizer.nextToken()).append(" ");
-            }
+        final String commandType = matcher.group("commandType");
+        final String restOfCommand = matcher.group("restOfCommand");
+        logger.info("Command Type: " + commandType + " Rest of command: " + restOfCommand);
 
-            commandWord += (" " + nextWord);
-            arguments = " " + stringBuilder.toString();
+        if (commandType.equals(NOTE_TYPE)) {
+            return parseClientNoteCommands(restOfCommand);
         }
 
-        switch (commandWord) {
-        case ClientNoteAddCommand.COMMAND_WORD:
-            return new ClientNoteAddCommandParser(tagNoteMap).parse(arguments);
+        String commandWord = CLIENT_TYPE + " " + commandType;
 
+        switch (commandWord) {
         case ClientAddCommand.COMMAND_WORD:
-            return new ClientAddCommandParser().parse(arguments);
+            return new ClientAddCommandParser().parse(restOfCommand);
 
         case ClientEditCommand.COMMAND_WORD:
-            return new ClientEditCommandParser().parse(arguments);
+            return new ClientEditCommandParser().parse(restOfCommand);
 
         case ClientDeleteCommand.COMMAND_WORD:
-            return new ClientDeleteCommandParser().parse(arguments);
+            return new ClientDeleteCommandParser().parse(restOfCommand);
 
         case ClientFindCommand.COMMAND_WORD:
-            return new ClientFindCommandParser().parse(arguments);
+            return new ClientFindCommandParser().parse(restOfCommand);
 
         case ClientViewCommand.COMMAND_WORD:
-            return new ClientViewCommandParser().parse(arguments);
+            return new ClientViewCommandParser().parse(restOfCommand);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
+    /**
+     * Parses input given that command is of CLIENT_TYPE + NOTE_TYPE (starts with "client note")
+     *
+     * @param input user input with "client note" stripped
+     * @return command relating to client note functions
+     * @throws ParseException if input does not conform to expected format
+     */
+    private Command parseClientNoteCommands(String input) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        final String commandType = matcher.group("commandType");
+        final String restOfCommand = matcher.group("restOfCommand");
+        logger.info("Command Type: " + commandType + " Rest of command: " + restOfCommand);
+
+        String commandWord = CLIENT_TYPE + " " + NOTE_TYPE + " " + commandType;
+
+        switch (commandWord) {
+        case ClientNoteAddCommand.COMMAND_WORD:
+            return new ClientNoteAddCommandParser(tagNoteMap).parse(restOfCommand);
+        case ClientNoteDeleteCommand.COMMAND_WORD:
+            return new ClientNoteDeleteCommandParser().parse(restOfCommand);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
 }

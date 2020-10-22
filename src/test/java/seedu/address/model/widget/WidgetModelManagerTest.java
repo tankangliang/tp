@@ -47,5 +47,4 @@ public class WidgetModelManagerTest {
         assertNotEquals(widgetModelManager1.getWidgetContent(), widgetModelManager2.getWidgetContent());
     }
 
-
 }

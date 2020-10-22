@@ -8,7 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
@@ -20,14 +22,23 @@ import seedu.address.model.tag.Tag;
  */
 public class TagNoteMap {
 
-    public final Set<Note> noteSet = new HashSet<>(); // TODO: not really needed
+    private static final Logger logger = LogsCenter.getLogger(TagNoteMap.class);
+
+    private final Set<Note> noteSet = new HashSet<>(); // TODO: not really needed
     /**
      * A map that contains the mapping from any tag to a unique tag.
      * A map is used instead of a set because the set does not offer the option of getting objects inside it.
      */
-    public final Map<Tag, Tag> uniqueTagMap = new HashMap<>();
-    public final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
-    public final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
+    private final Map<Tag, Tag> uniqueTagMap = new HashMap<>();
+    private final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
+    private final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
+
+    /**
+     * Constructor ensures our unique tag map has the UNTAGGED tag.
+     */
+    public TagNoteMap() {
+        uniqueTagMap.put(Tag.UNTAGGED, Tag.UNTAGGED);
+    }
 
     private void initTagNoteMapFromNotes(Set<Note> notes) {
         noteSet.addAll(notes);
@@ -51,6 +62,7 @@ public class TagNoteMap {
             Set<Note> clientNotes = client.getClientNotes();
             initTagNoteMapFromNotes(clientNotes);
         }
+        logger.info("--------------[TagNoteMap initialized from clients]");
     }
 
     /**
@@ -62,6 +74,7 @@ public class TagNoteMap {
         // todo: make init work when passed in a list of countryNotes
         requireAllNonNull(countryNotes);
         initTagNoteMapFromNotes(countryNotes);
+        logger.info("--------------[TagNoteMap initialized from country notes]");
     }
 
     /**
@@ -94,7 +107,26 @@ public class TagNoteMap {
         return Collections.unmodifiableSet(tagToNotesMap.getOrDefault(tag, new HashSet<>()));
     }
 
-    // TODO: DELETE NOTE METHOD
+    /**
+     * Deletes a note from the TagNoteMap. Modifies existing {@code noteSet, tagToNotesMap, noteToTagsMap}
+     * @param note The note to be deleted from the TagNoteMap.
+     */
+    public void deleteNote(Note note) {
+        assert noteSet.contains(note) : "trying to remove note that doesn't exist in noteSet";
+        assert noteToTagsMap.containsKey(note) : "trying to remove note that doesn't exist in noteToTagsMap";
+        noteSet.remove(note);
+        Set<Tag> associatedTags = this.noteToTagsMap.get(note);
+        for (Tag tag : associatedTags) { // remove note for relevant tags
+            Set<Note> notes = this.tagToNotesMap.get(tag);
+            notes.remove(note);
+            if (notes.isEmpty()) { // remove the tag itself from tagToNotesMap and uniqueTagMap:
+                this.tagToNotesMap.remove(tag);
+                this.uniqueTagMap.remove(tag);
+            }
+        }
+        noteToTagsMap.remove(note);
+    }
+
 
     /**
      * Links a new set of tags to a note.
@@ -111,10 +143,6 @@ public class TagNoteMap {
         //  for each oldtags: remove this note from the tag to notes map. So if the hashset is empty
         requireAllNonNull(newTags, note);
         for (Tag newTag : newTags) {
-            // update our uniqueTagMap
-            if (!uniqueTagMap.containsKey(newTag)) {
-                uniqueTagMap.put(newTag, newTag);
-            }
             // update the notes set for each of the tags:
             if (tagToNotesMap.containsKey(newTag)) { // if that tag exists
                 tagToNotesMap.get(newTag).add(note);
@@ -128,6 +156,7 @@ public class TagNoteMap {
         Set<Tag> currentTags = noteToTagsMap.getOrDefault(note, new HashSet<>());
         currentTags.addAll(newTags);
         noteToTagsMap.put(note, currentTags);
+        noteSet.add(note);
     }
 
     @Override

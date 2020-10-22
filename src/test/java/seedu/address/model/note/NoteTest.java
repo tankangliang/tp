@@ -13,7 +13,6 @@ import seedu.address.model.tag.Tag;
 class NoteTest {
     private static final String NOTE_CONTENT_1 = "note content 1";
     private static final String NOTE_CONTENT_2 = "note content 2";
-    private static final String DUPLICATE_NOTE_CONTENT_1 = "note content 1";
     private static final Note NOTE_1 = new Note(NOTE_CONTENT_1);
     private static final Tag TAG_1 = new Tag("tag1");
     private static final Tag TAG_2 = new Tag("tag2");
@@ -26,9 +25,21 @@ class NoteTest {
     }
 
     @Test
+    public void equals_sameNote_returnTrue() {
+        Note note = new Note(NOTE_CONTENT_1);
+        assertEquals(note, note);
+    }
+
+    @Test
+    public void equals_null_returnFalse() {
+        Note note = new Note(NOTE_CONTENT_1);
+        assertNotEquals(note, null);
+    }
+
+    @Test
     public void equals_sameNoteContents_returnTrue() {
         Note note1 = new Note(NOTE_CONTENT_1);
-        Note note1Duplicate = new Note(DUPLICATE_NOTE_CONTENT_1);
+        Note note1Duplicate = new Note(NOTE_CONTENT_1);
         assertEquals(note1, note1Duplicate);
     }
 

@@ -22,7 +22,11 @@ public class ClientNoteAddCommandParser implements Parser<ClientNoteAddCommand> 
 
     private final TagNoteMap tagNoteMap;
 
+    /**
+     * Initializes a {@code CLientNoteAddCommandParser} with the {@code tagNoteMap} object.
+     */
     public ClientNoteAddCommandParser(TagNoteMap tagNoteMap) {
+        requireNonNull(tagNoteMap);
         this.tagNoteMap = tagNoteMap;
     }
 
@@ -41,8 +45,7 @@ public class ClientNoteAddCommandParser implements Parser<ClientNoteAddCommand> 
         }
         Index index;
         try {
-            String[] preambleWords = argMultimap.getPreamble().split(" "); // todo: ask if there's a better way?
-            index = ParserUtil.parseIndex(preambleWords[preambleWords.length - 1]);
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ClientNoteAddCommand.MESSAGE_USAGE), pe);
@@ -54,7 +57,6 @@ public class ClientNoteAddCommandParser implements Parser<ClientNoteAddCommand> 
                 .orElseThrow(() -> new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ClientNoteAddCommand.MESSAGE_USAGE))));
         clientNote.setTags(tags);
-        tagNoteMap.updateTagsForNote(tags, clientNote);
         return new ClientNoteAddCommand(index, clientNote);
     }
 

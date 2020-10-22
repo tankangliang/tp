@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTRACT_EXPIRY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -38,7 +39,8 @@ public class ClientUtil {
         sb.append(PREFIX_EMAIL + client.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + client.getAddress().value + " ");
         sb.append(PREFIX_COUNTRY + client.getCountry().getCountryCode() + " ");
-        sb.append(PREFIX_TIMEZONE + client.getTimezone().value + " ");
+        sb.append(PREFIX_TIMEZONE + client.getTimezone().toString() + " ");
+        sb.append(PREFIX_CONTRACT_EXPIRY_DATE + client.getContractExpiryDate().value + " ");
         client.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -56,7 +58,10 @@ public class ClientUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getCountry().ifPresent(country -> sb.append(PREFIX_COUNTRY).append(country.getCountryCode())
                 .append(" "));
-        descriptor.getTimezone().ifPresent(timezone -> sb.append(PREFIX_TIMEZONE).append(timezone.value).append(" "));
+        descriptor.getTimezone().ifPresent(timezone -> sb.append(PREFIX_TIMEZONE)
+                .append(timezone.toString()).append(" "));
+        descriptor.getContractExpiryDate().ifPresent(contractExpiryDate ->
+                sb.append(PREFIX_CONTRACT_EXPIRY_DATE).append(contractExpiryDate.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

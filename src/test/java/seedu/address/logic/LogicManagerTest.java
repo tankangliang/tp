@@ -1,9 +1,11 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.CONTRACT_EXPIRY_DATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COUNTRY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -19,6 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.ClientAddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -40,7 +43,8 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private final Model model = new ModelManager();
+    private StorageManager storage;
     private Logic logic;
 
     @BeforeEach
@@ -48,8 +52,31 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
+    }
+
+    @Test
+    public void constructor_nullArgs_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new LogicManager(model, null));
+        assertThrows(NullPointerException.class, () -> new LogicManager(null, storage));
+    }
+
+    @Test
+    public void getMethods_returnCorrectObjects() {
+        assertEquals(logic.getAddressBook(), model.getAddressBook());
+        assertEquals(logic.getAddressBookFilePath(), model.getAddressBookFilePath());
+        assertEquals(logic.getFilteredClientList(), model.getFilteredClientList());
+        assertEquals(logic.getWidgetContent(), model.getWidgetContent());
+        assertEquals(logic.getGuiSettings(), model.getGuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings() {
+        GuiSettings guiSettings = new GuiSettings(15.0, 10.0, 90, 100);
+        assertNotEquals(logic.getGuiSettings(), guiSettings);
+        logic.setGuiSettings(guiSettings);
+        assertEquals(logic.getGuiSettings(), guiSettings);
     }
 
     @Test
@@ -82,7 +109,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = ClientAddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + COUNTRY_DESC_AMY + TIMEZONE_DESC_AMY;
+                + ADDRESS_DESC_AMY + COUNTRY_DESC_AMY + TIMEZONE_DESC_AMY + CONTRACT_EXPIRY_DATE_DESC_AMY;
         Client expectedClient = new ClientBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addClient(expectedClient);

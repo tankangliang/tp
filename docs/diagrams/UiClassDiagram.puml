@@ -48,6 +48,7 @@ ClientListPanel --|> UiPart
 ClientCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow -down-|> UiPart
+WidgetViewBox -left-|> UiPart
 
 WidgetViewBox .right.> Model
 ClientCard .right.> Model

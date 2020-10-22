@@ -25,7 +25,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.client.Client;
-import seedu.address.model.country.Country;
+import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
@@ -190,7 +190,7 @@ public class ClientAddCommandTest {
         }
 
         @Override
-        public boolean hasCountryNote(Country country, Note countryNote) {
+        public boolean hasCountryNote(CountryNote countryNote) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -200,7 +200,7 @@ public class ClientAddCommandTest {
         }
 
         @Override
-        public void addCountryNote(Country country, Note countryNote) {
+        public void addCountryNote(CountryNote countryNote) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -210,7 +210,17 @@ public class ClientAddCommandTest {
         }
 
         @Override
+        public void deleteClientNote(Client associatedClient, Note noteToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Client> getFilteredClientList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Note> getFilteredClientNotesList() {
             throw new AssertionError("This method should not be called.");
         }
 

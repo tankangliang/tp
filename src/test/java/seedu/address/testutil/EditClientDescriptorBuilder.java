@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -19,7 +20,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditClientDescriptorBuilder {
 
-    private EditClientDescriptor descriptor;
+    private final EditClientDescriptor descriptor;
 
     public EditClientDescriptorBuilder() {
         descriptor = new EditClientDescriptor();
@@ -40,6 +41,7 @@ public class EditClientDescriptorBuilder {
         descriptor.setAddress(client.getAddress());
         descriptor.setCountry(client.getCountry());
         descriptor.setTimezone(client.getTimezone());
+        descriptor.setContractExpiryDate(client.getContractExpiryDate());
         descriptor.setTags(client.getTags());
     }
 
@@ -88,6 +90,14 @@ public class EditClientDescriptorBuilder {
      */
     public EditClientDescriptorBuilder withTimezone(String timezone) {
         descriptor.setTimezone(new Timezone(timezone));
+        return this;
+    }
+
+    /**
+     * Sets the {@code contractExpiryDate} of the {@code EditClientDescriptor} that we are building.
+     */
+    public EditClientDescriptorBuilder withContractExpiryDate(String contractExpiryDate) {
+        descriptor.setContractExpiryDate(new ContractExpiryDate(contractExpiryDate));
         return this;
     }
 

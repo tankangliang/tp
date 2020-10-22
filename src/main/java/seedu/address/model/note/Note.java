@@ -7,7 +7,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -15,6 +17,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Note {
     public static final String MESSAGE_CONSTRAINTS = "Notes should not be blank";
+    private static final Logger logger = LogsCenter.getLogger(Note.class);
     private final String noteContents;
     private final Set<Tag> tags = new HashSet<>();
 
@@ -26,6 +29,7 @@ public class Note {
     public Note(String content) {
         requireNonNull(content);
         noteContents = content;
+        logger.info(String.format("--------------[New Note created with contents: %s]", noteContents));
     }
 
     /**
@@ -39,6 +43,29 @@ public class Note {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Gets the content of the note.
+     *
+     * @return The content of the note.
+     */
+    public String getNoteContents() {
+        return noteContents;
+    }
+
+    /**
+     * Returns whether this note is a client note.
+     *
+     * @return True if this note is a client note, false otherwise.
+     */
+    public boolean isClientNote() {
+        return true;
+    }
+
+    /**
+     * Gets the set of tags that is related to this Note.
+     *
+     * @return The set of tags that is related to this Note.
+     */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
