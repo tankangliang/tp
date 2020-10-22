@@ -13,7 +13,6 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ModelManager;
 import seedu.address.model.client.Client;
 import seedu.address.model.tag.Tag;
 
