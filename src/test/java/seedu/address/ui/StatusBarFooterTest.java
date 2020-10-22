@@ -28,7 +28,6 @@ public class StatusBarFooterTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        // initial state
         assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString());
     }
 
