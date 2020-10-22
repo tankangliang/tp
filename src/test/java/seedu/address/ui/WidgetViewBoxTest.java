@@ -14,7 +14,7 @@
 //import javafx.scene.layout.StackPane;
 //import javafx.stage.Stage;
 //import seedu.address.model.widget.WidgetObject;
-//
+//TODO: Implementation
 ///**
 // * GUI unit test for WidgetViewBox. Test done to ensure the integrity of content displayed does not regress in future
 // * refactoring.

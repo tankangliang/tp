@@ -1,5 +1,7 @@
 package guitests.guihandles;
 
+import java.net.URL;
+
 import guitests.GuiRobot;
 import javafx.stage.Stage;
 
@@ -10,6 +12,8 @@ public class HelpWindowHandle extends StageHandle {
 
     public static final String HELP_WINDOW_TITLE = "Help [Press Esc to close]";
 
+    public static final String USERGUIDE_URL_ID = "#userGuideUrl";
+
     public HelpWindowHandle(Stage helpWindowStage) {
         super(helpWindowStage);
     }
@@ -19,6 +23,10 @@ public class HelpWindowHandle extends StageHandle {
      */
     public static boolean isWindowPresent() {
         return new GuiRobot().isWindowShown(HELP_WINDOW_TITLE);
+    }
+
+    public String getUgUrl() {
+        return new GuiRobot().lookup(USERGUIDE_URL_ID).queryLabeled().getText();
     }
 
 }
