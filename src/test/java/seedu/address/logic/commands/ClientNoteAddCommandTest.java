@@ -27,7 +27,15 @@ public class ClientNoteAddCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_duplicateClientNote_throwsCommandException() throws CommandException {
+    public void constructor_nullArgs_throwsNullPointerException() {
+        Index idx = Index.fromOneBased(1);
+        Note clientNote = new Note(NOTE_CONTENT_1);
+        assertThrows(NullPointerException.class, () -> new ClientNoteAddCommand(idx, null));
+        assertThrows(NullPointerException.class, () -> new ClientNoteAddCommand(null, clientNote));
+    }
+
+    @Test
+    public void execute_duplicateClientNote_throwsCommandException() {
         Client client = TypicalClients.ALICE;
         Index idx = Index.fromOneBased(1);
         Note clientNote = new Note(NOTE_CONTENT_1);
@@ -53,7 +61,34 @@ public class ClientNoteAddCommandTest {
         } catch (CommandException e) {
             fail();
         }
+    }
 
+    @Test
+    public void equals() {
+        Index idx1 = Index.fromOneBased(1);
+        Index idx2 = Index.fromOneBased(2);
+        Note clientNote1 = new Note(NOTE_CONTENT_1);
+        Note clientNote2 = new Note(NOTE_CONTENT_2);
+        ClientNoteAddCommand addCommand = new ClientNoteAddCommand(idx1, clientNote1);
+        ClientNoteAddCommand addCommandDifferentNote = new ClientNoteAddCommand(idx1, clientNote2);
+        ClientNoteAddCommand addCommandDifferentIndex = new ClientNoteAddCommand(idx2, clientNote1);
+
+        // same object -> returns true
+        assertTrue(addCommand.equals(addCommand));
+
+        // same values -> returns true
+        ClientNoteAddCommand addCommandCopy = new ClientNoteAddCommand(idx1, clientNote1);
+        assertTrue(addCommand.equals(addCommandCopy));
+
+        // different types -> returns false
+        assertFalse(addCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(addCommand.equals(null));
+
+        // different note or index -> returns false
+        assertFalse(addCommand.equals(addCommandDifferentNote));
+        assertFalse(addCommand.equals(addCommandDifferentIndex));
     }
 
 }

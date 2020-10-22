@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
@@ -33,7 +34,15 @@ import seedu.address.testutil.EditClientDescriptorBuilder;
  */
 public class ClientEditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @Test
+    public void constructor_nullArgs_throwsNullPointerException() {
+        Client editedClient = new ClientBuilder().build();
+        EditClientDescriptor descriptor = new EditClientDescriptorBuilder(editedClient).build();
+        assertThrows(NullPointerException.class, () -> new ClientEditCommand(INDEX_FIRST_CLIENT, null));
+        assertThrows(NullPointerException.class, () -> new ClientEditCommand(null, descriptor));
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {

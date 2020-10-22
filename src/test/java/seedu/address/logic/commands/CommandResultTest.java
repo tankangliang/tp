@@ -8,6 +8,21 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class CommandResultTest {
+
+    @Test
+    public void constructor() {
+        CommandResult defaultCommandResult = new CommandResult("test");
+        assertFalse(defaultCommandResult.isShowHelp());
+        assertFalse(defaultCommandResult.isExit());
+        assertFalse(defaultCommandResult.isView());
+
+        CommandResult customCommandResult = new CommandResult("test", true, false, true);
+        assertTrue(customCommandResult.isShowHelp());
+        assertFalse(customCommandResult.isExit());
+        assertTrue(customCommandResult.isView());
+        assertEquals(customCommandResult.getFeedbackToUser(), "test");
+    }
+
     @Test
     public void equals() {
         CommandResult commandResult = new CommandResult("feedback");
@@ -36,7 +51,7 @@ public class CommandResultTest {
     }
 
     @Test
-    public void hashcode() {
+    public void hashCode_test() {
         CommandResult commandResult = new CommandResult("feedback");
 
         // same values -> returns same hashcode
