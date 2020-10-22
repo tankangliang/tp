@@ -37,7 +37,7 @@ public class ClientCardTest extends GuiUnitTest {
     public void contructor_badClient_throwsException() {
         // faulty clients contact
         try {
-            // TODO: Since this will modify JVM runtime behaviour, remove after adding assertions.
+            // TODO: Since this will modify JVM runtime behaviour, remove after appropriate adding assertions.
             Client faultyClient = new ClientBuilder().build();
             Field badCountry = faultyClient.getClass().getDeclaredField("country");
             badCountry.setAccessible(true);
@@ -45,8 +45,9 @@ public class ClientCardTest extends GuiUnitTest {
             modField.setAccessible(true);
             modField.setInt(badCountry, badCountry.getModifiers() & ~Modifier.FINAL);
             badCountry.set(faultyClient, null);
+
             ClientCard faultyCard = new ClientCard(faultyClient, 1);
-            fail(" Client card is accepting a faulty client ");
+            fail("Client card is accepting a faulty client");
         } catch (NullPointerException e) {
             assertEquals(1, 1);
         } catch (IllegalAccessException | NoSuchFieldException ie) {
@@ -56,7 +57,7 @@ public class ClientCardTest extends GuiUnitTest {
         // null client
         try {
             ClientCard nullCard = new ClientCard(null, 0);
-            fail("------------------[ ClientCard is getting created with a null client ]");
+            fail("Card is being created with a null client");
         } catch (Exception e) {
             assertEquals(1, 1);
         }

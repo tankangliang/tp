@@ -40,9 +40,12 @@ public class HelpWindowHandle extends StageHandle {
      * Difference between this method and the other is the above method find the node straight from the
      * stage and immediately tries to clicks it.
      * This one looks up the node with the given id and tries to query it as a button first before clicking it.
-     * IDEA does not seem to be able to pick up the covarage for the above method. Hence this is also included.
      */
     public void accessCopyUrlButton() {
+        /*
+        * I am including this method here since my IDEA does not pickup the coverage for the test on the method
+        * copyUrl of the help window. Two tests are need to display a full coverage.
+        * */
         Button copyButton = guiRobot.lookup("#copyButton").queryButton();
         guiRobot.clickOn(copyButton);
     }
