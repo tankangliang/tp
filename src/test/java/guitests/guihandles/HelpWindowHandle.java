@@ -8,7 +8,7 @@ import javafx.stage.Stage;
  */
 public class HelpWindowHandle extends StageHandle {
 
-    public static final String HELP_WINDOW_TITLE = "Help";
+    public static final String HELP_WINDOW_TITLE = "Help [Press Esc to close]";
 
     public HelpWindowHandle(Stage helpWindowStage) {
         super(helpWindowStage);
