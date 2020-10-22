@@ -156,6 +156,7 @@ public class TagNoteMap {
         Set<Tag> currentTags = noteToTagsMap.getOrDefault(note, new HashSet<>());
         currentTags.addAll(newTags);
         noteToTagsMap.put(note, currentTags);
+        noteSet.add(note);
     }
 
     @Override
