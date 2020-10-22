@@ -35,8 +35,6 @@ run {
 }
 
 test {
-    // Set
-    jvmArgs "-Dheadless=${project.hasProperty('headless') ? project.headless : true}"
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
