@@ -1,12 +1,16 @@
 package seedu.address.model.widget;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.country.Country;
+import seedu.address.model.note.CountryNote;
+import seedu.address.model.note.Note;
 
 /**
  * This is a separate model manager that separately manages the display contents of the proposed View Box left of
@@ -40,6 +44,9 @@ public class WidgetModelManager implements WidgetModel {
     public void setContent(Object content) {
         if (content instanceof Client) {
             widgetObject = clientParser((Client) content);
+        } else if (content instanceof List) {
+            // country notes list
+            widgetObject = countryNotesParser((List<CountryNote>) content);
         } else {
             widgetObject = handle(content);
         }
@@ -78,6 +85,25 @@ public class WidgetModelManager implements WidgetModel {
 
         newObj.set(/*header*/ name, /*div1*/ country, /*text1*/ timezone, /*div2*/ "", /*text2*/ email,
                 /*text3*/ phone, /*div3*/ "", /*text4 SCROLLABLE VIEW*/ notes, /*footer*/ tags);
+
+        return newObj;
+    }
+
+    /**
+     * Maps content of the country note list to the widget object.
+     */
+    private WidgetObject countryNotesParser(List<CountryNote> countryNoteList) {
+        logger.info("Setting content of widget to country note list: ");
+        WidgetObject newObj = new WidgetObject();
+        StringBuilder combinedNotes = new StringBuilder();
+        Country country = countryNoteList.get(0).getCountry();
+
+        for (CountryNote countryNote : countryNoteList) {
+            combinedNotes.append(countryNote.getNoteContents()).append("\n");
+        }
+
+        newObj.set(/*header*/ country.getCountryName() + " Notes", /*div1*/ combinedNotes.toString(), /*text1*/ "", /*div2*/ "", /*text2*/ "",
+            /*text3*/ "", /*div3*/ "", /*text4 SCROLLABLE VIEW*/ "", /*footer*/ "");
 
         return newObj;
     }
