@@ -56,6 +56,7 @@ public class ClientNoteDeleteCommand extends Command {
 
         Client associatedClient = lastShownClientList.get(targetClientIndex.getZeroBased());
         Note noteToDelete = lastShownClientNoteList.get(targetClientNoteIndex.getZeroBased());
+        assert associatedClient.hasClientNote(noteToDelete) : "attempting to delete client note that doesn't exist";
         model.deleteClientNote(associatedClient, noteToDelete);
         return new CommandResult(MESSAGE_DELETED_CLIENT_NOTE_SUCCESS);
     }

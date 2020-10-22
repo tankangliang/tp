@@ -18,7 +18,7 @@ class ClientNoteDeleteCommandParserTest {
     private final ClientNoteDeleteCommandParser parser = new ClientNoteDeleteCommandParser();
 
     @Test
-    public void parse_emptyUserInput_throwsParseException() {
+    public void parse_emptyRestOfCommand_throwsParseException() {
         String userInput = "";
         assertParseFailure(parser, userInput, EXPECTED_PARSE_FAILURE_MESSAGE);
     }

@@ -2,6 +2,7 @@ package seedu.address.model.note;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalClients.ALICE;
@@ -59,6 +60,23 @@ class TagNoteMapTest {
         Set<Note> expectedNotes = new HashSet<>();
         expectedNotes.add(taggedNote);
         assertEquals(tagNoteMap.getNotesForTag(testTag), expectedNotes);
+    }
+
+    // also tests that when a tag doesn't have associated notes then it is removed from tagToNotesMap and uniqueTagsMap
+    @Test
+    void deleteNote_deleteSoleNoteWithSoleTag_clearsTagToNotesMapAndUniqueTagEntriesReturnsTrue() {
+        taggedNote.setTags(tags);
+        Set<Note> expectedNotesSet = new HashSet<>();
+        expectedNotesSet.add(taggedNote);
+        this.client.addClientNote(taggedNote);
+        List<Client> clients = new ArrayList<>();
+        clients.add(client);
+        tagNoteMap.initTagNoteMapFromClients(clients);
+        assertTrue(tagNoteMap.getTagsForNote(taggedNote).equals(tags));
+        assertTrue(tagNoteMap.getNotesForTag(testTag).equals(expectedNotesSet));
+        tagNoteMap.deleteNote(taggedNote);
+        assertFalse(tagNoteMap.getNotesForTag(testTag).equals(expectedNotesSet));
+        System.out.println("hello");
     }
 
     @Test

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -131,6 +133,7 @@ public class ModelManager implements Model {
         for (Note note : clientNotes) {
             Set<Tag> tags = note.getTags();
             updateTagNoteMapWithNote(tags, note);
+            updateTagNoteMapWithNote(tags, note);
         }
     }
 
@@ -189,8 +192,10 @@ public class ModelManager implements Model {
     @Override
     public void deleteClientNote(Client associatedClient, Note noteToDelete) {
         requireAllNonNull(associatedClient, noteToDelete);
+        // update tagNoteMap
         // todo: Ritesh implement delete in the Client class and add tests to cover this method
-        // associatedClient.deleteClientNote(noteToDelete);
+        this.tagNoteMap.deleteNote(noteToDelete);
+        associatedClient.deleteClientNote(noteToDelete);
     }
 
     //=========== Filtered Client List Accessors =============================================================
@@ -206,8 +211,14 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<Note> getFilteredClientNotesList() {
-        // todo: Ritesh filtered client notes list used by ClientNoteDeleteCommand
-        return FXCollections.observableArrayList();
+        // todo: depends on UI display of client notes and their index
+        //  Ritesh filtered client notes list used by ClientNoteDeleteCommand
+        ObservableList<Client> currentClients = this.getFilteredClientList();
+        List<Note> clientNotes = new ArrayList<>();
+        for (Client client : currentClients) {
+            clientNotes.addAll(client.getClientNotes());
+        }
+        return FXCollections.observableList(clientNotes);
     }
 
     @Override
