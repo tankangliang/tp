@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import guitests.GuiRobot;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +26,20 @@ public class HelpWindowHandle extends StageHandle {
 
     public String getUgUrl() {
         return new GuiRobot().lookup(USERGUIDE_URL_ID).queryLabeled().getText();
+    }
+
+    /**
+     * Clicks on the copy url button on the {@code HelpWindow}.
+     */
+    public void clickOnCopyUrlButton() {
+        guiRobot.clickOn("#copyButton");
+    }
+
+    /**
+     * Simulates the pressing of the escape key.
+     */
+    public void pressEscKey() {
+        guiRobot.press(KeyCode.ESCAPE);
     }
 
 }

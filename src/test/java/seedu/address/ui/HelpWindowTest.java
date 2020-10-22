@@ -6,6 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static seedu.address.ui.HelpWindow.USERGUIDE_URL;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.util.concurrent.TimeoutException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
@@ -40,6 +45,24 @@ public class HelpWindowTest extends GuiUnitTest {
 
     @Test
     public void isShowing_helpWindowIsHiding_returnsFalse() {
+        assertFalse(helpWindow.isShowing());
+    }
+
+    @Test
+    public void copyUrl_userGuideUrl_copiesCorrectly() throws Exception {
+        FxToolkit.showStage();
+        helpWindowHandle.clickOnCopyUrlButton();
+        guiRobot.pauseForHuman();
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        String ugUrl = (String) clipboard.getData(DataFlavor.stringFlavor);
+        assertEquals(USERGUIDE_URL, ugUrl);
+    }
+
+    @Test
+    public void pressEscKey_helpWindowIsShowing_returnsFalse() throws Exception {
+        FxToolkit.showStage();
+        guiRobot.pauseForHuman();
+        helpWindowHandle.pressEscKey();
         assertFalse(helpWindow.isShowing());
     }
 
