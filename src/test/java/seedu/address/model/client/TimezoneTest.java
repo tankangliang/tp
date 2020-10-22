@@ -47,6 +47,7 @@ public class TimezoneTest {
         assertEquals("GMT+14", new Timezone("GMT+14").toString());
         assertEquals("GMT-12", new Timezone("GMT-12").toString());
         assertEquals("GMT+0", new Timezone("GMT-0").toString());
+        assertEquals("GMT+0", new Timezone("GMT+0").toString());
         assertEquals("GMT+0", new Timezone("GMT-00").toString());
         assertEquals("GMT+0", new Timezone("GMT+00").toString());
     }
