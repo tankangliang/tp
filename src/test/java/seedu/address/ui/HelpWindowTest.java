@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static seedu.address.ui.HelpWindow.USERGUIDE_URL;
 
 import java.awt.Toolkit;
@@ -57,6 +58,8 @@ public class HelpWindowTest extends GuiUnitTest {
 
     @Test
     public void copyUrl_userGuideUrl_copiesCorrectly() throws Exception {
+        // This test will throw an error when run in headless environment due to the Clipboard access.
+        assumeFalse(guiRobot.isHeadlessMode());
         FxToolkit.showStage();
         helpWindowHandle.clickOnCopyUrlButton();
         guiRobot.pauseForHuman();
@@ -67,6 +70,10 @@ public class HelpWindowTest extends GuiUnitTest {
 
     @Test
     public void copyUrlByDirectAccess_userGuideUrl_copiesCorrectly() throws Exception {
+        // This test is to increase coverage. Somehow IDEA does not
+        // pickup the copyURL method from the previous test.
+        // Two tests are needed in fact.
+        assumeFalse(guiRobot.isHeadlessMode());
         FxToolkit.showStage();
         helpWindowHandle.accessCopyUrlButton();
         guiRobot.pauseForHuman();
