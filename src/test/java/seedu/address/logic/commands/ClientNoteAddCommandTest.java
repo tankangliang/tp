@@ -65,19 +65,19 @@ public class ClientNoteAddCommandTest {
 
     @Test
     public void equals() {
-        Index idx = Index.fromOneBased(1);
+        Index idx1 = Index.fromOneBased(1);
         Index idx2 = Index.fromOneBased(2);
-        Note clientNote1 = new Note(NOTE_CONTENT_2);
-        Note clientNote2 = new Note(NOTE_CONTENT_1);
-        ClientNoteAddCommand addCommand = new ClientNoteAddCommand(idx, clientNote1);
-        ClientNoteAddCommand addCommandDifferentNote = new ClientNoteAddCommand(idx, clientNote2);
+        Note clientNote1 = new Note(NOTE_CONTENT_1);
+        Note clientNote2 = new Note(NOTE_CONTENT_2);
+        ClientNoteAddCommand addCommand = new ClientNoteAddCommand(idx1, clientNote1);
+        ClientNoteAddCommand addCommandDifferentNote = new ClientNoteAddCommand(idx1, clientNote2);
         ClientNoteAddCommand addCommandDifferentIndex = new ClientNoteAddCommand(idx2, clientNote1);
 
         // same object -> returns true
         assertTrue(addCommand.equals(addCommand));
 
         // same values -> returns true
-        ClientNoteAddCommand addCommandCopy = new ClientNoteAddCommand(idx, clientNote1);
+        ClientNoteAddCommand addCommandCopy = new ClientNoteAddCommand(idx1, clientNote1);
         assertTrue(addCommand.equals(addCommandCopy));
 
         // different types -> returns false
