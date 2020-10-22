@@ -2,9 +2,13 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysClient;
 import static seedu.address.testutil.TypicalClients.AMY;
 import static seedu.address.testutil.TypicalClients.BOB;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +31,33 @@ public class ClientCardTest extends GuiUnitTest {
         clientCard = new ClientCard(clientWithTags, 2);
         uiPartExtension.setUiPart(clientCard);
         assertCardDisplay(clientCard, clientWithTags, 2);
+    }
+
+    @Test
+    public void contructor_badClient_throwsException() {
+        // faulty clients contact
+        try {
+            // TODO: Remove after adding systems test. Will modify JVM baheviour.
+            Client faultyClient = new ClientBuilder().build();
+            Field badCountry = faultyClient.getClass().getDeclaredField("country");
+            badCountry.setAccessible(true);
+            Field modField = badCountry.getClass().getDeclaredField("modifiers");
+            modField.setAccessible(true);
+            modField.setInt(badCountry, badCountry.getModifiers() & ~Modifier.FINAL);
+            badCountry.set(faultyClient, null);
+            ClientCard faultyCard = new ClientCard(faultyClient, 1);
+            fail(" Client card is accepting a faulty client ");
+        } catch (Exception e) {
+            assertEquals(1, 1);
+        }
+
+        // null client
+        try {
+            ClientCard nullCard = new ClientCard(null, 0);
+            fail("------------------[ ClientCard is getting created with a null client ]");
+        } catch (Exception e) {
+            assertEquals(1,1);
+        }
     }
 
     @Test
