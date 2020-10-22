@@ -133,6 +133,11 @@ public interface Model {
     void updateFilteredClientList(Predicate<Client> predicate);
 
     /**
+     * Initialises TagNoteMap from Clients notes and Country notes.
+     */
+    void initialiseTagNoteMap();
+
+    /**
      * Returns the tag note map.
      */
     TagNoteMap getTagNoteMap();

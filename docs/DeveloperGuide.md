@@ -146,6 +146,25 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Associating Notes and Tags
+
+The proposed association mechanism between `Tag` and `Note` objects is facilitated by `TagNoteMap`. 
+It is stored internally within the `Addressbook` object. Additionally, it implements the following operations:
+
+* `TagNoteMap#getTagsForNote()` — Returns an unmodifiable set of Tags associated to a particular Note.
+
+* `TagNoteMap#updateTagsForNote()` — Returns an unmodifiable set of Notes associated to a particular Tag .
+
+* `TagNoteMap#initTagNoteMapFromNotes()` —  Initialises the TagNoteMap from a set of Notes.
+
+The `TagNoteMap#initTagNoteMapFromNotes()` is exposed in the `Model` interface as `Model#initialiseTagNoteMap()`.
+
+Given below is an example usage scenario and how mapping mechanism behaves at each step.
+
+
+
+
+
 ### Suggesting contacts
 
 #### Implementation

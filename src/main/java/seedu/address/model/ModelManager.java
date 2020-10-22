@@ -174,6 +174,7 @@ public class ModelManager implements Model {
     /**
      * Initialises TagNoteMap from Clients notes and Country notes.
      */
+    @Override
     public void initialiseTagNoteMap() {
         this.tagNoteMap.initTagNoteMapFromClients(this.addressBook.getClientList());
         //        this.countryManager.getAllCountryNotesAsCollectionOfSets()
