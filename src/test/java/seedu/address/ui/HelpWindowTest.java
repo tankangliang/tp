@@ -58,6 +58,7 @@ public class HelpWindowTest extends GuiUnitTest {
 
     @Test
     public void copyUrl_userGuideUrl_copiesCorrectly() throws Exception {
+        // TODO: https://stackoverflow.com/questions/52812363/getsystemclipboard-failed-on-headless-exception
         // Clipboard access in headless environment will throw an error.
         assumeFalse(guiRobot.isHeadlessMode(), "Test skipped in headless mode.");
 
