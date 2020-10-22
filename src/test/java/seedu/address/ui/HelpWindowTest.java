@@ -51,6 +51,7 @@ public class HelpWindowTest extends GuiUnitTest {
     public void pressEscKey_helpWindowIsShowing_returnsFalse() throws Exception {
         FxToolkit.showStage();
         guiRobot.pauseForHuman();
+
         helpWindowHandle.pressEscKey();
         assertFalse(helpWindow.isShowing());
     }
@@ -59,9 +60,12 @@ public class HelpWindowTest extends GuiUnitTest {
     public void copyUrl_userGuideUrl_copiesCorrectly() throws Exception {
         // Clipboard access in headless environment will throw an error.
         assumeFalse(guiRobot.isHeadlessMode());
+
         FxToolkit.showStage();
+
         helpWindowHandle.clickOnCopyUrlButton();
         guiRobot.pauseForHuman();
+
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         String ugUrl = (String) clipboard.getData(DataFlavor.stringFlavor);
         assertEquals(USERGUIDE_URL, ugUrl);
@@ -73,9 +77,12 @@ public class HelpWindowTest extends GuiUnitTest {
         // pickup the copyURL method from the previous test.
         // Two tests are needed in fact.
         assumeFalse(guiRobot.isHeadlessMode());
+
         FxToolkit.showStage();
+
         helpWindowHandle.accessCopyUrlButton();
         guiRobot.pauseForHuman();
+
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         String ugUrl = (String) clipboard.getData(DataFlavor.stringFlavor);
         assertEquals(USERGUIDE_URL, ugUrl);
