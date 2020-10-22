@@ -83,7 +83,7 @@ Format: `help`
 
 Adds a new client to the app.
 
-Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE`
+Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE ce/CONTRACT_EXPIRY_DATE`
 
 Examples:
 
@@ -115,15 +115,14 @@ Format: `client find KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 * `client find katya` Finds all clients with names that matches **katya**.
-* `client find Russia` Finds all clients associated to the country of **Russia**
-* `client find Katya Russia` Finds all clients who are either named **katya** or are associated to **Russia**
-
+* `client find Russia` Finds all clients associated to the country of **Russia**.
+* `client find Katya Russia` Finds all clients who are either named **katya** or are associated to **Russia**.
 
 ### Editing a client: `client edit`
 
 Edits a client's information by their index in the list view.
 
-Format: `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY_CODE] [tz/TIMEZONE]`
+Format: `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY_CODE] [tz/TIMEZONE] [ce/CONTRACT_EXPIRY]`
 
 * COUNTRY follows the ISO3166 Format of two-letter country codes. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
 
@@ -141,7 +140,7 @@ Format: `client delete INDEX`
 
 Examples:
 
-* `client delete 5`
+* `client delete 5` Deletes the client at index 5 of the list panel.
 
 ### Saving data
 
@@ -149,8 +148,7 @@ Automatically saved after every change.
 
 ### Adding client notes: `client note add`
 
-
-Format: `client note add CLIENT_INDEX [t/TAG] nt/NOTE_STRING`
+Format: `client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...`
 
 Examples:
 
@@ -188,7 +186,7 @@ Notes:
 
 Edits a note of a client (denoted by client's index) by the note's index.
 
-Format: `client note edit CLIENT_INDEX NOTE_INDEX [nt/NOTE_STRING] [t/TAG]`
+Format: `client note edit CLIENT_INDEX NOTE_INDEX [nt/NOTE_STRING] [t/TAG]...`
 
 Examples:
 
@@ -204,7 +202,7 @@ Notes:
 
 * `client note edit 3 2 nt/Loves cats`
 
-The original note containing "Hates cats" will be changed to "Loves cats" while retaining its original tag. The resulting list will look like
+The original note containing "Hates cats" will be changed to "Loves cats" while retaining its original tag. The resulting list will look like:
 
 ```
 Client: 3
@@ -243,7 +241,7 @@ Examples:
 
 Obtains a list of clients based on the suggestion type(s) passed in.
 
-Format: `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]`
+Format: `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...`
 
 * SUGGESTION_TYPE must be one of the following: `frequency`, `available` or `contract`
 
@@ -257,7 +255,7 @@ Examples:
 
 ### Clearing all entries: `clear`
 
-Deletes all information from the application, you will start from a clean slate.
+Deletes all existing information from the application. You will start from a clean slate.
 
 ### Exiting the program: `exit`
 
@@ -279,18 +277,17 @@ Format: `exit`
 Action | Format, Examples
 --------|------------------
 **List all clients** | `list`
-**Add client** | `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE` <br> e.g., `client add 5 n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RUS tz/GMT+3`
-**Edit client** | `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY_CODE] [tz/TIMEZONE]`<br> e.g.,`client edit 3 c/JP tz/GMT+7`
+**Add client** | `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE ce/CONTRACT_EXPIRY_DATE` <br> e.g., `client add 5 n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RUS tz/GMT+3 ce/22-12-2020`
+**Edit client** | `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY_CODE] [tz/TIMEZONE] [ce/CONTRACT_EXPIRY_DATE]`<br> e.g.,`client edit 3 c/JP tz/GMT+7`
 **View client** | `client view INDEX` <br> e.g., `client view 2`
 **Find client** | `client find KEYWORD [MORE_KEYWORDS]`<br> e.g., `client find Hans`
 **Delete client** | `client delete INDEX`<br> e.g., `client delete 3`
-**Add client note** | `client note add CLIENT_INDEX t/TAG nt/NOTE_STRING` <br> e.g., `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
+**Add client note** | `client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...` <br> e.g., `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
 **Delete client note** | `client note delete CLIENT_INDEX NOTE_INDEX` <br> e.g., `client note delete 3 2`
-**Edit client note** | `client note edit CLIENT_INDEX NOTE_INDEX [nt/NOTE_STRING] [t/TAG]` <br> e.g., `client note edit 3 2 nt/Loves cats`
+**Edit client note** | `client note edit CLIENT_INDEX NOTE_INDEX [nt/NOTE_STRING] [t/TAG]...` <br> e.g., `client note edit 3 2 nt/Loves cats`
 **Filter by country** | `country filter c/COUNTRY_CODE` <br> e.g., `country filter c/SG`
 **Add country note** | `country note c/COUNTRY nt/NOTE_STRING` <br> e.g., `country note c/SG nt/people love to queue for things`
-**Get suggestions** | `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]` <br> e.g., `suggest by/available by/frequency`
+**Get suggestions** | `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...` <br> e.g., `suggest by/available by/frequency`
 **Clear** | `clear`
 **Exit** | `exit`
 **Help** | `help`
-
