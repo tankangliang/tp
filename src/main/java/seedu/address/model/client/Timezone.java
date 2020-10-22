@@ -31,7 +31,7 @@ public class Timezone {
     private static final Pattern TIMEZONE_FORMAT = Pattern.compile(VALIDATION_REGEX);
 
 
-    public final int value;
+    public final int offsetValue;
 
     /**
      * Constructs a {@code Timezone}.
@@ -45,7 +45,7 @@ public class Timezone {
         int offsetValue = Integer.parseInt(offsetString);
 
         assert offsetValue <= LARGEST_POSITIVE_OFFSET && offsetValue >= (-1 * SMALLEST_NEGATIVE_OFFSET);
-        value = offsetValue;
+        this.offsetValue = offsetValue;
     }
 
     /**
@@ -76,7 +76,7 @@ public class Timezone {
      * @return The current hour in this timezone.
      */
     public int getCurrHourInTimezone() {
-        ZoneOffset zoneOffSet = ZoneOffset.ofHours(value);
+        ZoneOffset zoneOffSet = ZoneOffset.ofHours(offsetValue);
         OffsetDateTime date = OffsetDateTime.now(zoneOffSet);
         return date.getHour();
     }
@@ -85,20 +85,20 @@ public class Timezone {
     @Override
     public String toString() {
         // Negative offset values will automatically include "-"
-        String sign = value >= 0 ? "+" : "";
-        return GMT_STRING + sign + value;
+        String sign = offsetValue >= 0 ? "+" : "";
+        return GMT_STRING + sign + offsetValue;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Timezone // instanceof handles nulls
-                && value == (((Timezone) other).value)); // state check
+                && offsetValue == (((Timezone) other).offsetValue)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value;
+        return offsetValue;
     }
 
 }

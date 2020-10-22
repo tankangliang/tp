@@ -46,7 +46,6 @@ public class AddressBookParser {
 
     private final TagNoteMap tagNoteMap;
 
-
     public AddressBookParser(TagNoteMap tagNoteMap) {
         this.tagNoteMap = tagNoteMap;
     }
