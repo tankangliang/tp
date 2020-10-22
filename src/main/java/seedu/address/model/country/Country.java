@@ -8,8 +8,6 @@ import java.util.Locale;
  */
 public class Country {
 
-    public static final String MESSAGE_CONSTRAINTS = "Country code must be a valid 2-letter ISO3166 country code";
-
     private final String countryName;
     private final String countryCode;
 
@@ -19,6 +17,8 @@ public class Country {
      * @param countryCode The ISO3166 2-letter country code of the country to be initialized.
      */
     public Country(String countryCode) {
+        assert CountryCodeVerifier.isValidCountryCode(countryCode);
+
         this.countryCode = countryCode;
         this.countryName = new Locale("", countryCode).getDisplayName();
     }

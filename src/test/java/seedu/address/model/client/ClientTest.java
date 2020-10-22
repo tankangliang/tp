@@ -1,6 +1,8 @@
 package seedu.address.model.client;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNTRY_BOB;
@@ -54,6 +56,8 @@ public class ClientTest {
         editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .withCountry(VALID_COUNTRY_BOB).build();
         assertTrue(ALICE.isSameClient(editedAlice));
+
+        // TODO: Add tests with modified notes
     }
 
     @Test
@@ -97,5 +101,46 @@ public class ClientTest {
         // different tags -> returns false
         editedAlice = new ClientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // TODO: Add tests with modified notes
+    }
+
+    @Test
+    public void hashCode_test() {
+        // same values -> hashCode is same
+        Client aliceCopy = new ClientBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
+
+        // same object -> hashCode is same
+        assertEquals(ALICE.hashCode(), ALICE.hashCode());
+
+        // different client -> hashCode is different
+        assertNotEquals(ALICE.hashCode(), BOB.hashCode());
+
+        // different name -> hashCode is different
+        Client editedAlice = new ClientBuilder(ALICE).withName(VALID_NAME_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different phone -> hashCode is different
+        editedAlice = new ClientBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different email -> hashCode is different
+        editedAlice = new ClientBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different address -> hashCode is different
+        editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different country -> hashCode is different
+        editedAlice = new ClientBuilder(ALICE).withCountry(VALID_COUNTRY_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different tags -> hashCode is different
+        editedAlice = new ClientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // TODO: Add tests with modified notes
     }
 }
