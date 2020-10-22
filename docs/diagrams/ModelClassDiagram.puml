@@ -28,12 +28,15 @@ Class Email
 Class Name
 Class Phone
 Class UniqueClientList
+Class ContractExpiryDate
+Class Timezone
 }
 
 Package Note {
 Class Note
 Class TagNoteMap
 }
+
 Package Tag {
 Class Tag
 Class UniqueTagSet
@@ -61,6 +64,9 @@ Model .right.> ObservableList
 ModelManager o--> "1" AddressBook
 ModelManager o-left-> "1" UserPrefs
 ModelManager *-right->"1" WidgetModel
+AddressBook *-right->"1" UniqueTagSet
+
+
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniqueClientList
@@ -69,7 +75,11 @@ Client *--> Name
 Client *--> Phone
 Client *--> Email
 Client *--> Address
-Client *--> "*" Tag
+Client *--> ContractExpiryDate
+Client *-up-> "*" Tag
+Client --> Country
+Client --> Timezone
+Client -->"*" Note
 
 
 WidgetModelManager ..|> WidgetModel
@@ -78,6 +88,7 @@ WidgetModelManager *-right->"1" WidgetObject
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
+UniqueTagSet -[hidden]right-> Tag
 
 ModelManager -->"1" Client : filtered list
 @enduml
