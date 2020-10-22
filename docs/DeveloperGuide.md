@@ -75,7 +75,7 @@ The sections below give more details of each component.
 **API** :
 [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `StatusBarFooter`, etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ClientListPanel`, `WidgetViewBox`, `StatusBarFooter`, etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
 The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 The `UI` component,
@@ -115,13 +115,16 @@ The `Model`,
 * stores the address book data.
 * exposes an unmodifiable `ObservableList<Client>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+* contains a `UniqueTagSet` to prevent duplication of `Tag` objects.
 
+#### Inner Workings of TBM
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Client` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
+<!--- TODO: Add a full explanation of the interaction between Note, Tag and Country, with class and sequence diagrams? -->
 
-</div>
+![Design of the Client, Note, Tag and Country Components](images/InnerWorkings.png)
 
+The above Model diagram provides a high level view of how TBM functions. However, is does not fully represent the class design between Note, Country and Tag.
+This sub-section gives a better explanation of the mappings for Note, Tag and Country.
 
 ### Storage component
 
@@ -143,9 +146,10 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Suggesting contacts by contract expiry date
+### Suggesting contacts
 
-### Implementation
+#### Implementation
+
 
 The suggestion mechanism is facilitated by `filteredClients` in `ModelManager`. It is an instance of `javafx.collections.transformation.FilteredList<Client>`. It implements the following relevant operations:
 * `FilteredList<Client>#setPredicate(Predicate<? super Client> p)` — Filters out any clients that do not match the predicate in the list.
@@ -153,17 +157,31 @@ The suggestion mechanism is facilitated by `filteredClients` in `ModelManager`. 
 
 These operations are exposed in the `Model` interface as `Model#updateFilteredClientList()` and `Model#sortFilteredClientList()` respectively.
 
-The following sequence diagram shows how the suggest operation works and below it is an example usage scenario and how the suggestion mechanism behaves at each step.
+The following activity diagram summarizes what happens when a user inputs a `suggest` command.
+
+![Suggest Activity Diagram](images/SuggestActivityDiagram.png)
+
+Given below is an example usage scenario and how the suggestion mechanism behaves at each step.
+
+Step 1: The user executes `suggest by/contract` to list the suggested clients sorted by contract expiry dates. At this point, `filteredClients` is showing all clients.
+
+![SuggestState0](images/SuggestState0.png)
+
+Step 2: The `suggest` command calls `Model#updateFilteredClientList` with the contract expiry date predicate (which checks if a client has a contract expiry date). `Model` updates the `filteredClients` object with the contract expiry date predicate which filters out all clients without an existing contract expiry date.
+
+![SuggestState1](images/SuggestState1.png)
+
+Step 3: The `suggest` command calls `Model#sortFilteredClientList` with the contract expiry date comparator (which sorts clients by earliest contract expiry date). `Model` updates the `filteredClients` object with the contract expiry date comparator which gives us clients in order of increasing contract expiry date.
+
+![SuggestState2](images/SuggestState2.png)
+
+Step 4: The change is then propagated to `Ui`, which updates the displayed clients in `ClientListPanel`.
+
+Step 5: The user decides to execute the command `list`, which resets the `filteredClients` objects to have all clients, and in turn resets the displayed clients in `ClientListPanel` as well. 
+
+The following sequence diagram shows how the suggest operation works:
 
 ![Suggest Sequence Diagram](images/SuggestSequenceDiagram.png)
-
-Step 1: The user executes `suggest by/contract` to list the suggested clients sorted by contract expiry dates. The `suggest` command calls `Model#updateFilteredClientList` and `Model#sortFilteredClientList`, passing in the contract expiry date predicate (which checks if a client has a contract expiry date) and contract expiry date comparator respectively.
-
-Step 2: `Model` updates the `filteredClients` object.
-
-Step 3: The change is then propagated to `Ui`, which updates the displayed clients in `ClientListPanel`.
-
-Step 4: The user decides to execute the command `list`, which resets the `filteredClients` objects to have all clients, and in turn resets the displayed clients in `ClientListPanel` as well. 
 
 ### \[Proposed\] Undo/redo feature
 

@@ -22,7 +22,11 @@ public class ClientNoteAddCommandParser implements Parser<ClientNoteAddCommand> 
 
     private final TagNoteMap tagNoteMap;
 
+    /**
+     * Initializes a {@code CLientNoteAddCommandParser} with the {@code tagNoteMap} object.
+     */
     public ClientNoteAddCommandParser(TagNoteMap tagNoteMap) {
+        requireNonNull(tagNoteMap);
         this.tagNoteMap = tagNoteMap;
     }
 

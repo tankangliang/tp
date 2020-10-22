@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -20,6 +21,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.ClientAddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
@@ -41,7 +43,8 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private final Model model = new ModelManager();
+    private StorageManager storage;
     private Logic logic;
 
     @BeforeEach
@@ -49,8 +52,31 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
+    }
+
+    @Test
+    public void constructor_nullArgs_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new LogicManager(model, null));
+        assertThrows(NullPointerException.class, () -> new LogicManager(null, storage));
+    }
+
+    @Test
+    public void getMethods_returnCorrectObjects() {
+        assertEquals(logic.getAddressBook(), model.getAddressBook());
+        assertEquals(logic.getAddressBookFilePath(), model.getAddressBookFilePath());
+        assertEquals(logic.getFilteredClientList(), model.getFilteredClientList());
+        assertEquals(logic.getWidgetContent(), model.getWidgetContent());
+        assertEquals(logic.getGuiSettings(), model.getGuiSettings());
+    }
+
+    @Test
+    public void setGuiSettings() {
+        GuiSettings guiSettings = new GuiSettings(15.0, 10.0, 90, 100);
+        assertNotEquals(logic.getGuiSettings(), guiSettings);
+        logic.setGuiSettings(guiSettings);
+        assertEquals(logic.getGuiSettings(), guiSettings);
     }
 
     @Test

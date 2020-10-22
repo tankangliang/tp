@@ -15,7 +15,6 @@ import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
-
 /**
  * Adds a Client-specific Note to list of notes associated with a client.
  */

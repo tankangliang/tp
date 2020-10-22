@@ -37,7 +37,7 @@ public class SuggestCommandParser implements Parser<SuggestCommand> {
 
         List<Predicate<Client>> suggestionTypePredicateList = suggestionTypeList
             .stream()
-            .map(suggestionType -> suggestionType.getSuggestionPredicate())
+            .map(SuggestionType::getSuggestionPredicate)
             .collect(Collectors.toList());
 
         return new SuggestCommand(suggestionTypePredicateList);
