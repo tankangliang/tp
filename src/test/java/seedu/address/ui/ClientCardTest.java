@@ -3,9 +3,9 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysClient;
 import static seedu.address.testutil.TypicalClients.AMY;
 import static seedu.address.testutil.TypicalClients.BOB;
+import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysClient;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -56,7 +56,7 @@ public class ClientCardTest extends GuiUnitTest {
             ClientCard nullCard = new ClientCard(null, 0);
             fail("------------------[ ClientCard is getting created with a null client ]");
         } catch (Exception e) {
-            assertEquals(1,1);
+            assertEquals(1, 1);
         }
     }
 
