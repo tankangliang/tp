@@ -3,7 +3,7 @@
 skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 
-title After command "suggest"
+title After command "suggest by/contract"
 
 box Logic LOGIC_COLOR_T1
 participant ":SuggestCommand" as SuggestCommand LOGIC_COLOR
@@ -14,7 +14,7 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> SuggestCommand : execute(suggest)
+[-> SuggestCommand : execute("suggest by/contract")
 activate SuggestCommand
 
 SuggestCommand -> Model : updateClientFilteredList(Predicate)
