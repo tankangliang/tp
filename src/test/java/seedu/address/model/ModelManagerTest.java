@@ -26,6 +26,7 @@ import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.ClientBuilder;
 
 public class ModelManagerTest {
 
@@ -130,17 +131,19 @@ public class ModelManagerTest {
         assertTrue(modelManager.hasClientNote(client, clientNote));
     }
 
-    //    @Test
-    //    // todo: ritesh fix this test. pretty sure the test method is written wrongly
-    //    public void deleteClientNote_validSyntax_deletesSuccessfully() {
-    //        Client client = new ClientBuilder(ALICE).build();
-    //        Note clientNote = new Note("this be a client note");
-    //        modelManager.addClientNote(client, clientNote);
-    //        assertTrue(modelManager.hasClientNote(client, clientNote));
-    //        modelManager.initialiseTagNoteMap();
-    //        modelManager.deleteClientNote(client, clientNote);
-    //        assertFalse(modelManager.hasClientNote(client, clientNote));
-    //    }
+    @Test
+    public void deleteClientNote_validSyntax_deletesSuccessfully() {
+        Client client = new ClientBuilder(ALICE).build();
+        UserPrefs userPrefs = new UserPrefs();
+        AddressBook addressBook = new AddressBookBuilder().withClient(client).build();
+        modelManager = new ModelManager(addressBook, userPrefs);
+        Note clientNote = new Note("this be a client note");
+        modelManager.addClientNote(client, clientNote);
+        assertTrue(modelManager.hasClientNote(client, clientNote));
+        modelManager.initialiseTagNoteMap();
+        modelManager.deleteClientNote(client, clientNote);
+        assertFalse(modelManager.hasClientNote(client, clientNote));
+    }
 
     @Test
     public void getTagNoteMap_returnUninitialisedTagNoteMap_returnsTrue() {
