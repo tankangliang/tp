@@ -1,6 +1,9 @@
 package guitests;
 
+import static org.testfx.api.FxToolkit.registerPrimaryStage;
+
 import java.util.Optional;
+import java.util.concurrent.TimeoutException;
 import java.util.function.BooleanSupplier;
 
 import org.testfx.api.FxRobot;
@@ -17,7 +20,7 @@ public class GuiRobot extends FxRobot {
     private static final int PAUSE_FOR_HUMAN_DELAY_MILLISECONDS = 250;
     private static final int DEFAULT_WAIT_FOR_EVENT_TIMEOUT_MILLISECONDS = 5000;
 
-    private static final String PROPERTY_TESTFX_HEADLESS = "testfx.headless";
+    private static final String PROPERTY_HEADLESS = "headless";
 
     private final boolean isHeadlessMode;
 
@@ -25,8 +28,15 @@ public class GuiRobot extends FxRobot {
      * Constructor for this GuiRobot.
      */
     public GuiRobot() {
-        String headlessPropertyValue = System.getProperty(PROPERTY_TESTFX_HEADLESS);
+        String headlessPropertyValue = System.getProperty(PROPERTY_HEADLESS);
         isHeadlessMode = headlessPropertyValue != null && headlessPropertyValue.equals("true");
+        if (isHeadlessMode) {
+            System.setProperty("testfx.robot", "glass");
+            System.setProperty("testfx.headless", "true");
+            System.setProperty("prism.order", "sw");
+            System.setProperty("prism.text", "t2k");
+            System.setProperty("java.awt.headless", "true");
+        }
     }
 
     /**
