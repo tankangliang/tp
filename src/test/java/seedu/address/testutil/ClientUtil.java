@@ -58,7 +58,8 @@ public class ClientUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getCountry().ifPresent(country -> sb.append(PREFIX_COUNTRY).append(country.getCountryCode())
                 .append(" "));
-        descriptor.getTimezone().ifPresent(timezone -> sb.append(PREFIX_TIMEZONE).append(timezone.toString()).append(" "));
+        descriptor.getTimezone().ifPresent(timezone -> sb.append(PREFIX_TIMEZONE)
+                .append(timezone.toString()).append(" "));
         descriptor.getContractExpiryDate().ifPresent(contractExpiryDate ->
                 sb.append(PREFIX_CONTRACT_EXPIRY_DATE).append(contractExpiryDate.value).append(" "));
         if (descriptor.getTags().isPresent()) {
