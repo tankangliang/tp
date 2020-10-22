@@ -7,6 +7,9 @@ import seedu.address.logic.commands.CountryNoteViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.country.Country;
 
+/**
+ * Parses input arguments and creates a new CountryNoteViewCommand object
+ */
 public class CountryNoteViewCommandParser implements Parser<CountryNoteViewCommand> {
 
     @Override
