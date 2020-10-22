@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
 import static seedu.address.ui.HelpWindow.USERGUIDE_URL;
 
 import java.awt.Toolkit;
@@ -58,7 +57,7 @@ public class HelpWindowTest extends GuiUnitTest {
 
     @Test
     public void copyUrl_userGuideUrl_copiesCorrectly() throws Exception {
-        // This test will throw an error when run in headless environment due to the Clipboard access.
+        // Clipboard access in headless environment will throw an error.
         assumeFalse(guiRobot.isHeadlessMode());
         FxToolkit.showStage();
         helpWindowHandle.clickOnCopyUrlButton();
