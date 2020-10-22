@@ -27,23 +27,6 @@ run {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
-    testLogging {
-        events TestLogEvent.FAILED, TestLogEvent.SKIPPED
-        if (System.env.'CI') {
-            events << TestLogEvent.STARTED
-        }
-
-    }
-}
-
-test {
-    systemProperty 'testfx.setup.timeout', '60000'
-    testLogging {
-        events TestLogEvent.FAILED, TestLogEvent.SKIPPED
-        if (System.env.'CI') {
-            events << TestLogEvent.STARTED
-        }
-    }
 }
 
 task coverage(type: JacocoReport) {
