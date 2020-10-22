@@ -4,6 +4,17 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
+Package Client {
+Class Client
+Class Address
+Class Email
+Class Name
+Class Phone
+Class UniqueClientList
+Class ContractExpiryDate
+Class Timezone
+}
+
 Package Country {
 Class Country
 Class CountryManager
@@ -18,4 +29,31 @@ Package Tag {
 Class Tag
 Class UniqueTagSet
 }
+
+AddressBook *-right-> "1" UniqueClientList
+AddressBook *-right-> "1" UniqueTagSet
+AddressBook *-right-> "1" CountryManager
+
+UniqueClientList o--> "*" Client
+
+Client *--> Name
+Client *--> Phone
+Client *--> Email
+Client *--> Address
+Client *--> ContractExpiryDate
+Client *-up-> "*" Tag
+Client -up-> Country
+Client --> Timezone
+Client -->"*" Note
+
+CountryManager o-left->"*" Country : has >
+UniqueTagSet o-right->"*" Tag
+TagNoteMap o-right->"*" Note
+
+TagNoteMap o-up-> Tag
+CountryManager --> "*" Note : creates mapping >
+
+Client -[hidden]right- AddressBook
 @enduml
+
+

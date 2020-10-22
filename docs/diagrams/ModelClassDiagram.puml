@@ -85,6 +85,10 @@ Client -->"*" Note
 WidgetModelManager ..|> WidgetModel
 WidgetModelManager *-right->"1" WidgetObject
 
+CountryManager o-left-> "*" Country
+UniqueTagSet o-right-> "*" Tag
+TagNoteMap o-right-> "*" Note
+
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
