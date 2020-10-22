@@ -25,6 +25,18 @@ class NoteTest {
     }
 
     @Test
+    public void equals_sameNote_returnTrue() {
+        Note note = new Note(NOTE_CONTENT_1);
+        assertEquals(note, note);
+    }
+
+    @Test
+    public void equals_null_returnFalse() {
+        Note note = new Note(NOTE_CONTENT_1);
+        assertNotEquals(note, null);
+    }
+
+    @Test
     public void equals_sameNoteContents_returnTrue() {
         Note note1 = new Note(NOTE_CONTENT_1);
         Note note1Duplicate = new Note(NOTE_CONTENT_1);

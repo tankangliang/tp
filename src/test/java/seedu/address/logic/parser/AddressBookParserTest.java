@@ -35,6 +35,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientCountryMatchesInputCountryPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
 import seedu.address.model.country.Country;
+import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
@@ -108,7 +109,9 @@ public class AddressBookParserTest {
         final String commandString = CountryNoteCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString
                 + " " + PREFIX_NOTE + noteString;
         CountryNoteCommand command = (CountryNoteCommand) parser.parseCommand(commandString);
-        assertEquals(new CountryNoteCommand(new Country(countryString), new Note(noteString)), command);
+        assertEquals(
+            new CountryNoteCommand(new CountryNote(noteString, new Country(countryString))),
+            command);
     }
 
     @Test
@@ -143,7 +146,7 @@ public class AddressBookParserTest {
         final String commandString = ClientNoteAddCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                 + " " + PREFIX_NOTE + noteString;
         TagNoteMap tagNoteMap = new TagNoteMap();
-        Set<Tag> tags = tagNoteMap.getUniqueTags(Collections.EMPTY_LIST);
+        Set<Tag> tags = tagNoteMap.getUniqueTags(Collections.emptyList());
         final Note note = new Note(noteString);
         note.setTags(tags);
         ClientNoteAddCommand command = (ClientNoteAddCommand) parser.parseCommand(commandString);
