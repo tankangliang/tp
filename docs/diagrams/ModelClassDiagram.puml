@@ -49,7 +49,8 @@ Class TagNoteMap
 
 Package Country {
 Class Country
-Class CountryManager
+Class CountryNotesManager
+Class CountryCodeVerifier
 }
 }
 
@@ -85,7 +86,7 @@ Client -->"*" Note
 WidgetModelManager ..|> WidgetModel
 WidgetModelManager *-right->"1" WidgetObject
 
-CountryManager o-left-> "*" Country
+CountryNotesManager o-left-> "*" Country
 UniqueTagSet o-right-> "*" Tag
 TagNoteMap o-right-> "*" Note
 
