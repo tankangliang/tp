@@ -45,24 +45,24 @@ class ClientNoteDeleteCommandTest {
     public void testEquals() {
         ClientNoteDeleteCommand clientNoteDeleteCommand1 =
                 new ClientNoteDeleteCommand(Index.fromOneBased(1), Index.fromOneBased(1));
-        ClientNoteDeleteCommand clientNoteDeleteCommand1_duplicate =
+        ClientNoteDeleteCommand clientNoteDeleteCommand1Duplicate =
                 new ClientNoteDeleteCommand(Index.fromOneBased(1), Index.fromOneBased(1));
-        ClientNoteDeleteCommand clientNoteDeleteCommand_Client2 =
+        ClientNoteDeleteCommand clientNoteDeleteCommandClient2 =
                 new ClientNoteDeleteCommand(Index.fromOneBased(2), Index.fromOneBased(1));
-        ClientNoteDeleteCommand clientNoteDeleteCommand1_ClientNote2 =
+        ClientNoteDeleteCommand clientNoteDeleteCommand1ClientNote2 =
                 new ClientNoteDeleteCommand(Index.fromOneBased(1), Index.fromOneBased(2));
 
         // same object -> returns true
         assertEquals(clientNoteDeleteCommand1, clientNoteDeleteCommand1);
 
         // same values -> returns true
-        assertEquals(clientNoteDeleteCommand1, clientNoteDeleteCommand1_duplicate);
+        assertEquals(clientNoteDeleteCommand1, clientNoteDeleteCommand1Duplicate);
 
         // diff values (diff client) --> returns false
-        assertNotEquals(clientNoteDeleteCommand1, clientNoteDeleteCommand_Client2);
+        assertNotEquals(clientNoteDeleteCommand1, clientNoteDeleteCommandClient2);
 
         // diff values (diff client note) --> returns false
-        assertNotEquals(clientNoteDeleteCommand1, clientNoteDeleteCommand1_ClientNote2);
+        assertNotEquals(clientNoteDeleteCommand1, clientNoteDeleteCommand1ClientNote2);
 
     }
 }

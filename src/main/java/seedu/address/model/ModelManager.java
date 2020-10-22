@@ -210,8 +210,7 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Note> getFilteredClientNotesList() {
         // todo: Ritesh filtered client notes list used by ClientNoteDeleteCommand
-        ObservableList<Note> stubList = FXCollections.observableArrayList();
-        return stubList;
+        return FXCollections.observableArrayList();
     }
 
     @Override
