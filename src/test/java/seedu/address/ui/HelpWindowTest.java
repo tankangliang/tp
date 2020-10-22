@@ -48,6 +48,14 @@ public class HelpWindowTest extends GuiUnitTest {
     }
 
     @Test
+    public void pressEscKey_helpWindowIsShowing_returnsFalse() throws Exception {
+        FxToolkit.showStage();
+        guiRobot.pauseForHuman();
+        helpWindowHandle.pressEscKey();
+        assertFalse(helpWindow.isShowing());
+    }
+
+    @Test
     public void copyUrl_userGuideUrl_copiesCorrectly() throws Exception {
         FxToolkit.showStage();
         helpWindowHandle.clickOnCopyUrlButton();
@@ -58,11 +66,13 @@ public class HelpWindowTest extends GuiUnitTest {
     }
 
     @Test
-    public void pressEscKey_helpWindowIsShowing_returnsFalse() throws Exception {
+    public void copyUrlByDirectAccess_userGuideUrl_copiesCorrectly() throws Exception {
         FxToolkit.showStage();
+        helpWindowHandle.accessCopyUrlButton();
         guiRobot.pauseForHuman();
-        helpWindowHandle.pressEscKey();
-        assertFalse(helpWindow.isShowing());
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        String ugUrl = (String) clipboard.getData(DataFlavor.stringFlavor);
+        assertEquals(USERGUIDE_URL, ugUrl);
     }
 
     @Test

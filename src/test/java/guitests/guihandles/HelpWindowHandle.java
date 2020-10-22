@@ -1,6 +1,7 @@
 package guitests.guihandles;
 
 import guitests.GuiRobot;
+import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
@@ -33,6 +34,17 @@ public class HelpWindowHandle extends StageHandle {
      */
     public void clickOnCopyUrlButton() {
         guiRobot.clickOn("#copyButton");
+    }
+
+    /**
+     * Difference between this method and the other is the above method find the node straight from the
+     * stage and immediately tries to clicks it.
+     * This one looks up the node with the given id and tries to query it as a button first before clicking it.
+     * IDEA does not seem to be able to pick up the covarage for the above method. Hence this is also included.
+     */
+    public void accessCopyUrlButton() {
+        Button copyButton = guiRobot.lookup("#copyButton").queryButton();
+        guiRobot.clickOn(copyButton);
     }
 
     /**

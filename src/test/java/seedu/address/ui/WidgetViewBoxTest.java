@@ -74,6 +74,14 @@ public class WidgetViewBoxTest extends GuiUnitTest {
         assertViewBoxDisplay(widgetViewBox, newObj);
     }
 
+    @Test
+    public void equals() {
+        WidgetViewBox obj1 = WidgetViewBox.init(TEST_OBJECT);
+        WidgetViewBox obj2 = WidgetViewBox.init(TEST_OBJECT);
+
+        assertEquals(obj1, obj2);
+    }
+
     private void assertViewBoxDisplay(WidgetViewBox widgetViewBox , WidgetObject expectedObject) {
         guiRobot.pauseForHuman();
 
