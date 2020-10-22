@@ -10,7 +10,9 @@ import javafx.scene.Node;
 import seedu.address.ui.testutil.UiPartExtension;
 
 /**
- * A GUI unit test class for AddressBook.
+ * A GUI unit test class for TBM.
+ *
+ * NTS: Either use this or FxRobot and ApplicationTest extension for the testing of GUI.
  */
 public abstract class GuiUnitTest {
 
