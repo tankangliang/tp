@@ -20,10 +20,11 @@ import seedu.address.testutil.TypicalClients;
 class ClientNoteDeleteCommandTest {
 
     private static final String NOTE_CONTENT_1 = "client note content 1";
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute_validCommand_doesNotThrowException() throws CommandException {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Index idx = Index.fromOneBased(1);
         Note clientNote = new Note(NOTE_CONTENT_1);
         ClientNoteAddCommand addCommand = new ClientNoteAddCommand(idx, clientNote);
