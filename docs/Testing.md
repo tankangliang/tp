@@ -36,9 +36,7 @@ This project has three types of tests:
 1. ##### GUI Tests
     These are tests which simulates user interaction with the application.
     
-    a. *Systems tests* that test the entire application by simulating user actions on the GUI. These are located in the `systemtests` package.
-    
-    b. *Unit tests* that test the individual GUI components. These are in the `seedu.address.ui` package.
+    a. *Unit tests* that test the individual GUI components. These are in the `seedu.address.ui` package.
 
 1. ##### Non-GUI Tests
     These are test not involving the GUI of TBM. They include,
