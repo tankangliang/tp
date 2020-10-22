@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -42,6 +43,16 @@ class ClientNoteAddCommandParserTest {
         tags.add(testTag);
         untaggedTags = new HashSet<>();
         untaggedTags.add(Tag.UNTAGGED);
+    }
+
+    @Test
+    public void constructor() {
+        assertThrows(NullPointerException.class, () -> new ClientNoteAddCommandParser(null));
+    }
+
+    @Test
+    public void parse_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> parser.parse(null));
     }
 
     @Test
