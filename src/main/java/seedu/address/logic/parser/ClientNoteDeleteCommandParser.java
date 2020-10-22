@@ -13,9 +13,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class ClientNoteDeleteCommandParser implements Parser<ClientNoteDeleteCommand> {
 
     @Override
-    public ClientNoteDeleteCommand parse(String userInput) throws ParseException {
-        requireNonNull(userInput);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput); // no prefix needed
+    public ClientNoteDeleteCommand parse(String restOfCommand) throws ParseException {
+        requireNonNull(restOfCommand);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(restOfCommand); // no prefix needed
         if (argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ClientNoteDeleteCommand.MESSAGE_USAGE));
@@ -24,7 +24,7 @@ public class ClientNoteDeleteCommandParser implements Parser<ClientNoteDeleteCom
         Index targetClientNoteIndex;
         try {
             String[] splitPreamble = argMultimap.getPreamble().split(" ");
-            if (splitPreamble.length != 5) { // cmd format: client note delete 1 1 all space delimited ==> 5 elems
+            if (splitPreamble.length != 2) { // restOfCommand: 1 1 all space delimited ==> 2 elems only
                 throw new ParseException("nope");
             }
             targetClientIndex = ParserUtil.parseIndex(splitPreamble[splitPreamble.length - 2]);

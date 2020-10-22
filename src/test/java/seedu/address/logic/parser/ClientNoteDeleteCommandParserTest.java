@@ -24,11 +24,9 @@ class ClientNoteDeleteCommandParserTest {
     }
 
     @Test
-    public void parse_inCorrectlyDelimitedUserInput_throwsParseException() {
-        String userInput1 = "client notedelete 11";
-        String userInput2 = "clientnote delete 1 1";
+    public void parse_inCorrectlyDelimitedRestOfCommand_throwsParseException() {
+        String userInput1 = "11";
         assertParseFailure(parser, userInput1, EXPECTED_PARSE_FAILURE_MESSAGE);
-        assertParseFailure(parser, userInput2, EXPECTED_PARSE_FAILURE_MESSAGE);
     }
 
     @Test
@@ -37,9 +35,9 @@ class ClientNoteDeleteCommandParserTest {
         Index expectedClientNoteIndex = Index.fromOneBased(12);
         ClientNoteDeleteCommand expectedCommand =
                 new ClientNoteDeleteCommand(expectedClientIndex, expectedClientNoteIndex);
-        String validUserInput = "client note delete 1 12";
-        assertDoesNotThrow(() -> parser.parse(validUserInput));
-        ClientNoteDeleteCommand actualCommand = parser.parse(validUserInput);
+        String restOfCommand = "1 12";
+        assertDoesNotThrow(() -> parser.parse(restOfCommand));
+        ClientNoteDeleteCommand actualCommand = parser.parse(restOfCommand);
         assertEquals(actualCommand, expectedCommand);
     }
 

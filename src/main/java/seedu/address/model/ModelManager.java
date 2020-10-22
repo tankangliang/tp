@@ -189,7 +189,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteClientNote(Client associatedClient, Note noteToDelete) {
         requireAllNonNull(associatedClient, noteToDelete);
-        // todo: Ritesh implement delete in the Client class
+        // todo: Ritesh implement delete in the Client class and add tests to cover this method
         // associatedClient.deleteClientNote(noteToDelete);
     }
 
