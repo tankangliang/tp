@@ -159,7 +159,7 @@ These operations are exposed in the `Model` interface as `Model#updateFilteredCl
 
 The following activity diagram summarizes what happens when a user inputs a `suggest` command.
 
-[!Suggest Activity Diagram](images/SuggestActivityDiagram.png)
+![Suggest Activity Diagram](images/SuggestActivityDiagram.png)
 
 Given below is an example usage scenario and how the suggestion mechanism behaves at each step.
 
