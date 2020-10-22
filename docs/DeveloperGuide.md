@@ -165,15 +165,15 @@ Given below is an example usage scenario and how the suggestion mechanism behave
 
 Step 1: The user executes `suggest by/contract` to list the suggested clients sorted by contract expiry dates. At this point, `filteredClients` is showing all clients.
 
-![SequenceState0](images/SequenceState0.png)
+![SuggestState0](images/SuggestState0.png)
 
 Step 2: The `suggest` command calls `Model#updateFilteredClientList` with the contract expiry date predicate (which checks if a client has a contract expiry date). `Model` updates the `filteredClients` object with the contract expiry date predicate which filters out all clients without an existing contract expiry date.
 
-![SequenceState1](images/SequenceState1.png)
+![SuggestState1](images/SuggestState1.png)
 
 Step 3: The `suggest` command calls `Model#sortFilteredClientList` with the contract expiry date comparator (which sorts clients by earliest contract expiry date). `Model` updates the `filteredClients` object with the contract expiry date comparator which gives us clients in order of increasing contract expiry date.
 
-![SequenceState2](images/SequenceState2.png)
+![SuggestState2](images/SuggestState2.png)
 
 Step 4: The change is then propagated to `Ui`, which updates the displayed clients in `ClientListPanel`.
 
