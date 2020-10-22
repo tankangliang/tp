@@ -212,7 +212,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Note> getFilteredClientNotesList() {
         // todo: depends on UI display of client notes and their index
-        //  Ritesh filtered client notes list used by ClientNoteDeleteCommand
         ObservableList<Client> currentClients = this.getFilteredClientList();
         List<Note> clientNotes = new ArrayList<>();
         for (Client client : currentClients) {

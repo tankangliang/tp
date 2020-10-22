@@ -3,7 +3,6 @@ package seedu.address.model.note;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalClients.ALICE;
 
@@ -14,6 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ClientBuilder;
@@ -62,6 +62,17 @@ class TagNoteMapTest {
         assertEquals(tagNoteMap.getNotesForTag(testTag), expectedNotes);
     }
 
+    @Test
+    void getUniqueTags_verifyWithNewTag_doesNotThrowExceptionReturnsTrue() throws ParseException {
+        Set<Tag> expectedResult = new HashSet<>();
+        expectedResult.add(new Tag("unprecedentedTag"));
+        List<String> tagNameStrings = new ArrayList<>();
+        tagNameStrings.add("unprecedentedTag");
+        assertDoesNotThrow(() -> this.tagNoteMap.getUniqueTags(tagNameStrings));
+        Set<Tag> actualResult = this.tagNoteMap.getUniqueTags(tagNameStrings);
+        assertEquals(expectedResult, actualResult);
+    }
+
     // also tests that when a tag doesn't have associated notes then it is removed from tagToNotesMap and uniqueTagsMap
     @Test
     void deleteNote_deleteSoleNoteWithSoleTag_clearsTagToNotesMapAndUniqueTagEntriesReturnsTrue() {
@@ -101,9 +112,9 @@ class TagNoteMapTest {
         TagNoteMap emptyTagNoteMap = new TagNoteMap();
         TagNoteMap sameObject = this.tagNoteMap;
         Object randomObject = new Object();
-        assertEquals(sameObject, this.tagNoteMap);
-        assertEquals(emptyTagNoteMap, this.tagNoteMap);
-        assertNotEquals(randomObject, this.tagNoteMap);
+        assertTrue(sameObject.equals(this.tagNoteMap));
+        assertTrue(emptyTagNoteMap.equals(this.tagNoteMap));
+        assertFalse(this.tagNoteMap.equals(randomObject));
     }
 
     /*  todo Future test cases:

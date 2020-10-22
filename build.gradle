@@ -1,5 +1,3 @@
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-
 plugins {
     id 'java'
     id 'checkstyle'
@@ -39,35 +37,6 @@ test {
     finalizedBy jacocoTestReport
 }
 
-test {
-    systemProperty 'testfx.setup.timeout', '60000'
-    testLogging {
-        events TestLogEvent.FAILED, TestLogEvent.SKIPPED
-        if (System.env.'CI') {
-            events << TestLogEvent.STARTED
-        }
-    }
-
-    doFirst {
-        boolean runHeadless = gradle.taskGraph.hasTask(headlessTest)
-
-        if (System.env.'CI') {
-            println "Skipping GUI tests"
-            test.exclude 'seedu/address/ui'
-        } else {
-            if (runHeadless) {
-                println "Running gui test in headless environment"
-            }
-            jvmArgs "-Dheadless=${project.hasProperty('headless') ? project.headless : runHeadless}"
-        }
-
-    }
-}
-
-task headlessTest
-
-headlessTest.dependsOn test
-
 task coverage(type: JacocoReport) {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
@@ -106,16 +75,12 @@ dependencies {
     implementation 'com.jfoenix:jfoenix:9.0.10'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
-    testImplementation "org.testfx:testfx-junit5:4.0.16-alpha"
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
-    testRuntimeOnly group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+26'
-
 }
 
 shadowJar {
     archiveFileName = 'TBM.jar'
-
 }
 
-defaultTasks 'clean', 'test', 'headlessTest'
+defaultTasks 'clean', 'test'
