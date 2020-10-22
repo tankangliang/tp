@@ -10,7 +10,7 @@ while () is ([arguments present])
     :Parse argument into SuggestionType;
     :Add related predicate into list;
     :Add related comparator into list;
-endwhile
+endwhile ([else])
 
 :Apply predicates to Model#updateClientFilteredList;
 :Apply comparators to Model#sortClientFilteredList;
