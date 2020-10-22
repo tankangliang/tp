@@ -70,7 +70,7 @@ public class CountryNotesManager {
      *
      * @param country The country from which we get CountryNotes.
      */
-    public Set<CountryNote> getCountryNote(Country country) {
+    public Set<CountryNote> getCountryNotes(Country country) {
         requireNonNull(country);
         return this.countryToCountryNotesMap.get(country);
     }
