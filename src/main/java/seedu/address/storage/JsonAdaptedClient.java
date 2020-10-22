@@ -19,7 +19,7 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
-import seedu.address.model.country.CountryManager;
+import seedu.address.model.country.CountryCodeVerifier;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -121,8 +121,8 @@ class JsonAdaptedClient {
         if (country == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName()));
         }
-        if (!CountryManager.isValidCountryCode(country)) {
-            throw new IllegalValueException(Country.MESSAGE_CONSTRAINTS);
+        if (!CountryCodeVerifier.isValidCountryCode(country)) {
+            throw new IllegalValueException(CountryCodeVerifier.MESSAGE_CONSTRAINTS);
         }
         final Country modelCountry = new Country(country);
 

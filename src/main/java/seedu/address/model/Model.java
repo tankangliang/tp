@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
-import seedu.address.model.country.Country;
+import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
@@ -101,14 +101,14 @@ public interface Model {
     void setClient(Client target, Client editedClient);
 
     /**
-     * Returns true if {@code country} contains the {@code countryNote} specified.
+     * Returns true if the {@code countryNote} already exists in TBM.
      */
-    boolean hasCountryNote(Country country, Note countryNote);
+    boolean hasCountryNote(CountryNote countryNote);
 
     /**
-     * Adds the given country note to the given country.
+     * Adds the given country note to TBM.
      */
-    void addCountryNote(Country country, Note countryNote);
+    void addCountryNote(CountryNote countryNote);
 
     /**
      * Returns true if {@code client} contains the {@code clientNote} specified.
