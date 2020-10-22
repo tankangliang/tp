@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,6 +16,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.TagNoteMap;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.widget.WidgetModel;
 import seedu.address.model.widget.WidgetObject;
 
@@ -29,6 +32,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
     private final WidgetModel widget;
+    private final TagNoteMap tagNoteMap;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,6 +47,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         this.widget = WidgetModel.initWidget();
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
+        this.tagNoteMap = new TagNoteMap();
     }
 
     public ModelManager() {
@@ -122,6 +127,11 @@ public class ModelManager implements Model {
     public void addClient(Client client) {
         addressBook.addClient(client);
         updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+        Set<Note> clientNotes = client.getClientNotes();
+        for (Note note : clientNotes) {
+            Set<Tag> tags = note.getTags();
+            updateTagNoteMapWithNote(tags, note);
+        }
     }
 
     @Override
@@ -137,6 +147,7 @@ public class ModelManager implements Model {
 
         return addressBook.hasCountryNote(country, countryNote);
     }
+
     @Override
     public boolean hasClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
@@ -149,10 +160,33 @@ public class ModelManager implements Model {
 
         addressBook.addCountryNote(country, countryNote);
     }
+
     @Override
     public void addClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
         target.addClientNote(clientNote);
+        // update the TagNoteMap:
+        Set<Tag> newTags = clientNote.getTags();
+        this.tagNoteMap.updateTagsForNote(newTags, clientNote);
+    }
+
+    @Override
+    public void updateTagNoteMapWithNote(Set<Tag> newTags, Note note) {
+        this.tagNoteMap.updateTagsForNote(newTags, note);
+    }
+
+    /**
+     * Initialises TagNoteMap from Clients notes and Country notes.
+     */
+    public void initialiseTagNoteMap() {
+        this.tagNoteMap.initTagNoteMapFromClients(this.addressBook.getClientList());
+        //        this.countryManager.getAllCountryNotesAsCollectionOfSets()
+        //                .forEach(this.tagNoteMap::initTagNoteMapFromCountryNotes);
+        // todo: initialiseTagNoteMap probably has to be changed to use AddressBook#getNoteList()
+    }
+
+    public TagNoteMap getTagNoteMap() {
+        return this.tagNoteMap;
     }
 
     @Override
@@ -202,7 +236,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredClients.equals(other.filteredClients);
+                && filteredClients.equals(other.filteredClients)
+                && tagNoteMap.equals(other.tagNoteMap);
     }
 
 }

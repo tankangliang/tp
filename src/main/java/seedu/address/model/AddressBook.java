@@ -25,7 +25,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueClientList clients;
     private final UniqueTagSet tags;
     private final CountryManager countryMananger;
-
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -58,7 +57,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setClients(List<Client> clients) {
         this.clients.setClients(clients);
-
         Set<Tag> allClientTags = new HashSet<>();
         for (Client client : clients) {
             allClientTags.addAll(client.getTags());
@@ -145,7 +143,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addCountryNote(Country country, Note countryNote) {
         requireAllNonNull(country, countryNote);
-
         countryMananger.addCountryNote(country, countryNote);
     }
 

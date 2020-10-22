@@ -19,7 +19,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
 
 public class ClientViewCommandTest {
-    //TODO: Implement
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -27,7 +26,7 @@ public class ClientViewCommandTest {
         Client clientToView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         ClientViewCommand command = new ClientViewCommand(INDEX_FIRST_CLIENT);
 
-        String expectedMsg = String.format(ClientViewCommand.MESSAGE_VIEW_CLIENT_SUCCESS, clientToView);
+        String expectedMsg = String.format(ClientViewCommand.MESSAGE_VIEW_CLIENT_SUCCESS, clientToView.getName());
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setWidgetContent(clientToView);
@@ -49,7 +48,7 @@ public class ClientViewCommandTest {
         Client clientToView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         ClientViewCommand clientViewCommand = new ClientViewCommand(INDEX_FIRST_CLIENT);
 
-        String expectedMessage = String.format(ClientViewCommand.MESSAGE_VIEW_CLIENT_SUCCESS, clientToView);
+        String expectedMessage = String.format(ClientViewCommand.MESSAGE_VIEW_CLIENT_SUCCESS, clientToView.getName());
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showClientAtIndex(expectedModel, INDEX_FIRST_CLIENT);
@@ -70,6 +69,7 @@ public class ClientViewCommandTest {
 
         assertCommandFailure(clientViewCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
     }
+
     @Test
     public void equals() {
         ClientViewCommand viewFirstCommand = new ClientViewCommand(INDEX_FIRST_CLIENT);

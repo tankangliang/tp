@@ -28,6 +28,7 @@ public class Client {
     private final Address address;
     private final Country country;
     private final Timezone timezone;
+    private final ContractExpiryDate contractExpiryDate;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Note> clientNotes = new LinkedHashSet<>(); // todo: initialise this iff client has notes
 
@@ -35,7 +36,7 @@ public class Client {
      * Every field must be present and not null.
      */
     public Client(Name name, Phone phone, Email email, Address address, Country country, Timezone timezone,
-                  Set<Tag> tags) {
+                  ContractExpiryDate contractExpiryDate, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -43,6 +44,7 @@ public class Client {
         this.address = address;
         this.country = country;
         this.timezone = timezone;
+        this.contractExpiryDate = contractExpiryDate;
         this.tags.addAll(tags);
     }
 
@@ -68,6 +70,10 @@ public class Client {
 
     public Timezone getTimezone() {
         return timezone;
+    }
+
+    public ContractExpiryDate getContractExpiryDate() {
+        return contractExpiryDate;
     }
 
     /**
@@ -150,6 +156,7 @@ public class Client {
                 && otherClient.getAddress().equals(getAddress())
                 && otherClient.getCountry().equals(getCountry())
                 && otherClient.getTimezone().equals(getTimezone())
+                && otherClient.getContractExpiryDate().equals(getContractExpiryDate())
                 && otherClient.getTags().equals(getTags());
     }
 
@@ -173,6 +180,8 @@ public class Client {
                 .append(getCountry())
                 .append(" Timezone: ")
                 .append(getTimezone())
+                .append(" Contract Expiry Date: ")
+                .append(getContractExpiryDate())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

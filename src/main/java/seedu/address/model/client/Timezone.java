@@ -3,8 +3,11 @@ package seedu.address.model.client;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 
 /**
  * Represents a Client's timezone in the address book.
@@ -12,17 +15,21 @@ import java.util.regex.Pattern;
  */
 public class Timezone {
 
+    public static final String GMT_STRING = "GMT";
+    public static final int SMALLEST_NEGATIVE_OFFSET = 12;
+    public static final int LARGEST_POSITIVE_OFFSET = 14;
+
     public static final String MESSAGE_CONSTRAINTS =
-            "Timezone should be in the form \"GMT+X\" or \"GMT-X\" where X is a number.\n"
-            + "Largest offset is GMT+14 and smallest offset is GMT-12";
+        "Timezone should be in the form \"" + GMT_STRING + "+X\" or \"" + GMT_STRING
+            + "-X\" where X is a number.\n" + "Largest offset is " + GMT_STRING
+            + "+" + LARGEST_POSITIVE_OFFSET + " and smallest offset is " + GMT_STRING
+            + "-" + SMALLEST_NEGATIVE_OFFSET;
 
     /** Timezone must start with "GMT" */
-    public static final String VALIDATION_REGEX = "^GMT(?<sign>[+-])(?<number>[\\d]+)";
+    public static final String VALIDATION_REGEX = "^" + GMT_STRING + "(?<sign>[+-])(?<number>[\\d]+)";
 
     private static final Pattern TIMEZONE_FORMAT = Pattern.compile(VALIDATION_REGEX);
 
-    private static final int SMALLEST_NEGATIVE_OFFSET = 12;
-    private static final int LARGEST_POSITIVE_OFFSET = 14;
 
     public final String value;
 
@@ -57,6 +64,18 @@ public class Timezone {
             }
         }
         return false;
+    }
+
+    /**
+     * Gets the current hour in this timezone.
+     *
+     * @return The current hour in this timezone.
+     */
+    public int getCurrHourInTimezone() {
+        String offsetString = value.substring(GMT_STRING.length());
+        ZoneOffset zoneOffSet = ZoneOffset.of(offsetString);
+        OffsetDateTime date = OffsetDateTime.now(zoneOffSet);
+        return date.getHour();
     }
 
 

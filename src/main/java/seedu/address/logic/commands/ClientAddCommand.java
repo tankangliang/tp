@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTRACT_EXPIRY_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -28,6 +29,7 @@ public class ClientAddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_COUNTRY + "COUNTRY_CODE "
             + PREFIX_TIMEZONE + "TIMEZONE "
+            + PREFIX_CONTRACT_EXPIRY_DATE + "CONTRACT_EXPIRY_DATE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -36,6 +38,7 @@ public class ClientAddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_COUNTRY + "SG "
             + PREFIX_TIMEZONE + "GMT+8 "
+            + PREFIX_CONTRACT_EXPIRY_DATE + "30-1-2023 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

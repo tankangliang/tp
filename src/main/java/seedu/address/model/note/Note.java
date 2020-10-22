@@ -1,16 +1,22 @@
 package seedu.address.model.note;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import seedu.address.model.tag.Tag;
 
 /**
  * Generic Note class for country and client notes.
  */
 public class Note {
-    public static final String MESSAGE_CONSTRAINTS = "message contraints for note";
-    protected final String noteContents;
+    public static final String MESSAGE_CONSTRAINTS = "Notes should not be blank";
+    private final String noteContents;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Constructs a Note object with some content in it.
@@ -20,6 +26,21 @@ public class Note {
     public Note(String content) {
         requireNonNull(content);
         noteContents = content;
+    }
+
+    /**
+     * Sets the tags of this note to the {@code tags} passed in.
+     *
+     * @param tags The tag to be added.
+     */
+    public void setTags(Set<Tag> tags) {
+        requireAllNonNull(tags);
+        this.tags.clear();
+        this.tags.addAll(tags);
+    }
+
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     @Override
@@ -36,8 +57,9 @@ public class Note {
 
         // state check
         Note c = (Note) obj;
+        boolean hasSameTags = this.tags.equals(c.tags);
 
-        return this.noteContents.equals(c.noteContents);
+        return this.noteContents.equals(c.noteContents) && hasSameTags;
     }
 
     @Override
@@ -47,6 +69,6 @@ public class Note {
 
     @Override
     public int hashCode() {
-        return Objects.hash(noteContents);
+        return Objects.hash(noteContents, tags);
     }
 }
