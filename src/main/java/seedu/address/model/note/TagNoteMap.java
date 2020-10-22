@@ -8,7 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
@@ -20,14 +22,16 @@ import seedu.address.model.tag.Tag;
  */
 public class TagNoteMap {
 
-    public final Set<Note> noteSet = new HashSet<>(); // TODO: not really needed
+    private static final Logger logger = LogsCenter.getLogger(TagNoteMap.class);
+
+    private final Set<Note> noteSet = new HashSet<>(); // TODO: not really needed
     /**
      * A map that contains the mapping from any tag to a unique tag.
      * A map is used instead of a set because the set does not offer the option of getting objects inside it.
      */
-    public final Map<Tag, Tag> uniqueTagMap = new HashMap<>();
-    public final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
-    public final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
+    private final Map<Tag, Tag> uniqueTagMap = new HashMap<>();
+    private final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
+    private final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
 
     /**
      * Constructor ensures our unique tag map has the UNTAGGED tag.
@@ -58,6 +62,7 @@ public class TagNoteMap {
             Set<Note> clientNotes = client.getClientNotes();
             initTagNoteMapFromNotes(clientNotes);
         }
+        logger.info("--------------[TagNoteMap initialized from clients]");
     }
 
     /**
@@ -69,6 +74,7 @@ public class TagNoteMap {
         // todo: make init work when passed in a list of countryNotes
         requireAllNonNull(countryNotes);
         initTagNoteMapFromNotes(countryNotes);
+        logger.info("--------------[TagNoteMap initialized from country notes]");
     }
 
     /**
