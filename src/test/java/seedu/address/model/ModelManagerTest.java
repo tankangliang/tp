@@ -84,7 +84,7 @@ public class ModelManagerTest {
 
     @Test
     public void deleteClient_deleteExistingClient_returnsTrue() {
-        Client target = ALICE;
+        Client target = new ClientBuilder(ALICE).build();
         modelManager.addClient(target);
         assertTrue(modelManager.hasClient(ALICE));
         modelManager.deleteClient(target);
@@ -103,8 +103,10 @@ public class ModelManagerTest {
 
     @Test
     public void hasClient_clientInAddressBook_returnsTrue() {
-        modelManager.addClient(ALICE);
-        assertTrue(modelManager.hasClient(ALICE));
+        Client client = new ClientBuilder(ALICE).build();
+        assertFalse(modelManager.hasClient(client));
+        modelManager.addClient(client);
+        assertTrue(modelManager.hasClient(client));
     }
 
     @Test
@@ -124,7 +126,7 @@ public class ModelManagerTest {
 
     @Test
     public void addAndHasClientNote_validSyntax_updatesCorrectly() {
-        Client client = ALICE;
+        Client client = new ClientBuilder(ALICE).build();
         Note clientNote = new Note("this be a client note");
         assertFalse(modelManager.hasClientNote(client, clientNote));
         modelManager.addClientNote(client, clientNote);
@@ -194,7 +196,7 @@ public class ModelManagerTest {
         tags.add(new Tag("tagName"));
         Note taggedNote = new Note("jurong hill was a nice place");
         taggedNote.setTags(tags);
-        Client aliceTagged = ALICE;
+        Client aliceTagged = new ClientBuilder(ALICE).build();
         aliceTagged.addClientNote(taggedNote);
         this.modelManager.addClient(aliceTagged);
         assertDoesNotThrow(() -> this.modelManager.initialiseTagNoteMap());

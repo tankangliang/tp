@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -72,7 +71,7 @@ class ClientNoteAddCommandParserTest {
             expectedClientNote.setTags(untaggedTags);
             ClientNoteAddCommand expected = new ClientNoteAddCommand(Index.fromOneBased(1), expectedClientNote);
             ClientNoteAddCommand actual = parser.parse(HAS_INDEX_HAS_NOTE);
-            assertEquals(expected, actual);
+            assertParseSuccess(parser, HAS_INDEX_HAS_NOTE, expected);
         } catch (ParseException e) {
             fail();
         }
