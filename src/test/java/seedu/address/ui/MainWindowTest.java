@@ -58,6 +58,7 @@ public class MainWindowTest extends GuiUnitTest {
         guiRobot.pauseForHuman();
         assertTrue(mainWindowHandle.isShowing());
 
+
         // checks the interaction of copy url and url is correct
         guiRobot.clickOn("Help");
         guiRobot.clickOn("F1");
@@ -71,7 +72,7 @@ public class MainWindowTest extends GuiUnitTest {
         guiRobot.press(KeyCode.ESCAPE);
         assertFalse(HelpWindowHandle.isWindowPresent());
 
-        // TODO:
+        // TODO: Command Execution test
 
     }
 }
