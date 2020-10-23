@@ -20,7 +20,7 @@ public class Timezone {
     public static final int LARGEST_POSITIVE_OFFSET = 14;
 
     public static final String MESSAGE_CONSTRAINTS =
-        "Timezone should be in the form \"" + GMT_STRING + "+X\" or \"" + GMT_STRING
+            "Timezone should be in the form \"" + GMT_STRING + "+X\" or \"" + GMT_STRING
             + "-X\" where X is a number.\n" + "Largest offset is " + GMT_STRING
             + "+" + LARGEST_POSITIVE_OFFSET + " and smallest offset is " + GMT_STRING
             + "-" + SMALLEST_NEGATIVE_OFFSET;

@@ -15,7 +15,7 @@ public class CountryNoteViewCommandParser implements Parser<CountryNoteViewComma
     @Override
     public CountryNoteViewCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_COUNTRY);
+                ArgumentTokenizer.tokenize(args, PREFIX_COUNTRY);
 
         if (argMultimap.getValue(PREFIX_COUNTRY).isEmpty()) {
             throw new ParseException(

@@ -17,11 +17,11 @@ public class SuggestCommand extends Command {
 
     public static final String COMMAND_WORD = "suggest";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Suggests a list of all clients based on the "
-        + "suggestion types specified in the arguments.\n"
-        + "Parameters: " + PREFIX_SUGGEST + "SUGGESTION_TYPE\n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_SUGGEST + SuggestionType.BY_FREQUENCY + "\n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_SUGGEST + SuggestionType.BY_AVAILABLE + "\n"
-        + "Example: " + COMMAND_WORD + " " + PREFIX_SUGGEST + SuggestionType.BY_CONTRACT;
+            + "suggestion types specified in the arguments.\n"
+            + "Parameters: " + PREFIX_SUGGEST + "SUGGESTION_TYPE\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SUGGEST + SuggestionType.BY_FREQUENCY + "\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SUGGEST + SuggestionType.BY_AVAILABLE + "\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_SUGGEST + SuggestionType.BY_CONTRACT;
     public static final String MESSAGE_SUGGEST_SUCCESS = "Showing clients based on suggestion criteria";
 
     private final List<Predicate<Client>> suggestionTypePredicateList;
@@ -37,8 +37,8 @@ public class SuggestCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredClientList(
-            client -> suggestionTypePredicateList.stream().allMatch(pred -> pred.test(client)));
+        model.updateFilteredClientList(client ->
+                suggestionTypePredicateList.stream().allMatch(pred -> pred.test(client)));
         return new CommandResult(MESSAGE_SUGGEST_SUCCESS);
     }
 

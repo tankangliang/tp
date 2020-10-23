@@ -16,7 +16,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
 import seedu.address.model.tag.Tag;
 
-
 /**
  * Manages the relationship between Tags and Notes.
  */
@@ -24,12 +23,12 @@ public class TagNoteMap {
 
     private static final Logger logger = LogsCenter.getLogger(TagNoteMap.class);
 
-    private final Set<Note> noteSet = new HashSet<>(); // TODO: not really needed
     /**
      * A map that contains the mapping from any tag to a unique tag.
      * A map is used instead of a set because the set does not offer the option of getting objects inside it.
      */
     private final Map<Tag, Tag> uniqueTagMap = new HashMap<>();
+    private final Set<Note> noteSet = new HashSet<>(); // TODO: not really needed
     private final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
     private final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
 
@@ -47,7 +46,7 @@ public class TagNoteMap {
             for (Tag tag : tags) {
                 uniqueTagMap.put(tag, tag);
             }
-            updateTagsForNote(tags, clientNote);
+            addTagsForNote(tags, clientNote);
         }
     }
 
@@ -108,7 +107,9 @@ public class TagNoteMap {
     }
 
     /**
-     * Deletes a note from the TagNoteMap. Modifies existing {@code noteSet, tagToNotesMap, noteToTagsMap}
+     * Deletes a note from the TagNoteMap.
+     * Modifies existing {@code noteSet, tagToNotesMap, noteToTagsMap, uniqueTagMap}.
+     *
      * @param note The note to be deleted from the TagNoteMap.
      */
     public void deleteNote(Note note) {
@@ -127,20 +128,15 @@ public class TagNoteMap {
         noteToTagsMap.remove(note);
     }
 
-
     /**
-     * Links a new set of tags to a note.
+     * Adds a set of tags to a note, the note will contain a union of its current tag set and the input tag set
+     * after this operation.
      * Method is public for ModelManager to use.
-     * //todo doublecheck if this is unsafe.
      *
      * @param newTags The tags to associate with a particular note.
      * @param note    The note to associate the tag with.
      */
-    public void updateTagsForNote(Set<Tag> newTags, Note note) {
-        // TODO: note is inside note to tags map
-        //  between old tags and new tags
-        //  oldtags.removeAll(new tags)
-        //  for each oldtags: remove this note from the tag to notes map. So if the hashset is empty
+    public void addTagsForNote(Set<Tag> newTags, Note note) {
         requireAllNonNull(newTags, note);
         for (Tag newTag : newTags) {
             // update the notes set for each of the tags:

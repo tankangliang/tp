@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +18,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
 import seedu.address.testutil.ClientBuilder;
-import seedu.address.testutil.TypicalClients;
 
 class ClientNoteDeleteCommandTest {
 
@@ -62,7 +62,7 @@ class ClientNoteDeleteCommandTest {
 
     @Test
     public void execute_validClientIndexInvalidClientNoteIndex_throwsCommandException() {
-        Client client = TypicalClients.ALICE;
+        Client client = new ClientBuilder(ALICE).build();
         Note clientNote = new Note(NOTE_CONTENT_1);
         Index idx = Index.fromOneBased(1);
         model.addClientNote(client, clientNote);
