@@ -55,7 +55,7 @@ public class ClientNoteAddCommandParser implements Parser<ClientNoteAddCommand> 
 
         Note clientNote = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE)
                 .orElseThrow(() -> new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ClientNoteAddCommand.MESSAGE_USAGE))));
+                        ClientNoteAddCommand.MESSAGE_USAGE))));
         clientNote.setTags(tags);
         return new ClientNoteAddCommand(index, clientNote);
     }

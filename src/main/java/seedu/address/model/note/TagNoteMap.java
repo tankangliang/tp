@@ -16,7 +16,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
 import seedu.address.model.tag.Tag;
 
-
 /**
  * Manages the relationship between Tags and Notes.
  */
@@ -24,12 +23,12 @@ public class TagNoteMap {
 
     private static final Logger logger = LogsCenter.getLogger(TagNoteMap.class);
 
-    private final Set<Note> noteSet = new HashSet<>(); // TODO: not really needed
     /**
      * A map that contains the mapping from any tag to a unique tag.
      * A map is used instead of a set because the set does not offer the option of getting objects inside it.
      */
     private final Map<Tag, Tag> uniqueTagMap = new HashMap<>();
+    private final Set<Note> noteSet = new HashSet<>(); // TODO: not really needed
     private final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
     private final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
 
@@ -129,11 +128,10 @@ public class TagNoteMap {
         noteToTagsMap.remove(note);
     }
 
-
     /**
-     * Links a new set of tags to a note.
+     * Adds a set of tags to a note, the note will contain a union of its current tag set and the input tag set
+     * after this operation.
      * Method is public for ModelManager to use.
-     * //todo doublecheck if this is unsafe.
      *
      * @param newTags The tags to associate with a particular note.
      * @param note    The note to associate the tag with.

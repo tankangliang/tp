@@ -111,9 +111,7 @@ public class AddressBookParserTest {
         final String commandString = CountryNoteCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString
                 + " " + PREFIX_NOTE + noteString;
         CountryNoteCommand command = (CountryNoteCommand) parser.parseCommand(commandString);
-        assertEquals(
-                new CountryNoteCommand(new CountryNote(noteString, new Country(countryString))),
-                command);
+        assertEquals(new CountryNoteCommand(new CountryNote(noteString, new Country(countryString))), command);
     }
 
     @Test
