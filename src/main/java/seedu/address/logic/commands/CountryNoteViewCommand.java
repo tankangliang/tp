@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 
 import seedu.address.model.Model;
@@ -26,11 +27,13 @@ public class CountryNoteViewCommand extends Command {
      * @param country The country which all displayed country notes belong to.
      */
     public CountryNoteViewCommand(Country country) {
+        requireNonNull(country);
         this.country = country;
     }
 
     @Override
     public CommandResult execute(Model model) {
+        requireNonNull(model);
         model.updateFilteredCountryNoteList(countryNote -> countryNote.getCountry().equals(country));
         return new CommandResult(String.format(MESSAGE_SUCCESS, country), false, false, WidgetViewOption.COUNTRY_NOTES);
     }

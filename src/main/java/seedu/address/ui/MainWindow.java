@@ -36,7 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private WidgetViewBox widgetViewBox;
-    private WidgetListViewBox widgetListViewBox;
+    private CountryNoteListPanel countryNoteListPanel;
     @FXML
     private StackPane widgetPlaceholder;
     @FXML
@@ -115,7 +115,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         widgetViewBox = new WidgetViewBox();
-        widgetListViewBox = new WidgetListViewBox(logic.getFilteredCountryNoteList());
+        countryNoteListPanel = new CountryNoteListPanel(logic.getFilteredCountryNoteList());
         widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
 
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
@@ -194,8 +194,9 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             case COUNTRY_NOTES:
                 widgetPlaceholder.getChildren().clear();
-                widgetPlaceholder.getChildren().add(widgetListViewBox.getRoot());
+                widgetPlaceholder.getChildren().add(countryNoteListPanel.getRoot());
                 break;
+            case NONE:
             default:
                 break;
             }

@@ -9,23 +9,23 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.note.CountryNote;
 
-public class WidgetListViewBox extends UiPart<Region> {
-
+/**
+ * A widget that wraps around ListView.
+ */
+public class CountryNoteListPanel extends UiPart<Region> {
     private static final String FXML = "WidgetListViewBox.fxml";
 
     @FXML
     private VBox viewBox;
-
     @FXML
     private Label header;
-
     @FXML
     private ListView<CountryNote> countryNoteListView;
 
     /**
-     * Initializes a {@code WidgetListViewBox}
+     * Initializes a {@code CountryNoteListPanel} with a countryNoteObservableList.
      */
-    public WidgetListViewBox(ObservableList<CountryNote> countryNoteObservableList) {
+    public CountryNoteListPanel(ObservableList<CountryNote> countryNoteObservableList) {
         super(FXML);
         header.setText("Country Notes");
         countryNoteListView.setItems(countryNoteObservableList);

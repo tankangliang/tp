@@ -29,7 +29,7 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.widgetViewOption = null;
+        this.widgetViewOption = WidgetViewOption.NONE;
     }
 
     /**

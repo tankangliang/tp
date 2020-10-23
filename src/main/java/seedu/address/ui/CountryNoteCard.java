@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -28,6 +30,7 @@ public class CountryNoteCard extends UiPart<Region> {
      */
     public CountryNoteCard(int index, CountryNote countryNote) {
         super(FXML);
+        requireAllNonNull(index, countryNote);
         this.countryNote = countryNote;
         countryNoteContent.setText(index + ". " + countryNote.getNoteContents());
     }

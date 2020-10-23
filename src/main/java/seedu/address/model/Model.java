@@ -133,7 +133,7 @@ public interface Model {
     void updateFilteredClientList(Predicate<Client> predicate);
 
     /**
-     * Returns an unmodifiable view of the filtered country notes list
+     * Returns an unmodifiable view of the filtered country notes list.
      */
     ObservableList<CountryNote> getFilteredCountryNoteList();
 
