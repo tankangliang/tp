@@ -55,14 +55,14 @@ public class CountryNotesManagerTest {
             CountryNote genericNote = new CountryNote("generic note", country);
             countryNotesManager.addCountryNote(genericNote);
             assertEquals(1, countryNotesManager.asUnmodifiableObservableList()
-                .stream()
-                .filter(x -> x.equals(genericNote))
-                .count());
+                    .stream()
+                    .filter(x -> x.equals(genericNote))
+                    .count());
             countryNotesManager.addCountryNote(genericNote);
             assertEquals(1, countryNotesManager.asUnmodifiableObservableList()
-                .stream()
-                .filter(x -> x.equals(genericNote))
-                .count());
+                    .stream()
+                    .filter(x -> x.equals(genericNote))
+                    .count());
         }
     }
 

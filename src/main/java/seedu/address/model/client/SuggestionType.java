@@ -15,7 +15,7 @@ public class SuggestionType {
     public static final String BY_AVAILABLE = "available";
     public static final String BY_CONTRACT = "contract";
     public static final String MESSAGE_CONSTRAINTS = "Suggestion type can only be of the following: "
-        + BY_FREQUENCY + ", " + BY_AVAILABLE + ", " + BY_CONTRACT;
+            + BY_FREQUENCY + ", " + BY_AVAILABLE + ", " + BY_CONTRACT;
 
     public final String suggestionString;
 
@@ -48,6 +48,7 @@ public class SuggestionType {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidSuggestionType(String test) {
+        requireNonNull(test);
         return test.equals(BY_FREQUENCY) || test.equals(BY_AVAILABLE) || test.equals(BY_CONTRACT);
     }
 

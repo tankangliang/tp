@@ -1,8 +1,6 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -16,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClientNoteAddCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
@@ -67,15 +64,10 @@ class ClientNoteAddCommandParserTest {
 
     @Test
     public void parse_hasIndexHasNote_equalsExpected() {
-        try {
-            Note expectedClientNote = new Note(NOTE_STRING);
-            expectedClientNote.setTags(untaggedTags);
-            ClientNoteAddCommand expected = new ClientNoteAddCommand(Index.fromOneBased(1), expectedClientNote);
-            ClientNoteAddCommand actual = parser.parse(HAS_INDEX_HAS_NOTE);
-            assertEquals(expected, actual);
-        } catch (ParseException e) {
-            fail();
-        }
+        Note expectedClientNote = new Note(NOTE_STRING);
+        expectedClientNote.setTags(untaggedTags);
+        ClientNoteAddCommand expected = new ClientNoteAddCommand(Index.fromOneBased(1), expectedClientNote);
+        assertParseSuccess(parser, HAS_INDEX_HAS_NOTE, expected);
     }
 
     @Test

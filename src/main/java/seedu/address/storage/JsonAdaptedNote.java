@@ -17,7 +17,7 @@ class JsonAdaptedNote {
 
     @JsonCreator
     public JsonAdaptedNote(@JsonProperty("contents") String contents,
-        @JsonProperty("countryCode") String countryCode) {
+            @JsonProperty("countryCode") String countryCode) {
         this.contents = contents;
         this.countryCode = countryCode;
     }

@@ -39,7 +39,7 @@ public class CountryNoteCommandParserTest {
     public void parse_validCountryHasNote_equalsExpected() {
         try {
             CountryNoteCommand expected = new CountryNoteCommand(
-                new CountryNote("random string", new Country("SG")));
+                    new CountryNote("random string", new Country("SG")));
             assertEquals(expected, parser.parse(" c/SG nt/random string"));
         } catch (ParseException e) {
             fail();

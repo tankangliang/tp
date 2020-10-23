@@ -13,7 +13,7 @@ public class CountryNotesManager {
 
     private final ObservableList<CountryNote> internalCountryNoteList = FXCollections.observableArrayList();
     private final ObservableList<CountryNote> internalCountryNoteUnmodifiableList =
-        FXCollections.unmodifiableObservableList(internalCountryNoteList);
+            FXCollections.unmodifiableObservableList(internalCountryNoteList);
 
     /**
      * Checks if {@code countryNote} already exists.

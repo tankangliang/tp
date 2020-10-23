@@ -41,9 +41,7 @@ public class ClientUtil {
         sb.append(PREFIX_COUNTRY + client.getCountry().getCountryCode() + " ");
         sb.append(PREFIX_TIMEZONE + client.getTimezone().toString() + " ");
         sb.append(PREFIX_CONTRACT_EXPIRY_DATE + client.getContractExpiryDate().value + " ");
-        client.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        client.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         return sb.toString();
     }
 
