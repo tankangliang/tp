@@ -1,12 +1,13 @@
 package guitests.guihandles;
 
+import guitests.GuiRobot;
 import javafx.stage.Stage;
 
 /**
  * Provides a handle for {@code MainWindow}.
  */
 public class MainWindowHandle extends StageHandle {
-
+    private static final String MAIN_WINDOW_TITLE = "Travelling BusinessMan";
     private final ClientListPanelHandle clientListPanel;
     private final ResultDisplayHandle resultDisplay;
     private final CommandBoxHandle commandBox;
@@ -46,6 +47,10 @@ public class MainWindowHandle extends StageHandle {
 
     public MainMenuHandle getMainMenu() {
         return mainMenu;
+    }
+
+    public boolean isShowing() {
+        return new GuiRobot().isWindowShown(MAIN_WINDOW_TITLE);
     }
 
 }

@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -45,6 +47,7 @@ public class MainWindowTest extends GuiUnitTest {
 
     @Test
     public void main() {
-
+        guiRobot.pauseForHuman();
+        assertTrue(mainWindowHandle.isShowing());
     }
 }
