@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
+import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 
 /**
@@ -20,4 +21,10 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate notes.
      */
     ObservableList<Note> getNoteList();
+
+    /**
+     * Returns an unmodifiable view of the country notes list.
+     * This list will not contain any duplicate country notes.
+     */
+    ObservableList<CountryNote> getCountryNoteList();
 }

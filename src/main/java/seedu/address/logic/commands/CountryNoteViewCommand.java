@@ -31,7 +31,7 @@ public class CountryNoteViewCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        model.setWidgetContent(model.getAddressBook().getNoteList());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, country), false, false, true);
+        model.setWidgetCountryNoteObservableList(model.getAddressBook().getCountryNoteList());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, country), false, false, false, true);
     }
 }

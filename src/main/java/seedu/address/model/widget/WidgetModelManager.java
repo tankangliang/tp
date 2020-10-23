@@ -6,11 +6,11 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
-import seedu.address.model.note.Note;
 
 /**
  * This is a separate model manager that separately manages the display contents of the proposed View Box left of
@@ -51,6 +51,11 @@ public class WidgetModelManager implements WidgetModel {
             widgetObject = handle(content);
         }
 
+    }
+
+    @Override
+    public void setCountryNoteObservableList(ObservableList<CountryNote> countryNoteObservableList) {
+        widgetObject.setCountryNoteObservableList(countryNoteObservableList);
     }
 
     /**

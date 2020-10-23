@@ -117,6 +117,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setWidgetCountryNoteObservableList(ObservableList<CountryNote> countryNoteObservableList) {
+        widget.setCountryNoteObservableList(countryNoteObservableList);
+    }
+
+    @Override
     public WidgetObject getWidgetContent() {
         return widget.getWidgetContent();
     }

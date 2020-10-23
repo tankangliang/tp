@@ -20,6 +20,9 @@ public class CommandResult {
     /** The application has to update/change/display something on the view box in the ui. */
     private final boolean view;
 
+    /** The application has to update/change/display something on the view box in the ui. */
+    private final boolean isListView;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -28,6 +31,18 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.view = view;
+        this.isListView = false;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean view, boolean isListView) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.view = view;
+        this.isListView = isListView;
     }
 
     /**
@@ -52,6 +67,10 @@ public class CommandResult {
 
     public boolean isView() {
         return view;
+    }
+
+    public boolean isListView() {
+        return isListView;
     }
 
     @Override

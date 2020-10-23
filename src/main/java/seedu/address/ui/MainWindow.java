@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private WidgetViewBox widgetViewBox;
+    private WidgetListViewBox widgetListViewBox;
     @FXML
     private StackPane widgetPlaceholder;
     @FXML
@@ -114,6 +115,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         widgetViewBox = new WidgetViewBox();
+        widgetListViewBox = new WidgetListViewBox();
         widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
 
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
@@ -186,6 +188,13 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isView()) {
                 widgetViewBox.update(logic.getWidgetContent());
+            }
+
+            if (commandResult.isListView()) {
+                //widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
+                widgetPlaceholder.getChildren().clear();
+                widgetListViewBox.update(logic.getWidgetContent().getCountryNoteObservableList());
+                widgetPlaceholder.getChildren().add(widgetListViewBox.getRoot());
             }
 
             if (commandResult.isShowHelp()) {

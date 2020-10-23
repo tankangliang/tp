@@ -1,5 +1,8 @@
 package seedu.address.model.widget;
 
+import javafx.collections.ObservableList;
+import seedu.address.model.note.CountryNote;
+
 /**
  * This is the api for interacting with the proposed View Box widget in the TBM application. The view box widget model
  * is encapsulated within the TBM model itself.
@@ -31,4 +34,6 @@ public interface WidgetModel {
      * @return WidgetObject
      */
     WidgetObject getWidgetContent();
+
+    void setCountryNoteObservableList(ObservableList<CountryNote> countryNoteObservableList);
 }

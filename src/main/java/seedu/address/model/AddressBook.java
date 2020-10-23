@@ -178,6 +178,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return FXCollections.observableArrayList(countryNotesManager.getAllCountryNotesAsList());
     }
 
+    public ObservableList<CountryNote> getCountryNoteList() {
+        return FXCollections.observableList(countryNotesManager.getAllCountryNotesAsList());
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
