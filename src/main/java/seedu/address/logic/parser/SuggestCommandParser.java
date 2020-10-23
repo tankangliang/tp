@@ -25,7 +25,7 @@ public class SuggestCommandParser implements Parser<SuggestCommand> {
      */
     public SuggestCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_SUGGEST);
+                ArgumentTokenizer.tokenize(args, PREFIX_SUGGEST);
 
         if (!argMultimap.getValue(PREFIX_SUGGEST).isPresent()) {
             throw new ParseException(
@@ -33,12 +33,12 @@ public class SuggestCommandParser implements Parser<SuggestCommand> {
         }
 
         Set<SuggestionType> suggestionTypeList =
-            ParserUtil.parseSuggestionTypes(argMultimap.getAllValues(PREFIX_SUGGEST));
+                ParserUtil.parseSuggestionTypes(argMultimap.getAllValues(PREFIX_SUGGEST));
 
         List<Predicate<Client>> suggestionTypePredicateList = suggestionTypeList
-            .stream()
-            .map(SuggestionType::getSuggestionPredicate)
-            .collect(Collectors.toList());
+                .stream()
+                .map(SuggestionType::getSuggestionPredicate)
+                .collect(Collectors.toList());
 
         return new SuggestCommand(suggestionTypePredicateList);
     }

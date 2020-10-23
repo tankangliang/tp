@@ -41,13 +41,13 @@ public class WidgetObjectTest {
         WidgetObject o2 = new WidgetObject();
         o2.set("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
         assertAll("Fields Equality", () -> assertEquals(o1.getHeader(), o2.getHeader()), () ->
-                        assertEquals(o1.getDivOne(), o2.getDivOne()), () ->
-                        assertEquals(o1.getTextOne(), o2.getTextOne()), () ->
-                        assertEquals(o1.getDivTwo(), o2.getDivTwo()), () ->
-                        assertEquals(o1.getTextTwo(), o2.getTextTwo()), () ->
-                        assertEquals(o1.getTextThree(), o2.getTextThree()), () ->
-                        assertEquals(o1.getDivThree(), o2.getDivThree()), () ->
-                        assertEquals(o1.getTextFour(), o2.getTextFour()), () ->
+                assertEquals(o1.getDivOne(), o2.getDivOne()), () ->
+                assertEquals(o1.getTextOne(), o2.getTextOne()), () ->
+                assertEquals(o1.getDivTwo(), o2.getDivTwo()), () ->
+                assertEquals(o1.getTextTwo(), o2.getTextTwo()), () ->
+                assertEquals(o1.getTextThree(), o2.getTextThree()), () ->
+                assertEquals(o1.getDivThree(), o2.getDivThree()), () ->
+                assertEquals(o1.getTextFour(), o2.getTextFour()), () ->
                 assertEquals(o1.getFooter(), o2.getFooter()));
     }
 }

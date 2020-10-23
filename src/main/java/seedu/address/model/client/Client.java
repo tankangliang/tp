@@ -36,7 +36,7 @@ public class Client {
      * Every field must be present and not null.
      */
     public Client(Name name, Phone phone, Email email, Address address, Country country, Timezone timezone,
-                  ContractExpiryDate contractExpiryDate, Set<Tag> tags) {
+            ContractExpiryDate contractExpiryDate, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, country, timezone, contractExpiryDate, tags);
         this.name = name;
         this.phone = phone;

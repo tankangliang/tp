@@ -15,7 +15,7 @@ public class SuggestionType {
     public static final String BY_AVAILABLE = "available";
     public static final String BY_CONTRACT = "contract";
     public static final String MESSAGE_CONSTRAINTS = "Suggestion type can only be of the following: "
-        + BY_FREQUENCY + ", " + BY_AVAILABLE + ", " + BY_CONTRACT;
+            + BY_FREQUENCY + ", " + BY_AVAILABLE + ", " + BY_CONTRACT;
 
     public final String suggestionString;
 

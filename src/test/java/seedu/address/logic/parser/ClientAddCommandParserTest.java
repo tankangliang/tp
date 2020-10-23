@@ -124,7 +124,7 @@ public class ClientAddCommandParserTest {
         // zero tags
         Client expectedClient = new ClientBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                        + COUNTRY_DESC_AMY + TIMEZONE_DESC_AMY + CONTRACT_EXPIRY_DATE_DESC_AMY,
+                + COUNTRY_DESC_AMY + TIMEZONE_DESC_AMY + CONTRACT_EXPIRY_DATE_DESC_AMY,
                 new ClientAddCommand(expectedClient));
     }
 
