@@ -17,10 +17,10 @@ public class CountryNoteCard extends UiPart<Region> {
     @FXML
     private HBox countryNoteContainer;
 
-    public CountryNoteCard(CountryNote countryNote) {
+    public CountryNoteCard(int index, CountryNote countryNote) {
         super(FXML);
         this.countryNote = countryNote;
-        countryNoteContent.setText(countryNote.getNoteContents());
+        countryNoteContent.setText(index + ". " + countryNote.getNoteContents());
     }
 
     public HBox getCountryNoteContainer() {

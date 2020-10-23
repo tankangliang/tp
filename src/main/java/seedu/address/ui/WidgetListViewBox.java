@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.logic.commands.CountryNoteCommand;
 import seedu.address.model.note.CountryNote;
 
 public class WidgetListViewBox extends UiPart<Region> {
@@ -32,11 +33,12 @@ public class WidgetListViewBox extends UiPart<Region> {
 
     public void update(ObservableList<CountryNote> countryNoteObservableList) {
         scrollView.getChildren().clear();
-        scrollView.getChildren().addAll(countryNoteObservableList
-            .stream()
-            .map(CountryNoteCard::new)
-            .map(CountryNoteCard::getCountryNoteContainer)
-            .collect(Collectors.toList()));
+        int indx = 1;
+        for (CountryNote countryNote : countryNoteObservableList) {
+            CountryNoteCard countryNoteCard = new CountryNoteCard(indx, countryNote);
+            scrollView.getChildren().add(countryNoteCard.getCountryNoteContainer());
+            indx++;
+        }
     }
 
 
