@@ -227,9 +227,9 @@ public class ModelManagerTest {
     public void updateFilteredCountryNoteList_countryPredicate_showRelevantCountryNotes() {
         modelManager.updateFilteredCountryNoteList(countryNote -> true);
         int expect = (int) modelManager.getFilteredCountryNoteList()
-            .stream()
-            .filter(countryNote -> countryNote.getCountry().equals(new Country("SG")))
-            .count();
+                .stream()
+                .filter(countryNote -> countryNote.getCountry().equals(new Country("SG")))
+                .count();
         modelManager.updateFilteredCountryNoteList(countryNote -> countryNote.equals(new Country("SG")));
         assertEquals(expect, modelManager.getFilteredCountryNoteList().size());
     }
