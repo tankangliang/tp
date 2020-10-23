@@ -186,16 +186,18 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isView()) {
+            switch (commandResult.getWidgetViewOption()) {
+            case CLIENT:
                 widgetPlaceholder.getChildren().clear();
                 widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
                 widgetViewBox.update(logic.getWidgetContent());
-            }
-
-            if (commandResult.isListView()) {
-                //widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
+                break;
+            case COUNTRY_NOTES:
                 widgetPlaceholder.getChildren().clear();
                 widgetPlaceholder.getChildren().add(widgetListViewBox.getRoot());
+                break;
+            default:
+                break;
             }
 
             if (commandResult.isShowHelp()) {

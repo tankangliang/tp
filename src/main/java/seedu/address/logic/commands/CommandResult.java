@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.ui.WidgetViewOption;
+
 /**
  * Represents the result of a command execution.
  */
@@ -17,32 +19,27 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** The application has to update/change/display something on the view box in the ui. */
-    private final boolean view;
-
-    /** The application has to update/change/display something on the view box in the ui. */
-    private final boolean isListView;
+    /** Indicates what kind of display to show on the widget view box. */
+    private final WidgetViewOption widgetViewOption;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean view) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.view = view;
-        this.isListView = false;
+        this.widgetViewOption = null;
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean view, boolean isListView) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, WidgetViewOption widgetViewOption) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.view = view;
-        this.isListView = isListView;
+        this.widgetViewOption = widgetViewOption;
     }
 
     /**
@@ -50,7 +47,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -65,12 +62,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isView() {
-        return view;
-    }
-
-    public boolean isListView() {
-        return isListView;
+    public WidgetViewOption getWidgetViewOption() {
+        return widgetViewOption;
     }
 
     @Override

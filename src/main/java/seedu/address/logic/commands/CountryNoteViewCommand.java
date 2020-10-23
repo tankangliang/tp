@@ -2,12 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 
-import java.util.stream.Collectors;
-
-import javafx.collections.FXCollections;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.country.Country;
+import seedu.address.ui.WidgetViewOption;
 
 /**
  * Command to view all country notes of a given country.
@@ -33,8 +30,8 @@ public class CountryNoteViewCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         model.updateFilteredCountryNoteList(countryNote -> countryNote.getCountry().equals(country));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, country), false, false, false, true);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, country), false, false, WidgetViewOption.COUNTRY_NOTES);
     }
 }

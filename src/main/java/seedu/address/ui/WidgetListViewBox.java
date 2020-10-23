@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.stream.Collectors;
-
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,10 +7,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.logic.commands.CountryNoteCommand;
-import seedu.address.model.client.Client;
 import seedu.address.model.note.CountryNote;
-import seedu.address.ui.ClientListPanel.ClientListViewCell;
 
 public class WidgetListViewBox extends UiPart<Region> {
 
@@ -38,9 +33,11 @@ public class WidgetListViewBox extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code CountryNote} using a {@code CountryNoteCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code CountryNote} using a {@code
+     * CountryNoteCard}.
      */
     class CountryListViewCell extends ListCell<CountryNote> {
+
         @Override
         protected void updateItem(CountryNote countryNote, boolean empty) {
             super.updateItem(countryNote, empty);
