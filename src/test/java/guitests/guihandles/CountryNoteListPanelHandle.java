@@ -9,7 +9,7 @@ import seedu.address.model.note.CountryNote;
 /**
  * Provides a handle for {@code CountryNoteListPanel} containing the list of {@code CountryNoteCard}.
  */
-public class CountryNoteListPanelHandle extends NodeHandle<ListView<CountryNote>>{
+public class CountryNoteListPanelHandle extends NodeHandle<ListView<CountryNote>> {
 
     private static final String COUNTRY_NOTE_LIST_VIEW_ID = "#countryNoteListView";
 

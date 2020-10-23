@@ -4,6 +4,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import seedu.address.model.note.CountryNote;
 
+/**
+ * Provides a handler for {@code CountryNoteCard}.
+ */
 public class CountryNoteCardHandle extends NodeHandle<Node> {
     private static final String COUNTRY_NOTE_CONTENT_LABEL_ID = "#countryNoteContent";
     private final Label countryNoteContent;
