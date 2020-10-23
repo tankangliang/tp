@@ -15,8 +15,6 @@ public class ClientListPanelHandle extends NodeHandle<ListView<Client>> {
 
     private static final String CARD_PANE_ID = "#cardPane";
 
-    private Optional<Client> lastRememberedSelectedClientCard;
-
     public ClientListPanelHandle(ListView<Client> clientListPanelNode) {
         super(clientListPanelNode);
     }

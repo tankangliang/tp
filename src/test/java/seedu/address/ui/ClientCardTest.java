@@ -7,9 +7,6 @@ import static seedu.address.testutil.TypicalClients.AMY;
 import static seedu.address.testutil.TypicalClients.BOB;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysClient;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-
 import org.junit.jupiter.api.Test;
 
 import guitests.guihandles.ClientCardHandle;
@@ -69,7 +66,7 @@ public class ClientCardTest extends GuiUnitTest {
     }
 
     /**
-     * Asserts that {@code personCard} displays the details of {@code expectedPerson} correctly and matches
+     * Asserts that {@code clientCard} displays the details of {@code expectedClient} correctly and matches
      * {@code expectedId}.
      */
     private void assertCardDisplay(ClientCard clientCard, Client expectedClient, int expectedId) {
@@ -78,7 +75,7 @@ public class ClientCardTest extends GuiUnitTest {
         ClientCardHandle clientCardHandle = new ClientCardHandle(clientCard.getRoot());
 
         // verify id is displayed correctly
-        assertEquals(Integer.toString(expectedId) + ". ", clientCardHandle.getId());
+        assertEquals(expectedId + ". ", clientCardHandle.getId());
 
         // verify person details are displayed correctly
         assertCardDisplaysClient(expectedClient, clientCardHandle);
