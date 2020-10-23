@@ -107,7 +107,26 @@ public class TagNoteMap {
         return Collections.unmodifiableSet(tagToNotesMap.getOrDefault(tag, new HashSet<>()));
     }
 
-    // TODO: DELETE NOTE METHOD
+    /**
+     * Deletes a note from the TagNoteMap. Modifies existing {@code noteSet, tagToNotesMap, noteToTagsMap}
+     * @param note The note to be deleted from the TagNoteMap.
+     */
+    public void deleteNote(Note note) {
+        assert noteSet.contains(note) : "trying to remove note that doesn't exist in noteSet";
+        assert noteToTagsMap.containsKey(note) : "trying to remove note that doesn't exist in noteToTagsMap";
+        noteSet.remove(note);
+        Set<Tag> associatedTags = this.noteToTagsMap.get(note);
+        for (Tag tag : associatedTags) { // remove note for relevant tags
+            Set<Note> notes = this.tagToNotesMap.get(tag);
+            notes.remove(note);
+            if (notes.isEmpty()) { // remove the tag itself from tagToNotesMap and uniqueTagMap:
+                this.tagToNotesMap.remove(tag);
+                this.uniqueTagMap.remove(tag);
+            }
+        }
+        noteToTagsMap.remove(note);
+    }
+
 
     /**
      * Links a new set of tags to a note.
@@ -137,6 +156,7 @@ public class TagNoteMap {
         Set<Tag> currentTags = noteToTagsMap.getOrDefault(note, new HashSet<>());
         currentTags.addAll(newTags);
         noteToTagsMap.put(note, currentTags);
+        noteSet.add(note);
     }
 
     @Override

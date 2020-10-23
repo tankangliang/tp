@@ -26,6 +26,7 @@ import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.ClientBuilder;
 
 public class ModelManagerTest {
 
@@ -82,6 +83,15 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteClient_deleteExistingClient_returnsTrue() {
+        Client target = ALICE;
+        modelManager.addClient(target);
+        assertTrue(modelManager.hasClient(ALICE));
+        modelManager.deleteClient(target);
+        assertFalse(modelManager.hasClient(target));
+    }
+
+    @Test
     public void hasClient_nullClient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasClient(null));
     }
@@ -119,6 +129,20 @@ public class ModelManagerTest {
         assertFalse(modelManager.hasClientNote(client, clientNote));
         modelManager.addClientNote(client, clientNote);
         assertTrue(modelManager.hasClientNote(client, clientNote));
+    }
+
+    @Test
+    public void deleteClientNote_validSyntax_deletesSuccessfully() {
+        Client client = new ClientBuilder(ALICE).build();
+        UserPrefs userPrefs = new UserPrefs();
+        AddressBook addressBook = new AddressBookBuilder().withClient(client).build();
+        modelManager = new ModelManager(addressBook, userPrefs);
+        Note clientNote = new Note("this be a client note");
+        modelManager.addClientNote(client, clientNote);
+        assertTrue(modelManager.hasClientNote(client, clientNote));
+        modelManager.initialiseTagNoteMap();
+        modelManager.deleteClientNote(client, clientNote);
+        assertFalse(modelManager.hasClientNote(client, clientNote));
     }
 
     @Test
@@ -175,5 +199,13 @@ public class ModelManagerTest {
         this.modelManager.addClient(aliceTagged);
         assertDoesNotThrow(() -> this.modelManager.initialiseTagNoteMap());
     }
+
+    /* todo future tests:
+     *  run coverage for model manager test and see what's missing:
+     * 1. setClient
+     * 2. widgetContent setter and gettter
+     * 3. getFilteredClientNotesList
+     *
+     * */
 
 }
