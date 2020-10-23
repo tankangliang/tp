@@ -31,6 +31,7 @@ public class WidgetListViewBox extends UiPart<Region> {
     }
 
     public void update(ObservableList<CountryNote> countryNoteObservableList) {
+        scrollView.getChildren().clear();
         scrollView.getChildren().addAll(countryNoteObservableList
             .stream()
             .map(CountryNoteCard::new)

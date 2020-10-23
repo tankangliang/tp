@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 
+import java.util.stream.Collectors;
+
+import javafx.collections.FXCollections;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.country.Country;
@@ -31,7 +34,11 @@ public class CountryNoteViewCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        model.setWidgetCountryNoteObservableList(model.getAddressBook().getCountryNoteList());
+        model.setWidgetCountryNoteObservableList(
+            FXCollections.observableList(model.getAddressBook().getCountryNoteList()
+                .stream()
+                .filter(countryNote -> countryNote.getCountry().equals(country))
+                .collect(Collectors.toList())));
         return new CommandResult(String.format(MESSAGE_SUCCESS, country), false, false, false, true);
     }
 }
