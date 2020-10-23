@@ -2,6 +2,8 @@ package seedu.address.model.country;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Locale;
 
@@ -10,6 +12,25 @@ import org.junit.jupiter.api.Test;
 public class CountryTest {
 
     private static final String[] COUNTRY_CODES = Locale.getISOCountries();
+
+    @Test
+    public void constructor_validCountryCode_returnCountry() {
+        for (String countryCodes : COUNTRY_CODES) {
+            try {
+                new Country(countryCodes);
+            } catch (AssertionError e) {
+                fail();
+            }
+        }
+    }
+
+    @Test
+    public void constructor_invalidCountryCode_throwsAssertionError() {
+        assertThrows(AssertionError.class, () -> new Country("abc"));
+        assertThrows(AssertionError.class, () -> new Country("12"));
+        assertThrows(AssertionError.class, () -> new Country("ab"));
+        assertThrows(AssertionError.class, () -> new Country("AA"));
+    }
 
     @Test
     public void equals_notACountry_returnFalse() {

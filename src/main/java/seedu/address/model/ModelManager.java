@@ -33,6 +33,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
+    private final FilteredList<CountryNote> filteredCountryNotes;
     private final WidgetModel widget;
     private final TagNoteMap tagNoteMap;
 
@@ -49,6 +50,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         this.widget = WidgetModel.initWidget();
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
+        filteredCountryNotes = new FilteredList<>(this.addressBook.getCountryNoteList());
         this.tagNoteMap = new TagNoteMap();
     }
 
@@ -201,10 +203,6 @@ public class ModelManager implements Model {
 
     //=========== Filtered Client List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of {@code
-     * versionedAddressBook}
-     */
     @Override
     public ObservableList<Client> getFilteredClientList() {
         return filteredClients;
@@ -225,6 +223,17 @@ public class ModelManager implements Model {
     public void updateFilteredClientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<CountryNote> getFilteredCountryNoteList() {
+        return filteredCountryNotes;
+    }
+
+    @Override
+    public void updateFilteredCountryNoteList(Predicate<CountryNote> predicate) {
+        requireNonNull(predicate);
+        filteredCountryNotes.setPredicate(predicate);
     }
 
     @Override
