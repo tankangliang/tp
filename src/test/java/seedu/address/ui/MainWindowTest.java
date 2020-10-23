@@ -1,7 +1,13 @@
 package seedu.address.ui;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.ui.HelpWindow.USERGUIDE_URL;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.nio.file.Path;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -9,7 +15,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.testfx.api.FxToolkit;
 
+import guitests.guihandles.HelpWindowHandle;
 import guitests.guihandles.MainWindowHandle;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.logic.LogicManager;
@@ -17,7 +25,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-
 /**
  * This test class does not conduct a unit test.
  */
@@ -46,8 +53,25 @@ public class MainWindowTest extends GuiUnitTest {
     }
 
     @Test
-    public void main() {
+    public void main() throws Exception {
+
         guiRobot.pauseForHuman();
         assertTrue(mainWindowHandle.isShowing());
+
+        // checks the interaction of copy url and url is correct
+        guiRobot.clickOn("Help");
+        guiRobot.clickOn("F1");
+        guiRobot.pauseForHuman();
+        guiRobot.clickOn("#copyButton");
+        if (!guiRobot.isHeadlessMode()) {
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            assertEquals(USERGUIDE_URL, clipboard.getData(DataFlavor.stringFlavor));
+        }
+        guiRobot.pauseForHuman();
+        guiRobot.press(KeyCode.ESCAPE);
+        assertFalse(HelpWindowHandle.isWindowPresent());
+
+        //
+
     }
 }
