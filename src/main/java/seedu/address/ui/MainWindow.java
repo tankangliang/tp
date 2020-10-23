@@ -205,10 +205,6 @@ public class MainWindow extends UiPart<Stage> {
                 break;
             }
 
-            if (commandResult.isView()) {
-                widgetViewBox.update(logic.getWidgetContent());
-            }
-
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
