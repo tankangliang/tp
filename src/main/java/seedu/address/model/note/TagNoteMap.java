@@ -108,7 +108,9 @@ public class TagNoteMap {
     }
 
     /**
-     * Deletes a note from the TagNoteMap. Modifies existing {@code noteSet, tagToNotesMap, noteToTagsMap}
+     * Deletes a note from the TagNoteMap.
+     * Modifies existing {@code noteSet, tagToNotesMap, noteToTagsMap, uniqueTagMap}.
+     *
      * @param note The note to be deleted from the TagNoteMap.
      */
     public void deleteNote(Note note) {

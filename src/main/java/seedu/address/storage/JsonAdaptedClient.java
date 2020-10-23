@@ -43,10 +43,10 @@ class JsonAdaptedClient {
      */
     @JsonCreator
     public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("country") String country, @JsonProperty("timezone") String timezone,
-                             @JsonProperty("contractExpiryDate") String contractExpiryDate,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("country") String country, @JsonProperty("timezone") String timezone,
+            @JsonProperty("contractExpiryDate") String contractExpiryDate,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -70,9 +70,7 @@ class JsonAdaptedClient {
         country = source.getCountry().getCountryCode();
         timezone = source.getTimezone().toString();
         contractExpiryDate = source.getContractExpiryDate().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**
@@ -127,8 +125,7 @@ class JsonAdaptedClient {
         final Country modelCountry = new Country(country);
 
         if (timezone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Timezone.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Timezone.class.getSimpleName()));
         }
         if (!Timezone.isValidTimezone(timezone)) {
             throw new IllegalValueException(Timezone.MESSAGE_CONSTRAINTS);
@@ -136,18 +133,15 @@ class JsonAdaptedClient {
         final Timezone modelTimezone = new Timezone(timezone);
 
         if (contractExpiryDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ContractExpiryDate.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ContractExpiryDate.class.getSimpleName()));
         }
         if (!ContractExpiryDate.isValidDate(contractExpiryDate)) {
             throw new IllegalValueException(ContractExpiryDate.MESSAGE_CONSTRAINTS);
         }
-        final ContractExpiryDate modelContractExpiryContractExpiryDate =
-                ParserUtil.parseContractExpiryDate(contractExpiryDate);
+        final ContractExpiryDate modelContractExpiryContractExpiryDate = ParserUtil.parseContractExpiryDate(contractExpiryDate);
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTimezone,
-                modelContractExpiryContractExpiryDate, modelTags);
+        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTimezone, modelContractExpiryContractExpiryDate, modelTags);
     }
 
 }
