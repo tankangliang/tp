@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
@@ -26,6 +27,7 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        requireAllNonNull(feedbackToUser, showHelp, exit);
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
@@ -36,6 +38,7 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified fields
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, WidgetViewOption widgetViewOption) {
+        requireAllNonNull(feedbackToUser, showHelp, exit, widgetViewOption);
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;

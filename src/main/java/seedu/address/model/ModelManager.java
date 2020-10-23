@@ -203,10 +203,6 @@ public class ModelManager implements Model {
 
     //=========== Filtered Client List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of {@code
-     * versionedAddressBook}
-     */
     @Override
     public ObservableList<Client> getFilteredClientList() {
         return filteredClients;
@@ -229,10 +225,6 @@ public class ModelManager implements Model {
         filteredClients.setPredicate(predicate);
     }
 
-    /**
-     * Returns an unmodifiable view of the list of {@code CountryNote} backed by the internal list of {@code
-     * versionedAddressBook}
-     */
     @Override
     public ObservableList<CountryNote> getFilteredCountryNoteList() {
         return filteredCountryNotes;

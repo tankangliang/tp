@@ -2,9 +2,6 @@ package seedu.address.model.widget;
 
 import java.util.Arrays;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.note.CountryNote;
-
 /**
  * A standardised way to render content on the widget view box.
  * Truncates anything that does not fit into the defined 8 divisions/sections for the displaying in the view box.
@@ -33,8 +30,6 @@ public class WidgetObject {
     private static final int DIVTHREE_POS = 6;
     private static final int TEXTFOUR_POS = 7;
     private static final int FOOTER_POS = 8;
-
-    private ObservableList<CountryNote> countryNoteObservableList = null;
 
     /**
      * Array is a collection of the fields to be mapped to the widget Ui component.
@@ -86,14 +81,6 @@ public class WidgetObject {
                 return;
             }
         }
-    }
-
-    public void setCountryNoteObservableList(ObservableList<CountryNote> countryNoteObservableList) {
-        this.countryNoteObservableList = countryNoteObservableList;
-    }
-
-    public ObservableList<CountryNote> getCountryNoteObservableList() {
-        return this.countryNoteObservableList;
     }
 
     /**

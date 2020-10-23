@@ -123,8 +123,8 @@ public class AddressBookParser {
             return new CountryNoteViewCommandParser().parse(restOfCommand);
 
         case CountryFilterCommand.COMMAND_WORD:
-
             return new CountryFilterCommandParser().parse(restOfCommand);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
