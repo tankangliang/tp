@@ -47,7 +47,7 @@ public class TagNoteMap {
             for (Tag tag : tags) {
                 uniqueTagMap.put(tag, tag);
             }
-            updateTagsForNote(tags, clientNote);
+            addTagsForNote(tags, clientNote);
         }
     }
 
@@ -136,11 +136,7 @@ public class TagNoteMap {
      * @param newTags The tags to associate with a particular note.
      * @param note    The note to associate the tag with.
      */
-    public void updateTagsForNote(Set<Tag> newTags, Note note) {
-        // TODO: note is inside note to tags map
-        //  between old tags and new tags
-        //  oldtags.removeAll(new tags)
-        //  for each oldtags: remove this note from the tag to notes map. So if the hashset is empty
+    public void addTagsForNote(Set<Tag> newTags, Note note) {
         requireAllNonNull(newTags, note);
         for (Tag newTag : newTags) {
             // update the notes set for each of the tags:

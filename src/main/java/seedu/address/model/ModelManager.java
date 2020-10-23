@@ -133,7 +133,6 @@ public class ModelManager implements Model {
         for (Note note : clientNotes) {
             Set<Tag> tags = note.getTags();
             updateTagNoteMapWithNote(tags, note);
-            updateTagNoteMapWithNote(tags, note);
         }
     }
 
@@ -167,12 +166,12 @@ public class ModelManager implements Model {
         target.addClientNote(clientNote);
         // update the TagNoteMap:
         Set<Tag> newTags = clientNote.getTags();
-        this.tagNoteMap.updateTagsForNote(newTags, clientNote);
+        this.tagNoteMap.addTagsForNote(newTags, clientNote);
     }
 
     @Override
     public void updateTagNoteMapWithNote(Set<Tag> newTags, Note note) {
-        this.tagNoteMap.updateTagsForNote(newTags, note);
+        this.tagNoteMap.addTagsForNote(newTags, note);
     }
 
     /**
@@ -193,8 +192,6 @@ public class ModelManager implements Model {
     @Override
     public void deleteClientNote(Client associatedClient, Note noteToDelete) {
         requireAllNonNull(associatedClient, noteToDelete);
-        // update tagNoteMap
-        // todo: Ritesh implement delete in the Client class and add tests to cover this method
         this.tagNoteMap.deleteNote(noteToDelete);
         associatedClient.deleteClientNote(noteToDelete);
     }
