@@ -29,6 +29,7 @@ import seedu.address.logic.commands.ClientNoteDeleteCommand;
 import seedu.address.logic.commands.ClientViewCommand;
 import seedu.address.logic.commands.CountryFilterCommand;
 import seedu.address.logic.commands.CountryNoteCommand;
+import seedu.address.logic.commands.CountryNoteViewCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -124,6 +125,14 @@ public class AddressBookParserTest {
         final ClientCountryMatchesInputCountryPredicate predicate =
                 new ClientCountryMatchesInputCountryPredicate(new Country(countryString));
         assertEquals(new CountryFilterCommand(predicate), command);
+    }
+
+    @Test
+    public void parseCountryCommands_countryNoteView() throws Exception {
+        final String countryString = "SG";
+        final String commandString = CountryNoteViewCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString;
+        CountryNoteViewCommand command = (CountryNoteViewCommand) parser.parseCommand(commandString);
+        assertEquals(new CountryNoteViewCommand(new Country(countryString)), command);
     }
 
     @Test

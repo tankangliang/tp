@@ -175,7 +175,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //TODO: add client notes also. NOTE: THIS ONLY RETURNS COUNTRY NOTES FOR NOW.
     @Override
     public ObservableList<Note> getNoteList() {
-        return FXCollections.observableArrayList(countryNotesManager.getAllCountryNotesAsList());
+        return FXCollections.observableArrayList(countryNotesManager.asUnmodifiableObservableList());
+    }
+
+    public ObservableList<CountryNote> getCountryNoteList() {
+        return countryNotesManager.asUnmodifiableObservableList();
     }
 
     @Override
