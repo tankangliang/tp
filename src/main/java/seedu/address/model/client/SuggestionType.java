@@ -48,6 +48,7 @@ public class SuggestionType {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidSuggestionType(String test) {
+        requireNonNull(test);
         return test.equals(BY_FREQUENCY) || test.equals(BY_AVAILABLE) || test.equals(BY_CONTRACT);
     }
 
