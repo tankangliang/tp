@@ -23,17 +23,18 @@ class ClientNoteDeleteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validCommand_doesNotThrowException() throws CommandException {
+    public void execute_validCommand_doesNotThrowException() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Index clientIdx = Index.fromOneBased(2);
         Index clientNoteIdx = Index.fromOneBased(1);
         Note clientNote = new Note(NOTE_CONTENT_1);
-        ClientNoteAddCommand addCommand = new ClientNoteAddCommand(clientIdx, clientNote);
-        addCommand.execute(model);
-        ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(clientIdx, clientNoteIdx);
-        assertDoesNotThrow(() -> clientNoteDeleteCommand.execute(model));
+        assertDoesNotThrow(() -> {
+            ClientNoteAddCommand addCommand = new ClientNoteAddCommand(clientIdx, clientNote);
+            addCommand.execute(model);
+            ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(clientIdx, clientNoteIdx);
+            clientNoteDeleteCommand.execute(model);
+        });
     }
-
 
     @Test
     public void execute_invalidClientIndex_throwsCommandException() {
@@ -81,6 +82,6 @@ class ClientNoteDeleteCommandTest {
 
         // diff values (diff client note) --> returns false
         assertFalse(clientNoteDeleteCommand1.equals(clientNoteDeleteCommand1ClientNote2));
-
     }
+
 }
