@@ -62,7 +62,6 @@ class ClientNoteDeleteCommandTest {
 
     @Test
     public void execute_validClientIndexInvalidClientNoteIndex_throwsCommandException() {
-//        Client client = TypicalClients.ALICE;
         Client client = new ClientBuilder(ALICE).build();
         Note clientNote = new Note(NOTE_CONTENT_1);
         Index idx = Index.fromOneBased(1);
