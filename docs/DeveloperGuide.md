@@ -148,7 +148,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Associating Notes and Tags
 
-The proposed association mechanism between `Tag` and `Note` objects is facilitated by `TagNoteMap`. 
+The proposed association mechanism between `Tag` and `Note` objects is facilitated by `TagNoteMap`.
 It is stored internally within the `Addressbook` object. Additionally, it implements the following operations:
 
 * `TagNoteMap#getTagsForNote()` — Returns an unmodifiable set of Tags associated to a particular Note.
@@ -196,7 +196,7 @@ Step 3: The `suggest` command calls `Model#sortFilteredClientList` with the cont
 
 Step 4: The change is then propagated to `Ui`, which updates the displayed clients in `ClientListPanel`.
 
-Step 5: The user decides to execute the command `list`, which resets the `filteredClients` objects to have all clients, and in turn resets the displayed clients in `ClientListPanel` as well. 
+Step 5: The user decides to execute the command `list`, which resets the `filteredClients` objects to have all clients, and in turn resets the displayed clients in `ClientListPanel` as well.
 
 The following sequence diagram shows how the suggest operation works:
 
