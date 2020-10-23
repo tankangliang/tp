@@ -220,6 +220,16 @@ public class ClientAddCommandTest {
         }
 
         @Override
+        public ObservableList<CountryNote> getFilteredCountryNoteList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredCountryNoteList(Predicate<CountryNote> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void initialiseTagNoteMap() {
             throw new AssertionError("This method should not be called.");
         }

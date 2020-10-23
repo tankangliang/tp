@@ -2,23 +2,15 @@ package seedu.address.model.country;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import seedu.address.model.client.Client;
 import seedu.address.model.note.CountryNote;
 
 /**
  * A high-level class responsible for mapping ISO3166 countries to countryNotes.
  */
 public class CountryNotesManager {
+
     private final ObservableList<CountryNote> internalCountryNoteList = FXCollections.observableArrayList();
     private final ObservableList<CountryNote> internalCountryNoteUnmodifiableList =
         FXCollections.unmodifiableObservableList(internalCountryNoteList);
@@ -55,8 +47,7 @@ public class CountryNotesManager {
     }
 
     /**
-     * Returns all Country Notes.
-     * Returning a list of all country notes prevents deep-copying.
+     * Returns all Country Notes. Returning a list of all country notes prevents deep-copying.
      *
      * @return List of all country notes.
      */

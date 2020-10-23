@@ -1,22 +1,19 @@
 package seedu.address.model.widget;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
-import seedu.address.model.country.Country;
-import seedu.address.model.note.CountryNote;
 
 /**
- * This is a separate model manager that separately manages the display contents of the proposed View Box left of
- * the filtered client list.
+ * This is a separate model manager that separately manages the display contents of the proposed View Box left
+ * of the filtered client list.
  */
 public class WidgetModelManager implements WidgetModel {
+
     private static final Logger logger = LogsCenter.getLogger(WidgetModelManager.class);
     private WidgetObject widgetObject;
 
@@ -28,15 +25,19 @@ public class WidgetModelManager implements WidgetModel {
         logger.info("----------------[ Creating WidgetModelManager ]");
         return new WidgetModelManager();
     }
+
     /**
-     * <p>Sets the content to be displayed in the view box to be of that content. Break down the content into a
+     * <p>Sets the content to be displayed in the view box to be of that content. Break down the content into
+     * a
      * standardised format in specified in {@code WidgetOject}.</p>
      *
-     * <p>In creating the widget object, the values for each of the widget object fields can be set to a String value.
-     * In order to do so, the targeted object to be displayed, needs to have its contents/fields/members stringified.
-     * After stringifying the attributes, call {@link WidgetObject#set(String...) set}, where args is an ordered set of
-     * Strings. Hence, the first String will be set as the value for the header field of the widget object, the second
-     * String will be set to the div1 field of the widget object so on and so forth.</p>
+     * <p>In creating the widget object, the values for each of the widget object fields can be set to a
+     * String value.
+     * In order to do so, the targeted object to be displayed, needs to have its contents/fields/members
+     * stringified. After stringifying the attributes, call {@link WidgetObject#set(String...) set}, where
+     * args is an ordered set of Strings. Hence, the first String will be set as the value for the header
+     * field of the widget object, the second String will be set to the div1 field of the widget object so on
+     * and so forth.</p>
      *
      * @param content
      */
@@ -75,13 +76,13 @@ public class WidgetModelManager implements WidgetModel {
         String phone = client.getPhone().toString();
         String notes = client.getClientNotes().toString(); //TODO: Temporary display for the client notes
         String tags = Stream.of(client.getTags())
-                .map(Object::toString)
-                .collect(Collectors.joining())
-                .replace("[", "")
-                .replace("]", "");
+            .map(Object::toString)
+            .collect(Collectors.joining())
+            .replace("[", "")
+            .replace("]", "");
 
         newObj.set(/*header*/ name, /*div1*/ country, /*text1*/ timezone, /*div2*/ "", /*text2*/ email,
-                /*text3*/ phone, /*div3*/ "", /*text4 SCROLLABLE VIEW*/ notes, /*footer*/ tags);
+            /*text3*/ phone, /*div3*/ "", /*text4 SCROLLABLE VIEW*/ notes, /*footer*/ tags);
 
         return newObj;
     }
@@ -96,7 +97,7 @@ public class WidgetModelManager implements WidgetModel {
         // TODO: v1.3 || v1.4 deprecate this method.
         // Logs the unknown object being passed to this method
         logger.info("=============================[ Client object was not passed as content ]"
-                + "=============================");
+            + "=============================");
         logger.info("Setting content of widget to: " + content.getClass());
         WidgetObject wo = new WidgetObject();
         java.lang.reflect.Field[] fields = content.getClass().getDeclaredFields();
@@ -105,7 +106,8 @@ public class WidgetModelManager implements WidgetModel {
                 f.setAccessible(true);
                 String fieldName = f.getName();
                 String fieldValue = f.get(content).toString();
-                logger.info("----- [ Warning! Object passed is not a client! ] -----" + fieldName + ": " + fieldValue);
+                logger.info("----- [ Warning! Object passed is not a client! ] -----" + fieldName + ": "
+                    + fieldValue);
                 StringBuilder sb = new StringBuilder().append(fieldName).append(": ").append(fieldValue);
                 wo.set(sb.toString());
             } catch (IllegalAccessException ex) {

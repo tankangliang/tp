@@ -3,7 +3,6 @@ package seedu.address.model.widget;
 import java.util.Arrays;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 
 /**
@@ -75,14 +74,6 @@ public class WidgetObject {
         }
     }
 
-    public void setCountryNoteObservableList(ObservableList<CountryNote> countryNoteObservableList) {
-        this.countryNoteObservableList = countryNoteObservableList;
-    }
-
-    public ObservableList<CountryNote> getCountryNoteObservableList() {
-        return this.countryNoteObservableList;
-    }
-
     /**
      * Sets the first null field to the given String value. Any fields not set will be an empty string.
      *
@@ -95,6 +86,14 @@ public class WidgetObject {
                 return;
             }
         }
+    }
+
+    public void setCountryNoteObservableList(ObservableList<CountryNote> countryNoteObservableList) {
+        this.countryNoteObservableList = countryNoteObservableList;
+    }
+
+    public ObservableList<CountryNote> getCountryNoteObservableList() {
+        return this.countryNoteObservableList;
     }
 
     /**
