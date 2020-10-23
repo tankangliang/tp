@@ -323,7 +323,8 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: transparent;
+    -fx-background-color: derive(-LIGHTGREY, 50%);
+    /*-fx-background-color: transparent;*/
 }
 
 .scroll-bar .increment-button, .scroll-bar .decrement-button {
@@ -415,4 +416,8 @@
 #viewbox {
     -fx-border-radius: 30, 30;
     -fx-background-color: derive(-LIGHTGREY, 30%);
+}
+
+#countryNotesScrollPane {
+    -fx-background: derive(-LIGHTGREY, 20%);
 }
