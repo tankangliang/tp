@@ -43,6 +43,8 @@ class ClientNoteDeleteCommandTest {
                 fail();
             }
         }).thenRun(() -> {
+            System.out.println(model.getFilteredClientList().get(clientIdx.getZeroBased()));
+            System.out.println(model.getFilteredClientNotesList());
             ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(clientIdx, clientNoteIdx);
             try {
                 clientNoteDeleteCommand.execute(model);
