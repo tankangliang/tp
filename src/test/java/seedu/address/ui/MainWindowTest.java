@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.ui.HelpWindow.USERGUIDE_URL;
 
-import java.awt.*;
+import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.nio.file.Path;
@@ -71,7 +71,7 @@ public class MainWindowTest extends GuiUnitTest {
         guiRobot.press(KeyCode.ESCAPE);
         assertFalse(HelpWindowHandle.isWindowPresent());
 
-        //
+        // TODO:
 
     }
 }
