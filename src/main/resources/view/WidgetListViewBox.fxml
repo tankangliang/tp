@@ -14,7 +14,7 @@
                   <Label fx:id="header" alignment="CENTER" prefHeight="46.0" prefWidth="249.0" styleClass="widget_header" />
                </children>
             </StackPane>
-            <ListView fx:id="countryNoteListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+            <ListView fx:id="countryNoteListView" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
    </children>
