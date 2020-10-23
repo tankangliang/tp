@@ -14,7 +14,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 public class CommandBoxTest extends GuiUnitTest {
-    //TODO: maybe try some other command instead of this generic stuff
     private static final String COMMAND_THAT_SUCCEEDS = ListCommand.COMMAND_WORD;
     private static final String COMMAND_THAT_FAILS = "invalid command";
 

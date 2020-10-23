@@ -28,9 +28,6 @@ public class WidgetViewBoxHandle extends NodeHandle<Node> {
     private final TextArea textFourTextArea;
     private final Label footerLabel;
 
-
-    //TODO: Change label of TextArea according to changes in widgetviewbox
-
     /**
      * Constructor for handler.
      *
@@ -64,4 +61,5 @@ public class WidgetViewBoxHandle extends NodeHandle<Node> {
                 && textFourTextArea.getText().equals(otherObject.getTextFour())
                 && footerLabel.getText().equals(otherObject.getFooter());
     }
+
 }
