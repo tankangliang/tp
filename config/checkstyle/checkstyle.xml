@@ -338,11 +338,10 @@
       <property name="option" value="eol"/>
     </module>
 
-    <!-- Checks that indentation for case blocks matches switch line. -->
-    <!-- Checks that indentation for wrapped lines is 8 spaces more than the parent line. -->
     <module name="Indentation">
+      <!-- Checks that indentation for case blocks matches switch line. -->
       <property name="caseIndent" value="0" />
-      <property name="throwsIndent" value="8" />
+      <!-- Checks that indentation for wrapped lines is 8 spaces more than the parent line. -->
       <property name="lineWrappingIndentation" value="8"/>
     </module>
 
