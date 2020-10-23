@@ -200,6 +200,38 @@ public class ModelManagerTest {
         assertDoesNotThrow(() -> this.modelManager.initialiseTagNoteMap());
     }
 
+    @Test
+    public void addCountryNote_validCountryNote_addCountryNote() {
+        CountryNote countryNote = new CountryNote("some", new Country("SG"));
+        assertFalse(modelManager.hasCountryNote(countryNote));
+        modelManager.addCountryNote(countryNote);
+        assertTrue(modelManager.hasCountryNote(countryNote));
+    }
+
+    @Test
+    public void updateFilteredCountryNoteList_truePredicate_showAllCountryNotes() {
+        int initialSize = modelManager.getFilteredCountryNoteList().size();
+        modelManager.updateFilteredCountryNoteList(countryNote -> true);
+        assertEquals(initialSize, modelManager.getFilteredCountryNoteList().size());
+    }
+
+    @Test
+    public void updateFilteredCountryNoteList_falsePredicate_showNoneCountryNotes() {
+        modelManager.updateFilteredCountryNoteList(countryNote -> false);
+        assertEquals(0, modelManager.getFilteredCountryNoteList().size());
+    }
+
+    @Test
+    public void updateFilteredCountryNoteList_countryPredicate_showRelevantCountryNotes() {
+        modelManager.updateFilteredCountryNoteList(countryNote -> true);
+        int expect = (int) modelManager.getFilteredCountryNoteList()
+            .stream()
+            .filter(countryNote -> countryNote.getCountry().equals(new Country("SG")))
+            .count();
+        modelManager.updateFilteredCountryNoteList(countryNote -> countryNote.equals(new Country("SG")));
+        assertEquals(expect, modelManager.getFilteredCountryNoteList().size());
+    }
+
     /* todo future tests:
      *  run coverage for model manager test and see what's missing:
      * 1. setClient
