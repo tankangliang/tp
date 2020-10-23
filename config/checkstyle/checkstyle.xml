@@ -338,8 +338,12 @@
       <property name="option" value="eol"/>
     </module>
 
+    <!-- Checks that indentation for case blocks matches switch line. -->
+    <!-- Checks that indentation for wrapped lines is 8 spaces more than the parent line. -->
     <module name="Indentation">
       <property name="caseIndent" value="0" />
+      <property name="throwsIndent" value="8" />
+      <property name="lineWrappingIndentation" value="8"/>
     </module>
 
     <module name="NoWhitespaceBefore">
@@ -404,14 +408,6 @@
 
     <!-- Checks if every overriden method has the @Override annotation. -->
     <module name="MissingOverride"/>
-
-    <!-- Checks that indentation for case blocks matches switch line. -->
-    <!-- Checks that indentation for wrapped lines is 8 spaces more than the parent line. -->
-    <module name="Indentation">
-      <property name="caseIndent" value="0"/>
-      <property name="lineWrappingIndentation" value="8"/>
-      <property name="forceStrictCondition" value="true"/>
-    </module>
 
   </module>
 </module>
