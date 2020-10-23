@@ -78,8 +78,6 @@ public interface Model {
      */
     void setWidgetContent(Object content);
 
-    void setWidgetCountryNoteObservableList(ObservableList<CountryNote> countryNoteObservableList);
-
     /**
      * Retrives the widget content object to be displayed in the widget.
      *

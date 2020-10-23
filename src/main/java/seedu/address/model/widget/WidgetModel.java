@@ -34,6 +34,4 @@ public interface WidgetModel {
      * @return WidgetObject
      */
     WidgetObject getWidgetContent();
-
-    void setCountryNoteObservableList(ObservableList<CountryNote> countryNoteObservableList);
 }

@@ -117,11 +117,13 @@ public class AddressBookParser {
         switch (commandWord) {
         case CountryNoteCommand.COMMAND_WORD:
             return new CountryNoteCommandParser().parse(restOfCommand);
+
         case CountryNoteViewCommand.COMMAND_WORD:
             return new CountryNoteViewCommandParser().parse(restOfCommand);
-        case CountryFilterCommand.COMMAND_WORD:
-            return new CountryFilterCommandParser().parse(restOfCommand);
 
+        case CountryFilterCommand.COMMAND_WORD:
+
+            return new CountryFilterCommandParser().parse(restOfCommand);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
