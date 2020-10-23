@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 
+import java.util.Objects;
+
 import seedu.address.model.Model;
 import seedu.address.model.client.ClientCountryMatchesInputCountryPredicate;
 
@@ -55,5 +57,10 @@ public class CountryFilterCommand extends Command {
         CountryFilterCommand c = (CountryFilterCommand) other;
 
         return predicate.equals(c.predicate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(predicate);
     }
 }

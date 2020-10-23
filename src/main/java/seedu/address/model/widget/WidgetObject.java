@@ -31,7 +31,6 @@ public class WidgetObject {
     private static final int TEXTFOUR_POS = 7;
     private static final int FOOTER_POS = 8;
 
-
     /**
      * Array is a collection of the fields to be mapped to the widget Ui component.
      *

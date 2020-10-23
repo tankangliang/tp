@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
+import seedu.address.ui.WidgetViewOption;
 
 /**
  * Represents the result of a command execution.
@@ -17,17 +20,29 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
-    /** The application has to update/change/display something on the view box in the ui. */
-    private final boolean view;
+    /** Indicates what kind of display to show on the widget view box. */
+    private final WidgetViewOption widgetViewOption;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean view) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        requireAllNonNull(feedbackToUser, showHelp, exit);
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.view = view;
+        this.widgetViewOption = WidgetViewOption.NONE;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, WidgetViewOption widgetViewOption) {
+        requireAllNonNull(feedbackToUser, showHelp, exit, widgetViewOption);
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.exit = exit;
+        this.widgetViewOption = widgetViewOption;
     }
 
     /**
@@ -35,7 +50,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -50,8 +65,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isView() {
-        return view;
+    public WidgetViewOption getWidgetViewOption() {
+        return widgetViewOption;
     }
 
     @Override
