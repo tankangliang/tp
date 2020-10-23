@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+
+import java.util.concurrent.CompletableFuture;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,18 +37,22 @@ class ClientNoteDeleteCommandTest {
         Index clientIdx = Index.fromOneBased(2);
         Index clientNoteIdx = Index.fromOneBased(1);
         Note clientNote = new Note(NOTE_CONTENT_1);
-        Executable add = () -> {
+        CompletableFuture<Void> c = CompletableFuture.runAsync(() -> {
             ClientNoteAddCommand addCommand = new ClientNoteAddCommand(clientIdx, clientNote);
-            addCommand.execute(model);
-        };
-        Executable delete = () -> {
+            try {
+                addCommand.execute(model);
+            } catch (CommandException ignored) {
+                fail();
+            }
+        }).thenRun(() -> {
             ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(clientIdx, clientNoteIdx);
-            clientNoteDeleteCommand.execute(model);
-        };
-        assertDoesNotThrow(() -> {
-            add.execute();
-            delete.execute();
+            try {
+                clientNoteDeleteCommand.execute(model);
+            } catch (CommandException ignored) {
+                fail();
+            }
         });
+        c.join();
     }
 
     @Test
