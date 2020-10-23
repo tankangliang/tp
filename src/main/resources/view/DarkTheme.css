@@ -362,7 +362,7 @@
 
 #clientListView {
     -fx-background-radius: 5, 5;
-    -fx-padding: 0 0 0 17;
+    -fx-padding: 0 0 0 0;
 }
 
 #clientListView .scroll-bar .thumb {
