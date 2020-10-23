@@ -230,6 +230,11 @@ public class ClientAddCommandTest {
         }
 
         @Override
+        public void initialiseTagNoteMap() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public TagNoteMap getTagNoteMap() {
             throw new AssertionError("This method should not be called.");
         }
