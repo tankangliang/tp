@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.util.concurrent.CompletableFuture;
@@ -35,24 +36,11 @@ class ClientNoteDeleteCommandTest {
         Index clientIdx = Index.fromOneBased(2);
         Index clientNoteIdx = Index.fromOneBased(1);
         Note clientNote = new Note(NOTE_CONTENT_1);
-        CompletableFuture<Void> c = CompletableFuture.runAsync(() -> {
-            ClientNoteAddCommand addCommand = new ClientNoteAddCommand(clientIdx, clientNote);
-            try {
-                addCommand.execute(model);
-            } catch (CommandException ignored) {
-                fail();
-            }
-        }).thenRun(() -> {
-            System.out.println(model.getFilteredClientList().get(clientIdx.getZeroBased()));
-            System.out.println(model.getFilteredClientNotesList());
-            ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(clientIdx, clientNoteIdx);
-            try {
-                clientNoteDeleteCommand.execute(model);
-            } catch (CommandException ignored) {
-                fail();
-            }
-        });
-        c.join();
+        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        newModel.addClientNote(newModel.getFilteredClientList().get(clientIdx.getZeroBased()), clientNote);
+        CommandResult expectedResult = new CommandResult(ClientNoteDeleteCommand.MESSAGE_DELETED_CLIENT_NOTE_SUCCESS);
+        ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(clientIdx, clientNoteIdx);
+        assertCommandSuccess(clientNoteDeleteCommand, newModel, expectedResult, model);
     }
 
     @Test
