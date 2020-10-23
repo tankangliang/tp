@@ -16,6 +16,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
+import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.TypicalClients;
 
 class ClientNoteDeleteCommandTest {
@@ -30,14 +31,25 @@ class ClientNoteDeleteCommandTest {
 
     @Test
     public void execute_validCommand_doesNotThrowException() {
-        Index clientIdx = Index.fromOneBased(2);
+        Index client2Idx = Index.fromOneBased(2);
         Index clientNoteIdx = Index.fromOneBased(1);
         Note clientNote = new Note(NOTE_CONTENT_1);
-        Model newModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        newModel.addClientNote(newModel.getFilteredClientList().get(clientIdx.getZeroBased()), clientNote);
+        Model newModel = new ModelManager();
+        Client client1 = new ClientBuilder().withName("client1").build();
+        Client client2 = new ClientBuilder().withName("client2").build();
+        newModel.addClient(client1);
+        newModel.addClient(client2);
+        newModel.addClientNote(client2, clientNote);
+
+        Model expectedModel = new ModelManager();
+        Client client1Copy = new ClientBuilder().withName("client1").build();
+        Client client2Copy = new ClientBuilder().withName("client2").build();
+        expectedModel.addClient(client1Copy);
+        expectedModel.addClient(client2Copy);
+
         CommandResult expectedResult = new CommandResult(ClientNoteDeleteCommand.MESSAGE_DELETED_CLIENT_NOTE_SUCCESS);
-        ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(clientIdx, clientNoteIdx);
-        assertCommandSuccess(clientNoteDeleteCommand, newModel, expectedResult, model);
+        ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(client2Idx, clientNoteIdx);
+        assertCommandSuccess(clientNoteDeleteCommand, newModel, expectedResult, expectedModel);
     }
 
     @Test
