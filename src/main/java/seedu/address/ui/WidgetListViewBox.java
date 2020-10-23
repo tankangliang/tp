@@ -5,10 +5,14 @@ import java.util.stream.Collectors;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.logic.commands.CountryNoteCommand;
+import seedu.address.model.client.Client;
 import seedu.address.model.note.CountryNote;
+import seedu.address.ui.ClientListPanel.ClientListViewCell;
 
 public class WidgetListViewBox extends UiPart<Region> {
 
@@ -18,29 +22,35 @@ public class WidgetListViewBox extends UiPart<Region> {
     private VBox viewBox;
 
     @FXML
-    private VBox scrollView;
+    private Label header;
 
     @FXML
-    private Label header;
+    private ListView<CountryNote> countryNoteListView;
 
     /**
      * Initializes a {@code WidgetListViewBox}
      */
-    public WidgetListViewBox() {
+    public WidgetListViewBox(ObservableList<CountryNote> countryNoteObservableList) {
         super(FXML);
         header.setText("Country Notes");
+        countryNoteListView.setItems(countryNoteObservableList);
+        countryNoteListView.setCellFactory(listView -> new CountryListViewCell());
     }
 
-    public void update(ObservableList<CountryNote> countryNoteObservableList) {
-        scrollView.getChildren().clear();
-        int indx = 1;
-        header.setText(countryNoteObservableList.get(0).getCountry().getCountryName() + " Country Notes");
-        for (CountryNote countryNote : countryNoteObservableList) {
-            CountryNoteCard countryNoteCard = new CountryNoteCard(indx, countryNote);
-            scrollView.getChildren().add(countryNoteCard.getCountryNoteContainer());
-            indx++;
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code CountryNote} using a {@code CountryNoteCard}.
+     */
+    class CountryListViewCell extends ListCell<CountryNote> {
+        @Override
+        protected void updateItem(CountryNote countryNote, boolean empty) {
+            super.updateItem(countryNote, empty);
+
+            if (empty || countryNote == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new CountryNoteCard(getIndex() + 1, countryNote).getRoot());
+            }
         }
     }
-
-
 }

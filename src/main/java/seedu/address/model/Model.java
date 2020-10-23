@@ -135,6 +135,18 @@ public interface Model {
     void updateFilteredClientList(Predicate<Client> predicate);
 
     /**
+     * Returns an unmodifiable view of the filtered country notes list
+     */
+    ObservableList<CountryNote> getFilteredCountryNoteList();
+
+    /**
+     * Updates the filter of the filtered country notes list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredCountryNoteList(Predicate<CountryNote> predicate);
+
+    /**
      * Initialises TagNoteMap from Clients notes and Country notes.
      */
     void initialiseTagNoteMap();

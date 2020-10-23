@@ -34,11 +34,7 @@ public class CountryNoteViewCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        model.setWidgetCountryNoteObservableList(
-            FXCollections.observableList(model.getAddressBook().getCountryNoteList()
-                .stream()
-                .filter(countryNote -> countryNote.getCountry().equals(country))
-                .collect(Collectors.toList())));
+        model.updateFilteredCountryNoteList(countryNote -> countryNote.getCountry().equals(country));
         return new CommandResult(String.format(MESSAGE_SUCCESS, country), false, false, false, true);
     }
 }

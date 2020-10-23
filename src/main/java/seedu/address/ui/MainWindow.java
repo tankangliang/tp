@@ -115,7 +115,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         widgetViewBox = new WidgetViewBox();
-        widgetListViewBox = new WidgetListViewBox();
+        widgetListViewBox = new WidgetListViewBox(logic.getFilteredCountryNoteList());
         widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
 
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
@@ -195,7 +195,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isListView()) {
                 //widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
                 widgetPlaceholder.getChildren().clear();
-                widgetListViewBox.update(logic.getWidgetContent().getCountryNoteObservableList());
                 widgetPlaceholder.getChildren().add(widgetListViewBox.getRoot());
             }
 
