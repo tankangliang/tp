@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.function.Executable;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -33,11 +34,17 @@ class ClientNoteDeleteCommandTest {
         Index clientIdx = Index.fromOneBased(2);
         Index clientNoteIdx = Index.fromOneBased(1);
         Note clientNote = new Note(NOTE_CONTENT_1);
-        assertDoesNotThrow(() -> {
+        Executable add = () -> {
             ClientNoteAddCommand addCommand = new ClientNoteAddCommand(clientIdx, clientNote);
             addCommand.execute(model);
+        };
+        Executable delete = () -> {
             ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(clientIdx, clientNoteIdx);
             clientNoteDeleteCommand.execute(model);
+        };
+        assertDoesNotThrow(() -> {
+            add.execute();
+            delete.execute();
         });
     }
 
