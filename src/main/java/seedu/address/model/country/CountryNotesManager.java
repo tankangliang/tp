@@ -16,12 +16,6 @@ public class CountryNotesManager {
         FXCollections.unmodifiableObservableList(internalCountryNoteList);
 
     /**
-     * Initializes a CountryNotesManager with a Map that maps ISO3166 2-letter country codes to countries.
-     */
-    public CountryNotesManager() {
-    }
-
-    /**
      * Checks if {@code countryNote} already exists.
      *
      * @param countryNote The note to be checked.
@@ -43,7 +37,9 @@ public class CountryNotesManager {
         }
         requireNonNull(countryNote);
 
-        internalCountryNoteList.add(countryNote);
+        if (!hasCountryNote(countryNote)) {
+            internalCountryNoteList.add(countryNote);
+        }
     }
 
     /**

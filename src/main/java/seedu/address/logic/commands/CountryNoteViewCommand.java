@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 
+import java.util.Objects;
+
 import seedu.address.model.Model;
 import seedu.address.model.country.Country;
 import seedu.address.ui.WidgetViewOption;
@@ -36,5 +38,28 @@ public class CountryNoteViewCommand extends Command {
         requireNonNull(model);
         model.updateFilteredCountryNoteList(countryNote -> countryNote.getCountry().equals(country));
         return new CommandResult(String.format(MESSAGE_SUCCESS, country), false, false, WidgetViewOption.COUNTRY_NOTES);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CountryNoteViewCommand)) {
+            return false;
+        }
+
+        // state check
+        CountryNoteViewCommand c = (CountryNoteViewCommand) other;
+
+        return country.equals(c.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(country);
     }
 }
