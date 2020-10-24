@@ -8,6 +8,9 @@ import java.util.Locale;
  */
 public class Country {
 
+    private static final String NONE_COUNTRY_CODE = "";
+    private static final String NONE_COUNTRY_NAME = "";
+
     private final String countryName;
     private final String countryCode;
 
@@ -21,6 +24,15 @@ public class Country {
 
         this.countryCode = countryCode;
         this.countryName = new Locale("", countryCode).getDisplayName();
+    }
+
+    private Country() {
+        this.countryCode = NONE_COUNTRY_CODE;
+        this.countryName = NONE_COUNTRY_NAME;
+    }
+
+    public static Country getNullCountry() {
+        return new Country();
     }
 
     /**

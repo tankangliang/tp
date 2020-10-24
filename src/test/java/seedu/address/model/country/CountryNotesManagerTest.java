@@ -2,6 +2,7 @@ package seedu.address.model.country;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Locale;
@@ -64,6 +65,23 @@ public class CountryNotesManagerTest {
                     .filter(x -> x.equals(genericNote))
                     .count());
         }
+    }
+
+    @Test
+    public void deleteCountryNote_countryNoteNotExist_assertionError() {
+        CountryNotesManager countryNotesManager = new CountryNotesManager();
+        CountryNote countryNote = new CountryNote("random", new Country("SG"));
+        assertThrows(AssertionError.class, () -> countryNotesManager.deleteCountryNote(countryNote));
+    }
+
+    @Test
+    public void deleteCountryNote_countryNoteExists_deletesCountryNote() {
+        CountryNotesManager countryNotesManager = new CountryNotesManager();
+        CountryNote countryNote = new CountryNote("random", new Country("SG"));
+        countryNotesManager.addCountryNote(countryNote);
+        assertTrue(countryNotesManager.hasCountryNote(countryNote));
+        countryNotesManager.deleteCountryNote(countryNote);
+        assertFalse(countryNotesManager.hasCountryNote(countryNote));
     }
 
 }

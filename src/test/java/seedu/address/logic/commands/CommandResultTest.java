@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.country.Country;
 import seedu.address.ui.WidgetViewOption;
 
 public class CommandResultTest {
@@ -17,6 +18,8 @@ public class CommandResultTest {
         assertFalse(defaultCommandResult.isShowHelp());
         assertFalse(defaultCommandResult.isExit());
         assertEquals("NONE", defaultCommandResult.getWidgetViewOptionAsString());
+        assertFalse(defaultCommandResult.shouldDisplayClient());
+        assertFalse(defaultCommandResult.shouldDisplayCountryNote());
 
         CommandResult customCommandResult = new CommandResult("test", true, false,
                 WidgetViewOption.generateClientWidgetOption());
@@ -24,10 +27,28 @@ public class CommandResultTest {
         assertFalse(customCommandResult.isExit());
         assertEquals("CLIENT", customCommandResult.getWidgetViewOptionAsString());
         assertEquals(customCommandResult.getFeedbackToUser(), "test");
+        assertTrue(customCommandResult.shouldDisplayClient());
+        assertFalse(customCommandResult.shouldDisplayCountryNote());
 
         customCommandResult = new CommandResult("test", true, false,
                 WidgetViewOption.generateCountryNoteWidgetOption(null));
         assertEquals("COUNTRY_NOTE", customCommandResult.getWidgetViewOptionAsString());
+        assertFalse(customCommandResult.shouldDisplayClient());
+        assertTrue(customCommandResult.shouldDisplayCountryNote());
+    }
+
+    @Test
+    public void getCountry_nullCountry_returnExpected() {
+        CommandResult commandResult = new CommandResult("test", false, false,
+                WidgetViewOption.generateCountryNoteWidgetOption(Country.getNullCountry()));
+        assertEquals(Country.getNullCountry(), commandResult.getCountry());
+    }
+
+    @Test
+    public void getCountry_validCountry_returnExpected() {
+        CommandResult commandResult = new CommandResult("test", false, false,
+                WidgetViewOption.generateCountryNoteWidgetOption(new Country("SG")));
+        assertEquals(new Country("SG"), commandResult.getCountry());
     }
 
     @Test

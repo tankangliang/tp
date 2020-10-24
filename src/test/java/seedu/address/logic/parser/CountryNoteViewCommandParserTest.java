@@ -13,10 +13,25 @@ import seedu.address.model.country.Country;
 public class CountryNoteViewCommandParserTest {
 
     @Test
-    public void parse_noCountry_throwParseException() {
+    public void parse_invalidCountry_throwParseException() {
         assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" c/"));
         assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" c/   "));
         assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" c/   12"));
+    }
+
+    @Test
+    public void parse_noCountry_returnsExpected() {
+        CountryNoteViewCommand expected = new CountryNoteViewCommand();
+        try {
+            CountryNoteViewCommand actual = new CountryNoteViewCommandParser().parse("");
+            assertEquals(expected, actual);
+            actual = new CountryNoteViewCommandParser().parse(" awfoekwof owfofew  132");
+            assertEquals(expected, actual);
+            actual = new CountryNoteViewCommandParser().parse("  2  3");
+            assertEquals(expected, actual);
+        } catch (ParseException e) {
+            fail();
+        }
     }
 
     @Test

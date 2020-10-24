@@ -225,13 +225,23 @@ public class ModelManagerTest {
 
     @Test
     public void updateFilteredCountryNoteList_countryPredicate_showRelevantCountryNotes() {
+        modelManager.addCountryNote(new CountryNote("random", new Country("SG")));
         modelManager.updateFilteredCountryNoteList(countryNote -> true);
         int expect = (int) modelManager.getFilteredCountryNoteList()
                 .stream()
                 .filter(countryNote -> countryNote.getCountry().equals(new Country("SG")))
                 .count();
-        modelManager.updateFilteredCountryNoteList(countryNote -> countryNote.equals(new Country("SG")));
+        modelManager.updateFilteredCountryNoteList(countryNote -> countryNote.getCountry().equals(new Country("SG")));
         assertEquals(expect, modelManager.getFilteredCountryNoteList().size());
+    }
+
+    @Test
+    public void deleteCountryNote_validCountryNote_updateCountryNoteList() {
+        modelManager.addCountryNote(new CountryNote("random", new Country("SG")));
+        modelManager.updateFilteredCountryNoteList(countryNote -> true);
+        int initial = modelManager.getFilteredCountryNoteList().size();
+        modelManager.deleteCountryNote(modelManager.getFilteredCountryNoteList().get(0));
+        assertEquals(initial - 1, modelManager.getFilteredCountryNoteList().size());
     }
 
     /* todo future tests:

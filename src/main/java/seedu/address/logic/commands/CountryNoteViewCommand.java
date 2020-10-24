@@ -37,7 +37,7 @@ public class CountryNoteViewCommand extends Command {
      * Initializes a CountryNoteViewCommand that views all country notes.
      */
     public CountryNoteViewCommand() {
-        this.country = null;
+        this.country = Country.getNullCountry();
     }
 
     @Override
