@@ -177,6 +177,11 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
+        // different userPrefs -> returns false
+        UserPrefs differentUserPrefs = new UserPrefs();
+        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredClientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
@@ -190,15 +195,9 @@ public class ModelManagerTest {
         modelManagerCopy.updateSortedFilteredClientList((client1, client2) -> 1);
         assertFalse(modelManager.equals(modelManagerCopy));
 
-        // different userPrefs -> returns false
-        modelManagerCopy = new ModelManager(addressBook, userPrefs);
-        UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(modelManagerCopy));
-
         // different tagNoteMap -> returns false
         modelManagerCopy = new ModelManager(addressBook, userPrefs);
-        modelManagerCopy.addCountryNote(new CountryNote("country note", new Country("US")));
+        modelManagerCopy.addClientNote(new ClientBuilder().build(), new Note("client note"));
         assertFalse(modelManager.equals(modelManagerCopy));
     }
 
