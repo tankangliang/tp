@@ -148,6 +148,9 @@ class JsonAdaptedClient {
         final ContractExpiryDate modelContractExpiryContractExpiryDate =
                 ParserUtil.parseContractExpiryDate(contractExpiryDate);
 
+        // Does not throw an exception if lastModifiedInstant is missing/invalid due to corruption of data.
+        // This field is merely metadata for us and is not significant enough to discard client's data due to this
+        // field being missing.
         LastModifiedInstant modelLastModifiedInstant;
         if (lastModifiedInstant == null) {
             modelLastModifiedInstant = new LastModifiedInstant();

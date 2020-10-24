@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.Instant;
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
@@ -35,6 +36,9 @@ class LastModifiedInstantTest {
     public void constructor_noArguments_returnsCurrentInstant() {
         LocalDate currentDate = LocalDate.now();
         LastModifiedInstant lastModifiedInstant = new LastModifiedInstant();
+        // Test to make sure the generated instant is within 1 second of now.
+        Instant instantNowMinusOneSecond = Instant.now().minusSeconds(1);
+        assertEquals(instantNowMinusOneSecond.compareTo(lastModifiedInstant.value), -1);
 
         LocalDate instantDate = LocalDate.parse(lastModifiedInstant.toString().substring(0, 10));
         assertEquals(currentDate.getYear(), instantDate.getYear());
@@ -61,7 +65,6 @@ class LastModifiedInstantTest {
         assertFalse(LastModifiedInstant.isValidInstant("2020-10-10T15:18.617617Z")); // missing seconds
         assertFalse(LastModifiedInstant.isValidInstant("2020-10-10T15:18:35.617617")); // missing Z
 
-
         // invalid parts
         assertFalse(LastModifiedInstant.isValidInstant("YYYY-10-10T15:18:35.617617Z")); // invalid year
         assertFalse(LastModifiedInstant.isValidInstant("2020-MM-10T15:18:35.617617Z")); // invalid month
@@ -73,7 +76,6 @@ class LastModifiedInstantTest {
         assertFalse(LastModifiedInstant.isValidInstant("2020-10-10T15:18:35.617617Y")); // invalid zone
         assertFalse(LastModifiedInstant.isValidInstant("2020-10-10Z15:18:35.617617Z")); // invalid separator
         assertFalse(LastModifiedInstant.isValidInstant("2020/10/10T15:18:35.617617Z")); // "/" instead of "-"
-
 
         // valid email
         assertTrue(LastModifiedInstant.isValidInstant("2020-10-10T15:18:35.617617Z")); // valid instant
