@@ -43,6 +43,8 @@ public class CommandTestUtil {
     public static final String VALID_TIMEZONE_BOB = "GMT+7";
     public static final String VALID_CONTRACT_EXPIRY_DATE_AMY = "1-1-2022";
     public static final String VALID_CONTRACT_EXPIRY_DATE_BOB = "13-12-2021";
+    public static final String VALID_LAST_MODIFIED_INSTANT_AMY = "2020-10-10T00:00:00.000000Z";
+    public static final String VALID_LAST_MODIFIED_INSTANT_BOB = "2020-11-11T00:00:00.000000Z";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 

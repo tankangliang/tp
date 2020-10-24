@@ -25,6 +25,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.LastModifiedInstant;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
@@ -109,10 +110,11 @@ public class ClientEditCommand extends Command {
         Timezone updatedTimezone = editClientDescriptor.getTimezone().orElse(clientToEdit.getTimezone());
         ContractExpiryDate updatedContractExpiryDate =
                 editClientDescriptor.getContractExpiryDate().orElse(clientToEdit.getContractExpiryDate());
+        LastModifiedInstant updatedLastModifiedInstant = new LastModifiedInstant();
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedTimezone,
-                updatedContractExpiryDate, updatedTags);
+                updatedContractExpiryDate, updatedLastModifiedInstant, updatedTags);
     }
 
     @Override

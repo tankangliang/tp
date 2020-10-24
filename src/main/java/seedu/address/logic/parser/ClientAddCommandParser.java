@@ -19,6 +19,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.LastModifiedInstant;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
@@ -53,9 +54,11 @@ public class ClientAddCommandParser implements Parser<ClientAddCommand> {
         Timezone timezone = ParserUtil.parseTimezone(argMultimap.getValue(PREFIX_TIMEZONE).get());
         ContractExpiryDate contractExpiryDate =
                 ParserUtil.parseContractExpiryDate(argMultimap.getValue(PREFIX_CONTRACT_EXPIRY_DATE).get());
+        LastModifiedInstant lastModifiedInstant = new LastModifiedInstant();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Client client = new Client(name, phone, email, address, country, timezone, contractExpiryDate, tagList);
+        Client client = new Client(name, phone, email, address, country, timezone, contractExpiryDate,
+                lastModifiedInstant, tagList);
 
         return new ClientAddCommand(client);
     }
