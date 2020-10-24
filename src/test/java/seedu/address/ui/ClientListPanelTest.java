@@ -17,8 +17,7 @@ import seedu.address.model.client.Client;
 import seedu.address.testutil.ClientBuilder;
 
 public class ClientListPanelTest extends GuiUnitTest {
-    private static final ObservableList<Client> TYPICAL_CLIENTS =
-            FXCollections.observableList(getTypicalClients());
+    private static final ObservableList<Client> TYPICAL_CLIENTS = FXCollections.observableList(getTypicalClients());
 
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
