@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.TypicalClients.AMY;
 import static seedu.address.testutil.TypicalClients.BOB;
@@ -33,12 +34,8 @@ public class ClientCardTest extends GuiUnitTest {
     @Test
     public void contructor_badClient_throwsException() {
         // null client
-        try {
-            ClientCard nullCard = new ClientCard(null, 0);
-            fail("Card is being created with a null client");
-        } catch (NullPointerException e) {
-            assertEquals(1, 1);
-        }
+        assertThrows(NullPointerException.class, () -> new ClientCard(null, 0),
+                "Card is being created with a null client");
     }
 
     @Test
