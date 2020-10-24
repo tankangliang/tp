@@ -6,7 +6,7 @@ jobs:
   build:
     strategy:
       matrix:
-        platform: [ubuntu-latest]
+        platform: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.platform }}
 
     steps:
@@ -34,11 +34,6 @@ jobs:
         with:
           java-version: '11'
           java-package: jdk
-
-      - name: Set up xvfb for Linux
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get install xvfb
 
       - name: Set up headless for MacOS
         if: runner.os == 'macOS'
