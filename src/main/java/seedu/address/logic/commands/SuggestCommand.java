@@ -27,7 +27,8 @@ public class SuggestCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_SUGGEST + SuggestionType.BY_CONTRACT;
     public static final String MESSAGE_SUGGEST_SUCCESS = "Showing clients based on suggestion criteria";
 
-    private final List<Predicate<Client>> suggestionTypePredicateList;
+    private final Set<SuggestionType> suggestionTypeOrderedSet;
+    private final Predicate<Client> suggestionTypePredicate;
     private final Comparator<Client> suggestionTypeCombinedComparator;
 
     /**
@@ -35,8 +36,10 @@ public class SuggestCommand extends Command {
      */
     public SuggestCommand(Set<SuggestionType> suggestionTypeOrderedSet) {
         requireNonNull(suggestionTypeOrderedSet);
-        this.suggestionTypePredicateList = suggestionTypeOrderedSet.stream()
-                .map(SuggestionType::getSuggestionPredicate).collect(Collectors.toList());
+        this.suggestionTypeOrderedSet = suggestionTypeOrderedSet;
+        this.suggestionTypePredicate = suggestionTypeOrderedSet.stream()
+                .map(SuggestionType::getSuggestionPredicate)
+                .reduce(client -> true, (p1, p2) -> client -> p1.test(client) && p2.test(client));
 
         List<Comparator<Client>> suggestionTypeComparatorList = suggestionTypeOrderedSet.stream()
                 .map(SuggestionType::getSuggestionComparator).collect(Collectors.toList());
@@ -54,8 +57,7 @@ public class SuggestCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredClientList(client ->
-                suggestionTypePredicateList.stream().allMatch(pred -> pred.test(client)));
+        model.updateFilteredClientList(suggestionTypePredicate);
         model.updateSortedFilteredClientList(suggestionTypeCombinedComparator);
         return new CommandResult(MESSAGE_SUGGEST_SUCCESS);
     }
@@ -64,6 +66,6 @@ public class SuggestCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof SuggestCommand // instanceof handles nulls
-            && suggestionTypePredicateList.equals(((SuggestCommand) other).suggestionTypePredicateList)); // state check
+            && suggestionTypeOrderedSet.equals(((SuggestCommand) other).suggestionTypeOrderedSet)); // state check
     }
 }
