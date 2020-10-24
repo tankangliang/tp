@@ -61,14 +61,16 @@ public class MainWindowTest extends GuiUnitTest {
         guiRobot.clickOn("Help");
         guiRobot.clickOn("F1");
         guiRobot.pauseForHuman();
+        assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
         guiRobot.clickOn("#copyButton");
         if (!guiRobot.isHeadlessMode()) {
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             assertEquals(USERGUIDE_URL, clipboard.getData(DataFlavor.stringFlavor));
+            guiRobot.pauseForHuman();
+            guiRobot.press(KeyCode.ESCAPE);
+            guiRobot.pauseForHuman();
+            assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
         }
-        guiRobot.pauseForHuman();
-        guiRobot.press(KeyCode.ESCAPE).sleep(100);
-        assertFalse(HelpWindowHandle.isWindowPresent());
 
         // TODO: Command Execution test
     }

@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.HelpWindowHandle;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 
@@ -49,10 +50,10 @@ public class HelpWindowTest extends GuiUnitTest {
 
     @Test
     public void pressEscKey_helpWindowIsShowing_returnsFalse() throws Exception {
+        assumeFalse(guiRobot.isHeadlessMode());
         FxToolkit.showStage();
         guiRobot.pauseForHuman();
-
-        helpWindowHandle.pressEscKey();
+        guiRobot.press(KeyCode.ESCAPE);
         assertFalse(helpWindow.isShowing());
     }
 
@@ -97,22 +98,19 @@ public class HelpWindowTest extends GuiUnitTest {
         // stage2.isFocused() returns true. However, as reported in the bug report,
         // both stage1.isFocused() and stage2.isFocused() returns true,
         // which fails the test.
-        if (!guiRobot.isHeadlessMode()) {
-            guiRobot.interact(helpWindow::show);
+        assumeFalse(guiRobot.isHeadlessMode(), "Test skipped in headless mode");
+        guiRobot.interact(helpWindow::show);
 
-            // Focus on another stage to remove focus from the helpWindow
-            guiRobot.interact(() -> {
-                Stage temporaryStage = new Stage();
-                temporaryStage.show();
-                temporaryStage.requestFocus();
-            });
-            assertFalse(helpWindow.getRoot().isFocused());
+        // Focus on another stage to remove focus from the helpWindow
+        guiRobot.interact(() -> {
+            Stage temporaryStage = new Stage();
+            temporaryStage.show();
+            temporaryStage.requestFocus();
+        });
+        assertFalse(helpWindow.getRoot().isFocused());
 
-            guiRobot.interact(helpWindow::focus);
-            assertTrue(helpWindow.getRoot().isFocused());
-        } else {
-            assertTrue(true);
-        }
+        guiRobot.interact(helpWindow::focus);
+        assertTrue(helpWindow.getRoot().isFocused());
     }
 
 }

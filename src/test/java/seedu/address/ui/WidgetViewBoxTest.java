@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -52,16 +53,12 @@ public class WidgetViewBoxTest extends GuiUnitTest {
         * Issue was raised by @rtshkmr where his JVM has correct timezone and time but wrong country.
         * Locale.getDefault().getDisplayCountry() returns United States for him.
         */
-        //assumeFalse(guiRobot.isHeadlessMode(), "Test skipped in headless mode.");
-        if (!guiRobot.isHeadlessMode()) {
-            WidgetViewBox widgetViewBox = new WidgetViewBox();
+        assumeFalse(guiRobot.isHeadlessMode(), "Test skipped in headless mode.");
+        WidgetViewBox widgetViewBox = new WidgetViewBox();
 
-            uiPartExtension.setUiPart(widgetViewBox);
-            guiRobot.pauseForHuman();
-            guiRobot.pauseForHuman();
-        } else {
-            assertEquals(1, 1);
-        }
+        uiPartExtension.setUiPart(widgetViewBox);
+        guiRobot.pauseForHuman();
+        guiRobot.pauseForHuman();
     }
 
     @Test

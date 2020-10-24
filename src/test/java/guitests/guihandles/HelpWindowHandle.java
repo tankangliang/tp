@@ -2,7 +2,6 @@ package guitests.guihandles;
 
 import guitests.GuiRobot;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 /**
@@ -48,13 +47,6 @@ public class HelpWindowHandle extends StageHandle {
         * */
         Button copyButton = guiRobot.lookup("#copyButton").queryButton();
         guiRobot.clickOn(copyButton);
-    }
-
-    /**
-     * Simulates the pressing of the escape key.
-     */
-    public void pressEscKey() {
-        guiRobot.press(KeyCode.ESCAPE).sleep(100);
     }
 
 }
