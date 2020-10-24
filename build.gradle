@@ -56,6 +56,8 @@ task headless {
         test {
             systemProperties = [
                 'java.awt.headless': 'true',
+                'glass.platform': 'monocle',
+                'monocle.platform': 'headless',
                 'testfx.robot': 'glass',
                 'testfx.headless': 'true',
                 'prism.order': 'sw',
