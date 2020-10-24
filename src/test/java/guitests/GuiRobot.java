@@ -1,5 +1,6 @@
 package guitests;
 
+import java.awt.GraphicsEnvironment;
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
 
@@ -29,7 +30,8 @@ public class GuiRobot extends FxRobot {
      */
     public GuiRobot() {
         String headlessPropertyValue = System.getProperty(PROPERTY_HEADLESS);
-        isHeadlessMode = headlessPropertyValue != null && headlessPropertyValue.equals("true");
+        isHeadlessMode = (headlessPropertyValue != null && headlessPropertyValue.equals("true"))
+                || GraphicsEnvironment.isHeadless();
     }
 
     /**
