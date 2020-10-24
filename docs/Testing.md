@@ -21,8 +21,7 @@ There are three ways to run tests.
 * **Method 2: Using Gradle**
   * Open a console and run the command `gradlew clean test` (Mac/Linux: `./gradlew clean test`)
 * **Method 3: Using Gradle (headless)**
-  * Open a console and run command `gradlew clean headlessTest` (Mac/Linux: `./gradlew clean headlessTest`)
-  * Alternatively, to configure the test task to run in headless mode, refer to the bottom section [Default headless](#default-headless)
+  * Open a console and run command `gradlew clean headless test` (Mac/Linux: `./gradlew clean headless test`)
 
 <div markdown="span" class="alert alert-secondary">:link: **Link**: Read [this Gradle Tutorial from the se-edu/guides](https://se-education.org/guides/tutorials/gradle.html) to learn more about using Gradle.
 </div>
@@ -35,25 +34,19 @@ This project has three types of tests:
 
 1. ##### GUI Tests
     These are tests which simulates user interaction with the application.
-    
+
     a. *Unit tests* that test the individual GUI components. These are in the `seedu.address.ui` package.
 
 1. ##### Non-GUI Tests
-    These are test not involving the GUI of TBM. They include,
+    These are tests not involving the GUI of TBM. They include,<br>
     a. *Unit tests* targeting the lowest level methods/classes.<br>
-        
+
       e.g  `seedu.address.commons.StringUtilTest`
-        
+
     b. *Integration tests* that are checking the integration of multiple code units (those code units are assumed to be working).<br>
-   
+
       e.g. `seedu.address.storage.StorageManagerTest`
-      
+
     c. Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together.<br>
-   
+
       e.g. `seedu.address.logic.LogicManagerTest`
-
-## Default headless
-
-To do this, replace the `else` block in the task `test` in `build.gradle` with this line: 
-
-* `jvmArgs "-Dheadless=${project.hasProperty('headless') ? project.headless : true}"`
