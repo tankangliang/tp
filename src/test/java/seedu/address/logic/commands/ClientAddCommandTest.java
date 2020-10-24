@@ -215,6 +215,11 @@ public class ClientAddCommandTest {
         }
 
         @Override
+        public void deleteCountryNote(CountryNote countryNoteToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Client> getFilteredClientList() {
             throw new AssertionError("This method should not be called.");
         }

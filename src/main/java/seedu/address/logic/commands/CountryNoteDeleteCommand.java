@@ -18,9 +18,9 @@ public class CountryNoteDeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "country ndelete"; // TODO: change to country note delete
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Deletes the country note that are associated with the last viewed country at the given index.\n"
-        + "Parameters: INDEX"
-        + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the country note that are associated with the last viewed country at the given index.\n"
+            + "Parameters: INDEX"
+            + "Example: " + COMMAND_WORD + " 1";
     private static final String MESSAGE_SUCCESS = "Deleted country note at index %1$s: %2$s";
     private final Index targetIndex;
 
@@ -44,7 +44,8 @@ public class CountryNoteDeleteCommand extends Command {
 
         CountryNote countryNoteToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteCountryNote(countryNoteToDelete);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), countryNoteToDelete), false, false,
-            WidgetViewOption.generateNullWidgetOption());
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), countryNoteToDelete), false, false,
+                WidgetViewOption.generateNullWidgetOption());
     }
 }

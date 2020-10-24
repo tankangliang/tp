@@ -14,11 +14,6 @@ public class CountryNoteViewCommandParserTest {
 
     @Test
     public void parse_noCountry_throwParseException() {
-        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" "));
-        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" avbc"));
-        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" sg"));
-        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" SG"));
-        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" 123"));
         assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" c/"));
         assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" c/   "));
         assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" c/   12"));
