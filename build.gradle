@@ -8,6 +8,15 @@ plugins {
     id 'jacoco'
 }
 
+if (System.getProperty("headless")) {
+    apply plugin: 'org.openjfx.javafxplugin' version '0.0.8'
+
+    javafx {
+        version = '11'
+        modules = [ 'javafx.base', 'javafx.graphics', 'javafx.controls', 'javafx.fxml' ]
+    }
+}
+
 allprojects {
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
@@ -112,15 +121,14 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
 
-    implementation 'com.jfoenix:jfoen' +
-            'ix:9.0.10'
+    implementation 'com.jfoenix:jfoenix:9.0.10'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
 
-    testCompile group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+26'
-    testCompile group: 'org.testfx', name: 'testfx-core', version: testFxVersion
-    testCompile group: 'org.testfx', name: 'testfx-junit5', version: testFxVersion
+    testImplementation group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+26'
+    testImplementation group: 'org.testfx', name: 'testfx-core', version: testFxVersion
+    testImplementation group: 'org.testfx', name: 'testfx-junit5', version: testFxVersion
 }
 
 shadowJar {
