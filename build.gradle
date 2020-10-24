@@ -2,16 +2,10 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
     id 'java'
-    id 'org.openjfx.javafxplugin' version '0.0.9'
     id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '4.0.4'
     id 'application'
     id 'jacoco'
-}
-
-javafx {
-    version = '11'
-    modules = [ 'javafx.graphics', 'javafx.controls', 'javafx.fxml' ]
 }
 
 allprojects {
@@ -98,7 +92,7 @@ task coverage(type: JacocoReport) {
 }
 
 dependencies {
-    String testFxVersion = '4.0.15-alpha'
+    String testFxVersion = '4.0.16-alpha'
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '11'
 
@@ -118,14 +112,15 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
 
-    implementation 'com.jfoenix:jfoenix:9.0.10'
+    implementation 'com.jfoenix:jfoen' +
+            'ix:9.0.10'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
-    testImplementation group: 'org.testfx', name: 'testfx-core', version: testFxVersion
-    testImplementation group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+26'
-
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
-    testRuntimeOnly group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+26'
+
+    testCompile group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+26'
+    testCompile group: 'org.testfx', name: 'testfx-core', version: testFxVersion
+    testCompile group: 'org.testfx', name: 'testfx-junit5', version: testFxVersion
 }
 
 shadowJar {
