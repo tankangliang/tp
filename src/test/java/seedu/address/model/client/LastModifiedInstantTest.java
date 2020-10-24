@@ -8,6 +8,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +28,8 @@ class LastModifiedInstantTest {
         LocalDate currentDate = LocalDate.now();
         LastModifiedInstant lastModifiedInstant = new LastModifiedInstant("invalid instant");
 
-        LocalDate instantDate = LocalDate.parse(lastModifiedInstant.toString().substring(0, 10));
+        LocalDate instantDate = Instant.parse(lastModifiedInstant.toString())
+                .atZone(ZoneId.systemDefault()).toLocalDate();
         assertEquals(currentDate.getYear(), instantDate.getYear());
         assertEquals(currentDate.getMonth(), instantDate.getMonth());
         assertEquals(currentDate.getDayOfMonth(), instantDate.getDayOfMonth());
@@ -34,13 +37,14 @@ class LastModifiedInstantTest {
 
     @Test
     public void constructor_noArguments_returnsCurrentInstant() {
-        LocalDate currentDate = LocalDate.now();
         LastModifiedInstant lastModifiedInstant = new LastModifiedInstant();
         // Test to make sure the generated instant is within 1 second of now.
         Instant instantNowMinusOneSecond = Instant.now().minusSeconds(1);
         assertEquals(instantNowMinusOneSecond.compareTo(lastModifiedInstant.value), -1);
 
-        LocalDate instantDate = LocalDate.parse(lastModifiedInstant.toString().substring(0, 10));
+        LocalDate currentDate = LocalDate.now();
+        LocalDate instantDate = Instant.parse(lastModifiedInstant.toString())
+                .atZone(ZoneId.systemDefault()).toLocalDate();
         assertEquals(currentDate.getYear(), instantDate.getYear());
         assertEquals(currentDate.getMonth(), instantDate.getMonth());
         assertEquals(currentDate.getDayOfMonth(), instantDate.getDayOfMonth());
@@ -110,8 +114,8 @@ class LastModifiedInstantTest {
         LastModifiedInstant lastModifiedInstant1 = new LastModifiedInstant(VALID_INSTANT_1);
         LastModifiedInstant lastModifiedInstant2 = new LastModifiedInstant(VALID_INSTANT_2);
 
-        assertEquals(lastModifiedInstant1.compareTo(lastModifiedInstant2), -1);
-        assertEquals(lastModifiedInstant2.compareTo(lastModifiedInstant1), 1);
+        assertEquals(lastModifiedInstant1.compareTo(lastModifiedInstant2), 1);
+        assertEquals(lastModifiedInstant2.compareTo(lastModifiedInstant1), -1);
         assertEquals(lastModifiedInstant1.compareTo(lastModifiedInstant1), 0);
         assertEquals(lastModifiedInstant1.compareTo(new LastModifiedInstant(VALID_INSTANT_1)), 0);
     }

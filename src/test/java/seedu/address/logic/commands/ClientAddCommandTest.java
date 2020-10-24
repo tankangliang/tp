@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalClients.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -215,17 +216,22 @@ public class ClientAddCommandTest {
         }
 
         @Override
-        public ObservableList<Client> getFilteredClientList() {
+        public ObservableList<Client> getSortedFilteredClientList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Note> getFilteredClientNotesList() {
+        public ObservableList<Note> getSortedFilteredClientNotesList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredClientList(Predicate<Client> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateSortedFilteredClientList(Comparator<Client> comparator) {
             throw new AssertionError("This method should not be called.");
         }
 

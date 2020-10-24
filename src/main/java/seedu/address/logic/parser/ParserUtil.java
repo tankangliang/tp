@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -195,7 +196,7 @@ public class ParserUtil {
      */
     public static Set<SuggestionType> parseSuggestionTypes(Collection<String> suggestionTypes) throws ParseException {
         requireNonNull(suggestionTypes);
-        final Set<SuggestionType> suggestionSet = new HashSet<>();
+        final Set<SuggestionType> suggestionSet = new LinkedHashSet<>();
         for (String suggestionType : suggestionTypes) {
             suggestionSet.add(parseSuggestionType(suggestionType));
         }
@@ -208,6 +209,9 @@ public class ParserUtil {
     public static ContractExpiryDate parseContractExpiryDate(String dateString) throws ParseException {
         requireNonNull(dateString);
         String trimmedDateString = dateString.trim();
+        if (dateString.isEmpty()) {
+            return ContractExpiryDate.NULL_DATE;
+        }
         if (!ContractExpiryDate.isValidDate(trimmedDateString)) {
             throw new ParseException(ContractExpiryDate.MESSAGE_CONSTRAINTS);
         }

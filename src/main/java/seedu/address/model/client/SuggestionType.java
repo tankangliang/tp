@@ -3,6 +3,7 @@ package seedu.address.model.client;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 /**
@@ -30,14 +31,34 @@ public class SuggestionType {
         this.suggestionString = suggestionString;
     }
 
+    /**
+     * Returns this suggestion type's predicate.
+     */
     public Predicate<Client> getSuggestionPredicate() {
         switch (suggestionString) {
         case BY_AVAILABLE:
             return new SuggestAvailabilityPredicate();
         case BY_CONTRACT:
-            return client -> true;
+            return new SuggestContractPredicate();
         case BY_FREQUENCY:
             return client -> true;
+        default:
+            assert false; // code execution will never reach here
+            return null;
+        }
+    }
+
+    /**
+     * Returns this suggestion type's comparator.
+     */
+    public Comparator<Client> getSuggestionComparator() {
+        switch (suggestionString) {
+        case BY_AVAILABLE:
+            return (client1, client2) -> 0;
+        case BY_CONTRACT:
+            return Comparator.comparing(Client::getContractExpiryDate);
+        case BY_FREQUENCY:
+            return Comparator.comparing(Client::getLastModifiedInstant);
         default:
             assert false; // code execution will never reach here
             return null;

@@ -32,15 +32,10 @@ public class SuggestCommandParser implements Parser<SuggestCommand> {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SuggestCommand.MESSAGE_USAGE));
         }
 
-        Set<SuggestionType> suggestionTypeList =
+        Set<SuggestionType> suggestionTypeOrderedSet =
                 ParserUtil.parseSuggestionTypes(argMultimap.getAllValues(PREFIX_SUGGEST));
 
-        List<Predicate<Client>> suggestionTypePredicateList = suggestionTypeList
-                .stream()
-                .map(SuggestionType::getSuggestionPredicate)
-                .collect(Collectors.toList());
-
-        return new SuggestCommand(suggestionTypePredicateList);
+        return new SuggestCommand(suggestionTypeOrderedSet);
     }
 
 }

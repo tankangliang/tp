@@ -3,8 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUGGEST;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
@@ -25,13 +28,27 @@ public class SuggestCommand extends Command {
     public static final String MESSAGE_SUGGEST_SUCCESS = "Showing clients based on suggestion criteria";
 
     private final List<Predicate<Client>> suggestionTypePredicateList;
+    private final Comparator<Client> suggestionTypeCombinedComparator;
 
     /**
      * Initializes SuggestCommand with a SuggestionType
      */
-    public SuggestCommand(List<Predicate<Client>> suggestionTypePredicateList) {
-        requireNonNull(suggestionTypePredicateList);
-        this.suggestionTypePredicateList = suggestionTypePredicateList;
+    public SuggestCommand(Set<SuggestionType> suggestionTypeOrderedSet) {
+        requireNonNull(suggestionTypeOrderedSet);
+        this.suggestionTypePredicateList = suggestionTypeOrderedSet.stream()
+                .map(SuggestionType::getSuggestionPredicate).collect(Collectors.toList());
+
+        List<Comparator<Client>> suggestionTypeComparatorList = suggestionTypeOrderedSet.stream()
+                .map(SuggestionType::getSuggestionComparator).collect(Collectors.toList());
+        this.suggestionTypeCombinedComparator = (client1, client2) -> {
+            for (Comparator<Client> comparator: suggestionTypeComparatorList) {
+                int compareResult = comparator.compare(client1, client2);
+                if (compareResult != 0) {
+                    return compareResult;
+                }
+            }
+            return 0;
+        };
     }
 
     @Override
@@ -39,6 +56,7 @@ public class SuggestCommand extends Command {
         requireNonNull(model);
         model.updateFilteredClientList(client ->
                 suggestionTypePredicateList.stream().allMatch(pred -> pred.test(client)));
+        model.updateSortedFilteredClientList(suggestionTypeCombinedComparator);
         return new CommandResult(MESSAGE_SUGGEST_SUCCESS);
     }
 

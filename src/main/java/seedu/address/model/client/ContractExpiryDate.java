@@ -26,8 +26,22 @@ public class ContractExpiryDate implements Comparable<ContractExpiryDate> {
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("d-M-[uuuu][uu]")
             .withResolverStyle(ResolverStyle.STRICT);
     public static final String DEFAULT_DATE_FORMAT = "d-M-uuuu";
+    public static final String DISPLAY_DATE_FORMAT = "d MMM uuuu";
+    public static final ContractExpiryDate NULL_DATE = new ContractExpiryDate();
+    public final boolean isNullDate;
     public final String value;
+    public final String displayValue;
     private final LocalDate date;
+
+    /**
+     * Constructs a null date object.
+     */
+    private ContractExpiryDate() {
+        this.value = "";
+        this.displayValue = "";
+        this.date = null;
+        this.isNullDate = true;
+    }
 
     /**
      * Constructs a date object.
@@ -37,6 +51,8 @@ public class ContractExpiryDate implements Comparable<ContractExpiryDate> {
         checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         this.date = LocalDate.parse(date, DATE_FORMATTER);
         this.value = this.date.format(DateTimeFormatter.ofPattern(DEFAULT_DATE_FORMAT));
+        this.displayValue = this.date.format(DateTimeFormatter.ofPattern(DISPLAY_DATE_FORMAT));
+        this.isNullDate = false;
     }
 
     /**

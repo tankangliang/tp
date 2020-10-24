@@ -66,7 +66,7 @@ public class LogicManagerTest {
     public void getMethods_returnCorrectObjects() {
         assertEquals(logic.getAddressBook(), model.getAddressBook());
         assertEquals(logic.getAddressBookFilePath(), model.getAddressBookFilePath());
-        assertEquals(logic.getFilteredClientList(), model.getFilteredClientList());
+        assertEquals(logic.getFilteredClientList(), model.getSortedFilteredClientList());
         assertEquals(logic.getWidgetContent(), model.getWidgetContent());
         assertEquals(logic.getGuiSettings(), model.getGuiSettings());
     }
