@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.country.Country;
 import seedu.address.ui.WidgetViewOption;
 
 /**
@@ -23,6 +24,9 @@ public class CommandResult {
     /** Indicates what kind of display to show on the widget view box. */
     private final WidgetViewOption widgetViewOption;
 
+    /** The country to display. */
+    private final Country country;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -31,7 +35,8 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.widgetViewOption = WidgetViewOption.NONE;
+        this.widgetViewOption = WidgetViewOption.generateNullWidgetOption();
+        this.country = null;
     }
 
     /**
@@ -43,6 +48,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.widgetViewOption = widgetViewOption;
+        this.country = null;
     }
 
     /**
@@ -67,6 +73,18 @@ public class CommandResult {
 
     public WidgetViewOption getWidgetViewOption() {
         return widgetViewOption;
+    }
+
+    public boolean shouldDisplayClient() {
+        return widgetViewOption.isClient();
+    }
+
+    public boolean shouldDisplayCountryNote() {
+        return widgetViewOption.isCountryNote();
+    }
+
+    public Country getCountry() {
+        return widgetViewOption.getCountry();
     }
 
     @Override

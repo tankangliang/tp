@@ -159,6 +159,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         countryNotesManager.addCountryNote(countryNote);
     }
 
+    /**
+     * Deletes the given country note.
+     *
+     * @param countryNoteToDelete The country note to delete.
+     */
+    public void deleteCountryNote(CountryNote countryNoteToDelete) {
+        requireNonNull(countryNoteToDelete);
+        countryNotesManager.deleteCountryNote(countryNoteToDelete);
+    }
+
     //// util methods
 
     @Override
@@ -193,4 +203,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return clients.hashCode();
     }
+
+
 }

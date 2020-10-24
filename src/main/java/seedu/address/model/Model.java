@@ -111,6 +111,11 @@ public interface Model {
     void addCountryNote(CountryNote countryNote);
 
     /**
+     * Deletes the given country note in TBM.
+     */
+    void deleteCountryNote(CountryNote countryNoteToDelete);
+
+    /**
      * Returns true if {@code client} contains the {@code clientNote} specified.
      */
     boolean hasClientNote(Client client, Note clientNote);
@@ -174,4 +179,6 @@ public interface Model {
      * @param note    The note to associate the tag with.
      */
     void updateTagNoteMapWithNote(Set<Tag> newTags, Note note);
+
+
 }
