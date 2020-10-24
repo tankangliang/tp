@@ -48,11 +48,6 @@ test {
             events << TestLogEvent.STARTED
         }
     }
-
-    doFirst {
-        test.include 'seedu/address/**'
-        test.include 'seedu/address/ui/**'
-    }
 }
 
 task headless {
