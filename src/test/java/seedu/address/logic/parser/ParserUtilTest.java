@@ -336,6 +336,7 @@ public class ParserUtilTest {
     @Test
     public void parseContractExpiryDate_blankString_returnsNullDate() throws ParseException {
         assertEquals(ParserUtil.parseContractExpiryDate(""), ContractExpiryDate.NULL_DATE);
+        assertEquals(ParserUtil.parseContractExpiryDate("  "), ContractExpiryDate.NULL_DATE);
     }
 
     @Test

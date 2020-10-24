@@ -51,19 +51,28 @@ public class SuggestCommandTest {
         Client client1 = new ClientBuilder().withName("client1")
                 .withContractExpiryDate(ContractExpiryDate.NULL_DATE).build();
         Client client2 = new ClientBuilder().withName("client2")
-                .withContractExpiryDate("2-3-2020").build();
+                .withContractExpiryDate("2-3-2020").withLastModifiedInstant("2020-10-10T15:18:35.617617Z").build();
         Client client3 = new ClientBuilder().withName("client3")
-                .withContractExpiryDate("1-3-2020").build();
+                .withContractExpiryDate("1-3-2020").withLastModifiedInstant("2020-10-11T14:18:35.617617Z").build();
+        Client client4 = new ClientBuilder().withName("client4")
+                .withContractExpiryDate("10-3-2020").withLastModifiedInstant("2020-10-11T15:18:35.617617Z").build();
         newModel.addClient(client1);
         newModel.addClient(client2);
         newModel.addClient(client3);
-        assertEquals(newModel.getSortedFilteredClientList().size(), 3);
-        SuggestCommand suggestCommand = new SuggestCommand(
+        newModel.addClient(client4);
+        assertEquals(newModel.getSortedFilteredClientList().size(), 4);
+        SuggestCommand suggestCommand1 = new SuggestCommand(
                 Set.of(new SuggestionType(SuggestionType.BY_CONTRACT)));
         CommandResult expectedResult = new CommandResult(SuggestCommand.MESSAGE_SUGGEST_SUCCESS);
-        assertEquals(suggestCommand.execute(newModel), expectedResult);
-        assertEquals(newModel.getSortedFilteredClientList().size(), 2);
+        assertEquals(suggestCommand1.execute(newModel), expectedResult);
+        assertEquals(newModel.getSortedFilteredClientList().size(), 3);
         assertEquals(newModel.getSortedFilteredClientList().get(0), client3);
+
+        SuggestCommand suggestCommand2 = new SuggestCommand(Set.of(new SuggestionType(SuggestionType.BY_FREQUENCY),
+                new SuggestionType(SuggestionType.BY_CONTRACT)));
+        assertEquals(suggestCommand2.execute(newModel), expectedResult);
+        assertEquals(newModel.getSortedFilteredClientList().size(), 3);
+        assertEquals(newModel.getSortedFilteredClientList().get(0), client4);
     }
 
     @Test

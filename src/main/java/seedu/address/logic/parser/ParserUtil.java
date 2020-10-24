@@ -209,7 +209,7 @@ public class ParserUtil {
     public static ContractExpiryDate parseContractExpiryDate(String dateString) throws ParseException {
         requireNonNull(dateString);
         String trimmedDateString = dateString.trim();
-        if (dateString.isEmpty()) {
+        if (trimmedDateString.isEmpty()) {
             return ContractExpiryDate.NULL_DATE;
         }
         if (!ContractExpiryDate.isValidDate(trimmedDateString)) {
