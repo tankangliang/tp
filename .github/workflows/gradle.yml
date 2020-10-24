@@ -40,7 +40,6 @@ jobs:
         run: |
           sudo apt-get install xvfb
           export DISPLAY=:99.0
-          Xvfb :99
 
       - name: Set up headless for MacOS
         if: runner.os == 'macOS'
