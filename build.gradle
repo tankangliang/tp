@@ -67,6 +67,7 @@ task headless {
                 'monocle.platform': 'headless',
                 'prism.order': 'sw',
                 'prism.text': 't2k',
+                'prism.verbose': 'true'
             ]
         }
     }
