@@ -122,6 +122,7 @@ dependencies {
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
     testImplementation group: 'org.testfx', name: 'testfx-core', version: testFxVersion
+    testImplementation group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+26'
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
     testRuntimeOnly group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+26'
