@@ -18,17 +18,9 @@ import javafx.stage.Stage;
  */
 public class GuiRobot extends FxRobot {
 
-    private static final int PAUSE_FOR_HUMAN_DELAY_MILLISECONDS = 1000;
+    private static final int PAUSE_FOR_HUMAN_DELAY_MILLISECONDS = 500;
     private static final int DEFAULT_WAIT_FOR_EVENT_TIMEOUT_MILLISECONDS = 5000;
-
-    private final boolean isHeadlessMode;
-
-    /**
-     * Constructor for this GuiRobot.
-     */
-    public GuiRobot() {
-        isHeadlessMode = GraphicsEnvironment.isHeadless();
-    }
+    private static final boolean isHeadlessMode = GraphicsEnvironment.isHeadless();
 
     /**
      * Pauses execution for {@code PAUSE_FOR_HUMAN_DELAY_MILLISECONDS} milliseconds for a human to examine the

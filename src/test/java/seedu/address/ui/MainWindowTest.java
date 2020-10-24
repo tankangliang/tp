@@ -66,11 +66,11 @@ public class MainWindowTest extends GuiUnitTest {
         if (!guiRobot.isHeadlessMode()) {
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             assertEquals(USERGUIDE_URL, clipboard.getData(DataFlavor.stringFlavor));
-            guiRobot.pauseForHuman();
-            guiRobot.press(KeyCode.ESCAPE);
-            guiRobot.pauseForHuman();
-            assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
         }
+        guiRobot.pauseForHuman();
+        guiRobot.push(KeyCode.ESCAPE);
+        guiRobot.pauseForHuman();
+        assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
 
         // TODO: Command Execution test
     }

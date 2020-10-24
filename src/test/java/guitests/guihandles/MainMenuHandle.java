@@ -27,7 +27,7 @@ public class MainMenuHandle extends NodeHandle<Node> {
      * with the menu bar in {@code MainWindow}.
      */
     public void openHelpWindowUsingAccelerator() {
-        guiRobot.press(KeyCode.F1);
+        guiRobot.push(KeyCode.F1);
     }
 
     /**

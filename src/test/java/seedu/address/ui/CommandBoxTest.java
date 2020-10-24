@@ -58,13 +58,13 @@ public class CommandBoxTest extends GuiUnitTest {
     }
 
     @Test
-    public void commandBox_handleKeyPress() {
+    public void commandBox_handleKeyPush() {
         commandBoxHandle.run(COMMAND_THAT_FAILS);
         assertEquals(errorStyleOfCommandBox, commandBoxHandle.getStyleClass());
-        guiRobot.press(KeyCode.ESCAPE);
+        guiRobot.push(KeyCode.ESCAPE);
         assertEquals(errorStyleOfCommandBox, commandBoxHandle.getStyleClass());
 
-        guiRobot.press(KeyCode.A);
+        guiRobot.push(KeyCode.A);
         assertEquals(defaultStyleOfCommandBox, commandBoxHandle.getStyleClass());
     }
 

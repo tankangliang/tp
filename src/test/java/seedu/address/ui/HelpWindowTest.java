@@ -50,10 +50,9 @@ public class HelpWindowTest extends GuiUnitTest {
 
     @Test
     public void pressEscKey_helpWindowIsShowing_returnsFalse() throws Exception {
-        assumeFalse(guiRobot.isHeadlessMode());
         FxToolkit.showStage();
         guiRobot.pauseForHuman();
-        guiRobot.press(KeyCode.ESCAPE);
+        guiRobot.push(KeyCode.ESCAPE);
         assertFalse(helpWindow.isShowing());
     }
 
