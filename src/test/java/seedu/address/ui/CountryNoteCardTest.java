@@ -18,7 +18,7 @@ public class CountryNoteCardTest extends GuiUnitTest {
     private final Country country = new Country("SG");
 
     @Test
-    public void dsiplay() {
+    public void display() {
         CountryNote countryNote = new CountryNote(DUMMY_NOTE_CONTENT, country);
         CountryNoteCard countryNoteCard = new CountryNoteCard(1, countryNote);
         uiPartExtension.setUiPart(countryNoteCard);
