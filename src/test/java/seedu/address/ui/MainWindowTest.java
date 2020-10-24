@@ -67,7 +67,7 @@ public class MainWindowTest extends GuiUnitTest {
             assertEquals(USERGUIDE_URL, clipboard.getData(DataFlavor.stringFlavor));
         }
         guiRobot.pauseForHuman();
-        guiRobot.press(KeyCode.ESCAPE);
+        guiRobot.press(KeyCode.ESCAPE).sleep(100);
         assertFalse(HelpWindowHandle.isWindowPresent());
 
         // TODO: Command Execution test

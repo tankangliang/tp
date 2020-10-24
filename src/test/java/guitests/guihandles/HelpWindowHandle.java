@@ -54,7 +54,7 @@ public class HelpWindowHandle extends StageHandle {
      * Simulates the pressing of the escape key.
      */
     public void pressEscKey() {
-        guiRobot.press(KeyCode.ESCAPE);
+        guiRobot.press(KeyCode.ESCAPE).sleep(100);
     }
 
 }
