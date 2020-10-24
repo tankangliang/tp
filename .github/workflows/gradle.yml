@@ -40,7 +40,6 @@ jobs:
         run: |
           sudo apt-get install xvfb
           export DISPLAY=:99.0
-          sudo chmod +x /etc/init.d/xvfb
           sudo service xvfb start
 
       - name: Set up headless for MacOS
