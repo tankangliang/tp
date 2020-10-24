@@ -58,8 +58,8 @@ public class MainWindowTest extends GuiUnitTest {
         assertTrue(mainWindowHandle.isShowing());
 
         // checks the interaction of copy url and url is correct
-        guiRobot.clickOn("Help");
-        guiRobot.clickOn("F1");
+        guiRobot.clickOn("#help");
+        guiRobot.clickOn("#helpMenuItem");
         guiRobot.pauseForHuman();
         assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
         guiRobot.clickOn("#copyButton");

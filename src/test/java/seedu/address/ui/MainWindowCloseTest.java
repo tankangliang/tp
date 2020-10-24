@@ -79,8 +79,8 @@ public class MainWindowCloseTest extends GuiUnitTest {
          * Closes the {@code MainWindow} by clicking on the menu bar's exit button.
          */
         private void clickOnMenuExitButton() {
-            guiRobot.clickOn("File");
-            guiRobot.clickOn("Exit");
+            guiRobot.clickOn("#file");
+            guiRobot.clickOn("#exit");
         }
 
         /**
@@ -95,8 +95,8 @@ public class MainWindowCloseTest extends GuiUnitTest {
          * Opens the {@code HelpWindow} by clicking on the menu bar's help button.
          */
         private void clickOnMenuHelpButton() {
-            guiRobot.clickOn("Help");
-            guiRobot.clickOn("F1");
+            guiRobot.clickOn("#help");
+            guiRobot.clickOn("#helpMenuItem");
         }
     }
 }
