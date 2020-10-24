@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.testutil.ClientBuilder;
 
 public class SuggestContractPredicateTest {
@@ -14,7 +15,7 @@ public class SuggestContractPredicateTest {
 
     @Test
     public void test_clientWithNullContractExpiryDate_returnsFalse() {
-        Client client = new ClientBuilder().withContractExpiryDate("").build();
+        Client client = new ClientBuilder().withContractExpiryDate(ContractExpiryDate.NULL_DATE).build();
         assertFalse(predicate.test(client));
     }
 
