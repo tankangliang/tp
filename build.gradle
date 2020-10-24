@@ -41,34 +41,31 @@ test {
 
 test {
     systemProperty 'testfx.setup.timeout', '60000'
+
     testLogging {
         events TestLogEvent.FAILED, TestLogEvent.SKIPPED
         if (System.env.'CI') {
             events << TestLogEvent.STARTED
         }
     }
+}
 
-    doFirst {
-        boolean runHeadless = gradle.taskGraph.hasTask(headlessTest)
-
-        if (System.env.'CI') {
-            println "Skipping GUI tests"
-            test.exclude 'seedu/address/ui'
-        } else {
-            if (runHeadless) {
-                println "Running gui test in headless environment"
-            } else {
-                println "Running gui test without headless environment"
-            }
-            jvmArgs "-Dheadless=${project.hasProperty('headless') ? project.headless : runHeadless}"
+task headless {
+    doLast {
+        println 'Setting headless mode properties.'
+        test {
+            systemProperties = [
+                    'testfx.robot': 'glass',
+                    'testfx.headless': 'true',
+                    'prism.order': 'sw',
+                    'prism.text': 't2k',
+            ]
         }
-
     }
 }
 
-task headlessTest
-
-headlessTest.dependsOn test
+// Makes sure that headless properties are set before running tests
+test.mustRunAfter headless
 
 task coverage(type: JacocoReport) {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
@@ -86,6 +83,7 @@ task coverage(type: JacocoReport) {
 }
 
 dependencies {
+    String testFxVersion = '4.0.16-alpha'
     String jUnitVersion = '5.4.0'
     String javaFxVersion = '11'
 
@@ -108,16 +106,14 @@ dependencies {
     implementation 'com.jfoenix:jfoenix:9.0.10'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
-    testImplementation "org.testfx:testfx-junit5:4.0.16-alpha"
+    testImplementation group: 'org.testfx', name: 'testfx-core', version: testFxVersion
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
     testRuntimeOnly group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+26'
-
 }
 
 shadowJar {
     archiveFileName = 'TBM.jar'
-
 }
 
-defaultTasks 'clean', 'test', 'headlessTest'
+defaultTasks 'clean', 'headless', 'test'
