@@ -188,6 +188,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return FXCollections.observableArrayList(countryNotesManager.asUnmodifiableObservableList());
     }
 
+    /**
+     * Gets the list of country notes in TBM.
+     *
+     * @return The list of country notes in TBM.
+     */
     public ObservableList<CountryNote> getCountryNoteList() {
         return countryNotesManager.asUnmodifiableObservableList();
     }
@@ -203,6 +208,4 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return clients.hashCode();
     }
-
-
 }

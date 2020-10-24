@@ -33,6 +33,11 @@ public class CountryNoteListPanel extends UiPart<Region> {
         countryNoteListView.setCellFactory(listView -> new CountryListViewCell());
     }
 
+    /**
+     * Sets the header of the CountryNoteListPanel.
+     *
+     * @param country The country to be displayed.
+     */
     public void setHeader(Country country) {
         if (country == null) {
             header.setText("All Country Notes");

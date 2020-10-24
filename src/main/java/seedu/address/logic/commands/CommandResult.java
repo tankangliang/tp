@@ -24,9 +24,6 @@ public class CommandResult {
     /** Indicates what kind of display to show on the widget view box. */
     private final WidgetViewOption widgetViewOption;
 
-    /** The country to display. */
-    private final Country country;
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -36,7 +33,6 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.widgetViewOption = WidgetViewOption.generateNullWidgetOption();
-        this.country = null;
     }
 
     /**
@@ -48,7 +44,6 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.widgetViewOption = widgetViewOption;
-        this.country = null;
     }
 
     /**
@@ -71,18 +66,38 @@ public class CommandResult {
         return exit;
     }
 
-    public WidgetViewOption getWidgetViewOption() {
-        return widgetViewOption;
+    /**
+     * Returns the string representation of the widget view.
+     *
+     * @return The string representation of the widget view.
+     */
+    public String getWidgetViewOptionAsString() {
+        return widgetViewOption.toString();
     }
 
+    /**
+     * Returns true if the UI should display the client view.
+     *
+     * @return True if the UI should display the client view.
+     */
     public boolean shouldDisplayClient() {
         return widgetViewOption.isClient();
     }
 
+    /**
+     * Returns true if the UI should display the country notes view.
+     *
+     * @return True if the UI should display the country notes view.
+     */
     public boolean shouldDisplayCountryNote() {
         return widgetViewOption.isCountryNote();
     }
 
+    /**
+     * Gets the country that is associated with the widget view.
+     *
+     * @return The country that is associated with the widget view.
+     */
     public Country getCountry() {
         return widgetViewOption.getCountry();
     }

@@ -19,8 +19,6 @@ public class CountryNoteViewCommandParser implements Parser<CountryNoteViewComma
 
         if (argMultimap.getValue(PREFIX_COUNTRY).isEmpty()) {
             return new CountryNoteViewCommand();
-            //throw new ParseException(
-            //    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CountryNoteViewCommand.MESSAGE_USAGE));
         }
         Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).get());
 

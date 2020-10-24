@@ -186,7 +186,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            logger.info("Widget View Option: " + commandResult.getWidgetViewOption());
+            logger.info("Widget View Option: " + commandResult.getWidgetViewOptionAsString());
 
             if (commandResult.shouldDisplayClient()) {
                 logger.info("Toggling client view");
@@ -196,7 +196,7 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandResult.shouldDisplayCountryNote()) {
                 logger.info("Toggling country notes view");
                 widgetPlaceholder.getChildren().clear();
-                countryNoteListPanel.setHeader(commandResult.getWidgetViewOption().getCountry());
+                countryNoteListPanel.setHeader(commandResult.getCountry());
                 widgetPlaceholder.getChildren().add(countryNoteListPanel.getRoot());
             }
 

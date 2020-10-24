@@ -6,6 +6,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CountryNoteDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * A class that parses the user input and returns a CountryNoteDeleteCommand.
+ */
 public class CountryNoteDeleteCommandParser implements Parser<CountryNoteDeleteCommand> {
 
     @Override

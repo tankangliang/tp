@@ -122,6 +122,7 @@ public class AddressBookParser {
 
         case CountryNoteViewCommand.COMMAND_WORD:
             return new CountryNoteViewCommandParser().parse(restOfCommand);
+
         case CountryNoteDeleteCommand.COMMAND_WORD:
             return new CountryNoteDeleteCommandParser().parse(restOfCommand);
 

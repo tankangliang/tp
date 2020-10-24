@@ -61,11 +61,8 @@ public class CountryNotesManager {
             assert false; // should always be a valid country
         }
         requireNonNull(countryNoteToDelete);
+        assert hasCountryNote(countryNoteToDelete);
 
-        //TODO: throw exception if country note not exist
-        if (hasCountryNote(countryNoteToDelete)) {
-            internalCountryNoteList.remove(countryNoteToDelete);
-        }
-
+        internalCountryNoteList.remove(countryNoteToDelete);
     }
 }

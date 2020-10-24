@@ -179,6 +179,4 @@ public interface Model {
      * @param note    The note to associate the tag with.
      */
     void updateTagNoteMapWithNote(Set<Tag> newTags, Note note);
-
-
 }

@@ -15,7 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_TIMEZONE = new Prefix("tz/");
     public static final Prefix PREFIX_CONTRACT_EXPIRY_DATE = new Prefix("ce/");
     public static final Prefix PREFIX_NOTE = new Prefix("nt/");
-    public static final Prefix PREFIX_INDEX = new Prefix("idx/");
     public static final Prefix PREFIX_SUGGEST = new Prefix("by/");
 
 }
