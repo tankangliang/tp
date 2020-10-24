@@ -39,7 +39,6 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get install xvfb
-          export DISPLAY=:99.0
 
       - name: Set up headless for MacOS
         if: runner.os == 'macOS'
@@ -48,9 +47,7 @@ jobs:
           brew cask reinstall caskroom/versions/java11
 
       - name: Build and check with Gradle
-        env:
-          DISPLAY: ":99.0"
-        run: xvfb-run -a ./gradlew headless check coverage
+        run: ./gradlew headless check coverage
 
       - uses: codecov/codecov-action@v1
         if: runner.os == 'Linux'

@@ -21,17 +21,13 @@ public class GuiRobot extends FxRobot {
     private static final int PAUSE_FOR_HUMAN_DELAY_MILLISECONDS = 1000;
     private static final int DEFAULT_WAIT_FOR_EVENT_TIMEOUT_MILLISECONDS = 5000;
 
-    private static final String PROPERTY_HEADLESS = "headless";
-
     private final boolean isHeadlessMode;
 
     /**
      * Constructor for this GuiRobot.
      */
     public GuiRobot() {
-        String headlessPropertyValue = System.getProperty(PROPERTY_HEADLESS);
-        isHeadlessMode = (headlessPropertyValue != null && headlessPropertyValue.equals("true"))
-                || GraphicsEnvironment.isHeadless();
+        isHeadlessMode = GraphicsEnvironment.isHeadless();
     }
 
     /**
