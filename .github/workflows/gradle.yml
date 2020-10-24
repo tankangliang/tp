@@ -40,6 +40,8 @@ jobs:
         run: |
           sudo apt-get install xvfb
           export DISPLAY=:99.0
+          sudo chmod +x /etc/init.d/xvfb
+          sudo service xvfb start
 
       - name: Set up headless for MacOS
         if: runner.os == 'macOS'
@@ -51,7 +53,6 @@ jobs:
         env:
           DISPLAY: ":99.0"
         run: |
-          /opt/X11/bin/Xvfb :99 -ac
           ./gradlew headless check coverage
 
       - uses: codecov/codecov-action@v1
