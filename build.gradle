@@ -8,15 +8,6 @@ plugins {
     id 'jacoco'
 }
 
-//if (System.getProperty("headless")) {
-//    apply plugin: 'org.openjfx.javafxplugin' version '0.0.8'
-//
-//    javafx {
-//        version = '11'
-//        modules = [ 'javafx.base', 'javafx.graphics', 'javafx.controls', 'javafx.fxml' ]
-//    }
-//}
-
 allprojects {
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {
