@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import guitests.guihandles.ClientCardHandle;
 import guitests.guihandles.ClientListPanelHandle;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
@@ -21,7 +20,6 @@ public class ClientListPanelTest extends GuiUnitTest {
 
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
-    private final SimpleObjectProperty<Client> selectedClient = new SimpleObjectProperty<>();
     private ClientListPanelHandle clientListPanelHandle;
 
     @Test

@@ -18,7 +18,7 @@ public class ClientCardTest extends GuiUnitTest {
     @Test
     public void display() {
         // no tags
-        Client clientWithNoTags = new ClientBuilder().withTags(new String[0]).build();
+        Client clientWithNoTags = new ClientBuilder().withTags().build();
         ClientCard clientCard = new ClientCard(clientWithNoTags, 1);
         uiPartExtension.setUiPart(clientCard);
         assertCardDisplay(clientCard, clientWithNoTags, 1);
@@ -31,7 +31,7 @@ public class ClientCardTest extends GuiUnitTest {
     }
 
     @Test
-    public void contructor_badClient_throwsException() {
+    public void constructor_badClient_throwsException() {
         // null client
         assertThrows(NullPointerException.class, () -> new ClientCard(null, 0),
                 "Card is being created with a null client");
