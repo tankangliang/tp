@@ -148,6 +148,10 @@ public class ClientBuilder {
         return this;
     }
 
+    /**
+     * Builds a client with the specified fields in {@code ClientBuilder}.
+     * @return Client with fields in {@code ClientBuilder}.
+     */
     public Client build() {
         return new Client(name, phone, email, address, country, timezone, contractExpiryDate,
                 lastModifiedInstant, tags);

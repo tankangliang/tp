@@ -98,7 +98,8 @@ class LastModifiedInstantTest {
         LastModifiedInstant lastModifiedInstant1 = new LastModifiedInstant(VALID_INSTANT_1);
         LastModifiedInstant lastModifiedInstant2 = new LastModifiedInstant(VALID_INSTANT_2);
         assertEquals(lastModifiedInstant1.hashCode(), lastModifiedInstant1.hashCode()); // same object
-        assertEquals(lastModifiedInstant1.hashCode(), new LastModifiedInstant(VALID_INSTANT_1).hashCode()); // same instant
+        assertEquals(lastModifiedInstant1.hashCode(),
+                new LastModifiedInstant(VALID_INSTANT_1).hashCode()); // same instant
         assertNotEquals(lastModifiedInstant1.hashCode(), lastModifiedInstant2.hashCode()); // different instant
     }
 
