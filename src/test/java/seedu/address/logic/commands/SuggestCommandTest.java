@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -61,15 +62,19 @@ public class SuggestCommandTest {
         newModel.addClient(client3);
         newModel.addClient(client4);
         assertEquals(newModel.getSortedFilteredClientList().size(), 4);
-        SuggestCommand suggestCommand1 = new SuggestCommand(
-                Set.of(new SuggestionType(SuggestionType.BY_CONTRACT)));
+
+        LinkedHashSet<SuggestionType> suggestionTypes = new LinkedHashSet<>();
+        suggestionTypes.add(new SuggestionType(SuggestionType.BY_CONTRACT));
+        SuggestCommand suggestCommand1 = new SuggestCommand(suggestionTypes);
         CommandResult expectedResult = new CommandResult(SuggestCommand.MESSAGE_SUGGEST_SUCCESS);
         assertEquals(suggestCommand1.execute(newModel), expectedResult);
         assertEquals(newModel.getSortedFilteredClientList().size(), 3);
         assertEquals(newModel.getSortedFilteredClientList().get(0), client3);
 
-        SuggestCommand suggestCommand2 = new SuggestCommand(Set.of(new SuggestionType(SuggestionType.BY_FREQUENCY),
-                new SuggestionType(SuggestionType.BY_CONTRACT)));
+        suggestionTypes = new LinkedHashSet<>();
+        suggestionTypes.add(new SuggestionType(SuggestionType.BY_FREQUENCY));
+        suggestionTypes.add(new SuggestionType(SuggestionType.BY_CONTRACT));
+        SuggestCommand suggestCommand2 = new SuggestCommand(suggestionTypes);
         assertEquals(suggestCommand2.execute(newModel), expectedResult);
         assertEquals(newModel.getSortedFilteredClientList().size(), 3);
         assertEquals(newModel.getSortedFilteredClientList().get(0), client4);
