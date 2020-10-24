@@ -52,9 +52,9 @@ public class SuggestCommandTest {
         Client client1 = new ClientBuilder().withName("client1")
                 .withContractExpiryDate(ContractExpiryDate.NULL_DATE).build();
         Client client2 = new ClientBuilder().withName("client2")
-                .withContractExpiryDate("2-3-2020").withLastModifiedInstant("2020-10-10T15:18:35.617617Z").build();
+                .withContractExpiryDate("2-3-2020").withLastModifiedInstant("2020-10-11T15:18:35.617617Z").build();
         Client client3 = new ClientBuilder().withName("client3")
-                .withContractExpiryDate("1-3-2020").withLastModifiedInstant("2020-10-11T14:18:35.617617Z").build();
+                .withContractExpiryDate("1-3-2020").withLastModifiedInstant("2020-10-10T16:18:35.617617Z").build();
         Client client4 = new ClientBuilder().withName("client4")
                 .withContractExpiryDate("10-3-2020").withLastModifiedInstant("2020-10-11T15:18:35.617617Z").build();
         newModel.addClient(client1);
@@ -77,7 +77,7 @@ public class SuggestCommandTest {
         SuggestCommand suggestCommand2 = new SuggestCommand(suggestionTypes);
         assertEquals(suggestCommand2.execute(newModel), expectedResult);
         assertEquals(newModel.getSortedFilteredClientList().size(), 3);
-        assertEquals(newModel.getSortedFilteredClientList().get(0), client4);
+        assertEquals(newModel.getSortedFilteredClientList().get(0), client2);
     }
 
     @Test
