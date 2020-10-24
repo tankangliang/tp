@@ -48,14 +48,14 @@ public class WidgetViewBoxTest extends GuiUnitTest {
     @Test
     public void displayDefault() {
         /*
-        * Issue was raised by @rtshkmr where his JVM has correct timezone and time but wrong country.
-        * Locale.getDefault().getDisplayCountry() returns United States for him.
+        * A bug raised here https://bugs.java.com/bugdatabase/view_bug.do?bug_id=7082429.
         */
         assumeFalse(guiRobot.isHeadlessMode(), "Test skipped in headless mode.");
         WidgetViewBox widgetViewBox = new WidgetViewBox();
 
         uiPartExtension.setUiPart(widgetViewBox);
-        guiRobot.pauseForHuman();
+
+        // check if the country is correct
         guiRobot.pauseForHuman();
     }
 

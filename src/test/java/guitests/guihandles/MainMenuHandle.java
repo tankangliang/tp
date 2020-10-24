@@ -16,21 +16,6 @@ public class MainMenuHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Opens the {@code HelpWindow} using the menu bar in {@code MainWindow}.
-     */
-    public void openHelpWindowUsingMenu() {
-        clickOnMenuItemsSequentially("#help", "#helpMenuItem");
-    }
-
-    /**
-     * Opens the {@code HelpWindow} by pressing the shortcut key associated
-     * with the menu bar in {@code MainWindow}.
-     */
-    public void openHelpWindowUsingAccelerator() {
-        guiRobot.push(KeyCode.F1);
-    }
-
-    /**
      * Clicks on {@code menuItems} in order.
      */
     private void clickOnMenuItemsSequentially(String... menuItems) {

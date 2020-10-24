@@ -33,18 +33,4 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
         return saveLocationNode.getText();
     }
 
-    /**
-     * Remembers the content of the 'save location' portion of the status bar.
-     */
-    public void rememberSaveLocation() {
-        lastRememberedSaveLocation = getSaveLocation();
-    }
-
-    /**
-     * Returns true if the current content of the 'save location' is different from the value remembered by the most
-     * recent {@code rememberSaveLocation()} call.
-     */
-    public boolean isSaveLocationChanged() {
-        return !lastRememberedSaveLocation.equals(getSaveLocation());
-    }
 }

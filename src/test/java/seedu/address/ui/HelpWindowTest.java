@@ -73,9 +73,7 @@ public class HelpWindowTest extends GuiUnitTest {
     @Test
     public void copyUrlByDirectAccess_userGuideUrl_copiesCorrectly() throws Exception {
         assumeFalse(guiRobot.isHeadlessMode());
-        // This test is to increase coverage. Somehow IDEA does not
-        // pickup the copyURL method from the previous test.
-        // Two tests are needed in fact.
+
         FxToolkit.showStage();
 
         helpWindowHandle.accessCopyUrlButton();
