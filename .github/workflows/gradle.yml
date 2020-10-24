@@ -35,15 +35,12 @@ jobs:
           java-version: '11'
           java-package: jdk+fx
 
-      - name: Set up xvfb
-        if: runner.os == 'Linux'
-        run: sudo apt-get install xvfb
-
-      - name: Set up headless for Linux
+      - name: Set up xvfb for Linux
         if: runner.os == 'Linux'
         run: |
+          sudo apt-get install xvfb
           export DISPLAY=:99.0
-          sh -e /etc/init.d/xvfb start
+          Xvfb -ac :99 -screen 0 1280x1024x16 > /dev/null 2>&1 &
 
       - name: Set up headless for MacOS
         if: runner.os == 'macOS'
