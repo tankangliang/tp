@@ -2,13 +2,13 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import guitests.guihandles.WidgetViewBoxHandle;
 import seedu.address.model.widget.WidgetObject;
+
 /**
  * GUI unit test for WidgetViewBox. Test done to ensure the integrity of content displayed does not regress in future
  * refactoring.
