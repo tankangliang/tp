@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -86,11 +86,7 @@ public class WidgetViewBoxTest extends GuiUnitTest {
         WidgetViewBoxHandle widgetViewBoxHandle = new WidgetViewBoxHandle(widgetViewBox.getRoot());
 
         // Testing using the equals method of handler.
-        if (!widgetViewBoxHandle.equals(expectedObject)) {
-            fail();
-        } else {
-            assertEquals(1, 1);
-        }
+        assertTrue(widgetViewBoxHandle.equals(expectedObject));
     }
 
 }
