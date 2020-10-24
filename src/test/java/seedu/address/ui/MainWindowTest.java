@@ -54,10 +54,8 @@ public class MainWindowTest extends GuiUnitTest {
 
     @Test
     public void main() throws Exception {
-
         guiRobot.pauseForHuman();
         assertTrue(mainWindowHandle.isShowing());
-
 
         // checks the interaction of copy url and url is correct
         guiRobot.clickOn("Help");
@@ -70,12 +68,8 @@ public class MainWindowTest extends GuiUnitTest {
         }
         guiRobot.pauseForHuman();
         guiRobot.press(KeyCode.ESCAPE);
-        // TODO: Some headless GUI bug
-        if (!guiRobot.isHeadlessMode()) {
-            assertFalse(HelpWindowHandle.isWindowPresent());
-        }
+        assertFalse(HelpWindowHandle.isWindowPresent());
 
         // TODO: Command Execution test
-
     }
 }

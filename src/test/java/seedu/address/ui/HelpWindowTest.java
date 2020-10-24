@@ -49,14 +49,11 @@ public class HelpWindowTest extends GuiUnitTest {
 
     @Test
     public void pressEscKey_helpWindowIsShowing_returnsFalse() throws Exception {
-        // TODO: Headless GUI bug
-        if (!guiRobot.isHeadlessMode()) {
-            FxToolkit.showStage();
-            guiRobot.pauseForHuman();
+        FxToolkit.showStage();
+        guiRobot.pauseForHuman();
 
-            helpWindowHandle.pressEscKey();
-            assertFalse(helpWindow.isShowing());
-        }
+        helpWindowHandle.pressEscKey();
+        assertFalse(helpWindow.isShowing());
     }
 
     @Test
