@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Objects;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -47,5 +48,28 @@ public class CountryNoteDeleteCommand extends Command {
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), countryNoteToDelete), false, false,
                 WidgetViewOption.generateNullWidgetOption());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CountryNoteDeleteCommand)) {
+            return false;
+        }
+
+        // state check
+        CountryNoteDeleteCommand c = (CountryNoteDeleteCommand) other;
+
+        return targetIndex.equals(c.targetIndex);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(targetIndex);
     }
 }
