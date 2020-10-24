@@ -50,16 +50,20 @@ public class SuggestCommandTest {
         Model newModel = new ModelManager();
         Client client1 = new ClientBuilder().withName("client1")
                 .withContractExpiryDate(ContractExpiryDate.NULL_DATE).build();
-        Client client2 = new ClientBuilder().withName("client2").build();
+        Client client2 = new ClientBuilder().withName("client2")
+                .withContractExpiryDate("2-3-2020").build();
+        Client client3 = new ClientBuilder().withName("client3")
+                .withContractExpiryDate("1-3-2020").build();
         newModel.addClient(client1);
         newModel.addClient(client2);
-        assertEquals(newModel.getSortedFilteredClientList().size(), 2);
+        newModel.addClient(client3);
+        assertEquals(newModel.getSortedFilteredClientList().size(), 3);
         SuggestCommand suggestCommand = new SuggestCommand(
                 Set.of(new SuggestionType(SuggestionType.BY_CONTRACT)));
         CommandResult expectedResult = new CommandResult(SuggestCommand.MESSAGE_SUGGEST_SUCCESS);
         assertEquals(suggestCommand.execute(newModel), expectedResult);
-        assertEquals(newModel.getSortedFilteredClientList().size(), 1);
-        assertEquals(newModel.getSortedFilteredClientList().get(0), client2);
+        assertEquals(newModel.getSortedFilteredClientList().size(), 2);
+        assertEquals(newModel.getSortedFilteredClientList().get(0), client3);
     }
 
     @Test
