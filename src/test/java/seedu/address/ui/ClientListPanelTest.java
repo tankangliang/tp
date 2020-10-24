@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.TypicalClients.getTypicalClients;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysClient;
 
-import java.util.Collections;
-
 import org.junit.jupiter.api.Test;
 
 import guitests.guihandles.ClientCardHandle;
@@ -15,14 +13,8 @@ import guitests.guihandles.ClientListPanelHandle;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
-import seedu.address.model.client.ContractExpiryDate;
-import seedu.address.model.client.Email;
-import seedu.address.model.client.Name;
-import seedu.address.model.client.Phone;
-import seedu.address.model.client.Timezone;
-import seedu.address.model.country.Country;
+import seedu.address.testutil.ClientBuilder;
 
 public class ClientListPanelTest extends GuiUnitTest {
     private static final ObservableList<Client> TYPICAL_CLIENTS =
@@ -73,15 +65,7 @@ public class ClientListPanelTest extends GuiUnitTest {
     private ObservableList<Client> createBackingList(int clientCount) {
         ObservableList<Client> backingList = FXCollections.observableArrayList();
         for (int i = 0; i < clientCount; i++) {
-            Name name = new Name(i + "Kim Lim");
-            Phone phone = new Phone("94002233");
-            Email email = new Email("kimlim@gmail.com");
-            Address address = new Address("Serangoon");
-            Country country = new Country("SG");
-            Timezone timezone = new Timezone("GMT+8");
-            ContractExpiryDate contractExpiryDate = new ContractExpiryDate("20-11-2022");
-            Client client = new Client(name, phone, email, address, country, timezone,
-                    contractExpiryDate, Collections.emptySet());
+            Client client = new ClientBuilder().withName(i + "Kim Lim").build();
             backingList.add(client);
         }
         return backingList;
