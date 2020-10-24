@@ -3,7 +3,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane styleClass="placeHolder" xmlns="http://javafx.com/javafx/8"
+<StackPane styleClass="placeHolder result-display" xmlns="http://javafx.com/javafx/8"
     xmlns:fx="http://javafx.com/fxml/1">
-  <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display"/>
+  <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display" text="Waiting for command..."/>
 </StackPane>

@@ -2,18 +2,18 @@
 /*MAKESHIFT DARKTHEME*/
 
 .root {
-    -MAINGREY: #1C1C1C; /*DARK GREY*/
-    -LIGHTGREY: #8C8C8C; /*LIGHT GREY*/
+    -MAINGREY: #383838; /*DARK GREY*/
+    -LIGHTGREY: rgba(255,255,255,0.65); /*LIGHT GREY*/
     -ACCENT: #FFBD59; /*BEIGE CREAM*/
     -TERTIARY: #010012; /*DARK NAVY*/
 }
 
 .root * {
-    -fx-font-family: "Arial";
+    -fx-font-family: 'Arial';
 }
 
 .background {
-    -fx-background-color: derive(-MAINGREY, 20%);
+    -fx-background-color: -MAINGREY;
     background-color: -MAINGREY; /* Used in the default.html file */
 }
 
@@ -51,7 +51,7 @@
 
 .table-view {
     -fx-base: #1d1d1d;
-    -fx-control-inner-background: #1d1d1d;
+    -fx-control-inner-background: -MAINGREY;
     -fx-background-color: #1d1d1d;
     -fx-table-cell-border-color: transparent;
     -fx-table-header-border-color: transparent;
@@ -86,20 +86,20 @@
 }
 
 .split-pane:horizontal .split-pane-divider {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -MAINGREY;
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -MAINGREY;
 }
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(-LIGHTGREY, 20%);
+    -fx-background-color: -LIGHTGREY;
 }
 
 .list-view.scrollbar:vertical {
@@ -110,7 +110,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 10 10 10 10;
-    -fx-background-color: derive(-LIGHTGREY, 20%);
+    -fx-background-color: -LIGHTGREY;
 }
 
 .list-cell:filled:even {
@@ -159,28 +159,32 @@
     -fx-text-fill: #010504;
 }
 
+.bold {
+    -fx-font-weight: 700;
+}
+
 .cell_small_label {
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: #ffffff;
 }
 
 .stack-pane {
-     -fx-background-color: derive(-MAINGREY, 20%);
+     -fx-background-color: -MAINGREY;
 }
 
 .widget-pane {
-     -fx-background-color: derive(-LIGHTGREY, 40%);
+     -fx-background-color: -LIGHTGREY;
      -fx-background-radius: 5, 5;
      -fx-padding: 15 20 20 15;
 }
 
 .notes .content{
-    -fx-background-color: derive(-LIGHTGREY, 40%);
+    -fx-background-color: -LIGHTGREY;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(-MAINGREY, 20%);
-     -fx-border-color: derive(-MAINGREY, 20%);
+     -fx-background-color: -MAINGREY;
+     -fx-border-color: -MAINGREY;
      -fx-border-top-width: 1px;
      -fx-padding: 10;
 }
@@ -190,11 +194,37 @@
 }
 
 .result-display {
-    -fx-background-color: derive(-MAINGREY, 20%);
+    -fx-background-color: rgb(85,85,85);
     -fx-font-size: 12pt;
-    -fx-text-fill: derive(-MAINGREY, 20%);
+    -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-alignment: center-left;
+    -fx-padding: 15 0 0 0;
 
+}
+
+#resultDisplay .content {
+    -fx-background-color: rgb(85,85,85);
+    -fx-border-radius: 30;
+    -fx-background-radius: 30;
+    -fx-text-fill: white;
+}
+
+#resultDisplay .scroll-pane {
+    -fx-hbar-policy: NEVER;
+    -fx-vbar-policy: NEVER;
+}
+
+.result-display.scroll-pane {
+    -fx-background-color: transparent;
+}
+.result-display .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+.result-display .scroll-pane .content{
+    -fx-background-color: transparent;
 }
 
 .status-bar .label {
@@ -350,7 +380,7 @@
 }
 
 #commandTextField {
-    -fx-background-color: #e3e3e3;
+    -fx-background-color: #EBEBEB;
     -fx-background-radius: 30, 30;
     -fx-background-insets: 0;
     -fx-border-color: #e3e3e3;
@@ -358,29 +388,37 @@
     -fx-border-width: 0;
     -fx-border-radius: 30, 30;
     -fx-font-size: 13pt;
-    -fx-text-fill: #6e6e6e;
+    -fx-text-fill: rgba(0,0,0,0.5);
     -fx-font-weight: bold;
+}
+
+#clientList .content {
+    -fx-background-color: -MAINGREY;
+}
+
+#clientList .list-cell:even {
+    -fx-background-color: transparent;
+}
+
+#clientList .list-cell:odd {
+    -fx-background-color: transparent;
+}
+
+#clientListPanelPlaceholder .content {
+    -fx-background-color: -MAINGREY;
 }
 
 #clientListView {
     -fx-background-radius: 5, 5;
+    -fx-background-color: -LIGHTGREY;
 }
 
 #clientListView .scroll-bar .thumb {
-    -fx-background-color: derive(-MAINGREY, 40%);
+    -fx-background-color: -MAINGREY;
 }
 
 #filterField, #clientListPanel, #clientWebpage {
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
-}
-
-#resultDisplay .content {
-    -fx-background-color: derive(-LIGHTGREY, 20%);
-}
-
-#resultDisplay .scroll-pane {
-    -fx-hbar-policy: NEVER;
-    -fx-vbar-policy: NEVER;
 }
 
 #tags {
@@ -415,9 +453,9 @@
 
 #viewbox {
     -fx-border-radius: 30, 30;
-    -fx-background-color: derive(-LIGHTGREY, 30%);
+    -fx-background-color: -LIGHTGREY;
 }
 
 #countryNotesScrollPane {
-    -fx-background: derive(-LIGHTGREY, 20%);
+    -fx-background: -LIGHTGREY;
 }
