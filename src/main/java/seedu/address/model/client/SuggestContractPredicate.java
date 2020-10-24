@@ -3,7 +3,7 @@ package seedu.address.model.client;
 import java.util.function.Predicate;
 
 /**
- * Predicate to check for client availability in their timezone
+ * Predicate to check if client contains a contract expiry date.
  */
 public class SuggestContractPredicate implements Predicate<Client> {
     private static final int SUGGEST_CONTRACT_PREDICATE_HASHCODE = 2;

@@ -37,13 +37,28 @@ public class SuggestCommand extends Command {
     public SuggestCommand(Set<SuggestionType> suggestionTypeOrderedSet) {
         requireNonNull(suggestionTypeOrderedSet);
         this.suggestionTypeOrderedSet = suggestionTypeOrderedSet;
-        this.suggestionTypePredicate = suggestionTypeOrderedSet.stream()
+        this.suggestionTypePredicate = getCombinedPredicate(suggestionTypeOrderedSet);
+        this.suggestionTypeCombinedComparator = getCombinedComparator(suggestionTypeOrderedSet);
+    }
+
+    /**
+     * Given an ordered set of suggestion types, returns a combined predicate that returns true only if the client
+     * passed in passes all the suggestion types' predicates.
+     */
+    private static Predicate<Client> getCombinedPredicate(Set<SuggestionType> suggestionTypeOrderedSet) {
+        return suggestionTypeOrderedSet.stream()
                 .map(SuggestionType::getSuggestionPredicate)
                 .reduce(client -> true, (p1, p2) -> client -> p1.test(client) && p2.test(client));
+    }
 
+    /**
+     * Given an ordered set of suggestion types, returns a combined comparator that combines the suggestion types'
+     * comparators. Ordering of comparisons will be the same as the ordering of the ordered set passed in.
+     */
+    private static Comparator<Client> getCombinedComparator(Set<SuggestionType> suggestionTypeOrderedSet) {
         List<Comparator<Client>> suggestionTypeComparatorList = suggestionTypeOrderedSet.stream()
                 .map(SuggestionType::getSuggestionComparator).collect(Collectors.toList());
-        this.suggestionTypeCombinedComparator = (client1, client2) -> {
+        return (client1, client2) -> {
             for (Comparator<Client> comparator: suggestionTypeComparatorList) {
                 int compareResult = comparator.compare(client1, client2);
                 if (compareResult != 0) {
