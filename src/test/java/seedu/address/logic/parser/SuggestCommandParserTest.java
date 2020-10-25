@@ -20,22 +20,22 @@ public class SuggestCommandParserTest {
     public void parse_validArgs_returnsSuggestCommand() {
         Set<SuggestionType> suggestionTypes = new LinkedHashSet<>();
         suggestionTypes.add(new SuggestionType(SuggestionType.BY_AVAILABLE));
-        assertParseSuccess(parser, "suggest by/available", new SuggestCommand(suggestionTypes));
+        assertParseSuccess(parser, " by/available", new SuggestCommand(suggestionTypes));
 
         suggestionTypes.add(new SuggestionType(SuggestionType.BY_CONTRACT));
-        assertParseSuccess(parser, "suggest by/available by/contract", new SuggestCommand(suggestionTypes));
+        assertParseSuccess(parser, " by/available by/contract", new SuggestCommand(suggestionTypes));
 
         /* TODO: Add this back if frequency gets a predicate
         suggestionTypes.add(new SuggestionType(SuggestionType.BY_FREQUENCY));
-        assertParseSuccess(parser, "suggest by/available by/contract by/frequency",
+        assertParseSuccess(parser, " by/available by/contract by/frequency",
                new SuggestCommand(suggestionTypes));*/
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "suggest by/availability", SuggestionType.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "suggest by/", SuggestionType.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "suggest available",
+        assertParseFailure(parser, " by/availability", SuggestionType.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " by/", SuggestionType.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, " available",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SuggestCommand.MESSAGE_USAGE));
     }
 

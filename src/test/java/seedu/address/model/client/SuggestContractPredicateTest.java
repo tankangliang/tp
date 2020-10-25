@@ -40,16 +40,17 @@ public class SuggestContractPredicateTest {
         // null -> returns false
         assertFalse(predicate.equals(null));
 
-        // different predicate list -> returns false
+        // different predicate -> returns false
         assertFalse(predicate.equals(new SuggestAvailabilityPredicate()));
     }
 
     @Test
     public void hashCode_test() {
         SuggestContractPredicate predicateCopy = new SuggestContractPredicate();
+        // same predicate -> same hashCode
         assertEquals(predicate.hashCode(), predicateCopy.hashCode());
 
-        // different predicate list -> returns false
+        // different predicate -> different hashCode
         assertNotEquals(predicate.hashCode(), new SuggestAvailabilityPredicate().hashCode());
     }
 

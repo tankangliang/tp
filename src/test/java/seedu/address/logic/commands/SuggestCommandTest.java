@@ -63,7 +63,7 @@ public class SuggestCommandTest {
         newModel.addClient(client4);
         assertEquals(newModel.getSortedFilteredClientList().size(), 4);
 
-        LinkedHashSet<SuggestionType> suggestionTypes = new LinkedHashSet<>();
+        Set<SuggestionType> suggestionTypes = new LinkedHashSet<>();
         suggestionTypes.add(new SuggestionType(SuggestionType.BY_CONTRACT));
         SuggestCommand suggestCommand1 = new SuggestCommand(suggestionTypes);
         CommandResult expectedResult = new CommandResult(SuggestCommand.MESSAGE_SUGGEST_SUCCESS);
@@ -99,7 +99,7 @@ public class SuggestCommandTest {
         // null -> returns false
         assertFalse(suggestCommand.equals(null));
 
-        // different predicate list -> returns false
+        // different suggestion type set -> returns false
         assertFalse(suggestCommand.equals(new SuggestCommand(Collections.emptySet())));
     }
 
