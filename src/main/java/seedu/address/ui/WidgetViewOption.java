@@ -22,7 +22,7 @@ public class WidgetViewOption {
      * @param country The country of the country notes to view.
      */
     private WidgetViewOption(boolean isClient, boolean isCountryNote, Country country) {
-        assert !(isClient && isCountryNote); // isClient and isCountryNote cannot be both true
+        assert !(isClient && isCountryNote) : "isClient and isCountryNote cannot be both true";
         this.isClient = isClient;
         this.isCountryNote = isCountryNote;
         this.country = country;
