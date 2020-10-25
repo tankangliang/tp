@@ -129,7 +129,8 @@ public class ModelManagerTest {
     public void addAndHasClientNote_validSyntax_updatesCorrectly() {
         Client client = new ClientBuilder(ALICE).build();
         Note clientNote = new Note("this be a client note");
-        assertFalse(modelManager.hasClientNote(client, clientNote));
+        assertThrows(AssertionError.class, () -> modelManager.hasClientNote(client, clientNote));
+        modelManager.addClient(client);
         modelManager.addClientNote(client, clientNote);
         assertTrue(modelManager.hasClientNote(client, clientNote));
     }

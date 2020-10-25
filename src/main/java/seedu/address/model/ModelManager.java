@@ -157,6 +157,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
+        assert addressBook.hasClient(target) : "addressbook not synced with modelManager; missing client";
         return target.hasClientNote(clientNote);
     }
 
@@ -171,6 +172,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, clientNote);
         target.addClientNote(clientNote);
         // update the TagNoteMap:
+        // todo: update address book to reflect the new note added?
         Set<Tag> newTags = clientNote.getTags();
         this.tagNoteMap.addTagsForNote(newTags, clientNote);
     }
