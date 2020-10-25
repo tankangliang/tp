@@ -13,7 +13,7 @@ import seedu.address.model.note.Note;
 /**
  * Parses input arguments and creates a new CountryNoteCommand object.
  */
-public class CountryNoteCommandParser implements Parser<CountryNoteAddCommand> {
+public class CountryNoteAddCommandParser implements Parser<CountryNoteAddCommand> {
 
     /**
      * Parses the given {@code arg} of arguments in the context of the CountryNoteAddCommand and returns a

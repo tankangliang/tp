@@ -13,7 +13,7 @@ import seedu.address.model.note.CountryNote;
 
 public class CountryNoteAddCommandParserTest {
 
-    private final CountryNoteCommandParser parser = new CountryNoteCommandParser();
+    private final CountryNoteAddCommandParser parser = new CountryNoteAddCommandParser();
 
     @Test
     public void parse_noCountryNoNote_throwsParseException() {
