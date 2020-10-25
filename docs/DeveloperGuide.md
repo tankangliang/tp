@@ -10,7 +10,21 @@ This page contains step-by-step instructions on how to get started in contributi
 
 ### Travelling BusinessMan Concepts
 
-<!-- TODO -->
+1. Flexible
+
+1. Lightweight
+
+1. Portable
+
+1. Loosely Coupled
+
+1. Scalable
+
+1. Secure
+
+1. CLI Optimised
+
+<!-- TODO: add proper concepts tbm should encompass for the pitch and dev should adhere to -->
 
 With that being said, this guide will help orient you eager developers quickly, to things like,
 
