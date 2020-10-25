@@ -292,7 +292,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design consideration:
 
-##### Aspect: How undo & redo executes
+##### Aspect: How undo/redo executes
 
 * **Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
@@ -308,6 +308,11 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
+### \[Proposed\] Command History
+
+A command history will greatly optimise the user's productivity by removing the need to repetitively type out similar commands.
+Furthermore, it allows backwards viewing of previous commands given, which is similar to the CLI experience.
 
 
 --------------------------------------------------------------------------------------------------------------------
