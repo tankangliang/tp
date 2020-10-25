@@ -3,14 +3,10 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUGGEST;
 
-import java.util.List;
 import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.SuggestCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.client.Client;
 import seedu.address.model.client.SuggestionType;
 
 /**
@@ -27,20 +23,15 @@ public class SuggestCommandParser implements Parser<SuggestCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_SUGGEST);
 
-        if (!argMultimap.getValue(PREFIX_SUGGEST).isPresent()) {
+        if (!argMultimap.getValue(PREFIX_SUGGEST).isPresent() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SuggestCommand.MESSAGE_USAGE));
         }
 
-        Set<SuggestionType> suggestionTypeList =
+        Set<SuggestionType> suggestionTypeOrderedSet =
                 ParserUtil.parseSuggestionTypes(argMultimap.getAllValues(PREFIX_SUGGEST));
 
-        List<Predicate<Client>> suggestionTypePredicateList = suggestionTypeList
-                .stream()
-                .map(SuggestionType::getSuggestionPredicate)
-                .collect(Collectors.toList());
-
-        return new SuggestCommand(suggestionTypePredicateList);
+        return new SuggestCommand(suggestionTypeOrderedSet);
     }
 
 }
