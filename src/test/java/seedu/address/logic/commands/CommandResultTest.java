@@ -31,7 +31,7 @@ public class CommandResultTest {
         assertFalse(customCommandResult.shouldDisplayCountryNote());
 
         customCommandResult = new CommandResult("test", true, false,
-                WidgetViewOption.generateCountryNoteWidgetOption(null));
+                WidgetViewOption.generateCountryNoteWidgetOption(Country.NULL_COUNTRY));
         assertEquals("COUNTRY_NOTE", customCommandResult.getWidgetViewOptionAsString());
         assertFalse(customCommandResult.shouldDisplayClient());
         assertTrue(customCommandResult.shouldDisplayCountryNote());
