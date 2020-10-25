@@ -32,6 +32,6 @@ public class CountryNoteCard extends UiPart<Region> {
         super(FXML);
         requireAllNonNull(index, countryNote);
         this.countryNote = countryNote;
-        countryNoteContent.setText(index + ". " + countryNote.getNoteContents());
+        countryNoteContent.setText(index + ". " + countryNote);
     }
 }
