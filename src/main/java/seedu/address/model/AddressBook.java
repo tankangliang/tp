@@ -191,7 +191,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Gets the list of country notes in TBM as an unmodifiable observable list.
      *
-     * @return The list of country notes in TBM.
+     * @return The unmodifiable observable list of country notes in TBM.
      */
     public ObservableList<CountryNote> getCountryNoteList() {
         return countryNotesManager.asUnmodifiableObservableList();
