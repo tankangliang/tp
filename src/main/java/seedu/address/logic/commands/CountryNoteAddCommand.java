@@ -19,7 +19,8 @@ public class CountryNoteAddCommand extends Command {
             + "Parameters: "
             + PREFIX_COUNTRY + "COUNTRY_CODE "
             + PREFIX_NOTE + "NOTE_STRING\n"
-            + "Example: " + COMMAND_WORD + " c/SG nt/likes laksa";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_COUNTRY + "SG "
+            + PREFIX_NOTE + "has one of the lowest coporate taxes in the world";
     private static final String MESSAGE_DUPLICATE_COUNTRY_NOTE = "This country note already exists in TBM";
     private static final String MESSAGE_SUCCESS = "Successfully added country note for %1$s: %2$s";
 
