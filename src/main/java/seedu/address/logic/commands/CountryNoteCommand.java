@@ -13,7 +13,7 @@ import seedu.address.model.note.CountryNote;
  */
 public class CountryNoteCommand extends Command {
 
-    public static final String COMMAND_WORD = "country note";
+    public static final String COMMAND_WORD = "country note add";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a note that is associated with the user input country.\n"
             + "Parameters: "

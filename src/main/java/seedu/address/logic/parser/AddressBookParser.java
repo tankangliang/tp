@@ -39,6 +39,7 @@ public class AddressBookParser {
      */
     private static final String CLIENT_TYPE = "client";
     private static final String COUNTRY_TYPE = "country";
+    private static final String COUNTRY_NOTE_TYPE = "country note";
     private static final String NOTE_TYPE = "note";
 
     /**
@@ -116,14 +117,35 @@ public class AddressBookParser {
 
         String commandWord = COUNTRY_TYPE + " " + commandType;
         switch (commandWord) {
+        case COUNTRY_NOTE_TYPE:
+            return parseCountryNoteCommands(restOfCommand);
+
+        case CountryFilterCommand.COMMAND_WORD:
+            return new CountryFilterCommandParser().parse(restOfCommand);
+
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
+
+    private Command parseCountryNoteCommands(String input) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        final String commandType = matcher.group("commandType");
+        final String restOfCommand = matcher.group("restOfCommand");
+        logger.info("Command Type: " + commandType + " Rest of command: " + restOfCommand);
+
+        String commandWord = COUNTRY_NOTE_TYPE + " " + commandType;
+        switch (commandWord) {
         case CountryNoteCommand.COMMAND_WORD:
             return new CountryNoteCommandParser().parse(restOfCommand);
 
         case CountryNoteViewCommand.COMMAND_WORD:
             return new CountryNoteViewCommandParser().parse(restOfCommand);
-
-        case CountryFilterCommand.COMMAND_WORD:
-            return new CountryFilterCommandParser().parse(restOfCommand);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
