@@ -148,6 +148,13 @@ public class JsonAdaptedClientTest {
     }
 
     @Test
+    public void toModelType_emptyContractExpiryDate_doesNotThrowException() {
+        JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_COUNTRY, VALID_TIMEZONE, "", VALID_LAST_MODIFIED_INSTANT, VALID_TAGS);
+        assertDoesNotThrow(() -> client.toModelType());
+    }
+
+    @Test
     public void toModelType_invalidContractExpiryDate_throwsIllegalValueException() {
         JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_COUNTRY, VALID_TIMEZONE, INVALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS);

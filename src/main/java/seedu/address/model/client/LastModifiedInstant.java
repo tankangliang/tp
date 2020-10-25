@@ -68,6 +68,6 @@ public class LastModifiedInstant implements Comparable<LastModifiedInstant> {
 
     @Override
     public int compareTo(LastModifiedInstant other) {
-        return value.compareTo(other.value);
+        return other.value.compareTo(value);
     }
 }

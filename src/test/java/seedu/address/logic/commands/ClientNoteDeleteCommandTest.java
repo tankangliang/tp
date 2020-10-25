@@ -54,7 +54,7 @@ class ClientNoteDeleteCommandTest {
 
     @Test
     public void execute_invalidClientIndex_throwsCommandException() {
-        Index invalidClientIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
+        Index invalidClientIndex = Index.fromOneBased(model.getSortedFilteredClientList().size() + 1);
         ClientNoteDeleteCommand clientNoteDeleteCommand =
                 new ClientNoteDeleteCommand(invalidClientIndex, Index.fromOneBased(1));
         assertThrows(CommandException.class, () -> clientNoteDeleteCommand.execute(model));
@@ -66,7 +66,7 @@ class ClientNoteDeleteCommandTest {
         Note clientNote = new Note(NOTE_CONTENT_1);
         Index idx = Index.fromOneBased(1);
         model.addClientNote(client, clientNote);
-        Index invalidClientNoteIndex = Index.fromOneBased(model.getFilteredClientNotesList().size() + 1);
+        Index invalidClientNoteIndex = Index.fromOneBased(model.getSortedFilteredClientNotesList().size() + 1);
         ClientNoteDeleteCommand clientNoteDeleteCommand =
                 new ClientNoteDeleteCommand(idx, invalidClientNoteIndex);
         assertThrows(CommandException.class, () -> clientNoteDeleteCommand.execute(model));

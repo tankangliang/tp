@@ -141,6 +141,14 @@ public class ClientBuilder {
     }
 
     /**
+     * Sets the {@code ContractExpiryDate} of the {@code Client} that we are building.
+     */
+    public ClientBuilder withContractExpiryDate(ContractExpiryDate contractExpiryDate) {
+        this.contractExpiryDate = contractExpiryDate;
+        return this;
+    }
+
+    /**
      * Sets the {@code LastModifiedInstant} of the {@code Client} that we are building.
      */
     public ClientBuilder withLastModifiedInstant(String lastModifiedInstant) {

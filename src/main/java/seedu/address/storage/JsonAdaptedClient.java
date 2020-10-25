@@ -142,7 +142,10 @@ class JsonAdaptedClient {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 ContractExpiryDate.class.getSimpleName()));
         }
-        if (!ContractExpiryDate.isValidDate(contractExpiryDate)) {
+        // It's possible for contractExpiryDate to have an empty String as a value, which would indicate
+        // the client has no contractExpiryDate set, and {@code ParserUtil.parseContractExpiryDate} will parse it into
+        // a {@code ContractExpiryDate.NULL_DATE}
+        if (!contractExpiryDate.isEmpty() && !ContractExpiryDate.isValidDate(contractExpiryDate)) {
             throw new IllegalValueException(ContractExpiryDate.MESSAGE_CONSTRAINTS);
         }
         final ContractExpiryDate modelContractExpiryContractExpiryDate =

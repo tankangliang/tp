@@ -28,7 +28,7 @@ public class ClientDeleteCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Client clientToDelete = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        Client clientToDelete = model.getSortedFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         ClientDeleteCommand clientDeleteCommand = new ClientDeleteCommand(INDEX_FIRST_CLIENT);
 
         String expectedMessage = String.format(ClientDeleteCommand.MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete);
@@ -41,7 +41,7 @@ public class ClientDeleteCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getSortedFilteredClientList().size() + 1);
         ClientDeleteCommand clientDeleteCommand = new ClientDeleteCommand(outOfBoundIndex);
 
         assertCommandFailure(clientDeleteCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
@@ -51,7 +51,7 @@ public class ClientDeleteCommandTest {
     public void execute_validIndexFilteredList_success() {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
 
-        Client clientToDelete = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        Client clientToDelete = model.getSortedFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         ClientDeleteCommand clientDeleteCommand = new ClientDeleteCommand(INDEX_FIRST_CLIENT);
 
         String expectedMessage = String.format(ClientDeleteCommand.MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete);
@@ -104,6 +104,6 @@ public class ClientDeleteCommandTest {
     private void showNoClient(Model model) {
         model.updateFilteredClientList(p -> false);
 
-        assertTrue(model.getFilteredClientList().isEmpty());
+        assertTrue(model.getSortedFilteredClientList().isEmpty());
     }
 }
