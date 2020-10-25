@@ -33,9 +33,13 @@ title: User Guide
 
 1. Ensure you have Java 11
 
-1. Download the application file (.jar file) from [here](#https://github.com/AY2021S1-CS2103T-F11-4/tp/releases)
+1. Download the application file (.jar file) from [here](https://github.com/AY2021S1-CS2103T-F11-4/tp/releases)
 
-1. Move file to a directory of your choice and run `java -jar tbm.jar`
+1. Double click on the `tbm.jar` file found in the directory it was downloaded to.
+
+1. Alternatively, from the directory containing `tbm.jar`, shift right click and open any shell terminal in the current directory.
+
+1. Run `java -jar tbm.jar`
 
 Now that you have started TBM, 
 
