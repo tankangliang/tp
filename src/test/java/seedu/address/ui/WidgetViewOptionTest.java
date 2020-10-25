@@ -14,15 +14,15 @@ public class WidgetViewOptionTest {
         WidgetViewOption widgetViewOption = WidgetViewOption.generateClientWidgetOption();
         assertTrue(widgetViewOption.isClient());
         assertFalse(widgetViewOption.isCountryNote());
-        assertEquals(Country.getNullCountry(), widgetViewOption.getCountry());
+        assertEquals(Country.NULL_COUNTRY, widgetViewOption.getCountry());
     }
 
     @Test
     public void generateCountryNoteWidgetOption_isCountryNoteTrue() {
-        WidgetViewOption widgetViewOption = WidgetViewOption.generateCountryNoteWidgetOption(Country.getNullCountry());
+        WidgetViewOption widgetViewOption = WidgetViewOption.generateCountryNoteWidgetOption(Country.NULL_COUNTRY);
         assertFalse(widgetViewOption.isClient());
         assertTrue(widgetViewOption.isCountryNote());
-        assertEquals(Country.getNullCountry(), widgetViewOption.getCountry());
+        assertEquals(Country.NULL_COUNTRY, widgetViewOption.getCountry());
         widgetViewOption = WidgetViewOption.generateCountryNoteWidgetOption(new Country("SG"));
         assertFalse(widgetViewOption.isClient());
         assertTrue(widgetViewOption.isCountryNote());
@@ -34,6 +34,6 @@ public class WidgetViewOptionTest {
         WidgetViewOption widgetViewOption = WidgetViewOption.generateNullWidgetOption();
         assertFalse(widgetViewOption.isClient());
         assertFalse(widgetViewOption.isCountryNote());
-        assertEquals(Country.getNullCountry(), widgetViewOption.getCountry());
+        assertEquals(Country.NULL_COUNTRY, widgetViewOption.getCountry());
     }
 }

@@ -34,7 +34,7 @@ public class WidgetViewOption {
      * @return A client widget option that represents intent to view client.
      */
     public static WidgetViewOption generateClientWidgetOption() {
-        return new WidgetViewOption(true, false, Country.getNullCountry());
+        return new WidgetViewOption(true, false, Country.NULL_COUNTRY);
     }
 
     /**
@@ -52,7 +52,7 @@ public class WidgetViewOption {
      * @return A null widget option.
      */
     public static WidgetViewOption generateNullWidgetOption() {
-        return new WidgetViewOption(false, false, Country.getNullCountry());
+        return new WidgetViewOption(false, false, Country.NULL_COUNTRY);
     }
 
     /**

@@ -8,6 +8,7 @@ import java.util.Locale;
  */
 public class Country {
 
+    public static final Country NULL_COUNTRY = new Country();
     private static final String NONE_COUNTRY_CODE = "";
     private static final String NONE_COUNTRY_NAME = "";
 
@@ -29,10 +30,6 @@ public class Country {
     private Country() {
         this.countryCode = NONE_COUNTRY_CODE;
         this.countryName = NONE_COUNTRY_NAME;
-    }
-
-    public static Country getNullCountry() {
-        return new Country();
     }
 
     /**

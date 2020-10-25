@@ -40,8 +40,8 @@ public class CommandResultTest {
     @Test
     public void getCountry_nullCountry_returnExpected() {
         CommandResult commandResult = new CommandResult("test", false, false,
-                WidgetViewOption.generateCountryNoteWidgetOption(Country.getNullCountry()));
-        assertEquals(Country.getNullCountry(), commandResult.getCountry());
+                WidgetViewOption.generateCountryNoteWidgetOption(Country.NULL_COUNTRY));
+        assertEquals(Country.NULL_COUNTRY, commandResult.getCountry());
     }
 
     @Test
