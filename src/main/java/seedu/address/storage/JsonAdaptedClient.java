@@ -21,6 +21,7 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryCodeVerifier;
+import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,17 +40,20 @@ class JsonAdaptedClient {
     private final String contractExpiryDate;
     private final String lastModifiedInstant;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedNote> clientNotes = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedClient} with the given client details.
      */
     @JsonCreator
-    public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("country") String country, @JsonProperty("timezone") String timezone,
-            @JsonProperty("contractExpiryDate") String contractExpiryDate,
-            @JsonProperty("lastModifiedInstant") String lastModifiedInstant,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+    public JsonAdaptedClient(@JsonProperty("name") String name,
+                @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                @JsonProperty("address") String address, @JsonProperty("country") String country,
+                @JsonProperty("timezone") String timezone,
+                @JsonProperty("contractExpiryDate") String contractExpiryDate,
+                @JsonProperty("lastModifiedInstant") String lastModifiedInstant,
+                @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                @JsonProperty("clientNotes") List<JsonAdaptedNote> clientNotes) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -61,7 +65,34 @@ class JsonAdaptedClient {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        if (clientNotes != null) {
+            this.clientNotes.addAll(clientNotes);
+        }
     }
+
+    /**
+     * Constructs a {@code JsonAdaptedClient} with the given client details.
+     */
+//    @JsonCreator
+//    public JsonAdaptedClient(@JsonProperty("name") String name,
+//            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+//            @JsonProperty("address") String address, @JsonProperty("country") String country,
+//            @JsonProperty("timezone") String timezone,
+//            @JsonProperty("contractExpiryDate") String contractExpiryDate,
+//            @JsonProperty("lastModifiedInstant") String lastModifiedInstant,
+//            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+//        this.name = name;
+//        this.phone = phone;
+//        this.email = email;
+//        this.address = address;
+//        this.country = country;
+//        this.timezone = timezone;
+//        this.contractExpiryDate = contractExpiryDate;
+//        this.lastModifiedInstant = lastModifiedInstant;
+//        if (tagged != null) {
+//            this.tagged.addAll(tagged);
+//        }
+//    }
 
     /**
      * Converts a given {@code Client} into this class for Jackson use.
@@ -76,6 +107,8 @@ class JsonAdaptedClient {
         contractExpiryDate = source.getContractExpiryDate().value;
         lastModifiedInstant = source.getLastModifiedInstant().toString();
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
+        clientNotes
+            .addAll(source.getClientNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toSet()));
     }
 
     /**
@@ -88,9 +121,14 @@ class JsonAdaptedClient {
         for (JsonAdaptedTag tag : tagged) {
             clientTags.add(tag.toModelType());
         }
+        final Set<Note> clientNotes = new HashSet<>();
+        for (JsonAdaptedNote note : this.clientNotes) {
+            clientNotes.add(note.toModelType());
+        }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
@@ -98,7 +136,8 @@ class JsonAdaptedClient {
         final Name modelName = new Name(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
@@ -106,7 +145,8 @@ class JsonAdaptedClient {
         final Phone modelPhone = new Phone(phone);
 
         if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
@@ -114,7 +154,8 @@ class JsonAdaptedClient {
         final Email modelEmail = new Email(email);
 
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
@@ -122,7 +163,8 @@ class JsonAdaptedClient {
         final Address modelAddress = new Address(address);
 
         if (country == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName()));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName()));
         }
         if (!CountryCodeVerifier.isValidCountryCode(country)) {
             throw new IllegalValueException(CountryCodeVerifier.MESSAGE_CONSTRAINTS);
@@ -130,8 +172,8 @@ class JsonAdaptedClient {
         final Country modelCountry = new Country(country);
 
         if (timezone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                Timezone.class.getSimpleName()));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Timezone.class.getSimpleName()));
         }
         if (!Timezone.isValidTimezone(timezone)) {
             throw new IllegalValueException(Timezone.MESSAGE_CONSTRAINTS);
@@ -139,21 +181,21 @@ class JsonAdaptedClient {
         final Timezone modelTimezone = new Timezone(timezone);
 
         if (contractExpiryDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                ContractExpiryDate.class.getSimpleName()));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, ContractExpiryDate.class.getSimpleName()));
         }
         // It's possible for contractExpiryDate to have an empty String as a value, which would indicate
-        // the client has no contractExpiryDate set, and {@code ParserUtil.parseContractExpiryDate} will parse it into
+        // the client has no contractExpiryDate set, and {@code ParserUtil.parseContractExpiryDate} will
+        // parse it into
         // a {@code ContractExpiryDate.NULL_DATE}
         if (!contractExpiryDate.isEmpty() && !ContractExpiryDate.isValidDate(contractExpiryDate)) {
             throw new IllegalValueException(ContractExpiryDate.MESSAGE_CONSTRAINTS);
         }
         final ContractExpiryDate modelContractExpiryContractExpiryDate =
                 ParserUtil.parseContractExpiryDate(contractExpiryDate);
-
         // Does not throw an exception if lastModifiedInstant is missing/invalid due to corruption of data.
-        // This field is merely metadata for us and is not significant enough to discard client's data due to this
-        // field being missing.
+        // This field is merely metadata for us and is not significant enough to discard client's data due
+        // to this field being missing.
         LastModifiedInstant modelLastModifiedInstant;
         if (lastModifiedInstant == null) {
             modelLastModifiedInstant = new LastModifiedInstant();
@@ -162,8 +204,13 @@ class JsonAdaptedClient {
         }
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry,
-            modelTimezone, modelContractExpiryContractExpiryDate, modelLastModifiedInstant, modelTags);
+        Client freshClient =
+                new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTimezone,
+                    modelContractExpiryContractExpiryDate, modelLastModifiedInstant, modelTags);
+        for (Note note : clientNotes) {
+            freshClient.addClientNote(note);
+        }
+        return freshClient;
     }
 
 }
