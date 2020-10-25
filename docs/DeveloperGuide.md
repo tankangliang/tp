@@ -5,13 +5,22 @@ title: Developer Guide
 
 ## **Introduction**
 
-### Purpose
+Welcome! We are excited that you want to learn about <strong><i>TBM</i></strong>.<br>
+This page contains step-by-step instructions on how to get started in contributing or getting yourself involved in this awesome project! However, before you get too excited, allow us to introduce you to the core concepts that underpins the heart of <strong><i>TBM</i></strong>.
 
-This documentation specifies the architecture and design decisions for the application, <strong><i>Travelling BusinessMan</i></strong>.
+### Travelling BusinessMan Concepts
 
-### Scope
+<!-- TODO -->
 
-This describes the software architecture and software design decisions for the implementation of <strong><i>TBM</i></strong>. The intended audience is the developers, designers and testers for the application.
+With that being said, this guide will help orient you eager developers quickly, to things like,
+
+1. Software design choices of <strong><i>TBM</i></strong>.
+
+1. Architecture of <strong><i>TBM</i></strong>.
+
+1. Implementations for the array of features <strong><i>TBM</i></strong> offers.
+
+## Table of Contents
 
 * Table of Contents
 {:toc}
