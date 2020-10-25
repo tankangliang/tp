@@ -164,8 +164,6 @@ public class AddressBookParserTest {
         assertEquals(new ClientNoteAddCommand(INDEX_FIRST_CLIENT, note), command);
     }
 
-
-
     @Test
     public void parseClientNoteCommands_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,

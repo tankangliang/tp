@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.model.country.Country;
 
 /**
@@ -23,6 +25,8 @@ public class WidgetViewOption {
      */
     private WidgetViewOption(boolean isClient, boolean isCountryNote, Country country) {
         assert !(isClient && isCountryNote) : "isClient and isCountryNote cannot be both true";
+        requireNonNull(country);
+        assert !(isClient && isCountryNote); // isClient and isCountryNote cannot be both true
         this.isClient = isClient;
         this.isCountryNote = isCountryNote;
         this.country = country;
