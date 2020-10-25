@@ -132,17 +132,17 @@ Edits a client's information by their index in the list view.
 
 Format: `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY_CODE] [tz/TIMEZONE] [ce/CONTRACT_EXPIRY]`
 
-* COUNTRY follows the ISO3166 Format of two-letter country codes. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+* COUNTRY follows the ISO3166 Format of two-letter country codes. [Here](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) is a list of country codes.
 
 Examples:
 
-* `client edit 5 n/Katya` Only edits **name**, other fields remain the same
+* `client edit 5 n/Katya` Only edits **name**, other fields remain the same.
 * `client edit 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg` Edits **name**, **phone number** and **email**, other fields remain the same.
-* `client edit 3 c/JP tz/GMT+7` Edits **country** to Japan and **timezone** to GMT+7
+* `client edit 3 c/JP tz/GMT+7` Edits **country** to Japan and **timezone** to GMT+7.
 
 ### Deleting a client: `client delete`
 
-Deletes a client by their index in the list view.
+Deletes a client by their index in the viewable list panel.
 
 Format: `client delete INDEX`
 
@@ -166,7 +166,7 @@ Examples:
 
 ### Deleting client notes: `client note delete`
 
-Deletes a note of a client (denoted by client's index) by the note's index.
+Deletes a note of a client (denoted by a client's index) by the note's index.
 
 Format: `client note delete CLIENT_INDEX NOTE_INDEX`
 
@@ -183,7 +183,8 @@ Notes:
 
 `client note delete 3 2`
 
-The above command deletes the note regarding "Hates cats". The resulting information will look like
+The above command deletes the note regarding "Hates cats". The resulting information will look like:
+
 ```
 Client: 3
 Notes:
@@ -226,18 +227,18 @@ Filters the list of clients by a specified country.
 
 Format: `country filter c/COUNTRY_CODE`
 
-* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes.
 
 Examples:
 
-* `country filter c/SG` Filters by contacts in Singapore
-* `country filter c/RU` Filters by contacts in Russia
+* `country filter c/SG` Filters by contacts in Singapore.
+* `country filter c/RU` Filters by contacts in Russia.
 
 ### Adding notes for a country: `country note`
 
 Format: `country note c/COUNTRY_CODE nt/NOTE_STRING`
 
-* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes.
 
 Examples:
 
@@ -251,7 +252,7 @@ Obtains a list of clients based on the suggestion type(s) passed in.
 
 Format: `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...`
 
-* SUGGESTION_TYPE must be one of the following: `frequency`, `available` or `contract`
+* SUGGESTION_TYPE must be one of the following: `frequency`, `available` or `contract`.
 
 Examples:
 
