@@ -149,6 +149,8 @@ public class AddressBookParserTest {
                 parser.parseCommand("country unknownCommand "));
     }
 
+    //TODO: add tests when country commands are finalized
+
     @Test
     public void parseClientNoteCommands_addClientNote() throws Exception {
         final String noteString = "likes cats";

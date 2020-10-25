@@ -13,15 +13,28 @@ import seedu.address.model.country.Country;
 public class CountryNoteViewCommandParserTest {
 
     @Test
-    public void parse_noCountry_throwParseException() {
-        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" "));
-        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" avbc"));
-        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" sg"));
-        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" SG"));
-        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" 123"));
+    public void parse_invalidCountry_throwParseException() {
         assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" c/"));
         assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" c/   "));
         assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" c/   12"));
+    }
+
+    @Test
+    public void parse_noCountry_returnsExpected() {
+        try {
+            CountryNoteViewCommand expected = new CountryNoteViewCommand();
+            CountryNoteViewCommand actual = new CountryNoteViewCommandParser().parse("");
+            assertEquals(expected, actual);
+        } catch (ParseException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_withPreamble_throwsParseException() {
+        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" abc"));
+        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" 12 32 2"));
+        assertThrows(ParseException.class, () -> new CountryNoteViewCommandParser().parse(" a 2 3b"));
     }
 
     @Test
