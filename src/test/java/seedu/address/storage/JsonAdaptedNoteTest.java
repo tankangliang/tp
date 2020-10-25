@@ -16,13 +16,15 @@ import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedNoteTest {
 
-    @Test public void toModelType_validTaggedClientNote_returnsClientNote() throws IllegalValueException {
+    @Test public void toModelType_validTaggedClientNote_returnsTaggedClientNote() throws IllegalValueException {
         Note taggedClientNote = new Note("some note");
         Set<Tag> associatedTags = new HashSet<>();
         associatedTags.add(new Tag("someTag"));
         taggedClientNote.setTags(associatedTags);
         JsonAdaptedNote jsonAdaptedNote = new JsonAdaptedNote(taggedClientNote);
-        assertTrue(jsonAdaptedNote.toModelType().isClientNote());
+        Note deserialisedNote = jsonAdaptedNote.toModelType();
+        assertTrue(deserialisedNote.isClientNote());
+        assertTrue(deserialisedNote.getTags().equals(associatedTags));
     }
 
     @Test public void toModelType_validCountryNote_returnsCountryNote() throws IllegalValueException {
