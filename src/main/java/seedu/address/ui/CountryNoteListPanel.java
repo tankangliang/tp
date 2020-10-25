@@ -7,6 +7,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 
 /**
@@ -30,6 +31,19 @@ public class CountryNoteListPanel extends UiPart<Region> {
         header.setText("Country Notes");
         countryNoteListView.setItems(countryNoteObservableList);
         countryNoteListView.setCellFactory(listView -> new CountryListViewCell());
+    }
+
+    /**
+     * Sets the header of the CountryNoteListPanel.
+     *
+     * @param country The country to be displayed.
+     */
+    public void setHeader(Country country) {
+        if (country.equals(Country.NULL_COUNTRY)) {
+            header.setText("All Country Notes");
+        } else {
+            header.setText(country + " notes");
+        }
     }
 
     /**

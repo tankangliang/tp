@@ -19,6 +19,7 @@ import seedu.address.logic.commands.ClientViewCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CountryFilterCommand;
 import seedu.address.logic.commands.CountryNoteAddCommand;
+import seedu.address.logic.commands.CountryNoteDeleteCommand;
 import seedu.address.logic.commands.CountryNoteViewCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -146,6 +147,9 @@ public class AddressBookParser {
 
         case CountryNoteViewCommand.COMMAND_WORD:
             return new CountryNoteViewCommandParser().parse(restOfCommand);
+
+        case CountryNoteDeleteCommand.COMMAND_WORD:
+            return new CountryNoteDeleteCommandParser().parse(restOfCommand);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

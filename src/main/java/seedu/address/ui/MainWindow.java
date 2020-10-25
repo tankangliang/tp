@@ -186,23 +186,18 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            logger.info("Widget View Option: " + commandResult.getWidgetViewOption());
+            logger.info("Widget View Option: " + commandResult.getWidgetViewOptionAsString());
 
-            switch (commandResult.getWidgetViewOption()) {
-            case CLIENT:
+            if (commandResult.shouldDisplayClient()) {
                 logger.info("Toggling client view");
                 widgetPlaceholder.getChildren().clear();
                 widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
                 widgetViewBox.update(logic.getWidgetContent());
-                break;
-            case COUNTRY_NOTES:
+            } else if (commandResult.shouldDisplayCountryNote()) {
                 logger.info("Toggling country notes view");
                 widgetPlaceholder.getChildren().clear();
+                countryNoteListPanel.setHeader(commandResult.getCountry());
                 widgetPlaceholder.getChildren().add(countryNoteListPanel.getRoot());
-                break;
-            case NONE:
-            default:
-                break;
             }
 
             if (commandResult.isShowHelp()) {

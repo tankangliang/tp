@@ -21,6 +21,12 @@ public class CountryFilterCommandParserTest {
     }
 
     @Test
+    public void parse_withPreamable_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse(" random string c/SG"));
+        assertThrows(ParseException.class, () -> parser.parse(" 123 c/MY"));
+    }
+
+    @Test
     public void parse_invalidCountryCode_throwsParseException() {
         assertThrows(ParseException.class, () -> parser.parse(" c/ZZ"));
         assertThrows(ParseException.class, () -> parser.parse(" c/123"));
