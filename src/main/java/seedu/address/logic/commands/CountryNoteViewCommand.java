@@ -43,12 +43,13 @@ public class CountryNoteViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        if (country == null) {
+        if (country.equals(Country.getNullCountry())) {
             model.updateFilteredCountryNoteList(countryNote -> true);
         } else {
             model.updateFilteredCountryNoteList(countryNote -> countryNote.getCountry().equals(country));
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, country == null ? "all countries" : country),
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                country.equals(Country.getNullCountry()) ? "all countries" : country),
             false, false, WidgetViewOption.generateCountryNoteWidgetOption(country));
     }
 

@@ -39,7 +39,7 @@ public class CountryNoteListPanel extends UiPart<Region> {
      * @param country The country to be displayed.
      */
     public void setHeader(Country country) {
-        if (country == null) {
+        if (country.equals(Country.getNullCountry())) {
             header.setText("All Country Notes");
         } else {
             header.setText(country + " notes");
