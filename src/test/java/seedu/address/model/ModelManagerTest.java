@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.client.SuggestionType;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
@@ -120,8 +121,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredClientList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredClientList().remove(0));
+    public void getSortedFilteredClientList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getSortedFilteredClientList().remove(0));
     }
 
     @Test
@@ -176,6 +177,11 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
+        // different userPrefs -> returns false
+        UserPrefs differentUserPrefs = new UserPrefs();
+        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredClientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
@@ -184,10 +190,15 @@ public class ModelManagerTest {
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-        // different userPrefs -> returns false
-        UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        // different sortedList -> returns false
+        modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManagerCopy.updateSortedFilteredClientList((client1, client2) -> 1);
+        assertFalse(modelManager.equals(modelManagerCopy));
+
+        // different tagNoteMap -> returns false
+        modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManagerCopy.addClientNote(new ClientBuilder().build(), new Note("client note"));
+        assertFalse(modelManager.equals(modelManagerCopy));
     }
 
     @Test
@@ -232,6 +243,40 @@ public class ModelManagerTest {
                 .count();
         modelManager.updateFilteredCountryNoteList(countryNote -> countryNote.equals(new Country("SG")));
         assertEquals(expect, modelManager.getFilteredCountryNoteList().size());
+    }
+
+    @Test
+    public void updateSortedFilteredClientList_zeroComparator_sameOrderOfClients() {
+        AddressBook addressBook = new AddressBookBuilder().withClient(ALICE).withClient(BENSON).build();
+        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+        modelManagerCopy.updateSortedFilteredClientList((client1, client2) -> 0);
+        assertEquals(modelManagerCopy, new ModelManager(addressBook, new UserPrefs()));
+    }
+
+    @Test
+    public void updateSortedFilteredClientList_contractComparator_correctOrderOfClients() {
+        Client client1 = new ClientBuilder().withName("client1").withContractExpiryDate("2-3-2020").build();
+        Client client2 = new ClientBuilder().withName("client2").withContractExpiryDate("1-3-2020").build();
+        AddressBook addressBook = new AddressBookBuilder().withClient(client1).withClient(client2).build();
+        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+        assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client1);
+        modelManagerCopy.updateSortedFilteredClientList(
+                new SuggestionType(SuggestionType.BY_CONTRACT).getSuggestionComparator());
+        assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client2);
+    }
+
+    @Test
+    public void updateSortedFilteredClientList_frequencyComparator_correctOrderOfClients() {
+        Client client1 = new ClientBuilder().withName("client1")
+                .withLastModifiedInstant("2020-01-01T00:00:00.000000Z").build();
+        Client client2 = new ClientBuilder().withName("client2")
+                .withLastModifiedInstant("2020-01-02T00:00:00.000000Z").build();
+        AddressBook addressBook = new AddressBookBuilder().withClient(client1).withClient(client2).build();
+        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+        assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client1);
+        modelManagerCopy.updateSortedFilteredClientList(
+                new SuggestionType(SuggestionType.BY_FREQUENCY).getSuggestionComparator());
+        assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client2);
     }
 
     /* todo future tests:

@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEZONE;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -42,7 +43,7 @@ public class ClientAddCommandParser implements Parser<ClientAddCommand> {
                         PREFIX_COUNTRY, PREFIX_TIMEZONE, PREFIX_CONTRACT_EXPIRY_DATE, PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY,
-                PREFIX_TIMEZONE, PREFIX_CONTRACT_EXPIRY_DATE) || !argMultimap.getPreamble().isEmpty()) {
+                PREFIX_TIMEZONE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientAddCommand.MESSAGE_USAGE));
         }
 
@@ -52,8 +53,13 @@ public class ClientAddCommandParser implements Parser<ClientAddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).get());
         Timezone timezone = ParserUtil.parseTimezone(argMultimap.getValue(PREFIX_TIMEZONE).get());
-        ContractExpiryDate contractExpiryDate =
-                ParserUtil.parseContractExpiryDate(argMultimap.getValue(PREFIX_CONTRACT_EXPIRY_DATE).get());
+        Optional<String> contractExpiryDateString = argMultimap.getValue(PREFIX_CONTRACT_EXPIRY_DATE);
+        ContractExpiryDate contractExpiryDate;
+        if (contractExpiryDateString.isPresent()) {
+            contractExpiryDate = ParserUtil.parseContractExpiryDate(contractExpiryDateString.get());
+        } else {
+            contractExpiryDate = ContractExpiryDate.NULL_DATE;
+        }
         LastModifiedInstant lastModifiedInstant = new LastModifiedInstant();
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 

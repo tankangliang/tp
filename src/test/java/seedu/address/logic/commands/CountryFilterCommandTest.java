@@ -25,7 +25,7 @@ public class CountryFilterCommandTest {
 
     @Test
     public void execute_validCountries_matchesExpectedFilterResult() {
-        List<Client> initialClientList = new ArrayList<>(model.getFilteredClientList());
+        List<Client> initialClientList = new ArrayList<>(model.getSortedFilteredClientList());
 
         for (String countryCode : COUNTRY_CODES) {
             Country country = new Country(countryCode);
@@ -38,7 +38,7 @@ public class CountryFilterCommandTest {
                     .collect(Collectors.toList());
 
             int i = 0;
-            for (Client client : model.getFilteredClientList()) {
+            for (Client client : model.getSortedFilteredClientList()) {
                 assertEquals(expectedFilteredClientList.get(i), client);
                 i++;
             }
