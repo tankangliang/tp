@@ -21,6 +21,18 @@ public class CountryNoteCommandParserTest {
     }
 
     @Test
+    public void parse_withPreamable_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse(" random string c/SG nt/abc"));
+        assertThrows(ParseException.class, () -> parser.parse(" random string c/SG nt/"));
+        assertThrows(ParseException.class, () -> parser.parse(" random string c/ nt/abc"));
+        assertThrows(ParseException.class, () -> parser.parse(" random string c/ nt/"));
+        assertThrows(ParseException.class, () -> parser.parse(" 123 c/SG nt/abc"));
+        assertThrows(ParseException.class, () -> parser.parse(" 123 c/SG nt/"));
+        assertThrows(ParseException.class, () -> parser.parse(" 123 c/ nt/abc"));
+        assertThrows(ParseException.class, () -> parser.parse(" 123 c/ nt/"));
+    }
+
+    @Test
     public void parse_hasCountryNoNote_throwsParseException() {
         assertThrows(ParseException.class, () -> parser.parse(" c/SG random string"));
     }

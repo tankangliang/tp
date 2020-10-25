@@ -43,7 +43,7 @@ public class ClientViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Client> lastShownList = model.getFilteredClientList();
+        List<Client> lastShownList = model.getSortedFilteredClientList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
@@ -53,7 +53,7 @@ public class ClientViewCommand extends Command {
         model.setWidgetContent(clientToView);
 
         return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, clientToView.getName()),
-                false, false, WidgetViewOption.CLIENT);
+                false, false, WidgetViewOption.generateClientWidgetOption());
     }
 
     @Override

@@ -17,9 +17,13 @@ public class CountryNoteViewCommandParser implements Parser<CountryNoteViewComma
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COUNTRY);
 
-        if (argMultimap.getValue(PREFIX_COUNTRY).isEmpty()) {
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CountryNoteViewCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CountryNoteViewCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getValue(PREFIX_COUNTRY).isEmpty()) {
+            return new CountryNoteViewCommand();
         }
         Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).get());
 

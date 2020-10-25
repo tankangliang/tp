@@ -159,6 +159,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         countryNotesManager.addCountryNote(countryNote);
     }
 
+    /**
+     * Deletes the given country note.
+     *
+     * @param countryNoteToDelete The country note to delete.
+     */
+    public void deleteCountryNote(CountryNote countryNoteToDelete) {
+        requireNonNull(countryNoteToDelete);
+        countryNotesManager.deleteCountryNote(countryNoteToDelete);
+    }
+
     //// util methods
 
     @Override
@@ -178,6 +188,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return FXCollections.observableArrayList(countryNotesManager.asUnmodifiableObservableList());
     }
 
+    /**
+     * Gets the list of country notes in TBM as an unmodifiable observable list.
+     *
+     * @return The unmodifiable observable list of country notes in TBM.
+     */
     public ObservableList<CountryNote> getCountryNoteList() {
         return countryNotesManager.asUnmodifiableObservableList();
     }

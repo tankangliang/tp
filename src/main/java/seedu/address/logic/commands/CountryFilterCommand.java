@@ -37,7 +37,7 @@ public class CountryFilterCommand extends Command {
         requireNonNull(model);
         model.updateFilteredClientList(predicate);
         return new CommandResult(
-                String.format(MESSAGE_FILTER_CLIENT_BY_COUNTRY_SUCCESS, model.getFilteredClientList().size(),
+                String.format(MESSAGE_FILTER_CLIENT_BY_COUNTRY_SUCCESS, model.getSortedFilteredClientList().size(),
                         predicate.getInputCountryStringRepresentation()));
     }
 

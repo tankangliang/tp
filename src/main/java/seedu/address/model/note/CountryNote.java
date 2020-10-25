@@ -53,4 +53,9 @@ public class CountryNote extends Note {
     public int hashCode() {
         return Objects.hash(super.hashCode(), country);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " [" + getCountry() + "]";
+    }
 }

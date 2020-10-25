@@ -33,11 +33,24 @@ public class CountryNoteViewCommand extends Command {
         this.country = country;
     }
 
+    /**
+     * Initializes a CountryNoteViewCommand that views all country notes.
+     */
+    public CountryNoteViewCommand() {
+        this.country = Country.NULL_COUNTRY;
+    }
+
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredCountryNoteList(countryNote -> countryNote.getCountry().equals(country));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, country), false, false, WidgetViewOption.COUNTRY_NOTES);
+        if (country.equals(Country.NULL_COUNTRY)) {
+            model.updateFilteredCountryNoteList(countryNote -> true);
+        } else {
+            model.updateFilteredCountryNoteList(countryNote -> countryNote.getCountry().equals(country));
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS,
+                country.equals(Country.NULL_COUNTRY) ? "all countries" : country),
+            false, false, WidgetViewOption.generateCountryNoteWidgetOption(country));
     }
 
     @Override
