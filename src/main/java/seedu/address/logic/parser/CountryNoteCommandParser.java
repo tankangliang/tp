@@ -16,11 +16,11 @@ import seedu.address.model.note.Note;
 public class CountryNoteCommandParser implements Parser<CountryNoteAddCommand> {
 
     /**
-     * Parses the given {@code arg} of arguments in the context of the CountryNoteCommand and returns a
-     * CountryNoteCommand object for execution.
+     * Parses the given {@code arg} of arguments in the context of the CountryNoteAddCommand and returns a
+     * CountryNoteAddCommand object for execution.
      *
      * @param args The user input string.
-     * @return A CountryNoteCommand object which corresponds to the user input string.
+     * @return A CountryNoteAddCommand object which corresponds to the user input string.
      * @throws ParseException If user input string is invalid.
      */
     public CountryNoteAddCommand parse(String args) throws ParseException {

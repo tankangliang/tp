@@ -129,6 +129,13 @@ public class AddressBookParser {
         }
     }
 
+    /**
+     * Parses input given that command is of COUNTRY_NOTE_TYPE (starts with "country note")
+     *
+     * @param input user input with "country note" stripped
+     * @return command relating to country note functions
+     * @throws ParseException if input does not conform to expected format
+     */
     private Command parseCountryNoteCommands(String input) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
         if (!matcher.matches()) {
