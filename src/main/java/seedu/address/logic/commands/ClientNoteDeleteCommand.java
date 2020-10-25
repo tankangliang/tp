@@ -43,8 +43,8 @@ public class ClientNoteDeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Client> lastShownClientList = model.getFilteredClientList();
-        List<Note> lastShownClientNoteList = model.getFilteredClientNotesList();
+        List<Client> lastShownClientList = model.getSortedFilteredClientList();
+        List<Note> lastShownClientNoteList = model.getSortedFilteredClientNotesList();
 
         if (targetClientIndex.getZeroBased() >= lastShownClientList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);

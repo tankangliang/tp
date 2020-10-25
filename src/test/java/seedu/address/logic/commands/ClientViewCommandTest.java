@@ -23,7 +23,7 @@ public class ClientViewCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Client clientToView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        Client clientToView = model.getSortedFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         ClientViewCommand command = new ClientViewCommand(INDEX_FIRST_CLIENT);
 
         String expectedMsg = String.format(ClientViewCommand.MESSAGE_VIEW_CLIENT_SUCCESS, clientToView.getName());
@@ -36,7 +36,7 @@ public class ClientViewCommandTest {
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getSortedFilteredClientList().size() + 1);
         ClientViewCommand clientViewCommand = new ClientViewCommand(outOfBoundIndex);
 
         assertCommandFailure(clientViewCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
@@ -45,7 +45,7 @@ public class ClientViewCommandTest {
     public void execute_validIndexFilteredList_success() {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
 
-        Client clientToView = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        Client clientToView = model.getSortedFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         ClientViewCommand clientViewCommand = new ClientViewCommand(INDEX_FIRST_CLIENT);
 
         String expectedMessage = String.format(ClientViewCommand.MESSAGE_VIEW_CLIENT_SUCCESS, clientToView.getName());

@@ -53,15 +53,15 @@ public class ClientEditCommandTest {
         String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setClient(model.getFilteredClientList().get(0), editedClient);
+        expectedModel.setClient(model.getSortedFilteredClientList().get(0), editedClient);
 
         assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastClient = Index.fromOneBased(model.getFilteredClientList().size());
-        Client lastClient = model.getFilteredClientList().get(indexLastClient.getZeroBased());
+        Index indexLastClient = Index.fromOneBased(model.getSortedFilteredClientList().size());
+        Client lastClient = model.getSortedFilteredClientList().get(indexLastClient.getZeroBased());
 
         ClientBuilder clientInList = new ClientBuilder(lastClient);
         Client editedClient = clientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
@@ -83,7 +83,7 @@ public class ClientEditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         ClientEditCommand clientEditCommand = new ClientEditCommand(INDEX_FIRST_CLIENT, new EditClientDescriptor());
-        Client editedClient = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        Client editedClient = model.getSortedFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
 
         String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
@@ -96,7 +96,7 @@ public class ClientEditCommandTest {
     public void execute_filteredList_success() {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
 
-        Client clientInFilteredList = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        Client clientInFilteredList = model.getSortedFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         Client editedClient = new ClientBuilder(clientInFilteredList).withName(VALID_NAME_BOB).build();
         ClientEditCommand clientEditCommand = new ClientEditCommand(INDEX_FIRST_CLIENT,
                 new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -104,14 +104,14 @@ public class ClientEditCommandTest {
         String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setClient(model.getFilteredClientList().get(0), editedClient);
+        expectedModel.setClient(model.getSortedFilteredClientList().get(0), editedClient);
 
         assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_duplicateClientUnfilteredList_failure() {
-        Client firstClient = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        Client firstClient = model.getSortedFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         EditClientDescriptor descriptor = new EditClientDescriptorBuilder(firstClient).build();
         ClientEditCommand editCommand = new ClientEditCommand(INDEX_SECOND_CLIENT, descriptor);
 
@@ -132,7 +132,7 @@ public class ClientEditCommandTest {
 
     @Test
     public void execute_invalidClientIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredClientList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getSortedFilteredClientList().size() + 1);
         EditClientDescriptor descriptor = new EditClientDescriptorBuilder()
                 .withName(VALID_NAME_BOB).build();
         ClientEditCommand editCommand = new ClientEditCommand(outOfBoundIndex, descriptor);

@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -136,12 +137,12 @@ public interface Model {
     /**
      * Returns an unmodifiable view of the filtered client list.
      */
-    ObservableList<Client> getFilteredClientList();
+    ObservableList<Client> getSortedFilteredClientList();
 
     /**
      * Returns an unmodifiable view of the filtered client notes list.
      */
-    ObservableList<Note> getFilteredClientNotesList();
+    ObservableList<Note> getSortedFilteredClientNotesList();
 
     /**
      * Updates the filter of the filtered client list to filter by the given {@code predicate}.
@@ -149,6 +150,13 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredClientList(Predicate<Client> predicate);
+
+    /**
+     * Updates the order of the filtered client list using the give {@code comparator}.
+     *
+     * @throws NullPointerException if {@code comparator} is null.
+     */
+    void updateSortedFilteredClientList(Comparator<Client> comparator);
 
     /**
      * Returns an unmodifiable view of the filtered country notes list.
