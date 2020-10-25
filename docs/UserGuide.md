@@ -2,6 +2,7 @@
 layout: page
 title: User Guide
 ---
+<!-- NTS: end every sentence with a period -->
 <div>
     <div>
         <img src="images/TBM.png" width="160px">
@@ -31,21 +32,21 @@ title: User Guide
 
 <p>Before you start using <strong><i>TBM</i></strong>, </p>
 
-1. Ensure you have Java 11
+1. Ensure you have Java 11.
 
-1. Download the application file (.jar file) from [here](https://github.com/AY2021S1-CS2103T-F11-4/tp/releases)
+1. Download the application file (.jar file) from [here](https://github.com/AY2021S1-CS2103T-F11-4/tp/releases).
 
 1. Double click on the `tbm.jar` file found in the directory it was downloaded to.
 
 1. Alternatively, from the directory containing `tbm.jar`, shift right click and open any shell terminal in the current directory.
 
-1. Run `java -jar tbm.jar`
+1. Run `java -jar tbm.jar`.
 
 Now that you have started TBM, 
 
 1. Type any command in the command box and press Enter to execute it.
 
-1. (Recommended) The [`help`](#Viewing-help-help) command will show a quick page of some commonly used commands to get you started quickly, if you are a new user of TBM
+1. (Recommended) The [`help`](#Viewing-help-help) command will show a quick page of some commonly used commands to get you started quickly, if you are a new user of TBM,
 
    * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
@@ -75,7 +76,7 @@ Now that you have started TBM,
 
 ### Viewing all saved clients: `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all clients in the TBM.
 
 Format: `list`
 
@@ -96,19 +97,20 @@ Examples:
 * `client add 5 n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RUS tz/GMT+3 ce/2-3-2020`<br>
   This adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok, Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**, contract expiry date **2 Mar 2020**.
 
-### Viewing clients: `client view`
+### Viewing a client: `client view`
 
-View the client specified by the index.
+Views the client specified at the index.
 
 Format: `client view INDEX`
 
 Examples:
 
-* `client view 2` Views information for client at index 2 of the list panel
+* `client view 2` Views information of the client at index 2 of the list displayed on the panel.
 
 ### Finding clients: `client find`
 
-Finds clients whose names contain any of the given keywords, or whose country of residence contains any of the given keywords.
+Finds clients whose names contain any of the given keywords, or whose country of residence contains any of the given keywords.<br>
+:bulb: This is a good way to find clients belonging to a country. Although beware, if your client has a country name in their name, it will cause some issues!
 
 Format: `client find KEYWORD [MORE_KEYWORDS]`
 
@@ -116,7 +118,7 @@ Format: `client find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name and country are searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Clients matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo Russia` will return `Hans Gruber`, `Bo Yang`, `Alice Katya`
+* Clients matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo Russia` will return `Hans Gruber`, `Bo Yang`, `Alice Katya`.
 
 Examples:
 
