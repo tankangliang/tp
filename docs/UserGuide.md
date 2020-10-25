@@ -46,7 +46,7 @@ Now that you have started TBM,
 
 1. Type any command in the command box and press Enter to execute it.
 
-1. (Recommended) The [`help`](#Viewing-help-help) command will show a quick page of some commonly used commands to get you started quickly, if you are a new user of TBM,
+1. (Recommended) The [`help`](#Viewing-help-help) command will show a help page of some commonly used commands to fully utilise TBM, especially if you are a new user of TBM,
 
    * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
