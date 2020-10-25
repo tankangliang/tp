@@ -179,15 +179,13 @@
 }
 
 .result-display {
-    -fx-background-color: rgb(85,85,85);
+    -fx-background-color: -MAINGREY;
     -fx-font-size: 12pt;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-border-radius: 30;
     -fx-background-radius: 30;
     -fx-alignment: center-left;
-    -fx-padding: 15 0 0 0;
-
 }
 
 #resultDisplay .content {
@@ -195,6 +193,7 @@
     -fx-border-radius: 30;
     -fx-background-radius: 30;
     -fx-text-fill: white;
+    -fx-padding: 10 0 10 15;
 }
 
 #resultDisplay .scroll-pane {
@@ -395,7 +394,7 @@
 
 #clientListView {
     -fx-background-radius: 20;
-    -fx-border-radius: 20
+    -fx-border-radius: 20;
     -fx-background-color: -LIGHTGREY;
 }
 
