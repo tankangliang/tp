@@ -66,7 +66,8 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedNote note: notes) {
             Note modelNote = note.toModelType();
             if (note.isClientNote()) {
-                // handle client note
+                // handle client note:
+                // do nothing since clientNotes are already stored in clients when toModelType() is called
             } else {
                 // note is countryNote
                 addressBook.addCountryNote((CountryNote) modelNote);
@@ -74,5 +75,4 @@ class JsonSerializableAddressBook {
         }
         return addressBook;
     }
-
 }

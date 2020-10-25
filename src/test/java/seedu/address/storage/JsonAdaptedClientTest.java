@@ -2,18 +2,22 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.storage.JsonAdaptedClient.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.BENSON;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.Client;
 import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
@@ -21,6 +25,9 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryCodeVerifier;
+import seedu.address.model.note.Note;
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.ClientBuilder;
 
 public class JsonAdaptedClientTest {
     private static final String INVALID_NAME = "R@chel";
@@ -49,6 +56,19 @@ public class JsonAdaptedClientTest {
     public void toModelType_validClientDetails_returnsClient() throws Exception {
         JsonAdaptedClient client = new JsonAdaptedClient(BENSON);
         assertEquals(BENSON, client.toModelType());
+    }
+
+    @Test
+    public void toModelType_validClientWithTaggedClientNote_returnsTrue() throws IllegalValueException {
+        Client taggedClient = new ClientBuilder(BENSON).build();
+        Note taggedClientNote = new Note("some note");
+        Set<Tag> associatedTags = new HashSet<>();
+        associatedTags.add(new Tag("someTag"));
+        taggedClientNote.setTags(associatedTags);
+        taggedClient.addClientNote(taggedClientNote);
+        JsonAdaptedClient client = new JsonAdaptedClient(taggedClient);
+        assertDoesNotThrow(client::toModelType);
+        assertTrue(taggedClient.equals(client.toModelType()));
     }
 
     @Test
