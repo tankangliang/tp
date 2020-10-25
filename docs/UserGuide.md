@@ -264,7 +264,7 @@ Format: `country note delete INDEX`
 
 Examples:
 
-* `country note delete 1`
+* `country note delete 1` Deletes the country note at index 1 of the country notes list panel.
 
 ### Getting suggestions on clients: `suggest`
 
