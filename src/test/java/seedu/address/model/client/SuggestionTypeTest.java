@@ -28,6 +28,12 @@ public class SuggestionTypeTest {
     }
 
     @Test
+    public void getSuggestionPredicate_byContract_suggestContractPredicate() {
+        SuggestionType available = new SuggestionType(SuggestionType.BY_CONTRACT);
+        assertTrue(available.getSuggestionPredicate() instanceof SuggestContractPredicate);
+    }
+
+    @Test
     public void isValidSuggestionType_validSuggestionType_returnsTrue() {
         assertTrue(SuggestionType.isValidSuggestionType(SuggestionType.BY_AVAILABLE));
         assertTrue(SuggestionType.isValidSuggestionType(SuggestionType.BY_CONTRACT));
@@ -69,6 +75,17 @@ public class SuggestionTypeTest {
 
         // different suggestion type -> returns false
         assertNotEquals(available.hashCode(), new SuggestionType(SuggestionType.BY_CONTRACT).hashCode());
+    }
+
+    @Test
+    public void toString_test() {
+        SuggestionType available = new SuggestionType(SuggestionType.BY_AVAILABLE);
+        SuggestionType contract = new SuggestionType(SuggestionType.BY_CONTRACT);
+        SuggestionType frequency = new SuggestionType(SuggestionType.BY_FREQUENCY);
+        
+        assertEquals(available.toString(), "[available]");
+        assertEquals(contract.toString(), "[contract]");
+        assertEquals(frequency.toString(), "[frequency]");
     }
 
 }
