@@ -11,7 +11,7 @@ import seedu.address.model.note.CountryNote;
 /**
  * Adds a Country-specific Note.
  */
-public class CountryNoteCommand extends Command {
+public class CountryNoteAddCommand extends Command {
 
     public static final String COMMAND_WORD = "country note add";
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -30,7 +30,7 @@ public class CountryNoteCommand extends Command {
      *
      * @param countryNote The countryNote to be added.
      */
-    public CountryNoteCommand(CountryNote countryNote) {
+    public CountryNoteAddCommand(CountryNote countryNote) {
         requireNonNull(countryNote);
         this.countryNote = countryNote;
     }
@@ -54,12 +54,12 @@ public class CountryNoteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CountryNoteCommand)) {
+        if (!(other instanceof CountryNoteAddCommand)) {
             return false;
         }
 
         // state check
-        CountryNoteCommand c = (CountryNoteCommand) other;
+        CountryNoteAddCommand c = (CountryNoteAddCommand) other;
 
         return countryNote.equals(c.countryNote);
     }

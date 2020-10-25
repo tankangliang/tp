@@ -18,7 +18,7 @@ import seedu.address.logic.commands.ClientNoteDeleteCommand;
 import seedu.address.logic.commands.ClientViewCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CountryFilterCommand;
-import seedu.address.logic.commands.CountryNoteCommand;
+import seedu.address.logic.commands.CountryNoteAddCommand;
 import seedu.address.logic.commands.CountryNoteViewCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -141,7 +141,7 @@ public class AddressBookParser {
 
         String commandWord = COUNTRY_NOTE_TYPE + " " + commandType;
         switch (commandWord) {
-        case CountryNoteCommand.COMMAND_WORD:
+        case CountryNoteAddCommand.COMMAND_WORD:
             return new CountryNoteCommandParser().parse(restOfCommand);
 
         case CountryNoteViewCommand.COMMAND_WORD:

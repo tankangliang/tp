@@ -28,7 +28,7 @@ import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.commands.ClientNoteDeleteCommand;
 import seedu.address.logic.commands.ClientViewCommand;
 import seedu.address.logic.commands.CountryFilterCommand;
-import seedu.address.logic.commands.CountryNoteCommand;
+import seedu.address.logic.commands.CountryNoteAddCommand;
 import seedu.address.logic.commands.CountryNoteViewCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -109,10 +109,10 @@ public class AddressBookParserTest {
     public void parseCountryCommands_addCountryNote() throws Exception {
         final String countryString = "SG";
         final String noteString = "is hot";
-        final String commandString = CountryNoteCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString
+        final String commandString = CountryNoteAddCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString
                 + " " + PREFIX_NOTE + noteString;
-        CountryNoteCommand command = (CountryNoteCommand) parser.parseCommand(commandString);
-        assertEquals(new CountryNoteCommand(new CountryNote(noteString, new Country(countryString))), command);
+        CountryNoteAddCommand command = (CountryNoteAddCommand) parser.parseCommand(commandString);
+        assertEquals(new CountryNoteAddCommand(new CountryNote(noteString, new Country(countryString))), command);
     }
 
     @Test
