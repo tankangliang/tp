@@ -10,10 +10,12 @@ import seedu.address.logic.commands.CountryNoteAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
+import seedu.address.model.note.TagNoteMap;
 
 public class CountryNoteAddCommandParserTest {
 
-    private final CountryNoteAddCommandParser parser = new CountryNoteAddCommandParser();
+    private final TagNoteMap tagNoteMap = new TagNoteMap();
+    private final CountryNoteAddCommandParser parser = new CountryNoteAddCommandParser(tagNoteMap);
 
     @Test
     public void parse_noCountryNoNote_throwsParseException() {

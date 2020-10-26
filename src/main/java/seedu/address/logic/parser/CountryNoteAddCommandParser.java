@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.commands.CountryNoteAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.country.Country;
