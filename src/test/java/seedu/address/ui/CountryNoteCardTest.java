@@ -29,7 +29,7 @@ public class CountryNoteCardTest extends GuiUnitTest {
         guiRobot.pauseForHuman();
 
         CountryNoteCardHandle countryNoteCardHandle = new CountryNoteCardHandle(countryNoteCard.getRoot());
-        assertEquals(expectedId + ". " + expectedCard.getNoteContents() + " [Singapore (SG)]",
+        assertEquals(expectedId + ". " + expectedCard.getNoteContents() + " [" + expectedCard.getCountry() + "]",
                 countryNoteCardHandle.getCountryNoteContent());
     }
 }
