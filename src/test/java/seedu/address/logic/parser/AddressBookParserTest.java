@@ -106,7 +106,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCountryCommands_addCountryNote() throws Exception {
+    public void parseCountryCommands_addCountryNote_success() throws Exception {
         final String countryString = "SG";
         final String noteString = "is hot";
         final String commandString = CountryNoteAddCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString

@@ -316,7 +316,7 @@ Action | Format, Examples
 **Edit client note** | `client note edit CLIENT_INDEX NOTE_INDEX [nt/NOTE_STRING] [t/TAG]...` <br> e.g., `client note edit 3 2 nt/Loves cats`
 **Filter by country** | `country filter c/COUNTRY_CODE` <br> e.g., `country filter c/SG`
 **View country note** | `country note view [c/COUNTRY_CODE]` <br> e.g., `country note view c/SG`
-**Add country note** | `country note add c/COUNTRY_CODE nt/NOTE_STRING` <br> e.g., `country note c/SG nt/has one of the lowest coporate taxes in the world`
+**Add country note** | `country note add c/COUNTRY_CODE nt/NOTE_STRING` <br> e.g., `country note add c/SG nt/has one of the lowest coporate taxes in the world`
 **Delete country note** | `country note delete INDEX` <br> e.g., `country note delete 1`
 **Get suggestions** | `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...` <br> e.g., `suggest by/available by/frequency`
 **Clear** | `clear`
