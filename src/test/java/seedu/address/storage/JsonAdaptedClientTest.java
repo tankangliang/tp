@@ -49,7 +49,7 @@ public class JsonAdaptedClientTest {
     private static final String VALID_CONTRACT_EXPIRY_DATE = BENSON.getContractExpiryDate().toString();
     private static final String VALID_LAST_MODIFIED_INSTANT = BENSON.getLastModifiedInstant().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS =
-        BENSON.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
+             BENSON.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
     private List<JsonAdaptedNote> clientNotes = new ArrayList<>();
 
     @Test
@@ -74,7 +74,7 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
+                new JsonAdaptedClient(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
                 VALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS,
                 clientNotes);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
@@ -84,7 +84,7 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
+                new JsonAdaptedClient(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
                 VALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS,
                 clientNotes);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
@@ -94,7 +94,7 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
+                new JsonAdaptedClient(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
                 VALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS,
                 clientNotes);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
@@ -104,8 +104,9 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY, VALID_TIMEZONE,
-                VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS, clientNotes);
+                new JsonAdaptedClient(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
+                VALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS,
+                clientNotes);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
     }
@@ -113,7 +114,7 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
                 VALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS,
                 clientNotes);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
@@ -123,8 +124,9 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS, VALID_COUNTRY, VALID_TIMEZONE,
-                VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS, clientNotes);
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS, VALID_COUNTRY,
+                VALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS,
+                clientNotes);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
     }
@@ -132,7 +134,7 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_COUNTRY,
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS, VALID_COUNTRY,
                 VALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS,
                 clientNotes);
         String expectedMessage = Address.MESSAGE_CONSTRAINTS;
@@ -142,8 +144,9 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_COUNTRY, VALID_TIMEZONE,
-                VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS, clientNotes);
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, null, VALID_COUNTRY,
+                VALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS,
+                clientNotes);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
     }
@@ -151,7 +154,7 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_invalidCountry_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_COUNTRY,
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_COUNTRY,
                 VALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS,
                 clientNotes);
         String expectedMessage = CountryCodeVerifier.MESSAGE_CONSTRAINTS;
@@ -161,7 +164,7 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_nullCountry_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, null, VALID_TIMEZONE,
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, null, VALID_TIMEZONE,
                 VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS, clientNotes);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
@@ -170,7 +173,7 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_invalidTimezone_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
                 INVALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS,
                 clientNotes);
         String expectedMessage = Timezone.MESSAGE_CONSTRAINTS;
@@ -180,7 +183,7 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_nullTimezone_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY, null,
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY, null,
                 VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS, clientNotes);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Timezone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
@@ -189,7 +192,7 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_emptyContractExpiryDate_doesNotThrowException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
                 VALID_TIMEZONE, "", VALID_LAST_MODIFIED_INSTANT, VALID_TAGS, clientNotes);
         assertDoesNotThrow(() -> client.toModelType());
     }
@@ -197,7 +200,7 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_invalidContractExpiryDate_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
                 VALID_TIMEZONE, INVALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS,
                 clientNotes);
         String expectedMessage = ContractExpiryDate.MESSAGE_CONSTRAINTS;
@@ -207,17 +210,17 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_nullContractExpiryDate_throwsIllegalValueException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
                 VALID_TIMEZONE, null, VALID_LAST_MODIFIED_INSTANT, VALID_TAGS, clientNotes);
         String expectedMessage =
-            String.format(MISSING_FIELD_MESSAGE_FORMAT, ContractExpiryDate.class.getSimpleName());
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, ContractExpiryDate.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, client::toModelType);
     }
 
     @Test
     public void toModelType_invalidLastModifiedInstant_doesNotThrowException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
                 VALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, INVALID_LAST_MODIFIED_INSTANT, VALID_TAGS,
                 clientNotes);
         assertDoesNotThrow(client::toModelType);
@@ -226,7 +229,7 @@ public class JsonAdaptedClientTest {
     @Test
     public void toModelType_nullLastModifiedInstant_doesNotThrowException() {
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
                 VALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, null, VALID_TAGS, clientNotes);
         assertDoesNotThrow(client::toModelType);
     }
@@ -236,7 +239,7 @@ public class JsonAdaptedClientTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedClient client =
-            new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
+                new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_COUNTRY,
                 VALID_TIMEZONE, VALID_CONTRACT_EXPIRY_DATE, VALID_LAST_MODIFIED_INSTANT, invalidTags,
                 clientNotes);
         assertThrows(IllegalValueException.class, client::toModelType);
