@@ -5,7 +5,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane prefHeight="365.0" prefWidth="337.0" styleClass="widget-pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane prefHeight="365.0" prefWidth="337.0" styleClass="widget-pane" xmlns="http://javafx.com/javafx/8"
+           xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="viewBox">
          <children>
