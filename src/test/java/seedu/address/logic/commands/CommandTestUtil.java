@@ -43,6 +43,8 @@ public class CommandTestUtil {
     public static final String VALID_TIMEZONE_BOB = "GMT+7";
     public static final String VALID_CONTRACT_EXPIRY_DATE_AMY = "1-1-2022";
     public static final String VALID_CONTRACT_EXPIRY_DATE_BOB = "13-12-2021";
+    public static final String VALID_LAST_MODIFIED_INSTANT_AMY = "2020-10-10T00:00:00.000000Z";
+    public static final String VALID_LAST_MODIFIED_INSTANT_BOB = "2020-11-11T00:00:00.000000Z";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -129,24 +131,25 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Client> expectedFilteredList = new ArrayList<>(actualModel.getFilteredClientList());
+        List<Client> expectedFilteredList = new ArrayList<>(actualModel.getSortedFilteredClientList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredClientList());
+        assertEquals(expectedFilteredList, actualModel.getSortedFilteredClientList());
     }
+
     /**
      * Updates {@code model}'s filtered list to show only the client at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showClientAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredClientList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getSortedFilteredClientList().size());
 
-        Client client = model.getFilteredClientList().get(targetIndex.getZeroBased());
+        Client client = model.getSortedFilteredClientList().get(targetIndex.getZeroBased());
         final String[] splitName = client.getName().fullName.split("\\s+");
         model.updateFilteredClientList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredClientList().size());
+        assertEquals(1, model.getSortedFilteredClientList().size());
     }
 
 }

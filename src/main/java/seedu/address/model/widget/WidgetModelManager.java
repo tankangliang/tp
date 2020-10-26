@@ -13,6 +13,7 @@ import seedu.address.model.client.Client;
  * the filtered client list.
  */
 public class WidgetModelManager implements WidgetModel {
+
     private static final Logger logger = LogsCenter.getLogger(WidgetModelManager.class);
     private WidgetObject widgetObject;
 
@@ -24,6 +25,7 @@ public class WidgetModelManager implements WidgetModel {
         logger.info("----------------[ Creating WidgetModelManager ]");
         return new WidgetModelManager();
     }
+
     /**
      * <p>Sets the content to be displayed in the view box to be of that content. Break down the content into a
      * standardised format in specified in {@code WidgetOject}.</p>
@@ -76,8 +78,8 @@ public class WidgetModelManager implements WidgetModel {
                 .replace("[", "")
                 .replace("]", "");
 
-        newObj.set(/*header*/ name, /*div1*/ country, /*text1*/ timezone, /*div2*/ "", /*text2*/ email,
-                /*text3*/ phone, /*div3*/ "", /*text4 SCROLLABLE VIEW*/ notes, /*footer*/ tags);
+        newObj.set(/*header*/ name, /*div1*/ country, /*text1*/ timezone, /*div2*/ "", /*text2*/
+                email, /*text3*/ phone, /*div3*/ "", /*text4 SCROLLABLE VIEW*/ notes, /*footer*/ tags);
 
         return newObj;
     }

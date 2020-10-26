@@ -7,6 +7,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.LastModifiedInstant;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
@@ -34,6 +35,7 @@ public class ClientBuilder {
     private Country country;
     private Timezone timezone;
     private ContractExpiryDate contractExpiryDate;
+    private LastModifiedInstant lastModifiedInstant;
     private Set<Tag> tags;
 
     /**
@@ -47,6 +49,7 @@ public class ClientBuilder {
         country = new Country(DEFAULT_COUNTRY);
         timezone = new Timezone(DEFAULT_TIMEZONE);
         contractExpiryDate = new ContractExpiryDate(DEFAULT_CONTRACT_EXPIRY_DATE);
+        lastModifiedInstant = new LastModifiedInstant();
         tags = new HashSet<>();
     }
 
@@ -61,6 +64,7 @@ public class ClientBuilder {
         country = clientToCopy.getCountry();
         timezone = clientToCopy.getTimezone();
         contractExpiryDate = clientToCopy.getContractExpiryDate();
+        lastModifiedInstant = clientToCopy.getLastModifiedInstant();
         tags = new HashSet<>(clientToCopy.getTags());
     }
 
@@ -136,8 +140,29 @@ public class ClientBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ContractExpiryDate} of the {@code Client} that we are building.
+     */
+    public ClientBuilder withContractExpiryDate(ContractExpiryDate contractExpiryDate) {
+        this.contractExpiryDate = contractExpiryDate;
+        return this;
+    }
+
+    /**
+     * Sets the {@code LastModifiedInstant} of the {@code Client} that we are building.
+     */
+    public ClientBuilder withLastModifiedInstant(String lastModifiedInstant) {
+        this.lastModifiedInstant = new LastModifiedInstant(lastModifiedInstant);
+        return this;
+    }
+
+    /**
+     * Builds a client with the specified fields in {@code ClientBuilder}.
+     * @return Client with fields in {@code ClientBuilder}.
+     */
     public Client build() {
-        return new Client(name, phone, email, address, country, timezone, contractExpiryDate, tags);
+        return new Client(name, phone, email, address, country, timezone, contractExpiryDate,
+                lastModifiedInstant, tags);
     }
 
 }

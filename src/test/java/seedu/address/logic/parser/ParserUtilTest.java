@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
@@ -57,8 +58,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () ->
+                ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -325,5 +326,37 @@ public class ParserUtilTest {
                 new SuggestionType((VALID_SUGGESTION_TYPE_3))));
 
         assertEquals(expectedSuggestionTypeSet, actualSuggestionTypeSet);
+    }
+
+    @Test
+    public void parseContractExpiryDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseContractExpiryDate(null));
+    }
+
+    @Test
+    public void parseContractExpiryDate_blankString_returnsNullDate() throws ParseException {
+        assertEquals(ParserUtil.parseContractExpiryDate(""), ContractExpiryDate.NULL_DATE);
+        assertEquals(ParserUtil.parseContractExpiryDate("  "), ContractExpiryDate.NULL_DATE);
+    }
+
+    @Test
+    public void parseContractExpiryDate_invalidDateString_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseContractExpiryDate("2-2-100"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseContractExpiryDate("3/2/2020"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseContractExpiryDate("29/2/2021"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseContractExpiryDate("20/13/2022"));
+        assertThrows(ParseException.class, () -> ParserUtil.parseContractExpiryDate("31/1/2025"));
+    }
+
+    @Test
+    public void parseContractExpiryDate_validDateString_returns() throws ParseException {
+        String validDate1 = "2-3-2020";
+        String validDate2 = "30-10-20";
+        String minDate = "1-1-0000";
+        String maxDate = "31-12-9999";
+        assertEquals(ParserUtil.parseContractExpiryDate(validDate1), new ContractExpiryDate(validDate1));
+        assertEquals(ParserUtil.parseContractExpiryDate(validDate2), new ContractExpiryDate(validDate2));
+        assertEquals(ParserUtil.parseContractExpiryDate(minDate), new ContractExpiryDate(minDate));
+        assertEquals(ParserUtil.parseContractExpiryDate(maxDate), new ContractExpiryDate(maxDate));
     }
 }

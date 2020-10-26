@@ -15,6 +15,7 @@ import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
+import seedu.address.model.client.LastModifiedInstant;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
@@ -36,6 +37,7 @@ class JsonAdaptedClient {
     private final String country;
     private final String timezone;
     private final String contractExpiryDate;
+    private final String lastModifiedInstant;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -43,10 +45,11 @@ class JsonAdaptedClient {
      */
     @JsonCreator
     public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address,
-                             @JsonProperty("country") String country, @JsonProperty("timezone") String timezone,
-                             @JsonProperty("contractExpiryDate") String contractExpiryDate,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("country") String country, @JsonProperty("timezone") String timezone,
+            @JsonProperty("contractExpiryDate") String contractExpiryDate,
+            @JsonProperty("lastModifiedInstant") String lastModifiedInstant,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -54,6 +57,7 @@ class JsonAdaptedClient {
         this.country = country;
         this.timezone = timezone;
         this.contractExpiryDate = contractExpiryDate;
+        this.lastModifiedInstant = lastModifiedInstant;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -70,9 +74,8 @@ class JsonAdaptedClient {
         country = source.getCountry().getCountryCode();
         timezone = source.getTimezone().toString();
         contractExpiryDate = source.getContractExpiryDate().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        lastModifiedInstant = source.getLastModifiedInstant().toString();
+        tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**
@@ -128,7 +131,7 @@ class JsonAdaptedClient {
 
         if (timezone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Timezone.class.getSimpleName()));
+                Timezone.class.getSimpleName()));
         }
         if (!Timezone.isValidTimezone(timezone)) {
             throw new IllegalValueException(Timezone.MESSAGE_CONSTRAINTS);
@@ -137,17 +140,30 @@ class JsonAdaptedClient {
 
         if (contractExpiryDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ContractExpiryDate.class.getSimpleName()));
+                ContractExpiryDate.class.getSimpleName()));
         }
-        if (!ContractExpiryDate.isValidDate(contractExpiryDate)) {
+        // It's possible for contractExpiryDate to have an empty String as a value, which would indicate
+        // the client has no contractExpiryDate set, and {@code ParserUtil.parseContractExpiryDate} will parse it into
+        // a {@code ContractExpiryDate.NULL_DATE}
+        if (!contractExpiryDate.isEmpty() && !ContractExpiryDate.isValidDate(contractExpiryDate)) {
             throw new IllegalValueException(ContractExpiryDate.MESSAGE_CONSTRAINTS);
         }
         final ContractExpiryDate modelContractExpiryContractExpiryDate =
                 ParserUtil.parseContractExpiryDate(contractExpiryDate);
 
+        // Does not throw an exception if lastModifiedInstant is missing/invalid due to corruption of data.
+        // This field is merely metadata for us and is not significant enough to discard client's data due to this
+        // field being missing.
+        LastModifiedInstant modelLastModifiedInstant;
+        if (lastModifiedInstant == null) {
+            modelLastModifiedInstant = new LastModifiedInstant();
+        } else {
+            modelLastModifiedInstant = new LastModifiedInstant(lastModifiedInstant);
+        }
+
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTimezone,
-                modelContractExpiryContractExpiryDate, modelTags);
+        return new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry,
+            modelTimezone, modelContractExpiryContractExpiryDate, modelLastModifiedInstant, modelTags);
     }
 
 }

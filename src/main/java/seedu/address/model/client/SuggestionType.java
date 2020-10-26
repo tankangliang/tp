@@ -3,6 +3,7 @@ package seedu.address.model.client;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 /**
@@ -15,7 +16,7 @@ public class SuggestionType {
     public static final String BY_AVAILABLE = "available";
     public static final String BY_CONTRACT = "contract";
     public static final String MESSAGE_CONSTRAINTS = "Suggestion type can only be of the following: "
-        + BY_FREQUENCY + ", " + BY_AVAILABLE + ", " + BY_CONTRACT;
+            + BY_FREQUENCY + ", " + BY_AVAILABLE + ", " + BY_CONTRACT;
 
     public final String suggestionString;
 
@@ -30,12 +31,15 @@ public class SuggestionType {
         this.suggestionString = suggestionString;
     }
 
+    /**
+     * Returns this suggestion type's predicate.
+     */
     public Predicate<Client> getSuggestionPredicate() {
         switch (suggestionString) {
         case BY_AVAILABLE:
             return new SuggestAvailabilityPredicate();
         case BY_CONTRACT:
-            return client -> true;
+            return new SuggestContractPredicate();
         case BY_FREQUENCY:
             return client -> true;
         default:
@@ -45,9 +49,27 @@ public class SuggestionType {
     }
 
     /**
-     * Returns true if a given string is a valid tag name.
+     * Returns this suggestion type's comparator.
+     */
+    public Comparator<Client> getSuggestionComparator() {
+        switch (suggestionString) {
+        case BY_AVAILABLE:
+            return (client1, client2) -> 0;
+        case BY_CONTRACT:
+            return Comparator.comparing(Client::getContractExpiryDate);
+        case BY_FREQUENCY:
+            return Comparator.comparing(Client::getLastModifiedInstant);
+        default:
+            assert false; // code execution will never reach here
+            return null;
+        }
+    }
+
+    /**
+     * Returns true if a given string is a valid suggestion type name.
      */
     public static boolean isValidSuggestionType(String test) {
+        requireNonNull(test);
         return test.equals(BY_FREQUENCY) || test.equals(BY_AVAILABLE) || test.equals(BY_CONTRACT);
     }
 

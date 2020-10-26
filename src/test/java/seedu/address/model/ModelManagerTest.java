@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.client.SuggestionType;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
@@ -84,7 +85,7 @@ public class ModelManagerTest {
 
     @Test
     public void deleteClient_deleteExistingClient_returnsTrue() {
-        Client target = ALICE;
+        Client target = new ClientBuilder(ALICE).build();
         modelManager.addClient(target);
         assertTrue(modelManager.hasClient(ALICE));
         modelManager.deleteClient(target);
@@ -103,8 +104,10 @@ public class ModelManagerTest {
 
     @Test
     public void hasClient_clientInAddressBook_returnsTrue() {
-        modelManager.addClient(ALICE);
-        assertTrue(modelManager.hasClient(ALICE));
+        Client client = new ClientBuilder(ALICE).build();
+        assertFalse(modelManager.hasClient(client));
+        modelManager.addClient(client);
+        assertTrue(modelManager.hasClient(client));
     }
 
     @Test
@@ -118,13 +121,13 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredClientList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredClientList().remove(0));
+    public void getSortedFilteredClientList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> modelManager.getSortedFilteredClientList().remove(0));
     }
 
     @Test
     public void addAndHasClientNote_validSyntax_updatesCorrectly() {
-        Client client = ALICE;
+        Client client = new ClientBuilder(ALICE).build();
         Note clientNote = new Note("this be a client note");
         assertFalse(modelManager.hasClientNote(client, clientNote));
         modelManager.addClientNote(client, clientNote);
@@ -174,6 +177,11 @@ public class ModelManagerTest {
         // different addressBook -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
+        // different userPrefs -> returns false
+        UserPrefs differentUserPrefs = new UserPrefs();
+        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredClientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
@@ -182,10 +190,15 @@ public class ModelManagerTest {
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
-        // different userPrefs -> returns false
-        UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        // different sortedList -> returns false
+        modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManagerCopy.updateSortedFilteredClientList((client1, client2) -> 1);
+        assertFalse(modelManager.equals(modelManagerCopy));
+
+        // different tagNoteMap -> returns false
+        modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManagerCopy.addClientNote(new ClientBuilder().build(), new Note("client note"));
+        assertFalse(modelManager.equals(modelManagerCopy));
     }
 
     @Test
@@ -194,10 +207,86 @@ public class ModelManagerTest {
         tags.add(new Tag("tagName"));
         Note taggedNote = new Note("jurong hill was a nice place");
         taggedNote.setTags(tags);
-        Client aliceTagged = ALICE;
+        Client aliceTagged = new ClientBuilder(ALICE).build();
         aliceTagged.addClientNote(taggedNote);
         this.modelManager.addClient(aliceTagged);
         assertDoesNotThrow(() -> this.modelManager.initialiseTagNoteMap());
+    }
+
+    @Test
+    public void addCountryNote_validCountryNote_addCountryNote() {
+        CountryNote countryNote = new CountryNote("some", new Country("SG"));
+        assertFalse(modelManager.hasCountryNote(countryNote));
+        modelManager.addCountryNote(countryNote);
+        assertTrue(modelManager.hasCountryNote(countryNote));
+    }
+
+    @Test
+    public void updateFilteredCountryNoteList_truePredicate_showAllCountryNotes() {
+        int initialSize = modelManager.getFilteredCountryNoteList().size();
+        modelManager.updateFilteredCountryNoteList(countryNote -> true);
+        assertEquals(initialSize, modelManager.getFilteredCountryNoteList().size());
+    }
+
+    @Test
+    public void updateFilteredCountryNoteList_falsePredicate_showNoneCountryNotes() {
+        modelManager.updateFilteredCountryNoteList(countryNote -> false);
+        assertEquals(0, modelManager.getFilteredCountryNoteList().size());
+    }
+
+    @Test
+    public void updateFilteredCountryNoteList_countryPredicate_showRelevantCountryNotes() {
+        modelManager.addCountryNote(new CountryNote("random", new Country("SG")));
+        modelManager.updateFilteredCountryNoteList(countryNote -> true);
+        int expect = (int) modelManager.getFilteredCountryNoteList()
+                .stream()
+                .filter(countryNote -> countryNote.getCountry().equals(new Country("SG")))
+                .count();
+        modelManager.updateFilteredCountryNoteList(countryNote -> countryNote.getCountry().equals(new Country("SG")));
+        assertEquals(expect, modelManager.getFilteredCountryNoteList().size());
+    }
+
+    @Test
+    public void deleteCountryNote_validCountryNote_updateCountryNoteList() {
+        modelManager.addCountryNote(new CountryNote("random", new Country("SG")));
+        modelManager.updateFilteredCountryNoteList(countryNote -> true);
+        int initial = modelManager.getFilteredCountryNoteList().size();
+        modelManager.deleteCountryNote(modelManager.getFilteredCountryNoteList().get(0));
+        assertEquals(initial - 1, modelManager.getFilteredCountryNoteList().size());
+    }
+
+    @Test
+    public void updateSortedFilteredClientList_zeroComparator_sameOrderOfClients() {
+        AddressBook addressBook = new AddressBookBuilder().withClient(ALICE).withClient(BENSON).build();
+        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+        modelManagerCopy.updateSortedFilteredClientList((client1, client2) -> 0);
+        assertEquals(modelManagerCopy, new ModelManager(addressBook, new UserPrefs()));
+    }
+
+    @Test
+    public void updateSortedFilteredClientList_contractComparator_correctOrderOfClients() {
+        Client client1 = new ClientBuilder().withName("client1").withContractExpiryDate("2-3-2020").build();
+        Client client2 = new ClientBuilder().withName("client2").withContractExpiryDate("1-3-2020").build();
+        AddressBook addressBook = new AddressBookBuilder().withClient(client1).withClient(client2).build();
+        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+        assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client1);
+        modelManagerCopy.updateSortedFilteredClientList(
+                new SuggestionType(SuggestionType.BY_CONTRACT).getSuggestionComparator());
+        assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client2);
+    }
+
+    @Test
+    public void updateSortedFilteredClientList_frequencyComparator_correctOrderOfClients() {
+        Client client1 = new ClientBuilder().withName("client1")
+                .withLastModifiedInstant("2020-01-01T00:00:00.000000Z").build();
+        Client client2 = new ClientBuilder().withName("client2")
+                .withLastModifiedInstant("2020-01-02T00:00:00.000000Z").build();
+        AddressBook addressBook = new AddressBookBuilder().withClient(client1).withClient(client2).build();
+        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+        assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client1);
+        modelManagerCopy.updateSortedFilteredClientList(
+                new SuggestionType(SuggestionType.BY_FREQUENCY).getSuggestionComparator());
+        assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client2);
     }
 
     /* todo future tests:

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
-import seedu.address.testutil.TypicalClients;
+import seedu.address.testutil.ClientBuilder;
 
 
 public class ClientNoteAddCommandTest {
@@ -24,7 +25,7 @@ public class ClientNoteAddCommandTest {
     private static final String NOTE_CONTENT_2 = "client note content 2";
     private static final String NOTE_CONTENT_3 = "client note content 3";
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
@@ -36,10 +37,11 @@ public class ClientNoteAddCommandTest {
 
     @Test
     public void execute_duplicateClientNote_throwsCommandException() {
-        Client client = TypicalClients.ALICE;
-        // todo: question: how come if I modify it to ClientBuilder().build(), it will fail this test?
+        model = new ModelManager();
+        Client client = new ClientBuilder(ALICE).build();
         Index idx = Index.fromOneBased(1);
         Note clientNote = new Note(NOTE_CONTENT_1);
+        model.addClient(client);
         model.addClientNote(client, clientNote);
         ClientNoteAddCommand clientNoteAddCommand = new ClientNoteAddCommand(idx, clientNote);
         assertThrows(CommandException.class, () -> clientNoteAddCommand.execute(model));
@@ -48,7 +50,9 @@ public class ClientNoteAddCommandTest {
     @Test
     public void execute_notDuplicateClientNote_successfullyAddsClientNote() {
         try {
-            Client client = TypicalClients.ALICE;
+            model = new ModelManager();
+            Client client = new ClientBuilder(ALICE).build();
+            model.addClient(client);
             Index idx = Index.fromOneBased(1);
             Note clientNote2 = new Note(NOTE_CONTENT_2);
             Note clientNote3 = new Note(NOTE_CONTENT_3);

@@ -29,7 +29,7 @@ public class ClientAddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_COUNTRY + "COUNTRY_CODE "
             + PREFIX_TIMEZONE + "TIMEZONE "
-            + PREFIX_CONTRACT_EXPIRY_DATE + "CONTRACT_EXPIRY_DATE "
+            + "[" + PREFIX_CONTRACT_EXPIRY_DATE + "CONTRACT_EXPIRY_DATE" + "] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "

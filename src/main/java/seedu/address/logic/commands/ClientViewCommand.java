@@ -9,6 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.ui.WidgetViewOption;
 
 /**
  * Views a client identified by its displayed index. Displayed on the widget view box.
@@ -42,7 +43,7 @@ public class ClientViewCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Client> lastShownList = model.getFilteredClientList();
+        List<Client> lastShownList = model.getSortedFilteredClientList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
@@ -50,8 +51,9 @@ public class ClientViewCommand extends Command {
 
         Client clientToView = lastShownList.get(targetIndex.getZeroBased());
         model.setWidgetContent(clientToView);
+
         return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, clientToView.getName()),
-                false, false, true);
+                false, false, WidgetViewOption.generateClientWidgetOption());
     }
 
     @Override

@@ -5,8 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTRACT_EXPIRY_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNTRY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LAST_MODIFIED_INSTANT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -54,7 +56,7 @@ public class ClientTest {
 
         // same name, same phone, same email, different attributes -> returns true
         editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .withCountry(VALID_COUNTRY_BOB).build();
+                .withCountry(VALID_COUNTRY_BOB).withLastModifiedInstant(VALID_LAST_MODIFIED_INSTANT_BOB).build();
         assertTrue(ALICE.isSameClient(editedAlice));
 
         // TODO: Add tests with modified notes
@@ -98,6 +100,14 @@ public class ClientTest {
         editedAlice = new ClientBuilder(ALICE).withCountry(VALID_COUNTRY_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
+        // different contract expiry date -> returns false
+        editedAlice = new ClientBuilder(ALICE).withContractExpiryDate(VALID_CONTRACT_EXPIRY_DATE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different last modified instant -> returns true
+        editedAlice = new ClientBuilder(ALICE).withLastModifiedInstant(VALID_LAST_MODIFIED_INSTANT_BOB).build();
+        assertTrue(ALICE.equals(editedAlice));
+
         // different tags -> returns false
         editedAlice = new ClientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
@@ -136,6 +146,14 @@ public class ClientTest {
         // different country -> hashCode is different
         editedAlice = new ClientBuilder(ALICE).withCountry(VALID_COUNTRY_BOB).build();
         assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different contract expiry date -> hashCode is different
+        editedAlice = new ClientBuilder(ALICE).withContractExpiryDate(VALID_CONTRACT_EXPIRY_DATE_BOB).build();
+        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
+
+        // different last modified instant -> hashCode is same
+        editedAlice = new ClientBuilder(ALICE).withLastModifiedInstant(VALID_LAST_MODIFIED_INSTANT_BOB).build();
+        assertEquals(ALICE.hashCode(), editedAlice.hashCode());
 
         // different tags -> hashCode is different
         editedAlice = new ClientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();

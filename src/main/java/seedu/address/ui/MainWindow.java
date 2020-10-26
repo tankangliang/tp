@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private WidgetViewBox widgetViewBox;
+    private CountryNoteListPanel countryNoteListPanel;
     @FXML
     private StackPane widgetPlaceholder;
     @FXML
@@ -114,6 +115,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         widgetViewBox = new WidgetViewBox();
+        countryNoteListPanel = new CountryNoteListPanel(logic.getFilteredCountryNoteList());
         widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
 
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());
@@ -184,8 +186,18 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isView()) {
+            logger.info("Widget View Option: " + commandResult.getWidgetViewOptionAsString());
+
+            if (commandResult.shouldDisplayClient()) {
+                logger.info("Toggling client view");
+                widgetPlaceholder.getChildren().clear();
+                widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
                 widgetViewBox.update(logic.getWidgetContent());
+            } else if (commandResult.shouldDisplayCountryNote()) {
+                logger.info("Toggling country notes view");
+                widgetPlaceholder.getChildren().clear();
+                countryNoteListPanel.setHeader(commandResult.getCountry());
+                widgetPlaceholder.getChildren().add(countryNoteListPanel.getRoot());
             }
 
             if (commandResult.isShowHelp()) {

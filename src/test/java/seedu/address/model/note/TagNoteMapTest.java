@@ -115,10 +115,4 @@ class TagNoteMapTest {
         assertTrue(emptyTagNoteMap.equals(this.tagNoteMap));
         assertFalse(this.tagNoteMap.equals(randomObject));
     }
-
-    /*  todo Future test cases:
-     *      1. test constructor and other methods for ensuring the code coverage
-     *      2.
-     *
-     * */
 }

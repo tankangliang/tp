@@ -57,7 +57,7 @@ public class TimezoneTest {
         // use System clock to test
         // adapted from https://www.w3resource.com/java-exercises/datatypes/java-datatype-exercise-5.php
         for (int timezoneOffset = -1 * Timezone.SMALLEST_NEGATIVE_OFFSET;
-            timezoneOffset <= Timezone.LARGEST_POSITIVE_OFFSET; timezoneOffset++) {
+                timezoneOffset <= Timezone.LARGEST_POSITIVE_OFFSET; timezoneOffset++) {
             long totalMilliseconds = System.currentTimeMillis();
             long totalSeconds = totalMilliseconds / 1000;
             long totalMinutes = totalSeconds / 60;

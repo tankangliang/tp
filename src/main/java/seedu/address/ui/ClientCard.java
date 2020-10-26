@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -7,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.client.Client;
 
 /**
@@ -29,6 +32,8 @@ public class ClientCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private VBox clientFields;
+    @FXML
     private Label name;
     @FXML
     private Label id;
@@ -43,8 +48,6 @@ public class ClientCard extends UiPart<Region> {
     @FXML
     private Label timezone;
     @FXML
-    private Label contractExpiryDate;
-    @FXML
     private FlowPane tags;
 
     /**
@@ -52,6 +55,7 @@ public class ClientCard extends UiPart<Region> {
      */
     public ClientCard(Client client, int displayedIndex) {
         super(FXML);
+        requireAllNonNull(client);
         this.client = client;
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
@@ -60,7 +64,11 @@ public class ClientCard extends UiPart<Region> {
         email.setText(client.getEmail().value);
         country.setText(client.getCountry().getCountryName());
         timezone.setText(client.getTimezone().toString());
-        contractExpiryDate.setText(client.getContractExpiryDate().value);
+        if (!client.getContractExpiryDate().isNullDate) {
+            Label dateLabel = new Label(client.getContractExpiryDate().displayValue);
+            dateLabel.getStyleClass().add("cell_small_label");
+            clientFields.getChildren().add(dateLabel);
+        }
         client.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

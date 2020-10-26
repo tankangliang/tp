@@ -1,15 +1,13 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClientNoteDeleteCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 class ClientNoteDeleteCommandParserTest {
     private static final String EXPECTED_PARSE_FAILURE_MESSAGE =
@@ -30,15 +28,13 @@ class ClientNoteDeleteCommandParserTest {
     }
 
     @Test
-    public void parse_correctUserInput_doesNotThrowExceptionReturnsTrue() throws ParseException {
+    public void parse_correctUserInput_doesNotThrowExceptionReturnsTrue() {
         Index expectedClientIndex = Index.fromOneBased(1);
         Index expectedClientNoteIndex = Index.fromOneBased(12);
         ClientNoteDeleteCommand expectedCommand =
                 new ClientNoteDeleteCommand(expectedClientIndex, expectedClientNoteIndex);
         String restOfCommand = "1 12";
-        assertDoesNotThrow(() -> parser.parse(restOfCommand));
-        ClientNoteDeleteCommand actualCommand = parser.parse(restOfCommand);
-        assertEquals(actualCommand, expectedCommand);
+        assertParseSuccess(parser, restOfCommand, expectedCommand);
     }
 
 

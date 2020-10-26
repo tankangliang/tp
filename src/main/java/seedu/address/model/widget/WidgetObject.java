@@ -6,19 +6,11 @@ import java.util.Arrays;
  * A standardised way to render content on the widget view box.
  * Truncates anything that does not fit into the defined 8 divisions/sections for the displaying in the view box.
  * Defined format for fields to be displayed is:
- * <ol>
- *     <li>Header</li>
- *     <li>Div 1</li>
- *     <li>Text 1</li>
- *     <li>Div 2</li>
- *     <li>Text 2</li>
- *     <li>Text 3</li>
- *     <li>Div 3</li>
- *     <li>Text 4</li>
- *     <li>Footer</li>
- * </ol>
+ *
+ * The object mainly displays the information of the client.
  */
 public class WidgetObject {
+    //TODO: Aesthetics of client info
 
     public static final int NUMBER_OF_FIELDS = 9;
     private static final int HEADER_POS = 0;
@@ -30,7 +22,6 @@ public class WidgetObject {
     private static final int DIVTHREE_POS = 6;
     private static final int TEXTFOUR_POS = 7;
     private static final int FOOTER_POS = 8;
-
 
     /**
      * Array is a collection of the fields to be mapped to the widget Ui component.

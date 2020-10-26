@@ -28,7 +28,8 @@ import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.commands.ClientNoteDeleteCommand;
 import seedu.address.logic.commands.ClientViewCommand;
 import seedu.address.logic.commands.CountryFilterCommand;
-import seedu.address.logic.commands.CountryNoteCommand;
+import seedu.address.logic.commands.CountryNoteAddCommand;
+import seedu.address.logic.commands.CountryNoteViewCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -105,15 +106,13 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCountryCommands_addCountryNote() throws Exception {
+    public void parseCountryCommands_addCountryNote_success() throws Exception {
         final String countryString = "SG";
         final String noteString = "is hot";
-        final String commandString = CountryNoteCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString
+        final String commandString = CountryNoteAddCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString
                 + " " + PREFIX_NOTE + noteString;
-        CountryNoteCommand command = (CountryNoteCommand) parser.parseCommand(commandString);
-        assertEquals(
-            new CountryNoteCommand(new CountryNote(noteString, new Country(countryString))),
-            command);
+        CountryNoteAddCommand command = (CountryNoteAddCommand) parser.parseCommand(commandString);
+        assertEquals(new CountryNoteAddCommand(new CountryNote(noteString, new Country(countryString))), command);
     }
 
     @Test
@@ -124,6 +123,14 @@ public class AddressBookParserTest {
         final ClientCountryMatchesInputCountryPredicate predicate =
                 new ClientCountryMatchesInputCountryPredicate(new Country(countryString));
         assertEquals(new CountryFilterCommand(predicate), command);
+    }
+
+    @Test
+    public void parseCountryCommands_countryNoteView() throws Exception {
+        final String countryString = "SG";
+        final String commandString = CountryNoteViewCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString;
+        CountryNoteViewCommand command = (CountryNoteViewCommand) parser.parseCommand(commandString);
+        assertEquals(new CountryNoteViewCommand(new Country(countryString)), command);
     }
 
     @Test
@@ -141,6 +148,8 @@ public class AddressBookParserTest {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
                 parser.parseCommand("country unknownCommand "));
     }
+
+    //TODO: add tests when country commands are finalized
 
     @Test
     public void parseClientNoteCommands_addClientNote() throws Exception {
@@ -207,8 +216,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand(""));
     }
 
     @Test

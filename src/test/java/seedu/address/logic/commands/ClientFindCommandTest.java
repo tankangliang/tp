@@ -61,7 +61,7 @@ public class ClientFindCommandTest {
         ClientFindCommand command = new ClientFindCommand(predicate);
         expectedModel.updateFilteredClientList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredClientList());
+        assertEquals(Collections.emptyList(), model.getSortedFilteredClientList());
     }
 
     @Test
@@ -71,7 +71,7 @@ public class ClientFindCommandTest {
         ClientFindCommand command = new ClientFindCommand(predicate);
         expectedModel.updateFilteredClientList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredClientList());
+        assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getSortedFilteredClientList());
     }
 
     /**

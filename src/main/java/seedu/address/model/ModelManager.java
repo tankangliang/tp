@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
@@ -33,6 +35,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
+    private final SortedList<Client> sortedFilteredClients;
+    private final FilteredList<CountryNote> filteredCountryNotes;
     private final WidgetModel widget;
     private final TagNoteMap tagNoteMap;
 
@@ -49,6 +53,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         this.widget = WidgetModel.initWidget();
         filteredClients = new FilteredList<>(this.addressBook.getClientList());
+        sortedFilteredClients = new SortedList<>(filteredClients);
+        filteredCountryNotes = new FilteredList<>(this.addressBook.getCountryNoteList());
         this.tagNoteMap = new TagNoteMap();
     }
 
@@ -133,7 +139,6 @@ public class ModelManager implements Model {
         for (Note note : clientNotes) {
             Set<Tag> tags = note.getTags();
             updateTagNoteMapWithNote(tags, note);
-            updateTagNoteMapWithNote(tags, note);
         }
     }
 
@@ -162,22 +167,29 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteCountryNote(CountryNote countryNoteToDelete) {
+        requireNonNull(countryNoteToDelete);
+        addressBook.deleteCountryNote(countryNoteToDelete);
+    }
+
+    @Override
     public void addClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
         target.addClientNote(clientNote);
         // update the TagNoteMap:
         Set<Tag> newTags = clientNote.getTags();
-        this.tagNoteMap.updateTagsForNote(newTags, clientNote);
+        this.tagNoteMap.addTagsForNote(newTags, clientNote);
     }
 
     @Override
     public void updateTagNoteMapWithNote(Set<Tag> newTags, Note note) {
-        this.tagNoteMap.updateTagsForNote(newTags, note);
+        this.tagNoteMap.addTagsForNote(newTags, note);
     }
 
     /**
      * Initialises TagNoteMap from Clients notes and Country notes.
      */
+    @Override
     public void initialiseTagNoteMap() {
         this.tagNoteMap.initTagNoteMapFromClients(this.addressBook.getClientList());
         //        this.countryManager.getAllCountryNotesAsCollectionOfSets()
@@ -192,29 +204,22 @@ public class ModelManager implements Model {
     @Override
     public void deleteClientNote(Client associatedClient, Note noteToDelete) {
         requireAllNonNull(associatedClient, noteToDelete);
-        // update tagNoteMap
-        // todo: Ritesh implement delete in the Client class and add tests to cover this method
         this.tagNoteMap.deleteNote(noteToDelete);
         associatedClient.deleteClientNote(noteToDelete);
     }
 
     //=========== Filtered Client List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of {@code
-     * versionedAddressBook}
-     */
     @Override
-    public ObservableList<Client> getFilteredClientList() {
-        return filteredClients;
+    public ObservableList<Client> getSortedFilteredClientList() {
+        return sortedFilteredClients;
     }
 
     @Override
-    public ObservableList<Note> getFilteredClientNotesList() {
+    public ObservableList<Note> getSortedFilteredClientNotesList() {
         // todo: depends on UI display of client notes and their index
-        ObservableList<Client> currentClients = this.getFilteredClientList();
         List<Note> clientNotes = new ArrayList<>();
-        for (Client client : currentClients) {
+        for (Client client : getSortedFilteredClientList()) {
             clientNotes.addAll(client.getClientNotes());
         }
         return FXCollections.observableList(clientNotes);
@@ -224,6 +229,23 @@ public class ModelManager implements Model {
     public void updateFilteredClientList(Predicate<Client> predicate) {
         requireNonNull(predicate);
         filteredClients.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortedFilteredClientList(Comparator<Client> comparator) {
+        requireNonNull(comparator);
+        sortedFilteredClients.setComparator(comparator);
+    }
+
+    @Override
+    public ObservableList<CountryNote> getFilteredCountryNoteList() {
+        return filteredCountryNotes;
+    }
+
+    @Override
+    public void updateFilteredCountryNoteList(Predicate<CountryNote> predicate) {
+        requireNonNull(predicate);
+        filteredCountryNotes.setPredicate(predicate);
     }
 
     @Override
@@ -242,7 +264,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredClients.equals(other.filteredClients)
+                && sortedFilteredClients.equals(other.sortedFilteredClients)
                 && tagNoteMap.equals(other.tagNoteMap);
     }
 

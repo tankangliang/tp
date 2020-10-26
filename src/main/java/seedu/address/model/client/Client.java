@@ -31,12 +31,13 @@ public class Client {
     private final ContractExpiryDate contractExpiryDate;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Note> clientNotes = new LinkedHashSet<>(); // todo: initialise this iff client has notes
+    private final LastModifiedInstant lastModifiedInstant;
 
     /**
      * Every field must be present and not null.
      */
     public Client(Name name, Phone phone, Email email, Address address, Country country, Timezone timezone,
-                  ContractExpiryDate contractExpiryDate, Set<Tag> tags) {
+            ContractExpiryDate contractExpiryDate, LastModifiedInstant lastModifiedInstant, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, country, timezone, contractExpiryDate, tags);
         this.name = name;
         this.phone = phone;
@@ -45,6 +46,7 @@ public class Client {
         this.country = country;
         this.timezone = timezone;
         this.contractExpiryDate = contractExpiryDate;
+        this.lastModifiedInstant = lastModifiedInstant;
         this.tags.addAll(tags);
     }
 
@@ -74,6 +76,10 @@ public class Client {
 
     public ContractExpiryDate getContractExpiryDate() {
         return contractExpiryDate;
+    }
+
+    public LastModifiedInstant getLastModifiedInstant() {
+        return lastModifiedInstant;
     }
 
     /**

@@ -20,6 +20,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.exceptions.DuplicateClientException;
+import seedu.address.model.country.Country;
+import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.testutil.ClientBuilder;
 
@@ -84,6 +86,24 @@ public class AddressBookTest {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getClientList().remove(0));
     }
 
+    @Test
+    public void addCountryNote_updateCountryNoteList() {
+        CountryNote countryNote = new CountryNote("random", new Country("SG"));
+        assertFalse(addressBook.hasCountryNote(countryNote));
+        addressBook.addCountryNote(countryNote);
+        assertTrue(addressBook.hasCountryNote(countryNote));
+    }
+
+    @Test
+    public void deleteCountryNote_updateCountryNoteList() {
+        CountryNote countryNote = new CountryNote("random2", new Country("SG"));
+        assertFalse(addressBook.hasCountryNote(countryNote));
+        addressBook.addCountryNote(countryNote);
+        assertTrue(addressBook.hasCountryNote(countryNote));
+        addressBook.deleteCountryNote(countryNote);
+        assertFalse(addressBook.hasCountryNote(countryNote));
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose clients list can violate interface constraints.
      */
@@ -101,6 +121,11 @@ public class AddressBookTest {
 
         @Override
         public ObservableList<Note> getNoteList() {
+            return null;
+        }
+
+        @Override
+        public ObservableList<CountryNote> getCountryNoteList() {
             return null;
         }
     }
