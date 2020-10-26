@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -177,8 +178,6 @@ public class ModelManager implements Model {
     public void addClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
         target.addClientNote(clientNote);
-        // update the TagNoteMap:
-        // todo: update address book to reflect the new note added?
         Set<Tag> newTags = clientNote.getTags();
         this.tagNoteMap.addTagsForNote(newTags, clientNote);
     }
@@ -194,9 +193,8 @@ public class ModelManager implements Model {
     @Override
     public void initialiseTagNoteMap() {
         this.tagNoteMap.initTagNoteMapFromClients(this.addressBook.getClientList());
-        //        this.countryManager.getAllCountryNotesAsCollectionOfSets()
-        //                .forEach(this.tagNoteMap::initTagNoteMapFromCountryNotes);
         // todo: initialiseTagNoteMap probably has to be changed to use AddressBook#getNoteList()
+        this.tagNoteMap.initTagNoteMapFromCountryNotes(new HashSet<>(this.addressBook.getCountryNoteList()));
     }
 
     public TagNoteMap getTagNoteMap() {

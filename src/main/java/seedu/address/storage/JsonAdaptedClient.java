@@ -33,6 +33,8 @@ class JsonAdaptedClient {
 
     private final String name;
     private final String phone;
+
+
     private final String email;
     private final String address;
     private final String country;
@@ -84,7 +86,7 @@ class JsonAdaptedClient {
         lastModifiedInstant = source.getLastModifiedInstant().toString();
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         clientNotes
-            .addAll(source.getClientNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toSet()));
+                .addAll(source.getClientNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toSet()));
     }
 
     /**
@@ -104,7 +106,7 @@ class JsonAdaptedClient {
 
         if (name == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
@@ -113,7 +115,7 @@ class JsonAdaptedClient {
 
         if (phone == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
         if (!Phone.isValidPhone(phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
@@ -122,7 +124,7 @@ class JsonAdaptedClient {
 
         if (email == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
@@ -131,7 +133,7 @@ class JsonAdaptedClient {
 
         if (address == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
@@ -140,7 +142,7 @@ class JsonAdaptedClient {
 
         if (country == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName()));
         }
         if (!CountryCodeVerifier.isValidCountryCode(country)) {
             throw new IllegalValueException(CountryCodeVerifier.MESSAGE_CONSTRAINTS);
@@ -149,7 +151,7 @@ class JsonAdaptedClient {
 
         if (timezone == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, Timezone.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Timezone.class.getSimpleName()));
         }
         if (!Timezone.isValidTimezone(timezone)) {
             throw new IllegalValueException(Timezone.MESSAGE_CONSTRAINTS);
@@ -158,7 +160,7 @@ class JsonAdaptedClient {
 
         if (contractExpiryDate == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, ContractExpiryDate.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ContractExpiryDate.class.getSimpleName()));
         }
         // It's possible for contractExpiryDate to have an empty String as a value, which would indicate
         // the client has no contractExpiryDate set, and {@code ParserUtil.parseContractExpiryDate} will
@@ -180,13 +182,13 @@ class JsonAdaptedClient {
         }
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        Client freshClient =
+        Client modelClient =
                 new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTimezone,
                     modelContractExpiryContractExpiryDate, modelLastModifiedInstant, modelTags);
         for (Note note : clientNotes) {
-            freshClient.addClientNote(note);
+            modelClient.addClientNote(note);
         }
-        return freshClient;
+        return modelClient;
     }
 
 }

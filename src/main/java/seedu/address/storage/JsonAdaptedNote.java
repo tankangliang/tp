@@ -58,9 +58,9 @@ class JsonAdaptedNote {
     }
 
     /**
-     * Returns the correct Note object being represented by this json note.
+     * Converts this Jackson-friendly adapted note object into the model's {@code Note} object.
      *
-     * @return The correct Note object being represented by this json note.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted note.
      */
     public Note toModelType() throws IllegalValueException {
         if (isClientNote()) {
