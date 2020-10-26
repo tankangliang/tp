@@ -32,7 +32,9 @@ public class HelpWindow extends UiPart<Stage> {
             + "client note delete CLIENT_INDEX NOTE_INDEX\n"
             + "client note update CLIENT_INDEX NOTE_INDEX NOTE_STRING t/TAG\n"
             + "country filter c/COUNTRY_CODE\n"
-            + "country note c/COUNTRY_CODE nt/NOTE_STRING";
+            + "country note view [c/COUNTRY_CODE]\n"
+            + "country note add c/COUNTRY_CODE nt/NOTE_STRING\n"
+            + "country note delete INDEX";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
@@ -131,7 +133,7 @@ public class HelpWindow extends UiPart<Stage> {
      * Copies the URL to the user guide to the clipboard.
      */
     @FXML
-    private void copyUrl() {
+    public void copyUrl() {
         final Clipboard clipboard = Clipboard.getSystemClipboard();
         final ClipboardContent url = new ClipboardContent();
         url.putString(USERGUIDE_URL);

@@ -14,11 +14,11 @@ import seedu.address.ui.WidgetViewOption;
  */
 public class CountryNoteViewCommand extends Command {
 
-    public static final String COMMAND_WORD = "country nview"; // TODO: change to country note view
+    public static final String COMMAND_WORD = "country note view";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views all country notes that are associated with the given country.\n"
             + "Parameters: "
-            + PREFIX_COUNTRY + "COUNTRY_CODE "
+            + PREFIX_COUNTRY + "COUNTRY_CODE \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_COUNTRY + "SG";
     private static final String MESSAGE_SUCCESS = "Showing country notes for %1$s";
     private final Country country;

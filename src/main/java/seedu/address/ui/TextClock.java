@@ -43,10 +43,4 @@ public class TextClock {
         timeline.pause();
     }
 
-    /**
-     * Stops the clock.
-     */
-    public void stop() {
-        timeline.stop();
-    }
 }
