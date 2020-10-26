@@ -21,7 +21,6 @@ public class ResultDisplay extends UiPart<Region> {
      */
     public ResultDisplay() {
         super(FXML);
-        this.resultDisplay.setWrapText(true);
     }
 
     public void setFeedbackToUser(String feedbackToUser) {
