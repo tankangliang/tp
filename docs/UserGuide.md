@@ -22,7 +22,7 @@ title: User Guide
 
 ## Table of contents
 
-* Table of Contents
+1. Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------

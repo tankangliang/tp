@@ -13,7 +13,7 @@ This documentation specifies the architecture and design decisions for the appli
 
 This describes the software architecture and software design decisions for the implementation of <strong><i>TBM</i></strong>. The intended audience is the developers, designers and testers for the application.
 
-* Table of Contents
+1. Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
