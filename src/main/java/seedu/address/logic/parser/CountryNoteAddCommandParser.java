@@ -1,19 +1,35 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Set;
+
+import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.commands.CountryNoteAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.TagNoteMap;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new CountryNoteCommand object.
  */
 public class CountryNoteAddCommandParser implements Parser<CountryNoteAddCommand> {
+    private final TagNoteMap tagNoteMap;
+
+    /**
+     * Initializes a {@code CLientNoteAddCommandParser} with the {@code tagNoteMap} object.
+     */
+    public CountryNoteAddCommandParser(TagNoteMap tagNoteMap) {
+        requireNonNull(tagNoteMap);
+        this.tagNoteMap = tagNoteMap;
+    }
 
     /**
      * Parses the given {@code arg} of arguments in the context of the CountryNoteAddCommand and returns a
@@ -25,17 +41,22 @@ public class CountryNoteAddCommandParser implements Parser<CountryNoteAddCommand
      */
     public CountryNoteAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_COUNTRY, PREFIX_NOTE);
+                ArgumentTokenizer.tokenize(args, PREFIX_COUNTRY, PREFIX_NOTE, PREFIX_TAG);
 
         if (argMultimap.getValue(PREFIX_COUNTRY).isEmpty() || argMultimap.getValue(PREFIX_NOTE).isEmpty()
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, CountryNoteAddCommand.MESSAGE_USAGE));
         }
-        Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).get());
+        Set<Tag> tags = tagNoteMap.getUniqueTags(argMultimap.getAllValues(PREFIX_TAG));
+
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
+        note.setTags(tags);
+
+        Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).get());
         CountryNote countryNote = new CountryNote(note.getNoteContents(), country);
 
         return new CountryNoteAddCommand(countryNote);
     }
+
 }

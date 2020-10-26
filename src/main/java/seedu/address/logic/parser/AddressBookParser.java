@@ -150,7 +150,7 @@ public class AddressBookParser {
         String commandWord = COUNTRY_NOTE_TYPE + " " + commandType;
         switch (commandWord) {
         case CountryNoteAddCommand.COMMAND_WORD:
-            return new CountryNoteAddCommandParser().parse(restOfCommand);
+            return new CountryNoteAddCommandParser(tagNoteMap).parse(restOfCommand);
 
         case CountryNoteViewCommand.COMMAND_WORD:
             return new CountryNoteViewCommandParser().parse(restOfCommand);
