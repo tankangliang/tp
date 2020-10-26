@@ -17,7 +17,7 @@ import seedu.address.ui.WidgetViewOption;
  */
 public class CountryNoteDeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "country ndelete"; // TODO: change to country note delete
+    public static final String COMMAND_WORD = "country note delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the country note that are associated with the last viewed country at the given index.\n"
             + "Parameters: INDEX\n"
