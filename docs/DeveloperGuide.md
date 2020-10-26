@@ -8,24 +8,19 @@ title: Developer Guide
 Welcome! We are excited that you want to learn about <strong><i>TBM</i></strong>.<br>
 This page contains step-by-step instructions on how to get started in contributing or getting yourself involved in this awesome project! However, before you get too excited, allow us to introduce you to the core concepts that underpins the heart of <strong><i>TBM</i></strong>.
 
-### Travelling BusinessMan Concepts
+### Travelling BusinessMan Design Concepts
 
-1. Flexible
+1. Lightweight/Portable: <strong><i>TBM</i></strong> has a small footprint and runs fast on any platform. 
 
-1. Lightweight
+1. Scalable: Software which does not deteriorate in performance with increasing data sizes. 
 
-1. Portable
+1. Extensible: A community driven software development process, which encourages innovative inputs and contributions from our users. Features are easily integrated into the application when needed.
 
-1. Loosely Coupled
+1. Privacy: We do not collect, store or misappropriate our client's data.
 
-1. Scalable
+1. CLI Optimised: Built by users for users. Our features in the application cater to users highly accustomed to the CLI.
 
-1. Secure
-
-1. CLI Optimised
-
-<!-- TODO: add proper concepts tbm should encompass for the pitch and dev should adhere to -->
-
+These concepts are the foundations of <strong><i>TBM</i></strong>, furthermore we believe in the value of having users being an active contributor to our project.
 With that being said, this guide will help orient you eager developers quickly, to things like,
 
 1. Software design choices of <strong><i>TBM</i></strong>.
