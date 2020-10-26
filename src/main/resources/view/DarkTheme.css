@@ -1,11 +1,11 @@
 /*MAKESHIFT DARKTHEME*/
 
 .root {
-    -BACKGROUND: rgb(254,244,232); /*OFF WHITE*/
-    -LIGHTBACKGROUND: rgba(255,255,255,0.65); /*LIGHTER OFF WHITE*/
-    -PRIMARY_COLOUR: rgba(126,0,0,1); /*MAROON */
-    -PRIMARY_TEXT: rgba(126,0,0,1); /*MAROON */
-    -ACCENT: #FFBD59; /*BEIGE CREAM*/
+    -BACKGROUND: rgba(0,0,0,0.8); /*OFF WHITE*/
+    -LIGHTBACKGROUND: rgba(0,0,0,0.5); /*LIGHTER OFF WHITE*/
+    -PRIMARY_COLOUR: #FF3333; /*MAROON */
+    -PRIMARY_TEXT: white; /*MAROON */
+    -ACCENT: transparent; /*BEIGE CREAM*/
     -TERTIARY: #010012; /*DARK NAVY*/
 }
 
@@ -220,7 +220,7 @@
 
 .status-bar-with-border {
     -fx-background-color: -BACKGROUND;
-    -fx-border-color: -PRIMARY_COLOUR;
+    -fx-border-color: -BACKGROUND;
     -fx-border-width: 1px;
 }
 
@@ -352,7 +352,7 @@
 }
 
 #cardPane {
-    -fx-background-color: -BACKGROUND;
+    -fx-background-color: -PRIMARY_COLOUR;
     -fx-background-radius: 30, 30;
     -fx-border-width: 0;
     -fx-border-radius:20, 20;
