@@ -178,27 +178,27 @@
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
-.result-display {
-    -fx-background-color: -MAINGREY;
+#resultDisplayWrapper {
+    -fx-background-color: -DARKACCENT;
     -fx-font-size: 12pt;
     -fx-text-fill: white;
     -fx-font-weight: bold;
-    -fx-border-radius: 30;
-    -fx-background-radius: 30;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
     -fx-alignment: center-left;
 }
 
-#resultDisplay .content {
-    -fx-background-color: -DARKACCENT;
-    -fx-border-radius: 30;
-    -fx-background-radius: 30;
+#resultDisplay {
+    -fx-background-color: transparent;
     -fx-text-fill: white;
+}
+
+#resultDisplay .content {
     -fx-padding: 10 0 10 15;
 }
 
 #resultDisplay .scroll-pane {
     -fx-hbar-policy: NEVER;
-    -fx-vbar-policy: NEVER;
 }
 
 .result-display.scroll-pane {
