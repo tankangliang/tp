@@ -82,7 +82,7 @@ public class SuggestionTypeTest {
         SuggestionType available = new SuggestionType(SuggestionType.BY_AVAILABLE);
         SuggestionType contract = new SuggestionType(SuggestionType.BY_CONTRACT);
         SuggestionType frequency = new SuggestionType(SuggestionType.BY_FREQUENCY);
-        
+
         assertEquals(available.toString(), "[available]");
         assertEquals(contract.toString(), "[contract]");
         assertEquals(frequency.toString(), "[frequency]");
