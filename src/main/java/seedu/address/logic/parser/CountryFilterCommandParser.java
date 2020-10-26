@@ -25,7 +25,7 @@ public class CountryFilterCommandParser implements Parser<CountryFilterCommand> 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_COUNTRY);
 
-        if (argMultimap.getValue(PREFIX_COUNTRY).isEmpty()) {
+        if (argMultimap.getValue(PREFIX_COUNTRY).isEmpty() || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CountryFilterCommand.MESSAGE_USAGE));
         }
         String countryCode = argMultimap.getValue(PREFIX_COUNTRY).get();

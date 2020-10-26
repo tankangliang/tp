@@ -43,12 +43,26 @@ public class CountryNotesManager {
     }
 
     /**
-     * Returns all Country Notes. Returning a list of all country notes prevents deep-copying.
+     * Returns all Country Notes as an unmodifiable List.
      *
-     * @return List of all country notes.
+     * @return Unmodifiable list of all country notes.
      */
     public ObservableList<CountryNote> asUnmodifiableObservableList() {
         return internalCountryNoteUnmodifiableList;
     }
 
+    /**
+     * Deletes the given country note.
+     *
+     * @param countryNoteToDelete The country note to be deleted.
+     */
+    public void deleteCountryNote(CountryNote countryNoteToDelete) {
+        if (!CountryCodeVerifier.isValidCountryCode(countryNoteToDelete.getCountry().getCountryCode())) {
+            assert false; // should always be a valid country
+        }
+        requireNonNull(countryNoteToDelete);
+        assert hasCountryNote(countryNoteToDelete);
+
+        internalCountryNoteList.remove(countryNoteToDelete);
+    }
 }

@@ -64,8 +64,17 @@ public class WidgetViewBox extends UiPart<Region> {
     private WidgetViewBox(WidgetObject object) {
         super(FXML);
         this.widgetObject = object;
+        textClock = new TextClock(header);
+        header.setText(object.getHeader());
+        divOne.setText(object.getDivOne());
+        textOne.setText(object.getTextOne());
+        divTwo.setText(object.getDivTwo());
+        textTwo.setText(object.getTextTwo());
+        textThree.setText(object.getTextThree());
+        divThree.setText(object.getDivThree());
+        textFour.setText(object.getTextFour());
+        footer.setText(object.getFooter());
     }
-
 
     /**
      * Updates the current content of the widget view box to the given content.

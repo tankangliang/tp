@@ -167,6 +167,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteCountryNote(CountryNote countryNoteToDelete) {
+        requireNonNull(countryNoteToDelete);
+        addressBook.deleteCountryNote(countryNoteToDelete);
+    }
+
+    @Override
     public void addClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
         target.addClientNote(clientNote);
