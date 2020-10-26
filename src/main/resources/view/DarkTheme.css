@@ -1,8 +1,9 @@
 /*MAKESHIFT DARKTHEME*/
 
 .root {
-    -MAINGREY: #383838; /*DARK GREY*/
+    -MAINGREY: #80D2F6; /*DARK GREY*/
     -LIGHTGREY: rgba(255,255,255,0.65); /*LIGHT GREY*/
+    -DARKACCENT: #00719C;
     -ACCENT: #FFBD59; /*BEIGE CREAM*/
     -TERTIARY: #010012; /*DARK NAVY*/
 }
@@ -188,7 +189,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: rgb(85,85,85);
+    -fx-background-color: -DARKACCENT;
     -fx-border-radius: 30;
     -fx-background-radius: 30;
     -fx-text-fill: white;
@@ -217,8 +218,8 @@
 }
 
 .status-bar-with-border {
-    -fx-background-color: derive(#1d1d1d, 30%);
-    -fx-border-color: derive(#1d1d1d, 25%);
+    -fx-background-color: -MAINGREY;
+    -fx-border-color: -DARKACCENT;
     -fx-border-width: 1px;
 }
 
@@ -245,7 +246,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: -DARKACCENT;
 }
 
 .menu-bar .label {
@@ -350,7 +351,7 @@
 }
 
 #cardPane {
-    -fx-background-color: derive(#1c1c1c, 20%);
+    -fx-background-color: -DARKACCENT;
     -fx-background-radius: 30, 30;
     -fx-border-width: 0;
     -fx-border-radius:20, 20;
