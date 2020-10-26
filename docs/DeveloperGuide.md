@@ -161,9 +161,23 @@ The `TagNoteMap#initTagNoteMapFromNotes()` is exposed in the `Model` interface a
 
 Given below is an example usage scenario and how mapping mechanism behaves at each step.
 
+### Associating Notes and Countries
 
+#### Implementation
 
+The association between `Note` and `Country` is facilitated by `CountryNotesManager`.
+Internally, `CountryNotesManager` stores a list of country notes using an instance of `javafx.collections.ObservableList<CountryNote>`. 
+By storing the list of country notes as an `ObservableList`, the UI would be able to track and immediately reflect any changes to the country notes list.
 
+It implements the following operations:
+* `CountryNotesManager#asUnmodifiableObservableList()` — Returns an unmodifiable `ObservableList<CountryNote>`. 
+* `CountryNotesManager#hasCountryNote(CountryNote countryNote)`  — Returns true if the given `countryNote` already exists in the internal `ObservableList<CountryNote>`.
+* `CountryNotesManager#addCountryNote(CountryNote countryNote)`  — Adds the given `countryNote` to the internal `ObservableList<CountryNote>`.
+* `CountryNotesManager#deleteCountryNote(CountryNote countryNote)`  — Deletes the given `countryNote` from the internal `ObservableList<CountryNote>`.
+
+The following class diagram illustrates how classes in the `seedu.address.model.country` package are related. 
+
+Given below is a sequence diagram that shows the sequence of method calls that occur when a user inputs a `country note add` command. 
 
 ### Suggesting contacts
 
