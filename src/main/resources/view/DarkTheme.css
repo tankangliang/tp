@@ -1,11 +1,11 @@
 /*MAKESHIFT DARKTHEME*/
 
 .root {
-    -BACKGROUND: rgba(0,0,0,0.8); /*OFF WHITE*/
-    -LIGHTBACKGROUND: rgba(0,0,0,0.5); /*LIGHTER OFF WHITE*/
-    -PRIMARY_COLOUR: #FF3333; /*MAROON */
-    -PRIMARY_TEXT: white; /*MAROON */
-    -ACCENT: transparent; /*BEIGE CREAM*/
+    -BACKGROUND: #393939; /*OFF WHITE*/
+    -PANE_BACKGROUND: #000000; /*LIGHTER OFF WHITE*/
+    -PRIMARY_COLOUR: #FF3333; /*RED */
+    -PRIMARY_TEXT: white; /*WHITE */
+    -ACCENT: transparent; /*NO ACCENT*/
     -TERTIARY: #010012; /*DARK NAVY*/
 }
 
@@ -100,7 +100,7 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: -LIGHTBACKGROUND;
+    -fx-background-color: -PANE_BACKGROUND;
 }
 
 .list-view.scrollbar:vertical {
@@ -111,7 +111,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 10 10 10 10;
-    -fx-background-color: -LIGHTBACKGROUND;
+    -fx-background-color: -PANE_BACKGROUND;
 }
 
 .list-cell:filled:selected #cardPane {
@@ -159,13 +159,13 @@
 }
 
 .widget-pane {
-     -fx-background-color: -LIGHTBACKGROUND;
+     -fx-background-color: -PANE_BACKGROUND;
      -fx-background-radius: 20;
      -fx-padding: 15 20 20 15;
 }
 
 .notes .content{
-    -fx-background-color: -LIGHTBACKGROUND;
+    -fx-background-color: -PANE_BACKGROUND;
 }
 
 .pane-with-border {
@@ -180,7 +180,7 @@
 }
 
 #resultDisplayWrapper {
-    -fx-background-color: -LIGHTBACKGROUND;
+    -fx-background-color: -PANE_BACKGROUND;
     -fx-font-size: 12pt;
     -fx-text-fill: -PRIMARY_TEXT;
     -fx-font-weight: bold;
@@ -339,7 +339,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(-LIGHTBACKGROUND, 50%);
+    -fx-background-color: derive(-PANE_BACKGROUND, 50%);
     /*-fx-background-color: transparent;*/
 }
 
@@ -365,7 +365,7 @@
 }
 
 #commandTextField {
-    -fx-background-color: -LIGHTBACKGROUND;
+    -fx-background-color: -PANE_BACKGROUND;
     -fx-background-radius: 30, 30;
     -fx-background-insets: 0;
     -fx-border-color: #e3e3e3;
@@ -396,7 +396,7 @@
 #clientListView {
     -fx-background-radius: 20;
     -fx-border-radius: 20;
-    -fx-background-color: -LIGHTBACKGROUND;
+    -fx-background-color: -PANE_BACKGROUND;
 }
 
 #clientListView .scroll-bar .thumb {
@@ -439,9 +439,9 @@
 
 #viewbox {
     -fx-border-radius: 30, 30;
-    -fx-background-color: -LIGHTBACKGROUND;
+    -fx-background-color: -PANE_BACKGROUND;
 }
 
 #countryNotesScrollPane {
-    -fx-background: -LIGHTBACKGROUND;
+    -fx-background: -PANE_BACKGROUND;
 }
