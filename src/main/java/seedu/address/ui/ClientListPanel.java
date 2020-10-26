@@ -29,6 +29,8 @@ public class ClientListPanel extends UiPart<Region> {
         clientListView.setCellFactory(listView -> new ClientListViewCell());
     }
 
+    // Selection test was removed due to lack of selection feature in AB3.
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Client} using a {@code ClientCard}.
      */

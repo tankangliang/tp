@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -53,6 +55,7 @@ public class ClientCard extends UiPart<Region> {
      */
     public ClientCard(Client client, int displayedIndex) {
         super(FXML);
+        requireAllNonNull(client);
         this.client = client;
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
