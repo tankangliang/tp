@@ -71,30 +71,6 @@ class JsonAdaptedClient {
     }
 
     /**
-     * Constructs a {@code JsonAdaptedClient} with the given client details.
-     */
-//    @JsonCreator
-//    public JsonAdaptedClient(@JsonProperty("name") String name,
-//            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-//            @JsonProperty("address") String address, @JsonProperty("country") String country,
-//            @JsonProperty("timezone") String timezone,
-//            @JsonProperty("contractExpiryDate") String contractExpiryDate,
-//            @JsonProperty("lastModifiedInstant") String lastModifiedInstant,
-//            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
-//        this.name = name;
-//        this.phone = phone;
-//        this.email = email;
-//        this.address = address;
-//        this.country = country;
-//        this.timezone = timezone;
-//        this.contractExpiryDate = contractExpiryDate;
-//        this.lastModifiedInstant = lastModifiedInstant;
-//        if (tagged != null) {
-//            this.tagged.addAll(tagged);
-//        }
-//    }
-
-    /**
      * Converts a given {@code Client} into this class for Jackson use.
      */
     public JsonAdaptedClient(Client source) {
