@@ -11,15 +11,16 @@ import seedu.address.model.note.CountryNote;
 /**
  * Adds a Country-specific Note.
  */
-public class CountryNoteCommand extends Command {
+public class CountryNoteAddCommand extends Command {
 
-    public static final String COMMAND_WORD = "country note";
+    public static final String COMMAND_WORD = "country note add";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a note that is associated with the user input country.\n"
             + "Parameters: "
             + PREFIX_COUNTRY + "COUNTRY_CODE "
             + PREFIX_NOTE + "NOTE_STRING\n"
-            + "Example: " + COMMAND_WORD + " c/SG nt/likes laksa";
+            + "Example: " + COMMAND_WORD + " " + PREFIX_COUNTRY + "SG "
+            + PREFIX_NOTE + "has one of the lowest coporate taxes in the world";
     private static final String MESSAGE_DUPLICATE_COUNTRY_NOTE = "This country note already exists in TBM";
     private static final String MESSAGE_SUCCESS = "Successfully added country note for %1$s: %2$s";
 
@@ -30,7 +31,7 @@ public class CountryNoteCommand extends Command {
      *
      * @param countryNote The countryNote to be added.
      */
-    public CountryNoteCommand(CountryNote countryNote) {
+    public CountryNoteAddCommand(CountryNote countryNote) {
         requireNonNull(countryNote);
         this.countryNote = countryNote;
     }
@@ -54,12 +55,12 @@ public class CountryNoteCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CountryNoteCommand)) {
+        if (!(other instanceof CountryNoteAddCommand)) {
             return false;
         }
 
         // state check
-        CountryNoteCommand c = (CountryNoteCommand) other;
+        CountryNoteAddCommand c = (CountryNoteAddCommand) other;
 
         return countryNote.equals(c.countryNote);
     }

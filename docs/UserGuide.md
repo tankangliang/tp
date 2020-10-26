@@ -234,17 +234,46 @@ Examples:
 * `country filter c/SG` Filters by contacts in Singapore.
 * `country filter c/RU` Filters by contacts in Russia.
 
-### Adding notes for a country: `country note`
+### Viewing notes for a country: `country note view`
 
-Format: `country note c/COUNTRY_CODE nt/NOTE_STRING`
+Views the list of country notes from the Country which corresponds to the given country code.
+If no country code is given, all country notes in TBM will be shown.
+
+Format: `country note view [c/COUNTRY_CODE]`
+
+* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+
+Examples:
+
+* `country note view` 
+* `country note view c/SG` 
+* `country note view c/IN` 
+
+### Adding notes for a country: `country note add`
+
+Adds a note that is associated with a specific country.
+
+Format: `country note add c/COUNTRY_CODE nt/NOTE_STRING`
+
+* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
+
+Examples:
+
+* `country note add c/SG nt/has one of the lowest coporate taxes in the world`
+* `country note add c/CN nt/building good relations (guanxi) is important when conducting business here`
+* `country note add c/IN nt/is world's fastest growing economy`
+
+### Deleting notes for a country: `country note delete`
+
+Deletes a note that is associated with a specific country.
+
+Format: `country note delete INDEX`
 
 * COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes.
 
 Examples:
 
-* `country note c/SG nt/has one of the lowest coporate taxes in the world`
-* `country note c/CN nt/building good relations (guanxi) is important when conducting business here`
-* `country note c/IN nt/is world's fastest growing economy`
+* `country note delete 1` Deletes the country note at index 1 of the country notes list panel.
 
 ### Getting suggestions on clients: `suggest`
 
@@ -295,7 +324,9 @@ Action | Format, Examples
 **Delete client note** | `client note delete CLIENT_INDEX NOTE_INDEX` <br> e.g., `client note delete 3 2`
 **Edit client note** | `client note edit CLIENT_INDEX NOTE_INDEX [nt/NOTE_STRING] [t/TAG]...` <br> e.g., `client note edit 3 2 nt/Loves cats`
 **Filter by country** | `country filter c/COUNTRY_CODE` <br> e.g., `country filter c/SG`
-**Add country note** | `country note c/COUNTRY nt/NOTE_STRING` <br> e.g., `country note c/SG nt/people love to queue for things`
+**View country note** | `country note view [c/COUNTRY_CODE]` <br> e.g., `country note view c/SG`
+**Add country note** | `country note add c/COUNTRY_CODE nt/NOTE_STRING` <br> e.g., `country note add c/SG nt/has one of the lowest coporate taxes in the world`
+**Delete country note** | `country note delete INDEX` <br> e.g., `country note delete 1`
 **Get suggestions** | `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...` <br> e.g., `suggest by/available by/frequency`
 **Clear** | `clear`
 **Exit** | `exit`
