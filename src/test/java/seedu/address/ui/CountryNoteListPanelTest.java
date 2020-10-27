@@ -21,7 +21,7 @@ public class CountryNoteListPanelTest extends GuiUnitTest {
      */
     @Test
     public void performanceTest() {
-        createBackingList(300);
+        createBackingList(100);
         CountryNoteListPanel countryNoteListPanel = new CountryNoteListPanel(COUNTRY_NOTE_OBSERVABLE_LIST);
         uiPartExtension.setUiPart(countryNoteListPanel);
         assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
