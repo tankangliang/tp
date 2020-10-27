@@ -47,8 +47,6 @@ public class ClientCard extends UiPart<Region> {
     private Label country;
     @FXML
     private Label timezone;
-    @FXML
-    private FlowPane tags;
 
     /**
      * Creates a {@code ClientCode} with the given {@code Client} and index to display.
@@ -69,9 +67,6 @@ public class ClientCard extends UiPart<Region> {
             dateLabel.getStyleClass().add("cell_small_label");
             clientFields.getChildren().add(dateLabel);
         }
-        client.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

@@ -36,7 +36,6 @@ public class ClientBuilder {
     private Timezone timezone;
     private ContractExpiryDate contractExpiryDate;
     private LastModifiedInstant lastModifiedInstant;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code ClientBuilder} with the default details.
@@ -50,7 +49,6 @@ public class ClientBuilder {
         timezone = new Timezone(DEFAULT_TIMEZONE);
         contractExpiryDate = new ContractExpiryDate(DEFAULT_CONTRACT_EXPIRY_DATE);
         lastModifiedInstant = new LastModifiedInstant();
-        tags = new HashSet<>();
     }
 
     /**
@@ -65,7 +63,6 @@ public class ClientBuilder {
         timezone = clientToCopy.getTimezone();
         contractExpiryDate = clientToCopy.getContractExpiryDate();
         lastModifiedInstant = clientToCopy.getLastModifiedInstant();
-        tags = new HashSet<>(clientToCopy.getTags());
     }
 
     /**
@@ -73,14 +70,6 @@ public class ClientBuilder {
      */
     public ClientBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Client} that we are building.
-     */
-    public ClientBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -162,7 +151,7 @@ public class ClientBuilder {
      */
     public Client build() {
         return new Client(name, phone, email, address, country, timezone, contractExpiryDate,
-                lastModifiedInstant, tags);
+                lastModifiedInstant);
     }
 
 }

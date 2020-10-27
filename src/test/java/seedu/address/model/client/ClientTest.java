@@ -23,12 +23,6 @@ import seedu.address.testutil.ClientBuilder;
 public class ClientTest {
 
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Client client = new ClientBuilder().build();
-        assertThrows(UnsupportedOperationException.class, () -> client.getTags().remove(0));
-    }
-
-    @Test
     public void isSameClient() {
         // same object -> returns true
         assertTrue(ALICE.isSameClient(ALICE));
@@ -46,16 +40,16 @@ public class ClientTest {
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new ClientBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withCountry(VALID_COUNTRY_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withCountry(VALID_COUNTRY_BOB).build();
         assertTrue(ALICE.isSameClient(editedAlice));
 
         // same name, same email, different attributes -> returns true
         editedAlice = new ClientBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withCountry(VALID_COUNTRY_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withCountry(VALID_COUNTRY_BOB).build();
         assertTrue(ALICE.isSameClient(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .withCountry(VALID_COUNTRY_BOB).withLastModifiedInstant(VALID_LAST_MODIFIED_INSTANT_BOB).build();
         assertTrue(ALICE.isSameClient(editedAlice));
 
@@ -108,10 +102,6 @@ public class ClientTest {
         editedAlice = new ClientBuilder(ALICE).withLastModifiedInstant(VALID_LAST_MODIFIED_INSTANT_BOB).build();
         assertTrue(ALICE.equals(editedAlice));
 
-        // different tags -> returns false
-        editedAlice = new ClientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(ALICE.equals(editedAlice));
-
         // TODO: Add tests with modified notes
     }
 
@@ -154,10 +144,6 @@ public class ClientTest {
         // different last modified instant -> hashCode is same
         editedAlice = new ClientBuilder(ALICE).withLastModifiedInstant(VALID_LAST_MODIFIED_INSTANT_BOB).build();
         assertEquals(ALICE.hashCode(), editedAlice.hashCode());
-
-        // different tags -> hashCode is different
-        editedAlice = new ClientBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
-        assertNotEquals(ALICE.hashCode(), editedAlice.hashCode());
 
         // TODO: Add tests with modified notes
     }

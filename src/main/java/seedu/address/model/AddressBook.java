@@ -58,14 +58,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setClients(List<Client> clients) {
         this.clients.setClients(clients);
-        Set<Tag> allClientTags = new HashSet<>();
-        for (Client client : clients) {
-            allClientTags.addAll(client.getTags());
-        }
-        this.tags.setTags(allClientTags);
-        for (Client client : clients) {
-            replaceClientTagSet(client);
-        }
     }
 
     /**
@@ -111,32 +103,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the client tag set with a set of matching unique tag objects.
-     */
-    private void replaceClientTagSet(Client client) {
-        Set<Tag> clientLocalTags = client.getTags();
-        tags.addAll(clientLocalTags);
-        client.replaceTags(tags.getTags(clientLocalTags));
-    }
-
-    /**
-     * Replaces client tag set and adds the client to the address book.
+     * Adds the client to the address book.
      * The client must not already exist in the address book.
      */
     public void addClient(Client client) {
-        replaceClientTagSet(client);
         clients.add(client);
     }
 
     /**
-     * Replaces {@code editedClient} tag set and then replaces the given client {@code target} in the list
-     * with {@code editedClient}.
+     * Replaces the given client {@code target} in the list with {@code editedClient}.
      * {@code target} must exist in the address book.
      * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
      */
     public void setClient(Client target, Client editedClient) {
         requireNonNull(editedClient);
-        replaceClientTagSet(editedClient);
         clients.setClient(target, editedClient);
     }
 

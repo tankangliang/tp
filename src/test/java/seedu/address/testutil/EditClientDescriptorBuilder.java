@@ -42,7 +42,6 @@ public class EditClientDescriptorBuilder {
         descriptor.setCountry(client.getCountry());
         descriptor.setTimezone(client.getTimezone());
         descriptor.setContractExpiryDate(client.getContractExpiryDate());
-        descriptor.setTags(client.getTags());
     }
 
     /**
@@ -98,16 +97,6 @@ public class EditClientDescriptorBuilder {
      */
     public EditClientDescriptorBuilder withContractExpiryDate(String contractExpiryDate) {
         descriptor.setContractExpiryDate(new ContractExpiryDate(contractExpiryDate));
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditClientDescriptor}
-     * that we are building.
-     */
-    public EditClientDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
         return this;
     }
 

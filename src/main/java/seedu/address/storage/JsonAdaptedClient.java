@@ -22,7 +22,6 @@ import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryCodeVerifier;
 import seedu.address.model.note.Note;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Client}.
@@ -33,14 +32,12 @@ class JsonAdaptedClient {
 
     private final String name;
     private final String phone;
-
     private final String email;
     private final String address;
     private final String country;
     private final String timezone;
     private final String contractExpiryDate;
     private final String lastModifiedInstant;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedNote> clientNotes = new ArrayList<>();
 
     /**
@@ -48,13 +45,12 @@ class JsonAdaptedClient {
      */
     @JsonCreator
     public JsonAdaptedClient(@JsonProperty("name") String name,
-                @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                @JsonProperty("address") String address, @JsonProperty("country") String country,
-                @JsonProperty("timezone") String timezone,
-                @JsonProperty("contractExpiryDate") String contractExpiryDate,
-                @JsonProperty("lastModifiedInstant") String lastModifiedInstant,
-                @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                @JsonProperty("clientNotes") List<JsonAdaptedNote> clientNotes) {
+                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+                             @JsonProperty("address") String address, @JsonProperty("country") String country,
+                             @JsonProperty("timezone") String timezone,
+                             @JsonProperty("contractExpiryDate") String contractExpiryDate,
+                             @JsonProperty("lastModifiedInstant") String lastModifiedInstant,
+                             @JsonProperty("clientNotes") List<JsonAdaptedNote> clientNotes) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -63,9 +59,6 @@ class JsonAdaptedClient {
         this.timezone = timezone;
         this.contractExpiryDate = contractExpiryDate;
         this.lastModifiedInstant = lastModifiedInstant;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
-        }
         if (clientNotes != null) {
             this.clientNotes.addAll(clientNotes);
         }
@@ -83,7 +76,6 @@ class JsonAdaptedClient {
         timezone = source.getTimezone().toString();
         contractExpiryDate = source.getContractExpiryDate().value;
         lastModifiedInstant = source.getLastModifiedInstant().toString();
-        tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
         clientNotes.addAll(source.getClientNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toSet()));
     }
 
@@ -93,10 +85,6 @@ class JsonAdaptedClient {
      * @throws IllegalValueException if there were any data constraints violated in the adapted client.
      */
     public Client toModelType() throws IllegalValueException {
-        final List<Tag> clientTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            clientTags.add(tag.toModelType());
-        }
         final Set<Note> clientNotes = new HashSet<>();
         for (JsonAdaptedNote note : this.clientNotes) {
             clientNotes.add(note.toModelType());
@@ -179,9 +167,8 @@ class JsonAdaptedClient {
             modelLastModifiedInstant = new LastModifiedInstant(lastModifiedInstant);
         }
 
-        final Set<Tag> modelTags = new HashSet<>(clientTags);
         Client modelClient = new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTimezone,
-                    modelContractExpiryContractExpiryDate, modelLastModifiedInstant, modelTags);
+                    modelContractExpiryContractExpiryDate, modelLastModifiedInstant);
         for (Note note : clientNotes) {
             modelClient.addClientNote(note);
         }
