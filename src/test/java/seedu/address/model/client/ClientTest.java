@@ -47,8 +47,8 @@ public class ClientTest {
         assertTrue(ALICE.isSameClient(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
-                .withCountry(VALID_COUNTRY_BOB).withLastModifiedInstant(VALID_LAST_MODIFIED_INSTANT_BOB).build();
+        editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withCountry(VALID_COUNTRY_BOB)
+                .withLastModifiedInstant(VALID_LAST_MODIFIED_INSTANT_BOB).build();
         assertTrue(ALICE.isSameClient(editedAlice));
 
         // TODO: Add tests with modified notes

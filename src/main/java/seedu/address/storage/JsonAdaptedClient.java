@@ -45,12 +45,12 @@ class JsonAdaptedClient {
      */
     @JsonCreator
     public JsonAdaptedClient(@JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-                             @JsonProperty("address") String address, @JsonProperty("country") String country,
-                             @JsonProperty("timezone") String timezone,
-                             @JsonProperty("contractExpiryDate") String contractExpiryDate,
-                             @JsonProperty("lastModifiedInstant") String lastModifiedInstant,
-                             @JsonProperty("clientNotes") List<JsonAdaptedNote> clientNotes) {
+            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
+            @JsonProperty("address") String address, @JsonProperty("country") String country,
+            @JsonProperty("timezone") String timezone,
+            @JsonProperty("contractExpiryDate") String contractExpiryDate,
+            @JsonProperty("lastModifiedInstant") String lastModifiedInstant,
+            @JsonProperty("clientNotes") List<JsonAdaptedNote> clientNotes) {
         this.name = name;
         this.phone = phone;
         this.email = email;

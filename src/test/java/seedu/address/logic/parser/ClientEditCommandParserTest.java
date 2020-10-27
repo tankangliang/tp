@@ -108,8 +108,8 @@ public class ClientEditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_CLIENT;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + COUNTRY_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + NAME_DESC_AMY + TIMEZONE_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + COUNTRY_DESC_AMY + EMAIL_DESC_AMY
+                + ADDRESS_DESC_AMY + NAME_DESC_AMY + TIMEZONE_DESC_AMY;
 
         EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -180,8 +180,8 @@ public class ClientEditCommandParserTest {
                 + EMAIL_DESC_BOB + COUNTRY_DESC_AMY + COUNTRY_DESC_BOB + TIMEZONE_DESC_AMY + TIMEZONE_DESC_BOB;
 
         EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
-                .withCountry(VALID_COUNTRY_BOB).withTimezone(VALID_TIMEZONE_BOB).build();
+                .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withCountry(VALID_COUNTRY_BOB)
+                .withTimezone(VALID_TIMEZONE_BOB).build();
         ClientEditCommand expectedCommand = new ClientEditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

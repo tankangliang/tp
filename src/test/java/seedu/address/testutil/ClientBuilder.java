@@ -145,8 +145,7 @@ public class ClientBuilder {
      * @return Client with fields in {@code ClientBuilder}.
      */
     public Client build() {
-        return new Client(name, phone, email, address, country, timezone, contractExpiryDate,
-                lastModifiedInstant);
+        return new Client(name, phone, email, address, country, timezone, contractExpiryDate, lastModifiedInstant);
     }
 
 }
