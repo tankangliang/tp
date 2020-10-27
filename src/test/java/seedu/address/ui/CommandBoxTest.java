@@ -68,6 +68,18 @@ public class CommandBoxTest extends GuiUnitTest {
         assertEquals(defaultStyleOfCommandBox, commandBoxHandle.getStyleClass());
     }
 
+    @Test
+    public void commandBox_correctHistory() {
+        String viewCommand1 = "client view 1";
+        String viewCommand2 = "client view 2";
+        commandBoxHandle.run(viewCommand1);
+        commandBoxHandle.run(viewCommand2);
+        guiRobot.pauseForHuman();
+        guiRobot.press(KeyCode.UP);
+        String prevCommand = commandBoxHandle.getInput();
+        assertEquals(viewCommand2, prevCommand);
+    }
+
     /**
      * Runs a command that fails, then verifies that <br>
      *      - the text remains <br>
