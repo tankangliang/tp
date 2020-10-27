@@ -33,8 +33,7 @@ public class NoteListCardTest extends GuiUnitTest {
         guiRobot.pauseForHuman();
 
         NoteListCardHandle noteListCardHandle = new NoteListCardHandle(countryNoteCard.getRoot());
-        assertEquals("[" + expectedCard.getCountry() + "] " + expectedCard.getNoteContent(),
-                noteListCardHandle.getNoteContent());
+        assertEquals(expectedCard.getNoteContent(), noteListCardHandle.getNoteContent());
         assertEquals("#" + expectedId, noteListCardHandle.getNoteId());
     }
 
