@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -25,13 +26,13 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.widget.WidgetModel;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the TbmManager data.
  */
 public class ModelManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final TbmManager tbmManager;
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
     private final SortedList<Client> sortedFilteredClients;
@@ -40,25 +41,25 @@ public class ModelManager implements Model {
     private final TagNoteMap tagNoteMap;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given tbmManager and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTbmManager tbmManager, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(tbmManager, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with TBM Manager: " + tbmManager + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.tbmManager = new TbmManager(tbmManager);
         this.userPrefs = new UserPrefs(userPrefs);
         this.widget = WidgetModel.initWidget();
-        filteredClients = new FilteredList<>(this.addressBook.getClientList());
+        filteredClients = new FilteredList<>(this.tbmManager.getClientList());
         sortedFilteredClients = new SortedList<>(filteredClients);
-        filteredCountryNotes = new FilteredList<>(this.addressBook.getCountryNoteList());
+        filteredCountryNotes = new FilteredList<>(this.tbmManager.getCountryNoteList());
         this.tagNoteMap = new TagNoteMap();
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TbmManager(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -86,37 +87,37 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getTbmManagerFilePath() {
+        return userPrefs.getTbmManagerFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setTbmManagerFilePath(Path tbmManagerFilePath) {
+        requireNonNull(tbmManagerFilePath);
+        userPrefs.setTbmManagerFilePath(tbmManagerFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== TbmManager ================================================================================
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyTbmManager getTbmManager() {
+        return tbmManager;
     }
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setTbmManager(ReadOnlyTbmManager tbmManager) {
+        this.tbmManager.resetData(tbmManager);
     }
 
     @Override
     public boolean hasClient(Client client) {
         requireNonNull(client);
-        return addressBook.hasClient(client);
+        return tbmManager.hasClient(client);
     }
 
     @Override
     public void deleteClient(Client target) {
-        addressBook.removeClient(target);
+        tbmManager.removeClient(target);
     }
 
     @Override
@@ -132,7 +133,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addClient(Client client) {
-        addressBook.addClient(client);
+        tbmManager.addClient(client);
         updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
         Set<Note> clientNotes = client.getClientNotes();
         for (Note note : clientNotes) {
@@ -144,38 +145,38 @@ public class ModelManager implements Model {
     @Override
     public void setClient(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
-        addressBook.setClient(target, editedClient);
+        tbmManager.setClient(target, editedClient);
     }
 
     @Override
     public boolean hasCountryNote(CountryNote countryNote) {
         requireNonNull(countryNote);
-        return addressBook.hasCountryNote(countryNote);
+        return tbmManager.hasCountryNote(countryNote);
     }
 
     @Override
     public boolean hasClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
+        assert tbmManager.hasClient(target) : "tbmManager not synced with modelManager; missing client";
         return target.hasClientNote(clientNote);
     }
 
     @Override
     public void addCountryNote(CountryNote countryNote) {
         requireNonNull(countryNote);
-        addressBook.addCountryNote(countryNote);
+        tbmManager.addCountryNote(countryNote);
     }
 
     @Override
     public void deleteCountryNote(CountryNote countryNoteToDelete) {
         requireNonNull(countryNoteToDelete);
-        addressBook.deleteCountryNote(countryNoteToDelete);
+        tbmManager.deleteCountryNote(countryNoteToDelete);
     }
 
     @Override
     public void addClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
         target.addClientNote(clientNote);
-        // update the TagNoteMap:
         Set<Tag> newTags = clientNote.getTags();
         this.tagNoteMap.addTagsForNote(newTags, clientNote);
     }
@@ -190,10 +191,9 @@ public class ModelManager implements Model {
      */
     @Override
     public void initialiseTagNoteMap() {
-        this.tagNoteMap.initTagNoteMapFromClients(this.addressBook.getClientList());
-        //        this.countryManager.getAllCountryNotesAsCollectionOfSets()
-        //                .forEach(this.tagNoteMap::initTagNoteMapFromCountryNotes);
-        // todo: initialiseTagNoteMap probably has to be changed to use AddressBook#getNoteList()
+        this.tagNoteMap.initTagNoteMapFromClients(this.tbmManager.getClientList());
+        // todo: initialiseTagNoteMap probably has to be changed to use TbmManager#getNoteList()
+        this.tagNoteMap.initTagNoteMapFromCountryNotes(new HashSet<>(this.tbmManager.getCountryNoteList()));
     }
 
     public TagNoteMap getTagNoteMap() {
@@ -261,7 +261,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return tbmManager.equals(other.tbmManager)
                 && userPrefs.equals(other.userPrefs)
                 && sortedFilteredClients.equals(other.sortedFilteredClients)
                 && tagNoteMap.equals(other.tagNoteMap);

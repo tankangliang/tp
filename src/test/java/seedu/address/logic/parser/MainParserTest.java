@@ -6,11 +6,13 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUGGEST;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,14 +31,17 @@ import seedu.address.logic.commands.ClientNoteDeleteCommand;
 import seedu.address.logic.commands.ClientViewCommand;
 import seedu.address.logic.commands.CountryFilterCommand;
 import seedu.address.logic.commands.CountryNoteAddCommand;
+import seedu.address.logic.commands.CountryNoteDeleteCommand;
 import seedu.address.logic.commands.CountryNoteViewCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SuggestCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientCountryMatchesInputCountryPredicate;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
+import seedu.address.model.client.SuggestionType;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
@@ -46,15 +51,17 @@ import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.ClientUtil;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 
-public class AddressBookParserTest {
+public class MainParserTest {
 
     private final TagNoteMap tagNoteMap = new TagNoteMap();
-    private final AddressBookParser parser = new AddressBookParser(tagNoteMap);
+    private final MainParser parser = new MainParser(tagNoteMap);
 
     @Test
     public void parseClientCommands_addClient() throws Exception {
         Client client = new ClientBuilder().build();
-        ClientAddCommand command = (ClientAddCommand) parser.parseCommand(ClientUtil.getAddCommand(client));
+        final String commandString = ClientUtil.getAddCommand(client);
+
+        ClientAddCommand command = (ClientAddCommand) parser.parseCommand(commandString);
         assertEquals(new ClientAddCommand(client), command);
     }
 
@@ -62,30 +69,35 @@ public class AddressBookParserTest {
     public void parseClientCommands_editClient() throws Exception {
         Client client = new ClientBuilder().build();
         EditClientDescriptor descriptor = new EditClientDescriptorBuilder(client).build();
-        ClientEditCommand command = (ClientEditCommand) parser.parseCommand(ClientEditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_CLIENT.getOneBased() + " " + ClientUtil.getEditClientDescriptorDetails(descriptor));
+        final String commandString = ClientEditCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_CLIENT.getOneBased() + " " + ClientUtil.getEditClientDescriptorDetails(descriptor);
+
+        ClientEditCommand command = (ClientEditCommand) parser.parseCommand(commandString);
         assertEquals(new ClientEditCommand(INDEX_FIRST_CLIENT, descriptor), command);
     }
 
     @Test
     public void parseClientCommands_deleteClient() throws Exception {
-        ClientDeleteCommand command = (ClientDeleteCommand) parser.parseCommand(
-                ClientDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased());
+        final String commandString = ClientDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased();
+
+        ClientDeleteCommand command = (ClientDeleteCommand) parser.parseCommand(commandString);
         assertEquals(new ClientDeleteCommand(INDEX_FIRST_CLIENT), command);
     }
 
     @Test
     public void parseClientCommands_findClient() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        ClientFindCommand command = (ClientFindCommand) parser.parseCommand(
-                ClientFindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        final String commandString = ClientFindCommand.COMMAND_WORD + " "
+                + keywords.stream().collect(Collectors.joining(" "));
+
+        ClientFindCommand command = (ClientFindCommand) parser.parseCommand(commandString);
         assertEquals(new ClientFindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
     public void parseClientCommands_viewClient() throws Exception {
-        ClientViewCommand command = (ClientViewCommand) parser.parseCommand(
-                ClientViewCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased());
+        final String commandString = ClientViewCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased();
+        ClientViewCommand command = (ClientViewCommand) parser.parseCommand(commandString);
         assertEquals(new ClientViewCommand(INDEX_FIRST_CLIENT), command);
     }
 
@@ -106,31 +118,14 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCountryCommands_addCountryNote_success() throws Exception {
-        final String countryString = "SG";
-        final String noteString = "is hot";
-        final String commandString = CountryNoteAddCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString
-                + " " + PREFIX_NOTE + noteString;
-        CountryNoteAddCommand command = (CountryNoteAddCommand) parser.parseCommand(commandString);
-        assertEquals(new CountryNoteAddCommand(new CountryNote(noteString, new Country(countryString))), command);
-    }
-
-    @Test
     public void parseCountryCommands_countryFilter() throws Exception {
         final String countryString = "SG";
         final String commandString = CountryFilterCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString;
+
         CountryFilterCommand command = (CountryFilterCommand) parser.parseCommand(commandString);
         final ClientCountryMatchesInputCountryPredicate predicate =
                 new ClientCountryMatchesInputCountryPredicate(new Country(countryString));
         assertEquals(new CountryFilterCommand(predicate), command);
-    }
-
-    @Test
-    public void parseCountryCommands_countryNoteView() throws Exception {
-        final String countryString = "SG";
-        final String commandString = CountryNoteViewCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString;
-        CountryNoteViewCommand command = (CountryNoteViewCommand) parser.parseCommand(commandString);
-        assertEquals(new CountryNoteViewCommand(new Country(countryString)), command);
     }
 
     @Test
@@ -149,6 +144,50 @@ public class AddressBookParserTest {
                 parser.parseCommand("country unknownCommand "));
     }
 
+    @Test
+    public void parseCountryNoteCommands_addCountryNote() throws Exception {
+        final String countryString = "SG";
+        final String noteString = "is hot";
+        final String commandString = CountryNoteAddCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString
+                + " " + PREFIX_NOTE + noteString;
+
+        CountryNoteAddCommand command = (CountryNoteAddCommand) parser.parseCommand(commandString);
+        assertEquals(new CountryNoteAddCommand(new CountryNote(noteString, new Country(countryString))), command);
+    }
+
+    @Test
+    public void parseCountryNoteCommands_countryNoteView() throws Exception {
+        final String countryString = "SG";
+        final String commandString = CountryNoteViewCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString;
+
+        CountryNoteViewCommand command = (CountryNoteViewCommand) parser.parseCommand(commandString);
+        assertEquals(new CountryNoteViewCommand(new Country(countryString)), command);
+    }
+
+    @Test
+    public void parseCountryNoteCommands_countryNoteDelete() throws Exception {
+        final String commandString = CountryNoteDeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased();
+
+        CountryNoteDeleteCommand command = (CountryNoteDeleteCommand) parser.parseCommand(commandString);
+        assertEquals(new CountryNoteDeleteCommand(INDEX_FIRST_CLIENT), command);
+    }
+
+    @Test
+    public void parseCountryNoteCommands_unrecognisedInput_throwsParseException() {
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("country note"));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                HelpCommand.MESSAGE_USAGE), () -> parser.parseCommand("country note "));
+    }
+
+    @Test
+    public void parseCountryNoteCommands_unknownCommand_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("country note unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () ->
+                parser.parseCommand("country note unknownCommand "));
+    }
+
     //TODO: add tests when country commands are finalized
 
     @Test
@@ -160,6 +199,7 @@ public class AddressBookParserTest {
         Set<Tag> tags = tagNoteMap.getUniqueTags(Collections.emptyList());
         final Note note = new Note(noteString);
         note.setTags(tags);
+
         ClientNoteAddCommand command = (ClientNoteAddCommand) parser.parseCommand(commandString);
         assertEquals(new ClientNoteAddCommand(INDEX_FIRST_CLIENT, note), command);
     }
@@ -182,12 +222,24 @@ public class AddressBookParserTest {
 
     @Test
     public void parseClientNoteCommands_deleteClientNote_returnsTrue() throws Exception {
-        String validUserInput = "client note delete 1 12";
         Index validClientIndex = Index.fromOneBased(1);
         Index validClientNoteIndex = Index.fromOneBased(12);
+        final String commandString = ClientNoteDeleteCommand.COMMAND_WORD + " " + validClientIndex.getOneBased()
+                + " " + validClientNoteIndex.getOneBased();
+
         ClientNoteDeleteCommand expectedCommand = new ClientNoteDeleteCommand(validClientIndex, validClientNoteIndex);
-        ClientNoteDeleteCommand actualCommand = (ClientNoteDeleteCommand) parser.parseCommand(validUserInput);
+        ClientNoteDeleteCommand actualCommand = (ClientNoteDeleteCommand) parser.parseCommand(commandString);
         assertEquals(expectedCommand, actualCommand);
+    }
+
+    @Test
+    public void parseCommand_suggest() throws Exception {
+        final String commandString = SuggestCommand.COMMAND_WORD + " " + PREFIX_SUGGEST + SuggestionType.BY_AVAILABLE;
+        Set<SuggestionType> suggestionTypeSet = new LinkedHashSet<>();
+        suggestionTypeSet.add(new SuggestionType(SuggestionType.BY_AVAILABLE));
+
+        SuggestCommand command = (SuggestCommand) parser.parseCommand(commandString);
+        assertEquals(new SuggestCommand(suggestionTypeSet), command);
     }
 
     @Test

@@ -2,9 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,14 +12,13 @@ import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.country.CountryNotesManager;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagSet;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at TbmManager level
  * Duplicates are not allowed (by .isSameClient comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class TbmManager implements ReadOnlyTbmManager {
 
     private final UniqueClientList clients;
     private final UniqueTagSet tags;
@@ -38,12 +36,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         countryNotesManager = new CountryNotesManager();
     }
 
-    public AddressBook() {}
+    public TbmManager() {}
 
     /**
-     * Creates an AddressBook using the Clients in the {@code toBeCopied}
+     * Creates an TbmManager using the Clients in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public TbmManager(ReadOnlyTbmManager toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -57,18 +55,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setClients(List<Client> clients) {
         this.clients.setClients(clients);
-        Set<Tag> allClientTags = new HashSet<>();
-        for (Client client : clients) {
-            allClientTags.addAll(client.getTags());
-        }
-        this.tags.setTags(allClientTags);
-        for (Client client : clients) {
-            replaceClientTagSet(client);
-        }
     }
 
     /**
-     * Replaces all notes in addressbook with the given list of notes.
+     * Replaces all notes in TbmManager with the given list of notes.
      *
      * @param notes The given list of notes.
      */
@@ -76,6 +66,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Note note: notes) {
             if (note.isClientNote()) {
                 // handle client notes
+                // todo:  =======================================================
+                //        decided to not store the client notes in a separete set
+                //        because the notes are going to be stored within clients
+                //        itself. The setClient function aldy does this. Adding in
+                //        a collection of client notes in this class would mean that
+                //        collection needs to be constantly updated. As such, it
+                //        might be good enough to just modify the getNoteList method
+                //        ===========================================================
             } else {
                 countryNotesManager.addCountryNote((CountryNote) note);
             }
@@ -83,9 +81,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code TbmManager} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTbmManager newData) {
         requireNonNull(newData);
         setClients(newData.getClientList());
         setNotes(newData.getNoteList());
@@ -94,7 +92,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// client-level operations
 
     /**
-     * Returns true if a client with the same identity as {@code client} exists in the address book.
+     * Returns true if a client with the same identity as {@code client} exists in TManager.
      */
     public boolean hasClient(Client client) {
         requireNonNull(client);
@@ -102,37 +100,25 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the client tag set with a set of matching unique tag objects.
-     */
-    private void replaceClientTagSet(Client client) {
-        Set<Tag> clientLocalTags = client.getTags();
-        tags.addAll(clientLocalTags);
-        client.replaceTags(tags.getTags(clientLocalTags));
-    }
-
-    /**
-     * Replaces client tag set and adds the client to the address book.
-     * The client must not already exist in the address book.
+     * Adds the client to TbmManager.
+     * The client must not already exist in TbmManager.
      */
     public void addClient(Client client) {
-        replaceClientTagSet(client);
         clients.add(client);
     }
 
     /**
-     * Replaces {@code editedClient} tag set and then replaces the given client {@code target} in the list
-     * with {@code editedClient}.
-     * {@code target} must exist in the address book.
-     * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
+     * Replaces the given client {@code target} in the list with {@code editedClient}.
+     * {@code target} must exist in TbmManager.
+     * The client identity of {@code editedClient} must not be the same as another existing client in TbmManager.
      */
     public void setClient(Client target, Client editedClient) {
         requireNonNull(editedClient);
-        replaceClientTagSet(editedClient);
         clients.setClient(target, editedClient);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code TbmManager}. {@code key} must exist in TbmManager.
      */
     public void removeClient(Client key) {
         clients.remove(key);
@@ -185,7 +171,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     //TODO: add client notes also. NOTE: THIS ONLY RETURNS COUNTRY NOTES FOR NOW.
     @Override
     public ObservableList<Note> getNoteList() {
-        return FXCollections.observableArrayList(countryNotesManager.asUnmodifiableObservableList());
+        ArrayList<Note> accumulated = new ArrayList<>(getCountryNoteList());
+        this.clients.forEach(client -> accumulated.addAll(client.getClientNotes()));
+        return FXCollections.observableArrayList(accumulated);
     }
 
     /**
@@ -200,8 +188,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && clients.equals(((AddressBook) other).clients));
+                || (other instanceof TbmManager // instanceof handles nulls
+                && clients.equals(((TbmManager) other).clients));
     }
 
     @Override

@@ -7,11 +7,10 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
@@ -20,9 +19,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TbmManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
 import seedu.address.testutil.ClientBuilder;
@@ -34,7 +33,7 @@ import seedu.address.testutil.EditClientDescriptorBuilder;
  */
 public class ClientEditCommandTest {
 
-    private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
 
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
@@ -52,7 +51,7 @@ public class ClientEditCommandTest {
 
         String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TbmManager(model.getTbmManager()), new UserPrefs());
         expectedModel.setClient(model.getSortedFilteredClientList().get(0), editedClient);
 
         assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
@@ -64,17 +63,16 @@ public class ClientEditCommandTest {
         Client lastClient = model.getSortedFilteredClientList().get(indexLastClient.getZeroBased());
 
         ClientBuilder clientInList = new ClientBuilder(lastClient);
-        Client editedClient = clientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Client editedClient = clientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
         EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).build();
 
         ClientEditCommand clientEditCommand = new ClientEditCommand(indexLastClient, descriptor);
 
         String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TbmManager(model.getTbmManager()), new UserPrefs());
         expectedModel.setClient(lastClient, editedClient);
 
         assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
@@ -87,7 +85,7 @@ public class ClientEditCommandTest {
 
         String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TbmManager(model.getTbmManager()), new UserPrefs());
 
         assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
     }
@@ -103,7 +101,7 @@ public class ClientEditCommandTest {
 
         String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new TbmManager(model.getTbmManager()), new UserPrefs());
         expectedModel.setClient(model.getSortedFilteredClientList().get(0), editedClient);
 
         assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
@@ -123,7 +121,7 @@ public class ClientEditCommandTest {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
 
         // edit client in filtered list into a duplicate in address book
-        Client clientInList = model.getAddressBook().getClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
+        Client clientInList = model.getTbmManager().getClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
         ClientEditCommand clientEditCommand = new ClientEditCommand(INDEX_FIRST_CLIENT,
                 new EditClientDescriptorBuilder(clientInList).build());
 
@@ -149,7 +147,7 @@ public class ClientEditCommandTest {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
         Index outOfBoundIndex = INDEX_SECOND_CLIENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getClientList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTbmManager().getClientList().size());
 
         ClientEditCommand clientEditCommand = new ClientEditCommand(outOfBoundIndex,
                 new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).build());

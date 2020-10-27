@@ -7,7 +7,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTbmManager;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.CountryNote;
 
@@ -25,11 +25,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
-     * Returns the AddressBook.
+     * Returns the TbmManager.
      *
-     * @see seedu.address.model.Model#getAddressBook()
+     * @see seedu.address.model.Model#getTbmManager()
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyTbmManager getTbmManager();
 
     /**
      * Returns the client of the widget view box.
@@ -45,9 +45,9 @@ public interface Logic {
     ObservableList<CountryNote> getFilteredCountryNoteList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' TbmManager file path.
      */
-    Path getAddressBookFilePath();
+    Path getTbmManagerFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

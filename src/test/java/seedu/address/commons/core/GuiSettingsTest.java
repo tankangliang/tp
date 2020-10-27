@@ -2,6 +2,7 @@ package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.awt.Point;
@@ -41,5 +42,15 @@ public class GuiSettingsTest {
         GuiSettings guiSettings = new GuiSettings(1.0, 1.0, 5, 1);
         assertTrue(guiSettings.equals(guiSettings));
         assertFalse(defaultGuiSettings.equals(guiSettings));
+    }
+
+    @Test
+    public void hashCode_test() {
+        assertEquals(defaultGuiSettings.hashCode(), defaultGuiSettings.hashCode());
+
+        assertEquals(defaultGuiSettings.hashCode(), new GuiSettings().hashCode());
+
+        GuiSettings guiSettings = new GuiSettings(1.0, 1.0, 5, 1);
+        assertNotEquals(defaultGuiSettings.hashCode(), guiSettings.hashCode());
     }
 }

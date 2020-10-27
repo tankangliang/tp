@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
 public class Note {
     public static final String MESSAGE_CONSTRAINTS = "Notes should not be blank";
     private static final Logger logger = LogsCenter.getLogger(Note.class);
-    private final String noteContents;
+    private final String noteContent;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -28,8 +28,8 @@ public class Note {
      */
     public Note(String content) {
         requireNonNull(content);
-        noteContents = content;
-        logger.info(String.format("--------------[New Note created with contents: %s]", noteContents));
+        noteContent = content;
+        logger.info(String.format("--------------[New Note created with contents: %s]", noteContent));
     }
 
     /**
@@ -48,8 +48,8 @@ public class Note {
      *
      * @return The content of the note.
      */
-    public String getNoteContents() {
-        return noteContents;
+    public String getNoteContent() {
+        return noteContent;
     }
 
     /**
@@ -86,16 +86,16 @@ public class Note {
         Note c = (Note) obj;
         boolean hasSameTags = this.tags.equals(c.tags);
 
-        return this.noteContents.equals(c.noteContents) && hasSameTags;
+        return this.noteContent.equals(c.noteContent) && hasSameTags;
     }
 
     @Override
     public String toString() {
-        return noteContents;
+        return noteContent;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(noteContents, tags);
+        return Objects.hash(noteContent, tags);
     }
 }

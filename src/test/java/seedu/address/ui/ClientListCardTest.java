@@ -13,62 +13,60 @@ import guitests.guihandles.ClientCardHandle;
 import seedu.address.model.client.Client;
 import seedu.address.testutil.ClientBuilder;
 
-public class ClientCardTest extends GuiUnitTest {
+public class ClientListCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        // no tags
-        Client clientWithNoTags = new ClientBuilder().withTags().build();
-        ClientCard clientCard = new ClientCard(clientWithNoTags, 1);
+        Client client1 = new ClientBuilder().withName("client1").build();
+        ClientListCard clientCard = new ClientListCard(client1, 1);
         uiPartExtension.setUiPart(clientCard);
-        assertCardDisplay(clientCard, clientWithNoTags, 1);
+        assertCardDisplay(clientCard, client1, 1);
 
-        // with tags
-        Client clientWithTags = new ClientBuilder().build();
-        clientCard = new ClientCard(clientWithTags, 2);
+        Client client2 = new ClientBuilder().withName("client2").build();
+        clientCard = new ClientListCard(client2, 2);
         uiPartExtension.setUiPart(clientCard);
-        assertCardDisplay(clientCard, clientWithTags, 2);
+        assertCardDisplay(clientCard, client2, 2);
     }
 
     @Test
     public void constructor_badClient_throwsException() {
         // null client
-        assertThrows(NullPointerException.class, () -> new ClientCard(null, 0),
+        assertThrows(NullPointerException.class, () -> new ClientListCard(null, 0),
                 "Card is being created with a null client");
     }
 
     @Test
     public void equals() {
-        ClientCard amyClientCard = new ClientCard(AMY, 0);
+        ClientListCard amyClientListCard = new ClientListCard(AMY, 0);
 
         // same person, same index -> returns true
-        ClientCard copy = new ClientCard(AMY, 0);
-        assertEquals(copy, amyClientCard);
+        ClientListCard copy = new ClientListCard(AMY, 0);
+        assertEquals(copy, amyClientListCard);
 
         // same object -> returns true
-        assertEquals(amyClientCard, amyClientCard);
+        assertEquals(amyClientListCard, amyClientListCard);
 
         // null -> returns false
-        assertNotEquals(amyClientCard, null);
+        assertNotEquals(amyClientListCard, null);
 
         // different types -> returns false
-        assertNotEquals(amyClientCard, 0);
+        assertNotEquals(amyClientListCard, 0);
 
         // different person, same index -> returns false
-        assertNotEquals(new ClientCard(BOB, 0), amyClientCard);
+        assertNotEquals(new ClientListCard(BOB, 0), amyClientListCard);
 
         // same person, different index -> returns false
-        assertNotEquals(new ClientCard(AMY, 1), amyClientCard);
+        assertNotEquals(new ClientListCard(AMY, 1), amyClientListCard);
     }
 
     /**
-     * Asserts that {@code clientCard} displays the details of {@code expectedClient} correctly and matches
+     * Asserts that {@code clientListCard} displays the details of {@code expectedClient} correctly and matches
      * {@code expectedId}.
      */
-    private void assertCardDisplay(ClientCard clientCard, Client expectedClient, int expectedId) {
+    private void assertCardDisplay(ClientListCard clientListCard, Client expectedClient, int expectedId) {
         guiRobot.pauseForHuman();
 
-        ClientCardHandle clientCardHandle = new ClientCardHandle(clientCard.getRoot());
+        ClientCardHandle clientCardHandle = new ClientCardHandle(clientListCard.getRoot());
 
         // verify id is displayed correctly
         assertEquals(expectedId + ". ", clientCardHandle.getId());

@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ContractExpiryDate;
@@ -12,8 +9,6 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Client objects.
@@ -36,7 +31,6 @@ public class ClientBuilder {
     private Timezone timezone;
     private ContractExpiryDate contractExpiryDate;
     private LastModifiedInstant lastModifiedInstant;
-    private Set<Tag> tags;
 
     /**
      * Creates a {@code ClientBuilder} with the default details.
@@ -50,7 +44,6 @@ public class ClientBuilder {
         timezone = new Timezone(DEFAULT_TIMEZONE);
         contractExpiryDate = new ContractExpiryDate(DEFAULT_CONTRACT_EXPIRY_DATE);
         lastModifiedInstant = new LastModifiedInstant();
-        tags = new HashSet<>();
     }
 
     /**
@@ -65,7 +58,6 @@ public class ClientBuilder {
         timezone = clientToCopy.getTimezone();
         contractExpiryDate = clientToCopy.getContractExpiryDate();
         lastModifiedInstant = clientToCopy.getLastModifiedInstant();
-        tags = new HashSet<>(clientToCopy.getTags());
     }
 
     /**
@@ -73,14 +65,6 @@ public class ClientBuilder {
      */
     public ClientBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Client} that we are building.
-     */
-    public ClientBuilder withTags(String ... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -161,8 +145,7 @@ public class ClientBuilder {
      * @return Client with fields in {@code ClientBuilder}.
      */
     public Client build() {
-        return new Client(name, phone, email, address, country, timezone, contractExpiryDate,
-                lastModifiedInstant, tags);
+        return new Client(name, phone, email, address, country, timezone, contractExpiryDate, lastModifiedInstant);
     }
 
 }

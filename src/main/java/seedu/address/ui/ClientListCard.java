@@ -1,12 +1,9 @@
 package seedu.address.ui;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.util.Comparator;
+import static java.util.Objects.requireNonNull;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -15,7 +12,7 @@ import seedu.address.model.client.Client;
 /**
  * An UI component that displays information of a {@code Client}.
  */
-public class ClientCard extends UiPart<Region> {
+public class ClientListCard extends UiPart<Region> {
 
     private static final String FXML = "ClientListCard.fxml";
 
@@ -24,7 +21,7 @@ public class ClientCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on TbmManager level 4</a>
      */
 
     public final Client client;
@@ -47,15 +44,13 @@ public class ClientCard extends UiPart<Region> {
     private Label country;
     @FXML
     private Label timezone;
-    @FXML
-    private FlowPane tags;
 
     /**
-     * Creates a {@code ClientCode} with the given {@code Client} and index to display.
+     * Creates a {@code ClientListCard} with the given {@code Client} and index to display.
      */
-    public ClientCard(Client client, int displayedIndex) {
+    public ClientListCard(Client client, int displayedIndex) {
         super(FXML);
-        requireAllNonNull(client);
+        requireNonNull(client);
         this.client = client;
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
@@ -69,9 +64,6 @@ public class ClientCard extends UiPart<Region> {
             dateLabel.getStyleClass().add("cell_small_label");
             clientFields.getChildren().add(dateLabel);
         }
-        client.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
@@ -82,12 +74,12 @@ public class ClientCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ClientCard)) {
+        if (!(other instanceof ClientListCard)) {
             return false;
         }
 
         // state check
-        ClientCard card = (ClientCard) other;
+        ClientListCard card = (ClientListCard) other;
         return id.getText().equals(card.id.getText())
                 && client.equals(card.client);
     }

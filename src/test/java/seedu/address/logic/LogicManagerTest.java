@@ -29,10 +29,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTbmManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonTbmManagerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.ClientBuilder;
@@ -49,10 +49,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonTbmManagerStorage tbmManagerStorage =
+                new JsonTbmManagerStorage(temporaryFolder.resolve("tbmManager.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(tbmManagerStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -64,8 +64,8 @@ public class LogicManagerTest {
 
     @Test
     public void getMethods_returnCorrectObjects() {
-        assertEquals(logic.getAddressBook(), model.getAddressBook());
-        assertEquals(logic.getAddressBookFilePath(), model.getAddressBookFilePath());
+        assertEquals(logic.getTbmManager(), model.getTbmManager());
+        assertEquals(logic.getTbmManagerFilePath(), model.getTbmManagerFilePath());
         assertEquals(logic.getFilteredClientList(), model.getSortedFilteredClientList());
         assertEquals(logic.getWidgetContent(), model.getWidgetContent());
         assertEquals(logic.getGuiSettings(), model.getGuiSettings());
@@ -99,18 +99,18 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        // Setup LogicManager with JsonTbmManagerIoExceptionThrowingStub
+        JsonTbmManagerStorage tbmManagerStorage =
+                new JsonTbmManagerIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionTbmManager.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(tbmManagerStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
         String addCommand = ClientAddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + COUNTRY_DESC_AMY + TIMEZONE_DESC_AMY + CONTRACT_EXPIRY_DATE_DESC_AMY;
-        Client expectedClient = new ClientBuilder(AMY).withTags().build();
+        Client expectedClient = new ClientBuilder(AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addClient(expectedClient);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
@@ -158,7 +158,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTbmManager(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
@@ -178,13 +178,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonTbmManagerIoExceptionThrowingStub extends JsonTbmManagerStorage {
+        private JsonTbmManagerIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveTbmManager(ReadOnlyTbmManager tbmManager, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

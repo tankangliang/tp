@@ -44,32 +44,32 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' TBM Manager file path.
      */
-    Path getAddressBookFilePath();
+    Path getTbmManagerFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' TBM Manager file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setTbmManagerFilePath(Path tbmManagerFilePath);
 
     /**
-     * Returns the AddressBook
+     * Returns the TbmManager
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyTbmManager getTbmManager();
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces TBM Manager data with the data in {@code tbmManager}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setTbmManager(ReadOnlyTbmManager tbmManager);
 
     /**
-     * Returns true if a client with the same identity as {@code client} exists in the address book.
+     * Returns true if a client with the same identity as {@code client} exists in TBM Manager.
      */
     boolean hasClient(Client client);
 
     /**
-     * Deletes the given client. The client must exist in the address book.
+     * Deletes the given client. The client must exist in TBM Manager.
      */
     void deleteClient(Client target);
 
@@ -89,14 +89,14 @@ public interface Model {
     /**
      * Adds the given client.
      * <p>
-     * {@code client} must not already exist in the address book.
+     * {@code client} must not already exist in TBM Manager.
      */
     void addClient(Client client);
 
     /**
      * Replaces the given client {@code target} with {@code editedClient}. {@code target} must exist in the
-     * address book. The client identity of {@code editedClient} must not be the same as another existing
-     * client in the address book.
+     * TBM Manager. The client identity of {@code editedClient} must not be the same as another existing
+     * client in TBM Manager.
      */
     void setClient(Client target, Client editedClient);
 
@@ -121,7 +121,7 @@ public interface Model {
     boolean hasClientNote(Client client, Note clientNote);
 
     /**
-     * Adds the given client note to the given client.
+     * Adds the given client note to the given client, updating relevant maps while at it.
      */
     void addClientNote(Client client, Note clientNote);
 

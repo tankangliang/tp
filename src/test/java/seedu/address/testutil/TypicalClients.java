@@ -12,8 +12,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMEZONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMEZONE_BOB;
 
@@ -21,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.TbmManager;
 import seedu.address.model.client.Client;
 
 /**
@@ -32,18 +30,18 @@ public class TypicalClients {
     public static final Client ALICE = new ClientBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withCountry("SG").withTimezone("GMT+8").withContractExpiryDate("1-4-2021")
-            .withLastModifiedInstant("2020-01-01T00:00:00.000000Z").withTags("friends").build();
+            .withLastModifiedInstant("2020-01-01T00:00:00.000000Z").build();
     public static final Client BENSON = new ClientBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25").withCountry("SG").withTimezone("GMT+8")
             .withEmail("johnd@example.com").withPhone("98765432").withContractExpiryDate("3-12-2022")
-            .withLastModifiedInstant("2020-02-02T00:00:00.000000Z").withTags("owesMoney", "friends").build();
+            .withLastModifiedInstant("2020-02-02T00:00:00.000000Z").build();
     public static final Client CARL = new ClientBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withCountry("US").withTimezone("GMT-4")
             .withContractExpiryDate("30-1-2022").withLastModifiedInstant("2020-03-03T00:00:00.000000Z").build();
     public static final Client DANIEL = new ClientBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withAddress("10th street").withCountry("SG")
             .withTimezone("GMT+8").withContractExpiryDate("28-2-2021")
-            .withLastModifiedInstant("2020-04-04T00:00:00.000000Z").withTags("friends").build();
+            .withLastModifiedInstant("2020-04-04T00:00:00.000000Z").build();
     public static final Client ELLE = new ClientBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").withCountry("GB")
             .withTimezone("GMT+1").withContractExpiryDate("10-10-2024")
@@ -68,25 +66,25 @@ public class TypicalClients {
     public static final Client AMY = new ClientBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withCountry(VALID_COUNTRY_AMY)
             .withTimezone(VALID_TIMEZONE_AMY).withContractExpiryDate(VALID_CONTRACT_EXPIRY_DATE_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .build();
     public static final Client BOB = new ClientBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withCountry(VALID_COUNTRY_BOB)
             .withTimezone(VALID_TIMEZONE_BOB).withContractExpiryDate(VALID_CONTRACT_EXPIRY_DATE_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalClients() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical clients.
+     * Returns an {@code TbmManager} with all the typical clients.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static TbmManager getTypicalTbmManager() {
+        TbmManager tm = new TbmManager();
         for (Client client : getTypicalClients()) {
-            ab.addClient(client);
+            tm.addClient(client);
         }
-        return ab;
+        return tm;
     }
 
     public static List<Client> getTypicalClients() {
