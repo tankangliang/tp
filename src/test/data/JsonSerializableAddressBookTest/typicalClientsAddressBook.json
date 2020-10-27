@@ -2,25 +2,6 @@
   "_comment": "AddressBook save file which contains the same Client values as in TypicalClients#getTypicalAddressBook()",
   "clients": [
     {
-      "name": "Alice Pauline",
-      "phone": "94351253",
-      "email": "alice@example.com",
-      "address": "123, Jurong West Ave 6, #08-111",
-      "country": "SG",
-      "timezone": "GMT+8",
-      "contractExpiryDate": "1-4-2021",
-      "tagged": ["friends"],
-      "clientNotes": [ {
-        "contents": "lives in a pineapple",
-        "countryCode": "NULL_CC",
-        "tags": ["godLike"]
-      }, {
-        "contents": "secret to the best krabby patty is in the J.U.I.C.E.",
-        "countryCode": "NULL_CC",
-        "tags": ["seduction"]
-      } ]
-    }, 
-    {
       "name": "Benson Meier",
       "phone": "98765432",
       "email": "johnd@example.com",
@@ -39,6 +20,25 @@
         "tags": ["turnOff"]
         }
       ]
+    },
+    {
+      "name": "Alice Pauline",
+      "phone": "94351253",
+      "email": "alice@example.com",
+      "address": "123, Jurong West Ave 6, #08-111",
+      "country": "SG",
+      "timezone": "GMT+8",
+      "contractExpiryDate": "1-4-2021",
+      "tagged": ["friends"],
+      "clientNotes": [ {
+        "contents": "lives in a pineapple",
+        "countryCode": "NULL_CC",
+        "tags": ["godLike"]
+      }, {
+        "contents": "secret to the best krabby patty is in the J.U.I.C.E.",
+        "countryCode": "NULL_CC",
+        "tags": ["seduction"]
+      } ]
     },
     {
       "name": "Carl Kurz",
@@ -95,7 +95,8 @@
   {
     "contents": "lives in a pineapple",
     "countryCode": "NULL_CC",
-    "tags": ["godLike"]
+    "tags": ["godLike"],
+
   },
   {
     "contents": "secret to the best krabby patty is in the J.U.I.C.E.",
