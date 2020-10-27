@@ -34,7 +34,6 @@ class JsonAdaptedClient {
     private final String name;
     private final String phone;
 
-
     private final String email;
     private final String address;
     private final String country;
@@ -85,8 +84,7 @@ class JsonAdaptedClient {
         contractExpiryDate = source.getContractExpiryDate().value;
         lastModifiedInstant = source.getLastModifiedInstant().toString();
         tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
-        clientNotes
-                .addAll(source.getClientNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toSet()));
+        clientNotes.addAll(source.getClientNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toSet()));
     }
 
     /**
