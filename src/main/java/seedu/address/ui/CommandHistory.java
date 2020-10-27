@@ -4,8 +4,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.logging.Logger;
+
+import seedu.address.commons.core.LogsCenter;
 
 public class CommandHistory {
+    private static final Logger logger = LogsCenter.getLogger(CommandHistory.class);
     private final List<String> history;
     private int pointer;
 
@@ -15,8 +19,9 @@ public class CommandHistory {
      * @param history
      */
     public CommandHistory(List<String> history) {
+        logger.info(history.toString());
         this.history = history;
-        pointer = 0;
+        pointer = history.size();
     }
 
     /**
@@ -27,15 +32,7 @@ public class CommandHistory {
     public void add(String command) {
         requireAllNonNull(command);
         history.add(command);
-    }
-
-    /**
-     * Gets the current command in history.
-     *
-     * @return The current command.
-     */
-    public String getCurrent() {
-        return history.get(pointer);
+        pointer++;
     }
 
     /**
@@ -82,15 +79,24 @@ public class CommandHistory {
         return pointer - 1 >= 0;
     }
 
+    /**
+     * Moves the pointer backwards.
+     *
+     * @return Decremented pointer,
+     */
     private int moveBack() {
         assert pointer > 0;
         return --pointer;
     }
 
+    /**
+     * Moves the pointer forward.
+     *
+     * @return Incremented pointer.
+     */
     private int moveForward() {
         assert pointer < history.size() - 1;
         return ++pointer;
     }
-
 
 }

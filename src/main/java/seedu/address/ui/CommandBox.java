@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -32,7 +31,7 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
-        this.history = new CommandHistory(new ArrayList<>());
+        this.history = new CommandHistory(new ArrayList<String>());
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
@@ -49,11 +48,19 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void getPreviousCommand() {
-
+        if (history.hasPrevious()) {
+            String prevCommand = history.getPrevious();
+            commandTextField.setText(prevCommand);
+            commandTextField.positionCaret(prevCommand.length());
+        }
     }
 
     private void getNextCommand() {
-
+        if (history.hasNext()) {
+            String nextCommand = history.getNext();
+            commandTextField.setText(nextCommand);
+            commandTextField.positionCaret(nextCommand.length());
+        }
     }
 
     /**
