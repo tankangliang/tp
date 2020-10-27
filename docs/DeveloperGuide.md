@@ -179,8 +179,10 @@ The following class diagram illustrates how the relevant classes in the `seedu.a
 
 ![Country Class Diagram](images/CountryClass.png)
 
-Given below is a sequence diagram that shows how the `country note add` command works.<br>
-For brevity, the full command `country note add c/COUNTRY_CODE nt/NOTE_STRING` will be substituted by `country note add`.<br>
+Given below is a sequence diagram that shows how the `country note add` command works.
+
+For brevity, the full command `country note add c/COUNTRY_CODE nt/NOTE_STRING` will be substituted by `country note add`.
+
 Note that the `AddressBookParser#parseCommand(userInput)` calls `CountryNoteAddCommandParser#parse(userInput)` which in turn parses the user input into a `CountryNote` object, and returns an instance of a `CountryNoteAddCommand` with the `CountryNote` instance passed in as an argument to the constructor of `CountryNoteAddCommand`.
 Hence, `CountryNoteAddCommand` stores a `CountryNote` object. For brevity, the aforementioned sequence of method calls will be excluded from the following sequence diagram.
 
