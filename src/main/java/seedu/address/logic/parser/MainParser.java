@@ -31,9 +31,9 @@ import seedu.address.model.note.TagNoteMap;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class MainParser {
 
-    private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
+    private static final Logger logger = LogsCenter.getLogger(MainParser.class);
 
     /**
      * Different command type separators
@@ -50,7 +50,7 @@ public class AddressBookParser {
 
     private final TagNoteMap tagNoteMap;
 
-    public AddressBookParser(TagNoteMap tagNoteMap) {
+    public MainParser(TagNoteMap tagNoteMap) {
         this.tagNoteMap = tagNoteMap;
     }
 

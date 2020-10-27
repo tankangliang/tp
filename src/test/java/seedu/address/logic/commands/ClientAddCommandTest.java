@@ -20,11 +20,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTbmManager;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.TbmManager;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
@@ -136,12 +136,12 @@ public class ClientAddCommandTest {
         }
 
         @Override
-        public Path getAddressBookFilePath() {
+        public Path getTbmManagerFilePath() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void setAddressBookFilePath(Path addressBookFilePath) {
+        public void setTbmManagerFilePath(Path tbmManagerFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -151,12 +151,12 @@ public class ClientAddCommandTest {
         }
 
         @Override
-        public void setAddressBook(ReadOnlyAddressBook newData) {
+        public void setTbmManager(ReadOnlyTbmManager tbmManager) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyTbmManager getTbmManager() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -298,8 +298,8 @@ public class ClientAddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyTbmManager getTbmManager() {
+            return new TbmManager();
         }
     }
 
