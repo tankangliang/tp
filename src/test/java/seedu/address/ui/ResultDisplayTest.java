@@ -25,7 +25,7 @@ public class ResultDisplayTest extends GuiUnitTest {
     public void display_correctDisplayText() {
         // default result text
         guiRobot.pauseForHuman();
-        assertEquals("", resultDisplayHandle.getText());
+        assertEquals("Waiting for command...", resultDisplayHandle.getText());
 
         // new result received
         guiRobot.pauseForHuman();

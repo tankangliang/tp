@@ -18,7 +18,7 @@ import seedu.address.logic.commands.ClientNoteDeleteCommand;
 import seedu.address.logic.commands.ClientViewCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CountryFilterCommand;
-import seedu.address.logic.commands.CountryNoteCommand;
+import seedu.address.logic.commands.CountryNoteAddCommand;
 import seedu.address.logic.commands.CountryNoteDeleteCommand;
 import seedu.address.logic.commands.CountryNoteViewCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -40,6 +40,7 @@ public class AddressBookParser {
      */
     private static final String CLIENT_TYPE = "client";
     private static final String COUNTRY_TYPE = "country";
+    private static final String COUNTRY_NOTE_TYPE = "country note";
     private static final String NOTE_TYPE = "note";
 
     /**
@@ -117,17 +118,45 @@ public class AddressBookParser {
 
         String commandWord = COUNTRY_TYPE + " " + commandType;
         switch (commandWord) {
-        case CountryNoteCommand.COMMAND_WORD:
-            return new CountryNoteCommandParser().parse(restOfCommand);
+        case COUNTRY_NOTE_TYPE:
+            return parseCountryNoteCommands(restOfCommand);
+
+        case CountryFilterCommand.COMMAND_WORD:
+            return new CountryFilterCommandParser().parse(restOfCommand);
+
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
+
+    /**
+     * Parses input given that command is of COUNTRY_NOTE_TYPE (starts with "country note")
+     *
+     * @param input user input with "country note" stripped
+     * @return command relating to country note functions
+     * @throws ParseException if input does not conform to expected format
+     */
+    private Command parseCountryNoteCommands(String input) throws ParseException {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+        }
+
+        final String commandType = matcher.group("commandType");
+        final String restOfCommand = matcher.group("restOfCommand");
+        logger.info("Command Type: " + commandType + " Rest of command: " + restOfCommand);
+
+        String commandWord = COUNTRY_NOTE_TYPE + " " + commandType;
+        switch (commandWord) {
+        case CountryNoteAddCommand.COMMAND_WORD:
+            return new CountryNoteAddCommandParser().parse(restOfCommand);
 
         case CountryNoteViewCommand.COMMAND_WORD:
             return new CountryNoteViewCommandParser().parse(restOfCommand);
 
         case CountryNoteDeleteCommand.COMMAND_WORD:
             return new CountryNoteDeleteCommandParser().parse(restOfCommand);
-
-        case CountryFilterCommand.COMMAND_WORD:
-            return new CountryFilterCommandParser().parse(restOfCommand);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
