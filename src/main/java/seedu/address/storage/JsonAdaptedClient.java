@@ -182,8 +182,7 @@ class JsonAdaptedClient {
         }
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
-        Client modelClient =
-                new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTimezone,
+        Client modelClient = new Client(modelName, modelPhone, modelEmail, modelAddress, modelCountry, modelTimezone,
                     modelContractExpiryContractExpiryDate, modelLastModifiedInstant, modelTags);
         for (Note note : clientNotes) {
             modelClient.addClientNote(note);
