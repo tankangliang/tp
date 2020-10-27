@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -29,6 +30,8 @@ public class WidgetViewBox extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label time;
+    @FXML
     private Label phone;
     @FXML
     private Label email;
@@ -48,26 +51,7 @@ public class WidgetViewBox extends UiPart<Region> {
      */
     public WidgetViewBox() {
         super(FXML);
-        textClock = new TextClock(name);
-    }
-
-    /**
-     * Private constructor for testing purposes.
-     *
-     * @param client To be displayed.
-     */
-    private WidgetViewBox(Client client) {
-        super(FXML);
-        this.client = client;
-        textClock = new TextClock(name);
-        name.setText(client.getName().toString());
-        phone.setText(client.getPhone().toString());
-        email.setText(client.getEmail().toString());
-        country.setText(client.getCountry().getCountryName());
-        contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
-        noteTitle.setText("Notes");
-        notes.setItems(getObservableListofNote(client.getClientNotes()));
-        notes.setCellFactory(noteListView -> new ClientNoteListViewCell());
+        initDefault();
     }
 
     /**
@@ -83,7 +67,7 @@ public class WidgetViewBox extends UiPart<Region> {
         email.setText(client.getEmail().toString());
         country.setText(client.getCountry().getCountryName());
         contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
-        logger.info(client.getClientNotes().toString());
+        noteTitle.setText("Notes");
         notes.setItems(getObservableListofNote(client.getClientNotes()));
         notes.setCellFactory(noteListView -> new ClientNoteListViewCell());
     }
@@ -110,6 +94,12 @@ public class WidgetViewBox extends UiPart<Region> {
             noteList.add(itr.next());
         }
         return FXCollections.observableList(noteList);
+    }
+
+    private void initDefault() {
+        textClock = new TextClock(name);
+        time.setText(Locale.getDefault().getDisplayCountry());
+        textClock.play();
     }
 
     @Override
