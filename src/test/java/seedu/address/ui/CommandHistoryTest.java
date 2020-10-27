@@ -9,7 +9,6 @@ import java.util.NoSuchElementException;
 import org.junit.jupiter.api.Test;
 
 public class CommandHistoryTest {
-    
     @Test
     public void getNext_reachHistoryEnd_throwsNoSuchElementException() {
         CommandHistory commandHistory = CommandHistory.init();
