@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 
-import java.util.Objects;
-
 import seedu.address.model.Model;
 import seedu.address.model.country.Country;
 import seedu.address.ui.WidgetViewOption;
@@ -20,7 +18,7 @@ public class CountryNoteViewCommand extends Command {
             + "Parameters: "
             + PREFIX_COUNTRY + "COUNTRY_CODE \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_COUNTRY + "SG";
-    private static final String MESSAGE_SUCCESS = "Showing country notes for %1$s";
+    public static final String MESSAGE_SUCCESS = "Showing country notes for %1$s";
     private final Country country;
 
     /**
@@ -69,10 +67,5 @@ public class CountryNoteViewCommand extends Command {
         CountryNoteViewCommand c = (CountryNoteViewCommand) other;
 
         return country.equals(c.country);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(country);
     }
 }
