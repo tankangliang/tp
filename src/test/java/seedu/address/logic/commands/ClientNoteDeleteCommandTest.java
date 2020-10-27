@@ -32,7 +32,7 @@ class ClientNoteDeleteCommandTest {
     }
 
     @Test
-    public void execute_validClientIdxValidNoteIdx_doesNotThrowExceptionReturnsTrue() {
+    public void execute_validClientIdxValidNoteIdx_generatesClientNoteDeleteCommandSuccessfully() {
         Index client2Idx = Index.fromOneBased(2);
         Index clientNoteIdx = Index.fromOneBased(1);
         Note clientNote1 = new Note(NOTE_CONTENT_1);

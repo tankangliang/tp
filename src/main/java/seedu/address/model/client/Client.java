@@ -92,7 +92,7 @@ public class Client {
     /**
      * Gets the list of client notes associated with this client as an unmodifiable list.
      *
-     * @return An Unmodifiable List of client notes associated with this client.
+     * @return An unmodifiable list of client notes associated with this client.
      */
     public List<Note> getClientNotesAsList() {
         return Collections.unmodifiableList(new ArrayList<>(getClientNotes()));
