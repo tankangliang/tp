@@ -13,7 +13,7 @@ import seedu.address.model.note.Note;
  */
 public class ClientNoteCard extends UiPart<Region> {
 
-    private static final String FXML = "CountryNoteCard.fxml";
+    private static final String FXML = "ClientNoteCard.fxml";
 
     private final Note clientNote;
 

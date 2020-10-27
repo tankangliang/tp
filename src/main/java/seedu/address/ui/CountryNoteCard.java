@@ -6,19 +6,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.note.CountryNote;
+import seedu.address.model.note.Note;
 
 /**
  * UI container for displaying a country note object.
  */
 public class CountryNoteCard extends UiPart<Region> {
 
-    private static final String FXML = "CountryNoteCard.fxml";
+    private static final String FXML = "ClientNoteCard.fxml";
 
-    private final CountryNote countryNote;
+    private final Note clientNote;
 
     @FXML
-    private Label countryNoteContent;
+    private Label clientNoteContent;
     @FXML
     private HBox countryNoteContainer;
 
@@ -26,12 +26,12 @@ public class CountryNoteCard extends UiPart<Region> {
      * Initializes a CountryNoteCard.
      *
      * @param index The index of the country note.
-     * @param countryNote The country note to be displayed by this card.
+     * @param clientNote The country note to be displayed by this card.
      */
-    public CountryNoteCard(int index, CountryNote countryNote) {
+    public CountryNoteCard(int index, Note clientNote) {
         super(FXML);
-        requireAllNonNull(index, countryNote);
-        this.countryNote = countryNote;
-        countryNoteContent.setText(index + ". " + countryNote);
+        requireAllNonNull(index, clientNote);
+        this.clientNote = clientNote;
+        clientNoteContent.setText(index + ". " + clientNote);
     }
 }

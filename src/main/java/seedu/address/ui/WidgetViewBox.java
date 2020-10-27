@@ -1,11 +1,20 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.logging.Logger;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
 
@@ -13,6 +22,7 @@ import seedu.address.model.note.Note;
  * An Ui component that displays the information of {@code Client}.
  */
 public class WidgetViewBox extends UiPart<Region> {
+    private static Logger logger = LogsCenter.getLogger(WidgetViewBox.class);
     private static final String FXML = "WidgetViewBox.fxml";
     @FXML
     private VBox viewBox;
@@ -26,6 +36,8 @@ public class WidgetViewBox extends UiPart<Region> {
     private Label country;
     @FXML
     private Label contractExpiryDate;
+    @FXML
+    private Label noteTitle;
     @FXML
     private ListView<Note> notes;
     private Client client;
@@ -53,7 +65,8 @@ public class WidgetViewBox extends UiPart<Region> {
         email.setText(client.getEmail().toString());
         country.setText(client.getCountry().getCountryName());
         contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
-//        notes.setItems();
+        noteTitle.setText("Notes");
+        notes.setItems(getObservableListofNote(client.getClientNotes()));
         notes.setCellFactory(noteListView -> new ClientNoteListViewCell());
     }
 
@@ -70,6 +83,9 @@ public class WidgetViewBox extends UiPart<Region> {
         email.setText(client.getEmail().toString());
         country.setText(client.getCountry().getCountryName());
         contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
+        logger.info(client.getClientNotes().toString());
+        notes.setItems(getObservableListofNote(client.getClientNotes()));
+        notes.setCellFactory(noteListView -> new ClientNoteListViewCell());
     }
 
     /**
@@ -79,6 +95,21 @@ public class WidgetViewBox extends UiPart<Region> {
      */
     public static WidgetViewBox init() {
         return new WidgetViewBox();
+    }
+
+    /**
+     * Returns an observable list from a set of notes.
+     *
+     * @param notes
+     * @return ObservableList of notes.
+     */
+    private ObservableList<Note> getObservableListofNote(Set<Note> notes) {
+        Iterator<Note> itr = notes.iterator();
+        List<Note> noteList = new ArrayList<>();
+        while (itr.hasNext()) {
+            noteList.add(itr.next());
+        }
+        return FXCollections.observableList(noteList);
     }
 
     @Override
