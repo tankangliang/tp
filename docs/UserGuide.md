@@ -132,7 +132,7 @@ Edits a client's information by their index in the list view.
 
 Format: `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY_CODE] [tz/TIMEZONE] [ce/CONTRACT_EXPIRY]`
 
-* COUNTRY follows the ISO3166 Format of two-letter country codes. [Here](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) is a list of country codes.
+* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes.
 
 Examples:
 
