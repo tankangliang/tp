@@ -2,26 +2,6 @@
   "_comment": "AddressBook save file which contains the same Client values as in TypicalClients#getTypicalAddressBook()",
   "clients": [
     {
-      "name": "Benson Meier",
-      "phone": "98765432",
-      "email": "johnd@example.com",
-      "address": "311, Clementi Ave 2, #02-25",
-      "country": "SG",
-      "timezone": "GMT+8",
-      "contractExpiryDate": "3-12-2022",
-      "tagged": ["owesMoney", "friends" ],
-      "clientNotes": [ {
-        "contents": "his son is the devil's incarnate",
-        "countryCode": "NULL_CC",
-        "tags": ["turnOff"]
-        }, {
-          "contents": "snores a lot",
-        "countryCode": "NULL_CC",
-        "tags": ["turnOff"]
-        }
-      ]
-    },
-    {
       "name": "Alice Pauline",
       "phone": "94351253",
       "email": "alice@example.com",
@@ -30,15 +10,40 @@
       "timezone": "GMT+8",
       "contractExpiryDate": "1-4-2021",
       "tagged": ["friends"],
-      "clientNotes": [ {
-        "contents": "lives in a pineapple",
-        "countryCode": "NULL_CC",
-        "tags": ["godLike"]
-      }, {
-        "contents": "secret to the best krabby patty is in the J.U.I.C.E.",
-        "countryCode": "NULL_CC",
-        "tags": ["seduction"]
-      } ]
+      "clientNotes": [
+        {
+          "contents": "lives in a pineapple",
+          "countryCode": "NULL_CC",
+          "tags": ["godLike"]
+        },
+        {
+          "contents": "secret to the best krabby patty is in the J.U.I.C.E.",
+          "countryCode": "NULL_CC",
+          "tags": ["seduction"]
+        }
+      ]
+    },
+    {
+      "name": "Benson Meier",
+      "phone": "98765432",
+      "email": "johnd@example.com",
+      "address": "311, Clementi Ave 2, #02-25",
+      "country": "SG",
+      "timezone": "GMT+8",
+      "contractExpiryDate": "3-12-2022",
+      "tagged": ["owesMoney","friends"],
+      "clientNotes": [
+        {
+          "contents": "his son is the devil's incarnate",
+          "countryCode": "NULL_CC",
+          "tags": ["turnOff"]
+        },
+        {
+          "contents": "snores a lot",
+          "countryCode": "NULL_CC",
+          "tags": ["turnOff"]
+        }
+      ]
     },
     {
       "name": "Carl Kurz",
@@ -92,25 +97,25 @@
     }
   ],
   "notes": [
-  {
-    "contents": "lives in a pineapple",
-    "countryCode": "NULL_CC",
-    "tags": ["godLike"],
-
-  },
-  {
-    "contents": "secret to the best krabby patty is in the J.U.I.C.E.",
-    "countryCode": "NULL_CC",
-    "tags": ["seduction"]
-  },
-  {
+    {
+      "contents": "lives in a pineapple",
+      "countryCode": "NULL_CC",
+      "tags": ["godLike"]
+    },
+    {
+      "contents": "secret to the best krabby patty is in the J.U.I.C.E.",
+      "countryCode": "NULL_CC",
+      "tags": ["seduction"]
+    },
+    {
       "contents": "his son is the devil's incarnate",
       "countryCode": "NULL_CC",
       "tags": ["turnOff"]
-  },
-  {
-    "contents": "snores a lot",
-    "countryCode": "NULL_CC",
-    "tags": ["turnOff"]
-  }]
+    },
+    {
+      "contents": "snores a lot",
+      "countryCode": "NULL_CC",
+      "tags": ["turnOff"]
+    }
+  ]
 }
