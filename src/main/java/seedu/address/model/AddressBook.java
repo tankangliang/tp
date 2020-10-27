@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -76,6 +77,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Note note: notes) {
             if (note.isClientNote()) {
                 // handle client notes
+                // todo:  =======================================================
+                //        decided to not store the client notes in a separete set
+                //        because the notes are going to be stored within clients
+                //        itself. The setClient function aldy does this. Adding in
+                //        a collection of client notes in this class would mean that
+                //        collection needs to be constantly updated. As such, it
+                //        might be good enough to just modify the getNoteList method
+                //        ===========================================================
             } else {
                 countryNotesManager.addCountryNote((CountryNote) note);
             }
@@ -185,7 +194,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     //TODO: add client notes also. NOTE: THIS ONLY RETURNS COUNTRY NOTES FOR NOW.
     @Override
     public ObservableList<Note> getNoteList() {
-        return FXCollections.observableArrayList(countryNotesManager.asUnmodifiableObservableList());
+        ArrayList<Note> accumulated = new ArrayList<>(getCountryNoteList());
+        this.clients.forEach(client -> accumulated.addAll(client.getClientNotes()));
+        return FXCollections.observableArrayList(accumulated);
     }
 
     /**

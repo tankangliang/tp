@@ -23,9 +23,9 @@ public class CountryNoteListPanelHandle extends NodeHandle<ListView<CountryNote>
      * Returns the client card handle of a client associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public CountryNoteCardHandle getCountryNoteCardHandle(int index) {
+    public NoteListCardHandle getCountryNoteCardHandle(int index) {
         return getAllCardNodes().stream()
-                .map(CountryNoteCardHandle::new)
+                .map(NoteListCardHandle::new)
                 .filter(handle -> handle.equals(getCountryNote(index)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);

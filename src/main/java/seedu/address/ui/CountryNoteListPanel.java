@@ -1,36 +1,92 @@
 package seedu.address.ui;
 
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 
 /**
- * A widget that wraps around ListView.
+ * Panel containing the list of country notes.
  */
 public class CountryNoteListPanel extends UiPart<Region> {
-    private static final String FXML = "WidgetListViewBox.fxml";
 
-    @FXML
-    private VBox viewBox;
+    private static final String FXML = "CountryNoteListPanel.fxml";
+    private static final String HEADER_ALL_COUNTRIES_TEXT = "All Country Notes";
+
+    private boolean displayAllCountries = true;
+    private ObservableList<CountryNote> countryNoteObservableList;
+
     @FXML
     private Label header;
     @FXML
-    private ListView<CountryNote> countryNoteListView;
+    private VBox countryNoteListView;
 
     /**
      * Initializes a {@code CountryNoteListPanel} with a countryNoteObservableList.
      */
     public CountryNoteListPanel(ObservableList<CountryNote> countryNoteObservableList) {
         super(FXML);
+        this.countryNoteObservableList = countryNoteObservableList;
         header.setText("Country Notes");
-        countryNoteListView.setItems(countryNoteObservableList);
-        countryNoteListView.setCellFactory(listView -> new CountryListViewCell());
+
+        updateCountryNoteListView(countryNoteObservableList);
+        countryNoteObservableList.addListener(new ListChangeListener<CountryNote>() {
+            @Override
+            public void onChanged(Change<? extends CountryNote> c) {
+                if (c.next()) {
+                    updateCountryNoteListView(countryNoteObservableList);
+                }
+            }
+        });
+    }
+
+    private void updateCountryNoteListView(ObservableList<CountryNote> countryNoteObservableList) {
+        countryNoteListView.getChildren().clear();
+        // This index is used to keep track of how many country notes have been displayed so far.
+        int noteIndex = 0;
+        if (!displayAllCountries) {
+            initCountryNoteListViewFromCountryNotes(countryNoteListView, countryNoteObservableList, noteIndex);
+            return;
+        }
+
+        Country currCountry = null;
+        CountryNoteListSubPanel countryNoteListSubPanel = new CountryNoteListSubPanel();
+        for (CountryNote countryNote : countryNoteObservableList) {
+            if (currCountry == null) {
+                currCountry = countryNote.getCountry();
+            }
+            if (!currCountry.equals(countryNote.getCountry())) {
+                countryNoteListSubPanel.header.setText(currCountry + " notes");
+                countryNoteListView.getChildren().add(countryNoteListSubPanel.getRoot());
+                currCountry = countryNote.getCountry();
+                countryNoteListSubPanel = new CountryNoteListSubPanel();
+            }
+            Node node = new NoteListCard(countryNote, noteIndex + 1).getRoot();
+            countryNoteListSubPanel.countryNoteListView.getChildren().add(node);
+            noteIndex++;
+        }
+        if (countryNoteObservableList.size() != 0) {
+            countryNoteListSubPanel.header.setText(currCountry + " notes");
+            countryNoteListView.getChildren().add(countryNoteListSubPanel.getRoot());
+        }
+    }
+
+    /**
+     * Given a list of country notes and the VBox to display them in, adds the country notes to the viewbox.
+     */
+    private static void initCountryNoteListViewFromCountryNotes(VBox countryNoteListView,
+            ObservableList<CountryNote> countryNoteObservableList, int startIndex) {
+        for (int i = 0; i < countryNoteObservableList.size(); i++) {
+            CountryNote countryNote = countryNoteObservableList.get(i);
+            Node node = new NoteListCard(countryNote, i + startIndex + 1).getRoot();
+            countryNoteListView.getChildren().add(node);
+        }
     }
 
     /**
@@ -40,28 +96,41 @@ public class CountryNoteListPanel extends UiPart<Region> {
      */
     public void setHeader(Country country) {
         if (country.equals(Country.NULL_COUNTRY)) {
-            header.setText("All Country Notes");
+            countryNoteListView.setSpacing(10.0);
+            header.setText(HEADER_ALL_COUNTRIES_TEXT);
+            displayAllCountries = true;
         } else {
+            countryNoteListView.setSpacing(20.0);
             header.setText(country + " notes");
+            displayAllCountries = false;
         }
+        updateCountryNoteListView(countryNoteObservableList);
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code CountryNote} using a {@code
-     * CountryNoteCard}.
+     * Sub-panel which is used for viewing all countries' notes, only used when {@code displayAllCountries} is true.
      */
-    class CountryListViewCell extends ListCell<CountryNote> {
+    private static class CountryNoteListSubPanel extends UiPart<Region> {
+        private static final String FXML = "CountryNoteListPanel.fxml";
 
-        @Override
-        protected void updateItem(CountryNote countryNote, boolean empty) {
-            super.updateItem(countryNote, empty);
+        @FXML
+        private VBox countryNoteListContainer;
+        @FXML
+        private Label header;
+        @FXML
+        private ScrollPane countryNoteScrollPane;
+        @FXML
+        private VBox countryNoteListView;
 
-            if (empty || countryNote == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new CountryNoteCard(getIndex() + 1, countryNote).getRoot());
-            }
+        /**
+         * Initializes a {@code CountryNoteListSubPanel}.
+         */
+        public CountryNoteListSubPanel() {
+            super(FXML);
+            countryNoteListContainer.setStyle("-fx-border-color: #FF3333; -fx-border-radius: 20");
+            countryNoteScrollPane.setMinHeight(30.0);
+            countryNoteScrollPane.setPrefHeight(200.0);
         }
     }
+
 }

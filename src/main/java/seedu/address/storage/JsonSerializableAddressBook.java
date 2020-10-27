@@ -61,18 +61,12 @@ class JsonSerializableAddressBook {
             }
             addressBook.addClient(client);
         }
-
-        //TODO: For storing JSON notes
         for (JsonAdaptedNote note: notes) {
             Note modelNote = note.toModelType();
-            if (note.isClientNote()) {
-                // handle client note
-            } else {
-                // note is countryNote
+            if (!note.isClientNote()) { // i.e. it's a countryNote
                 addressBook.addCountryNote((CountryNote) modelNote);
             }
         }
         return addressBook;
     }
-
 }
