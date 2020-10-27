@@ -47,14 +47,15 @@
                 </StackPane>
 
         <HBox VBox.vgrow="ALWAYS" >
-          <VBox styleClass="pane-with-border" prefHeight="340" prefWidth="340" VBox.vgrow="ALWAYS" HBox.hgrow="NEVER">
+          <VBox styleClass="pane-with-border" prefHeight="340" minWidth="340" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
             <StackPane fx:id="widgetPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <VBox fx:id="clientList" styleClass="pane-with-border" minWidth="350" prefWidth="340" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+          <VBox fx:id="clientList" styleClass="pane-with-border" minWidth="350" prefWidth="340"
+                VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>

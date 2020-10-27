@@ -6,8 +6,7 @@
     "address": "123, Jurong West Ave 6, #08-111",
     "country": "SG",
     "timezone": "GMT+8",
-    "contractExpiryDate": "10-9-2020",
-    "tagged": [ "friends" ]
+    "contractExpiryDate": "10-9-2020"
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",

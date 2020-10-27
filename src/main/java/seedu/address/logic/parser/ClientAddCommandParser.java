@@ -7,11 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEZONE;
 
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ClientAddCommand;
@@ -25,7 +23,6 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new ClientAddCommand object
@@ -40,7 +37,7 @@ public class ClientAddCommandParser implements Parser<ClientAddCommand> {
     public ClientAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_COUNTRY, PREFIX_TIMEZONE, PREFIX_CONTRACT_EXPIRY_DATE, PREFIX_TAG);
+                        PREFIX_COUNTRY, PREFIX_TIMEZONE, PREFIX_CONTRACT_EXPIRY_DATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_COUNTRY,
                 PREFIX_TIMEZONE) || !argMultimap.getPreamble().isEmpty()) {
@@ -61,10 +58,9 @@ public class ClientAddCommandParser implements Parser<ClientAddCommand> {
             contractExpiryDate = ContractExpiryDate.NULL_DATE;
         }
         LastModifiedInstant lastModifiedInstant = new LastModifiedInstant();
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Client client = new Client(name, phone, email, address, country, timezone, contractExpiryDate,
-                lastModifiedInstant, tagList);
+                lastModifiedInstant);
 
         return new ClientAddCommand(client);
     }

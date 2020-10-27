@@ -2,9 +2,8 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +12,6 @@ import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.country.CountryNotesManager;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagSet;
 
 /**
@@ -57,14 +55,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setClients(List<Client> clients) {
         this.clients.setClients(clients);
-        Set<Tag> allClientTags = new HashSet<>();
-        for (Client client : clients) {
-            allClientTags.addAll(client.getTags());
-        }
-        this.tags.setTags(allClientTags);
-        for (Client client : clients) {
-            replaceClientTagSet(client);
-        }
     }
 
     /**
@@ -76,6 +66,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Note note: notes) {
             if (note.isClientNote()) {
                 // handle client notes
+                // todo:  =======================================================
+                //        decided to not store the client notes in a separete set
+                //        because the notes are going to be stored within clients
+                //        itself. The setClient function aldy does this. Adding in
+                //        a collection of client notes in this class would mean that
+                //        collection needs to be constantly updated. As such, it
+                //        might be good enough to just modify the getNoteList method
+                //        ===========================================================
             } else {
                 countryNotesManager.addCountryNote((CountryNote) note);
             }
@@ -102,32 +100,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the client tag set with a set of matching unique tag objects.
-     */
-    private void replaceClientTagSet(Client client) {
-        Set<Tag> clientLocalTags = client.getTags();
-        tags.addAll(clientLocalTags);
-        client.replaceTags(tags.getTags(clientLocalTags));
-    }
-
-    /**
-     * Replaces client tag set and adds the client to the address book.
+     * Adds the client to the address book.
      * The client must not already exist in the address book.
      */
     public void addClient(Client client) {
-        replaceClientTagSet(client);
         clients.add(client);
     }
 
     /**
-     * Replaces {@code editedClient} tag set and then replaces the given client {@code target} in the list
-     * with {@code editedClient}.
+     * Replaces the given client {@code target} in the list with {@code editedClient}.
      * {@code target} must exist in the address book.
      * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
      */
     public void setClient(Client target, Client editedClient) {
         requireNonNull(editedClient);
-        replaceClientTagSet(editedClient);
         clients.setClient(target, editedClient);
     }
 
@@ -185,7 +171,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     //TODO: add client notes also. NOTE: THIS ONLY RETURNS COUNTRY NOTES FOR NOW.
     @Override
     public ObservableList<Note> getNoteList() {
-        return FXCollections.observableArrayList(countryNotesManager.asUnmodifiableObservableList());
+        ArrayList<Note> accumulated = new ArrayList<>(getCountryNoteList());
+        this.clients.forEach(client -> accumulated.addAll(client.getClientNotes()));
+        return FXCollections.observableArrayList(accumulated);
     }
 
     /**
