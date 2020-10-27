@@ -30,8 +30,6 @@ public class WidgetViewBox extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label time;
-    @FXML
     private Label phone;
     @FXML
     private Label email;
@@ -60,8 +58,8 @@ public class WidgetViewBox extends UiPart<Region> {
      * @param client The new content.
      */
     public void update(Client client) {
-        this.client = client;
         textClock.pause();
+        this.client = client;
         name.setText(client.getName().toString());
         phone.setText(client.getPhone().toString());
         email.setText(client.getEmail().toString());
@@ -98,7 +96,7 @@ public class WidgetViewBox extends UiPart<Region> {
 
     private void initDefault() {
         textClock = new TextClock(name);
-        time.setText(Locale.getDefault().getDisplayCountry());
+        country.setText(Locale.getDefault().getDisplayCountry());
         textClock.play();
     }
 

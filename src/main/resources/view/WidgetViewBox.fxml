@@ -12,16 +12,13 @@
                 <Label fx:id="name" alignment="CENTER" prefHeight="46.0" prefWidth="280.0" styleClass="widget_header" text="name"/>
             </StackPane>
             <StackPane prefHeight="35.0" prefWidth="337.0">
-                <Label fx:id="time" prefHeight="17.0" prefWidth="290.0" styleClass="widget_div"/>
-            </StackPane>
-            <StackPane prefHeight="35.0" prefWidth="337.0">
-                <Label fx:id="phone" prefHeight="17.0" prefWidth="290.0" styleClass="widget_text"/>
+                <Label fx:id="country" prefHeight="17.0" prefWidth="290.0" styleClass="widget_div"/>
             </StackPane>
             <StackPane prefHeight="35.0" prefWidth="337.0">
                 <Label fx:id="email" prefHeight="17.0" prefWidth="290.0" styleClass="widget_text"/>
             </StackPane>
             <StackPane prefHeight="35.0" prefWidth="337.0">
-                <Label fx:id="country" prefHeight="17.0" prefWidth="289.0" styleClass="widget_text"/>
+                <Label fx:id="phone" prefHeight="17.0" prefWidth="289.0" styleClass="widget_text"/>
             </StackPane>
             <StackPane prefHeight="35.0" prefWidth="337.0">
                 <Label fx:id="contractExpiryDate" prefHeight="17.0" prefWidth="289.0" styleClass="widget_text"/>
