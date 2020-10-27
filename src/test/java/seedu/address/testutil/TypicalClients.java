@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.TbmManager;
 import seedu.address.model.client.Client;
 
 /**
@@ -77,14 +77,14 @@ public class TypicalClients {
     private TypicalClients() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical clients.
+     * Returns an {@code TbmManager} with all the typical clients.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static TbmManager getTypicalTbmManager() {
+        TbmManager tm = new TbmManager();
         for (Client client : getTypicalClients()) {
-            ab.addClient(client);
+            tm.addClient(client);
         }
-        return ab;
+        return tm;
     }
 
     public static List<Client> getTypicalClients() {

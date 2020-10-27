@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
@@ -24,7 +24,7 @@ import seedu.address.model.client.Client;
  */
 public class ClientDeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -33,7 +33,7 @@ public class ClientDeleteCommandTest {
 
         String expectedMessage = String.format(ClientDeleteCommand.MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getTbmManager(), new UserPrefs());
         expectedModel.deleteClient(clientToDelete);
 
         assertCommandSuccess(clientDeleteCommand, model, expectedMessage, expectedModel);
@@ -56,7 +56,7 @@ public class ClientDeleteCommandTest {
 
         String expectedMessage = String.format(ClientDeleteCommand.MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTbmManager(), new UserPrefs());
         expectedModel.deleteClient(clientToDelete);
         showNoClient(expectedModel);
 
@@ -69,7 +69,7 @@ public class ClientDeleteCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_CLIENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getClientList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTbmManager().getClientList().size());
 
         ClientDeleteCommand clientDeleteCommand = new ClientDeleteCommand(outOfBoundIndex);
 

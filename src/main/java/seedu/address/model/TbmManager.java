@@ -15,10 +15,10 @@ import seedu.address.model.note.Note;
 import seedu.address.model.tag.UniqueTagSet;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at TbmManager level
  * Duplicates are not allowed (by .isSameClient comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class TbmManager implements ReadOnlyTbmManager {
 
     private final UniqueClientList clients;
     private final UniqueTagSet tags;
@@ -36,12 +36,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         countryNotesManager = new CountryNotesManager();
     }
 
-    public AddressBook() {}
+    public TbmManager() {}
 
     /**
-     * Creates an AddressBook using the Clients in the {@code toBeCopied}
+     * Creates an TbmManager using the Clients in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public TbmManager(ReadOnlyTbmManager toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -58,7 +58,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces all notes in addressbook with the given list of notes.
+     * Replaces all notes in TbmManager with the given list of notes.
      *
      * @param notes The given list of notes.
      */
@@ -81,9 +81,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code TbmManager} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTbmManager newData) {
         requireNonNull(newData);
         setClients(newData.getClientList());
         setNotes(newData.getNoteList());
@@ -92,7 +92,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// client-level operations
 
     /**
-     * Returns true if a client with the same identity as {@code client} exists in the address book.
+     * Returns true if a client with the same identity as {@code client} exists in TManager.
      */
     public boolean hasClient(Client client) {
         requireNonNull(client);
@@ -100,8 +100,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds the client to the address book.
-     * The client must not already exist in the address book.
+     * Adds the client to TbmManager.
+     * The client must not already exist in TbmManager.
      */
     public void addClient(Client client) {
         clients.add(client);
@@ -109,8 +109,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given client {@code target} in the list with {@code editedClient}.
-     * {@code target} must exist in the address book.
-     * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
+     * {@code target} must exist in TbmManager.
+     * The client identity of {@code editedClient} must not be the same as another existing client in TbmManager.
      */
     public void setClient(Client target, Client editedClient) {
         requireNonNull(editedClient);
@@ -118,7 +118,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code TbmManager}. {@code key} must exist in TbmManager.
      */
     public void removeClient(Client key) {
         clients.remove(key);
@@ -188,8 +188,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && clients.equals(((AddressBook) other).clients));
+                || (other instanceof TbmManager // instanceof handles nulls
+                && clients.equals(((TbmManager) other).clients));
     }
 
     @Override

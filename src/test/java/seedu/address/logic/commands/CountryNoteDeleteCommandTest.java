@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 
 public class CountryNoteDeleteCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
     private final CountryNote genericCountryNote = new CountryNote("generic note", new Country("SG"));
 
     @Test
