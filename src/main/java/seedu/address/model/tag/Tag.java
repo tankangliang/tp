@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final int MAX_CHARACTERS = 45;
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and be within " + MAX_CHARACTERS
-            + " characters.";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and have a maximum of "
+            + MAX_CHARACTERS + " characters";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
     public static final Tag UNTAGGED = new Tag("untagged");
 
