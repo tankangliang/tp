@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEZONE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -29,8 +28,7 @@ public class ClientAddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_COUNTRY + "COUNTRY_CODE "
             + PREFIX_TIMEZONE + "TIMEZONE "
-            + "[" + PREFIX_CONTRACT_EXPIRY_DATE + "CONTRACT_EXPIRY_DATE" + "] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_CONTRACT_EXPIRY_DATE + "CONTRACT_EXPIRY_DATE" + "]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
@@ -38,9 +36,7 @@ public class ClientAddCommand extends Command {
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_COUNTRY + "SG "
             + PREFIX_TIMEZONE + "GMT+8 "
-            + PREFIX_CONTRACT_EXPIRY_DATE + "30-1-2023 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_CONTRACT_EXPIRY_DATE + "30-1-2023 ";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in the address book";

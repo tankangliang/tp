@@ -4,14 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Client in the address book.
@@ -29,7 +27,6 @@ public class Client {
     private final Country country;
     private final Timezone timezone;
     private final ContractExpiryDate contractExpiryDate;
-    private final Set<Tag> tags = new HashSet<>();
     private final Set<Note> clientNotes = new LinkedHashSet<>(); // todo: initialise this iff client has notes
     private final LastModifiedInstant lastModifiedInstant;
 
@@ -37,8 +34,8 @@ public class Client {
      * Every field must be present and not null.
      */
     public Client(Name name, Phone phone, Email email, Address address, Country country, Timezone timezone,
-            ContractExpiryDate contractExpiryDate, LastModifiedInstant lastModifiedInstant, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, country, timezone, contractExpiryDate, tags);
+            ContractExpiryDate contractExpiryDate, LastModifiedInstant lastModifiedInstant) {
+        requireAllNonNull(name, phone, email, address, country, timezone, contractExpiryDate);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,7 +44,6 @@ public class Client {
         this.timezone = timezone;
         this.contractExpiryDate = contractExpiryDate;
         this.lastModifiedInstant = lastModifiedInstant;
-        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -80,22 +76,6 @@ public class Client {
 
     public LastModifiedInstant getLastModifiedInstant() {
         return lastModifiedInstant;
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
-    /**
-     * Replace current tag objects with tag objects from {@code UniqueTagSet}.
-     */
-    public void replaceTags(Set<Tag> uniqueTags) {
-        tags.clear();
-        tags.addAll(uniqueTags);
     }
 
     /**
@@ -171,14 +151,13 @@ public class Client {
                 && otherClient.getAddress().equals(getAddress())
                 && otherClient.getCountry().equals(getCountry())
                 && otherClient.getTimezone().equals(getTimezone())
-                && otherClient.getContractExpiryDate().equals(getContractExpiryDate())
-                && otherClient.getTags().equals(getTags());
+                && otherClient.getContractExpiryDate().equals(getContractExpiryDate());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, country, timezone, contractExpiryDate, tags);
+        return Objects.hash(name, phone, email, address, country, timezone, contractExpiryDate);
     }
 
     @Override
@@ -196,9 +175,8 @@ public class Client {
                 .append(" Timezone: ")
                 .append(getTimezone())
                 .append(" Contract Expiry Date: ")
-                .append(getContractExpiryDate())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
+                .append(getContractExpiryDate());
+
         return builder.toString();
     }
 

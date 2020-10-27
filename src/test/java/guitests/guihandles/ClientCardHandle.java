@@ -1,11 +1,7 @@
 package guitests.guihandles;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
 import seedu.address.model.client.Client;
 
 /**
@@ -17,7 +13,6 @@ public class ClientCardHandle extends NodeHandle<Node> {
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
-    private static final String TAGS_FIELD_ID = "#tags";
     private static final String COUNTRY_FIELD_ID = "#country";
     private static final String TIMEZONE_FIELD_ID = "#timezone";
     private final Label idLabel;
@@ -27,7 +22,6 @@ public class ClientCardHandle extends NodeHandle<Node> {
     private final Label emailLabel;
     private final Label countryLabel;
     private final Label timezoneLabel;
-    private final List<Label> tagLabels;
 
     /**
      * Constructor for handler.
@@ -44,12 +38,6 @@ public class ClientCardHandle extends NodeHandle<Node> {
         emailLabel = getChildNode(EMAIL_FIELD_ID);
         countryLabel = getChildNode(COUNTRY_FIELD_ID);
         timezoneLabel = getChildNode(TIMEZONE_FIELD_ID);
-        Region tagsContainer = getChildNode(TAGS_FIELD_ID);
-        tagLabels = tagsContainer
-                .getChildrenUnmodifiable()
-                .stream()
-                .map(Label.class::cast)
-                .collect(Collectors.toList());
     }
 
     public String getId() {
@@ -80,13 +68,6 @@ public class ClientCardHandle extends NodeHandle<Node> {
         return timezoneLabel.getText();
     }
 
-    public List<String> getTags() {
-        return tagLabels
-                .stream()
-                .map(Label::getText)
-                .collect(Collectors.toList());
-    }
-
     /**
      * Returns true if this handle contains {@code client}.
      */
@@ -94,10 +75,6 @@ public class ClientCardHandle extends NodeHandle<Node> {
         return getName().equals(client.getName().fullName)
                 && getAddress().equals(client.getAddress().value)
                 && getPhone().equals(client.getPhone().value)
-                && getEmail().equals(client.getEmail().value)
-                && getTags().equals(client.getTags().stream()
-                .map(tag -> tag.tagName)
-                .sorted()
-                .collect(Collectors.toList()));
+                && getEmail().equals(client.getEmail().value);
     }
 }
