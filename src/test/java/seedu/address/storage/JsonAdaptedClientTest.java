@@ -50,7 +50,7 @@ public class JsonAdaptedClientTest {
     private static final String VALID_LAST_MODIFIED_INSTANT = BENSON.getLastModifiedInstant().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS =
              BENSON.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList());
-    private List<JsonAdaptedNote> clientNotes = new ArrayList<>();
+    private final List<JsonAdaptedNote> clientNotes = new ArrayList<>();
 
     @Test
     public void toModelType_validClientDetails_returnsClient() throws Exception {

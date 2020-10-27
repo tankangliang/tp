@@ -23,8 +23,7 @@ class JsonAdaptedNote {
     private final Set<JsonAdaptedTag> tags = new HashSet<>();
 
     @JsonCreator
-    public JsonAdaptedNote(@JsonProperty("contents") String contents,
-            @JsonProperty("countryCode") String countryCode,
+    public JsonAdaptedNote(@JsonProperty("contents") String contents, @JsonProperty("countryCode") String countryCode,
             @JsonProperty("noteTags") Set<JsonAdaptedTag> tags) {
         this.contents = contents;
         this.countryCode = countryCode;
