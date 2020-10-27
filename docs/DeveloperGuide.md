@@ -179,7 +179,9 @@ The following class diagram illustrates how the relevant classes in the `seedu.a
 
 ![Country Class Diagram](images/CountryClass.png)
 
-Given below is a sequence diagram that shows the sequence of method calls that occur when a user inputs a `country note add` command. 
+Given below is a sequence diagram that shows how the `country note add` command works.
+
+![Country Note Add Sequence Diagram](images/CountryNoteAddSeqDiag.png)
 
 ### Suggesting contacts
 
