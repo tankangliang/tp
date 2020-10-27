@@ -17,17 +17,15 @@ public class ClientListCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        // no tags
-        Client clientWithNoTags = new ClientBuilder().withTags().build();
-        ClientListCard clientListCard = new ClientListCard(clientWithNoTags, 1);
-        uiPartExtension.setUiPart(clientListCard);
-        assertCardDisplay(clientListCard, clientWithNoTags, 1);
+        Client client1 = new ClientBuilder().withName("client1").build();
+        ClientListCard clientCard = new ClientListCard(client1, 1);
+        uiPartExtension.setUiPart(clientCard);
+        assertCardDisplay(clientCard, client1, 1);
 
-        // with tags
-        Client clientWithTags = new ClientBuilder().build();
-        clientListCard = new ClientListCard(clientWithTags, 2);
-        uiPartExtension.setUiPart(clientListCard);
-        assertCardDisplay(clientListCard, clientWithTags, 2);
+        Client client2 = new ClientBuilder().withName("client2").build();
+        clientCard = new ClientListCard(client2, 2);
+        uiPartExtension.setUiPart(clientCard);
+        assertCardDisplay(clientCard, client2, 2);
     }
 
     @Test

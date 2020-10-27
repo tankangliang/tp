@@ -2,11 +2,8 @@ package seedu.address.ui;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -47,8 +44,6 @@ public class ClientListCard extends UiPart<Region> {
     private Label country;
     @FXML
     private Label timezone;
-    @FXML
-    private FlowPane tags;
 
     /**
      * Creates a {@code ClientListCard} with the given {@code Client} and index to display.
@@ -69,9 +64,6 @@ public class ClientListCard extends UiPart<Region> {
             dateLabel.getStyleClass().add("cell_small_label");
             clientFields.getChildren().add(dateLabel);
         }
-        client.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
