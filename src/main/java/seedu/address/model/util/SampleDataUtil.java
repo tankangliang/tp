@@ -3,8 +3,8 @@ package seedu.address.model.util;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTbmManager;
+import seedu.address.model.TbmManager;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ContractExpiryDate;
@@ -18,7 +18,7 @@ import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code TbmManager} with sample data.
  */
 public class SampleDataUtil {
 
@@ -62,20 +62,20 @@ public class SampleDataUtil {
         ));
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyTbmManager getSampleTbmManager() {
+        TbmManager sampleTm = new TbmManager();
         for (Client sampleClient : getSampleClients()) {
-            sampleAb.addClient(sampleClient);
+            sampleTm.addClient(sampleClient);
         }
 
-        //TODO: have method to add client notes to AddressBook
+        //TODO: have method to add client notes to TbmManager
         for (Note note: getSampleClientNotes()) {
         }
 
         for (CountryNote countryNote : getSampleCountryNotes()) {
-            sampleAb.addCountryNote(countryNote);
+            sampleTm.addCountryNote(countryNote);
         }
 
-        return sampleAb;
+        return sampleTm;
     }
 }

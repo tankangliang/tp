@@ -5,11 +5,11 @@ skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
 Package Model <<Rectangle>>{
-Interface ReadOnlyAddressBook <<Interface>>
+Interface ReadOnlyTbmManager <<Interface>>
 Interface Model <<Interface>>
 Interface ObservableList <<Interface>>
-Class AddressBook
-Class ReadOnlyAddressBook
+Class TbmManager
+Class ReadOnlyTbmManager
 Class Model
 Class ModelManager
 Class UserPrefs
@@ -63,20 +63,20 @@ Class CountryCodeVerifier
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
-AddressBook .up.|> ReadOnlyAddressBook
+TbmManager .up.|> ReadOnlyTbmManager
 
 ModelManager .up.|> Model
 Model .right.> ObservableList
-ModelManager o--> "1" AddressBook
+ModelManager o--> "1" TbmManager
 ModelManager o-left-> "1" UserPrefs
 ModelManager *-right->"1" WidgetModel
-AddressBook *-right->"1" UniqueTagSet
-AddressBook *-right-> "1" CountryNotesManager
+TbmManager *-right->"1" UniqueTagSet
+TbmManager *-right-> "1" CountryNotesManager
 
 
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniqueClientList
+TbmManager *--> "1" UniqueClientList
 UniqueClientList o--> "*" Client
 Client *--> Name
 Client *--> Phone
