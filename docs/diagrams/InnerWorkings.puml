@@ -31,9 +31,9 @@ Class Tag
 Class UniqueTagSet
 }
 
-AddressBook *-right-> "1" UniqueClientList
-AddressBook *-right-> "1" UniqueTagSet
-AddressBook *-right-> "1" CountryManager
+TbmManager *-right-> "1" UniqueClientList
+TbmManager *-right-> "1" UniqueTagSet
+TbmManager *-right-> "1" CountryManager
 
 UniqueClientList o--> "*" Client
 
@@ -54,5 +54,5 @@ TagNoteMap o-right->"*" Note
 TagNoteMap o-up-> Tag
 CountryManager --> "*" Note : creates mapping >
 
-Client -[hidden]right- AddressBook
+Client -[hidden]right- TbmManager
 @enduml

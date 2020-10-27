@@ -26,8 +26,8 @@ import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ClientBuilder;
+import seedu.address.testutil.TbmManagerBuilder;
 
 public class ModelManagerTest {
 
@@ -37,7 +37,7 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
-        assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
+        assertEquals(new TbmManager(), new TbmManager(modelManager.getTbmManager()));
     }
 
     @Test
@@ -48,14 +48,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setAddressBookFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setTbmManagerFilePath(Paths.get("address/book/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setAddressBookFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setTbmManagerFilePath(Paths.get("new/address/book/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -72,15 +72,15 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void setAddressBookFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setAddressBookFilePath(null));
+    public void setTbmManagerFilePath_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setTbmManagerFilePath(null));
     }
 
     @Test
-    public void setAddressBookFilePath_validPath_setsAddressBookFilePath() {
+    public void setTbmManagerFilePath_validPath_setsTbmManagerFilePath() {
         Path path = Paths.get("address/book/file/path");
-        modelManager.setAddressBookFilePath(path);
-        assertEquals(path, modelManager.getAddressBookFilePath());
+        modelManager.setTbmManagerFilePath(path);
+        assertEquals(path, modelManager.getTbmManagerFilePath());
     }
 
     @Test
@@ -98,12 +98,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasClient_clientNotInAddressBook_returnsFalse() {
+    public void hasClient_clientNotInTbmManager_returnsFalse() {
         assertFalse(modelManager.hasClient(ALICE));
     }
 
     @Test
-    public void hasClient_clientInAddressBook_returnsTrue() {
+    public void hasClient_clientInTbmManager_returnsTrue() {
         Client client = new ClientBuilder(ALICE).build();
         assertFalse(modelManager.hasClient(client));
         modelManager.addClient(client);
@@ -139,8 +139,8 @@ public class ModelManagerTest {
     public void deleteClientNote_validSyntax_deletesSuccessfully() {
         Client client = new ClientBuilder(ALICE).build();
         UserPrefs userPrefs = new UserPrefs();
-        AddressBook addressBook = new AddressBookBuilder().withClient(client).build();
-        modelManager = new ModelManager(addressBook, userPrefs);
+        TbmManager tbmManager = new TbmManagerBuilder().withClient(client).build();
+        modelManager = new ModelManager(tbmManager, userPrefs);
         Note clientNote = new Note("this be a client note");
         modelManager.addClientNote(client, clientNote);
         assertTrue(modelManager.hasClientNote(client, clientNote));
@@ -157,13 +157,13 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withClient(ALICE).withClient(BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        TbmManager tbmManager = new TbmManagerBuilder().withClient(ALICE).withClient(BENSON).build();
+        TbmManager differentTbmManager = new TbmManager();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(tbmManager, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(tbmManager, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -175,29 +175,29 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different tbmManager -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentTbmManager, userPrefs)));
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        differentUserPrefs.setTbmManagerFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(tbmManager, differentUserPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredClientList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(tbmManager, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
 
         // different sortedList -> returns false
-        modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManagerCopy = new ModelManager(tbmManager, userPrefs);
         modelManagerCopy.updateSortedFilteredClientList((client1, client2) -> 1);
         assertFalse(modelManager.equals(modelManagerCopy));
 
         // different tagNoteMap -> returns false
-        modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManagerCopy = new ModelManager(tbmManager, userPrefs);
         modelManagerCopy.addClientNote(new ClientBuilder().build(), new Note("client note"));
         assertFalse(modelManager.equals(modelManagerCopy));
     }
@@ -258,18 +258,18 @@ public class ModelManagerTest {
 
     @Test
     public void updateSortedFilteredClientList_zeroComparator_sameOrderOfClients() {
-        AddressBook addressBook = new AddressBookBuilder().withClient(ALICE).withClient(BENSON).build();
-        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+        TbmManager tbmManager = new TbmManagerBuilder().withClient(ALICE).withClient(BENSON).build();
+        ModelManager modelManagerCopy = new ModelManager(tbmManager, new UserPrefs());
         modelManagerCopy.updateSortedFilteredClientList((client1, client2) -> 0);
-        assertEquals(modelManagerCopy, new ModelManager(addressBook, new UserPrefs()));
+        assertEquals(modelManagerCopy, new ModelManager(tbmManager, new UserPrefs()));
     }
 
     @Test
     public void updateSortedFilteredClientList_contractComparator_correctOrderOfClients() {
         Client client1 = new ClientBuilder().withName("client1").withContractExpiryDate("2-3-2020").build();
         Client client2 = new ClientBuilder().withName("client2").withContractExpiryDate("1-3-2020").build();
-        AddressBook addressBook = new AddressBookBuilder().withClient(client1).withClient(client2).build();
-        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+        TbmManager tbmManager = new TbmManagerBuilder().withClient(client1).withClient(client2).build();
+        ModelManager modelManagerCopy = new ModelManager(tbmManager, new UserPrefs());
         assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client1);
         modelManagerCopy.updateSortedFilteredClientList(
                 new SuggestionType(SuggestionType.BY_CONTRACT).getSuggestionComparator());
@@ -282,8 +282,8 @@ public class ModelManagerTest {
                 .withLastModifiedInstant("2020-01-01T00:00:00.000000Z").build();
         Client client2 = new ClientBuilder().withName("client2")
                 .withLastModifiedInstant("2020-01-02T00:00:00.000000Z").build();
-        AddressBook addressBook = new AddressBookBuilder().withClient(client1).withClient(client2).build();
-        ModelManager modelManagerCopy = new ModelManager(addressBook, new UserPrefs());
+        TbmManager tbmManager = new TbmManagerBuilder().withClient(client1).withClient(client2).build();
+        ModelManager modelManagerCopy = new ModelManager(tbmManager, new UserPrefs());
         assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client1);
         modelManagerCopy.updateSortedFilteredClientList(
                 new SuggestionType(SuggestionType.BY_FREQUENCY).getSuggestionComparator());

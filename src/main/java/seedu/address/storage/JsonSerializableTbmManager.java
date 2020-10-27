@@ -9,17 +9,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTbmManager;
+import seedu.address.model.TbmManager;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable TbmManager that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "tbmManager")
+class JsonSerializableTbmManager {
 
     public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
 
@@ -27,46 +27,46 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedNote> notes = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given clients.
+     * Constructs a {@code JsonSerializableTbmManager} with the given clients.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("clients") List<JsonAdaptedClient> clients,
-            @JsonProperty("notes") List<JsonAdaptedNote> notes) {
+    public JsonSerializableTbmManager(@JsonProperty("clients") List<JsonAdaptedClient> clients,
+                                      @JsonProperty("notes") List<JsonAdaptedNote> notes) {
         this.clients.addAll(clients);
         this.notes.addAll(notes);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyTbmManager} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableTbmManager}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableTbmManager(ReadOnlyTbmManager source) {
         clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
         //TODO: For storing JSON notes
         notes.addAll(source.getNoteList().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code TbmManager} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public TbmManager toModelType() throws IllegalValueException {
+        TbmManager tbmManager = new TbmManager();
         for (JsonAdaptedClient jsonAdaptedClient : clients) {
             Client client = jsonAdaptedClient.toModelType();
-            if (addressBook.hasClient(client)) {
+            if (tbmManager.hasClient(client)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_CLIENT);
             }
-            addressBook.addClient(client);
+            tbmManager.addClient(client);
         }
         for (JsonAdaptedNote note: notes) {
             Note modelNote = note.toModelType();
             if (!note.isClientNote()) { // i.e. it's a countryNote
-                addressBook.addCountryNote((CountryNote) modelNote);
+                tbmManager.addCountryNote((CountryNote) modelNote);
             }
         }
-        return addressBook;
+        return tbmManager;
     }
 }

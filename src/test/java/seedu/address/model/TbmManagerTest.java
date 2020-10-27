@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.ALICE;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,25 +24,25 @@ import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.testutil.ClientBuilder;
 
-public class AddressBookTest {
+public class TbmManagerTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final TbmManager tbmManager = new TbmManager();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getClientList());
+        assertEquals(Collections.emptyList(), tbmManager.getClientList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> tbmManager.resetData(null));
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyTbmManager_replacesData() {
+        TbmManager newData = getTypicalTbmManager();
+        tbmManager.resetData(newData);
+        assertEquals(newData, tbmManager);
     }
 
     @Test
@@ -50,64 +50,64 @@ public class AddressBookTest {
         // Two clients with the same identity fields
         Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
         List<Client> newClients = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newClients);
+        TbmManagerStub newData = new TbmManagerStub(newClients);
 
-        assertThrows(DuplicateClientException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicateClientException.class, () -> tbmManager.resetData(newData));
     }
 
     @Test
     public void hasClient_nullClient_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasClient(null));
+        assertThrows(NullPointerException.class, () -> tbmManager.hasClient(null));
     }
 
     @Test
-    public void hasClient_clientNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasClient(ALICE));
+    public void hasClient_clientNotInTbmManager_returnsFalse() {
+        assertFalse(tbmManager.hasClient(ALICE));
     }
 
     @Test
-    public void hasClient_clientInAddressBook_returnsTrue() {
-        addressBook.addClient(ALICE);
-        assertTrue(addressBook.hasClient(ALICE));
+    public void hasClient_clientInTbmManager_returnsTrue() {
+        tbmManager.addClient(ALICE);
+        assertTrue(tbmManager.hasClient(ALICE));
     }
 
     @Test
-    public void hasClient_clientWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addClient(ALICE);
+    public void hasClient_clientWithSameIdentityFieldsInTbmManager_returnsTrue() {
+        tbmManager.addClient(ALICE);
         Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
-        assertTrue(addressBook.hasClient(editedAlice));
+        assertTrue(tbmManager.hasClient(editedAlice));
     }
 
     @Test
     public void getClientList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getClientList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> tbmManager.getClientList().remove(0));
     }
 
     @Test
     public void addCountryNote_updateCountryNoteList() {
         CountryNote countryNote = new CountryNote("random", new Country("SG"));
-        assertFalse(addressBook.hasCountryNote(countryNote));
-        addressBook.addCountryNote(countryNote);
-        assertTrue(addressBook.hasCountryNote(countryNote));
+        assertFalse(tbmManager.hasCountryNote(countryNote));
+        tbmManager.addCountryNote(countryNote);
+        assertTrue(tbmManager.hasCountryNote(countryNote));
     }
 
     @Test
     public void deleteCountryNote_updateCountryNoteList() {
         CountryNote countryNote = new CountryNote("random2", new Country("SG"));
-        assertFalse(addressBook.hasCountryNote(countryNote));
-        addressBook.addCountryNote(countryNote);
-        assertTrue(addressBook.hasCountryNote(countryNote));
-        addressBook.deleteCountryNote(countryNote);
-        assertFalse(addressBook.hasCountryNote(countryNote));
+        assertFalse(tbmManager.hasCountryNote(countryNote));
+        tbmManager.addCountryNote(countryNote);
+        assertTrue(tbmManager.hasCountryNote(countryNote));
+        tbmManager.deleteCountryNote(countryNote);
+        assertFalse(tbmManager.hasCountryNote(countryNote));
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose clients list can violate interface constraints.
+     * A stub ReadOnlyTbmManager whose clients list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class TbmManagerStub implements ReadOnlyTbmManager {
         private final ObservableList<Client> clients = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Client> clients) {
+        TbmManagerStub(Collection<Client> clients) {
             this.clients.setAll(clients);
         }
 
