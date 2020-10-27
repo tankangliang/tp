@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static java.util.Objects.requireNonNull;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,7 +12,7 @@ import seedu.address.model.client.Client;
 /**
  * An UI component that displays information of a {@code Client}.
  */
-public class ClientCard extends UiPart<Region> {
+public class ClientListCard extends UiPart<Region> {
 
     private static final String FXML = "ClientListCard.fxml";
 
@@ -46,11 +46,11 @@ public class ClientCard extends UiPart<Region> {
     private Label timezone;
 
     /**
-     * Creates a {@code ClientCode} with the given {@code Client} and index to display.
+     * Creates a {@code ClientListCard} with the given {@code Client} and index to display.
      */
-    public ClientCard(Client client, int displayedIndex) {
+    public ClientListCard(Client client, int displayedIndex) {
         super(FXML);
-        requireAllNonNull(client);
+        requireNonNull(client);
         this.client = client;
         id.setText(displayedIndex + ". ");
         name.setText(client.getName().fullName);
@@ -74,12 +74,12 @@ public class ClientCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ClientCard)) {
+        if (!(other instanceof ClientListCard)) {
             return false;
         }
 
         // state check
-        ClientCard card = (ClientCard) other;
+        ClientListCard card = (ClientListCard) other;
         return id.getText().equals(card.id.getText())
                 && client.equals(card.client);
     }
