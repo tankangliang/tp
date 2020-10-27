@@ -58,9 +58,4 @@ public class CountryFilterCommand extends Command {
 
         return predicate.equals(c.predicate);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(predicate);
-    }
 }

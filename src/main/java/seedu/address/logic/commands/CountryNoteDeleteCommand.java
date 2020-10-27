@@ -22,7 +22,7 @@ public class CountryNoteDeleteCommand extends Command {
             + ": Deletes the country note that are associated with the last viewed country at the given index.\n"
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
-    private static final String MESSAGE_SUCCESS = "Deleted country note at index %1$s: %2$s";
+    public static final String MESSAGE_SUCCESS = "Deleted country note at index %1$s: %2$s";
     private final Index targetIndex;
 
     /**
@@ -66,10 +66,5 @@ public class CountryNoteDeleteCommand extends Command {
         CountryNoteDeleteCommand c = (CountryNoteDeleteCommand) other;
 
         return targetIndex.equals(c.targetIndex);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(targetIndex);
     }
 }

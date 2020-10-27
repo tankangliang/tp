@@ -20,7 +20,7 @@ public class CountryNoteViewCommand extends Command {
             + "Parameters: "
             + PREFIX_COUNTRY + "COUNTRY_CODE \n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_COUNTRY + "SG";
-    private static final String MESSAGE_SUCCESS = "Showing country notes for %1$s";
+    public static final String MESSAGE_SUCCESS = "Showing country notes for %1$s";
     private final Country country;
 
     /**
@@ -69,10 +69,5 @@ public class CountryNoteViewCommand extends Command {
         CountryNoteViewCommand c = (CountryNoteViewCommand) other;
 
         return country.equals(c.country);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(country);
     }
 }
