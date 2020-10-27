@@ -2,12 +2,16 @@ package seedu.address.ui;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
 
+/**
+ * A class to encapsulate the history of commands entered by the user.
+ */
 public class CommandHistory {
     private static final Logger logger = LogsCenter.getLogger(CommandHistory.class);
     private final List<String> history;
@@ -18,10 +22,14 @@ public class CommandHistory {
      *
      * @param history
      */
-    public CommandHistory(List<String> history) {
+    private CommandHistory(List<String> history) {
         logger.info(history.toString());
         this.history = history;
         pointer = history.size();
+    }
+
+    public static CommandHistory init() {
+        return new CommandHistory(new ArrayList<String>());
     }
 
     /**
