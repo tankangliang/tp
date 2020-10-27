@@ -1,8 +1,10 @@
 package seedu.address.model.client;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTRACT_EXPIRY_DATE_BOB;
@@ -14,8 +16,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BOB;
 
+import java.util.List;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.note.Note;
 import seedu.address.testutil.ClientBuilder;
 
 public class ClientTest {
@@ -145,4 +151,45 @@ public class ClientTest {
 
         // TODO: Add tests with modified notes
     }
+
+    @Test
+    public void getClientNotes_modifyUnmodifiableSet_throwsException() {
+        Client client = new ClientBuilder(ALICE).build();
+        Note clientNote = new Note("hell yes");
+        client.addClientNote(clientNote);
+        assertTrue(client.hasClientNote(clientNote));
+        Set<Note> currentNotes = client.getClientNotes();
+        assertThrows(UnsupportedOperationException.class, () -> currentNotes.add(new Note("nice lahh")));
+    }
+
+    @Test
+    public void getClientNotesAsList_modifyUnmodifiableList_throwsException() {
+        Client client = new ClientBuilder(ALICE).build();
+        client.addClientNote(new Note("hell yes"));
+        List<Note> currentNotes = client.getClientNotesAsList();
+        assertThrows(UnsupportedOperationException.class, () -> currentNotes.add(new Note("nice lahh")));
+    }
+
+    @Test
+    public void deleteClientNote_deleteExistingNote_noteIsDeletedWithoutException() {
+        Client client = new ClientBuilder(ALICE).build();
+        Note clientNote = new Note("hell yes");
+        client.addClientNote(clientNote);
+        assertTrue(client.hasClientNote(clientNote));
+        assertDoesNotThrow(() -> client.deleteClientNote(clientNote));
+        client.deleteClientNote(clientNote);
+        assertFalse(client.hasClientNote(clientNote));
+    }
+
+    @Test
+    public void toString_positiveTest_correctStringDisplayed() {
+        Client client = new ClientBuilder(ALICE).build();
+        Note clientNote = new Note("hell yes");
+        client.addClientNote(clientNote);
+        String expected = "Alice Pauline Phone: 94351253 Email: alice@example.com Address: 123, Jurong West Ave 6,"
+                + " #08-111 Country: Singapore (SG) Timezone: GMT+8 Contract Expiry Date: 1-4-2021";
+        assertEquals(expected, client.toString());
+    }
+
+
 }

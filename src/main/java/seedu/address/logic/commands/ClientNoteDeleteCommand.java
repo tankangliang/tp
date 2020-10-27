@@ -24,7 +24,8 @@ public class ClientNoteDeleteCommand extends Command {
             + "Parameters: CLIENT INDEX, CLIENT NOTES INDEX"
             + "Example: " + COMMAND_WORD + " 1 " + "client note content";
     public static final String MESSAGE_DELETED_CLIENT_NOTE_SUCCESS = "Successfully deleted client note";
-    private static final String MESSAGE_INVALID_CLIENT_NOTE_DISPLAYED_INDEX = "The client index provided is invalid";
+    private static final String MESSAGE_INVALID_CLIENT_NOTE_DISPLAYED_INDEX = "The client note index provided is "
+            + "invalid";
     private final Index targetClientIndex;
     private final Index targetClientNoteIndex;
 
@@ -44,21 +45,17 @@ public class ClientNoteDeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Client> lastShownClientList = model.getSortedFilteredClientList();
-        List<Note> lastShownClientNoteList = model.getSortedFilteredClientNotesList();
-
         if (targetClientIndex.getZeroBased() >= lastShownClientList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
-
-        if (targetClientNoteIndex.getZeroBased() >= lastShownClientNoteList.size()) {
+        List<Note> notesList = lastShownClientList.get(targetClientIndex.getZeroBased()).getClientNotesAsList();
+        if (targetClientNoteIndex.getZeroBased() >= notesList.size()) {
             throw new CommandException(MESSAGE_INVALID_CLIENT_NOTE_DISPLAYED_INDEX);
         }
-
         Client associatedClient = lastShownClientList.get(targetClientIndex.getZeroBased());
-        Note noteToDelete = lastShownClientNoteList.get(targetClientNoteIndex.getZeroBased());
+        Note noteToDelete = associatedClient.getClientNotesAsList().get(targetClientNoteIndex.getZeroBased());
         assert associatedClient.hasClientNote(noteToDelete) : "attempting to delete client note that doesn't exist";
         model.deleteClientNote(associatedClient, noteToDelete);
-
         return new CommandResult(MESSAGE_DELETED_CLIENT_NOTE_SUCCESS);
     }
 
