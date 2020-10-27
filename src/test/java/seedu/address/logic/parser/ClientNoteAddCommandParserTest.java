@@ -85,6 +85,13 @@ class ClientNoteAddCommandParserTest {
     }
 
     @Test
+    void parse_invalidIndex_parseFailure() {
+        String userInput = "invalid index " + PREFIX_NOTE + NOTE_STRING;
+        ClientNoteAddCommandParser parser = new ClientNoteAddCommandParser(tagNoteMap);
+        assertParseFailure(parser, userInput, EXPECTED_PARSE_FAILURE_MESSAGE);
+    }
+
+    @Test
     void parse_validFormatUntaggedNote_parseSuccess() {
         Note expectedClientNote = new Note(NOTE_STRING);
         expectedClientNote.setTags(untaggedTags);

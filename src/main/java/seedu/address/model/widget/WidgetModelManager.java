@@ -2,8 +2,6 @@ package seedu.address.model.widget;
 
 import java.util.Arrays;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
@@ -72,14 +70,10 @@ public class WidgetModelManager implements WidgetModel {
         String email = client.getEmail().toString();
         String phone = client.getPhone().toString();
         String notes = client.getClientNotes().toString(); //TODO: Temporary display for the client notes
-        String tags = Stream.of(client.getTags())
-                .map(Object::toString)
-                .collect(Collectors.joining())
-                .replace("[", "")
-                .replace("]", "");
+
 
         newObj.set(/*header*/ name, /*div1*/ country, /*text1*/ timezone, /*div2*/ "", /*text2*/
-                email, /*text3*/ phone, /*div3*/ "", /*text4 SCROLLABLE VIEW*/ notes, /*footer*/ tags);
+                email, /*text3*/ phone, /*div3*/ "", /*text4 SCROLLABLE VIEW*/ notes);
 
         return newObj;
     }

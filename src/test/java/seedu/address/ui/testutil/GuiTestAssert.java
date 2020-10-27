@@ -3,7 +3,6 @@ package seedu.address.ui.testutil;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import guitests.guihandles.ClientCardHandle;
 import guitests.guihandles.ClientListPanelHandle;
@@ -23,7 +22,6 @@ public class GuiTestAssert {
         assertEquals(expectedCard.getEmail(), actualCard.getEmail());
         assertEquals(expectedCard.getName(), actualCard.getName());
         assertEquals(expectedCard.getPhone(), actualCard.getPhone());
-        assertEquals(expectedCard.getTags(), actualCard.getTags());
     }
 
     /**
@@ -34,8 +32,6 @@ public class GuiTestAssert {
         assertEquals(expectedClient.getPhone().value, actualCard.getPhone());
         assertEquals(expectedClient.getEmail().value, actualCard.getEmail());
         assertEquals(expectedClient.getAddress().value, actualCard.getAddress());
-        assertEquals(expectedClient.getTags().stream().map(tag -> tag.tagName).sorted().collect(Collectors.toList()),
-                actualCard.getTags());
     }
 
     /**
