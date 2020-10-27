@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.country.Country;
-
 import seedu.address.model.note.CountryNote;
 
 public class CountryNoteListPanelTest extends GuiUnitTest {
