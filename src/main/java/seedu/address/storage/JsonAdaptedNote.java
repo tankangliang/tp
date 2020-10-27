@@ -28,7 +28,7 @@ class JsonAdaptedNote {
      * @param note The note that this json note will be representing.
      */
     public JsonAdaptedNote(Note note) {
-        this.contents = note.getNoteContents();
+        this.contents = note.getNoteContent();
         if (note.isClientNote()) {
             this.countryCode = NULL_COUNTRY_CODE;
         } else {

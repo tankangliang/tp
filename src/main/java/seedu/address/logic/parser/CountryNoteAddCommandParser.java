@@ -34,7 +34,7 @@ public class CountryNoteAddCommandParser implements Parser<CountryNoteAddCommand
         }
         Country country = ParserUtil.parseCountry(argMultimap.getValue(PREFIX_COUNTRY).get());
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
-        CountryNote countryNote = new CountryNote(note.getNoteContents(), country);
+        CountryNote countryNote = new CountryNote(note.getNoteContent(), country);
 
         return new CountryNoteAddCommand(countryNote);
     }

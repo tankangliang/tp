@@ -56,6 +56,6 @@ public class CountryNote extends Note {
 
     @Override
     public String toString() {
-        return super.toString() + " [" + getCountry() + "]";
+        return "[" + getCountry() + "] " + super.toString();
     }
 }

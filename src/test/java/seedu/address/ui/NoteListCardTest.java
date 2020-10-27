@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import guitests.guihandles.CountryNoteCardHandle;
+import guitests.guihandles.NoteListCardHandle;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 
-public class CountryNoteCardTest extends GuiUnitTest {
+public class NoteListCardTest extends GuiUnitTest {
     private static final String DUMMY_NOTE_CONTENT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do"
             + " eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud"
             + " exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in"
@@ -20,16 +20,17 @@ public class CountryNoteCardTest extends GuiUnitTest {
     @Test
     public void display() {
         CountryNote countryNote = new CountryNote(DUMMY_NOTE_CONTENT, country);
-        CountryNoteCard countryNoteCard = new CountryNoteCard(1, countryNote);
+        NoteListCard countryNoteCard = new NoteListCard(countryNote, 1);
         uiPartExtension.setUiPart(countryNoteCard);
         assertCardDisplay(countryNoteCard, countryNote, 1);
     }
 
-    private void assertCardDisplay(CountryNoteCard countryNoteCard, CountryNote expectedCard, int expectedId) {
+    private void assertCardDisplay(NoteListCard countryNoteCard, CountryNote expectedCard, int expectedId) {
         guiRobot.pauseForHuman();
 
-        CountryNoteCardHandle countryNoteCardHandle = new CountryNoteCardHandle(countryNoteCard.getRoot());
-        assertEquals(expectedId + ". " + expectedCard.getNoteContents() + " [" + expectedCard.getCountry() + "]",
-                countryNoteCardHandle.getCountryNoteContent());
+        NoteListCardHandle noteListCardHandle = new NoteListCardHandle(countryNoteCard.getRoot());
+        assertEquals("[" + expectedCard.getCountry() + "] " + expectedCard.getNoteContent(),
+                noteListCardHandle.getNoteContent());
+        assertEquals("#" + expectedId, noteListCardHandle.getNoteId());
     }
 }

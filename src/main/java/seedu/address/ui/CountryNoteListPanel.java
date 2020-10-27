@@ -1,27 +1,26 @@
 package seedu.address.ui;
 
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 
 /**
- * A widget that wraps around ListView.
+ * Panel containing the list of country notes.
  */
 public class CountryNoteListPanel extends UiPart<Region> {
-    private static final String FXML = "WidgetListViewBox.fxml";
 
-    @FXML
-    private VBox viewBox;
+    private static final String FXML = "CountryNoteListPanel.fxml";
+
     @FXML
     private Label header;
     @FXML
-    private ListView<CountryNote> countryNoteListView;
+    private VBox countryNoteListView;
 
     /**
      * Initializes a {@code CountryNoteListPanel} with a countryNoteObservableList.
@@ -29,8 +28,25 @@ public class CountryNoteListPanel extends UiPart<Region> {
     public CountryNoteListPanel(ObservableList<CountryNote> countryNoteObservableList) {
         super(FXML);
         header.setText("Country Notes");
-        countryNoteListView.setItems(countryNoteObservableList);
-        countryNoteListView.setCellFactory(listView -> new CountryListViewCell());
+
+        for (int i = 0; i < countryNoteObservableList.size(); i++) {
+            CountryNote countryNote = countryNoteObservableList.get(i);
+            Node node = new NoteListCard(countryNote, i + 1).getRoot();
+            countryNoteListView.getChildren().add(node);
+        }
+        countryNoteObservableList.addListener(new ListChangeListener<CountryNote>() {
+            @Override
+            public void onChanged(Change<? extends CountryNote> c) {
+                while (c.next()) {
+                    countryNoteListView.getChildren().clear();
+                    for (int i = 0; i < countryNoteObservableList.size(); i++) {
+                        CountryNote countryNote = countryNoteObservableList.get(i);
+                        Node node = new NoteListCard(countryNote, i + 1).getRoot();
+                        countryNoteListView.getChildren().add(node);
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -46,22 +62,4 @@ public class CountryNoteListPanel extends UiPart<Region> {
         }
     }
 
-    /**
-     * Custom {@code ListCell} that displays the graphics of a {@code CountryNote} using a {@code
-     * CountryNoteCard}.
-     */
-    class CountryListViewCell extends ListCell<CountryNote> {
-
-        @Override
-        protected void updateItem(CountryNote countryNote, boolean empty) {
-            super.updateItem(countryNote, empty);
-
-            if (empty || countryNote == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new CountryNoteCard(getIndex() + 1, countryNote).getRoot());
-            }
-        }
-    }
 }
