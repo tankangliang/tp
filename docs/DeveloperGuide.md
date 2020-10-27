@@ -179,7 +179,8 @@ The following class diagram illustrates how the relevant classes in the `seedu.a
 
 ![Country Class Diagram](images/CountryClass.png)
 
-Given below is a sequence diagram that shows how the `country note add` command works.
+Given below is a sequence diagram that shows how the `country note add` command works. 
+For brevity, the full command `country note add c/COUNTRY_CODE nt/NOTE_STRING` will be substituted by `country note add`.
 
 ![Country Note Add Sequence Diagram](images/CountryNoteAddSeqDiag.png)
 
