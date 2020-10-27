@@ -1,8 +1,8 @@
 package seedu.address.model.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.model.util.SampleDataUtil.getSampleTbmManager;
 import static seedu.address.model.util.SampleDataUtil.getSampleClients;
+import static seedu.address.model.util.SampleDataUtil.getSampleTbmManager;
 
 import java.util.Arrays;
 

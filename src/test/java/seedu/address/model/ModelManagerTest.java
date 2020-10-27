@@ -26,8 +26,8 @@ import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.TbmManagerBuilder;
 import seedu.address.testutil.ClientBuilder;
+import seedu.address.testutil.TbmManagerBuilder;
 
 public class ModelManagerTest {
 
