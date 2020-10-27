@@ -180,7 +180,9 @@ The following class diagram illustrates how the relevant classes in the `seedu.a
 ![Country Class Diagram](images/CountryClass.png)
 
 Given below is a sequence diagram that shows how the `country note add` command works. 
-For brevity, the full command `country note add c/COUNTRY_CODE nt/NOTE_STRING` will be substituted by `country note add`.
+For brevity, the full command `country note add c/COUNTRY_CODE nt/NOTE_STRING` will be substituted by `country note add`. 
+Note that the `AddressBookParser` parses the user input and returns a `CountryNote` object, which will be passed as an argument to the constructor of `CountryNoteAddCommand`. 
+Hence, `CountryNoteAddCommand` stores a `CountryNote` object.
 
 ![Country Note Add Sequence Diagram](images/CountryNoteAddSeqDiag.png)
 
