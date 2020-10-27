@@ -1,4 +1,3 @@
-
 @startuml
 !include style.puml
 skinparam arrowThickness 1.1
@@ -10,10 +9,12 @@ Class CountryNotesManager
 Class CountryCodeVerifier
 Class Note
 Class CountryNote
+Class AddressBook
 
-CountryNote .up.|> Note
+CountryNote -up-|> Note
 CountryNote -r-> "1" Country
 CountryNotesManager "1" -up-> "*" CountryNote
 Country .up.> CountryCodeVerifier
+AddressBook -left-> "1" CountryNotesManager
 
 @enduml
