@@ -6,15 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEZONE;
-
-import java.util.Set;
 
 import seedu.address.logic.commands.ClientAddCommand;
 import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
 import seedu.address.model.client.Client;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for Client.
@@ -41,7 +37,6 @@ public class ClientUtil {
         sb.append(PREFIX_COUNTRY + client.getCountry().getCountryCode() + " ");
         sb.append(PREFIX_TIMEZONE + client.getTimezone().toString() + " ");
         sb.append(PREFIX_CONTRACT_EXPIRY_DATE + client.getContractExpiryDate().value + " ");
-        client.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         return sb.toString();
     }
 
@@ -60,14 +55,7 @@ public class ClientUtil {
                 .append(timezone.toString()).append(" "));
         descriptor.getContractExpiryDate().ifPresent(contractExpiryDate ->
                 sb.append(PREFIX_CONTRACT_EXPIRY_DATE).append(contractExpiryDate.value).append(" "));
-        if (descriptor.getTags().isPresent()) {
-            Set<Tag> tags = descriptor.getTags().get();
-            if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
-            } else {
-                tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
-            }
-        }
+
         return sb.toString();
     }
 }

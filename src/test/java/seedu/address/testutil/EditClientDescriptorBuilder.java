@@ -1,9 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
@@ -13,7 +9,6 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class to help with building EditClientDescriptor objects.
@@ -42,7 +37,6 @@ public class EditClientDescriptorBuilder {
         descriptor.setCountry(client.getCountry());
         descriptor.setTimezone(client.getTimezone());
         descriptor.setContractExpiryDate(client.getContractExpiryDate());
-        descriptor.setTags(client.getTags());
     }
 
     /**
@@ -98,16 +92,6 @@ public class EditClientDescriptorBuilder {
      */
     public EditClientDescriptorBuilder withContractExpiryDate(String contractExpiryDate) {
         descriptor.setContractExpiryDate(new ContractExpiryDate(contractExpiryDate));
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditClientDescriptor}
-     * that we are building.
-     */
-    public EditClientDescriptorBuilder withTags(String... tags) {
-        Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
         return this;
     }
 

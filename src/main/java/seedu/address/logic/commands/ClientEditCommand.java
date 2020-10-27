@@ -6,15 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEZONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -30,7 +26,6 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
-import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing client in the address book.
@@ -48,8 +43,7 @@ public class ClientEditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_COUNTRY + "COUNTRY_CODE] "
-            + "[" + PREFIX_TIMEZONE + "TIMEZONE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TIMEZONE + "TIMEZONE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -111,10 +105,9 @@ public class ClientEditCommand extends Command {
         ContractExpiryDate updatedContractExpiryDate =
                 editClientDescriptor.getContractExpiryDate().orElse(clientToEdit.getContractExpiryDate());
         LastModifiedInstant updatedLastModifiedInstant = new LastModifiedInstant();
-        Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
 
         return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedTimezone,
-                updatedContractExpiryDate, updatedLastModifiedInstant, updatedTags);
+                updatedContractExpiryDate, updatedLastModifiedInstant);
     }
 
     @Override
@@ -147,13 +140,11 @@ public class ClientEditCommand extends Command {
         private Country country;
         private Timezone timezone;
         private ContractExpiryDate contractExpiryDate;
-        private Set<Tag> tags;
 
         public EditClientDescriptor() {}
 
         /**
          * Copy constructor.
-         * A defensive copy of {@code tags} is used internally.
          */
         public EditClientDescriptor(EditClientDescriptor toCopy) {
             setName(toCopy.name);
@@ -163,15 +154,13 @@ public class ClientEditCommand extends Command {
             setCountry(toCopy.country);
             setTimezone(toCopy.timezone);
             setContractExpiryDate(toCopy.contractExpiryDate);
-            setTags(toCopy.tags);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, country, timezone,
-                    contractExpiryDate, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, country, timezone, contractExpiryDate);
         }
 
         public void setName(Name name) {
@@ -230,23 +219,6 @@ public class ClientEditCommand extends Command {
             return Optional.ofNullable(contractExpiryDate);
         }
 
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -268,8 +240,7 @@ public class ClientEditCommand extends Command {
                     && getAddress().equals(e.getAddress())
                     && getCountry().equals(e.getCountry())
                     && getTimezone().equals(e.getTimezone())
-                    && getContractExpiryDate().equals(e.getContractExpiryDate())
-                    && getTags().equals(e.getTags());
+                    && getContractExpiryDate().equals(e.getContractExpiryDate());
         }
     }
 }

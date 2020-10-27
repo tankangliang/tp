@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.model.note.CountryNote;
 
 /**
@@ -12,8 +13,13 @@ import seedu.address.model.note.CountryNote;
 public class CountryNotesManager {
 
     private final ObservableList<CountryNote> internalCountryNoteList = FXCollections.observableArrayList();
+    private final SortedList<CountryNote> internalCountryNoteSortedList = new SortedList<>(internalCountryNoteList);
     private final ObservableList<CountryNote> internalCountryNoteUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalCountryNoteList);
+            FXCollections.unmodifiableObservableList(internalCountryNoteSortedList);
+
+    public CountryNotesManager() {
+        internalCountryNoteSortedList.setComparator((CountryNote::compareTo));
+    }
 
     /**
      * Checks if {@code countryNote} already exists.
