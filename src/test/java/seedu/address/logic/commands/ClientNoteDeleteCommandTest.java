@@ -66,7 +66,7 @@ class ClientNoteDeleteCommandTest {
         assertThrows(CommandException.class, () -> clientNoteDeleteCommand.execute(model));
     }
 
-    @Testhttps://github.com/se-edu/addressbook-level4/blob/master/src/test/java/systemtests/SystemTestSetupHelper.java
+    @Test
     public void execute_validClientIndexInvalidClientNoteIndex_throwsCommandException() {
         Client client = new ClientBuilder(ALICE).build();
         Note clientNote = new Note(NOTE_CONTENT_1);
