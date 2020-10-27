@@ -1,8 +1,13 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -15,9 +20,9 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
-
+    private final CommandHistory history;
+    private int currentPointer;
     private final CommandExecutor commandExecutor;
-
     @FXML
     private TextField commandTextField;
 
@@ -27,8 +32,28 @@ public class CommandBox extends UiPart<Region> {
     public CommandBox(CommandExecutor commandExecutor) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.history = new CommandHistory(new ArrayList<>());
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+    }
+
+    @FXML
+    private void handleKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.UP) {
+            getPreviousCommand();
+        } else if (keyEvent.getCode() == KeyCode.DOWN) {
+            getNextCommand();
+        } else {
+
+        }
+    }
+
+    private void getPreviousCommand() {
+
+    }
+
+    private void getNextCommand() {
+
     }
 
     /**
@@ -37,7 +62,9 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandEntered() {
         try {
-            commandExecutor.execute(commandTextField.getText());
+            String command = commandTextField.getText();
+            commandExecutor.execute(command);
+            history.add(command);
             commandTextField.setText("");
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
