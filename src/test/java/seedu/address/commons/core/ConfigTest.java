@@ -38,7 +38,11 @@ public class ConfigTest {
     @Test
     public void equalsMethod() {
         assertNotNull(defaultConfig);
+
+        // same object same class -> equal
         assertTrue(defaultConfig.equals(defaultConfig));
+
+        // null -> not equal
         assertFalse(defaultConfig.equals(null));
 
         // different log -> not equal
@@ -65,7 +69,5 @@ public class ConfigTest {
         Config differentPath = new Config();
         differentPath.setUserPrefsFilePath(Paths.get("different path"));
         assertNotEquals(defaultConfig.hashCode(), differentPath.hashCode());
-
     }
-
 }

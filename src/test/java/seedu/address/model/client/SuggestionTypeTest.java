@@ -29,8 +29,8 @@ public class SuggestionTypeTest {
 
     @Test
     public void getSuggestionPredicate_byContract_suggestContractPredicate() {
-        SuggestionType available = new SuggestionType(SuggestionType.BY_CONTRACT);
-        assertTrue(available.getSuggestionPredicate() instanceof SuggestContractPredicate);
+        SuggestionType contract = new SuggestionType(SuggestionType.BY_CONTRACT);
+        assertTrue(contract.getSuggestionPredicate() instanceof SuggestContractPredicate);
     }
 
     @Test
