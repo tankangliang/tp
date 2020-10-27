@@ -32,7 +32,7 @@ public class CommandHistory {
     public void add(String command) {
         requireAllNonNull(command);
         history.add(command);
-        pointer++;
+        pointer = history.size();
     }
 
     /**
