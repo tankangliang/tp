@@ -1,9 +1,5 @@
 package seedu.address.ui;
 
-import java.util.LinkedList;
-import java.util.List;
-
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -53,34 +49,31 @@ public class CountryNoteListPanel extends UiPart<Region> {
     private void updateCountryNoteListView(ObservableList<CountryNote> countryNoteObservableList) {
         countryNoteListView.getChildren().clear();
         // This index is used to keep track of how many country notes have been displayed so far.
-        int startIndex = 0;
+        int noteIndex = 0;
         if (!displayAllCountries) {
-            initCountryNoteListViewFromCountryNotes(countryNoteListView, countryNoteObservableList, startIndex);
+            initCountryNoteListViewFromCountryNotes(countryNoteListView, countryNoteObservableList, noteIndex);
             return;
         }
 
         Country currCountry = null;
-        List<CountryNote> countryNotes = new LinkedList<>();
+        CountryNoteListSubPanel countryNoteListSubPanel = new CountryNoteListSubPanel();
         for (CountryNote countryNote : countryNoteObservableList) {
             if (currCountry == null) {
                 currCountry = countryNote.getCountry();
             }
             if (!currCountry.equals(countryNote.getCountry())) {
-                ObservableList<CountryNote> subCountryNoteObservableList = FXCollections.observableList(countryNotes);
-                countryNoteListView.getChildren()
-                        .add(new CountryNoteListSubPanel(currCountry, subCountryNoteObservableList, startIndex)
-                                .getRoot());
-                startIndex += subCountryNoteObservableList.size();
+                countryNoteListSubPanel.header.setText(currCountry + " notes");
+                countryNoteListView.getChildren().add(countryNoteListSubPanel.getRoot());
                 currCountry = countryNote.getCountry();
-                countryNotes.clear();
+                countryNoteListSubPanel = new CountryNoteListSubPanel();
             }
-            countryNotes.add(countryNote);
+            Node node = new NoteListCard(countryNote, noteIndex + 1).getRoot();
+            countryNoteListSubPanel.countryNoteListView.getChildren().add(node);
+            noteIndex++;
         }
-        if (countryNotes.size() > 0) {
-            ObservableList<CountryNote> subCountryNoteObservableList = FXCollections.observableList(countryNotes);
-            countryNoteListView.getChildren()
-                    .add(new CountryNoteListSubPanel(currCountry, subCountryNoteObservableList, startIndex)
-                            .getRoot());
+        if (countryNoteObservableList.size() != 0) {
+            countryNoteListSubPanel.header.setText(currCountry + " notes");
+            countryNoteListView.getChildren().add(countryNoteListSubPanel.getRoot());
         }
     }
 
@@ -115,7 +108,7 @@ public class CountryNoteListPanel extends UiPart<Region> {
     }
 
     /**
-     * Sub-panel which is used for viewing all countries' notes.
+     * Sub-panel which is used for viewing all countries' notes, only used when {@code displayAllCountries} is true.
      */
     private static class CountryNoteListSubPanel extends UiPart<Region> {
         private static final String FXML = "CountryNoteListPanel.fxml";
@@ -125,20 +118,17 @@ public class CountryNoteListPanel extends UiPart<Region> {
         @FXML
         private Label header;
         @FXML
-        private ScrollPane countryNoteSrollPane;
+        private ScrollPane countryNoteScrollPane;
         @FXML
         private VBox countryNoteListView;
 
         /**
-         * Initializes a {@code CountryNoteListPanel} with a countryNoteObservableList.
+         * Initializes a {@code CountryNoteListSubPanel}.
          */
-        public CountryNoteListSubPanel(Country country, ObservableList<CountryNote> countryNoteObservableList,
-                int startIndex) {
+        public CountryNoteListSubPanel() {
             super(FXML);
             countryNoteListContainer.setStyle("-fx-border-color: #FF3333; -fx-border-radius: 20");
-            header.setText(country + " notes");
-            countryNoteSrollPane.setMinHeight(30.0);
-            initCountryNoteListViewFromCountryNotes(countryNoteListView, countryNoteObservableList, startIndex);
+            countryNoteScrollPane.setMinHeight(30.0);
         }
     }
 
