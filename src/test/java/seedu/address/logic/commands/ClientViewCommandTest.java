@@ -29,7 +29,7 @@ public class ClientViewCommandTest {
         String expectedMsg = String.format(ClientViewCommand.MESSAGE_VIEW_CLIENT_SUCCESS, clientToView.getName());
 
         ModelManager expectedModel = new ModelManager(model.getTbmManager(), new UserPrefs());
-        expectedModel.setWidgetContent(clientToView);
+        expectedModel.setWidgetClient(clientToView);
 
         assertCommandSuccess(command, model, expectedMsg, expectedModel);
     }
@@ -52,7 +52,7 @@ public class ClientViewCommandTest {
 
         Model expectedModel = new ModelManager(model.getTbmManager(), new UserPrefs());
         showClientAtIndex(expectedModel, INDEX_FIRST_CLIENT);
-        expectedModel.setWidgetContent(clientToView);
+        expectedModel.setWidgetClient(clientToView);
 
         assertCommandSuccess(clientViewCommand, model, expectedMessage, expectedModel);
     }

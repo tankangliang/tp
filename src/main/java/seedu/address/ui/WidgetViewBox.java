@@ -120,13 +120,13 @@ public class WidgetViewBox extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Client)) {
+        if (!(other instanceof WidgetViewBox)) {
             return false;
         }
 
         // state check
-        Client other1 = (Client) other;
-        return this.equals(other1);
+        Client other1 = ((WidgetViewBox) other).client;
+        return client.equals(other1);
     }
 
     /**

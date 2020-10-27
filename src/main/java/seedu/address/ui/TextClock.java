@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;

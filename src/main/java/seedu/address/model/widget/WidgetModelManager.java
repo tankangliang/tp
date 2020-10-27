@@ -1,6 +1,5 @@
 package seedu.address.model.widget;
 
-import java.util.Arrays;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
@@ -34,9 +33,9 @@ public class WidgetModelManager implements WidgetModel {
     }
 
     /**
-     * Returns the widget content object.
+     * Returns the widget client.
      *
-     * @return WidgetObject.
+     * @return The client.
      */
     @Override
     public Client getWidgetClient() {

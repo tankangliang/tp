@@ -19,16 +19,16 @@ public class WidgetModelManagerTest {
 
         // set content with same object -> widget object should be the same
         Client bob = new ClientBuilder(BOB).build();
-        widgetModelManager1.setContent(bob);
-        widgetModelManager2.setContent(bob);
-        assertEquals(widgetModelManager1.getWidgetContent(), widgetModelManager2.getWidgetContent());
+        widgetModelManager1.setWidgetClient(bob);
+        widgetModelManager2.setWidgetClient(bob);
+        assertEquals(widgetModelManager1.getWidgetClient(), widgetModelManager2.getWidgetClient());
 
 
         // set content to different client objects but of the same fields and values -> meaning same person but
         // duplicate entry
         Client bob1 = new ClientBuilder(BOB).build();
-        widgetModelManager2.setContent(bob1);
-        assertEquals(widgetModelManager1.getWidgetContent(), widgetModelManager2.getWidgetContent());
+        widgetModelManager2.setWidgetClient(bob1);
+        assertEquals(widgetModelManager1.getWidgetClient(), widgetModelManager2.getWidgetClient());
 
     }
 
@@ -40,10 +40,10 @@ public class WidgetModelManagerTest {
         Client bob = new ClientBuilder(BOB).build();
         Client amy = new ClientBuilder(AMY).build();
 
-        widgetModelManager1.setContent(bob);
-        widgetModelManager2.setContent(amy);
+        widgetModelManager1.setWidgetClient(bob);
+        widgetModelManager2.setWidgetClient(amy);
 
-        assertNotEquals(widgetModelManager1.getWidgetContent(), widgetModelManager2.getWidgetContent());
+        assertNotEquals(widgetModelManager1.getWidgetClient(), widgetModelManager2.getWidgetClient());
     }
 
 }

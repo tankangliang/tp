@@ -169,18 +169,13 @@ public class ClientAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        /**
-         * Sets the widget box contents to the given content.
-         *
-         * @param content
-         */
         @Override
-        public void setWidgetContent(Object content) {
+        public void setWidgetClient(Client client) {
             throw new AssertionError("this method should not be called.");
         }
 
         @Override
-        public WidgetObject getWidgetContent() {
+        public Client getWidgetClient() {
             throw new AssertionError("This method should not be called.");
         }
 
