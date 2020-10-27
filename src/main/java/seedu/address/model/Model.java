@@ -122,7 +122,7 @@ public interface Model {
     boolean hasClientNote(Client client, Note clientNote);
 
     /**
-     * Adds the given client note to the given client.
+     * Adds the given client note to the given client, updating relevant maps while at it.
      */
     void addClientNote(Client client, Note clientNote);
 

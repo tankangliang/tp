@@ -87,7 +87,7 @@ Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TI
 
 Examples:
 
-* `client add 5 n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RUS tz/GMT+3 ce/2-3-2020`<br>
+* `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+3 ce/2-3-2020`<br>
   This adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok, Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**, contract expiry date **2 Mar 2020**.
 
 ### Viewing clients: `client view`
@@ -236,11 +236,11 @@ Format: `country note view [c/COUNTRY_CODE]`
 
 Examples:
 
-* `country note view` 
-* `country note view c/SG` 
-* `country note view c/IN` 
-
+* `country note view`
+* `country note view c/SG`
+* `country note view c/IN`
 ### Adding notes for a country: `country note add`
+
 
 Adds a note that is associated with a specific country.
 
@@ -306,7 +306,7 @@ Format: `exit`
 Action | Format, Examples
 --------|------------------
 **List all clients** | `list`
-**Add client** | `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE [ce/CONTRACT_EXPIRY_DATE]` <br> e.g., `client add 5 n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RUS tz/GMT+3 ce/22-12-2020`
+**Add client** | `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE [ce/CONTRACT_EXPIRY_DATE]` <br> e.g., `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+3 ce/22-12-2020`
 **Edit client** | `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY_CODE] [tz/TIMEZONE] [ce/CONTRACT_EXPIRY_DATE]`<br> e.g.,`client edit 3 c/JP tz/GMT+7`
 **View client** | `client view INDEX` <br> e.g., `client view 2`
 **Find client** | `client find KEYWORD [MORE_KEYWORDS]`<br> e.g., `client find Hans`
