@@ -163,7 +163,7 @@ public class ClientTest {
     }
 
     @Test
-    public void getClientNotesAsList_modifyUnmodifiableSet_throwsException() {
+    public void getClientNotesAsList_modifyUnmodifiableList_throwsException() {
         Client client = new ClientBuilder(ALICE).build();
         client.addClientNote(new Note("hell yes"));
         List<Note> currentNotes = client.getClientNotesAsList();
@@ -171,7 +171,7 @@ public class ClientTest {
     }
 
     @Test
-    public void deleteClientNote_deleteExistingNote_doesNotThrowExceptionReturnsTrue() {
+    public void deleteClientNote_deleteExistingNote_noteIsDeletedWithoutException() {
         Client client = new ClientBuilder(ALICE).build();
         Note clientNote = new Note("hell yes");
         client.addClientNote(clientNote);
@@ -182,7 +182,7 @@ public class ClientTest {
     }
 
     @Test
-    public void toString_positiveTest_returnsTrue() {
+    public void toString_positiveTest_correctStringDisplayed() {
         Client client = new ClientBuilder(ALICE).build();
         Note clientNote = new Note("hell yes");
         client.addClientNote(clientNote);

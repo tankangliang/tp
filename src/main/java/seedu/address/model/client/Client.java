@@ -36,7 +36,7 @@ public class Client {
      * Every field must be present and not null.
      */
     public Client(Name name, Phone phone, Email email, Address address, Country country, Timezone timezone,
-                  ContractExpiryDate contractExpiryDate, LastModifiedInstant lastModifiedInstant) {
+            ContractExpiryDate contractExpiryDate, LastModifiedInstant lastModifiedInstant) {
         requireAllNonNull(name, phone, email, address, country, timezone, contractExpiryDate);
         this.name = name;
         this.phone = phone;
@@ -90,9 +90,9 @@ public class Client {
     }
 
     /**
-     * Gets the list of client notes associated with this client as an observable arraylist.
+     * Gets the list of client notes associated with this client as an unmodifiable list.
      *
-     * @return An Observable List of client notes associated with this client.
+     * @return An Unmodifiable List of client notes associated with this client.
      */
     public List<Note> getClientNotesAsList() {
         return Collections.unmodifiableList(new ArrayList<>(getClientNotes()));
