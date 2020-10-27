@@ -1,16 +1,15 @@
 package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
-import static javafx.collections.FXCollections.observableArrayList;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import javafx.collections.ObservableList;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
 
@@ -37,7 +36,7 @@ public class Client {
      * Every field must be present and not null.
      */
     public Client(Name name, Phone phone, Email email, Address address, Country country, Timezone timezone,
-            ContractExpiryDate contractExpiryDate, LastModifiedInstant lastModifiedInstant) {
+                  ContractExpiryDate contractExpiryDate, LastModifiedInstant lastModifiedInstant) {
         requireAllNonNull(name, phone, email, address, country, timezone, contractExpiryDate);
         this.name = name;
         this.phone = phone;
@@ -92,12 +91,11 @@ public class Client {
 
     /**
      * Gets the list of client notes associated with this client as an observable arraylist.
+     *
      * @return An Observable List of client notes associated with this client.
      */
-    public ObservableList<Note>getClientNotesAsList() {
-        ArrayList<Note> arr = (new ArrayList<>(getClientNotes()));
-        ObservableList<Note> result = observableArrayList(arr);
-        return observableArrayList(new ArrayList<>(getClientNotes()));
+    public List<Note> getClientNotesAsList() {
+        return Collections.unmodifiableList(new ArrayList<>(getClientNotes()));
     }
 
     /**
@@ -112,6 +110,7 @@ public class Client {
 
     /**
      * Deletes a specific client note from associated notes for this client.
+     *
      * @param clientNote the clientNote to be deleted.
      */
     public void deleteClientNote(Note clientNote) {
