@@ -177,6 +177,8 @@ It implements the following operations:
 
 The following class diagram illustrates how classes in the `seedu.address.model.country` package are related. 
 
+![Country Class Diagram](images/CountryClass.png)
+
 Given below is a sequence diagram that shows the sequence of method calls that occur when a user inputs a `country note add` command. 
 
 ### Suggesting contacts
