@@ -3,9 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,7 +12,6 @@ import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.country.CountryNotesManager;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagSet;
 
 /**

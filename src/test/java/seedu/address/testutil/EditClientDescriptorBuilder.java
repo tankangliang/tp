@@ -1,9 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
@@ -13,7 +9,6 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class to help with building EditClientDescriptor objects.

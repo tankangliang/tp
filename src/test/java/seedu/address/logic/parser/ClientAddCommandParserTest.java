@@ -47,7 +47,6 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.CountryCodeVerifier;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ClientBuilder;
 
 public class ClientAddCommandParserTest {

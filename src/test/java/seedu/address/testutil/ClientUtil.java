@@ -6,15 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEZONE;
-
-import java.util.Set;
 
 import seedu.address.logic.commands.ClientAddCommand;
 import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
 import seedu.address.model.client.Client;
-import seedu.address.model.tag.Tag;
 
 /**
  * A utility class for Client.

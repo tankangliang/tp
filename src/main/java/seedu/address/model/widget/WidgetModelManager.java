@@ -2,8 +2,6 @@ package seedu.address.model.widget;
 
 import java.util.Arrays;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
