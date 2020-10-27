@@ -236,11 +236,11 @@ Format: `country note view [c/COUNTRY_CODE]`
 
 Examples:
 
-* `country note view` 
-* `country note view c/SG` 
-* `country note view c/IN` 
-
+* `country note view`
+* `country note view c/SG`
+* `country note view c/IN`
 ### Adding notes for a country: `country note add`
+
 
 Adds a note that is associated with a specific country.
 
