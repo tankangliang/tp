@@ -1,42 +1,34 @@
 package seedu.address.ui;
 
-import java.util.Locale;
-import java.util.TimeZone;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.model.widget.WidgetObject;
+import seedu.address.model.client.Client;
+import seedu.address.model.note.Note;
 
 /**
- * An Ui component that displays the information of {@code WidgetObject}.
+ * An Ui component that displays the information of {@code Client}.
  */
 public class WidgetViewBox extends UiPart<Region> {
     private static final String FXML = "WidgetViewBox.fxml";
     @FXML
     private VBox viewBox;
     @FXML
-    private Label header;
+    private Label name;
     @FXML
-    private Label divOne;
+    private Label phone;
     @FXML
-    private Label textOne;
+    private Label email;
     @FXML
-    private Label divTwo;
+    private Label country;
     @FXML
-    private Label textTwo;
+    private Label contractExpiryDate;
     @FXML
-    private Label textThree;
-    @FXML
-    private Label divThree;
-    //TODO: This is a stop gap to display everything about the client's notes.
-    @FXML
-    private TextArea textFour;
-    @FXML
-    private Label footer;
-    private WidgetObject widgetObject;
+    private ListView<Note> notes;
+    private Client client;
     private TextClock textClock;
 
     /**
@@ -44,65 +36,49 @@ public class WidgetViewBox extends UiPart<Region> {
      */
     public WidgetViewBox() {
         super(FXML);
-        textClock = new TextClock(header);
-        textClock.play();
-        divOne.setText(Locale.getDefault().getDisplayCountry());
-        textOne.setText(TimeZone.getDefault().getDisplayName());
-        divTwo.setText("Travelling BusinessMan");
-        textTwo.setText("");
-        textThree.setText("");
-        divThree.setText("");
-        textFour.setText("");
-        footer.setText("Made in NUS");
+        textClock = new TextClock(name);
     }
 
     /**
      * Private constructor for testing purposes.
      *
-     * @param object Widget Object to be used in testing.
+     * @param client To be displayed.
      */
-    private WidgetViewBox(WidgetObject object) {
+    private WidgetViewBox(Client client) {
         super(FXML);
-        this.widgetObject = object;
-        textClock = new TextClock(header);
-        header.setText(object.getHeader());
-        divOne.setText(object.getDivOne());
-        textOne.setText(object.getTextOne());
-        divTwo.setText(object.getDivTwo());
-        textTwo.setText(object.getTextTwo());
-        textThree.setText(object.getTextThree());
-        divThree.setText(object.getDivThree());
-        textFour.setText(object.getTextFour());
-        footer.setText(object.getFooter());
+        this.client = client;
+        textClock = new TextClock(name);
+        name.setText(client.getName().toString());
+        phone.setText(client.getPhone().toString());
+        email.setText(client.getEmail().toString());
+        country.setText(client.getCountry().getCountryName());
+        contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
+//        notes.setItems();
+        notes.setCellFactory(noteListView -> new ClientNoteListViewCell());
     }
 
     /**
      * Updates the current content of the widget view box to the given content.
      *
-     * @param other The new content.
+     * @param client The new content.
      */
-    public void update(WidgetObject other) {
-        this.widgetObject = other;
+    public void update(Client client) {
+        this.client = client;
         textClock.pause();
-        header.setText(other.getHeader());
-        divOne.setText(other.getDivOne());
-        textOne.setText(other.getTextOne());
-        divTwo.setText(other.getDivTwo());
-        textTwo.setText(other.getTextTwo());
-        textThree.setText(other.getTextThree());
-        divThree.setText(other.getDivThree());
-        textFour.setText(other.getTextFour());
-        footer.setText(other.getFooter());
+        name.setText(client.getName().toString());
+        phone.setText(client.getPhone().toString());
+        email.setText(client.getEmail().toString());
+        country.setText(client.getCountry().getCountryName());
+        contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
     }
 
     /**
-     * Initialiser to bypass static initialising problem in Non-FXML testing of this class.
+     * Static factory.
      *
-     * @param object Any Widget Object to be used in testing.
-     * @return WidgeViewBox.
+     * @return WidgetViewBox
      */
-    public static WidgetViewBox init(WidgetObject object) {
-        return new WidgetViewBox(object);
+    public static WidgetViewBox init() {
+        return new WidgetViewBox();
     }
 
     @Override
@@ -113,13 +89,32 @@ public class WidgetViewBox extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof WidgetViewBox)) {
+        if (!(other instanceof Client)) {
             return false;
         }
 
         // state check
-        WidgetViewBox other1 = (WidgetViewBox) other;
-        return widgetObject.equals(other1.widgetObject);
+        Client other1 = (Client) other;
+        return this.equals(other1);
+    }
+
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code CountryNote} using a {@code
+     * CountryNoteCard}.
+     */
+    class ClientNoteListViewCell extends ListCell<Note> {
+
+        @Override
+        protected void updateItem(Note clientNote, boolean empty) {
+            super.updateItem(clientNote, empty);
+
+            if (empty || clientNote == null) {
+                setGraphic(null);
+                setText(null);
+            } else {
+                setGraphic(new ClientNoteCard(getIndex() + 1, clientNote).getRoot());
+            }
+        }
     }
 
 }

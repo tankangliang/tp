@@ -18,7 +18,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.CountryNote;
-import seedu.address.model.widget.WidgetObject;
 import seedu.address.storage.Storage;
 
 /**
@@ -65,8 +64,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public WidgetObject getWidgetContent() {
-        return model.getWidgetContent();
+    public Client getWidgetClient() {
+        return model.getWidgetClient();
     }
 
     @Override

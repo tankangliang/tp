@@ -30,7 +30,6 @@ import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.widget.WidgetObject;
 import seedu.address.testutil.ClientBuilder;
 
 public class ClientAddCommandTest {

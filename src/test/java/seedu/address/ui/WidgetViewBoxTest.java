@@ -8,15 +8,15 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import guitests.guihandles.WidgetViewBoxHandle;
-import seedu.address.model.widget.WidgetObject;
+import seedu.address.model.client.Client;
+import seedu.address.testutil.TypicalClients;
 
 /**
  * GUI unit test for WidgetViewBox. Test done to ensure the integrity of content displayed does not regress in future
  * refactoring.
  */
 public class WidgetViewBoxTest extends GuiUnitTest {
-
-    private static final WidgetObject TEST_OBJECT = new WidgetObject();
+    private static final Client AMY = TypicalClients.AMY;
     private static final String FIRST_LINE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,";
     private static final String SECOND_LINE = "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
     private static final String THIRD_LINE = "Ut enim ad minim veniam,";
@@ -29,16 +29,15 @@ public class WidgetViewBoxTest extends GuiUnitTest {
 
     @BeforeAll
     public static void setupObject() {
-        TEST_OBJECT.set(FIRST_LINE, SECOND_LINE, THIRD_LINE, FOURTH_LINE, FIFTH_LINE, SIXTH_LINE, SEVENTH_LINE,
-                EIGHTH_LINE, NINTH_LINE);
     }
 
     @Test
     public void display() {
-        WidgetViewBox widgetViewBox = WidgetViewBox.init(TEST_OBJECT);
+        WidgetViewBox widgetViewBox = WidgetViewBox.init();
+        widgetViewBox.update(AMY);
         uiPartExtension.setUiPart(widgetViewBox);
 
-        assertViewBoxDisplay(widgetViewBox, TEST_OBJECT);
+        assertViewBoxDisplay(widgetViewBox, AMY);
     }
 
     /**
@@ -62,29 +61,32 @@ public class WidgetViewBoxTest extends GuiUnitTest {
     @Test
     public void updateContentToEmptyObject_updatesProperly_newObjectIsSuccessfullyUpdated() {
         // This is primarily testing that the textclock does not show itself during an update.
-        WidgetViewBox widgetViewBox = WidgetViewBox.init(TEST_OBJECT);
-        WidgetObject newObj = new WidgetObject();
-        widgetViewBox.update(newObj);
+        WidgetViewBox widgetViewBox = WidgetViewBox.init();
+        widgetViewBox.update(AMY);
+        Client benson = TypicalClients.BENSON;
+        widgetViewBox.update(benson);
         uiPartExtension.setUiPart(widgetViewBox);
 
-        assertViewBoxDisplay(widgetViewBox, newObj);
+        assertViewBoxDisplay(widgetViewBox, benson);
     }
 
     @Test
     public void equals() {
-        WidgetViewBox obj1 = WidgetViewBox.init(TEST_OBJECT);
-        WidgetViewBox obj2 = WidgetViewBox.init(TEST_OBJECT);
+        WidgetViewBox obj1 = WidgetViewBox.init();
+        obj1.update(AMY);
+        WidgetViewBox obj2 = WidgetViewBox.init();
+        obj2.update(AMY);
 
         assertEquals(obj1, obj2);
     }
 
-    private void assertViewBoxDisplay(WidgetViewBox widgetViewBox , WidgetObject expectedObject) {
+    private void assertViewBoxDisplay(WidgetViewBox widgetViewBox , Client client) {
         guiRobot.pauseForHuman();
 
         WidgetViewBoxHandle widgetViewBoxHandle = new WidgetViewBoxHandle(widgetViewBox.getRoot());
 
         // Testing using the equals method of handler.
-        assertTrue(widgetViewBoxHandle.equals(expectedObject));
+        assertTrue(widgetViewBoxHandle.equals(client));
     }
 
 }

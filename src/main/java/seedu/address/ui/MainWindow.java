@@ -192,7 +192,8 @@ public class MainWindow extends UiPart<Stage> {
                 logger.info("Toggling client view");
                 widgetPlaceholder.getChildren().clear();
                 widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
-                widgetViewBox.update(logic.getWidgetContent());
+                logger.info(logic.getWidgetClient().getName().fullName);
+                widgetViewBox.update(logic.getWidgetClient());
             } else if (commandResult.shouldDisplayCountryNote()) {
                 logger.info("Toggling country notes view");
                 widgetPlaceholder.getChildren().clear();
