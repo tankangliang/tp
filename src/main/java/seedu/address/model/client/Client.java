@@ -1,13 +1,16 @@
 package seedu.address.model.client;
 
 import static java.util.Objects.requireNonNull;
+import static javafx.collections.FXCollections.observableArrayList;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
 
@@ -85,6 +88,16 @@ public class Client {
      */
     public Set<Note> getClientNotes() {
         return Collections.unmodifiableSet(this.clientNotes);
+    }
+
+    /**
+     * Gets the list of client notes associated with this client as an observable arraylist.
+     * @return An Observable List of client notes associated with this client.
+     */
+    public ObservableList<Note>getClientNotesAsList() {
+        ArrayList<Note> arr = (new ArrayList<>(getClientNotes()));
+        ObservableList<Note> result = observableArrayList(arr);
+        return observableArrayList(new ArrayList<>(getClientNotes()));
     }
 
     /**

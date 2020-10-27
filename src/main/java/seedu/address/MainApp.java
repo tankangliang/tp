@@ -62,6 +62,8 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
+        model.initialiseTagNoteMap();
+        logger.info("=============================[ Initializing TBM ]=============================");
 
         logic = new LogicManager(model, storage);
 
