@@ -51,7 +51,7 @@ public class NoteListCard extends UiPart<Region> {
         note.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        noteContent.setText(note.toString());
+        noteContent.setText(note.getNoteContent());
     }
 
     @Override
