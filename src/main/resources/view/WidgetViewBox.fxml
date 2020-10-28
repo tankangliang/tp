@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ScrollPane?>
 <StackPane prefHeight="365.0" prefWidth="337.0" styleClass="widget-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <VBox fx:id="viewBox" prefHeight="301.0" prefWidth="337.0">
         <children>
@@ -30,7 +31,10 @@
                     </children>
                 </StackPane>
             </StackPane>
-             <ListView fx:id="notes" prefHeight="228.0" prefWidth="337.0" styleClass="clientNoteList" VBox.vgrow="ALWAYS"/>
+            <ScrollPane fx:id="clientNoteScrollPane" VBox.vgrow="SOMETIMES" prefWidth="337.0" hbarPolicy="NEVER"
+                        fitToWidth="true">
+                <VBox fx:id="clientNoteListView" VBox.vgrow="ALWAYS" spacing="20.0"/>
+            </ScrollPane>
         </children>
     </VBox>
 </StackPane>

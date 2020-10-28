@@ -1,18 +1,14 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
@@ -40,7 +36,10 @@ public class WidgetViewBox extends UiPart<Region> {
     @FXML
     private Label noteTitle;
     @FXML
-    private ListView<Note> notes;
+    private ScrollPane clientNoteScrollPane;
+    @FXML
+    private VBox clientNoteListView;
+    private ObservableList<Note> observableListNotes;
     private Client client;
     private TextClock textClock;
 
@@ -66,8 +65,16 @@ public class WidgetViewBox extends UiPart<Region> {
         country.setText(client.getCountry().getCountryName());
         contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
         noteTitle.setText("Notes");
-        notes.setItems(getObservableListofNote(client.getClientNotes()));
-        notes.setCellFactory(noteListView -> new ClientNoteListViewCell());
+        observableListNotes = client.getObsList();
+        observableListNotes.addListener(new ListChangeListener<Note>() {
+            @Override
+            public void onChanged(Change<? extends Note> c) {
+                if (c.next()) {
+                    updateObservableListNotes(observableListNotes);
+                }
+            }
+        });
+        initialiseNoteList(observableListNotes);
     }
 
     /**
@@ -80,24 +87,48 @@ public class WidgetViewBox extends UiPart<Region> {
     }
 
     /**
-     * Returns an observable list from a set of notes.
-     *
-     * @param notes
-     * @return ObservableList of notes.
+     * Sets a default view for the view box.
      */
-    private ObservableList<Note> getObservableListofNote(Set<Note> notes) {
-        Iterator<Note> itr = notes.iterator();
-        List<Note> noteList = new ArrayList<>();
-        while (itr.hasNext()) {
-            noteList.add(itr.next());
-        }
-        return FXCollections.observableList(noteList);
-    }
-
     private void initDefault() {
         textClock = new TextClock(name);
         country.setText(Locale.getDefault().getDisplayCountry());
         textClock.play();
+    }
+
+    /**
+     * Updates the displayed notes.
+     *
+     * @param observableListNotes The new client notes.
+     */
+    private void updateObservableListNotes(ObservableList<Note> observableListNotes) {
+        clearChildren();
+        int noteIdx = 0;
+        for (Note note : observableListNotes) {
+            NoteListCard noteListCard = new NoteListCard(note, noteIdx++);
+            clientNoteListView.getChildren().add(noteListCard.getRoot());
+        }
+    }
+
+    /**
+     * Method to call when initialising a Client to the view box. Set content of the scrollpane.
+     *
+     * @param observableListNotes The list of notes of the client.
+     */
+    private void initialiseNoteList(ObservableList<Note> observableListNotes) {
+        clearChildren();
+        int noteIdx = 0;
+        for (Note note : observableListNotes) {
+            NoteListCard noteListCard = new NoteListCard(note, noteIdx++);
+            clientNoteListView.getChildren().add(noteListCard.getRoot());
+        }
+        clientNoteScrollPane.setContent(clientNoteListView);
+    }
+
+    /**
+     * Per fn name.
+     */
+    private void clearChildren() {
+        clientNoteListView.getChildren().clear();
     }
 
     @Override
@@ -131,7 +162,7 @@ public class WidgetViewBox extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new ClientNoteCard(getIndex() + 1, clientNote).getRoot());
+                setGraphic(new NoteListCard(clientNote, getIndex() + 1).getRoot());
             }
         }
     }

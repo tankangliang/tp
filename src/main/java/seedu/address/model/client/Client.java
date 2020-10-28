@@ -3,11 +3,15 @@ package seedu.address.model.client;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
 
@@ -28,6 +32,7 @@ public class Client {
     private final Timezone timezone;
     private final ContractExpiryDate contractExpiryDate;
     private final Set<Note> clientNotes = new LinkedHashSet<>(); // todo: initialise this iff client has notes
+    private final ObservableList<Note> noteList = getObservervableList();
     private final LastModifiedInstant lastModifiedInstant;
 
     /**
@@ -95,6 +100,7 @@ public class Client {
     public void addClientNote(Note clientNote) {
         requireNonNull(clientNote);
         this.clientNotes.add(clientNote);
+        this.noteList.add(clientNote);
     }
 
     /**
@@ -104,6 +110,16 @@ public class Client {
     public void deleteClientNote(Note clientNote) {
         requireNonNull(clientNote);
         this.clientNotes.remove(clientNote);
+        this.noteList.remove(clientNote);
+    }
+
+    /**
+     * Exposes the underlying observable list of notes the client has, backed by a Set of Notes.
+     *
+     * @return Observable list of notes.
+     */
+    public ObservableList<Note> getObsList() {
+        return noteList;
     }
 
     /**
@@ -178,6 +194,14 @@ public class Client {
                 .append(getContractExpiryDate());
 
         return builder.toString();
+    }
+
+    private ObservableList<Note> getObservervableList() {
+        List<Note> noteList = new ArrayList<>();
+        for (Note note : clientNotes) {
+            noteList.add(note);
+        }
+        return FXCollections.observableList(noteList);
     }
 
 }
