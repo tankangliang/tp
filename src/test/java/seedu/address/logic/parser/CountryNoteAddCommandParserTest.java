@@ -57,7 +57,8 @@ public class CountryNoteAddCommandParserTest {
     public void parse_validCountryNoNote_throwsParseException() {
         assertThrows(ParseException.class, () -> parser.parse(" c/MY "));
         assertThrows(ParseException.class, () -> parser.parse(" c/MY t/a"));
-        assertThrows(ParseException.class, () -> parser.parse(" c/MY nt/ t/"));
+        assertThrows(ParseException.class, () -> parser.parse(" c/MY nt/ t/a"));
+        assertThrows(ParseException.class, () -> parser.parse(" nt/ c/MY t/a"));
     }
 
     @Test
