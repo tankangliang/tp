@@ -155,23 +155,4 @@ public class WidgetViewBox extends UiPart<Region> {
         clientNoteListView.setPadding(new Insets(5, 0, 5, 10));
     }
 
-    /**
-     * Custom {@code ListCell} that displays the graphics of a {@code CountryNote} using a {@code
-     * CountryNoteCard}.
-     */
-    class ClientNoteListViewCell extends ListCell<Note> {
-
-        @Override
-        protected void updateItem(Note clientNote, boolean empty) {
-            super.updateItem(clientNote, empty);
-
-            if (empty || clientNote == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new NoteListCard(clientNote, getIndex() + 1).getRoot());
-            }
-        }
-    }
-
 }
