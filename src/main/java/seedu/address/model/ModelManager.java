@@ -185,13 +185,8 @@ public class ModelManager implements Model {
         updateTagNoteMapWithNote(newTags, clientNote);
     }
 
-    /**
-     * Updates its {@code TagNoteMap} to map a note with a new set of tags.
-     *
-     * @param newTags The tags to associate with a particular note.
-     * @param note    The note to associate the tag with.
-     */
-    private void updateTagNoteMapWithNote(Set<Tag> newTags, Note note) {
+    @Override
+    public void updateTagNoteMapWithNote(Set<Tag> newTags, Note note) {
         this.tagNoteMap.addTagsForNote(newTags, note);
     }
 

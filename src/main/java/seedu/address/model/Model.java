@@ -180,4 +180,11 @@ public interface Model {
      */
     TagNoteMap getTagNoteMap();
 
+    /**
+     * Updates its {@code TagNoteMap} to map a note with a new set of tags.
+     *
+     * @param newTags The tags to associate with a particular note.
+     * @param note    The note to associate the tag with.
+     */
+    void updateTagNoteMapWithNote(Set<Tag> newTags, Note note);
 }
