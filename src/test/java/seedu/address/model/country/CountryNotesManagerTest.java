@@ -99,8 +99,8 @@ public class CountryNotesManagerTest {
     @Test
     public void asUnmodifiableObservableList_editList_throwsUnsupportedOperationException() {
         CountryNote countryNote = new CountryNote("random", new Country("SG"));
-        assertThrows(UnsupportedOperationException.class,
-                () -> countryNotesManager.asUnmodifiableObservableList().add(countryNote));
+        assertThrows(UnsupportedOperationException.class, () ->
+                countryNotesManager.asUnmodifiableObservableList().add(countryNote));
     }
 
     @Test

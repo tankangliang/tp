@@ -18,7 +18,7 @@ public class CountryNotesManager {
             FXCollections.unmodifiableObservableList(internalCountryNoteSortedList);
 
     public CountryNotesManager() {
-        internalCountryNoteSortedList.setComparator((CountryNote::compareTo));
+        internalCountryNoteSortedList.setComparator(CountryNote::compareTo);
     }
 
     /**
