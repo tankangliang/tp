@@ -210,6 +210,11 @@ public class ClientAddCommandTest {
         }
 
         @Override
+        public void editClientNote(Client associatedClient, Note noteToEdit, Note newNote) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteCountryNote(CountryNote countryNoteToDelete) {
             throw new AssertionError("This method should not be called.");
         }

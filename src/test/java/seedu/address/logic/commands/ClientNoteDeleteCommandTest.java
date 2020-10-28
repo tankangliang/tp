@@ -50,7 +50,7 @@ class ClientNoteDeleteCommandTest {
         Client client2Copy = new ClientBuilder().withName("client2").build();
         expectedModel.addClient(client1Copy);
         expectedModel.addClient(client2Copy);
-        expectedModel.addClientNote(client2, clientNote2);
+        expectedModel.addClientNote(client2Copy, clientNote2);
 
         CommandResult expectedResult = new CommandResult(ClientNoteDeleteCommand.MESSAGE_DELETED_CLIENT_NOTE_SUCCESS);
         ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(client2Idx, clientNoteIdx);

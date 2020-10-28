@@ -209,6 +209,13 @@ public class ModelManager implements Model {
         associatedClient.deleteClientNote(noteToDelete);
     }
 
+    @Override
+    public void editClientNote(Client associatedClient, Note noteToEdit, Note newNote) {
+        requireAllNonNull(associatedClient, noteToEdit);
+        this.tagNoteMap.editNote(noteToEdit, newNote);
+        associatedClient.editClientNote(noteToEdit, newNote);
+    }
+
     //=========== Filtered Client List Accessors =============================================================
 
     @Override
