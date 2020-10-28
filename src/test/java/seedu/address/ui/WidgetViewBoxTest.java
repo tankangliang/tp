@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import org.junit.jupiter.api.Test;
 
 import guitests.guihandles.WidgetViewBoxHandle;
+import javafx.collections.FXCollections;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
 import seedu.address.testutil.TypicalClients;
@@ -21,7 +22,7 @@ public class WidgetViewBoxTest extends GuiUnitTest {
     @Test
     public void display() {
         WidgetViewBox widgetViewBox = WidgetViewBox.init();
-        widgetViewBox.update(AMY);
+        widgetViewBox.updateClientDisplay(AMY);
         AMY.addClientNote(new Note("Birthday TMR"));
         uiPartExtension.setUiPart(widgetViewBox);
 
@@ -39,7 +40,7 @@ public class WidgetViewBoxTest extends GuiUnitTest {
         * A bug raised here https://bugs.java.com/bugdatabase/view_bug.do?bug_id=7082429.
         */
         assumeFalse(guiRobot.isHeadlessMode(), "Test skipped in headless mode.");
-        WidgetViewBox widgetViewBox = new WidgetViewBox();
+        WidgetViewBox widgetViewBox = new WidgetViewBox(FXCollections.emptyObservableList());
 
         uiPartExtension.setUiPart(widgetViewBox);
 
@@ -51,9 +52,9 @@ public class WidgetViewBoxTest extends GuiUnitTest {
     public void updateContentToEmptyObject_updatesProperly_newObjectIsSuccessfullyUpdated() {
         // This is primarily testing that the textclock does not show itself during an update.
         WidgetViewBox widgetViewBox = WidgetViewBox.init();
-        widgetViewBox.update(AMY);
+        widgetViewBox.updateClientDisplay(AMY);
         Client benson = TypicalClients.BENSON;
-        widgetViewBox.update(benson);
+        widgetViewBox.updateClientDisplay(benson);
         uiPartExtension.setUiPart(widgetViewBox);
 
         assertViewBoxDisplay(widgetViewBox, benson);
@@ -62,9 +63,9 @@ public class WidgetViewBoxTest extends GuiUnitTest {
     @Test
     public void equals() {
         WidgetViewBox obj1 = WidgetViewBox.init();
-        obj1.update(AMY);
+        obj1.updateClientDisplay(AMY);
         WidgetViewBox obj2 = WidgetViewBox.init();
-        obj2.update(AMY);
+        obj2.updateClientDisplay(AMY);
 
         assertEquals(obj1, obj2);
     }

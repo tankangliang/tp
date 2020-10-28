@@ -1,8 +1,10 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -39,15 +41,34 @@ public class WidgetViewBox extends UiPart<Region> {
     private ScrollPane clientNoteScrollPane;
     @FXML
     private VBox clientNoteListView;
-    private ObservableList<Note> observableListNotes;
-    private Client client;
+    private final ObservableList<Client> clientObservableList;
+    private int displayedClientIndex;
+    private Client displayedClient;
     private TextClock textClock;
 
     /**
      * Creates a {@code WidgetViewBox} with the given {@code WidgetObject}.
      */
-    public WidgetViewBox() {
+    public WidgetViewBox(ObservableList<Client> clientObservableList) {
         super(FXML);
+        this.clientObservableList = clientObservableList;
+
+        clientObservableList.addListener((ListChangeListener<Client>) c -> {
+            if (c.next()) {
+                if (c.wasUpdated() || c.wasReplaced()) {
+                    updateClientDisplay(clientObservableList.get(displayedClientIndex));
+                } else {
+                    for (int i = 0; i < clientObservableList.size(); i++) {
+                        Client client = clientObservableList.get(i);
+                        if (client.isSameClient(displayedClient)) {
+                            displayedClient = client;
+                            displayedClientIndex = i;
+                            return;
+                        }
+                    }
+                }
+            }
+        });
         initDefault();
     }
 
@@ -56,26 +77,23 @@ public class WidgetViewBox extends UiPart<Region> {
      *
      * @param client The new content.
      */
-    public void update(Client client) {
+    public void updateClientDisplay(Client client) {
         textClock.pause();
-        this.client = client;
+        displayedClient = client;
+        for (int i = 0; i < clientObservableList.size(); i++) {
+            if (clientObservableList.get(i).isSameClient(client)) {
+                displayedClient = clientObservableList.get(i);
+                displayedClientIndex = i;
+            }
+        }
         name.setText(client.getName().toString());
         phone.setText(client.getPhone().toString());
         email.setText(client.getEmail().toString());
         country.setText(client.getCountry().getCountryName());
         contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
         noteTitle.setText("Notes");
-        observableListNotes = client.getObsList();
-        observableListNotes.addListener(new ListChangeListener<Note>() {
-            @Override
-            public void onChanged(Change<? extends Note> c) {
-                if (c.next()) {
-                    updateObservableListNotes(observableListNotes);
-                }
-            }
-        });
+        updateObservableListNotes(client.getClientNotesAsList());
         drawPaneBorder();
-        initialiseNoteList(observableListNotes);
     }
 
     /**
@@ -84,7 +102,7 @@ public class WidgetViewBox extends UiPart<Region> {
      * @return WidgetViewBox
      */
     public static WidgetViewBox init() {
-        return new WidgetViewBox();
+        return new WidgetViewBox(FXCollections.emptyObservableList());
     }
 
     /**
@@ -100,30 +118,15 @@ public class WidgetViewBox extends UiPart<Region> {
     /**
      * Updates the displayed notes.
      *
-     * @param observableListNotes The new client notes.
+     * @param listNotes The new client notes.
      */
-    private void updateObservableListNotes(ObservableList<Note> observableListNotes) {
+    private void updateObservableListNotes(List<Note> listNotes) {
         clearChildren();
-        int noteIdx = 0;
-        for (Note note : observableListNotes) {
+        int noteIdx = 1;
+        for (Note note : listNotes) {
             NoteListCard noteListCard = new NoteListCard(note, noteIdx++);
             clientNoteListView.getChildren().add(noteListCard.getRoot());
         }
-    }
-
-    /**
-     * Method to call when initialising a Client to the view box. Set content of the scrollpane.
-     *
-     * @param observableListNotes The list of notes of the client.
-     */
-    private void initialiseNoteList(ObservableList<Note> observableListNotes) {
-        clearChildren();
-        int noteIdx = 0;
-        for (Note note : observableListNotes) {
-            NoteListCard noteListCard = new NoteListCard(note, noteIdx++);
-            clientNoteListView.getChildren().add(noteListCard.getRoot());
-        }
-        clientNoteScrollPane.setContent(clientNoteListView);
     }
 
     /**
@@ -146,8 +149,8 @@ public class WidgetViewBox extends UiPart<Region> {
         }
 
         // state check
-        Client other1 = ((WidgetViewBox) other).client;
-        return client.equals(other1);
+        Client other1 = ((WidgetViewBox) other).displayedClient;
+        return displayedClient.equals(other1);
     }
 
     private void drawPaneBorder() {

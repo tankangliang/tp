@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
 
@@ -31,8 +31,7 @@ public class Client {
     private final Country country;
     private final Timezone timezone;
     private final ContractExpiryDate contractExpiryDate;
-    private final Set<Note> clientNotes = new LinkedHashSet<>(); // todo: initialise this iff client has notes
-    private final ObservableList<Note> noteList = getObservervableList();
+    private final ObservableSet<Note> clientNotes = FXCollections.observableSet(new LinkedHashSet<>());
     private final LastModifiedInstant lastModifiedInstant;
 
     /**
@@ -101,6 +100,9 @@ public class Client {
         return Collections.unmodifiableList(new ArrayList<>(getClientNotes()));
     }
 
+    public ObservableSet<Note> getClientNotesAsObservableSet() {
+        return clientNotes;
+    }
     /**
      * Adds a client note for this client.
      *
@@ -109,7 +111,6 @@ public class Client {
     public void addClientNote(Note clientNote) {
         requireNonNull(clientNote);
         this.clientNotes.add(clientNote);
-        this.noteList.add(clientNote);
     }
 
     /**
@@ -120,16 +121,6 @@ public class Client {
     public void deleteClientNote(Note clientNote) {
         requireNonNull(clientNote);
         this.clientNotes.remove(clientNote);
-        this.noteList.remove(clientNote);
-    }
-
-    /**
-     * Exposes the underlying observable list of notes the client has, backed by a Set of Notes.
-     *
-     * @return Observable list of notes.
-     */
-    public ObservableList<Note> getObsList() {
-        return noteList;
     }
 
     /**
@@ -217,14 +208,6 @@ public class Client {
                 .append(getContractExpiryDate());
 
         return builder.toString();
-    }
-
-    private ObservableList<Note> getObservervableList() {
-        List<Note> noteList = new ArrayList<>();
-        for (Note note : clientNotes) {
-            noteList.add(note);
-        }
-        return FXCollections.observableList(noteList);
     }
 
 }
