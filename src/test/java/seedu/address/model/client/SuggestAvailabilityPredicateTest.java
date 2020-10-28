@@ -41,6 +41,22 @@ public class SuggestAvailabilityPredicateTest {
         assertFalse(suggestAvailabilityPredicate.test(client));
     }
 
+    @Test
+    public void equalsMethod() {
+        SuggestAvailabilityPredicate suggestAvailabilityPredicate = new SuggestAvailabilityPredicate();
+
+        // same object -> true
+        assertTrue(suggestAvailabilityPredicate.equals(suggestAvailabilityPredicate));
+
+        // null -> false
+        assertFalse(suggestAvailabilityPredicate.equals(null));
+
+        // different class -> false
+        assertFalse(suggestAvailabilityPredicate.equals(1));
+
+        // different object, same fields -> true
+        assertTrue(suggestAvailabilityPredicate.equals(new SuggestAvailabilityPredicate()));
+    }
 
     private static class TimezoneStub extends Timezone {
         private final int testCurrHour;

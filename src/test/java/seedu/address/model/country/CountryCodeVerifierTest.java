@@ -1,7 +1,10 @@
 package seedu.address.model.country;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,5 +24,10 @@ public class CountryCodeVerifierTest {
         assertFalse(CountryCodeVerifier.isValidCountryCode("az"));
         assertFalse(CountryCodeVerifier.isValidCountryCode("bd"));
         assertFalse(CountryCodeVerifier.isValidCountryCode("bdc"));
+    }
+
+    @Test
+    public void getCountryCodes_returnsIsoCountries() {
+        assertArrayEquals(Locale.getISOCountries(), CountryCodeVerifier.getCountryCodes());
     }
 }

@@ -58,38 +58,32 @@ public class ClientAddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB
-                + CONTRACT_EXPIRY_DATE_DESC_BOB,
+                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + CONTRACT_EXPIRY_DATE_DESC_BOB,
                 new ClientAddCommand(expectedClient));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB
-                + CONTRACT_EXPIRY_DATE_DESC_BOB,
+                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + CONTRACT_EXPIRY_DATE_DESC_BOB,
                 new ClientAddCommand(expectedClient));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB
-                + CONTRACT_EXPIRY_DATE_DESC_BOB,
+                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + CONTRACT_EXPIRY_DATE_DESC_BOB,
                 new ClientAddCommand(expectedClient));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB
-                + CONTRACT_EXPIRY_DATE_DESC_BOB,
+                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + CONTRACT_EXPIRY_DATE_DESC_BOB,
                 new ClientAddCommand(expectedClient));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB
-                + CONTRACT_EXPIRY_DATE_DESC_BOB,
+                + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + CONTRACT_EXPIRY_DATE_DESC_BOB,
                 new ClientAddCommand(expectedClient));
 
         // multiple countries - last country accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_AMY + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB
-                + CONTRACT_EXPIRY_DATE_DESC_BOB,
+                + COUNTRY_DESC_AMY + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + CONTRACT_EXPIRY_DATE_DESC_BOB,
                 new ClientAddCommand(expectedClient));
 
         // multiple timezones - last timezone accepted
@@ -100,8 +94,7 @@ public class ClientAddCommandParserTest {
 
         // multiple contract expiry dates - last date accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + CONTRACT_EXPIRY_DATE_DESC_AMY
-                + CONTRACT_EXPIRY_DATE_DESC_BOB,
+                + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + CONTRACT_EXPIRY_DATE_DESC_AMY + CONTRACT_EXPIRY_DATE_DESC_BOB,
                 new ClientAddCommand(expectedClient));
 
     }
@@ -141,7 +134,7 @@ public class ClientAddCommandParserTest {
 
         // missing timezone prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + COUNTRY_DESC_BOB + VALID_TIMEZONE_BOB, expectedMessage);
+                + COUNTRY_DESC_BOB + VALID_TIMEZONE_BOB + CONTRACT_EXPIRY_DATE_DESC_BOB, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB

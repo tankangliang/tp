@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
@@ -19,7 +19,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
 
 public class ClientViewCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -28,7 +28,7 @@ public class ClientViewCommandTest {
 
         String expectedMsg = String.format(ClientViewCommand.MESSAGE_VIEW_CLIENT_SUCCESS, clientToView.getName());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getTbmManager(), new UserPrefs());
         expectedModel.setWidgetContent(clientToView);
 
         assertCommandSuccess(command, model, expectedMsg, expectedModel);
@@ -50,7 +50,7 @@ public class ClientViewCommandTest {
 
         String expectedMessage = String.format(ClientViewCommand.MESSAGE_VIEW_CLIENT_SUCCESS, clientToView.getName());
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getTbmManager(), new UserPrefs());
         showClientAtIndex(expectedModel, INDEX_FIRST_CLIENT);
         expectedModel.setWidgetContent(clientToView);
 
@@ -63,7 +63,7 @@ public class ClientViewCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_CLIENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getClientList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getTbmManager().getClientList().size());
 
         ClientViewCommand clientViewCommand = new ClientViewCommand(outOfBoundIndex);
 

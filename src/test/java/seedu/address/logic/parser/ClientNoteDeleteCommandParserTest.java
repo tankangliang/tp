@@ -28,7 +28,7 @@ class ClientNoteDeleteCommandParserTest {
     }
 
     @Test
-    public void parse_correctUserInput_doesNotThrowExceptionReturnsTrue() {
+    public void parse_correctUserInput_doesNotThrowExceptionParsesSuccessfully() {
         Index expectedClientIndex = Index.fromOneBased(1);
         Index expectedClientNoteIndex = Index.fromOneBased(12);
         ClientNoteDeleteCommand expectedCommand =

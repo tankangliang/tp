@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ import seedu.address.model.country.Country;
 public class CountryFilterCommandTest {
 
     private static final String[] COUNTRY_CODES = Locale.getISOCountries();
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
 
     @Test
     public void execute_validCountries_matchesExpectedFilterResult() {

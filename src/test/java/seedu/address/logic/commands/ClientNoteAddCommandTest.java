@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.TypicalClients.ALICE;
-import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ public class ClientNoteAddCommandTest {
     private static final String NOTE_CONTENT_2 = "client note content 2";
     private static final String NOTE_CONTENT_3 = "client note content 3";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
 
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
