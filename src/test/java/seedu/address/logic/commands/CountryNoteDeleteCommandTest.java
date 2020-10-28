@@ -73,6 +73,7 @@ public class CountryNoteDeleteCommandTest {
         CountryNoteDeleteCommand countryNoteDeleteCommand = new CountryNoteDeleteCommand(index);
 
         Model expectedModel = new ModelManager();
+        expectedModel.updateTagNoteMapWithNote(genericCountryNote.getTags(), genericCountryNote);
         String expectedMessage = String.format(CountryNoteDeleteCommand.MESSAGE_SUCCESS, index.getOneBased(),
                 genericCountryNote);
 
