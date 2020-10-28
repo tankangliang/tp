@@ -2,9 +2,7 @@ package guitests.guihandles;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import seedu.address.model.client.Client;
-import seedu.address.model.note.Note;
 
 /**
  * Provides a handler to the widget view box.

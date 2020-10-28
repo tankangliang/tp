@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ScrollPane;
@@ -74,6 +75,7 @@ public class WidgetViewBox extends UiPart<Region> {
                 }
             }
         });
+        drawPaneBorder();
         initialiseNoteList(observableListNotes);
     }
 
@@ -146,6 +148,11 @@ public class WidgetViewBox extends UiPart<Region> {
         // state check
         Client other1 = ((WidgetViewBox) other).client;
         return client.equals(other1);
+    }
+
+    private void drawPaneBorder() {
+        clientNoteScrollPane.setStyle("-fx-border-color: #FF3333; -fx-border-radius: 5; -fx-border-width: 2;");
+        clientNoteListView.setPadding(new Insets(5, 0, 5, 10));
     }
 
     /**

@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 
-<?import javafx.scene.control.ScrollPane?>
-<StackPane prefHeight="365.0" prefWidth="337.0" styleClass="widget-pane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane prefHeight="365.0" prefWidth="337.0" styleClass="widget-pane" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1">
     <VBox fx:id="viewBox" prefHeight="301.0" prefWidth="337.0">
         <children>
-            <StackPane prefHeight="70.0" prefWidth="337.0">
-                <Label fx:id="name" alignment="CENTER" prefHeight="46.0" prefWidth="280.0" styleClass="widget_header" text="name"/>
+            <StackPane prefHeight="45.0" prefWidth="337.0">
+                <Label fx:id="name" alignment="CENTER" prefHeight="46.0" prefWidth="280.0" styleClass="widget_header" text="name" />
             </StackPane>
             <StackPane prefHeight="35.0" prefWidth="337.0">
-                <Label fx:id="country" prefHeight="17.0" prefWidth="290.0" styleClass="widget_div"/>
+                <Label fx:id="country" prefHeight="17.0" prefWidth="290.0" styleClass="widget_div" />
             </StackPane>
             <StackPane prefHeight="35.0" prefWidth="337.0">
-                <Label fx:id="email" prefHeight="17.0" prefWidth="290.0" styleClass="widget_text"/>
+                <Label fx:id="email" prefHeight="17.0" prefWidth="290.0" styleClass="widget_text" />
             </StackPane>
             <StackPane prefHeight="35.0" prefWidth="337.0">
-                <Label fx:id="phone" prefHeight="17.0" prefWidth="289.0" styleClass="widget_text"/>
+                <Label fx:id="phone" prefHeight="17.0" prefWidth="289.0" styleClass="widget_text" />
             </StackPane>
             <StackPane prefHeight="35.0" prefWidth="337.0">
-                <Label fx:id="contractExpiryDate" prefHeight="17.0" prefWidth="289.0" styleClass="widget_text"/>
+                <Label fx:id="contractExpiryDate" prefHeight="17.0" prefWidth="289.0" styleClass="widget_text" />
             </StackPane>
-            <StackPane prefWidth="337.0">
+            <StackPane prefHeight="45.0" prefWidth="337.0">
                 <StackPane prefHeight="30.0" prefWidth="337.0">
+                    <padding>
+                        <Insets topRightBottomLeft="5"/>
+                    </padding>
                     <children>
-                        <Label fx:id="noteTitle" alignment="CENTER" prefHeight="46.0" prefWidth="249.0" styleClass="widget_header"/>
+                        <Label fx:id="noteTitle" alignment="CENTER" prefHeight="15.0" prefWidth="249.0" styleClass="widget_header" />
                     </children>
                 </StackPane>
             </StackPane>
-            <ScrollPane fx:id="clientNoteScrollPane" VBox.vgrow="SOMETIMES" prefWidth="337.0" hbarPolicy="NEVER"
-                        fitToWidth="true">
-                <VBox fx:id="clientNoteListView" VBox.vgrow="ALWAYS" spacing="20.0"/>
+            <ScrollPane fx:id="clientNoteScrollPane" fitToWidth="true" hbarPolicy="NEVER" prefWidth="337.0" VBox.vgrow="SOMETIMES">
+                <VBox fx:id="clientNoteListView" spacing="20.0" VBox.vgrow="ALWAYS"/>
             </ScrollPane>
         </children>
     </VBox>
