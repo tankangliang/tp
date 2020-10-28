@@ -28,6 +28,7 @@ import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
 import seedu.address.logic.commands.ClientFindCommand;
 import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.commands.ClientNoteDeleteCommand;
+import seedu.address.logic.commands.ClientNoteEditCommand;
 import seedu.address.logic.commands.ClientViewCommand;
 import seedu.address.logic.commands.CountryFilterCommand;
 import seedu.address.logic.commands.CountryNoteAddCommand;
@@ -191,7 +192,7 @@ public class MainParserTest {
     //TODO: add tests when country commands are finalized
 
     @Test
-    public void parseClientNoteCommands_addClientNote() throws Exception {
+    public void parseClientNoteCommands_addValidClientNote_parsesSuccessfully() throws Exception {
         final String noteString = "likes cats";
         final String commandString = ClientNoteAddCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                 + " " + PREFIX_NOTE + noteString;
@@ -199,9 +200,22 @@ public class MainParserTest {
         Set<Tag> tags = tagNoteMap.getUniqueTags(Collections.emptyList());
         final Note note = new Note(noteString);
         note.setTags(tags);
-
         ClientNoteAddCommand command = (ClientNoteAddCommand) parser.parseCommand(commandString);
         assertEquals(new ClientNoteAddCommand(INDEX_FIRST_CLIENT, note), command);
+    }
+
+    @Test
+    public void parseClientNoteCommands_editValidClientNote_parseSuccessfully() throws Exception {
+        final String noteString = "likes cats";
+        final String commandString = ClientNoteEditCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
+                + " 1" + " " + PREFIX_NOTE + noteString;
+        TagNoteMap tagNoteMap = new TagNoteMap();
+        Set<Tag> tags = tagNoteMap.getUniqueTags(Collections.emptyList());
+        final Note note = new Note(noteString);
+        note.setTags(tags);
+
+        ClientNoteEditCommand command = (ClientNoteEditCommand) parser.parseCommand(commandString);
+        assertEquals(new ClientNoteEditCommand(INDEX_FIRST_CLIENT, Index.fromOneBased(1), note), command);
     }
 
     @Test

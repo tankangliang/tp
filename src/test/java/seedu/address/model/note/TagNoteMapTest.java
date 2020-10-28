@@ -88,6 +88,26 @@ class TagNoteMapTest {
         tagNoteMap.deleteNote(taggedNote);
         assertFalse(tagNoteMap.getNotesForTag(testTag).equals(expectedNotesSet));
     }
+    @Test
+    void editNote_validInputs_replaceExistingNoteWithNewNote() {
+        taggedNote.setTags(tags);
+        Note newNote = new Note(taggedNote.getNoteContent());
+        Set<Tag> newTagSet = new HashSet<>();
+        Tag newTag = new Tag("unprecedentedTag");
+        newTagSet.add(newTag);
+        newNote.setTags(newTagSet);
+        Set<Note> expectedNotesSet = new HashSet<>();
+        expectedNotesSet.add(newNote);
+        this.client.addClientNote(taggedNote);
+        List<Client> clients = new ArrayList<>();
+        clients.add(client);
+        tagNoteMap.initTagNoteMapFromClients(clients);
+        assertTrue(tagNoteMap.getTagsForNote(taggedNote).equals(tags));
+        tagNoteMap.editNote(taggedNote, newNote);
+        assertFalse(tagNoteMap.getNotesForTag(testTag).equals(expectedNotesSet));
+        assertTrue(tagNoteMap.getNotesForTag(newTag).equals(expectedNotesSet));
+    }
+
 
     @Test
     void getTagsForNote_useNoteWithTwoTags_returnsTrue() {

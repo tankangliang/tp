@@ -82,4 +82,9 @@ class ClientNoteEditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
+    /* todo: future tests:
+     *  1. exception throwing tests
+     *
+     */
+
 }

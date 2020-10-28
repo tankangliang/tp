@@ -212,7 +212,7 @@ public class ModelManager implements Model {
     public void editClientNote(Client associatedClient, Note noteToEdit, Note newNote) {
         requireAllNonNull(associatedClient, noteToEdit);
         // todo: Ritesh add tagnote map's edit and client's edit methods
-        //        this.tagNoteMap.editNote(noteToEdit, newNote);
+        this.tagNoteMap.editNote(noteToEdit, newNote);
         associatedClient.editClientNote(noteToEdit, newNote);
 
 
