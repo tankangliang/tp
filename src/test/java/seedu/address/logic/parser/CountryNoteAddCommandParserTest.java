@@ -50,7 +50,8 @@ public class CountryNoteAddCommandParserTest {
     public void parse_invalidCountryHasNote_throwsParseException() {
         assertThrows(ParseException.class, () -> parser.parse(" c/Z Z nt/random string"));
         assertThrows(ParseException.class, () -> parser.parse(" c/Z Z t/a nt/random string"));
-        assertThrows(ParseException.class, () -> parser.parse(" c/Z Z t/ nt/"));
+        assertThrows(ParseException.class, () -> parser.parse(" c/RUS t/a nt/random string"));
+        assertThrows(ParseException.class, () -> parser.parse(" c/R t/a nt/random string"));
     }
 
     @Test
