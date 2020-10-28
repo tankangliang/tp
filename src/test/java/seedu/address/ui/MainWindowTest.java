@@ -3,6 +3,7 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static seedu.address.ui.HelpWindow.USERGUIDE_URL;
 
 import java.awt.Toolkit;
@@ -75,6 +76,8 @@ public class MainWindowTest extends GuiUnitTest {
         guiRobot.push(KeyCode.ESCAPE);
         guiRobot.pauseForHuman();
         assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
+
+        assumeFalse(guiRobot.isHeadlessMode());
 
         // TODO: Command Execution test
         terminal.inputCommand("client add n/Lim p/18002345 e/lim@gmail.com a/Yishun c/SG tz/GMT+8");
