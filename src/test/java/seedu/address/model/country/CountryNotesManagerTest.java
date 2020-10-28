@@ -49,6 +49,13 @@ public class CountryNotesManagerTest {
     }
 
     @Test
+    public void addCountryNote_countryNoteWithNullCountry_throwsAssertionError() {
+        CountryNotesManager countryNotesManager = new CountryNotesManager();
+        CountryNote countryNote = new CountryNote("country note 1", Country.NULL_COUNTRY);
+        assertThrows(AssertionError.class, () -> countryNotesManager.addCountryNote(countryNote));
+    }
+
+    @Test
     public void addCountryNote_duplicateNote_notAdded() {
         CountryNotesManager countryNotesManager = new CountryNotesManager();
         for (String countryCode : COUNTRY_CODES) {

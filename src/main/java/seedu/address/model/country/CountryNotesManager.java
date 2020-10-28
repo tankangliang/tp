@@ -38,9 +38,8 @@ public class CountryNotesManager {
      * @param countryNote The country note to be added.
      */
     public void addCountryNote(CountryNote countryNote) {
-        if (!CountryCodeVerifier.isValidCountryCode(countryNote.getCountry().getCountryCode())) {
-            assert false; // should always be a valid country
-        }
+        // should always be a valid country
+        assert CountryCodeVerifier.isValidCountryCode(countryNote.getCountry().getCountryCode());
         requireNonNull(countryNote);
 
         if (!hasCountryNote(countryNote)) {
@@ -63,9 +62,8 @@ public class CountryNotesManager {
      * @param countryNoteToDelete The country note to be deleted.
      */
     public void deleteCountryNote(CountryNote countryNoteToDelete) {
-        if (!CountryCodeVerifier.isValidCountryCode(countryNoteToDelete.getCountry().getCountryCode())) {
-            assert false; // should always be a valid country
-        }
+        // should always be a valid country
+        assert CountryCodeVerifier.isValidCountryCode(countryNoteToDelete.getCountry().getCountryCode());
         requireNonNull(countryNoteToDelete);
         assert hasCountryNote(countryNoteToDelete);
 
