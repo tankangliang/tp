@@ -49,8 +49,6 @@ public class CountryNoteAddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_COUNTRY_NOTE);
         }
 
-        Set<Tag> tags = countryNote.getTags();
-        model.updateTagNoteMapWithNote(tags, countryNote);
         model.addCountryNote(countryNote);
         return new CommandResult(String.format(MESSAGE_SUCCESS, countryNote.getCountry(), countryNote));
     }

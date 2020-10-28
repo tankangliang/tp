@@ -56,8 +56,6 @@ public class ClientNoteAddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CLIENT_NOTE);
         }
         model.addClientNote(clientToAddNoteTo, clientNote);
-        Set<Tag> newTags = clientNote.getTags();
-        model.updateTagNoteMapWithNote(newTags, clientNote);
         return new CommandResult(MESSAGE_SUCCESS); // TODO: dynamically format success message
     }
 

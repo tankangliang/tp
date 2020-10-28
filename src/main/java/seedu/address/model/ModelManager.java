@@ -165,6 +165,9 @@ public class ModelManager implements Model {
     @Override
     public void addCountryNote(CountryNote countryNote) {
         requireNonNull(countryNote);
+        updateTagNoteMapWithNote(countryNote.getTags(), countryNote);
+        Set<Tag> newTags = countryNote.getTags();
+        updateTagNoteMapWithNote(newTags, countryNote);
         tbmManager.addCountryNote(countryNote);
     }
 
@@ -179,11 +182,16 @@ public class ModelManager implements Model {
         requireAllNonNull(target, clientNote);
         target.addClientNote(clientNote);
         Set<Tag> newTags = clientNote.getTags();
-        this.tagNoteMap.addTagsForNote(newTags, clientNote);
+        updateTagNoteMapWithNote(newTags, clientNote);
     }
 
-    @Override
-    public void updateTagNoteMapWithNote(Set<Tag> newTags, Note note) {
+    /**
+     * Updates its {@code TagNoteMap} to map a note with a new set of tags.
+     *
+     * @param newTags The tags to associate with a particular note.
+     * @param note    The note to associate the tag with.
+     */
+    private void updateTagNoteMapWithNote(Set<Tag> newTags, Note note) {
         this.tagNoteMap.addTagsForNote(newTags, note);
     }
 
