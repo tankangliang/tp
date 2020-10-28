@@ -96,4 +96,24 @@ public class CountryNotesManagerTest {
         assertFalse(countryNotesManager.hasCountryNote(countryNote));
     }
 
+    @Test
+    public void asUnmodifiableObservableList_editList_throwsUnsupportedOperationException() {
+        CountryNote countryNote = new CountryNote("random", new Country("SG"));
+        assertThrows(UnsupportedOperationException.class,
+                () -> countryNotesManager.asUnmodifiableObservableList().add(countryNote));
+    }
+
+    @Test
+    public void asUnmodifiableObservableList_returnsListSortedByCountryCode() {
+        CountryNote countryNote1 = new CountryNote("random", new Country("SG"));
+        CountryNote countryNote2 = new CountryNote("random2", new Country("AL"));
+        CountryNote countryNote3 = new CountryNote("random2", new Country("RU"));
+        countryNotesManager.addCountryNote(countryNote1);
+        countryNotesManager.addCountryNote(countryNote2);
+        countryNotesManager.addCountryNote(countryNote3);
+        assertEquals(countryNotesManager.asUnmodifiableObservableList().get(0), countryNote2);
+        assertEquals(countryNotesManager.asUnmodifiableObservableList().get(1), countryNote3);
+        assertEquals(countryNotesManager.asUnmodifiableObservableList().get(2), countryNote1);
+    }
+
 }
