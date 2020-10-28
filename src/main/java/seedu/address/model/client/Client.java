@@ -93,6 +93,15 @@ public class Client {
     }
 
     /**
+     * Gets the list of client notes associated with this client as an unmodifiable list.
+     *
+     * @return An unmodifiable list of client notes associated with this client.
+     */
+    public List<Note> getClientNotesAsList() {
+        return Collections.unmodifiableList(new ArrayList<>(getClientNotes()));
+    }
+
+    /**
      * Adds a client note for this client.
      *
      * @param clientNote The client note to be added.
@@ -105,6 +114,7 @@ public class Client {
 
     /**
      * Deletes a specific client note from associated notes for this client.
+     *
      * @param clientNote the clientNote to be deleted.
      */
     public void deleteClientNote(Note clientNote) {
