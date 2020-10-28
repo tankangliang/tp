@@ -59,6 +59,9 @@ title: User Guide
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
+* Items in round brackets mean that you have to supply at least one of them.<br>
+  e.g. `INDEX (n/NAME) (n/PHONE_NUMBER)` can be used as `1 n/John Doe` or `1 p/98899889` or `1 n/John Doe p/98899889`.
+
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -122,7 +125,7 @@ Examples:
 
 Edits a client's information by their index in the list view.
 
-Format: `client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY_CODE] [tz/TIMEZONE] [ce/CONTRACT_EXPIRY]`
+Format: `client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_CODE) (tz/TIMEZONE) (ce/CONTRACT_EXPIRY)`
 
 * COUNTRY follows the ISO3166 Format of two-letter country codes. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
 
