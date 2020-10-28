@@ -77,6 +77,12 @@ public class CountryNotesManagerTest {
     }
 
     @Test
+    public void deleteCountryNote_countryNoteWithNullCountry_throwsAssertionError() {
+        CountryNote countryNote = new CountryNote("country note 1", Country.NULL_COUNTRY);
+        assertThrows(AssertionError.class, () -> countryNotesManager.deleteCountryNote(countryNote));
+    }
+
+    @Test
     public void deleteCountryNote_nullCountryNote_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> countryNotesManager.deleteCountryNote(null));
     }
