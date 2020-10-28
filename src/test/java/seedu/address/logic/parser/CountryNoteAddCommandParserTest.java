@@ -63,15 +63,24 @@ public class CountryNoteAddCommandParserTest {
     }
 
     @Test
-    public void parse_validCountryHasNote_equalsExpected() {
+    public void parse_validCountryHasNoteNoUntagged_assertNotEquals() {
         try {
             CountryNote countryNote = new CountryNote("random string", new Country("SG"));
             CountryNoteAddCommand wrongCommand = new CountryNoteAddCommand(countryNote);
             assertNotEquals(wrongCommand, parser.parse(" c/SG nt/random string"));
+        } catch (ParseException e) {
+            fail();
+        }
+    }
+
+    @Test
+    public void parse_validCountryHasNoteHasUntagged_equalsExpected() {
+        try {
+            CountryNote countryNote = new CountryNote("random string", new Country("SG"));
             Set<Tag> tags = new HashSet<>();
             tags.add(Tag.UNTAGGED);
             countryNote.setTags(tags);
-            CountryNoteAddCommand expected = wrongCommand;
+            CountryNoteAddCommand expected = new CountryNoteAddCommand(countryNote);
             assertEquals(expected, parser.parse(" c/SG nt/random string"));
         } catch (ParseException e) {
             fail();
