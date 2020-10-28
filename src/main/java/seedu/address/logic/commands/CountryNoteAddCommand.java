@@ -5,9 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Set;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.note.CountryNote;
+import seedu.address.model.tag.Tag;
 
 /**
  * Adds a Country-specific Note.
@@ -46,6 +49,8 @@ public class CountryNoteAddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_COUNTRY_NOTE);
         }
 
+        Set<Tag> tags = countryNote.getTags();
+        model.updateTagNoteMapWithNote(tags, countryNote);
         model.addCountryNote(countryNote);
         return new CommandResult(String.format(MESSAGE_SUCCESS, countryNote.getCountry(), countryNote));
     }
