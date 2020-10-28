@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import guitests.guihandles.WidgetViewBoxHandle;
 import seedu.address.model.client.Client;
+import seedu.address.model.note.Note;
 import seedu.address.testutil.TypicalClients;
 
 /**
@@ -21,7 +22,9 @@ public class WidgetViewBoxTest extends GuiUnitTest {
     public void display() {
         WidgetViewBox widgetViewBox = WidgetViewBox.init();
         widgetViewBox.update(AMY);
+        AMY.addClientNote(new Note("Birthday TMR"));
         uiPartExtension.setUiPart(widgetViewBox);
+
 
         assertViewBoxDisplay(widgetViewBox, AMY);
     }
