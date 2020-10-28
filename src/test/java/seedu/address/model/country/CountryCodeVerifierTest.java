@@ -1,7 +1,6 @@
 package seedu.address.model.country;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -28,7 +27,7 @@ public class CountryCodeVerifierTest {
     }
 
     @Test
-    public void getCountryCodes_returnsISOCountries() {
+    public void getCountryCodes_returnsIsoCountries() {
         assertArrayEquals(Locale.getISOCountries(), CountryCodeVerifier.getCountryCodes());
     }
 }
