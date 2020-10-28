@@ -2,11 +2,13 @@ package seedu.address.model.country;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Locale;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.note.CountryNote;
@@ -15,10 +17,15 @@ public class CountryNotesManagerTest {
 
     //TODO: Add more tests if decide to include checking for 3-letter Country Code
     private static final String[] COUNTRY_CODES = Locale.getISOCountries();
+    private CountryNotesManager countryNotesManager;
+
+    @BeforeEach
+    public void setUp() {
+        countryNotesManager = new CountryNotesManager();
+    }
 
     @Test
     public void hasCountryNote_duplicateNote_returnTrue() {
-        CountryNotesManager countryNotesManager = new CountryNotesManager();
         for (String countryCode : COUNTRY_CODES) {
             Country country = new Country(countryCode);
             CountryNote genericNote = new CountryNote("generic note", country);
@@ -29,7 +36,6 @@ public class CountryNotesManagerTest {
 
     @Test
     public void hasCountryNote_notDuplicateNote_returnFalse() {
-        CountryNotesManager countryNotesManager = new CountryNotesManager();
         for (String countryCode : COUNTRY_CODES) {
             CountryNote genericNote = new CountryNote("generic note", new Country(countryCode));
             assertFalse(countryNotesManager.hasCountryNote(genericNote));
@@ -38,7 +44,6 @@ public class CountryNotesManagerTest {
 
     @Test
     public void addCountryNote_validNote_updatesCorrectly() {
-        CountryNotesManager countryNotesManager = new CountryNotesManager();
         for (String countryCode : COUNTRY_CODES) {
             Country country = new Country(countryCode);
             CountryNote genericNote = new CountryNote("generic note", country);
@@ -49,8 +54,13 @@ public class CountryNotesManagerTest {
     }
 
     @Test
+    public void addCountryNote_countryNoteWithNullCountry_throwsAssertionError() {
+        CountryNote countryNote = new CountryNote("country note 1", Country.NULL_COUNTRY);
+        assertThrows(AssertionError.class, () -> countryNotesManager.addCountryNote(countryNote));
+    }
+
+    @Test
     public void addCountryNote_duplicateNote_notAdded() {
-        CountryNotesManager countryNotesManager = new CountryNotesManager();
         for (String countryCode : COUNTRY_CODES) {
             Country country = new Country(countryCode);
             CountryNote genericNote = new CountryNote("generic note", country);
@@ -68,20 +78,83 @@ public class CountryNotesManagerTest {
     }
 
     @Test
+    public void deleteCountryNote_countryNoteWithNullCountry_throwsAssertionError() {
+        CountryNote countryNote = new CountryNote("country note 1", Country.NULL_COUNTRY);
+        assertThrows(AssertionError.class, () -> countryNotesManager.deleteCountryNote(countryNote));
+    }
+
+    @Test
+    public void deleteCountryNote_nullCountryNote_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> countryNotesManager.deleteCountryNote(null));
+    }
+
+    @Test
     public void deleteCountryNote_countryNoteNotExist_assertionError() {
-        CountryNotesManager countryNotesManager = new CountryNotesManager();
         CountryNote countryNote = new CountryNote("random", new Country("SG"));
         assertThrows(AssertionError.class, () -> countryNotesManager.deleteCountryNote(countryNote));
     }
 
     @Test
     public void deleteCountryNote_countryNoteExists_deletesCountryNote() {
-        CountryNotesManager countryNotesManager = new CountryNotesManager();
         CountryNote countryNote = new CountryNote("random", new Country("SG"));
         countryNotesManager.addCountryNote(countryNote);
         assertTrue(countryNotesManager.hasCountryNote(countryNote));
         countryNotesManager.deleteCountryNote(countryNote);
         assertFalse(countryNotesManager.hasCountryNote(countryNote));
+    }
+
+    @Test
+    public void asUnmodifiableObservableList_editList_throwsUnsupportedOperationException() {
+        CountryNote countryNote = new CountryNote("random", new Country("SG"));
+        assertThrows(UnsupportedOperationException.class, () ->
+                countryNotesManager.asUnmodifiableObservableList().add(countryNote));
+    }
+
+    @Test
+    public void asUnmodifiableObservableList_returnsListSortedByCountryCode() {
+        CountryNote countryNote1 = new CountryNote("random", new Country("SG"));
+        CountryNote countryNote2 = new CountryNote("random2", new Country("AL"));
+        CountryNote countryNote3 = new CountryNote("random2", new Country("RU"));
+        countryNotesManager.addCountryNote(countryNote1);
+        countryNotesManager.addCountryNote(countryNote2);
+        countryNotesManager.addCountryNote(countryNote3);
+        assertEquals(countryNotesManager.asUnmodifiableObservableList().get(0), countryNote2);
+        assertEquals(countryNotesManager.asUnmodifiableObservableList().get(1), countryNote3);
+        assertEquals(countryNotesManager.asUnmodifiableObservableList().get(2), countryNote1);
+    }
+
+    @Test
+    public void equals() {
+        // same object -> returns true
+        assertTrue(countryNotesManager.equals(countryNotesManager));
+
+        // same clients and country notes -> returns true
+        assertTrue(countryNotesManager.equals(new CountryNotesManager()));
+
+        // null -> returns false
+        assertFalse(countryNotesManager.equals(null));
+
+        // different class -> returns false
+        assertFalse(countryNotesManager.equals(1.0));
+
+        // different country notes -> returns false
+        CountryNotesManager countryNotesManagerWithCountryNote = new CountryNotesManager();
+        countryNotesManagerWithCountryNote.addCountryNote(new CountryNote("country note", new Country("AL")));
+        assertFalse(countryNotesManager.equals(countryNotesManagerWithCountryNote));
+    }
+
+    @Test
+    public void hashCode_test() {
+        // same object -> same hashcode
+        assertEquals(countryNotesManager.hashCode(), countryNotesManager.hashCode());
+
+        // same clients and country notes -> same hashcode
+        assertEquals(countryNotesManager.hashCode(), new CountryNotesManager().hashCode());
+
+        // different country notes -> different hashcode
+        CountryNotesManager countryNotesManagerWithCountryNote = new CountryNotesManager();
+        countryNotesManagerWithCountryNote.addCountryNote(new CountryNote("country note", new Country("AL")));
+        assertNotEquals(countryNotesManager.hashCode(), countryNotesManagerWithCountryNote.hashCode());
     }
 
 }

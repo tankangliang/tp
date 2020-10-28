@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -13,11 +14,13 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.exceptions.ClientNotFoundException;
 import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
@@ -26,11 +29,35 @@ import seedu.address.testutil.ClientBuilder;
 
 public class TbmManagerTest {
 
-    private final TbmManager tbmManager = new TbmManager();
+    private static final Client CLIENT = new ClientBuilder(ALICE).build();
+    private static final CountryNote COUNTRY_NOTE = new CountryNote("country note", new Country("US"));
+    private TbmManager tbmManager;
+
+    private TbmManager tbmManagerWithClient;
+    private TbmManager tbmManagerWithCountryNote;
+
+    @BeforeEach
+    public void setUp() {
+        tbmManager = new TbmManager();
+        tbmManagerWithClient = new TbmManager();
+        tbmManagerWithCountryNote = new TbmManager();
+        tbmManagerWithClient.addClient(CLIENT);
+        tbmManagerWithCountryNote.addCountryNote(COUNTRY_NOTE);
+    }
 
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), tbmManager.getClientList());
+        assertEquals(Collections.emptyList(), tbmManager.getCountryNoteList());
+
+        TbmManager newTbmManager = new TbmManager();
+        newTbmManager.addCountryNote(COUNTRY_NOTE);
+        newTbmManager.addClient(CLIENT);
+        tbmManager = new TbmManager(newTbmManager);
+        assertEquals(tbmManager.getCountryNoteList().size(), 1);
+        assertEquals(tbmManager.getClientList().size(), 1);
+        assertEquals(tbmManager.getCountryNoteList().get(0), COUNTRY_NOTE);
+        assertEquals(tbmManager.getClientList().get(0), CLIENT);
     }
 
     @Test
@@ -53,6 +80,42 @@ public class TbmManagerTest {
         TbmManagerStub newData = new TbmManagerStub(newClients);
 
         assertThrows(DuplicateClientException.class, () -> tbmManager.resetData(newData));
+    }
+
+    @Test
+    public void setClient_nullClients_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> tbmManager.setClient(null, CLIENT));
+        assertThrows(NullPointerException.class, () -> tbmManager.setClient(CLIENT, null));
+    }
+
+    @Test
+    public void setClient_clientNotInTbmManager_throwsClientNotFoundException() {
+        assertThrows(ClientNotFoundException.class, () -> tbmManager.setClient(ALICE, ALICE));
+    }
+
+    @Test
+    public void setClient_clientInTbmManager_success() {
+        Client editedClient = new ClientBuilder(ALICE).withName("EditedClient").build();
+        tbmManagerWithClient.setClient(CLIENT, editedClient);
+        assertFalse(tbmManagerWithClient.hasClient(CLIENT));
+        assertTrue(tbmManagerWithClient.hasClient(editedClient));
+    }
+
+    @Test
+    public void removeClient_nullClient_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> tbmManager.removeClient(null));
+    }
+
+    @Test
+    public void removeClient_clientNotInTbmManager_throwsClientNotFoundException() {
+        assertThrows(ClientNotFoundException.class, () -> tbmManager.removeClient(ALICE));
+    }
+
+    @Test
+    public void removeClient_clientInTbmManager_success() {
+        assertTrue(tbmManagerWithClient.hasClient(CLIENT));
+        tbmManagerWithClient.removeClient(CLIENT);
+        assertFalse(tbmManagerWithClient.hasClient(CLIENT));
     }
 
     @Test
@@ -99,6 +162,49 @@ public class TbmManagerTest {
         assertTrue(tbmManager.hasCountryNote(countryNote));
         tbmManager.deleteCountryNote(countryNote);
         assertFalse(tbmManager.hasCountryNote(countryNote));
+    }
+
+    @Test
+    public void toString_test() {
+        assertEquals(tbmManager.toString(), "0 clients");
+        assertEquals(tbmManagerWithCountryNote.toString(), "0 clients");
+        assertEquals(tbmManagerWithClient.toString(), "1 clients");
+    }
+
+    @Test
+    public void equals() {
+        // same object -> returns true
+        assertTrue(tbmManager.equals(tbmManager));
+
+        // same clients and country notes -> returns true
+        assertTrue(tbmManager.equals(new TbmManager()));
+
+        // null -> returns false
+        assertFalse(tbmManager.equals(null));
+
+        // different class -> returns false
+        assertFalse(tbmManager.equals(1.0));
+
+        // different clients -> returns false
+        assertFalse(tbmManager.equals(tbmManagerWithClient));
+
+        // different country notes -> returns false
+        assertFalse(tbmManager.equals(tbmManagerWithCountryNote));
+    }
+
+    @Test
+    public void hashCode_test() {
+        // same object -> same hashcode
+        assertEquals(tbmManager.hashCode(), tbmManager.hashCode());
+
+        // same clients and country notes -> same hashcode
+        assertEquals(tbmManager.hashCode(), new TbmManager().hashCode());
+
+        // different clients -> different hashcode
+        assertNotEquals(tbmManager.hashCode(), tbmManagerWithClient.hashCode());
+
+        // different country notes -> different hashcode
+        assertNotEquals(tbmManager.hashCode(), tbmManagerWithCountryNote.hashCode());
     }
 
     /**
