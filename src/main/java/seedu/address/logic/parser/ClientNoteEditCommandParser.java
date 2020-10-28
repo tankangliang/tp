@@ -45,21 +45,20 @@ public class ClientNoteEditCommandParser implements Parser<ClientNoteEditCommand
         try {
             String[] splitPreamble = argMultimap.getPreamble().split(" ");
             if (splitPreamble.length != 2) { // restOfCommand: 1 1 all space delimited ==> 2 elems only
-                throw new ParseException("nope");
+                throw new ParseException(""); // empty string, will be caught in the catch block
             }
             targetClientIndex = ParserUtil.parseIndex(splitPreamble[splitPreamble.length - 2]);
             targetClientNoteIndex = ParserUtil.parseIndex(splitPreamble[splitPreamble.length - 1]);
             Set<Tag> tags = tagNoteMap.getUniqueTags(argMultimap.getAllValues(PREFIX_TAG));
             Note newNote = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE)
-                    .orElseThrow(() -> new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            ClientNoteAddCommand.MESSAGE_USAGE))));
+                    .orElseThrow(() -> new ParseException(""))); // empty string, will be caught in the catch block
             newNote.setTags(tags);
             return new ClientNoteEditCommand(targetClientIndex, targetClientNoteIndex, newNote);
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ClientNoteEditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
     }
+
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
@@ -67,6 +66,4 @@ public class ClientNoteEditCommandParser implements Parser<ClientNoteEditCommand
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
-
 }

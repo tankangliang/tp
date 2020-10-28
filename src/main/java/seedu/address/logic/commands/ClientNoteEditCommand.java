@@ -17,7 +17,7 @@ import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
- * Deletes a Client-specific Note from a list of notes associated with a client.
+ * Edits a Client-specific Note from a list of notes associated with a client while preserving tagging history.
  */
 public class ClientNoteEditCommand extends Command {
 
@@ -47,7 +47,6 @@ public class ClientNoteEditCommand extends Command {
         this.newNote = newNote;
     }
 
-    // todo: modify this, do a statecheck b/w previous and currently edited and xfer state for unspecified one..
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -91,7 +90,7 @@ public class ClientNoteEditCommand extends Command {
         ClientNoteEditCommand c = (ClientNoteEditCommand) other;
 
         return this.targetClientIndex.equals(c.targetClientIndex)
-                && this.targetClientNoteIndex.equals(c.targetClientNoteIndex);
-        // todo: question: is it better to check commmand equality using the ClientNote object or it's associated index?
+                && this.targetClientNoteIndex.equals(c.targetClientNoteIndex)
+                && this.newNote.equals(c.newNote);
     }
 }

@@ -196,7 +196,7 @@ public class MainParserTest {
     //TODO: add tests when country commands are finalized
 
     @Test
-    public void parseClientNoteCommands_addValidClientNote_parsesSuccessfully() throws Exception {
+    public void parseClientNoteCommands_addValidClientNote() throws Exception {
         final String noteString = "likes cats";
         final String commandString = ClientNoteAddCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                 + " " + PREFIX_NOTE + noteString;
@@ -209,7 +209,7 @@ public class MainParserTest {
     }
 
     @Test
-    public void parseClientNoteCommands_editValidClientNote_parseSuccessfully() throws Exception {
+    public void parseClientNoteCommands_editValidClientNote() throws Exception {
         final String noteString = "likes cats";
         final String commandString = ClientNoteEditCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                 + " 1" + " " + PREFIX_NOTE + noteString;

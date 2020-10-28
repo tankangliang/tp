@@ -152,6 +152,7 @@ public class TagNoteMap {
         noteToTagsMap.remove(noteToEdit);
         addTagsForNote(newNote.getTags(), newNote); // todo: change this to retain past tags
     }
+
     /**
      * Adds a set of tags to a note, the note will contain a union of its current tag set and the input tag set
      * after this operation.

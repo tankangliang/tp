@@ -64,31 +64,30 @@ class ClientNoteEditCommandTest {
         newTagSet.add(newTag);
         Set<Tag> tagHistory = new HashSet<>();
         tagHistory.add(oldTag);
-        Set<Tag> expectedTags = new HashSet<>(); // preserves old tags and new tags
-        expectedTags.add(oldTag);
+        Set<Tag> expectedTags = new HashSet<>(tagHistory); // expected to preserve old tags and have new tags
         expectedTags.add(newTag);
-        Index clientIdx = Index.fromOneBased(1);
-        Index clientNoteIdx = Index.fromOneBased(1);
         Note oldClientNote = new Note(NOTE_CONTENT_1);
         oldClientNote.setTags(tagHistory);
         Note clientNote2 = new Note(NOTE_CONTENT_2);
-        Note newNote = new Note("dummy note to edit previous note");
-        newNote.setTags(newTagSet);
+        Note newClientNote = new Note("dummy note to edit previous note");
+        newClientNote.setTags(newTagSet);
         Model newModel = new ModelManager();
         Client client1 = new ClientBuilder().withName("client1").build();
         newModel.addClient(client1);
         newModel.addClientNote(client1, oldClientNote);
         newModel.addClientNote(client1, clientNote2);
-
         Model expectedModel = new ModelManager();
         Client client1Copy = new ClientBuilder().withName("client1").build();
         expectedModel.addClient(client1Copy);
-        newNote.setTags(expectedTags);
-        expectedModel.addClientNote(client1Copy, newNote);
+        newClientNote.setTags(expectedTags); // containing old and new tags
+        expectedModel.addClientNote(client1Copy, newClientNote);
         expectedModel.addClientNote(client1Copy, clientNote2);
 
+        Index clientIdx = Index.fromOneBased(1);
+        Index clientNoteIdx = Index.fromOneBased(1);
         CommandResult expectedResult = new CommandResult(ClientNoteEditCommand.MESSAGE_EDIT_CLIENT_NOTE_SUCCESS);
-        ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx, clientNoteIdx, newNote);
+        ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx,
+                clientNoteIdx, newClientNote);
         assertCommandSuccess(clientNoteEditCommand, newModel, expectedResult, expectedModel);
     }
 
@@ -109,7 +108,7 @@ class ClientNoteEditCommandTest {
         assertFalse(clientNoteEditCommand1.equals(randomObject));
 
         // same object -> returns true
-        assertTrue(clientNoteEditCommand1.equals(clientNoteEditCommand1Duplicate));
+        assertTrue(clientNoteEditCommand1.equals(clientNoteEditCommand1));
 
         // same values -> returns true
         assertTrue(clientNoteEditCommand1.equals(clientNoteEditCommand1Duplicate));

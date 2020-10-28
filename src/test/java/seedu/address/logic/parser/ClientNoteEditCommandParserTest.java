@@ -50,6 +50,7 @@ class ClientNoteEditCommandParserTest {
     public void constructor() {
         assertThrows(NullPointerException.class, () -> new ClientNoteEditCommandParser(null));
     }
+
     @Test
     public void parse_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> parser.parse(null));
@@ -59,6 +60,7 @@ class ClientNoteEditCommandParserTest {
     public void parse_noClientIndexNoNoteIndexNoNote_parseFailure() {
         assertParseFailure(parser, NO_CLIENT_INDEX_NO_NOTE_INDEX_NO_NOTE, EXPECTED_PARSE_FAILURE_MESSAGE);
     }
+
     @Test
     public void parse_hasClientIndexHasNoteIndexNoNote_parseFailure() {
         assertParseFailure(parser, HAS_CLIENT_INDEX_HAS_NOTE_INDEX_NO_NOTE, EXPECTED_PARSE_FAILURE_MESSAGE);
@@ -73,7 +75,7 @@ class ClientNoteEditCommandParserTest {
     }
 
     @Test
-    void parse_validFormatTaggedNote_parseSuccess() {
+    public void parse_validFormatTaggedNote_parseSuccess() {
         Note expectedClientNote = new Note(NOTE_STRING);
         expectedClientNote.setTags(tags);
         ClientNoteEditCommand expectedCommand = new ClientNoteEditCommand(CLIENT_INDEX, NOTE_INDEX, expectedClientNote);

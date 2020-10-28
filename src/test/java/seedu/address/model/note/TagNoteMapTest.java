@@ -88,6 +88,7 @@ class TagNoteMapTest {
         tagNoteMap.deleteNote(taggedNote);
         assertFalse(tagNoteMap.getNotesForTag(testTag).equals(expectedNotesSet));
     }
+
     @Test
     void editNote_validInputs_replacesExistingNoteWithNewNote() {
         taggedNote.setTags(tags);
@@ -107,7 +108,6 @@ class TagNoteMapTest {
         assertFalse(tagNoteMap.getNotesForTag(testTag).equals(expectedNotesSet));
         assertTrue(tagNoteMap.getNotesForTag(newTag).equals(expectedNotesSet));
     }
-
 
     @Test
     void getTagsForNote_useNoteWithTwoTags_returnsTrue() {

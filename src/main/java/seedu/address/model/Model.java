@@ -143,7 +143,6 @@ public interface Model {
      */
     void editClientNote(Client associatedClient, Note noteToEdit, Note newNote);
 
-
     /**
      * Returns an unmodifiable view of the filtered client list.
      */
