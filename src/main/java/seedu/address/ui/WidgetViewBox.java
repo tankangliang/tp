@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -92,7 +93,8 @@ public class WidgetViewBox extends UiPart<Region> {
         country.setText(client.getCountry().getCountryName());
         contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
         noteTitle.setText("Notes");
-        updateObservableListNotes(client.getClientNotesAsList());
+
+        Platform.runLater(() -> updateClientNotesDisplay(client.getClientNotesAsList()));
         drawPaneBorder();
     }
 
@@ -118,12 +120,12 @@ public class WidgetViewBox extends UiPart<Region> {
     /**
      * Updates the displayed notes.
      *
-     * @param listNotes The new client notes.
+     * @param clientNotes The client notes to display.
      */
-    private void updateObservableListNotes(List<Note> listNotes) {
+    private void updateClientNotesDisplay(List<Note> clientNotes) {
         clearChildren();
         int noteIdx = 1;
-        for (Note note : listNotes) {
+        for (Note note : clientNotes) {
             NoteListCard noteListCard = new NoteListCard(note, noteIdx++);
             clientNoteListView.getChildren().add(noteListCard.getRoot());
         }
