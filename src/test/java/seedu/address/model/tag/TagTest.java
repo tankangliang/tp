@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
-import seedu.address.model.UserPrefs;
 
 public class TagTest {
 
@@ -69,7 +68,7 @@ public class TagTest {
         Tag tag1 = new Tag("tag1");
         Tag tag2 = new Tag("tag2");
         // same object -> returns same hashcode
-        assertEquals(tag1.hashCode(),  tag1.hashCode());
+        assertEquals(tag1.hashCode(), tag1.hashCode());
 
         // same tag name -> returns same hashcode
         assertEquals(tag1.hashCode(), new Tag("tag1").hashCode());
