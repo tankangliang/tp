@@ -77,8 +77,6 @@ public class MainWindowTest extends GuiUnitTest {
         guiRobot.pauseForHuman();
         assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
 
-        assumeFalse(guiRobot.isHeadlessMode());
-
         // TODO: Command Execution test
         terminal.inputCommand("client add n/Lim p/18002345 e/lim@gmail.com a/Yishun c/SG tz/GMT+8");
         terminal.inputCommand("client add n/Kim p/18002346 e/kim@gmail.com a/Kishun c/SG tz/GMT+8");
@@ -90,6 +88,12 @@ public class MainWindowTest extends GuiUnitTest {
         terminal.inputCommand("country note add c/SG nt/shamaladingdong");
         terminal.inputCommand("country note add c/SG nt/chingchangchongdingdong");
 
+        // bad command
+        terminal.inputCommand("client viewf");
+
+        // skips the rest if headless
+        assumeFalse(guiRobot.isHeadlessMode());
+
         // viewing clients
         terminal.inputCommand("client view 1");
         checkLabel("#name", "Lim");
@@ -100,9 +104,6 @@ public class MainWindowTest extends GuiUnitTest {
 
         // viewing country
         terminal.inputCommand("country note view");
-
-        // bad command
-        terminal.inputCommand("client viewf");
 
     }
 
