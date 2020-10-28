@@ -129,6 +129,31 @@ public class TagNoteMap {
     }
 
     /**
+     * Edits a note from the TagNoteMap.
+     * Modifies existing {@code noteSet, tagToNotesMap, noteToTagsMap, uniqueTagMap}.
+     *
+     * @param noteToEdit The note to be edited from the TagNoteMap.
+     * @param newNote The new note to replace it with.
+     */
+    public void editNote(Note noteToEdit, Note newNote) {
+        assert noteSet.contains(noteToEdit) : "trying to remove note that doesn't exist in noteSet";
+        assert noteToTagsMap.containsKey(noteToEdit) : "trying to remove note that doesn't exist in noteToTagsMap";
+        noteSet.remove(noteToEdit);
+        Set<Tag> associatedTags = this.noteToTagsMap.get(noteToEdit);
+        for (Tag tag : associatedTags) { // remove note for relevant tags
+            Set<Note> notes = this.tagToNotesMap.get(tag);
+            notes.remove(noteToEdit);
+            if (notes.isEmpty()) { // remove the tag itself from tagToNotesMap and uniqueTagMap:
+                this.tagToNotesMap.remove(tag);
+                this.uniqueTagMap.remove(tag);
+            }
+        }
+        noteSet.add(newNote);
+        noteToTagsMap.remove(noteToEdit);
+        addTagsForNote(newNote.getTags(), newNote); // todo: change this to retain past tags
+    }
+
+    /**
      * Adds a set of tags to a note, the note will contain a union of its current tag set and the input tag set
      * after this operation.
      * Method is public for ModelManager to use.
@@ -154,7 +179,6 @@ public class TagNoteMap {
         noteToTagsMap.put(note, currentTags);
         noteSet.add(note);
     }
-
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object:

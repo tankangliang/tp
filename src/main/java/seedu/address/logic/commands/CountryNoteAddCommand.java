@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -18,9 +19,11 @@ public class CountryNoteAddCommand extends Command {
             + ": Adds a note that is associated with the user input country.\n"
             + "Parameters: "
             + PREFIX_COUNTRY + "COUNTRY_CODE "
-            + PREFIX_NOTE + "NOTE_STRING\n"
+            + PREFIX_NOTE + "NOTE_STRING"
+            + " [" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_COUNTRY + "SG "
-            + PREFIX_NOTE + "has one of the lowest coporate taxes in the world";
+            + PREFIX_NOTE + "has one of the lowest coporate taxes in the world "
+            + PREFIX_TAG + "tax";
     private static final String MESSAGE_DUPLICATE_COUNTRY_NOTE = "This country note already exists in TBM";
     private static final String MESSAGE_SUCCESS = "Successfully added country note for %1$s: %2$s";
 

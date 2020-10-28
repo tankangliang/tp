@@ -119,6 +119,19 @@ public class Client {
     }
 
     /**
+     * Edits a specific client note from associated notes for this client.
+     *
+     * @param clientNote the clientNote to be deleted.
+     * @param newNote the new clientnote to replace the existing one.
+     */
+    public void editClientNote(Note clientNote, Note newNote) {
+        requireNonNull(clientNote);
+        this.clientNotes.remove(clientNote);
+        this.clientNotes.add(newNote);
+        // todo: keep existing tags.
+    }
+
+    /**
      * Checks whether the client has a given note in collection or not.
      *
      * @param clientNote The note, to be checked if client has it in collection.

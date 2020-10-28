@@ -33,7 +33,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "client note update CLIENT_INDEX NOTE_INDEX NOTE_STRING t/TAG\n"
             + "country filter c/COUNTRY_CODE\n"
             + "country note view [c/COUNTRY_CODE]\n"
-            + "country note add c/COUNTRY_CODE nt/NOTE_STRING\n"
+            + "country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...\n"
             + "country note delete INDEX";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
