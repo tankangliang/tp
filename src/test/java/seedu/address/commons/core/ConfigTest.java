@@ -1,6 +1,8 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -36,7 +38,36 @@ public class ConfigTest {
     @Test
     public void equalsMethod() {
         assertNotNull(defaultConfig);
+
+        // same object same class -> equal
         assertTrue(defaultConfig.equals(defaultConfig));
+
+        // null -> not equal
+        assertFalse(defaultConfig.equals(null));
+
+        // different log -> not equal
+        Config differentLog = new Config();
+        differentLog.setLogLevel(Level.WARNING);
+        assertFalse(defaultConfig.equals(differentLog));
+
+        // different path -> not equal
+        Config differentPath = new Config();
+        differentPath.setUserPrefsFilePath(Paths.get("different path"));
+        assertFalse(defaultConfig.equals(differentPath));
     }
 
+    @Test
+    public void hashCode_test() {
+        assertEquals(defaultConfig.hashCode(), defaultConfig.hashCode());
+
+        // different log -> not equal
+        Config differentLog = new Config();
+        differentLog.setLogLevel(Level.WARNING);
+        assertNotEquals(defaultConfig.hashCode(), differentLog.hashCode());
+
+        // different path -> not equal
+        Config differentPath = new Config();
+        differentPath.setUserPrefsFilePath(Paths.get("different path"));
+        assertNotEquals(defaultConfig.hashCode(), differentPath.hashCode());
+    }
 }

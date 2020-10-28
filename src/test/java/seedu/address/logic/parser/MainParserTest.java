@@ -51,10 +51,10 @@ import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.ClientUtil;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 
-public class AddressBookParserTest {
+public class MainParserTest {
 
     private final TagNoteMap tagNoteMap = new TagNoteMap();
-    private final AddressBookParser parser = new AddressBookParser(tagNoteMap);
+    private final MainParser parser = new MainParser(tagNoteMap);
 
     @Test
     public void parseClientCommands_addClient() throws Exception {

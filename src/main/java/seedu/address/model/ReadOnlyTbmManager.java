@@ -8,7 +8,7 @@ import seedu.address.model.note.Note;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyTbmManager {
 
     /**
      * Returns an unmodifiable view of the clients list.

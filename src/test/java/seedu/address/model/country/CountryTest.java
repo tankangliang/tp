@@ -33,6 +33,24 @@ public class CountryTest {
     }
 
     @Test
+    public void getCountryName_differentCountry_differentCountryName() {
+        for (int i = 0; i < COUNTRY_CODES.length - 1; i++) {
+            Country countryFirst = new Country(COUNTRY_CODES[i]);
+            Country countrySecond = new Country(COUNTRY_CODES[i + 1]);
+            assertNotEquals(countryFirst.getCountryName(), countrySecond.getCountryName());
+        }
+    }
+
+    @Test
+    public void getCountryName_sameCountry_sameCountryName() {
+        for (String countryCode : COUNTRY_CODES) {
+            Country countryFirst = new Country(countryCode);
+            Country countrySecond = new Country(countryCode);
+            assertEquals(countryFirst.getCountryName(), countrySecond.getCountryName());
+        }
+    }
+
+    @Test
     public void equals_notACountry_returnFalse() {
         for (String countryCode : COUNTRY_CODES) {
             Country countryFirst = new Country(countryCode);
@@ -42,7 +60,7 @@ public class CountryTest {
     }
 
     @Test
-    public void equals_diffCountry_returnFalse() {
+    public void equals_differentCountry_returnFalse() {
         for (int i = 0; i < COUNTRY_CODES.length - 1; i++) {
             Country countryFirst = new Country(COUNTRY_CODES[i]);
             Country countrySecond = new Country(COUNTRY_CODES[i + 1]);
@@ -58,6 +76,24 @@ public class CountryTest {
             Country countrySecond = new Country(countryCode);
             assertEquals(countryFirst, countrySecond);
             assertEquals(countrySecond, countryFirst);
+        }
+    }
+
+    @Test
+    public void hashCode_differentCountry_differentHashCode() {
+        for (int i = 0; i < COUNTRY_CODES.length - 1; i++) {
+            Country countryFirst = new Country(COUNTRY_CODES[i]);
+            Country countrySecond = new Country(COUNTRY_CODES[i + 1]);
+            assertNotEquals(countryFirst.hashCode(), countrySecond.hashCode());
+        }
+    }
+
+    @Test
+    public void hashCode_sameCountry_sameHashCode() {
+        for (String countryCode : COUNTRY_CODES) {
+            Country countryFirst = new Country(countryCode);
+            Country countrySecond = new Country(countryCode);
+            assertEquals(countryFirst.hashCode(), countrySecond.hashCode());
         }
     }
 }

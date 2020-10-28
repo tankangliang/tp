@@ -1,5 +1,5 @@
 {
-  "_comment": "AddressBook save file which contains the same Client values as in TypicalClients#getTypicalAddressBook()",
+  "_comment": "TbmManager save file which contains the same Client values as in TypicalClients#getTypicalTbmManager()",
   "clients": [ {
       "name": "Alice Pauline",
       "phone": "94351253",
