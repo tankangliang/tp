@@ -1,0 +1,124 @@
+package seedu.address.logic.commands;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.client.Client;
+import seedu.address.model.note.Note;
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.ClientBuilder;
+
+class ClientNoteEditCommandTest {
+
+    private static final String NOTE_CONTENT_1 = "client note content 1";
+    private static final String NOTE_CONTENT_2 = "client note content 2";
+
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+    }
+
+    @Test
+    public void execute_validClientIdxValidNoteIdx_generatesClientNoteEditCommandSuccessfully() {
+        Index clientIdx = Index.fromOneBased(1);
+        Index clientNoteIdx = Index.fromOneBased(1);
+        Note clientNote1 = new Note(NOTE_CONTENT_1);
+        Note clientNote2 = new Note(NOTE_CONTENT_2);
+        Note newEditNote = new Note("dummy note to edit previous note");
+        Model newModel = new ModelManager();
+        Client client1 = new ClientBuilder().withName("client1").build();
+        newModel.addClient(client1);
+        newModel.addClientNote(client1, clientNote1);
+        newModel.addClientNote(client1, clientNote2);
+
+        Model expectedModel = new ModelManager();
+        Client client1Copy = new ClientBuilder().withName("client1").build();
+        expectedModel.addClient(client1Copy);
+        expectedModel.addClientNote(client1Copy, newEditNote);
+        expectedModel.addClientNote(client1Copy, clientNote2);
+
+        CommandResult expectedResult = new CommandResult(ClientNoteEditCommand.MESSAGE_EDIT_CLIENT_NOTE_SUCCESS);
+        ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx, clientNoteIdx, newEditNote);
+        assertCommandSuccess(clientNoteEditCommand, newModel, expectedResult, expectedModel);
+    }
+
+    @Test
+    public void execute_validClientIdxValidNoteIdxNewTaggedNote_preservesTagHistory() {
+        Tag oldTag = new Tag("historicalTag");
+        Tag newTag = new Tag("newTag");
+        Set<Tag> newTagSet = new HashSet<>();
+        newTagSet.add(newTag);
+        Set<Tag> tagHistory = new HashSet<>();
+        tagHistory.add(oldTag);
+        Set<Tag> expectedTags = new HashSet<>(); // preserves old tags and new tags
+        expectedTags.add(oldTag);
+        expectedTags.add(newTag);
+        Index clientIdx = Index.fromOneBased(1);
+        Index clientNoteIdx = Index.fromOneBased(1);
+        Note oldClientNote = new Note(NOTE_CONTENT_1);
+        oldClientNote.setTags(tagHistory);
+        Note clientNote2 = new Note(NOTE_CONTENT_2);
+        Note newNote = new Note("dummy note to edit previous note");
+        newNote.setTags(newTagSet);
+        Model newModel = new ModelManager();
+        Client client1 = new ClientBuilder().withName("client1").build();
+        newModel.addClient(client1);
+        newModel.addClientNote(client1, oldClientNote);
+        newModel.addClientNote(client1, clientNote2);
+
+        Model expectedModel = new ModelManager();
+        Client client1Copy = new ClientBuilder().withName("client1").build();
+        expectedModel.addClient(client1Copy);
+        newNote.setTags(expectedTags);
+        expectedModel.addClientNote(client1Copy, newNote);
+        expectedModel.addClientNote(client1Copy, clientNote2);
+
+        CommandResult expectedResult = new CommandResult(ClientNoteEditCommand.MESSAGE_EDIT_CLIENT_NOTE_SUCCESS);
+        ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx, clientNoteIdx, newNote);
+        assertCommandSuccess(clientNoteEditCommand, newModel, expectedResult, expectedModel);
+    }
+
+    @Test
+    public void testEquals() {
+        Note testNote = new Note("need for speed");
+        ClientNoteEditCommand clientNoteEditCommand1 = new ClientNoteEditCommand(Index.fromOneBased(1),
+                Index.fromOneBased(1), testNote);
+        ClientNoteEditCommand clientNoteEditCommand1Duplicate = new ClientNoteEditCommand(Index.fromOneBased(1),
+                Index.fromOneBased(1), testNote);
+        ClientNoteEditCommand clientNoteEditCommandClient2 = new ClientNoteEditCommand(Index.fromOneBased(2),
+                Index.fromOneBased(1), testNote);
+        ClientNoteEditCommand clientNoteEditCommand1ClientNote2 = new ClientNoteEditCommand(Index.fromOneBased(1),
+                Index.fromOneBased(2), testNote);
+        Object randomObject = new Object();
+
+        // random object -> returns false
+        assertFalse(clientNoteEditCommand1.equals(randomObject));
+
+        // same object -> returns true
+        assertTrue(clientNoteEditCommand1.equals(clientNoteEditCommand1Duplicate));
+
+        // same values -> returns true
+        assertTrue(clientNoteEditCommand1.equals(clientNoteEditCommand1Duplicate));
+
+        // diff values (diff client) --> returns false
+        assertFalse(clientNoteEditCommand1.equals(clientNoteEditCommandClient2));
+
+        // diff values (diff client note) --> returns false
+        assertFalse(clientNoteEditCommand1.equals(clientNoteEditCommand1ClientNote2));
+    }
+
+}

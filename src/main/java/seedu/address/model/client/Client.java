@@ -143,7 +143,7 @@ public class Client {
     }
 
     /**
-     * Returns true if both clients of the same name have at least one other identity field that is the same.
+     * Returns true if both clients of   the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two clients.
      */
     public boolean isSameClient(Client otherClient) {

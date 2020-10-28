@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -12,6 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
+import seedu.address.model.tag.Tag;
 
 /**
  * Deletes a Client-specific Note from a list of notes associated with a client.
@@ -59,7 +62,15 @@ public class ClientNoteEditCommand extends Command {
         Client associatedClient = lastShownClientList.get(targetClientIndex.getZeroBased());
         Note noteToEdit = associatedClient.getClientNotesAsList().get(targetClientNoteIndex.getZeroBased());
         assert associatedClient.hasClientNote(noteToEdit) : "attempting to edit client note that doesn't exist";
-        // todo: Ritesh implement model's edit method
+        Set<Tag> accumulatedTags = new HashSet<>();
+        accumulatedTags.addAll(noteToEdit.getTags()); // these are the previous tags, because we want to retain history
+        accumulatedTags.addAll(newNote.getTags());
+        // because parser used tagNoteMap#getUniqueTags, it is okay for there to be duplicates in previous tags and
+        // new Note's tags. Overwriting will keep one of the two duplicates, and they are the same object reference.
+        newNote.setTags(accumulatedTags);
+        if (accumulatedTags.size() <= 1 && accumulatedTags.contains(Tag.UNTAGGED)) {
+            accumulatedTags.remove(Tag.UNTAGGED);
+        }
         model.editClientNote(associatedClient, noteToEdit, newNote);
         return new CommandResult(MESSAGE_EDIT_CLIENT_NOTE_SUCCESS);
     }

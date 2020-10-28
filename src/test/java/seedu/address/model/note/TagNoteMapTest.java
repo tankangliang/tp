@@ -89,9 +89,9 @@ class TagNoteMapTest {
         assertFalse(tagNoteMap.getNotesForTag(testTag).equals(expectedNotesSet));
     }
     @Test
-    void editNote_validInputs_replaceExistingNoteWithNewNote() {
+    void editNote_validInputs_replacesExistingNoteWithNewNote() {
         taggedNote.setTags(tags);
-        Note newNote = new Note(taggedNote.getNoteContent());
+        Note newNote = new Note("new content");
         Set<Tag> newTagSet = new HashSet<>();
         Tag newTag = new Tag("unprecedentedTag");
         newTagSet.add(newTag);

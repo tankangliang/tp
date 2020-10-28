@@ -148,6 +148,7 @@ public class TagNoteMap {
                 this.uniqueTagMap.remove(tag);
             }
         }
+        noteSet.add(newNote);
         noteToTagsMap.remove(noteToEdit);
         addTagsForNote(newNote.getTags(), newNote); // todo: change this to retain past tags
     }
