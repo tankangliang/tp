@@ -2,6 +2,7 @@ package seedu.address.model.country;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -120,6 +121,40 @@ public class CountryNotesManagerTest {
         assertEquals(countryNotesManager.asUnmodifiableObservableList().get(0), countryNote2);
         assertEquals(countryNotesManager.asUnmodifiableObservableList().get(1), countryNote3);
         assertEquals(countryNotesManager.asUnmodifiableObservableList().get(2), countryNote1);
+    }
+
+    @Test
+    public void equals() {
+        // same object -> returns true
+        assertTrue(countryNotesManager.equals(countryNotesManager));
+
+        // same clients and country notes -> returns true
+        assertTrue(countryNotesManager.equals(new CountryNotesManager()));
+
+        // null -> returns false
+        assertFalse(countryNotesManager.equals(null));
+
+        // different class -> returns false
+        assertFalse(countryNotesManager.equals(1.0));
+
+        // different country notes -> returns false
+        CountryNotesManager countryNotesManagerWithCountryNote = new CountryNotesManager();
+        countryNotesManagerWithCountryNote.addCountryNote(new CountryNote("country note", new Country("AL")));
+        assertFalse(countryNotesManager.equals(countryNotesManagerWithCountryNote));
+    }
+
+    @Test
+    public void hashCode_test() {
+        // same object -> same hashcode
+        assertEquals(countryNotesManager.hashCode(), countryNotesManager.hashCode());
+
+        // same clients and country notes -> same hashcode
+        assertEquals(countryNotesManager.hashCode(), new CountryNotesManager().hashCode());
+
+        // different country notes -> different hashcode
+        CountryNotesManager countryNotesManagerWithCountryNote = new CountryNotesManager();
+        countryNotesManagerWithCountryNote.addCountryNote(new CountryNote("country note", new Country("AL")));
+        assertNotEquals(countryNotesManager.hashCode(), countryNotesManagerWithCountryNote.hashCode());
     }
 
 }

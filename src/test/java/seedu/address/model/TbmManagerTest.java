@@ -187,18 +187,24 @@ public class TbmManagerTest {
 
         // different clients -> returns false
         assertFalse(tbmManager.equals(tbmManagerWithClient));
+
+        // different country notes -> returns false
+        assertFalse(tbmManager.equals(tbmManagerWithCountryNote));
     }
 
     @Test
     public void hashCode_test() {
-        // same object -> returns same hashcode
+        // same object -> same hashcode
         assertEquals(tbmManager.hashCode(), tbmManager.hashCode());
 
-        // same clients and country notes -> returns same hashcode
+        // same clients and country notes -> same hashcode
         assertEquals(tbmManager.hashCode(), new TbmManager().hashCode());
 
-        // different clients -> returns false
+        // different clients -> different hashcode
         assertNotEquals(tbmManager.hashCode(), tbmManagerWithClient.hashCode());
+
+        // different country notes -> different hashcode
+        assertNotEquals(tbmManager.hashCode(), tbmManagerWithCountryNote.hashCode());
     }
 
     /**

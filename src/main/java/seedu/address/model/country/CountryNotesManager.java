@@ -2,6 +2,8 @@ package seedu.address.model.country;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Objects;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -69,4 +71,18 @@ public class CountryNotesManager {
 
         internalCountryNoteList.remove(countryNoteToDelete);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CountryNotesManager // instanceof handles nulls
+                && internalCountryNoteList
+                        .equals(((CountryNotesManager) other).internalCountryNoteList)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(internalCountryNoteList);
+    }
+
 }
