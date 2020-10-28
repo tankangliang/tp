@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -151,9 +152,12 @@ public class MainParserTest {
         final String noteString = "is hot";
         final String commandString = CountryNoteAddCommand.COMMAND_WORD + " " + PREFIX_COUNTRY + countryString
                 + " " + PREFIX_NOTE + noteString;
-
+        Set<Tag> tags = new HashSet<>();
+        tags.add(Tag.UNTAGGED);
+        CountryNote expected = new CountryNote(noteString, new Country(countryString));
+        expected.setTags(tags);
         CountryNoteAddCommand command = (CountryNoteAddCommand) parser.parseCommand(commandString);
-        assertEquals(new CountryNoteAddCommand(new CountryNote(noteString, new Country(countryString))), command);
+        assertEquals(new CountryNoteAddCommand(expected), command);
     }
 
     @Test
