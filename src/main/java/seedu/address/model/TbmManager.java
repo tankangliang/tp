@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +114,7 @@ public class TbmManager implements ReadOnlyTbmManager {
      * The client identity of {@code editedClient} must not be the same as another existing client in TbmManager.
      */
     public void setClient(Client target, Client editedClient) {
-        requireNonNull(editedClient);
+        requireAllNonNull(target, editedClient);
         clients.setClient(target, editedClient);
     }
 
@@ -189,7 +190,7 @@ public class TbmManager implements ReadOnlyTbmManager {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TbmManager // instanceof handles nulls
-                && clients.equals(((TbmManager) other).clients));
+                && clients.equals(((TbmManager) other).clients)); // state check
     }
 
     @Override
