@@ -60,7 +60,7 @@ public class ClientNoteEditCommand extends Command {
         Note noteToEdit = associatedClient.getClientNotesAsList().get(targetClientNoteIndex.getZeroBased());
         assert associatedClient.hasClientNote(noteToEdit) : "attempting to edit client note that doesn't exist";
         // todo: Ritesh implement model's edit method
-         model.editClientNote(associatedClient, noteToEdit, newNote);
+        model.editClientNote(associatedClient, noteToEdit, newNote);
         return new CommandResult(MESSAGE_EDIT_CLIENT_NOTE_SUCCESS);
     }
 

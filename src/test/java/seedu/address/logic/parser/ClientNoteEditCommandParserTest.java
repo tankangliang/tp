@@ -13,7 +13,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.commands.ClientNoteEditCommand;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
@@ -82,8 +81,5 @@ class ClientNoteEditCommandParserTest {
                 + SPACE + testTag.tagName + SPACE + PREFIX_NOTE + NOTE_STRING;
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-
-
-
 
 }

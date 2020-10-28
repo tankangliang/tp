@@ -50,8 +50,9 @@ public class ClientNoteEditCommandParser implements Parser<ClientNoteEditCommand
             targetClientIndex = ParserUtil.parseIndex(splitPreamble[splitPreamble.length - 2]);
             targetClientNoteIndex = ParserUtil.parseIndex(splitPreamble[splitPreamble.length - 1]);
             Set<Tag> tags = tagNoteMap.getUniqueTags(argMultimap.getAllValues(PREFIX_TAG));
-            Note newNote = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElseThrow(() -> new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ClientNoteAddCommand.MESSAGE_USAGE))));
+            Note newNote = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE)
+                    .orElseThrow(() -> new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            ClientNoteAddCommand.MESSAGE_USAGE))));
             newNote.setTags(tags);
             return new ClientNoteEditCommand(targetClientIndex, targetClientNoteIndex, newNote);
         } catch (ParseException pe) {
