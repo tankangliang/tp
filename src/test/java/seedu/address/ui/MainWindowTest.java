@@ -5,18 +5,22 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.ui.HelpWindow.USERGUIDE_URL;
 
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.nio.file.Path;
+
+import javax.security.auth.callback.TextInputCallback;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.testfx.api.FxToolkit;
 
+import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.HelpWindowHandle;
 import guitests.guihandles.MainWindowHandle;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
@@ -56,6 +60,9 @@ public class MainWindowTest extends GuiUnitTest {
     public void main() throws Exception {
         guiRobot.pauseForHuman();
         assertTrue(mainWindowHandle.isShowing());
+        guiRobot.clickOn("#commandTextField");
+        InteractionTerminal terminal = new InteractionTerminal(guiRobot.lookup("#commandTextField").queryTextInputControl());
+        terminal.inputCommand("clear");
 
         // checks the interaction of copy url and url is correct
         guiRobot.clickOn("#help");
@@ -73,5 +80,51 @@ public class MainWindowTest extends GuiUnitTest {
         assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
 
         // TODO: Command Execution test
+        terminal.inputCommand("client add n/Lim p/18002345 e/lim@gmail.com a/Yishun c/SG tz/GMT+8");
+        terminal.inputCommand("client add n/Kim p/18002346 e/kim@gmail.com a/Kishun c/SG tz/GMT+8");
+        terminal.inputCommand("client add n/Sim p/18002347 e/sim@gmail.com a/Sishun c/SG tz/GMT+8");
+        terminal.inputCommand("client note add 1 t/reminder nt/birthday tmr");
+        terminal.inputCommand("client note add 1 t/reminder nt/party tmr");
+        terminal.inputCommand("client note add 1 t/reminder nt/takeout tmr");
+        terminal.inputCommand("client note add 2 t/reminder nt/homework submission");
+        terminal.inputCommand("country note add c/SG nt/shamaladingdong");
+        terminal.inputCommand("country note add c/SG nt/chingchangchongdingdong");
+
+        // viewing clients
+        terminal.inputCommand("client view 1");
+        checkLabel("#name", "Lim");
+        terminal.inputCommand("client view 2");
+        checkLabel("#name", "Kim");
+        terminal.inputCommand("client view 3");
+        checkLabel("#name", "Sim");
+
+        // viewing country
+        terminal.inputCommand("country note view");
+
+        // bad command
+        terminal.inputCommand("client viewf");
+
+    }
+
+    private void checkLabel(String id, String value) {
+        assertEquals(value, guiRobot.lookup(id).queryLabeled().getText());
+    }
+
+    /**
+     * For gui interaction.
+     */
+    class InteractionTerminal {
+        TextInputControl textInputControl;
+        InteractionTerminal(TextInputControl textInputControl) {
+            this.textInputControl = textInputControl;
+        }
+
+        void inputCommand(String command) {
+            guiRobot.clickOn("#commandTextField");
+            textInputControl.setText(command);
+            guiRobot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+            guiRobot.pauseForHuman();
+            guiRobot.pauseForHuman();
+        }
     }
 }

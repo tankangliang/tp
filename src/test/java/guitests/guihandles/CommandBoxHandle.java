@@ -2,6 +2,7 @@ package guitests.guihandles;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
 
 /**

@@ -92,6 +92,7 @@ public class WidgetViewBox extends UiPart<Region> {
      * Sets a default view for the view box.
      */
     private void initDefault() {
+        //TODO: Some better information
         textClock = new TextClock(name);
         country.setText(Locale.getDefault().getDisplayCountry());
         textClock.play();
@@ -152,7 +153,7 @@ public class WidgetViewBox extends UiPart<Region> {
 
     private void drawPaneBorder() {
         clientNoteScrollPane.setStyle("-fx-border-color: #FF3333; -fx-border-radius: 5; -fx-border-width: 2;");
-        clientNoteListView.setPadding(new Insets(5, 0, 5, 10));
+        clientNoteListView.setPadding(new Insets(5, 5, 5, 10));
     }
 
 }
