@@ -5,19 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.ui.HelpWindow.USERGUIDE_URL;
 
-import java.awt.*;
+import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.nio.file.Path;
-
-import javax.security.auth.callback.TextInputCallback;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.HelpWindowHandle;
 import guitests.guihandles.MainWindowHandle;
 import javafx.scene.control.TextInputControl;
@@ -33,7 +30,6 @@ import seedu.address.storage.StorageManager;
  * This test class does not conduct a unit test.
  */
 public class MainWindowTest extends GuiUnitTest {
-    // TODO: Simulate full user interaction with TBM
     @TempDir
     public Path temporaryFolder;
     private MainWindow mainWindow;
@@ -61,7 +57,8 @@ public class MainWindowTest extends GuiUnitTest {
         guiRobot.pauseForHuman();
         assertTrue(mainWindowHandle.isShowing());
         guiRobot.clickOn("#commandTextField");
-        InteractionTerminal terminal = new InteractionTerminal(guiRobot.lookup("#commandTextField").queryTextInputControl());
+        InteractionTerminal terminal = new InteractionTerminal(guiRobot.lookup("#commandTextField")
+                .queryTextInputControl());
         terminal.inputCommand("clear");
 
         // checks the interaction of copy url and url is correct
@@ -114,7 +111,7 @@ public class MainWindowTest extends GuiUnitTest {
      * For gui interaction.
      */
     class InteractionTerminal {
-        TextInputControl textInputControl;
+        private TextInputControl textInputControl;
         InteractionTerminal(TextInputControl textInputControl) {
             this.textInputControl = textInputControl;
         }
@@ -122,8 +119,8 @@ public class MainWindowTest extends GuiUnitTest {
         void inputCommand(String command) {
             guiRobot.clickOn("#commandTextField");
             textInputControl.setText(command);
-            guiRobot.press(KeyCode.ENTER).release(KeyCode.ENTER);
             guiRobot.pauseForHuman();
+            guiRobot.press(KeyCode.ENTER).release(KeyCode.ENTER);
             guiRobot.pauseForHuman();
         }
     }
