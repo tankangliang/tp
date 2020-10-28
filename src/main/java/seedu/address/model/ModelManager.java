@@ -165,7 +165,6 @@ public class ModelManager implements Model {
     @Override
     public void addCountryNote(CountryNote countryNote) {
         requireNonNull(countryNote);
-        updateTagNoteMapWithNote(countryNote.getTags(), countryNote);
         Set<Tag> newTags = countryNote.getTags();
         updateTagNoteMapWithNote(newTags, countryNote);
         tbmManager.addCountryNote(countryNote);
