@@ -121,4 +121,4 @@ shadowJar {
     archiveFileName = 'TBM.jar'
 }
 
-defaultTasks 'clean', 'headless', 'test'
+defaultTasks 'clean', 'headless', 'check'

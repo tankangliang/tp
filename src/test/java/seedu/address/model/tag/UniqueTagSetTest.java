@@ -2,12 +2,14 @@ package seedu.address.model.tag;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -130,4 +132,54 @@ public class UniqueTagSetTest {
     public void asUnmodifiableSet_modifySet_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> uniqueTagSet.asUnmodifiableSet().clear());
     }
+
+    @Test
+    public void iterator() {
+        UniqueTagSet newUniqueTagSet = new UniqueTagSet();
+        Tag tag1 = new Tag("thisisatag");
+        Tag tag2 = new Tag("thisisanothertag");
+        newUniqueTagSet.addAll(Set.of(tag1, tag2));
+        Iterator<Tag> tagIterator = newUniqueTagSet.iterator();
+        assertTrue(tagIterator.hasNext());
+        Tag firstTag = tagIterator.next();
+        assertTrue(firstTag == tag1 || firstTag == tag2);
+        Tag secondTag = tagIterator.next();
+        assertTrue(!secondTag.equals(firstTag) && (secondTag == tag1 || secondTag == tag2));
+        assertFalse(tagIterator.hasNext());
+    }
+
+    @Test
+    public void equals() {
+        // same object -> returns true
+        assertTrue(uniqueTagSet.equals(uniqueTagSet));
+
+        // same tag name -> returns true
+        assertTrue(uniqueTagSet.equals(new UniqueTagSet()));
+
+        // null -> returns false
+        assertFalse(uniqueTagSet.equals(null));
+
+        // different class -> returns false
+        assertFalse(uniqueTagSet.equals(2.0));
+
+        // different tags -> returns false
+        UniqueTagSet uniqueTagSetDifferentTags = new UniqueTagSet();
+        uniqueTagSetDifferentTags.addAll(Set.of(new Tag("thisisatag")));
+        assertFalse(uniqueTagSet.equals(uniqueTagSetDifferentTags));
+    }
+
+    @Test
+    public void hashCode_test() {
+        // same object -> returns same hashcode
+        assertEquals(uniqueTagSet.hashCode(), uniqueTagSet.hashCode());
+
+        // same tag name -> returns true
+        assertEquals(uniqueTagSet.hashCode(), new UniqueTagSet().hashCode());
+
+        // different tags -> returns false
+        UniqueTagSet uniqueTagSetDifferentTags = new UniqueTagSet();
+        uniqueTagSetDifferentTags.addAll(Set.of(new Tag("thisisatag")));
+        assertNotEquals(uniqueTagSet.hashCode(), uniqueTagSetDifferentTags.hashCode());
+    }
+
 }

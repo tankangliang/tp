@@ -1,6 +1,8 @@
 package seedu.address.model.tag;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -16,7 +18,10 @@ public class TagTest {
     @Test
     public void constructor_invalidTagName_throwsIllegalArgumentException() {
         String invalidTagName = "";
-        assertThrows(IllegalArgumentException.class, () -> new Tag(invalidTagName));
+        assertThrows(IllegalArgumentException.class, Tag.MESSAGE_CONSTRAINTS, () -> new Tag(invalidTagName));
+
+        String invalidTagName2 = "pneumonoultramicroscopicsilicovolcanoconiosisk";
+        assertThrows(IllegalArgumentException.class, Tag.MESSAGE_CONSTRAINTS, () -> new Tag(invalidTagName2));
     }
 
     @Test
@@ -36,6 +41,47 @@ public class TagTest {
 
         // tag name exactly 45 characters -> valid
         assertTrue(Tag.isValidTagName("pneumonoultramicroscopicsilicovolcanoconiosis"));
+    }
+
+    @Test
+    public void equals() {
+        Tag tag1 = new Tag("tag1");
+        Tag tag2 = new Tag("tag2");
+        // same object -> returns true
+        assertTrue(tag1.equals(tag1));
+
+        // same tag name -> returns true
+        assertTrue(tag1.equals(new Tag("tag1")));
+
+        // null -> returns false
+        assertFalse(tag1.equals(null));
+
+        // different class -> returns false
+        assertFalse(tag1.equals(2.0));
+
+        // different tag name -> returns false
+        assertFalse(tag1.equals(tag2));
+    }
+
+    @Test
+    public void hashCode_test() {
+        Tag tag1 = new Tag("tag1");
+        Tag tag2 = new Tag("tag2");
+        // same object -> returns same hashcode
+        assertEquals(tag1.hashCode(), tag1.hashCode());
+
+        // same tag name -> returns same hashcode
+        assertEquals(tag1.hashCode(), new Tag("tag1").hashCode());
+
+        // different tag name -> returns different hashcode
+        assertNotEquals(tag1.hashCode(), tag2.hashCode());
+    }
+
+    @Test
+    public void toString_test() {
+        String tagName = "thisisatag";
+        Tag tag = new Tag(tagName);
+        assertEquals(tag.toString(), "[" + tagName + "]");
     }
 
 }
