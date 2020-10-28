@@ -2,6 +2,8 @@ package seedu.address.model.country;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Objects;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
@@ -18,7 +20,7 @@ public class CountryNotesManager {
             FXCollections.unmodifiableObservableList(internalCountryNoteSortedList);
 
     public CountryNotesManager() {
-        internalCountryNoteSortedList.setComparator((CountryNote::compareTo));
+        internalCountryNoteSortedList.setComparator(CountryNote::compareTo);
     }
 
     /**
@@ -38,9 +40,8 @@ public class CountryNotesManager {
      * @param countryNote The country note to be added.
      */
     public void addCountryNote(CountryNote countryNote) {
-        if (!CountryCodeVerifier.isValidCountryCode(countryNote.getCountry().getCountryCode())) {
-            assert false; // should always be a valid country
-        }
+        // should always be a valid country
+        assert CountryCodeVerifier.isValidCountryCode(countryNote.getCountry().getCountryCode());
         requireNonNull(countryNote);
 
         if (!hasCountryNote(countryNote)) {
@@ -63,12 +64,25 @@ public class CountryNotesManager {
      * @param countryNoteToDelete The country note to be deleted.
      */
     public void deleteCountryNote(CountryNote countryNoteToDelete) {
-        if (!CountryCodeVerifier.isValidCountryCode(countryNoteToDelete.getCountry().getCountryCode())) {
-            assert false; // should always be a valid country
-        }
+        // should always be a valid country
+        assert CountryCodeVerifier.isValidCountryCode(countryNoteToDelete.getCountry().getCountryCode());
         requireNonNull(countryNoteToDelete);
         assert hasCountryNote(countryNoteToDelete);
 
         internalCountryNoteList.remove(countryNoteToDelete);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CountryNotesManager // instanceof handles nulls
+                && internalCountryNoteList
+                        .equals(((CountryNotesManager) other).internalCountryNoteList)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(internalCountryNoteList);
+    }
+
 }
