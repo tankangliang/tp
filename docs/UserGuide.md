@@ -267,7 +267,7 @@ Format: `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...`
 
 Example:
 
-* `country note edit 1 nt/new government policy to support local development in cloud security t/contract` Edits the top-most country note in the last-viewed country notes panel to have the content "new government policy to support local development in cloud security" and a new tag "contract" in addition to the previous tags.
+* `country note edit 1 nt/new government policy to support local development in cloud security t/contract` Edits the first country note in the last-viewed country notes panel to have the content "new government policy to support local development in cloud security" and a new tag "contract" in addition to the previous tags.
 
 ### Deleting notes for a country: `country note delete`
 
