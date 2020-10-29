@@ -2,6 +2,7 @@ package seedu.address.model.client;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import org.junit.jupiter.api.Test;
 
@@ -42,17 +43,11 @@ public class SuggestAvailabilityPredicateTest {
     }
 
     @Test
-    public void equalsMethod() {
+    public void equals() {
         SuggestAvailabilityPredicate suggestAvailabilityPredicate = new SuggestAvailabilityPredicate();
 
-        // same object -> true
-        assertTrue(suggestAvailabilityPredicate.equals(suggestAvailabilityPredicate));
-
-        // null -> false
-        assertFalse(suggestAvailabilityPredicate.equals(null));
-
-        // different class -> false
-        assertFalse(suggestAvailabilityPredicate.equals(1));
+        // basic equals tests
+        basicEqualsTests(suggestAvailabilityPredicate);
 
         // different object, same fields -> true
         assertTrue(suggestAvailabilityPredicate.equals(new SuggestAvailabilityPredicate()));

@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
@@ -202,17 +203,13 @@ public class ClientEditCommandTest {
     public void equals() {
         final ClientEditCommand standardCommand = new ClientEditCommand(INDEX_FIRST_CLIENT, DESC_AMY);
 
+        // basic equals tests
+        basicEqualsTests(standardCommand);
+
         // same values -> returns true
         ClientEditCommand.EditClientDescriptor copyDescriptor = new EditClientDescriptor(DESC_AMY);
         ClientEditCommand commandWithSameValues = new ClientEditCommand(INDEX_FIRST_CLIENT, copyDescriptor);
-
         assertTrue(standardCommand.equals(commandWithSameValues));
-
-        // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
-
-        // null -> returns false
-        assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));

@@ -18,7 +18,7 @@ import seedu.address.logic.commands.ClientDeleteCommand;
  */
 public class ClientDeleteCommandParserTest {
 
-    private ClientDeleteCommandParser parser = new ClientDeleteCommandParser();
+    private final ClientDeleteCommandParser parser = new ClientDeleteCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
@@ -30,4 +30,5 @@ public class ClientDeleteCommandParserTest {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ClientDeleteCommand.MESSAGE_USAGE));
     }
+
 }

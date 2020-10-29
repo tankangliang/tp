@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import org.junit.jupiter.api.Test;
 
@@ -51,17 +52,12 @@ public class SuggestionTypeTest {
     @Test
     public void equals() {
         SuggestionType available = new SuggestionType(SuggestionType.BY_AVAILABLE);
+
+        // basic equals tests
+        basicEqualsTests(available);
+
         // same suggestion type -> returns true
         assertTrue(available.equals(new SuggestionType(SuggestionType.BY_AVAILABLE)));
-
-        // same object -> returns true
-        assertTrue(available.equals(available));
-
-        // null -> returns false
-        assertFalse(available.equals(null));
-
-        // different types -> returns false
-        assertFalse(available.equals(5.0f));
 
         // different suggestion type -> returns false
         assertFalse(available.equals(new SuggestionType(SuggestionType.BY_CONTRACT)));

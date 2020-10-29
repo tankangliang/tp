@@ -10,6 +10,7 @@ import seedu.address.logic.commands.CountryNoteDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class CountryNoteDeleteCommandParserTest {
+
     private final CountryNoteDeleteCommandParser parser = new CountryNoteDeleteCommandParser();
 
     @Test
@@ -30,4 +31,5 @@ public class CountryNoteDeleteCommandParserTest {
             fail();
         }
     }
+
 }

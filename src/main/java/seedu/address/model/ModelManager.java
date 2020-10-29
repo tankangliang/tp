@@ -173,6 +173,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteCountryNote(CountryNote countryNoteToDelete) {
         requireNonNull(countryNoteToDelete);
+        tagNoteMap.deleteNote(countryNoteToDelete);
         tbmManager.deleteCountryNote(countryNoteToDelete);
     }
 

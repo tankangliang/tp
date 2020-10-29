@@ -97,4 +97,5 @@ public class TypicalClients {
         Client george = new ClientBuilder(TypicalClients.GEORGE).build();
         return new ArrayList<>(Arrays.asList(alice, benson, carl, daniel, elle, fiona, george));
     }
+
 }

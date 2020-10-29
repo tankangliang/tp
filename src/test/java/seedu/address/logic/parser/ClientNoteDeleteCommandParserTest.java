@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClientNoteDeleteCommand;
 
 class ClientNoteDeleteCommandParserTest {
+
     private static final String EXPECTED_PARSE_FAILURE_MESSAGE =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientNoteDeleteCommand.MESSAGE_USAGE);
 
@@ -36,6 +37,5 @@ class ClientNoteDeleteCommandParserTest {
         String restOfCommand = "1 12";
         assertParseSuccess(parser, restOfCommand, expectedCommand);
     }
-
 
 }

@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -19,6 +20,7 @@ import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
 
 class ClientNoteEditCommandParserTest {
+
     private static final String SPACE = " ";
     private static final String CLIENT_INDEX_STRING = "1";
     private static final Index CLIENT_INDEX = Index.fromOneBased(Integer.parseInt(CLIENT_INDEX_STRING));
@@ -36,10 +38,11 @@ class ClientNoteEditCommandParserTest {
     private final TagNoteMap tagNoteMap = new TagNoteMap();
     private final ClientNoteEditCommandParser parser = new ClientNoteEditCommandParser(tagNoteMap);
     private final Tag testTag = new Tag("testTag");
-    private final Set<Tag> untaggedTags;
-    private final Set<Tag> tags;
+    private Set<Tag> untaggedTags;
+    private Set<Tag> tags;
 
-    public ClientNoteEditCommandParserTest() {
+    @BeforeEach
+    public void setUp() {
         tags = new HashSet<>();
         tags.add(testTag);
         untaggedTags = new HashSet<>();
