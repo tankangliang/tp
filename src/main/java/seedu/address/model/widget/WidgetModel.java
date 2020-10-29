@@ -18,7 +18,7 @@ public interface WidgetModel {
     };
 
     /**
-     * Sets the content to be displayed in the view box to be of that content.
+     * Sets the client to be displayed in the widget view box.
      *
      * @param client To be set in the widget.
      */
