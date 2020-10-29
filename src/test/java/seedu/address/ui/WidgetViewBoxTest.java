@@ -79,14 +79,13 @@ public class WidgetViewBoxTest extends GuiUnitTest {
         assertFalse(obj1.equals(obj3));
     }
 
-    private void assertViewBoxDisplay(WidgetViewBox widgetViewBox , Client client) {
+    private void assertViewBoxDisplay(WidgetViewBox widgetViewBox , Client expectedClient) {
         guiRobot.pauseForHuman();
 
         WidgetViewBoxHandle widgetViewBoxHandle = new WidgetViewBoxHandle(widgetViewBox.getRoot());
 
         // Testing using the equals method of handler.
-        assertTrue(widgetViewBoxHandle.equals(client));
+        assertTrue(widgetViewBoxHandle.equals(expectedClient));
     }
 
 }
-
