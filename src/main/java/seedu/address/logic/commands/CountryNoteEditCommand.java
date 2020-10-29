@@ -71,21 +71,16 @@ public class CountryNoteEditCommand extends Command {
         }
 
         CountryNote countryNoteToEdit = lastShownList.get(targetIndex.getZeroBased());
-        CountryNote newCountryNote;
         tags.addAll(countryNoteToEdit.getTags());
+        tags.addAll(countryNote.getTags());
 
-        if (countryNote.equals(CountryNote.NULL_COUNTRY_NOTE)) {
-            newCountryNote = new CountryNote(countryNoteToEdit);
-        } else {
-            newCountryNote = countryNote.setCountry(countryNoteToEdit.getCountry());
-            tags.addAll(countryNote.getTags());
-        }
-
+        // if previously note has UNTAGGED and now it has additional tags, remove UNTAGGED
         if (tags.size() > 1 && tags.contains(Tag.UNTAGGED)) {
             tags.remove(Tag.UNTAGGED);
         }
 
-        newCountryNote = newCountryNote.setCountry(countryNoteToEdit.getCountry());
+        CountryNote newCountryNote = new CountryNote(countryNoteToEdit.getNoteContent(),
+                countryNoteToEdit.getCountry(), tags);
         newCountryNote.setTags(tags);
 
         model.setCountryNote(countryNoteToEdit, newCountryNote);

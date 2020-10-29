@@ -1,10 +1,13 @@
 package seedu.address.model.note;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.model.country.Country;
+import seedu.address.model.tag.Tag;
 
 /**
  * Representation of a country note.
@@ -29,13 +32,17 @@ public class CountryNote extends Note implements Comparable<CountryNote> {
     }
 
     /**
-     * Initializes a country note by deep copying the given country note.
+     * Initializes the country note with the given content, country and tags.
      *
-     * @param countryNote The country note to deep copy.
+     * @param content The content of the country note.
+     * @param country The country that the country note belongs to.
+     * @param tags The tags that are associated with the country note.
      */
-    public CountryNote(CountryNote countryNote) {
-        super(countryNote.getNoteContent());
-        this.country = countryNote.country;
+    public CountryNote(String content, Country country, Set<Tag> tags) {
+        super(content);
+        requireAllNonNull(content, country, tags);
+        this.country = country;
+        super.setTags(tags);
     }
 
     /**
@@ -45,17 +52,6 @@ public class CountryNote extends Note implements Comparable<CountryNote> {
      */
     public Country getCountry() {
         return country;
-    }
-
-    /**
-     * Returns a new country note with the country set as the given country.
-     *
-     * @param country The given country.
-     * @return A new country note with the country set as the given country.
-     */
-    public CountryNote setCountry(Country country) {
-        requireNonNull(country);
-        return new CountryNote(getNoteContent(), country);
     }
 
     @Override

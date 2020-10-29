@@ -3,9 +3,13 @@ package seedu.address.model.note;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.country.Country;
+import seedu.address.model.tag.Tag;
 
 public class CountryNoteTest {
 
@@ -23,18 +27,15 @@ public class CountryNoteTest {
     }
 
     @Test
-    public void constructor_countryNote_ensureIsEqual() {
-        CountryNote c = new CountryNote("random", new Country("MY"));
-        CountryNote copy = new CountryNote(c);
-        assertEquals(copy, c);
-    }
-
-    @Test
-    public void setCountry_returnsExpected() {
-        CountryNote c = new CountryNote("random", new Country("MY"));
-        CountryNote actual = c.setCountry(new Country("SG"));
-        CountryNote expected = new CountryNote("random", new Country("SG"));
-        assertEquals(expected, actual);
+    public void constructor_countryNote_ensureEqualsExpected() {
+        String content = "content";
+        Country country = new Country("SG");
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("t"));
+        CountryNote c = new CountryNote(content, country, tags);
+        assertEquals(content, c.getNoteContent());
+        assertEquals(country, c.getCountry());
+        assertEquals(tags, c.getTags());
     }
 
 }
