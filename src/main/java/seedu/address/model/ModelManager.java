@@ -247,8 +247,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<CountryNote> getFilteredCountryNoteList() {
-        return filteredCountryNotes;
+    public ObservableList<CountryNote> getSortedFilteredCountryNoteList() {
+        return filteredCountryNotes.sorted(CountryNote::compareTo);
     }
 
     @Override

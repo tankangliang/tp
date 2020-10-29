@@ -43,7 +43,7 @@ public interface Logic {
     ObservableList<Client> getFilteredClientList();
 
     /** Returns an unmodifiable view of the filtered list of country notes */
-    ObservableList<CountryNote> getFilteredCountryNoteList();
+    ObservableList<CountryNote> getSortedFilteredCountryNoteList();
 
     /**
      * Returns the user prefs' TbmManager file path.
