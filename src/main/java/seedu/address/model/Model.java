@@ -117,6 +117,11 @@ public interface Model {
     void deleteCountryNote(CountryNote countryNoteToDelete);
 
     /**
+     * Replaces the given old country note with the given new country note.
+     */
+    void setCountryNote(CountryNote oldCountryNote, CountryNote newCountryNote);
+
+    /**
      * Returns true if {@code client} contains the {@code clientNote} specified.
      */
     boolean hasClientNote(Client client, Note clientNote);

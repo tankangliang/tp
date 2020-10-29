@@ -35,6 +35,16 @@ public class CountryNote extends Note implements Comparable<CountryNote> {
         return country;
     }
 
+    /**
+     * Returns a new country note with the country set as the given country.
+     *
+     * @param country The given country.
+     * @return A new country note with the country set as the given country.
+     */
+    public CountryNote set(Country country) {
+        return new CountryNote(getNoteContent(), country);
+    }
+
     @Override
     public boolean isClientNote() {
         return false;
