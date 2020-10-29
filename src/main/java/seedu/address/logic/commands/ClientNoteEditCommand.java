@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.List;
@@ -23,10 +24,10 @@ public class ClientNoteEditCommand extends Command {
 
     public static final String COMMAND_WORD = "client note edit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a note associated to a client "
-            + "by the index number used in the displayed client list "
-            + "and the index number for client note in the displayed client notes list. "
-            + "Parameters: CLIENT INDEX, CLIENT NOTES INDEX " + PREFIX_NOTE + "NOTE_STRING "
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NOTE + "client note newly edited content";
+            + "by the index number used in the displayed client list"
+            + "and the index number for client note in the displayed client notes list.\n"
+            + "Parameters: CLIENT_INDEX CLIENT_NOTE_INDEX " + PREFIX_NOTE + "NOTE_STRING [" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_NOTE + "client note newly edited content";
     public static final String MESSAGE_EDIT_CLIENT_NOTE_SUCCESS = "Successfully edited client note";
     private static final String MESSAGE_INVALID_CLIENT_NOTE_DISPLAYED_INDEX = "The client note index provided is "
             + "invalid";
