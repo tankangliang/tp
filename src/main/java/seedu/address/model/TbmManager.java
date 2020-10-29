@@ -23,7 +23,7 @@ import seedu.address.model.tag.UniqueTagSet;
 public class TbmManager implements ReadOnlyTbmManager {
 
     private final UniqueClientList clients;
-    private final UniqueTagSet tags;
+    private final UniqueTagSet tags; // todo: deprecate use of UniqueTagSet
     private final CountryNotesManager countryNotesManager;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
