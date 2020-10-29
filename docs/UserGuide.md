@@ -256,14 +256,14 @@ Examples:
 
 Adds a note that is associated with a specific country.
 
-Format: `country note add c/COUNTRY_CODE nt/NOTE_STRING`
+Format: `country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...`
 
 * COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
 
 Examples:
 
-* `country note add c/SG nt/has one of the lowest coporate taxes in the world`
-* `country note add c/CN nt/building good relations (guanxi) is important when conducting business here`
+* `country note add c/SG nt/has one of the lowest coporate taxes in the world t/tax`
+* `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
 * `country note add c/IN nt/is world's fastest growing economy`
 
 ### Deleting notes for a country: `country note delete`
@@ -328,7 +328,7 @@ Action | Format, Examples
 **Edit client note** | `client note edit CLIENT_INDEX NOTE_INDEX (nt/NOTE_STRING) (t/TAG)...` <br> e.g., `client note edit 3 2 nt/Loves cats`
 **Filter by country** | `country filter c/COUNTRY_CODE` <br> e.g., `country filter c/SG`
 **View country note** | `country note view [c/COUNTRY_CODE]` <br> e.g., `country note view c/SG`
-**Add country note** | `country note add c/COUNTRY_CODE nt/NOTE_STRING` <br> e.g., `country note add c/SG nt/has one of the lowest coporate taxes in the world`
+**Add country note** | `country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...` <br> e.g., `country note add c/SG nt/has one of the lowest coporate taxes in the world t/tax`
 **Delete country note** | `country note delete INDEX` <br> e.g., `country note delete 1`
 **Get suggestions** | `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...` <br> e.g., `suggest by/available by/frequency`
 **Clear** | `clear`

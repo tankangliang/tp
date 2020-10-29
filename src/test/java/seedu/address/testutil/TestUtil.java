@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,6 +36,21 @@ public class TestUtil {
     }
 
     /**
+     * Conducts all basic equals tests.
+     */
+    public static <T> void basicEqualsTests(T object) {
+        // same object -> returns true
+        assertTrue(object.equals(object));
+        // null -> returns false
+        assertFalse(object.equals(null));
+        // different class -> returns false
+        assertFalse(object.equals(2.0f));
+        // random object -> returns false
+        Object randomObject = new Object();
+        assertFalse(object.equals(randomObject));
+    }
+
+    /**
      * Returns the middle index of the client in the {@code model}'s client list.
      */
     public static Index getMidIndex(Model model) {
@@ -52,4 +70,5 @@ public class TestUtil {
     public static Client getClient(Model model, Index index) {
         return model.getSortedFilteredClientList().get(index.getZeroBased());
     }
+
 }

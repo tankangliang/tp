@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 
@@ -173,17 +174,11 @@ public class TbmManagerTest {
 
     @Test
     public void equals() {
-        // same object -> returns true
-        assertTrue(tbmManager.equals(tbmManager));
+        // basic equals tests
+        basicEqualsTests(tbmManager);
 
         // same clients and country notes -> returns true
         assertTrue(tbmManager.equals(new TbmManager()));
-
-        // null -> returns false
-        assertFalse(tbmManager.equals(null));
-
-        // different class -> returns false
-        assertFalse(tbmManager.equals(1.0));
 
         // different clients -> returns false
         assertFalse(tbmManager.equals(tbmManagerWithClient));

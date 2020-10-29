@@ -20,6 +20,7 @@ import seedu.address.model.ReadOnlyTbmManager;
 import seedu.address.model.TbmManager;
 
 public class JsonTbmManagerStorageTest {
+
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonTbmManagerStorageTest");
 
     @TempDir
@@ -107,4 +108,5 @@ public class JsonTbmManagerStorageTest {
     public void saveTbmManager_nullFilePath_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveTbmManager(new TbmManager(), null));
     }
+
 }

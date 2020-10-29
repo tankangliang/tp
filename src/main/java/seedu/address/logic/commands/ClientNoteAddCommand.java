@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -13,7 +12,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
-import seedu.address.model.tag.Tag;
 
 /**
  * Adds a Client-specific Note to list of notes associated with a client.
@@ -56,8 +54,6 @@ public class ClientNoteAddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_CLIENT_NOTE);
         }
         model.addClientNote(clientToAddNoteTo, clientNote);
-        Set<Tag> newTags = clientNote.getTags();
-        model.updateTagNoteMapWithNote(newTags, clientNote);
         return new CommandResult(MESSAGE_SUCCESS); // TODO: dynamically format success message
     }
 

@@ -13,6 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LAST_MODIFIED_INSTANT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BOB;
 
@@ -62,18 +63,12 @@ public class ClientTest {
 
     @Test
     public void equals() {
+        // basic equals tests
+        basicEqualsTests(ALICE);
+
         // same values -> returns true
         Client aliceCopy = new ClientBuilder(ALICE).build();
         assertTrue(ALICE.equals(aliceCopy));
-
-        // same object -> returns true
-        assertTrue(ALICE.equals(ALICE));
-
-        // null -> returns false
-        assertFalse(ALICE.equals(null));
-
-        // different type -> returns false
-        assertFalse(ALICE.equals(5));
 
         // different client -> returns false
         assertFalse(ALICE.equals(BOB));
@@ -179,6 +174,20 @@ public class ClientTest {
         assertDoesNotThrow(() -> client.deleteClientNote(clientNote));
         client.deleteClientNote(clientNote);
         assertFalse(client.hasClientNote(clientNote));
+    }
+
+    @Test
+    public void editClientNote_editExistingNote_noteIsEditedWithoutException() {
+        Client client = new ClientBuilder(ALICE).build();
+        Note clientNote = new Note("hell yes");
+        Note newNote = new Note("this be a new note");
+        client.addClientNote(clientNote);
+        assertTrue(client.hasClientNote(clientNote));
+        assertFalse(client.hasClientNote(newNote));
+        assertDoesNotThrow(() -> client.editClientNote(clientNote, newNote));
+        client.editClientNote(clientNote, newNote);
+        assertFalse(client.hasClientNote(clientNote));
+        assertTrue(client.hasClientNote(newNote));
     }
 
     @Test

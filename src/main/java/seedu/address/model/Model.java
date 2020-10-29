@@ -135,6 +135,15 @@ public interface Model {
     void deleteClientNote(Client associatedClient, Note noteToDelete);
 
     /**
+     * Edits a Client Note associated to a particular Client.
+     *
+     * @param associatedClient Client associated to the note to be edited.
+     * @param noteToEdit     Note to be edited.
+     * @param  newNote     newNote to be used.
+     */
+    void editClientNote(Client associatedClient, Note noteToEdit, Note newNote);
+
+    /**
      * Returns an unmodifiable view of the filtered client list.
      */
     ObservableList<Client> getSortedFilteredClientList();
@@ -161,7 +170,7 @@ public interface Model {
     /**
      * Returns an unmodifiable view of the filtered country notes list.
      */
-    ObservableList<CountryNote> getFilteredCountryNoteList();
+    ObservableList<CountryNote> getSortedFilteredCountryNoteList();
 
     /**
      * Updates the filter of the filtered country notes list to filter by the given {@code predicate}.

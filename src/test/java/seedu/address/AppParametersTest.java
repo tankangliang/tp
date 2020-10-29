@@ -3,6 +3,7 @@ package seedu.address;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -46,6 +47,12 @@ public class AppParametersTest {
     }
 
     @Test
+    public void equals_basicTests() {
+        // basic equals tests
+        basicEqualsTests(expected);
+    }
+
+    @Test
     public void equals_sameConfigPath_returnsTrue() {
         expected.setConfigPath(Paths.get("config.json"));
         AppParameters other = new AppParameters();
@@ -79,4 +86,5 @@ public class AppParametersTest {
             return Collections.unmodifiableMap(namedParameters);
         }
     }
+
 }

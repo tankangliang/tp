@@ -15,6 +15,7 @@ import seedu.address.logic.commands.ClientEditCommand;
 import seedu.address.logic.commands.ClientFindCommand;
 import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.commands.ClientNoteDeleteCommand;
+import seedu.address.logic.commands.ClientNoteEditCommand;
 import seedu.address.logic.commands.ClientViewCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CountryFilterCommand;
@@ -150,7 +151,7 @@ public class MainParser {
         String commandWord = COUNTRY_NOTE_TYPE + " " + commandType;
         switch (commandWord) {
         case CountryNoteAddCommand.COMMAND_WORD:
-            return new CountryNoteAddCommandParser().parse(restOfCommand);
+            return new CountryNoteAddCommandParser(tagNoteMap).parse(restOfCommand);
 
         case CountryNoteViewCommand.COMMAND_WORD:
             return new CountryNoteViewCommandParser().parse(restOfCommand);
@@ -232,6 +233,8 @@ public class MainParser {
             return new ClientNoteAddCommandParser(tagNoteMap).parse(restOfCommand);
         case ClientNoteDeleteCommand.COMMAND_WORD:
             return new ClientNoteDeleteCommandParser().parse(restOfCommand);
+        case ClientNoteEditCommand.COMMAND_WORD:
+            return new ClientNoteEditCommandParser(tagNoteMap).parse(restOfCommand);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

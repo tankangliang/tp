@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 
@@ -50,7 +51,7 @@ class ClientNoteDeleteCommandTest {
         Client client2Copy = new ClientBuilder().withName("client2").build();
         expectedModel.addClient(client1Copy);
         expectedModel.addClient(client2Copy);
-        expectedModel.addClientNote(client2, clientNote2);
+        expectedModel.addClientNote(client2Copy, clientNote2);
 
         CommandResult expectedResult = new CommandResult(ClientNoteDeleteCommand.MESSAGE_DELETED_CLIENT_NOTE_SUCCESS);
         ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(client2Idx, clientNoteIdx);
@@ -88,13 +89,9 @@ class ClientNoteDeleteCommandTest {
                 new ClientNoteDeleteCommand(Index.fromOneBased(2), Index.fromOneBased(1));
         ClientNoteDeleteCommand clientNoteDeleteCommand1ClientNote2 =
                 new ClientNoteDeleteCommand(Index.fromOneBased(1), Index.fromOneBased(2));
-        Object randomObject = new Object();
 
-        // random object -> returns false
-        assertFalse(clientNoteDeleteCommand1.equals(randomObject));
-
-        // same object -> returns true
-        assertTrue(clientNoteDeleteCommand1.equals(clientNoteDeleteCommand1));
+        // basic equals tests
+        basicEqualsTests(clientNoteDeleteCommand1);
 
         // same values -> returns true
         assertTrue(clientNoteDeleteCommand1.equals(clientNoteDeleteCommand1Duplicate));

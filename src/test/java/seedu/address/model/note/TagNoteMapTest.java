@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.ALICE;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -20,28 +22,31 @@ import seedu.address.testutil.ClientBuilder;
 
 class TagNoteMapTest {
 
-    private Client client = new ClientBuilder(ALICE).build();
-    private final Note taggedNote = new Note("jurong hill was a nice place");
-    private final TagNoteMap tagNoteMap = new TagNoteMap();
-    private final Tag testTag = new Tag("tagName");
-    private final Set<Tag> tags;
+    private static final Note TAGGED_NOTE = new Note("jurong hill was a nice place");
+    private static final Tag TEST_TAG = new Tag("tagName");
+    private TagNoteMap tagNoteMap;
+    private Client client;
+    private Set<Tag> tags;
 
-    public TagNoteMapTest() {
+    @BeforeEach
+    public void setUp() {
+        tagNoteMap = new TagNoteMap();
+        client = new ClientBuilder(ALICE).build();
         tags = new HashSet<>();
-        tags.add(testTag);
+        tags.add(TEST_TAG);
     }
 
     @Test
-    void initTagNoteMapFromClients_addClientWithTaggedNotes_doesNotThrowException() {
-        taggedNote.setTags(tags);
-        this.client.addClientNote(taggedNote);
+    public void initTagNoteMapFromClients_addClientWithTaggedNotes_doesNotThrowException() {
+        TAGGED_NOTE.setTags(tags);
+        client.addClientNote(TAGGED_NOTE);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
         assertDoesNotThrow(() -> tagNoteMap.initTagNoteMapFromClients(clients));
     }
 
     @Test
-    void initTagNoteMapFromCountryNotes_validSetOfTaggedCountryNotes_doesNotThrowException() {
+    public void initTagNoteMapFromCountryNotes_validSetOfTaggedCountryNotes_doesNotThrowException() {
         Set<Note> inputSet = new HashSet<>();
         Tag tag = new Tag("tagName");
         Note countryNote1 = new Note("this country note will be tagged");
@@ -51,19 +56,19 @@ class TagNoteMapTest {
     }
 
     @Test
-    void getNotesForTag_usesInitialisedMap_returnsTrue() {
-        taggedNote.setTags(tags);
-        this.client.addClientNote(taggedNote);
+    public void getNotesForTag_usesInitialisedMap_returnsTrue() {
+        TAGGED_NOTE.setTags(tags);
+        client.addClientNote(TAGGED_NOTE);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
         tagNoteMap.initTagNoteMapFromClients(clients);
         Set<Note> expectedNotes = new HashSet<>();
-        expectedNotes.add(taggedNote);
-        assertEquals(tagNoteMap.getNotesForTag(testTag), expectedNotes);
+        expectedNotes.add(TAGGED_NOTE);
+        assertEquals(tagNoteMap.getNotesForTag(TEST_TAG), expectedNotes);
     }
 
     @Test
-    void getUniqueTags_verifyWithNewTag_doesNotThrowExceptionReturnsTrue() throws ParseException {
+    public void getUniqueTags_verifyWithNewTag_doesNotThrowExceptionReturnsTrue() throws ParseException {
         Set<Tag> expectedResult = new HashSet<>();
         expectedResult.add(new Tag("unprecedentedTag"));
         List<String> tagNameStrings = new ArrayList<>();
@@ -75,44 +80,68 @@ class TagNoteMapTest {
 
     // also tests that when a tag doesn't have associated notes then it is removed from tagToNotesMap and uniqueTagsMap
     @Test
-    void deleteNote_deleteSoleNoteWithSoleTag_clearsTagToNotesMapAndUniqueTagEntriesReturnsTrue() {
-        taggedNote.setTags(tags);
+    public void deleteNote_deleteSoleNoteWithSoleTag_clearsTagToNotesMapAndUniqueTagEntriesReturnsTrue() {
+        TAGGED_NOTE.setTags(tags);
         Set<Note> expectedNotesSet = new HashSet<>();
-        expectedNotesSet.add(taggedNote);
-        this.client.addClientNote(taggedNote);
+        expectedNotesSet.add(TAGGED_NOTE);
+        client.addClientNote(TAGGED_NOTE);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
         tagNoteMap.initTagNoteMapFromClients(clients);
-        assertTrue(tagNoteMap.getTagsForNote(taggedNote).equals(tags));
-        assertTrue(tagNoteMap.getNotesForTag(testTag).equals(expectedNotesSet));
-        tagNoteMap.deleteNote(taggedNote);
-        assertFalse(tagNoteMap.getNotesForTag(testTag).equals(expectedNotesSet));
+        assertTrue(tagNoteMap.getTagsForNote(TAGGED_NOTE).equals(tags));
+        assertTrue(tagNoteMap.getNotesForTag(TEST_TAG).equals(expectedNotesSet));
+        tagNoteMap.deleteNote(TAGGED_NOTE);
+        assertFalse(tagNoteMap.getNotesForTag(TEST_TAG).equals(expectedNotesSet));
     }
 
     @Test
-    void getTagsForNote_useNoteWithTwoTags_returnsTrue() {
+    public void editNote_validInputs_replacesExistingNoteWithNewNote() {
+        TAGGED_NOTE.setTags(tags);
+        Note newNote = new Note("new content");
+        Set<Tag> newTagSet = new HashSet<>();
+        Tag newTag = new Tag("unprecedentedTag");
+        newTagSet.add(newTag);
+        newNote.setTags(newTagSet);
+        Set<Note> expectedNotesSet = new HashSet<>();
+        expectedNotesSet.add(newNote);
+        client.addClientNote(TAGGED_NOTE);
+        List<Client> clients = new ArrayList<>();
+        clients.add(client);
+        tagNoteMap.initTagNoteMapFromClients(clients);
+        assertTrue(tagNoteMap.getTagsForNote(TAGGED_NOTE).equals(tags));
+        tagNoteMap.editNote(TAGGED_NOTE, newNote);
+        assertFalse(tagNoteMap.getNotesForTag(TEST_TAG).equals(expectedNotesSet));
+        assertTrue(tagNoteMap.getNotesForTag(newTag).equals(expectedNotesSet));
+    }
+
+    @Test
+    public void getTagsForNote_useNoteWithTwoTags_returnsTrue() {
         Tag tag2 = new Tag("tag2");
         tags.add(tag2);
-        taggedNote.setTags(tags);
-        this.client = new ClientBuilder(ALICE).build();
-        this.client.addClientNote(taggedNote);
+        TAGGED_NOTE.setTags(tags);
+        client.addClientNote(TAGGED_NOTE);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
         tagNoteMap.initTagNoteMapFromClients(clients);
         Set<Tag> expectedTags = new HashSet<>();
         expectedTags.add(tag2);
-        expectedTags.add(testTag);
-        Set<Tag> actualTags = tagNoteMap.getTagsForNote(taggedNote);
+        expectedTags.add(TEST_TAG);
+        Set<Tag> actualTags = tagNoteMap.getTagsForNote(TAGGED_NOTE);
         assertTrue(expectedTags.equals(actualTags));
     }
 
     @Test
-    void equals_variousEqualityChecks_returnsTrueIfSameObjectOrState() {
-        TagNoteMap emptyTagNoteMap = new TagNoteMap();
-        TagNoteMap sameObject = this.tagNoteMap;
-        Object randomObject = new Object();
-        assertTrue(sameObject.equals(this.tagNoteMap));
-        assertTrue(emptyTagNoteMap.equals(this.tagNoteMap));
-        assertFalse(this.tagNoteMap.equals(randomObject));
+    public void equals() {
+        // basic equals tests
+        basicEqualsTests(tagNoteMap);
+
+        // same state -> returns true
+        TagNoteMap newTagNoteMap = new TagNoteMap();
+        assertTrue(newTagNoteMap.equals(this.tagNoteMap));
+
+        // after adding a note -> returns false
+        newTagNoteMap.addTagsForNote(tags, new Note("note"));
+        assertFalse(tagNoteMap.equals(newTagNoteMap));
     }
+
 }

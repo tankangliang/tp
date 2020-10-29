@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -16,7 +18,13 @@ import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 
 public class CountryNoteAddCommandTest {
-    private final Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+    }
 
     @Test
     public void execute_duplicateCountryNote_throwsCommandException() {
@@ -42,18 +50,11 @@ public class CountryNoteAddCommandTest {
     }
 
     @Test
-    public void equals_sameObj_returnTrue() {
+    public void equals_basicTests() {
         CountryNoteAddCommand countryNoteAddCommand = new CountryNoteAddCommand(
                 new CountryNote("generic", new Country("SG")));
-        assertTrue(countryNoteAddCommand.equals(countryNoteAddCommand));
-    }
-
-    @Test
-    public void equals_notCountryNoteCommand_returnFalse() {
-        CountryNoteAddCommand countryNoteAddCommand = new CountryNoteAddCommand(
-                new CountryNote("generic", new Country("SG")));
-        Object obj = new Object();
-        assertFalse(countryNoteAddCommand.equals(obj));
+        // basic equals tests
+        basicEqualsTests(countryNoteAddCommand);
     }
 
     @Test
@@ -95,4 +96,5 @@ public class CountryNoteAddCommandTest {
         assertTrue(countryNoteAddCommandFirst.equals(countryNoteAddCommandSecond));
         assertTrue(countryNoteAddCommandSecond.equals(countryNoteAddCommandFirst));
     }
+
 }
