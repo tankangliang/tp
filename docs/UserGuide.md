@@ -531,7 +531,7 @@ Being able to identify these is key to adding, deleting and editing client notes
 
 Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Card**:
 
-![Annoted Country View UI Layout](images/command-screenshots/country_note_view_annotated.png)
+![Annoted Country View UI Layout](./images/command-screenshots/country_note_view_annotated.png)
 
 
 
