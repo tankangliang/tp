@@ -26,11 +26,10 @@ public class CountryNoteEditCommand extends Command {
     public static final String COMMAND_WORD = "country note edit";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the country note at the given index in the last viewed country note list panel.\n"
-            + "Parameters: INDEX"
-            + PREFIX_NOTE + "NOTE_STRING"
-            + " [" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " SG "
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX "
+            + "(" + PREFIX_NOTE + "NOTE_STRING )"
+            + " (" + PREFIX_TAG + "TAG)...\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NOTE + "better government stability in recent months";
     public static final String MESSAGE_SUCCESS = "Edited country note at index %1$s: %2$s";
     private final Index targetIndex;
     private final CountryNote countryNote;

@@ -257,6 +257,16 @@ Examples:
 * `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
 * `country note add c/IN nt/is world's fastest growing economy`
 
+### Editing notes for a country: `country note edit`
+
+Edits a note that is associated with a specific country at the given index in the last viewed country note list panel.
+
+Format: `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...`
+
+Example:
+
+* `country note edit 1 nt/new government policy to support local development in cloud security t/contract` Edits the country note at index 1 of the last-viewed country notes panel to have the content "new government policy to support local development in cloud security" and a new tag "contract" in addition to the previous tags.
+
 ### Deleting notes for a country: `country note delete`
 
 Deletes a note that is associated with a specific country.
@@ -320,6 +330,7 @@ Action | Format, Examples
 **Filter by country** | `country filter c/COUNTRY_CODE` <br> e.g., `country filter c/SG`
 **View country note** | `country note view [c/COUNTRY_CODE]` <br> e.g., `country note view c/SG`
 **Add country note** | `country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...` <br> e.g., `country note add c/SG nt/has one of the lowest coporate taxes in the world t/tax`
+**Edit country note** | `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...` <br> e.g., `country note edit 1 nt/has one of the lowest coporate taxes in the world t/tax`
 **Delete country note** | `country note delete INDEX` <br> e.g., `country note delete 1`
 **Get suggestions** | `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...` <br> e.g., `suggest by/available by/frequency`
 **Clear** | `clear`
