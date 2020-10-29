@@ -54,7 +54,7 @@ Now that you have started **_TBM_**,
 
 Main View  | List / Client Notes View | Country Notes View
 :----------------------: | :-------------------------------------: | :-----------------------: |
-![TBM_UI](/docs/images/UI.png) | ![Clients](/docs/images/command-screenshots/client_view.png) |  ![Country](/docs/images/command-screenshots/country_note_view.png)
+![TBM_UI](images/UI.png) | ![Clients](images/command-screenshots/client_view.png) |  ![Country](images/command-screenshots/country_note_view.png)
 
 
 <div markdown="block" class="alert alert-info">
@@ -494,7 +494,7 @@ Parameter | Prefix | Constraints, Examples
 
 The diagram below shows the key UI elements of TBM upon first start-up.
 
-![Annotated UI Default Page](/docs/images/command-screenshots/UI_annotated.png)
+![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
 
 * **Command Box** allows you to input  commands in their correct syntax to interact with TBM.
 
@@ -508,7 +508,7 @@ never have to worry about not being able to see all your important clients at a 
     
     * On the off-chance there's a syntax issue, TBM will remind you of the correct syntax it expects, something like this:
  
-     ![Result Display slowing error message](/docs/images/command-screenshots/result_display_error_syntax.png)
+     ![Result Display slowing error message](images/command-screenshots/result_display_error_syntax.png)
      
 * **Generic Widget View Box** is aptly named because it shall spawn *Client Cards* or *Country Cards* when
  relevant commands are sent. Initially it will show you your local time, to the precise second and your own location.
@@ -521,7 +521,7 @@ never have to worry about not being able to see all your important clients at a 
 The diagram below is what you should see upon viewing a particular client (i.e. firing up the command `client view 1
 `). It shows how to identify a particular  client's  `CLIENT_INDEX`, and an  associated note's `CLIENT_NOTE_INDEX`.
 
-![Annotated Client View UI Layout](/docs/images/command-screenshots/client_view_annotated.png)
+![Annotated Client View UI Layout](images/command-screenshots/client_view_annotated.png)
 
 Here, the **Client Card** displaying the note that's tagged as `hobies` is referred to by the `CLIENT_INDEX` of `1`.
 
@@ -531,7 +531,7 @@ Being able to identify these is key to adding, deleting and editing client notes
 
 Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Card**:
 
-![Annoted Country View UI Layout](/docs/images/command-screenshots/country_note_view_annotated.png)
+![Annoted Country View UI Layout](images/command-screenshots/country_note_view_annotated.png)
 
 
 
