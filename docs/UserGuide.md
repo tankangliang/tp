@@ -37,12 +37,12 @@ title: User Guide
 1. Download the application file (.jar file) from [here](https://github.com/AY2021S1-CS2103T-F11-4/tp/releases).
 
 1. Navigate to the directory that the application file was downloaded to. To start the application:
- 
+
     1. Double click on the `tbm.jar` file and the application will start shortly.
-    
+
     1. Alternatively, open any shell terminal in the current directory and run the command `java -jar tbm.jar`.
 
-Now that you have started TBM, 
+Now that you have started TBM,
 
 1. Type any command in the command box and press Enter to execute it.
 
@@ -101,7 +101,7 @@ Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TI
 Example:
 
 * Command: `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+3 ce/2-3-2020`<br>
-  
+
   Adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok, Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**, contract expiry date **2 Mar 2020**.
 
 ### Viewing a client: `client view`
@@ -117,8 +117,8 @@ Given the current list of clients:
 1. Katya
 2. Alex
 ```
-Command: `client view 2` 
- 
+Command: `client view 2`
+
 The information for the client at index 2 of the list will be shown. In the example above, Alex's information will be displayed.
 
 ### Finding clients: `client find`
@@ -135,11 +135,11 @@ Format: `client find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* Command: `client find katya` 
+* Command: `client find katya`
 
    Finds all clients with names that matches **katya**.
 
-* Command: `client find Katya Hans` 
+* Command: `client find Katya Hans`
 
    Finds all clients whose names contain either **Katya** or **Hans**.
 
@@ -151,15 +151,15 @@ Format: `client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_C
 
 Examples:
 
-* Command: `client edit 5 n/Katya` 
+* Command: `client edit 5 n/Katya`
 
     Only edits **name** to `Katya`, other fields remain the same.
 
-* Command: `client edit 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg` 
+* Command: `client edit 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg`
 
     Edits **name** to `Alek`, **phone number** to `34842097` and **email** to `dcsdcr@nus.edu.sg`, other fields remain the same.
 
-* Command: `client edit 1 c/JP tz/GMT+7` 
+* Command: `client edit 1 c/JP tz/GMT+7`
 
     Edits **country** to `Japan` and **timezone** to `GMT+7`, other fields remain the same.
 
@@ -196,7 +196,7 @@ Format: `client delete INDEX`
 
 Example:
 
-* Command: `client delete 5` 
+* Command: `client delete 5`
 
     Deletes the client at index 5 of the list panel.
 
@@ -213,11 +213,11 @@ Examples:
 * Command: `client note add 1 t/pref nt/wants meetings to be as short as possible (preferably 30 mins)`
 
     Adds a **note** with a **tag** to the **first** client in the list.
-    
+
 * Command: `client note add 2 nt/prefers emails to calls`
-    
+
     Adds a **note** to the **second** client in the list.
-    
+
 * Command: `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
 
     Adds a **note** with a **tag** to the **fourth** client in the list.
@@ -287,11 +287,11 @@ Format: `country filter c/COUNTRY_CODE`
 
 Examples:
 
-* Command: `country filter c/SG` 
+* Command: `country filter c/SG`
 
     Filters by contacts in Singapore.
-    
-* Command: `country filter c/RU` 
+
+* Command: `country filter c/RU`
 
     Filters by contacts in Russia.
 
@@ -307,15 +307,15 @@ Examples:
 * Command: `country note view`
 
     All country notes in TBM will be displayed.
-    
+
 * Command: `country note view c/SG`
 
     Only country notes for Singapore will be displayed.
-    
+
 * Command: `country note view c/IN`
 
     Only country notes for India will be displayed.
-    
+
 ### Adding notes for a country: `country note add`
 
 Adds a note that is associated with a specific country.
@@ -327,7 +327,7 @@ Examples:
 * Command: `country note add c/SG nt/has one of the lowest corporate taxes in the world t/tax`
 
     Adds a **note** with a **tag** for Singapore.
-    
+
 * Command: `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
 
     Adds a **note** with a **tag** for China.
@@ -362,7 +362,7 @@ Singapore
 3. Speaks English
 ```
 
-Command: `country note edit 3 nt/Speaks Singlish t/language` 
+Command: `country note edit 3 nt/Speaks Singlish t/language`
 
 Edits the third country note in the country notes panel. In this case, it will be the note under Singapore. The resulting list will look like:
 
@@ -388,7 +388,7 @@ Format: `country note delete INDEX`
 
 Example:
 
-* Command: `country note delete 1` 
+* Command: `country note delete 1`
 
     Deletes the country note at index 1 of the country notes list panel.
 
@@ -400,19 +400,19 @@ Format: `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...`
 
 Examples:
 
-* Command: `suggest by/available` 
+* Command: `suggest by/available`
 
     Obtains a list of clients where the time is 1800-2200 in the client's timezone (off work hours).
 
-* Command: `suggest by/frequency` 
+* Command: `suggest by/frequency`
 
     Obtains a list of clients based on the last time their details were edited in TBM. Clients who have not been contacted for a longer period will be the first in the list.
 
-* `suggest by/contract` 
+* `suggest by/contract`
 
     Obtains a list of clients based on their current contract details. Clients whose contracts are expiring will be shown first.
 
-* `suggest by/contract by/available` 
+* `suggest by/contract by/available`
 
     Obtains a list of clients based on their current contract details but only clients who are available will be shown. Clients whose contracts are expiring will be shown first.
 
