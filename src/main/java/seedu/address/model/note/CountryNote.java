@@ -9,7 +9,7 @@ import seedu.address.model.country.Country;
 /**
  * Representation of a country note.
  */
-public class CountryNote extends Note implements Comparable<CountryNote> {
+public class CountryNote extends Note {
 
     private final Country country;
 
@@ -64,16 +64,6 @@ public class CountryNote extends Note implements Comparable<CountryNote> {
     @Override
     public String toString() {
         return "[" + getCountry() + "] " + super.toString();
-    }
-
-    @Override
-    public int compareTo(CountryNote countryNote) {
-        int countryCodeComparison = getCountry().getCountryCode().compareTo(countryNote.getCountry().getCountryCode());
-        if (countryCodeComparison != 0) {
-            return countryCodeComparison;
-        } else {
-            return getNoteContent().compareTo(countryNote.getNoteContent());
-        }
     }
 
 }
