@@ -88,6 +88,13 @@ public class TypicalClients {
     }
 
     public static List<Client> getTypicalClients() {
+        Client ALICE = new ClientBuilder(TypicalClients.ALICE).build();
+        Client BENSON = new ClientBuilder(TypicalClients.BENSON).build();
+        Client CARL = new ClientBuilder(TypicalClients.CARL).build();
+        Client DANIEL = new ClientBuilder(TypicalClients.DANIEL).build();
+        Client ELLE = new ClientBuilder(TypicalClients.ELLE).build();
+        Client FIONA = new ClientBuilder(TypicalClients.FIONA).build();
+        Client GEORGE = new ClientBuilder(TypicalClients.GEORGE).build();
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
