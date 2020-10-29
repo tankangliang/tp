@@ -6,7 +6,7 @@ import java.util.Locale;
  * A representation of a Country that can be identified by a 2-letter ISO3166 country-code or by its country
  * name. It contains a list of country notes.
  */
-public class Country {
+public class Country implements Comparable<Country> {
 
     public static final Country NULL_COUNTRY = new Country();
     private static final String NONE_COUNTRY_CODE = "";
@@ -78,4 +78,8 @@ public class Country {
         return countryName + " (" + countryCode + ")";
     }
 
+    @Override
+    public int compareTo(Country country) {
+        return countryCode.compareTo(country.countryCode);
+    }
 }
