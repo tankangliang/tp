@@ -5,13 +5,31 @@ title: Developer Guide
 
 ## **Introduction**
 
-### Purpose
+Welcome! We are excited that you want to learn about **_TBM_**.<br>
+This page contains step-by-step instructions on how to get started in contributing or getting yourself involved in this awesome project! However, before you get too excited, allow us to introduce you to the core concepts that underpins the heart of **_TBM_**.
 
-This documentation specifies the architecture and design decisions for the application, <strong><i>Travelling BusinessMan</i></strong>.
+### Travelling BusinessMan Design Concepts
 
-### Scope
+1. Lightweight/Portable: **_TBM_** has a small footprint and runs fast on any platform.
 
-This describes the software architecture and software design decisions for the implementation of <strong><i>TBM</i></strong>. The intended audience is the developers, designers and testers for the application.
+1. Scalable: Software which does not deteriorate in performance with increasing data sizes.
+
+1. Extensible: A community driven software development process, which encourages innovative inputs and contributions from our users. Features are easily integrated into the application when needed.
+
+1. Privacy: We do not collect, store or misappropriate our client's data.
+
+1. CLI Optimised: Built by users for users. Our features in the application cater to users highly accustomed to the CLI.
+
+These concepts are the foundations of **_TBM_**, furthermore we believe in the value of having users being an active contributor to our project.
+With that being said, this guide will help orient you eager developers quickly, to things like,
+
+1. Software design choices of **_TBM_**.
+
+1. Architecture of **_TBM_**.
+
+1. Implementations for the array of features **_TBM_** offers.
+
+## Table of Contents
 
 * Table of Contents
 {:toc}
@@ -123,7 +141,7 @@ The `Model`,
 
 ![Design of the Client, Note, Tag and Country Components](images/InnerWorkings.png)
 
-The above Model diagram provides a high level view of how TBM functions. However, is does not fully represent the class design between Note, Country and Tag.
+The above Model diagram provides a high level view of how **_TBM_** functions. However, is does not fully represent the class design between Note, Country and Tag.
 This sub-section gives a better explanation of the mappings for Note, Tag and Country.
 
 ### Storage component
@@ -166,16 +184,16 @@ Given below is an example usage scenario and how mapping mechanism behaves at ea
 #### Implementation
 
 The association between `Note` and `Country` is facilitated by `CountryNotesManager`.
-Internally, `CountryNotesManager` stores a list of country notes using an instance of `javafx.collections.ObservableList<CountryNote>`. 
+Internally, `CountryNotesManager` stores a list of country notes using an instance of `javafx.collections.ObservableList<CountryNote>`.
 By storing the list of country notes as an `ObservableList`, the UI would be able to track and immediately reflect any changes to the country notes list.
 
 It implements the following operations:
-* `CountryNotesManager#asUnmodifiableObservableList()` — Returns an unmodifiable `ObservableList<CountryNote>`. 
+* `CountryNotesManager#asUnmodifiableObservableList()` — Returns an unmodifiable `ObservableList<CountryNote>`.
 * `CountryNotesManager#hasCountryNote(CountryNote countryNote)`  — Returns true if the given `countryNote` already exists in the internal `ObservableList<CountryNote>`.
 * `CountryNotesManager#addCountryNote(CountryNote countryNote)`  — Adds the given `countryNote` to the internal `ObservableList<CountryNote>`.
 * `CountryNotesManager#deleteCountryNote(CountryNote countryNote)`  — Deletes the given `countryNote` from the internal `ObservableList<CountryNote>`.
 
-The following class diagram illustrates how the relevant classes in the `seedu.address.model` package are related to `CountryNote`. 
+The following class diagram illustrates how the relevant classes in the `seedu.address.model` package are related to `CountryNote`.
 
 ![Country Class Diagram](images/CountryClass.png)
 
@@ -292,7 +310,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Design consideration:
 
-##### Aspect: How undo & redo executes
+##### Aspect: How undo/redo executes
 
 * **Alternative 1 (current choice):** Saves the entire address book.
   * Pros: Easy to implement.
@@ -308,6 +326,11 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
+
+### \[Proposed\] Command History
+
+A command history will greatly optimise the user's productivity by removing the need to repetitively type out similar commands.
+Furthermore, it allows backwards viewing of previous commands given, which is similar to the CLI experience.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -349,7 +372,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                              | add contact details of business contacts |                                                                        |
 | `* * *`  | user                              | add personal preferences of existing business contacts | keep track of them                                       |
 | `* * *`  | user                              | add meeting notes after meeting with existing business contacts | keep track of my meetings                       |
-| `* * *`  | user                              | add information on business deals and contract expiration dates | let TBM keep track of them                      |
+| `* * *`  | user                              | add information on business deals and contract expiration dates | let **_TBM_** keep track of them                      |
 | `* * *`  | user                              | filter business contacts by country      |                                                                        |
 | `* * *`  | user                              | add cultural or relevant notes regarding a specific country | refer to these notes in the future                  |
 | `* * *`  | user                              | view my previously added information regarding a country |                                                        |
@@ -382,16 +405,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User meets secures a new business deal/client
-2.  User attempts to add the all associated parties and their information into TBM.
-3.  User successfully adds the all new information into TBM.
+2.  User attempts to add the all associated parties and their information into **_TBM_**.
+3.  User successfully adds the all new information into **_TBM_**.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. A party has a prior entry in TBM, which shows that User has a previous professional encounter with the party.
+* 2a. A party has a prior entry in **_TBM_**, which shows that User has a previous professional encounter with the party.
 
-    * 2a1. User does not add the new party as it will duplicate entries in the TBM.
+    * 2a1. User does not add the new party as it will duplicate entries in the **_TBM_**.
     * 2a2. User can choose to update/edit the client information instead.
 
   Use case ends.
@@ -401,7 +424,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1.  User requests to find a client.
-2.  TBM shows a list of clients that match user's query.
+2.  **_TBM_** shows a list of clients that match user's query.
 
     Use case ends.
 
@@ -417,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User enters a valid command that alters data (E.g. <u>`adding a client (UC1)`</u>).
 2.  Modified data gets stored in the existing data file.
-3.  TBM shows a message indicating command has been executed successfully.
+3.  **_TBM_** shows a message indicating command has been executed successfully.
 
     Use case ends.
 
@@ -425,8 +448,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. An error occurred while saving the modified data to the existing data file.
 
-    * 2a1. TBM reloads the data from the existing data file.
-    * 2a2. TBM shows an error message.
+    * 2a1. **_TBM_** reloads the data from the existing data file.
+    * 2a2. **_TBM_** shows an error message.
 
   Use case ends.
 
@@ -435,7 +458,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User inputs a country as filter.
-2. TBM shows all clients belonging to that country.
+2. **_TBM_** shows all clients belonging to that country.
 
    Use case ends.
 
@@ -443,18 +466,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. Invalid country is given.
 
-    * 1a1. TBM shows an error message.
+    * 1a1. **_TBM_** shows an error message.
 
       Use case ends.
 
-**UC5 - Clearing all entries from TBM**
+**UC5 - Clearing all entries from **_TBM_****
 
 **MSS**
 
 1.  User requests to clear all entries.
-2.  TBM asks the user to confirm.
+2.  **_TBM_** asks the user to confirm.
 3.  User confirms that they want to clear all entries.
-4.  TBM clears all entries.
+4.  **_TBM_** clears all entries.
 
     Use case ends.
 
@@ -472,19 +495,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  **TBM** should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+1.  **_TBM_** should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-4.  **TBM** should be able to recover its previous stable state from the data file if it crashes.
+4.  **_TBM_** should be able to recover its previous stable state from the data file if it crashes.
 3.  The data file should be stored locally in a human-editable text file.
-4.  **TBM** should be used by a single user.
-5.  **TBM** should be able to hold up to 1000 business contacts without a noticeable sluggishness in performance for typical usage.
-6.  **TBM** should be able to hold up to 5000 total client notes without a noticeable sluggishness in performance for typical usage.
-7.  **TBM** can handle at most 10000 business contacts and at most 50000 total client notes.
-8.  **TBM** will only accept countries that are specified by the [ISO3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) specification.
-9.  **TBM** will only accept [GMT](https://en.wikipedia.org/wiki/Greenwich_Mean_Time) timezones.
-10. **TBM** is not required to validate that the timezone of a business contact correctly matches his/her country.
-11. **TBM** should retain all functionalities even when it is not connected to the internet.
-12. The size of the **TBM** _JAR_ file should not exceed 100Mb.
+4.  **_TBM_** should be used by a single user.
+5.  **_TBM_** should be able to hold up to 1000 business contacts without a noticeable sluggishness in performance for typical usage.
+6.  **_TBM_** should be able to hold up to 5000 total client notes without a noticeable sluggishness in performance for typical usage.
+7.  **_TBM_** can handle at most 10000 business contacts and at most 50000 total client notes.
+8.  **_TBM_** will only accept countries that are specified by the [ISO3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) specification.
+9.  **_TBM_** will only accept [GMT](https://en.wikipedia.org/wiki/Greenwich_Mean_Time) timezones.
+10. **_TBM_** is not required to validate that the timezone of a business contact correctly matches his/her country.
+11. **_TBM_** should retain all functionalities even when it is not connected to the internet.
+12. The size of the **_TBM_** _JAR_ file should not exceed 100Mb.
 
 ### Glossary
 
@@ -492,13 +515,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Client**: Refers to a person whom the user is conducting his/her business with
 * **GMT**: [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time)
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **TBM**: Initialism for Travelling BusinessMan
+* **_TBM_**: Initialism for Travelling BusinessMan
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the app manually. Additionally, testers can look through our [Testing Guide](Testing.md) to get started on automated testing.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
