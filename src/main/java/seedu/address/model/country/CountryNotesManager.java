@@ -3,11 +3,9 @@ package seedu.address.model.country;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
-import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.note.CountryNote;
 
 /**
