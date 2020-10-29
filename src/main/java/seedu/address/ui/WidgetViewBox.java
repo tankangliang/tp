@@ -99,7 +99,7 @@ public class WidgetViewBox extends UiPart<Region> {
     }
 
     /**
-     * Static factory.
+     * Static factory for use in GUI testing.
      *
      * @return WidgetViewBox
      */
