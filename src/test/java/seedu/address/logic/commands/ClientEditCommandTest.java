@@ -42,7 +42,7 @@ import seedu.address.testutil.EditClientDescriptorBuilder;
  */
 public class ClientEditCommandTest {
 
-    private Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+    private Model model;
 
     @BeforeEach
     public void setUp() {
