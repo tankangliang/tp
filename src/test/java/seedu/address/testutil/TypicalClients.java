@@ -15,7 +15,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMEZONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIMEZONE_BOB;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -88,7 +87,14 @@ public class TypicalClients {
     }
 
     public static List<Client> getTypicalClients() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        Client alice = new ClientBuilder(ALICE).build();
+        Client benson = new ClientBuilder(BENSON).build();
+        Client carl = new ClientBuilder(CARL).build();
+        Client daniel = new ClientBuilder(DANIEL).build();
+        Client elle = new ClientBuilder(ELLE).build();
+        Client fiona = new ClientBuilder(FIONA).build();
+        Client george = new ClientBuilder(GEORGE).build();
+        return Arrays.asList(alice, benson, carl, daniel, elle, fiona, george);
     }
 
 }

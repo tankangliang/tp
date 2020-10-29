@@ -14,7 +14,6 @@ import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.country.CountryNotesManager;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
-import seedu.address.model.tag.UniqueTagSet;
 
 /**
  * Wraps all data at TbmManager level
@@ -23,7 +22,6 @@ import seedu.address.model.tag.UniqueTagSet;
 public class TbmManager implements ReadOnlyTbmManager {
 
     private final UniqueClientList clients;
-    private final UniqueTagSet tags;
     private final CountryNotesManager countryNotesManager;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -34,7 +32,6 @@ public class TbmManager implements ReadOnlyTbmManager {
      */
     {
         clients = new UniqueClientList();
-        tags = new UniqueTagSet();
         countryNotesManager = new CountryNotesManager();
     }
 
