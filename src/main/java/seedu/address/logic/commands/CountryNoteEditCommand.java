@@ -79,9 +79,10 @@ public class CountryNoteEditCommand extends Command {
             tags.remove(Tag.UNTAGGED);
         }
 
-        CountryNote newCountryNote = new CountryNote(countryNoteToEdit.getNoteContent(),
+        CountryNote newCountryNote = new CountryNote(
+                countryNote.equals(CountryNote.NULL_COUNTRY_NOTE)
+                        ? countryNoteToEdit.getNoteContent() : countryNote.getNoteContent(),
                 countryNoteToEdit.getCountry(), tags);
-        newCountryNote.setTags(tags);
 
         model.setCountryNote(countryNoteToEdit, newCountryNote);
 
