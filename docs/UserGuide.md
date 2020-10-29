@@ -58,7 +58,7 @@ Main View  | List / Client Notes View | Country Notes View
 
 
 <div markdown="block" class="alert alert-info">
-Please refer to the [Introduction to the UI](#appendix-a-introduction-to-the-ui) if you're trying TBM out for the
+Please refer to the [Introduction to the UI](#appendix-a---introduction-to-the-ui) if you're trying TBM out for the
  first  time.
 </div>
 
