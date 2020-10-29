@@ -62,16 +62,19 @@ class JsonAdaptedNote {
      * @throws IllegalValueException if there were any data constraints violated in the adapted note.
      */
     public Note toModelType() throws IllegalValueException {
+        Set<Tag> tags = new HashSet<>();
+        for (JsonAdaptedTag tag : this.tags) {
+            tags.add(tag.toModelType());
+        }
+
         if (isClientNote()) {
-            Set<Tag> clientNoteTags = new HashSet<>();
-            for (JsonAdaptedTag tag : this.tags) {
-                clientNoteTags.add(tag.toModelType());
-            }
             Note clientNote = new Note(contents);
-            clientNote.setTags(clientNoteTags);
+            clientNote.setTags(tags);
             return clientNote;
         } else {
-            return new CountryNote(contents, new Country(countryCode));
+            CountryNote countryNote = new CountryNote(contents, new Country(countryCode));
+            countryNote.setTags(tags);
+            return countryNote;
         }
     }
 
