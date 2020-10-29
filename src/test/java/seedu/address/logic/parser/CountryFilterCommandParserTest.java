@@ -44,4 +44,5 @@ public class CountryFilterCommandParserTest {
             fail();
         }
     }
+
 }

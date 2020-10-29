@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.country.Country;
 
 public class WidgetViewOptionTest {
+
     @Test
     public void generateClientWidgetOption_isClientTrue() {
         WidgetViewOption widgetViewOption = WidgetViewOption.generateClientWidgetOption();
@@ -36,4 +37,5 @@ public class WidgetViewOptionTest {
         assertFalse(widgetViewOption.isCountryNote());
         assertEquals(Country.NULL_COUNTRY, widgetViewOption.getCountry());
     }
+
 }

@@ -1,11 +1,10 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import org.junit.jupiter.api.Test;
 
@@ -29,15 +28,10 @@ public class CountryNoteViewCommandTest {
     }
 
     @Test
-    public void equals_sameObj_returnTrue() {
+    public void equals_basicTests() {
         CountryNoteViewCommand countryNoteViewCommand = new CountryNoteViewCommand(new Country("SG"));
-        assertTrue(countryNoteViewCommand.equals(countryNoteViewCommand));
-    }
-
-    @Test
-    public void equals_null_returnFalse() {
-        CountryNoteViewCommand countryNoteViewCommand = new CountryNoteViewCommand(new Country("SG"));
-        assertFalse(countryNoteViewCommand.equals(null));
+        // basic equals tests
+        basicEqualsTests(countryNoteViewCommand);
     }
 
     @Test

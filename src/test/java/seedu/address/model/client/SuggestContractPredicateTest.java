@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,18 +28,12 @@ public class SuggestContractPredicateTest {
 
     @Test
     public void equals() {
-        // same object -> returns true
-        assertTrue(predicate.equals(predicate));
+        // basic equals tests
+        basicEqualsTests(predicate);
 
         // same values -> returns true
         SuggestContractPredicate predicateCopy = new SuggestContractPredicate();
         assertTrue(predicate.equals(predicateCopy));
-
-        // different types -> returns false
-        assertFalse(predicate.equals(1));
-
-        // null -> returns false
-        assertFalse(predicate.equals(null));
 
         // different predicate -> returns false
         assertFalse(predicate.equals(new SuggestAvailabilityPredicate()));

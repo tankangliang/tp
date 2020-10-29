@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BENSON;
 
@@ -161,19 +162,13 @@ public class ModelManagerTest {
         TbmManager differentTbmManager = new TbmManager();
         UserPrefs userPrefs = new UserPrefs();
 
+        // basic equals tests
+        basicEqualsTests(modelManager);
+
         // same values -> returns true
         modelManager = new ModelManager(tbmManager, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(tbmManager, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
-
-        // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
-
-        // null -> returns false
-        assertFalse(modelManager.equals(null));
-
-        // different types -> returns false
-        assertFalse(modelManager.equals(5));
 
         // different tbmManager -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentTbmManager, userPrefs)));

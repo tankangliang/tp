@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -32,10 +33,11 @@ class ClientNoteAddCommandParserTest {
     private final TagNoteMap tagNoteMap = new TagNoteMap();
     private final ClientNoteAddCommandParser parser = new ClientNoteAddCommandParser(tagNoteMap);
     private final Tag testTag = new Tag("testTag");
-    private final Set<Tag> untaggedTags;
-    private final Set<Tag> tags;
+    private Set<Tag> untaggedTags;
+    private Set<Tag> tags;
 
-    public ClientNoteAddCommandParserTest() {
+    @BeforeEach
+    public void setUp() {
         tags = new HashSet<>();
         tags.add(testTag);
         untaggedTags = new HashSet<>();
@@ -118,4 +120,5 @@ class ClientNoteAddCommandParserTest {
         ClientNoteAddCommandParser parser = new ClientNoteAddCommandParser(tagNoteMap);
         assertParseFailure(parser, userInput, Tag.MESSAGE_CONSTRAINTS);
     }
+
 }

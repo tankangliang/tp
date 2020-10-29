@@ -11,7 +11,7 @@ import seedu.address.logic.commands.ClientViewCommand;
 
 public class ClientViewCommandParserTest {
 
-    private ClientViewCommandParser parser = new ClientViewCommandParser();
+    private final ClientViewCommandParser parser = new ClientViewCommandParser();
 
     @Test
     public void parse_validArgs_returnsViewCommand() {
@@ -23,4 +23,5 @@ public class ClientViewCommandParserTest {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 ClientViewCommand.MESSAGE_USAGE));
     }
+
 }
