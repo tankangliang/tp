@@ -23,7 +23,6 @@ import guitests.guihandles.HelpWindowHandle;
 import guitests.guihandles.MainWindowHandle;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.logic.LogicManager;
@@ -87,6 +86,7 @@ public class MainWindowTest extends GuiUnitTest {
         terminal.inputCommand("client add n/Lim p/18002345 e/lim@gmail.com a/Yishun c/SG tz/GMT+8");
         terminal.inputCommand("client add n/Kim p/18002346 e/kim@gmail.com a/Kishun c/SG tz/GMT+8");
         terminal.inputCommand("client add n/Sim p/18002347 e/sim@gmail.com a/Sishun c/SG tz/GMT+8");
+        terminal.inputCommand("client edit 1 n/Jim");
         terminal.inputCommand("client note add 1 t/reminder nt/birthday tmr");
         terminal.inputCommand("client note add 1 t/reminder nt/party tmr");
         terminal.inputCommand("client note add 1 t/reminder nt/takeout tmr");
@@ -121,7 +121,7 @@ public class MainWindowTest extends GuiUnitTest {
 
         // viewing clients
         terminal.inputCommand("client view 1");
-        checkLabel("#name", "Lim");
+        checkLabel("#name", "Jim");
         terminal.inputCommand("client view 2");
         checkLabel("#name", "Kim");
         terminal.inputCommand("client view 3");
