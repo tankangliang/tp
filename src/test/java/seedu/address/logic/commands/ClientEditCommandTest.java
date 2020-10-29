@@ -95,7 +95,7 @@ public class ClientEditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         ClientEditCommand clientEditCommand = new ClientEditCommand(INDEX_FIRST_CLIENT, new EditClientDescriptor());
-        Client editedClient = model.getSortedFilteredClientList().get(INDEX_FIRST_CLIENT.getSZeroBased());
+        Client editedClient = model.getSortedFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
 
         String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
