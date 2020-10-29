@@ -19,9 +19,8 @@ public class CountryNoteListPanel extends UiPart<Region> {
     private static final String FXML = "CountryNoteListPanel.fxml";
     private static final String HEADER_ALL_COUNTRIES_TEXT = "All Country Notes";
 
+    private final ObservableList<CountryNote> countryNoteObservableList;
     private boolean displayAllCountries = true;
-    private ObservableList<CountryNote> countryNoteObservableList;
-
     @FXML
     private Label header;
     @FXML
@@ -36,12 +35,9 @@ public class CountryNoteListPanel extends UiPart<Region> {
         header.setText("Country Notes");
 
         updateCountryNoteListView(countryNoteObservableList);
-        countryNoteObservableList.addListener(new ListChangeListener<CountryNote>() {
-            @Override
-            public void onChanged(Change<? extends CountryNote> c) {
-                if (c.next()) {
-                    updateCountryNoteListView(countryNoteObservableList);
-                }
+        countryNoteObservableList.addListener((ListChangeListener<CountryNote>) c -> {
+            if (c.next()) {
+                updateCountryNoteListView(countryNoteObservableList);
             }
         });
     }
@@ -57,7 +53,7 @@ public class CountryNoteListPanel extends UiPart<Region> {
 
         Country currCountry = null;
         CountryNoteListSubPanel countryNoteListSubPanel = new CountryNoteListSubPanel();
-        for (CountryNote countryNote : countryNoteObservableList) {
+        for (CountryNote countryNote : countryNoteObservableList.sorted()) {
             if (currCountry == null) {
                 currCountry = countryNote.getCountry();
             }
@@ -67,8 +63,7 @@ public class CountryNoteListPanel extends UiPart<Region> {
                 currCountry = countryNote.getCountry();
                 countryNoteListSubPanel = new CountryNoteListSubPanel();
             }
-            Node node = new NoteListCard(countryNote, noteIndex + 1).getRoot();
-            countryNoteListSubPanel.countryNoteListView.getChildren().add(node);
+            countryNoteListSubPanel.addNoteListCard(new NoteListCard(countryNote, noteIndex + 1));
             noteIndex++;
         }
         if (countryNoteObservableList.size() != 0) {
@@ -130,6 +125,10 @@ public class CountryNoteListPanel extends UiPart<Region> {
             countryNoteListContainer.setStyle("-fx-border-color: #FF3333; -fx-border-radius: 20");
             countryNoteScrollPane.setMinHeight(30.0);
             countryNoteScrollPane.setPrefHeight(200.0);
+        }
+
+        public void addNoteListCard(NoteListCard noteListCard) {
+            countryNoteListView.getChildren().add(noteListCard.getRoot());
         }
     }
 

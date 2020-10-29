@@ -3,10 +3,12 @@ package seedu.address.model.country;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.note.CountryNote;
 
 /**
@@ -14,14 +16,11 @@ import seedu.address.model.note.CountryNote;
  */
 public class CountryNotesManager {
 
-    private final ObservableList<CountryNote> internalCountryNoteList = FXCollections.observableArrayList();
-    private final SortedList<CountryNote> internalCountryNoteSortedList = new SortedList<>(internalCountryNoteList);
-    private final ObservableList<CountryNote> internalCountryNoteUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalCountryNoteSortedList);
+    private static final Logger logger = LogsCenter.getLogger(LogsCenter.class);
 
-    public CountryNotesManager() {
-        internalCountryNoteSortedList.setComparator(CountryNote::compareTo);
-    }
+    private final ObservableList<CountryNote> internalCountryNoteList = FXCollections.observableArrayList();
+    private final ObservableList<CountryNote> internalCountryNoteUnmodifiableList =
+            FXCollections.unmodifiableObservableList(internalCountryNoteList);
 
     /**
      * Checks if {@code countryNote} already exists.
