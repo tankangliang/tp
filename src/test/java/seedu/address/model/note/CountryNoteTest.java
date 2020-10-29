@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -74,7 +73,8 @@ public class CountryNoteTest {
         assertEquals(countryNote.hashCode(), new CountryNote(COUNTRY_NOTE_CONTENT, COUNTRY).hashCode());
 
         // different country -> different hashcode
-        assertNotEquals(countryNote.hashCode(), new CountryNote(COUNTRY_NOTE_CONTENT, new Country("AL")).hashCode());
+        assertNotEquals(countryNote.hashCode(),
+                new CountryNote(COUNTRY_NOTE_CONTENT, new Country("AL")).hashCode());
 
         // different note content -> different hashcode
         assertNotEquals(countryNote.hashCode(), new CountryNote("new country note", COUNTRY).hashCode());
