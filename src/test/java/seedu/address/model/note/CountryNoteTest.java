@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -72,7 +73,8 @@ public class CountryNoteTest {
         assertEquals(countryNote.hashCode(), new CountryNote(COUNTRY_NOTE_CONTENT, COUNTRY).hashCode());
 
         // different country -> different hashcode
-        assertNotEquals(countryNote.hashCode(), new CountryNote(COUNTRY_NOTE_CONTENT, new Country("AL")).hashCode());
+        assertNotEquals(countryNote.hashCode(),
+                new CountryNote(COUNTRY_NOTE_CONTENT, new Country("AL")).hashCode());
 
         // different note content -> different hashcode
         assertNotEquals(countryNote.hashCode(), new CountryNote("new country note", COUNTRY).hashCode());
@@ -81,6 +83,18 @@ public class CountryNoteTest {
         CountryNote countryNoteWithTags = new CountryNote(COUNTRY_NOTE_CONTENT, COUNTRY);
         countryNoteWithTags.setTags(Set.of(new Tag("tag1")));
         assertNotEquals(countryNote.hashCode(), countryNoteWithTags.hashCode());
+    }
+
+    @Test
+    public void constructor_countryNote_ensureEqualsExpected() {
+        String content = "content";
+        Country country = new Country("SG");
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("t"));
+        CountryNote c = new CountryNote(content, country, tags);
+        assertEquals(content, c.getNoteContent());
+        assertEquals(country, c.getCountry());
+        assertEquals(tags, c.getTags());
     }
 
 }

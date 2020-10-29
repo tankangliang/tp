@@ -34,7 +34,8 @@ public class HelpWindow extends UiPart<Stage> {
             + "country filter c/COUNTRY_CODE\n"
             + "country note view [c/COUNTRY_CODE]\n"
             + "country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...\n"
-            + "country note delete INDEX";
+            + "country note delete INDEX\n"
+            + "country note edit INDEX (nt/NOTE_STRING) (t/TAG)...";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
