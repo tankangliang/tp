@@ -1,8 +1,7 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CountryNoteEditCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.TagNoteMap;
@@ -21,37 +19,39 @@ public class CountryNoteEditCommandParserTest {
 
     private final TagNoteMap tagNoteMap = new TagNoteMap();
     private final CountryNoteEditCommandParser parser = new CountryNoteEditCommandParser(tagNoteMap);
+    private final String invalidCommandError = "Invalid command format! \n"
+            + "country note edit: Edits the country note at the given index in the last viewed country note list panel.\n"
+            + "Parameters: INDEX (nt/NOTE_STRING ) (t/TAG)...\n"
+            + "Example: country note edit 1 nt/better government stability in recent months";
+    private final String invalidIndexError = "Index is not a non-zero unsigned integer.";
+    private final String invalidTagError = "Tags names should be alphanumeric and have a maximum of 45 characters";
+    private final String invalidNoteError = "Notes should not be blank";
 
     @Test
     public void parse_withIndexWithNoteWithTag_returnsExpected() {
-        try {
-            CountryNote c = new CountryNote("abc", Country.NULL_COUNTRY);
-            Set<Tag> tags = new HashSet<>();
-            tags.add(new Tag("a"));
-            c.setTags(tags);
-            CountryNoteEditCommand expected = new CountryNoteEditCommand(Index.fromOneBased(1), c);
+        CountryNote c = new CountryNote("abc", Country.NULL_COUNTRY);
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("a"));
+        c.setTags(tags);
+        CountryNoteEditCommand expected = new CountryNoteEditCommand(Index.fromOneBased(1), c);
 
-            CountryNoteEditCommand actual = parser.parse(" 1 nt/abc t/a");
-            assertEquals(expected, actual);
-        } catch (ParseException e) {
-            fail();
-        }
+        assertParseSuccess(parser, " 1 nt/abc t/a", expected);
     }
 
     @Test
     public void parse_noIndexWithNoteNoTag_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(" nt/abc "));
-        assertThrows(ParseException.class, () -> parser.parse(" nt/y"));
-        assertThrows(ParseException.class, () -> parser.parse(" abc nt/y"));
-        assertThrows(ParseException.class, () -> parser.parse(" a 1 a nt/abc"));
+        assertParseFailure(parser, " nt/abc", invalidCommandError);
+        assertParseFailure(parser, " nt/y", invalidCommandError);
+        assertParseFailure(parser, " abc nt/abc", invalidIndexError);
+        assertParseFailure(parser, " a 1 a nt/abc", invalidIndexError);
     }
 
     @Test
     public void parse_withIndexNoNoteNoTag_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse(" 1 "));
-        assertThrows(ParseException.class, () -> parser.parse(" 1 t/"));
-        assertThrows(ParseException.class, () -> parser.parse(" 1 nt/"));
-        assertThrows(ParseException.class, () -> parser.parse(" 1 nt/ t/"));
+        assertParseFailure(parser, " 1  ", invalidCommandError);
+        assertParseFailure(parser, " 1 t/", invalidTagError);
+        assertParseFailure(parser, " 1 nt/", invalidNoteError);
+        assertParseFailure(parser, " 1 nt/ t/", invalidTagError);
     }
 
 }
