@@ -3,6 +3,7 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.AMY;
 import static seedu.address.testutil.TypicalClients.BOB;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysClient;
@@ -39,18 +40,12 @@ public class ClientListCardTest extends GuiUnitTest {
     public void equals() {
         ClientListCard amyClientListCard = new ClientListCard(AMY, 0);
 
+        // basic equals tests
+        basicEqualsTests(amyClientListCard);
+
         // same person, same index -> returns true
         ClientListCard copy = new ClientListCard(AMY, 0);
         assertEquals(copy, amyClientListCard);
-
-        // same object -> returns true
-        assertEquals(amyClientListCard, amyClientListCard);
-
-        // null -> returns false
-        assertNotEquals(amyClientListCard, null);
-
-        // different types -> returns false
-        assertNotEquals(amyClientListCard, 0);
 
         // different person, same index -> returns false
         assertNotEquals(new ClientListCard(BOB, 0), amyClientListCard);

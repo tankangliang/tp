@@ -1,9 +1,9 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import org.junit.jupiter.api.Test;
 
@@ -125,6 +125,9 @@ public class VersionTest {
         Version one;
         Version another;
 
+        // basic equals tests
+        basicEqualsTests(new Version(1, 1, 20, false));
+
         one = new Version(0, 0, 0, false);
         another = new Version(0, 0, 0, false);
         assertTrue(one.equals(another));
@@ -132,10 +135,6 @@ public class VersionTest {
         one = new Version(100, 191, 275, true);
         another = new Version(100, 191, 275, true);
         assertTrue(one.equals(another));
-
-        assertFalse(one.equals(null));
-
-        assertFalse(one.equals(1));
     }
 
     private void verifyVersionParsedCorrectly(String versionString,

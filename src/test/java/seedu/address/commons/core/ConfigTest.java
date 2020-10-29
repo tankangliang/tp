@@ -3,8 +3,7 @@ package seedu.address.commons.core;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import java.nio.file.Paths;
 import java.util.logging.Level;
@@ -36,14 +35,9 @@ public class ConfigTest {
     }
 
     @Test
-    public void equalsMethod() {
-        assertNotNull(defaultConfig);
-
-        // same object same class -> equal
-        assertTrue(defaultConfig.equals(defaultConfig));
-
-        // null -> not equal
-        assertFalse(defaultConfig.equals(null));
+    public void equals() {
+        // basic equals tests
+        basicEqualsTests(defaultConfig);
 
         // different log -> not equal
         Config differentLog = new Config();

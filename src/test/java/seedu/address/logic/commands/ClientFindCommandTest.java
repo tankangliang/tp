@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_CLIENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.CARL;
 import static seedu.address.testutil.TypicalClients.ELLE;
 import static seedu.address.testutil.TypicalClients.FIONA;
@@ -24,8 +25,9 @@ import seedu.address.model.client.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code ClientFindCommand}.
  */
 public class ClientFindCommandTest {
-    private Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+
+    private final Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+    private final Model expectedModel = new ModelManager(getTypicalTbmManager(), new UserPrefs());
 
     @Test
     public void equals() {
@@ -37,18 +39,12 @@ public class ClientFindCommandTest {
         ClientFindCommand findFirstCommand = new ClientFindCommand(firstPredicate);
         ClientFindCommand findSecondCommand = new ClientFindCommand(secondPredicate);
 
-        // same object -> returns true
-        assertTrue(findFirstCommand.equals(findFirstCommand));
+        // basic equals tests
+        basicEqualsTests(findFirstCommand);
 
         // same values -> returns true
         ClientFindCommand findFirstCommandCopy = new ClientFindCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(findFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(findFirstCommand.equals(null));
 
         // different client -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
@@ -80,4 +76,5 @@ public class ClientFindCommandTest {
     private NameContainsKeywordsPredicate preparePredicate(String userInput) {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
+
 }

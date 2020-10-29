@@ -53,7 +53,7 @@ public class ClientEditCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientEditCommand.MESSAGE_USAGE);
 
-    private ClientEditCommandParser parser = new ClientEditCommandParser();
+    private final ClientEditCommandParser parser = new ClientEditCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -204,4 +204,5 @@ public class ClientEditCommandParserTest {
         expectedCommand = new ClientEditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
+
 }

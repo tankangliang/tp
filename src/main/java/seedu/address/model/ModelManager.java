@@ -172,6 +172,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteCountryNote(CountryNote countryNoteToDelete) {
         requireNonNull(countryNoteToDelete);
+        tagNoteMap.deleteNote(countryNoteToDelete);
         tbmManager.deleteCountryNote(countryNoteToDelete);
     }
 
@@ -246,8 +247,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<CountryNote> getFilteredCountryNoteList() {
-        return filteredCountryNotes;
+    public ObservableList<CountryNote> getSortedFilteredCountryNoteList() {
+        return filteredCountryNotes.sorted(CountryNote::compareTo);
     }
 
     @Override

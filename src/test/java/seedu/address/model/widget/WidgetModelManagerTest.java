@@ -2,6 +2,7 @@ package seedu.address.model.widget;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.AMY;
 import static seedu.address.testutil.TypicalClients.BOB;
 
@@ -11,6 +12,12 @@ import seedu.address.model.client.Client;
 import seedu.address.testutil.ClientBuilder;
 
 public class WidgetModelManagerTest {
+
+    @Test
+    public void equals_basicTests() {
+        // basic equals tests
+        basicEqualsTests(WidgetModel.initWidget().getWidgetContent());
+    }
 
     @Test
     public void setContent_sameClient_isEqual() {

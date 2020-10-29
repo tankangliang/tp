@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNTRY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEZONE;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -45,8 +44,6 @@ public class CommandTestUtil {
     public static final String VALID_CONTRACT_EXPIRY_DATE_BOB = "13-12-2021";
     public static final String VALID_LAST_MODIFIED_INSTANT_AMY = "2020-10-10T00:00:00.000000Z";
     public static final String VALID_LAST_MODIFIED_INSTANT_BOB = "2020-11-11T00:00:00.000000Z";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -64,8 +61,6 @@ public class CommandTestUtil {
             " " + PREFIX_CONTRACT_EXPIRY_DATE + VALID_CONTRACT_EXPIRY_DATE_AMY;
     public static final String CONTRACT_EXPIRY_DATE_DESC_BOB =
             " " + PREFIX_CONTRACT_EXPIRY_DATE + VALID_CONTRACT_EXPIRY_DATE_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -73,7 +68,6 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_COUNTRY_DESC = " " + PREFIX_COUNTRY + "ZZ"; // not a valid country code
     public static final String INVALID_TIMEZONE_DESC = " " + PREFIX_TIMEZONE + "GT+8"; // not a valid timezone input
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_CONTRACT_EXPIRY_DATE_DESC =
             " " + PREFIX_CONTRACT_EXPIRY_DATE + "31-2-2020"; // 31st of Feb is not a valid date
 
