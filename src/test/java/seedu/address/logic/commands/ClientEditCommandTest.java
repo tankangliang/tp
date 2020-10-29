@@ -48,28 +48,6 @@ public class ClientEditCommandTest {
         model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
     }
 
-//    @Test
-//    public void execute_someFieldsSpecifiedUnfilteredList_success() {
-//        model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
-//        Index indexLastClient = Index.fromOneBased(model.getSortedFilteredClientList().size());
-//        Client lastClient = model.getSortedFilteredClientList().get(indexLastClient.getZeroBased());
-//
-//        ClientBuilder clientInList = new ClientBuilder(lastClient);
-//        Client editedClient = clientInList.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).build();
-//
-//        EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
-//                .withPhone(VALID_PHONE_BOB).build();
-//
-//        ClientEditCommand clientEditCommand = new ClientEditCommand(indexLastClient, descriptor);
-//
-//        String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
-//
-//        Model expectedModel = new ModelManager(new TbmManager(model.getTbmManager()), new UserPrefs());
-//        expectedModel.setClient(lastClient, editedClient);
-//        expectedModel.initialiseTagNoteMap();
-//        assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
-//    }
-
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
         Client editedClient = new ClientBuilder().build();
