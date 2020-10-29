@@ -10,7 +10,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyTbmManager;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.CountryNote;
-import seedu.address.model.widget.WidgetObject;
 
 /**
  * API of the Logic component
@@ -33,11 +32,11 @@ public interface Logic {
     ReadOnlyTbmManager getTbmManager();
 
     /**
-     * Returns the content of the widget view box.
+     * Returns the client of the widget view box.
      *
-     * @return WidgetObject.
+     * @return Client.
      */
-    WidgetObject getWidgetContent();
+    Client getWidgetClient();
 
     /** Returns an unmodifiable view of the filtered list of clients */
     ObservableList<Client> getFilteredClientList();

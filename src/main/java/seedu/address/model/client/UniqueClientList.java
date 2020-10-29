@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Iterator;
 import java.util.List;
 
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.exceptions.ClientNotFoundException;
@@ -24,7 +25,9 @@ import seedu.address.model.client.exceptions.DuplicateClientException;
  */
 public class UniqueClientList implements Iterable<Client> {
 
-    private final ObservableList<Client> internalList = FXCollections.observableArrayList();
+    // Initialize observableArrayList with a Callback that monitors change in the clients' notes list
+    private final ObservableList<Client> internalList = FXCollections.observableArrayList(client ->
+            new Observable[] { client.getClientNotesAsObservableSet() });
     private final ObservableList<Client> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 

@@ -5,41 +5,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import guitests.guihandles.WidgetViewBoxHandle;
-import seedu.address.model.widget.WidgetObject;
+import seedu.address.model.client.Client;
+import seedu.address.model.note.Note;
+import seedu.address.testutil.TypicalClients;
 
 /**
  * GUI unit test for WidgetViewBox. Test done to ensure the integrity of content displayed does not regress in future
  * refactoring.
  */
 public class WidgetViewBoxTest extends GuiUnitTest {
-
-    private static final WidgetObject TEST_OBJECT = new WidgetObject();
-    private static final String FIRST_LINE = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,";
-    private static final String SECOND_LINE = "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-    private static final String THIRD_LINE = "Ut enim ad minim veniam,";
-    private static final String FOURTH_LINE = "quis nostrud exercitation ullamco laboris nisi ut aliquip ex consequat.";
-    private static final String FIFTH_LINE = "Duis aute irure dolor in reprehenderit in voluptate vesse cillum dolore.";
-    private static final String SIXTH_LINE = "Excepteur sint occaecat cupidatat non proident,";
-    private static final String SEVENTH_LINE = "sunt in culpa qui officia deserunt mollit anim id est laborum.";
-    private static final String EIGHTH_LINE = "Sed ut perspiciatis unde omnis iste error sit voluptatem accusantium.";
-    private static final String NINTH_LINE = "totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et.";
-
-    @BeforeAll
-    public static void setupObject() {
-        TEST_OBJECT.set(FIRST_LINE, SECOND_LINE, THIRD_LINE, FOURTH_LINE, FIFTH_LINE, SIXTH_LINE, SEVENTH_LINE,
-                EIGHTH_LINE, NINTH_LINE);
-    }
+    private static final Client AMY = TypicalClients.AMY;
 
     @Test
     public void display() {
-        WidgetViewBox widgetViewBox = WidgetViewBox.init(TEST_OBJECT);
+        WidgetViewBox widgetViewBox = WidgetViewBox.init();
+        widgetViewBox.updateClientDisplay(AMY);
+        AMY.addClientNote(new Note("Birthday TMR"));
         uiPartExtension.setUiPart(widgetViewBox);
 
-        assertViewBoxDisplay(widgetViewBox, TEST_OBJECT);
+
+        assertViewBoxDisplay(widgetViewBox, AMY);
     }
 
     /**
@@ -52,7 +40,7 @@ public class WidgetViewBoxTest extends GuiUnitTest {
         * A bug raised here https://bugs.java.com/bugdatabase/view_bug.do?bug_id=7082429.
         */
         assumeFalse(guiRobot.isHeadlessMode(), "Test skipped in headless mode.");
-        WidgetViewBox widgetViewBox = new WidgetViewBox();
+        WidgetViewBox widgetViewBox = WidgetViewBox.init();
 
         uiPartExtension.setUiPart(widgetViewBox);
 
@@ -63,21 +51,23 @@ public class WidgetViewBoxTest extends GuiUnitTest {
     @Test
     public void updateContentToEmptyObject_updatesProperly_newObjectIsSuccessfullyUpdated() {
         // This is primarily testing that the textclock does not show itself during an update.
-        WidgetViewBox widgetViewBox = WidgetViewBox.init(TEST_OBJECT);
-        WidgetObject newObj = new WidgetObject();
-        widgetViewBox.update(newObj);
+        WidgetViewBox widgetViewBox = WidgetViewBox.init();
+        widgetViewBox.updateClientDisplay(AMY);
+        Client benson = TypicalClients.BENSON;
+        widgetViewBox.updateClientDisplay(benson);
         uiPartExtension.setUiPart(widgetViewBox);
 
-        assertViewBoxDisplay(widgetViewBox, newObj);
+        assertViewBoxDisplay(widgetViewBox, benson);
     }
 
     @Test
     public void equals() {
-        WidgetViewBox obj1 = WidgetViewBox.init(TEST_OBJECT);
-        WidgetViewBox obj2 = WidgetViewBox.init(TEST_OBJECT);
-        WidgetObject differentWidgetObject = new WidgetObject();
-        differentWidgetObject.set("different");
-        WidgetViewBox obj3 = WidgetViewBox.init(differentWidgetObject);
+        WidgetViewBox obj1 = WidgetViewBox.init();
+        obj1.updateClientDisplay(AMY);
+        WidgetViewBox obj2 = WidgetViewBox.init();
+        obj2.updateClientDisplay(AMY);
+        WidgetViewBox obj3 = WidgetViewBox.init();
+        obj3.updateClientDisplay(TypicalClients.BENSON);
 
         // basic equals tests
         basicEqualsTests(obj1);
@@ -89,14 +79,13 @@ public class WidgetViewBoxTest extends GuiUnitTest {
         assertFalse(obj1.equals(obj3));
     }
 
-    private void assertViewBoxDisplay(WidgetViewBox widgetViewBox , WidgetObject expectedObject) {
+    private void assertViewBoxDisplay(WidgetViewBox widgetViewBox , Client expectedClient) {
         guiRobot.pauseForHuman();
 
         WidgetViewBoxHandle widgetViewBoxHandle = new WidgetViewBoxHandle(widgetViewBox.getRoot());
 
         // Testing using the equals method of handler.
-        assertTrue(widgetViewBoxHandle.equals(expectedObject));
+        assertTrue(widgetViewBoxHandle.equals(expectedClient));
     }
 
 }
-
