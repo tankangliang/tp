@@ -5,7 +5,7 @@ title: User Guide
 <!-- NTS: end every sentence with a period -->
 <div>
     <div>
-        <img src="images/TBMBRAND.png" width="160px">
+        <img src="images/TBM_BRAND.png" width="160px">
     </div>
     <p>
         <h3><i>Welcome to the Travelling BusinessMan User Guide!</i></h3>
@@ -30,7 +30,7 @@ title: User Guide
 
 ## Quickstart
 
-<p>Before you start using <strong><i>TBM</i></strong>, </p>
+Before you start using **_TBM_**, 
 
 1. Ensure you have Java 11.
 
@@ -42,11 +42,11 @@ title: User Guide
 
 1. Run `java -jar tbm.jar`.
 
-Now that you have started TBM, 
+Now that you have started **_TBM_**, 
 
 1. Type any command in the command box and press Enter to execute it.
 
-1. (Recommended) The [`help`](#Viewing-help-help) command will show a help page of some commonly used commands to fully utilise TBM, especially if you are a new user of TBM,
+1. (Recommended) The [`help`](#Viewing-help-help) command will show a help page of some commonly used commands to fully utilise **_TBM_**, this is extremely useful if you are a new user,
 
    * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
@@ -79,13 +79,13 @@ Now that you have started TBM,
 
 ### Viewing all saved clients: `list`
 
-Shows a list of all clients in the TBM.
+Shows a list of all clients in the **_TBM_**.
 
 Format: `list`
 
 ### Viewing help: `help`
 
-Shows commonly used commands for TBM in a new help window. Pressing Esc will close this window.
+Shows commonly used commands for **_TBM_** in a new help window. Pressing Esc will close this window.
 
 Format: `help`
 
@@ -240,7 +240,7 @@ Examples:
 ### Viewing notes for a country: `country note view`
 
 Views the list of country notes from the Country which corresponds to the given country code.
-If no country code is given, all country notes in TBM will be shown.
+If no country code is given, all country notes in **_TBM_** will be shown.
 
 Format: `country note view [c/COUNTRY_CODE]`
 
@@ -301,7 +301,7 @@ Format: `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...`
 Examples:
 
 * `suggest by/available` Obtains a list of clients where the time is 1800-2200 in the client's timezone (off work hours).
-* `suggest by/frequency` Obtains a list of clients based on the last time their details were edited in TBM. Clients who have not been contacted for a longer period will be the first in the list.
+* `suggest by/frequency` Obtains a list of clients based on the last time their details were edited in **_TBM_**. Clients who have not been contacted for a longer period will be the first in the list.
 * `suggest by/contract` Obtains a list of clients based on their current contract details. Clients whose contracts are expiring will be shown first.
 * `suggest by/contract by/available` Similar to `suggest by/contract` but only available clients will be shown.
 
@@ -321,7 +321,7 @@ Format: `exit`
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TBM home folder.<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous **_TBM_** home folder.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
