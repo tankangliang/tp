@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEZONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +27,7 @@ import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
+import seedu.address.model.note.Note;
 
 /**
  * Edits the details of an existing client in the address book.
@@ -86,6 +88,7 @@ public class ClientEditCommand extends Command {
 
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+        model.initialiseTagNoteMap();
         return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_SUCCESS, editedClient));
     }
 
@@ -105,9 +108,11 @@ public class ClientEditCommand extends Command {
         ContractExpiryDate updatedContractExpiryDate =
                 editClientDescriptor.getContractExpiryDate().orElse(clientToEdit.getContractExpiryDate());
         LastModifiedInstant updatedLastModifiedInstant = new LastModifiedInstant();
-
-        return new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry, updatedTimezone,
-                updatedContractExpiryDate, updatedLastModifiedInstant);
+        LinkedHashSet<Note> retainedClientNotes = new LinkedHashSet<>(clientToEdit.getClientNotes());
+        Client newClient = new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry,
+                updatedTimezone, updatedContractExpiryDate, updatedLastModifiedInstant);
+        retainedClientNotes.stream().forEach(clientNote -> newClient.addClientNote(clientNote));
+        return newClient;
     }
 
     @Override
@@ -140,6 +145,7 @@ public class ClientEditCommand extends Command {
         private Country country;
         private Timezone timezone;
         private ContractExpiryDate contractExpiryDate;
+
 
         public EditClientDescriptor() {}
 

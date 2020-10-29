@@ -14,16 +14,22 @@ import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.TbmManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
+import seedu.address.model.note.Note;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 
@@ -74,7 +80,7 @@ public class ClientEditCommandTest {
 
         Model expectedModel = new ModelManager(new TbmManager(model.getTbmManager()), new UserPrefs());
         expectedModel.setClient(lastClient, editedClient);
-
+        expectedModel.initialiseTagNoteMap();
         assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
     }
 
@@ -86,7 +92,7 @@ public class ClientEditCommandTest {
         String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
         Model expectedModel = new ModelManager(new TbmManager(model.getTbmManager()), new UserPrefs());
-
+        expectedModel.initialiseTagNoteMap();
         assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
     }
 
@@ -103,6 +109,7 @@ public class ClientEditCommandTest {
 
         Model expectedModel = new ModelManager(new TbmManager(model.getTbmManager()), new UserPrefs());
         expectedModel.setClient(model.getSortedFilteredClientList().get(0), editedClient);
+        expectedModel.initialiseTagNoteMap();
 
         assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
     }
@@ -154,6 +161,34 @@ public class ClientEditCommandTest {
 
         assertCommandFailure(clientEditCommand, model, Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
     }
+
+    // Editing a client's non-note related fields should retain existing notes.
+    @Test
+    public void execute_changeClientName_preserveExistingClientNotes() throws CommandException {
+        Note clientNote = new Note("this note needs to persist after client gets edited");
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("niceTag"));
+        clientNote.setTags(tags);
+        Index indexLastClient = Index.fromOneBased(model.getSortedFilteredClientList().size());
+        Client lastClient = model.getSortedFilteredClientList().get(indexLastClient.getZeroBased());
+        model.addClientNote(lastClient, clientNote);
+        assertTrue(model.getSortedFilteredClientNotesList().size() == 1);
+        ClientBuilder clientInList = new ClientBuilder(lastClient); // rename to currentClient
+        Client editedClient = clientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
+        editedClient.addClientNote(clientNote);
+        EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).build();
+        ClientEditCommand clientEditCommand = new ClientEditCommand(indexLastClient, descriptor);
+        String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
+        Model expectedModel = new ModelManager(new TbmManager(model.getTbmManager()), new UserPrefs());
+        expectedModel.setClient(lastClient, editedClient);
+        expectedModel.initialiseTagNoteMap();
+        assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
+        clientEditCommand.execute(model);
+        assertTrue(model.hasClient(editedClient));
+
+    }
+
 
     @Test
     public void equals() {
