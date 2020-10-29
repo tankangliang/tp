@@ -55,8 +55,7 @@ public class CountryNoteEditCommandParser implements Parser<CountryNoteEditComma
         }
 
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
-        CountryNote countryNote = new CountryNote(note.getNoteContent(), Country.NULL_COUNTRY);
-        countryNote.setTags(tags);
+        CountryNote countryNote = new CountryNote(note.getNoteContent(), Country.NULL_COUNTRY, tags);
 
         return new CountryNoteEditCommand(targetIndex, countryNote);
     }

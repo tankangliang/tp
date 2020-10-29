@@ -75,7 +75,7 @@ public class CountryNoteEditCommand extends Command {
         tags.addAll(countryNote.getTags());
 
         // if previously note has UNTAGGED and now it has additional tags, remove UNTAGGED
-        if (tags.size() > 1 && tags.contains(Tag.UNTAGGED)) {
+        if (tags.size() > 1) {
             tags.remove(Tag.UNTAGGED);
         }
 

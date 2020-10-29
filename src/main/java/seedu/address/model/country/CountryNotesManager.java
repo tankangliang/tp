@@ -79,8 +79,8 @@ public class CountryNotesManager {
      * @param newCountryNote The new country note.
      */
     public void setCountryNote(CountryNote oldCountryNote, CountryNote newCountryNote) {
+        assert hasCountryNote(oldCountryNote) : "old country note must exist in internal list";;
         int targetIndx = internalCountryNoteList.indexOf(oldCountryNote);
-        assert targetIndx >= 0 : "old country note must exist in internal list";
         internalCountryNoteList.set(targetIndx, newCountryNote);
     }
 
