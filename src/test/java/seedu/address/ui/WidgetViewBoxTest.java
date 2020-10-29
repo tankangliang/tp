@@ -78,7 +78,7 @@ public class WidgetViewBoxTest extends GuiUnitTest {
         assertFalse(obj1.equals(obj3));
     }
 
-    private void assertViewBoxDisplay(WidgetViewBox widgetViewBox , Client client) {
+    private void assertViewBoxDisplay(WidgetViewBox widgetViewBox , Client expectedClient) {
         guiRobot.pauseForHuman();
 
         WidgetViewBoxHandle widgetViewBoxHandle = new WidgetViewBoxHandle(widgetViewBox.getRoot());
@@ -88,4 +88,3 @@ public class WidgetViewBoxTest extends GuiUnitTest {
     }
 
 }
-
