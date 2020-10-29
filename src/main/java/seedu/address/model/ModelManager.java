@@ -180,6 +180,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setCountryNote(CountryNote oldCountryNote, CountryNote newCountryNote) {
+        requireAllNonNull(oldCountryNote, newCountryNote);
+        this.tagNoteMap.editNote(oldCountryNote, newCountryNote);
+        tbmManager.setCountryNote(oldCountryNote, newCountryNote);
+    }
+
+    @Override
     public void addClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
         target.addClientNote(clientNote);
