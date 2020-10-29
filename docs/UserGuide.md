@@ -21,6 +21,18 @@ title: User Guide
     </p>
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
+ ![Clients](images/command-screenshots/client_view.png) 
+ ![Country](images/command-screenshots/country_note_view.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're  trying TBM out for the first  time.
+</div>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Table of Contents
 
 * Table of Contents
@@ -51,14 +63,6 @@ Now that you have started **_TBM_**,
    * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 --------------------------------------------------------------------------------------------------------------------
-
- ![Clients](images/command-screenshots/client_view.png) |  ![Country](images/command-screenshots/country_note_view.png)
-
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're  trying TBM out for the first  time.
-</div>
 
 ## Features
 
@@ -117,8 +121,7 @@ Example:
 Views the client specified by the `INDEX` parameter.
 <div markdown="block" class="alert alert-info">
 
-**:information_source:** Please refer to the [this](#view-for-client) if you need to be re
--acquainted with the UI for client related commands
+**:information_source:** Please refer to the [this](#view-for-client) if you need to be re-acquainted with the UI for client related commands
 </div>
 
 Format: `client view INDEX`
@@ -312,8 +315,7 @@ Examples:
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:** Please refer to the [this](#appendix-a---introduction-to-the-ui) if you need to be re
--acquainted with the UI for country related commands
+**:information_source:** Please refer to the [this](#appendix-a---introduction-to-the-ui) if you need to be re-acquainted with the UI for country related commands
 </div>
 
 
