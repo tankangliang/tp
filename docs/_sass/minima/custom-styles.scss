@@ -18,6 +18,9 @@ table {
     &:nth-child(odd) {
       background-color: #fcfbf8;
     }
+    &:nth-child(even) {
+      background-color: #faf9f6;
+    }
   }
 }
 
