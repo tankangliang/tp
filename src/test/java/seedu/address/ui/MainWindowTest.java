@@ -3,7 +3,8 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.ui.HelpWindow.USERGUIDE_URL;
 
 import java.awt.Toolkit;
@@ -23,6 +24,8 @@ import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.commands.ClientViewCommand;
+import seedu.address.logic.commands.CountryNoteAddCommand;
 import seedu.address.model.ModelManager;
 import seedu.address.storage.JsonTbmManagerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -88,11 +91,25 @@ public class MainWindowTest extends GuiUnitTest {
         terminal.inputCommand("country note add c/SG nt/shamaladingdong");
         terminal.inputCommand("country note add c/SG nt/chingchangchongdingdong");
 
-        // bad command
+        // unknown command
         terminal.inputCommand("client viewf");
+        String unknownCommandMessage = getResultMessage();
+        assertEquals(MESSAGE_UNKNOWN_COMMAND, unknownCommandMessage);
+
+        // some invalid command usage
+        terminal.inputCommand("client view");
+        String resultMessage = getResultMessage();
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientViewCommand.MESSAGE_USAGE);
+        assertEquals(expectedMessage, resultMessage);
+
+        terminal.inputCommand("country note add");
+        String resultMessage2 = getResultMessage();
+        String expectedMessage2 = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CountryNoteAddCommand.MESSAGE_USAGE);
+        assertEquals(expectedMessage2, resultMessage2);
+
 
         // skips the rest if headless
-        assumeFalse(guiRobot.isHeadlessMode());
+        //assumeFalse(guiRobot.isHeadlessMode());
 
         // viewing clients
         terminal.inputCommand("client view 1");
@@ -104,6 +121,7 @@ public class MainWindowTest extends GuiUnitTest {
 
         // viewing country
         terminal.inputCommand("country note view");
+        pauseToEyeball();
 
     }
 
@@ -111,16 +129,26 @@ public class MainWindowTest extends GuiUnitTest {
         assertEquals(value, guiRobot.lookup(id).queryLabeled().getText());
     }
 
+    private String getResultMessage() {
+        return guiRobot.lookup("#resultDisplay").queryTextInputControl().getText();
+    }
+
+    private void pauseToEyeball() {
+        guiRobot.pauseForHuman();
+        guiRobot.pauseForHuman();
+        guiRobot.pauseForHuman();
+    }
+
     /**
      * For gui interaction.
      */
-    class InteractionTerminal {
+    private class InteractionTerminal {
         private TextInputControl textInputControl;
-        InteractionTerminal(TextInputControl textInputControl) {
+        public InteractionTerminal(TextInputControl textInputControl) {
             this.textInputControl = textInputControl;
         }
 
-        void inputCommand(String command) {
+        public void inputCommand(String command) {
             guiRobot.clickOn("#commandTextField");
             textInputControl.setText(command);
             guiRobot.pauseForHuman();

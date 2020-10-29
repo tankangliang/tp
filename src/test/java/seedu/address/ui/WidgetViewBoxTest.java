@@ -8,7 +8,6 @@ import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import org.junit.jupiter.api.Test;
 
 import guitests.guihandles.WidgetViewBoxHandle;
-import javafx.collections.FXCollections;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
 import seedu.address.testutil.TypicalClients;
@@ -41,7 +40,7 @@ public class WidgetViewBoxTest extends GuiUnitTest {
         * A bug raised here https://bugs.java.com/bugdatabase/view_bug.do?bug_id=7082429.
         */
         assumeFalse(guiRobot.isHeadlessMode(), "Test skipped in headless mode.");
-        WidgetViewBox widgetViewBox = new WidgetViewBox(FXCollections.emptyObservableList());
+        WidgetViewBox widgetViewBox = WidgetViewBox.init();
 
         uiPartExtension.setUiPart(widgetViewBox);
 
@@ -67,6 +66,8 @@ public class WidgetViewBoxTest extends GuiUnitTest {
         obj1.updateClientDisplay(AMY);
         WidgetViewBox obj2 = WidgetViewBox.init();
         obj2.updateClientDisplay(AMY);
+        WidgetViewBox obj3 = WidgetViewBox.init();
+        obj3.updateClientDisplay(TypicalClients.BENSON);
 
         // basic equals tests
         basicEqualsTests(obj1);

@@ -16,7 +16,7 @@ public class WidgetModelManagerTest {
     @Test
     public void equals_basicTests() {
         // basic equals tests
-        basicEqualsTests(WidgetModel.initWidget().getWidgetContent());
+        basicEqualsTests(WidgetModel.initWidget());
     }
 
     @Test

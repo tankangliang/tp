@@ -20,14 +20,14 @@ public interface WidgetModel {
     /**
      * Sets the content to be displayed in the view box to be of that content.
      *
-     * @param client
+     * @param client To be set in the widget.
      */
     void setWidgetClient(Client client);
 
     /**
      * Returns the widget content object.
      *
-     * @return WidgetObject
+     * @return The client displayed for the widget.
      */
     Client getWidgetClient();
 }

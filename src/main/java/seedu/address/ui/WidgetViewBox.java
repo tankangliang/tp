@@ -76,7 +76,7 @@ public class WidgetViewBox extends UiPart<Region> {
     /**
      * Updates the current content of the widget view box to the given content.
      *
-     * @param client The new content.
+     * @param client The new client.
      */
     public void updateClientDisplay(Client client) {
         textClock.pause();

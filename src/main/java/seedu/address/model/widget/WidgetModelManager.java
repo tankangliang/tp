@@ -21,22 +21,12 @@ public class WidgetModelManager implements WidgetModel {
         return new WidgetModelManager();
     }
 
-    /**
-     * Sets the client to be displayed to a given client.
-     *
-     * @param client
-     */
     @Override
     public void setWidgetClient(Client client) {
         logger.info("Setting client of widget to: " + client.getName().fullName);
         this.client = client;
     }
 
-    /**
-     * Returns the widget client.
-     *
-     * @return The client.
-     */
     @Override
     public Client getWidgetClient() {
         logger.info("Retrieving client of widget: " + client.getName().fullName);
