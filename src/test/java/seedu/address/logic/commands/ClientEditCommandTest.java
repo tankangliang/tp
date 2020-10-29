@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
@@ -76,9 +77,9 @@ public class ClientEditCommandTest {
         Client lastClient = model.getSortedFilteredClientList().get(indexLastClient.getZeroBased());
 
         ClientBuilder clientInList = new ClientBuilder(lastClient);
-        Client editedClient = clientInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
+        Client editedClient = clientInList.withName(VALID_NAME_AMY).withPhone(VALID_PHONE_BOB).build();
 
-        EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_BOB)
+        EditClientDescriptor descriptor = new EditClientDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).build();
 
         ClientEditCommand clientEditCommand = new ClientEditCommand(indexLastClient, descriptor);
@@ -94,7 +95,7 @@ public class ClientEditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         ClientEditCommand clientEditCommand = new ClientEditCommand(INDEX_FIRST_CLIENT, new EditClientDescriptor());
-        Client editedClient = model.getSortedFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
+        Client editedClient = model.getSortedFilteredClientList().get(INDEX_FIRST_CLIENT.getSZeroBased());
 
         String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
 
@@ -193,8 +194,8 @@ public class ClientEditCommandTest {
         assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
         clientEditCommand.execute(model);
         assertTrue(model.hasClient(editedClient));
-
     }
+
 
 
     @Test

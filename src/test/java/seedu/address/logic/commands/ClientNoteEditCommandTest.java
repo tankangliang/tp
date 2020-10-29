@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -55,6 +56,37 @@ class ClientNoteEditCommandTest {
         ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx, clientNoteIdx, newEditNote);
         assertCommandSuccess(clientNoteEditCommand, newModel, expectedResult, expectedModel);
     }
+
+    // todo: add test to show untagged tag removal (in upcoming commit)
+//    @Test
+//    public void execute_addTagToExistingNote_defaultUntaggedTagIsRemoved() throws CommandException {
+//        Index clientIdx = Index.fromOneBased(1);
+//        Index clientNoteIdx = Index.fromOneBased(1);
+//        Note untaggedNote = new Note(NOTE_CONTENT_1);
+//
+//        Tag newTag = new Tag("newTag");
+//        Note taggedNote = new Note("initially will be untagged, then will have new tag");
+//        Set<Tag> expectedTags = new HashSet<>();
+//        expectedTags.add(newTag);
+//        taggedNote.setTags(expectedTags);
+//        Model newModel = new ModelManager();
+//        Client client1 = new ClientBuilder().withName("client1").build();
+//        newModel.addClient(client1);
+//        newModel.addClientNote(client1, untaggedNote); // adds an untagged note, default tag of "untagged" will exist
+//        newModel.initialiseTagNoteMap();
+//
+//        Model expectedModel = new ModelManager();
+//        Client client1Copy = new ClientBuilder().withName("client1").build();
+//        expectedModel.addClient(client1Copy);
+//        expectedModel.addClientNote(client1Copy, taggedNote);
+//        expectedModel.initialiseTagNoteMap();
+//
+//        CommandResult expectedResult = new CommandResult(ClientNoteEditCommand.MESSAGE_EDIT_CLIENT_NOTE_SUCCESS);
+//        ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx, clientNoteIdx, taggedNote);
+//        assertCommandSuccess(clientNoteEditCommand, newModel, expectedResult, expectedModel);
+//        clientNoteEditCommand.execute(model);
+//    }
+
 
     @Test
     public void execute_validClientIdxValidNoteIdxNewTaggedNote_preservesTagHistory() {

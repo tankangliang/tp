@@ -66,10 +66,10 @@ public class ClientNoteEditCommand extends Command {
         accumulatedTags.addAll(newNote.getTags());
         // because parser used tagNoteMap#getUniqueTags, it is okay for there to be duplicates in previous tags and
         // new Note's tags. Overwriting will keep one of the two duplicates, and they are the same object reference.
-        newNote.setTags(accumulatedTags);
-        if (accumulatedTags.size() <= 1 && accumulatedTags.contains(Tag.UNTAGGED)) {
+        if (accumulatedTags.size() > 1 && accumulatedTags.contains(Tag.UNTAGGED)) {
             accumulatedTags.remove(Tag.UNTAGGED);
         }
+        newNote.setTags(accumulatedTags);
         model.editClientNote(associatedClient, noteToEdit, newNote);
         return new CommandResult(MESSAGE_EDIT_CLIENT_NOTE_SUCCESS);
     }
