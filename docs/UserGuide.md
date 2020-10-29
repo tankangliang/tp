@@ -259,13 +259,15 @@ Examples:
 
 ### Editing notes for a country: `country note edit`
 
-Edits a note that is associated with a specific country at the given index in the last viewed country note list panel.
+Edits a note that is associated with a specific country at the given index in the last viewed country note list panel. 
+
+The country note list panel can be viewed using the command `country note view`.
 
 Format: `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...`
 
 Example:
 
-* `country note edit 1 nt/new government policy to support local development in cloud security t/contract` Edits the country note at index 1 of the last-viewed country notes panel to have the content "new government policy to support local development in cloud security" and a new tag "contract" in addition to the previous tags.
+* `country note edit 1 nt/new government policy to support local development in cloud security t/contract` Edits the top-most country note in the last-viewed country notes panel to have the content "new government policy to support local development in cloud security" and a new tag "contract" in addition to the previous tags.
 
 ### Deleting notes for a country: `country note delete`
 
