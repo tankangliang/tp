@@ -106,11 +106,9 @@ Example:
 
 ### Viewing a client: `client view`
 
-Views the client specified at the index.
+Views the client specified by the `INDEX` parameter.
 
 Format: `client view INDEX`
-
-* `INDEX` refers to the numbering beside each client in the current list in the graphical user interface.
 
 Example:
 
@@ -125,50 +123,82 @@ The information for the client at index 2 of the list will be shown. In the exam
 
 ### Finding clients: `client find`
 
-Finds clients whose names contain any of the given keywords
+Finds clients whose names contain any of the given keywords.
 
 Format: `client find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
 * Clients matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber` and `Bo Yang`.
 
 Examples:
 
-* `client find katya` 
+* Command: `client find katya` 
 
    Finds all clients with names that matches **katya**.
 
-* `client find Katya Hans` 
+* Command: `client find Katya Hans` 
 
    Finds all clients whose names contain either **Katya** or **Hans**.
 
 ### Editing a client: `client edit`
 
-Edits a client's information by their index in the list view.
+Edits a client's information by their index in the list view. Only edits the fields that have been passed in as parameters.
 
 Format: `client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_CODE) (tz/TIMEZONE) (ce/CONTRACT_EXPIRY)`
 
-* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes.
-* `INDEX` refers to the numbering beside each client in the current list in the graphical user interface.
-
 Examples:
 
-* `client edit 5 n/Katya` Only edits **name**, other fields remain the same.
-* `client edit 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg` Edits **name**, **phone number** and **email**, other fields remain the same.
-* `client edit 3 c/JP tz/GMT+7` Edits **country** to Japan and **timezone** to GMT+7.
+* Command: `client edit 5 n/Katya` 
+
+    Only edits **name** to `Katya`, other fields remain the same.
+
+* Command: `client edit 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg` 
+
+    Edits **name** to `Alek`, **phone number** to `34842097` and **email** to `dcsdcr@nus.edu.sg`, other fields remain the same.
+
+* Command: `client edit 1 c/JP tz/GMT+7` 
+
+    Edits **country** to `Japan` and **timezone** to `GMT+7`, other fields remain the same.
+
+Given the client below:
+
+```
+Client 1
+--------
+Name: Alex
+Phone: 911
+Country: Singapore
+Timezone: GMT+8
+...(other fields omitted)
+```
+Command: `client edit 1 c/JP tz/GMT+7`
+
+Alex's **country** and **timezone** will be edited and the following will be the result.
+
+```
+Client 1
+--------
+Name: Alex
+Phone: 911
+Country: Japan
+Timezone: GMT+7
+...(other fields omitted)
+```
 
 ### Deleting a client: `client delete`
 
-Deletes a client by their index in the viewable list panel.
+Deletes a client by their index in the list view.
 
 Format: `client delete INDEX`
 
 Example:
 
-* `client delete 5` Deletes the client at index 5 of the list panel.
+* Command: `client delete 5` 
+
+    Deletes the client at index 5 of the list panel.
 
 ### Saving data
 
@@ -180,9 +210,17 @@ Format: `client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...`
 
 Examples:
 
-* `client note add 1 t/pref nt/wants meetings to be as short as possible (preferably 30 mins)`
-* `client note add 2 t/pref nt/prefers emails to calls`
-* `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
+* Command: `client note add 1 t/pref nt/wants meetings to be as short as possible (preferably 30 mins)`
+
+    Adds a **note** with a **tag** to the **first** client in the list.
+    
+* Command: `client note add 2 nt/prefers emails to calls`
+    
+    Adds a **note** to the **second** client in the list.
+    
+* Command: `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
+
+    Adds a **note** with a **tag** to the **fourth** client in the list.
 
 ### Deleting client notes: `client note delete`
 
@@ -201,7 +239,7 @@ Notes:
 2. Hates cats [tag: pref]
 ```
 
-`client note delete 3 2`
+Command: `client note delete 3 2`
 
 The above command deletes the note regarding "Hates cats". The resulting information will look like:
 
@@ -213,9 +251,9 @@ Notes:
 
 ### Editing client notes: `client note edit`
 
-Edits a note of a client (denoted by that client's index) by the note's index.
+Edits a note of a client (denoted by that client's index) by the note's index. Supplying tags to the command will add the tags onto the current existing tags for that note.
 
-Format: `client note edit CLIENT_INDEX NOTE_INDEX (nt/NOTE_STRING) (t/TAG)...`
+Format: `client note edit CLIENT_INDEX NOTE_INDEX nt/NOTE_STRING [t/TAG]...`
 
 Examples:
 
@@ -229,15 +267,15 @@ Notes:
 3. Apprehensive of resigning contract [tag: meeting]
 ```
 
-* `client note edit 3 2 nt/Loves cats`
+Command: `client note edit 3 2 nt/Loves cats t/important`
 
-The original note containing "Hates cats" will be changed to "Loves cats" while retaining its original tag. The resulting list will look like:
+The original note containing "Hates cats" will be changed to "Loves cats" with an additional tag (on top of the existing one). The resulting list will look like:
 
 ```
 Client: 3
 Notes:
 1. Loves dogs [tag: pref]
-2. Loves cats [tag: pref]
+2. Loves cats [tag: pref, important]
 3. Apprehensive of resigning contract [tag: meeting]
 ```
 
@@ -247,45 +285,60 @@ Filters the list of clients by a specified country.
 
 Format: `country filter c/COUNTRY_CODE`
 
-* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes.
-
 Examples:
 
-* `country filter c/SG` Filters by contacts in Singapore.
-* `country filter c/RU` Filters by contacts in Russia.
+* Command: `country filter c/SG` 
+
+    Filters by contacts in Singapore.
+    
+* Command: `country filter c/RU` 
+
+    Filters by contacts in Russia.
 
 ### Viewing notes for a country: `country note view`
 
-Views the list of country notes from the Country which corresponds to the given country code.
+Views the list of country notes from the country specified by the country code.
 If no country code is given, all country notes in TBM will be shown.
 
 Format: `country note view [c/COUNTRY_CODE]`
 
-* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
-
 Examples:
 
-* `country note view`
-* `country note view c/SG`
-* `country note view c/IN`
-### Adding notes for a country: `country note add`
+* Command: `country note view`
 
+    All country notes in TBM will be displayed.
+    
+* Command: `country note view c/SG`
+
+    Only country notes for Singapore will be displayed.
+    
+* Command: `country note view c/IN`
+
+    Only country notes for India will be displayed.
+    
+### Adding notes for a country: `country note add`
 
 Adds a note that is associated with a specific country.
 
 Format: `country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...`
 
-* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
-
 Examples:
 
-* `country note add c/SG nt/has one of the lowest coporate taxes in the world t/tax`
-* `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
-* `country note add c/IN nt/is world's fastest growing economy`
+* Command: `country note add c/SG nt/has one of the lowest corporate taxes in the world t/tax`
+
+    Adds a **note** with a **tag** for Singapore.
+    
+* Command: `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
+
+    Adds a **note** with a **tag** for China.
+
+* Command: `country note add c/IN nt/is world's fastest growing economy`
+
+    Adds a **note** for India.
 
 ### Editing notes for a country: `country note edit`
 
-Edits a note that is associated with a specific country at the given index in the last viewed country note list panel. 
+Edits a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes. Supplying tags to the command will add the tags onto the current existing tags for that note.
 
 The country note list panel can be viewed using the command `country note view`.
 
@@ -293,19 +346,51 @@ Format: `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...`
 
 Example:
 
-* `country note edit 1 nt/new government policy to support local development in cloud security t/contract` Edits the first country note in the last-viewed country notes panel to have the content "new government policy to support local development in cloud security" and a new tag "contract" in addition to the previous tags.
+Given the list of country notes in the country note list panel:
+
+```
+China
+--------
+1. Speaks Mandarin [tag: language]
+
+Russia
+--------
+2. Speaks Russian [tag: language]
+
+Singapore
+--------
+3. Speaks English
+```
+
+Command: `country note edit 3 nt/Speaks Singlish t/language` 
+
+Edits the third country note in the country notes panel. In this case, it will be the note under Singapore. The resulting list will look like:
+
+```
+China
+--------
+1. Speaks Mandarin [tag: language]
+
+Russia
+--------
+2. Speaks Russian [tag: language]
+
+Singapore
+--------
+3. Speaks Singlish [tag: language]
+```
 
 ### Deleting notes for a country: `country note delete`
 
-Deletes a note that is associated with a specific country.
+Deletes a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes.
 
 Format: `country note delete INDEX`
 
-* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes.
-
 Example:
 
-* `country note delete 1` Deletes the country note at index 1 of the country notes list panel.
+* Command: `country note delete 1` 
+
+    Deletes the country note at index 1 of the country notes list panel.
 
 ### Getting suggestions on clients: `suggest`
 
@@ -313,19 +398,29 @@ Obtains a list of clients based on the suggestion type(s) passed in.
 
 Format: `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...`
 
-* SUGGESTION_TYPE must be one of the following: `frequency`, `available` or `contract`.
-
 Examples:
 
-* `suggest by/available` Obtains a list of clients where the time is 1800-2200 in the client's timezone (off work hours).
-* `suggest by/frequency` Obtains a list of clients based on the last time their details were edited in TBM. Clients who have not been contacted for a longer period will be the first in the list.
-* `suggest by/contract` Obtains a list of clients based on their current contract details. Clients whose contracts are expiring will be shown first.
-* `suggest by/contract by/available` Similar to `suggest by/contract` but only available clients will be shown.
+* Command: `suggest by/available` 
 
+    Obtains a list of clients where the time is 1800-2200 in the client's timezone (off work hours).
+
+* Command: `suggest by/frequency` 
+
+    Obtains a list of clients based on the last time their details were edited in TBM. Clients who have not been contacted for a longer period will be the first in the list.
+
+* `suggest by/contract` 
+
+    Obtains a list of clients based on their current contract details. Clients whose contracts are expiring will be shown first.
+
+* `suggest by/contract by/available` 
+
+    Obtains a list of clients based on their current contract details but only clients who are available will be shown. Clients whose contracts are expiring will be shown first.
 
 ### Clearing all entries: `clear`
 
-Deletes all existing information from the application. You will start from a clean slate.
+Deletes all existing information from the application. The end result will be an application with no client/note/country data.
+
+Format: `clear`
 
 ### Exiting the program: `exit`
 
@@ -354,7 +449,7 @@ Action | Format, Examples
 **Delete client** | `client delete INDEX`<br> e.g., `client delete 3`
 **Add client note** | `client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...` <br> e.g., `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
 **Delete client note** | `client note delete CLIENT_INDEX NOTE_INDEX` <br> e.g., `client note delete 3 2`
-**Edit client note** | `client note edit CLIENT_INDEX NOTE_INDEX (nt/NOTE_STRING) (t/TAG)...` <br> e.g., `client note edit 3 2 nt/Loves cats`
+**Edit client note** | `client note edit CLIENT_INDEX NOTE_INDEX nt/NOTE_STRING [t/TAG]...` <br> e.g., `client note edit 3 2 nt/Loves cats`
 **Filter by country** | `country filter c/COUNTRY_CODE` <br> e.g., `country filter c/SG`
 **View country note** | `country note view [c/COUNTRY_CODE]` <br> e.g., `country note view c/SG`
 **Add country note** | `country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...` <br> e.g., `country note add c/SG nt/has one of the lowest coporate taxes in the world t/tax`
@@ -379,4 +474,5 @@ Parameter | Prefix | Constraints, Examples
 **CONTRACT_EXPIRY_DATE** | `ce/` | Date should be given in the format "DD-MM-YYYY". <br> e.g. `ce/10-10-2020`
 **NOTE_STRING** | `nt/` | Notes can take any values, and it should not be blank. <br> e.g. `nt/Likes cats`
 **TAG** | `t/` | Tags names should be alphanumeric and have a maximum of 45 characters. <br> e.g. `t/important`
-
+**SUGGESTION_TYPE** | `by/` | Suggestion types can only be either `available`, `contract` or `frequency`. <br> e.g. `by/available`
+**INDEX** | - | Index is a number greater than 0 that is based on the numberings beside each client or note. <br> e.g. `1` would refer to the first client or note.
