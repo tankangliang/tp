@@ -19,14 +19,14 @@ public class CountryNoteEditCommandParserTest {
 
     private final TagNoteMap tagNoteMap = new TagNoteMap();
     private final CountryNoteEditCommandParser parser = new CountryNoteEditCommandParser(tagNoteMap);
-    private final String invalidCommandError = "Invalid command format! \n"
+    private static final String INVALID_COMMAND_ERROR = "Invalid command format! \n"
             + "country note edit: "
             + "Edits the country note at the given index in the last viewed country note list panel.\n"
             + "Parameters: INDEX (nt/NOTE_STRING ) (t/TAG)...\n"
             + "Example: country note edit 1 nt/better government stability in recent months";
-    private final String invalidIndexError = "Index is not a non-zero unsigned integer.";
-    private final String invalidTagError = "Tags names should be alphanumeric and have a maximum of 45 characters";
-    private final String invalidNoteError = "Notes should not be blank";
+    private static final String INVALID_INDEX_ERROR = "Index is not a non-zero unsigned integer.";
+    private static final String INVALID_TAG_ERROR = "Tags names should be alphanumeric and have a maximum of 45 characters";
+    private static final String INVALID_NOTE_ERROR = "Notes should not be blank";
 
     @Test
     public void parse_withIndexWithNoteWithTag_returnsExpected() {
@@ -41,18 +41,18 @@ public class CountryNoteEditCommandParserTest {
 
     @Test
     public void parse_noIndexWithNoteNoTag_throwsParseException() {
-        assertParseFailure(parser, " nt/abc", invalidCommandError);
-        assertParseFailure(parser, " nt/y", invalidCommandError);
-        assertParseFailure(parser, " abc nt/abc", invalidIndexError);
-        assertParseFailure(parser, " a 1 a nt/abc", invalidIndexError);
+        assertParseFailure(parser, " nt/abc", INVALID_COMMAND_ERROR);
+        assertParseFailure(parser, " nt/y", INVALID_COMMAND_ERROR);
+        assertParseFailure(parser, " abc nt/abc", INVALID_INDEX_ERROR);
+        assertParseFailure(parser, " a 1 a nt/abc", INVALID_INDEX_ERROR);
     }
 
     @Test
     public void parse_withIndexNoNoteNoTag_throwsParseException() {
-        assertParseFailure(parser, " 1  ", invalidCommandError);
-        assertParseFailure(parser, " 1 t/", invalidTagError);
-        assertParseFailure(parser, " 1 nt/", invalidNoteError);
-        assertParseFailure(parser, " 1 nt/ t/", invalidTagError);
+        assertParseFailure(parser, " 1  ", INVALID_COMMAND_ERROR);
+        assertParseFailure(parser, " 1 t/", INVALID_TAG_ERROR);
+        assertParseFailure(parser, " 1 nt/", INVALID_NOTE_ERROR);
+        assertParseFailure(parser, " 1 nt/ t/", INVALID_TAG_ERROR);
     }
 
 }
