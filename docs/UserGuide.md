@@ -11,13 +11,13 @@ title: User Guide
         <h3><i>Welcome to the Travelling BusinessMan User Guide!</i></h3>
     </p>
     <p>
-        <strong><i>Travelling BusinessMan</i></strong>, <strong><i>TBM</i></strong>, is a companion that goes beyond being just a simple contact management application.
+        <strong><i>Travelling BusinessMan</i></strong>, <strong><i>TBM</i></strong>, is a specialised contact management system targeted at business people with many international clients.
     </p>
     <p>
         <strong><i>TBM</i></strong> sorts and organises your clients for you, streamlines your workflow, improves business efficiency and so much more. All this is at the convenience of the Command-Line Interface. <strong><i>TBM</i></strong> does more than just tracking your clients!<br>
     </p>
     <p>
-        This user guide will be a starting point for you in getting yourself oriented with how <strong><i>TBM</i></strong> works and how you can integrate it into your professional journey!
+        This user guide will be a starting point for you in getting oriented with how <strong><i>TBM</i></strong> works and how you can integrate it into your professional journey!
     </p>
 </div>
 
@@ -36,35 +36,38 @@ title: User Guide
 
 1. Download the application file (.jar file) from [here](https://github.com/AY2021S1-CS2103T-F11-4/tp/releases).
 
-1. Double click on the `tbm.jar` file found in the directory it was downloaded to.
-
-1. Alternatively, from the directory containing `tbm.jar`, shift right click and open any shell terminal in the current directory.
-
-1. Run `java -jar tbm.jar`.
+1. Navigate to the directory that the application file was downloaded to. To start the application:
+ 
+    1. Double click on the `tbm.jar` file and the application will start shortly.
+    
+    1. Alternatively, open any shell terminal in the current directory and run the command `java -jar tbm.jar`.
 
 Now that you have started TBM, 
 
 1. Type any command in the command box and press Enter to execute it.
 
-1. (Recommended) The [`help`](#Viewing-help-help) command will show a help page of some commonly used commands to fully utilise TBM, especially if you are a new user of TBM,
+1. (Recommended for new users) The [`help`](#Viewing-help-help) command will show a help page of some commonly used commands to fully utilise TBM.
 
    * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-
-1. Alternatively, you can refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
+The following section outlines the commands supported by TBM. A short description is given for each command along with the format that they should be executed with. Complex commands also come with examples to demonstrate the purpose that the command serve.
+
+Certain commands require parameters and the summary of these parameters as well as their prefixes and constraints can be found in our [parameters summary table](#Parameter-constraints-summary)
+
+A summary of all commands can be found in our [command summary table](#Command-summary)
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `client add n/NAME`, `NAME` is a parameter which can be used as `client add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [ce/CONTRACT_EXPIRY_DATE]` can be used as `n/John Doe ce/2-3-2020`(both supplied) or as `n/John Doe`(optional parameter missing).
 
 * Items in round brackets mean that you have to supply at least one of them.<br>
   e.g. `INDEX (n/NAME) (n/PHONE_NUMBER)` can be used as `1 n/John Doe` or `1 p/98899889` or `1 n/John Doe p/98899889`, but not as `1` (i.e. both items are not supplied).
@@ -79,7 +82,7 @@ Now that you have started TBM,
 
 ### Viewing all saved clients: `list`
 
-Shows a list of all clients in the TBM.
+Shows a list of all clients in TBM.
 
 Format: `list`
 
@@ -91,14 +94,15 @@ Format: `help`
 
 ### Adding a client: `client add`
 
-Adds a new client to the app.
+Adds a new client to TBM.
 
 Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE [ce/CONTRACT_EXPIRY_DATE]`
 
 Example:
 
-* `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+3 ce/2-3-2020`<br>
-  This adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok, Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**, contract expiry date **2 Mar 2020**.
+* Command: `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+3 ce/2-3-2020`<br>
+  
+  Adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok, Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**, contract expiry date **2 Mar 2020**.
 
 ### Viewing a client: `client view`
 
@@ -106,28 +110,40 @@ Views the client specified at the index.
 
 Format: `client view INDEX`
 
+* `INDEX` refers to the numbering beside each client in the current list in the graphical user interface.
+
 Example:
 
-* `client view 2` Views information for the client at index 2 of the list panel.
+Given the current list of clients:
+```
+1. Katya
+2. Alex
+```
+Command: `client view 2` 
+ 
+The information for the client at index 2 of the list will be shown. In the example above, Alex's information will be displayed.
 
 ### Finding clients: `client find`
 
-Finds clients whose names contain any of the given keywords, or whose country of residence contains any of the given keywords.<br>
-:bulb: This is a good way to find clients belonging to a country. Although beware, if your client has a country name in their name, it will cause some issues!
+Finds clients whose names contain any of the given keywords
 
 Format: `client find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name and country are searched.
+* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Clients matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo Russia` will return `Hans Gruber`, `Bo Yang`, `Alice Katya`.
+* Clients matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber` and `Bo Yang`.
 
 Examples:
 
-* `client find katya` Finds all clients with names that matches **katya**.
-* `client find Russia` Finds all clients associated to the country of **Russia**.
-* `client find Katya Russia` Finds all clients who are either named **katya** or are associated to **Russia**.
+* `client find katya` 
+
+   Finds all clients with names that matches **katya**.
+
+* `client find Katya Hans` 
+
+   Finds all clients whose names contain either **Katya** or **Hans**.
 
 ### Editing a client: `client edit`
 
@@ -136,6 +152,7 @@ Edits a client's information by their index in the list view.
 Format: `client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_CODE) (tz/TIMEZONE) (ce/CONTRACT_EXPIRY)`
 
 * COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes.
+* `INDEX` refers to the numbering beside each client in the current list in the graphical user interface.
 
 Examples:
 
@@ -347,3 +364,19 @@ Action | Format, Examples
 **Clear** | `clear`
 **Exit** | `exit`
 **Help** | `help`
+
+
+## Parameter constraints summary
+
+Parameter | Prefix | Constraints, Examples
+--------|------------------| ----------
+**NAME** | `n/` | Names should only contain alphanumeric characters and spaces, and it should not be blank. <br> e.g. `n/John Doe`
+**PHONE_NUMBER** | `p/` | Phone numbers should only contain numbers, and it should be at least 3 digits long. <br> e.g. `p/9123 4567`
+**EMAIL** | `e/` | Emails should be of the format local-part@domain. <br> e.g. `e/katya@yahoo.com`
+**ADDRESS** |`a/` | Addresses can take any values, and it should not be blank. <br> e.g. `Vladivostok, Nevelskogo, bld. 15, appt. 256`
+**COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes. <br> e.g. `c/SG` (Singapore)
+**TIMEZONE** | `tz/` | Timezone should be given in offsets relative to [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time). <br> e.g. `tz/GMT+8`
+**CONTRACT_EXPIRY_DATE** | `ce/` | Date should be given in the format "DD-MM-YYYY". <br> e.g. `ce/10-10-2020`
+**NOTE_STRING** | `nt/` | Notes can take any values, and it should not be blank. <br> e.g. `nt/Likes cats`
+**TAG** | `t/` | Tags names should be alphanumeric and have a maximum of 45 characters. <br> e.g. `t/important`
+
