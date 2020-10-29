@@ -95,7 +95,6 @@ public class ClientEditCommandTest {
         Client editedClient = model.getSortedFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
         String expectedMessage = String.format(ClientEditCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
         Model expectedModel = new ModelManager(new TbmManager(model.getTbmManager()), new UserPrefs());
-        expectedModel.initialiseTagNoteMap();
         assertCommandSuccess(clientEditCommand, model, expectedMessage, expectedModel);
     }
 
