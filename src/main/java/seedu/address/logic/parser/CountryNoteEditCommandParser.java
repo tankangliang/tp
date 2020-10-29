@@ -18,7 +18,7 @@ import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new CountryNoteEditCommandParser object.
+ * Parses input arguments and creates a new CountryNoteEditCommand object.
  */
 public class CountryNoteEditCommandParser implements Parser<CountryNoteEditCommand> {
 

@@ -110,6 +110,6 @@ public class CountryNoteEditCommand extends Command {
         // state check
         CountryNoteEditCommand c = (CountryNoteEditCommand) other;
 
-        return targetIndex.equals(c.targetIndex) && countryNote.equals(c.countryNote);
+        return targetIndex.equals(c.targetIndex) && countryNote.equals(c.countryNote) && tags.equals(c.tags);
     }
 }
