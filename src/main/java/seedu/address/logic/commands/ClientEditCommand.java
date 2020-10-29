@@ -111,7 +111,7 @@ public class ClientEditCommand extends Command {
         LinkedHashSet<Note> retainedClientNotes = new LinkedHashSet<>(clientToEdit.getClientNotes());
         Client newClient = new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry,
                 updatedTimezone, updatedContractExpiryDate, updatedLastModifiedInstant);
-        retainedClientNotes.stream().forEach(clientNote -> newClient.addClientNote(clientNote));
+        retainedClientNotes.forEach(clientNote -> newClient.addClientNote(clientNote));
         return newClient;
     }
 
@@ -145,7 +145,6 @@ public class ClientEditCommand extends Command {
         private Country country;
         private Timezone timezone;
         private ContractExpiryDate contractExpiryDate;
-
 
         public EditClientDescriptor() {}
 

@@ -197,8 +197,6 @@ public class ClientEditCommandTest {
         assertTrue(model.hasClient(editedClient));
     }
 
-
-
     @Test
     public void equals() {
         final ClientEditCommand standardCommand = new ClientEditCommand(INDEX_FIRST_CLIENT, DESC_AMY);
