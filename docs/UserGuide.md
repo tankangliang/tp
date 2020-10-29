@@ -11,13 +11,13 @@ title: User Guide
         <h3><i>Welcome to the Travelling BusinessMan User Guide!</i></h3>
     </p>
     <p>
-        <strong><i>Travelling BusinessMan</i></strong>, <strong><i>TBM</i></strong>, is a companion that goes beyond being just a simple contact management application.
+        <strong><i>Travelling BusinessMan</i></strong>, <strong><i>TBM</i></strong>, is a specialised contact management system targeted at business people with many international clients.
     </p>
     <p>
         <strong><i>TBM</i></strong> sorts and organises your clients for you, streamlines your workflow, improves business efficiency and so much more. All this is at the convenience of the Command-Line Interface. <strong><i>TBM</i></strong> does more than just tracking your clients!<br>
     </p>
     <p>
-        This user guide will be a starting point for you in getting yourself oriented with how <strong><i>TBM</i></strong> works and how you can integrate it into your professional journey!
+        This user guide will be a starting point for you in getting oriented with how <strong><i>TBM</i></strong> works and how you can integrate it into your professional journey!
     </p>
 </div>
 
@@ -36,35 +36,38 @@ Before you start using **_TBM_**,
 
 1. Download the application file (.jar file) from [here](https://github.com/AY2021S1-CS2103T-F11-4/tp/releases).
 
-1. Double click on the `tbm.jar` file found in the directory it was downloaded to.
+1. Navigate to the directory that the application file was downloaded to. To start the application:
 
-1. Alternatively, from the directory containing `tbm.jar`, shift right click and open any shell terminal in the current directory.
+    1. Double click on the `tbm.jar` file and the application will start shortly.
 
-1. Run `java -jar tbm.jar`.
+    1. Alternatively, open any shell terminal in the current directory and run the command `java -jar tbm.jar`.
 
-Now that you have started **_TBM_**, 
+Now that you have started **_TBM_**,
 
 1. Type any command in the command box and press Enter to execute it.
 
-1. (Recommended) The [`help`](#Viewing-help-help) command will show a help page of some commonly used commands to fully utilise **_TBM_**, this is extremely useful if you are a new user,
+1. (Recommended for new users) The [`help`](#Viewing-help-help) command will show a help page of some commonly used commands to fully utilise **_TBM_**.
 
    * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-
-1. Alternatively, you can refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
+The following section outlines the commands supported by **_TBM_**. A short description is given for each command along with the format that they should be executed with. Complex commands also come with examples to demonstrate the purpose that the command serve.
+
+Certain commands require parameters and the summary of these parameters as well as their prefixes and constraints can be found in our [parameters summary table](#Parameter-constraints-summary)
+
+A summary of all commands can be found in our [command summary table](#Command-summary)
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `client add n/NAME`, `NAME` is a parameter which can be used as `client add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/NAME [ce/CONTRACT_EXPIRY_DATE]` can be used as `n/John Doe ce/2-3-2020`(both supplied) or as `n/John Doe`(optional parameter missing).
 
 * Items in round brackets mean that you have to supply at least one of them.<br>
   e.g. `INDEX (n/NAME) (n/PHONE_NUMBER)` can be used as `1 n/John Doe` or `1 p/98899889` or `1 n/John Doe p/98899889`, but not as `1` (i.e. both items are not supplied).
@@ -79,7 +82,7 @@ Now that you have started **_TBM_**,
 
 ### Viewing all saved clients: `list`
 
-Shows a list of all clients in the **_TBM_**.
+Shows a list of all clients in **_TBM_**.
 
 Format: `list`
 
@@ -91,67 +94,111 @@ Format: `help`
 
 ### Adding a client: `client add`
 
-Adds a new client to the app.
+Adds a new client to **_TBM_**.
 
 Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE [ce/CONTRACT_EXPIRY_DATE]`
 
 Example:
 
-* `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+3 ce/2-3-2020`<br>
-  This adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok, Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**, contract expiry date **2 Mar 2020**.
+* Command: `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+3 ce/2-3-2020`<br>
+
+  Adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok, Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**, contract expiry date **2 Mar 2020**.
 
 ### Viewing a client: `client view`
 
-Views the client specified at the index.
+Views the client specified by the `INDEX` parameter.
 
 Format: `client view INDEX`
 
 Example:
 
-* `client view 2` Views information for the client at index 2 of the list panel.
+Given the current list of clients:
+```
+1. Katya
+2. Alex
+```
+Command: `client view 2`
+
+The information for the client at index 2 of the list will be shown. In the example above, Alex's information will be displayed.
 
 ### Finding clients: `client find`
 
-Finds clients whose names contain any of the given keywords, or whose country of residence contains any of the given keywords.<br>
-:bulb: This is a good way to find clients belonging to a country. Although beware, if your client has a country name in their name, it will cause some issues!
+Finds clients whose names contain any of the given keywords.
 
 Format: `client find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name and country are searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Clients matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo Russia` will return `Hans Gruber`, `Bo Yang`, `Alice Katya`.
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Clients matching at least one keyword will be returned (i.e. OR search). e.g. `Hans Bo` will return `Hans Gruber` and `Bo Yang`.
 
 Examples:
 
-* `client find katya` Finds all clients with names that matches **katya**.
-* `client find Russia` Finds all clients associated to the country of **Russia**.
-* `client find Katya Russia` Finds all clients who are either named **katya** or are associated to **Russia**.
+* Command: `client find katya`
+
+   Finds all clients with names that matches **katya**.
+
+* Command: `client find Katya Hans`
+
+   Finds all clients whose names contain either **Katya** or **Hans**.
 
 ### Editing a client: `client edit`
 
-Edits a client's information by their index in the list view.
+Edits a client's information by their index in the list view. Only edits the fields that have been passed in as parameters.
 
 Format: `client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_CODE) (tz/TIMEZONE) (ce/CONTRACT_EXPIRY)`
 
-* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes.
-
 Examples:
 
-* `client edit 5 n/Katya` Only edits **name**, other fields remain the same.
-* `client edit 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg` Edits **name**, **phone number** and **email**, other fields remain the same.
-* `client edit 3 c/JP tz/GMT+7` Edits **country** to Japan and **timezone** to GMT+7.
+* Command: `client edit 5 n/Katya`
+
+    Only edits **name** to `Katya`, other fields remain the same.
+
+* Command: `client edit 4 n/Alek p/34842097 e/dcsdcr@nus.edu.sg`
+
+    Edits **name** to `Alek`, **phone number** to `34842097` and **email** to `dcsdcr@nus.edu.sg`, other fields remain the same.
+
+* Command: `client edit 1 c/JP tz/GMT+7`
+
+    Edits **country** to `Japan` and **timezone** to `GMT+7`, other fields remain the same.
+
+Given the client below:
+
+```
+Client 1
+--------
+Name: Alex
+Phone: 911
+Country: Singapore
+Timezone: GMT+8
+...(other fields omitted)
+```
+Command: `client edit 1 c/JP tz/GMT+7`
+
+Alex's **country** and **timezone** will be edited and the following will be the result.
+
+```
+Client 1
+--------
+Name: Alex
+Phone: 911
+Country: Japan
+Timezone: GMT+7
+...(other fields omitted)
+```
 
 ### Deleting a client: `client delete`
 
-Deletes a client by their index in the viewable list panel.
+Deletes a client by their index in the list view.
 
 Format: `client delete INDEX`
 
 Example:
 
-* `client delete 5` Deletes the client at index 5 of the list panel.
+* Command: `client delete 5`
+
+    Deletes the client at index 5 of the list panel.
 
 ### Saving data
 
@@ -163,9 +210,17 @@ Format: `client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...`
 
 Examples:
 
-* `client note add 1 t/pref nt/wants meetings to be as short as possible (preferably 30 mins)`
-* `client note add 2 t/pref nt/prefers emails to calls`
-* `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
+* Command: `client note add 1 t/pref nt/wants meetings to be as short as possible (preferably 30 mins)`
+
+    Adds a **note** with a **tag** to the **first** client in the list.
+
+* Command: `client note add 2 nt/prefers emails to calls`
+
+    Adds a **note** to the **second** client in the list.
+
+* Command: `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
+
+    Adds a **note** with a **tag** to the **fourth** client in the list.
 
 ### Deleting client notes: `client note delete`
 
@@ -184,7 +239,7 @@ Notes:
 2. Hates cats [tag: pref]
 ```
 
-`client note delete 3 2`
+Command: `client note delete 3 2`
 
 The above command deletes the note regarding "Hates cats". The resulting information will look like:
 
@@ -196,9 +251,9 @@ Notes:
 
 ### Editing client notes: `client note edit`
 
-Edits a note of a client (denoted by that client's index) by the note's index.
+Edits a note of a client (denoted by that client's index) by the note's index. Supplying tags to the command will add the tags onto the current existing tags for that note.
 
-Format: `client note edit CLIENT_INDEX NOTE_INDEX (nt/NOTE_STRING) (t/TAG)...`
+Format: `client note edit CLIENT_INDEX NOTE_INDEX nt/NOTE_STRING [t/TAG]...`
 
 Examples:
 
@@ -212,15 +267,15 @@ Notes:
 3. Apprehensive of resigning contract [tag: meeting]
 ```
 
-* `client note edit 3 2 nt/Loves cats`
+Command: `client note edit 3 2 nt/Loves cats t/important`
 
-The original note containing "Hates cats" will be changed to "Loves cats" while retaining its original tag. The resulting list will look like:
+The original note containing "Hates cats" will be changed to "Loves cats" with an additional tag (on top of the existing one). The resulting list will look like:
 
 ```
 Client: 3
 Notes:
 1. Loves dogs [tag: pref]
-2. Loves cats [tag: pref]
+2. Loves cats [tag: pref, important]
 3. Apprehensive of resigning contract [tag: meeting]
 ```
 
@@ -230,45 +285,60 @@ Filters the list of clients by a specified country.
 
 Format: `country filter c/COUNTRY_CODE`
 
-* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes.
-
 Examples:
 
-* `country filter c/SG` Filters by contacts in Singapore.
-* `country filter c/RU` Filters by contacts in Russia.
+* Command: `country filter c/SG`
+
+    Filters by contacts in Singapore.
+
+* Command: `country filter c/RU`
+
+    Filters by contacts in Russia.
 
 ### Viewing notes for a country: `country note view`
 
-Views the list of country notes from the Country which corresponds to the given country code.
+Views the list of country notes from the country specified by the country code.
 If no country code is given, all country notes in **_TBM_** will be shown.
 
 Format: `country note view [c/COUNTRY_CODE]`
 
-* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
-
 Examples:
 
-* `country note view`
-* `country note view c/SG`
-* `country note view c/IN`
-### Adding notes for a country: `country note add`
+* Command: `country note view`
 
+    All country notes in **_TBM_** will be displayed.
+
+* Command: `country note view c/SG`
+
+    Only country notes for Singapore will be displayed.
+
+* Command: `country note view c/IN`
+
+    Only country notes for India will be displayed.
+
+### Adding notes for a country: `country note add`
 
 Adds a note that is associated with a specific country.
 
 Format: `country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...`
 
-* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List of country codes](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes)
-
 Examples:
 
-* `country note add c/SG nt/has one of the lowest coporate taxes in the world t/tax`
-* `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
-* `country note add c/IN nt/is world's fastest growing economy`
+* Command: `country note add c/SG nt/has one of the lowest corporate taxes in the world t/tax`
+
+    Adds a **note** with a **tag** for Singapore.
+
+* Command: `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
+
+    Adds a **note** with a **tag** for China.
+
+* Command: `country note add c/IN nt/is world's fastest growing economy`
+
+    Adds a **note** for India.
 
 ### Editing notes for a country: `country note edit`
 
-Edits a note that is associated with a specific country at the given index in the last viewed country note list panel. 
+Edits a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes. Supplying tags to the command will add the tags onto the current existing tags for that note.
 
 The country note list panel can be viewed using the command `country note view`.
 
@@ -276,19 +346,51 @@ Format: `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...`
 
 Example:
 
-* `country note edit 1 nt/new government policy to support local development in cloud security t/contract` Edits the first country note in the last-viewed country notes panel to have the content "new government policy to support local development in cloud security" and a new tag "contract" in addition to the previous tags.
+Given the list of country notes in the country note list panel:
+
+```
+China
+--------
+1. Speaks Mandarin [tag: language]
+
+Russia
+--------
+2. Speaks Russian [tag: language]
+
+Singapore
+--------
+3. Speaks English
+```
+
+Command: `country note edit 3 nt/Speaks Singlish t/language`
+
+Edits the third country note in the country notes panel. In this case, it will be the note under Singapore. The resulting list will look like:
+
+```
+China
+--------
+1. Speaks Mandarin [tag: language]
+
+Russia
+--------
+2. Speaks Russian [tag: language]
+
+Singapore
+--------
+3. Speaks Singlish [tag: language]
+```
 
 ### Deleting notes for a country: `country note delete`
 
-Deletes a note that is associated with a specific country.
+Deletes a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes.
 
 Format: `country note delete INDEX`
 
-* COUNTRY_CODE is a 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes.
-
 Example:
 
-* `country note delete 1` Deletes the country note at index 1 of the country notes list panel.
+* Command: `country note delete 1`
+
+    Deletes the country note at index 1 of the country notes list panel.
 
 ### Getting suggestions on clients: `suggest`
 
@@ -296,19 +398,29 @@ Obtains a list of clients based on the suggestion type(s) passed in.
 
 Format: `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...`
 
-* SUGGESTION_TYPE must be one of the following: `frequency`, `available` or `contract`.
-
 Examples:
 
-* `suggest by/available` Obtains a list of clients where the time is 1800-2200 in the client's timezone (off work hours).
-* `suggest by/frequency` Obtains a list of clients based on the last time their details were edited in **_TBM_**. Clients who have not been contacted for a longer period will be the first in the list.
-* `suggest by/contract` Obtains a list of clients based on their current contract details. Clients whose contracts are expiring will be shown first.
-* `suggest by/contract by/available` Similar to `suggest by/contract` but only available clients will be shown.
+* Command: `suggest by/available`
 
+    Obtains a list of clients where the time is 1800-2200 in the client's timezone (off work hours).
+
+* Command: `suggest by/frequency`
+
+    Obtains a list of clients based on the last time their details were edited in **_TBM_**. Clients who have not been contacted for a longer period will be the first in the list.
+
+* `suggest by/contract`
+
+    Obtains a list of clients based on their current contract details. Clients whose contracts are expiring will be shown first.
+
+* `suggest by/contract by/available`
+
+    Obtains a list of clients based on their current contract details but only clients who are available will be shown. Clients whose contracts are expiring will be shown first.
 
 ### Clearing all entries: `clear`
 
-Deletes all existing information from the application. You will start from a clean slate.
+Deletes all existing information from the application. The end result will be an application with no client/note/country data.
+
+Format: `clear`
 
 ### Exiting the program: `exit`
 
@@ -337,7 +449,7 @@ Action | Format, Examples
 **Delete client** | `client delete INDEX`<br> e.g., `client delete 3`
 **Add client note** | `client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...` <br> e.g., `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
 **Delete client note** | `client note delete CLIENT_INDEX NOTE_INDEX` <br> e.g., `client note delete 3 2`
-**Edit client note** | `client note edit CLIENT_INDEX NOTE_INDEX (nt/NOTE_STRING) (t/TAG)...` <br> e.g., `client note edit 3 2 nt/Loves cats`
+**Edit client note** | `client note edit CLIENT_INDEX NOTE_INDEX nt/NOTE_STRING [t/TAG]...` <br> e.g., `client note edit 3 2 nt/Loves cats`
 **Filter by country** | `country filter c/COUNTRY_CODE` <br> e.g., `country filter c/SG`
 **View country note** | `country note view [c/COUNTRY_CODE]` <br> e.g., `country note view c/SG`
 **Add country note** | `country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...` <br> e.g., `country note add c/SG nt/has one of the lowest coporate taxes in the world t/tax`
@@ -347,3 +459,20 @@ Action | Format, Examples
 **Clear** | `clear`
 **Exit** | `exit`
 **Help** | `help`
+
+
+## Parameter constraints summary
+
+Parameter | Prefix | Constraints, Examples
+--------|------------------| ----------
+**NAME** | `n/` | Names should only contain alphanumeric characters and spaces, and it should not be blank. <br> e.g. `n/John Doe`
+**PHONE_NUMBER** | `p/` | Phone numbers should only contain numbers, and it should be at least 3 digits long. <br> e.g. `p/9123 4567`
+**EMAIL** | `e/` | Emails should be of the format local-part@domain. <br> e.g. `e/katya@yahoo.com`
+**ADDRESS** |`a/` | Addresses can take any values, and it should not be blank. <br> e.g. `Vladivostok, Nevelskogo, bld. 15, appt. 256`
+**COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes. <br> e.g. `c/SG` (Singapore)
+**TIMEZONE** | `tz/` | Timezone should be given in offsets relative to [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time). <br> e.g. `tz/GMT+8`
+**CONTRACT_EXPIRY_DATE** | `ce/` | Date should be given in the format "DD-MM-YYYY". <br> e.g. `ce/10-10-2020`
+**NOTE_STRING** | `nt/` | Notes can take any values, and it should not be blank. <br> e.g. `nt/Likes cats`
+**TAG** | `t/` | Tags names should be alphanumeric and have a maximum of 45 characters. <br> e.g. `t/important`
+**SUGGESTION_TYPE** | `by/` | Suggestion types can only be either `available`, `contract` or `frequency`. <br> e.g. `by/available`
+**INDEX** | - | Index is a number greater than 0 that is based on the numberings beside each client or note. <br> e.g. `1` would refer to the first client or note.

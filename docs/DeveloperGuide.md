@@ -10,9 +10,9 @@ This page contains step-by-step instructions on how to get started in contributi
 
 ### Travelling BusinessMan Design Concepts
 
-1. Lightweight/Portable: <strong><i>TBM</i></strong> has a small footprint and runs fast on any platform. 
+1. Lightweight/Portable: <strong><i>TBM</i></strong> has a small footprint and runs fast on any platform.
 
-1. Scalable: Software which does not deteriorate in performance with increasing data sizes. 
+1. Scalable: Software which does not deteriorate in performance with increasing data sizes.
 
 1. Extensible: A community driven software development process, which encourages innovative inputs and contributions from our users. Features are easily integrated into the application when needed.
 
@@ -184,16 +184,16 @@ Given below is an example usage scenario and how mapping mechanism behaves at ea
 #### Implementation
 
 The association between `Note` and `Country` is facilitated by `CountryNotesManager`.
-Internally, `CountryNotesManager` stores a list of country notes using an instance of `javafx.collections.ObservableList<CountryNote>`. 
+Internally, `CountryNotesManager` stores a list of country notes using an instance of `javafx.collections.ObservableList<CountryNote>`.
 By storing the list of country notes as an `ObservableList`, the UI would be able to track and immediately reflect any changes to the country notes list.
 
 It implements the following operations:
-* `CountryNotesManager#asUnmodifiableObservableList()` — Returns an unmodifiable `ObservableList<CountryNote>`. 
+* `CountryNotesManager#asUnmodifiableObservableList()` — Returns an unmodifiable `ObservableList<CountryNote>`.
 * `CountryNotesManager#hasCountryNote(CountryNote countryNote)`  — Returns true if the given `countryNote` already exists in the internal `ObservableList<CountryNote>`.
 * `CountryNotesManager#addCountryNote(CountryNote countryNote)`  — Adds the given `countryNote` to the internal `ObservableList<CountryNote>`.
 * `CountryNotesManager#deleteCountryNote(CountryNote countryNote)`  — Deletes the given `countryNote` from the internal `ObservableList<CountryNote>`.
 
-The following class diagram illustrates how the relevant classes in the `seedu.address.model` package are related to `CountryNote`. 
+The following class diagram illustrates how the relevant classes in the `seedu.address.model` package are related to `CountryNote`.
 
 ![Country Class Diagram](images/CountryClass.png)
 
