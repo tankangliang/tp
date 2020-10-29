@@ -57,6 +57,7 @@ public class ModelManager implements Model {
         sortedFilteredClients = new SortedList<>(filteredClients);
         filteredCountryNotes = new FilteredList<>(this.tbmManager.getCountryNoteList());
         this.tagNoteMap = new TagNoteMap();
+        this.initialiseTagNoteMap(); // init TagNoteMap upon construction of modelManager
     }
 
     public ModelManager() {
