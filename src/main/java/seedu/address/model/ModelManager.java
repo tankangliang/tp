@@ -147,6 +147,7 @@ public class ModelManager implements Model {
     public void setClient(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
         tbmManager.setClient(target, editedClient);
+        initialiseTagNoteMap();
     }
 
     @Override
