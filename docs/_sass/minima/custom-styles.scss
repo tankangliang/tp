@@ -13,6 +13,11 @@ div > img {
   margin: auto;
 }
 
+p > img {
+  display: block;
+  margin: auto;
+}
+
 table {
   tr {
     &:nth-child(odd) {
