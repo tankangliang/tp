@@ -15,8 +15,6 @@ import seedu.address.model.note.CountryNote;
  */
 public class CountryNotesManager {
 
-    private static final Logger logger = LogsCenter.getLogger(LogsCenter.class);
-
     private final ObservableList<CountryNote> internalCountryNoteList = FXCollections.observableArrayList();
     private final ObservableList<CountryNote> internalCountryNoteUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalCountryNoteList);
