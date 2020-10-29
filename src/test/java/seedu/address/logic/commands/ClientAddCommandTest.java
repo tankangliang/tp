@@ -31,7 +31,6 @@ import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.widget.WidgetObject;
 import seedu.address.testutil.ClientBuilder;
 
 public class ClientAddCommandTest {
@@ -165,18 +164,13 @@ public class ClientAddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        /**
-         * Sets the widget box contents to the given content.
-         *
-         * @param content
-         */
         @Override
-        public void setWidgetContent(Object content) {
+        public void setWidgetClient(Client client) {
             throw new AssertionError("this method should not be called.");
         }
 
         @Override
-        public WidgetObject getWidgetContent() {
+        public Client getWidgetClient() {
             throw new AssertionError("This method should not be called.");
         }
 

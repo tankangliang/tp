@@ -54,6 +54,7 @@ public class LogicManagerTest {
                 new JsonTbmManagerStorage(temporaryFolder.resolve("tbmManager.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         storage = new StorageManager(tbmManagerStorage, userPrefsStorage);
+        model.setWidgetClient(AMY);
         logic = new LogicManager(model, storage);
     }
 
@@ -68,7 +69,7 @@ public class LogicManagerTest {
         assertEquals(logic.getTbmManager(), model.getTbmManager());
         assertEquals(logic.getTbmManagerFilePath(), model.getTbmManagerFilePath());
         assertEquals(logic.getFilteredClientList(), model.getSortedFilteredClientList());
-        assertEquals(logic.getWidgetContent(), model.getWidgetContent());
+        assertEquals(logic.getWidgetClient(), model.getWidgetClient());
         assertEquals(logic.getGuiSettings(), model.getGuiSettings());
     }
 

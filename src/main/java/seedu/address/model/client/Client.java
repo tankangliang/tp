@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
 
@@ -29,7 +31,7 @@ public class Client {
     private final Country country;
     private final Timezone timezone;
     private final ContractExpiryDate contractExpiryDate;
-    private final Set<Note> clientNotes = new LinkedHashSet<>(); // todo: initialise this iff client has notes
+    private final ObservableSet<Note> clientNotes = FXCollections.observableSet(new LinkedHashSet<>());
     private final LastModifiedInstant lastModifiedInstant;
 
     /**
@@ -98,6 +100,9 @@ public class Client {
         return Collections.unmodifiableList(new ArrayList<>(getClientNotes()));
     }
 
+    public ObservableSet<Note> getClientNotesAsObservableSet() {
+        return clientNotes;
+    }
     /**
      * Adds a client note for this client.
      *

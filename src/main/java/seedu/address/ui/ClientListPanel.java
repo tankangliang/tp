@@ -23,7 +23,11 @@ public class ClientListPanel extends UiPart<Region> {
     public ClientListPanel(ObservableList<Client> clientList) {
         super(FXML);
         clientListView.setItems(clientList);
-        clientListView.setCellFactory(listView -> new ClientListViewCell());
+        clientListView.setCellFactory(listView -> {
+            ClientListViewCell clientListViewCell = new ClientListViewCell();
+            clientListViewCell.disableProperty().setValue(true);
+            return clientListViewCell;
+        });
     }
 
     // Selection test was removed due to lack of selection feature in AB3.
