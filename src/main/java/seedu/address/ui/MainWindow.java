@@ -115,7 +115,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         widgetViewBox = new WidgetViewBox();
-        countryNoteListPanel = new CountryNoteListPanel(logic.getFilteredCountryNoteList());
+        countryNoteListPanel = new CountryNoteListPanel(logic.getSortedFilteredCountryNoteList());
         widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
 
         clientListPanel = new ClientListPanel(logic.getFilteredClientList());

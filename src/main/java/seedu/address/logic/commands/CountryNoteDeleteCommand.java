@@ -36,7 +36,7 @@ public class CountryNoteDeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<CountryNote> lastShownList = model.getFilteredCountryNoteList();
+        List<CountryNote> lastShownList = model.getSortedFilteredCountryNoteList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_COUNTRY_NOTE_DISPLAYED_INDEX);

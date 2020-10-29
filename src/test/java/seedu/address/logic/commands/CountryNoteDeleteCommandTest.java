@@ -54,7 +54,7 @@ public class CountryNoteDeleteCommandTest {
 
     @Test
     public void execute_invalidCountryNoteIndex_throwsCommandException() {
-        Index invalidCountryNoteIndex = Index.fromOneBased(model.getFilteredCountryNoteList().size() + 1);
+        Index invalidCountryNoteIndex = Index.fromOneBased(model.getSortedFilteredCountryNoteList().size() + 1);
         CountryNoteDeleteCommand countryNoteDeleteCommand =
                 new CountryNoteDeleteCommand(invalidCountryNoteIndex);
         assertThrows(CommandException.class, () -> countryNoteDeleteCommand.execute(model));
