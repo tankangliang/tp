@@ -72,10 +72,6 @@ public class SampleDataUtil {
         for (Note note: getSampleClientNotes()) {
         }
 
-        for (CountryNote countryNote : getSampleCountryNotes()) {
-            sampleTm.addCountryNote(countryNote);
-        }
-
         return sampleTm;
     }
 }

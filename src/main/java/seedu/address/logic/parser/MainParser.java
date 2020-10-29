@@ -21,6 +21,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CountryFilterCommand;
 import seedu.address.logic.commands.CountryNoteAddCommand;
 import seedu.address.logic.commands.CountryNoteDeleteCommand;
+import seedu.address.logic.commands.CountryNoteEditCommand;
 import seedu.address.logic.commands.CountryNoteViewCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -158,6 +159,9 @@ public class MainParser {
 
         case CountryNoteDeleteCommand.COMMAND_WORD:
             return new CountryNoteDeleteCommandParser().parse(restOfCommand);
+
+        case CountryNoteEditCommand.COMMAND_WORD:
+            return new CountryNoteEditCommandParser(tagNoteMap).parse(restOfCommand);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

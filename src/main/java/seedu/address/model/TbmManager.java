@@ -148,6 +148,17 @@ public class TbmManager implements ReadOnlyTbmManager {
     }
 
     /**
+     * Replaces the old country note with the new country note.
+     *
+     * @param oldCountryNote The old country note.
+     * @param newCountryNote The new country note that replaces the old country note.
+     */
+    public void setCountryNote(CountryNote oldCountryNote, CountryNote newCountryNote) {
+        requireAllNonNull(oldCountryNote, newCountryNote);
+        countryNotesManager.setCountryNote(oldCountryNote, newCountryNote);
+    }
+
+    /**
      * Deletes the given country note.
      *
      * @param countryNoteToDelete The country note to delete.
