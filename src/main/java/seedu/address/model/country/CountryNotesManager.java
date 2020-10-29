@@ -66,6 +66,18 @@ public class CountryNotesManager {
         internalCountryNoteList.remove(countryNoteToDelete);
     }
 
+    /**
+     * Replaces the old country note with the new country note.
+     *
+     * @param oldCountryNote The old country note.
+     * @param newCountryNote The new country note.
+     */
+    public void setCountryNote(CountryNote oldCountryNote, CountryNote newCountryNote) {
+        assert hasCountryNote(oldCountryNote) : "old country note must exist in internal list";
+        int targetIndx = internalCountryNoteList.indexOf(oldCountryNote);
+        internalCountryNoteList.set(targetIndx, newCountryNote);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

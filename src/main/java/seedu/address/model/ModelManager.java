@@ -37,6 +37,7 @@ public class ModelManager implements Model {
     private final FilteredList<Client> filteredClients;
     private final SortedList<Client> sortedFilteredClients;
     private final FilteredList<CountryNote> filteredCountryNotes;
+    private final SortedList<CountryNote> sortedFilteredCountryNotes;
     private final WidgetModel widget;
     private final TagNoteMap tagNoteMap;
 
@@ -55,6 +56,9 @@ public class ModelManager implements Model {
         filteredClients = new FilteredList<>(this.tbmManager.getClientList());
         sortedFilteredClients = new SortedList<>(filteredClients);
         filteredCountryNotes = new FilteredList<>(this.tbmManager.getCountryNoteList());
+        sortedFilteredCountryNotes = new SortedList<>(filteredCountryNotes,
+                Comparator.comparing(CountryNote::getCountry)
+                        .thenComparingInt(filteredCountryNotes::indexOf));
         this.tagNoteMap = new TagNoteMap();
     }
 
@@ -177,6 +181,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setCountryNote(CountryNote oldCountryNote, CountryNote newCountryNote) {
+        requireAllNonNull(oldCountryNote, newCountryNote);
+        this.tagNoteMap.editNote(oldCountryNote, newCountryNote);
+        tbmManager.setCountryNote(oldCountryNote, newCountryNote);
+    }
+
+    @Override
     public void addClientNote(Client target, Note clientNote) {
         requireAllNonNull(target, clientNote);
         target.addClientNote(clientNote);
@@ -248,7 +259,7 @@ public class ModelManager implements Model {
 
     @Override
     public ObservableList<CountryNote> getSortedFilteredCountryNoteList() {
-        return filteredCountryNotes.sorted(CountryNote::compareTo);
+        return sortedFilteredCountryNotes;
     }
 
     @Override
