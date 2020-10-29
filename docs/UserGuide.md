@@ -52,6 +52,16 @@ Now that you have started **_TBM_**,
 
 --------------------------------------------------------------------------------------------------------------------
 
+Main View  | List / Client Notes View | Country Notes View
+:----------------------: | :-------------------------------------: | :-----------------------: |
+![TBM_UI](/docs/images/UI.png) | ![Clients](/docs/images/command-screenshots/client_view.png) |  ![Country](/docs/images/command-screenshots/country_note_view.png)
+
+
+<div markdown="block" class="alert alert-info">
+Please refer to the [Introduction to the UI](#appendix-a-introduction-to-the-ui) if you're trying TBM out for the
+ first  time.
+</div>
+
 ## Features
 
 The following section outlines the commands supported by **_TBM_**. A short description is given for each command along with the format that they should be executed with. Complex commands also come with examples to demonstrate the purpose that the command serve.
@@ -476,3 +486,56 @@ Parameter | Prefix | Constraints, Examples
 **TAG** | `t/` | Tags names should be alphanumeric and have a maximum of 45 characters. <br> e.g. `t/important`
 **SUGGESTION_TYPE** | `by/` | Suggestion types can only be either `available`, `contract` or `frequency`. <br> e.g. `by/available`
 **INDEX** | - | Index is a number greater than 0 that is based on the numberings beside each client or note. <br> e.g. `1` would refer to the first client or note.
+
+--------------------------------------------------------------------------------------------------------------------
+## Appendix A - Introduction to the UI
+
+### Start Page
+
+The diagram below shows the key UI elements of TBM upon first start-up.
+
+![Annotated UI Default Page](/docs/images/command-screenshots/UI_annotated.png)
+
+* **Command Box** allows you to input  commands in their correct syntax to interact with TBM.
+
+* **Client List Panel** will always allow you to view your client's information at a go. It's scrollable so that you 
+never have to worry about not being able to see all your important clients at a single glance!
+
+* **Client Card** will show you brief information a particular client. 
+
+* **Result Display** will show you the output of executing your command.
+    * It indicates successful commands.
+    
+    * On the off-chance there's a syntax issue, TBM will remind you of the correct syntax it expects, something like this:
+ 
+     ![Result Display slowing error message](/docs/images/command-screenshots/result_display_error_syntax.png)
+     
+* **Generic Widget View Box** is aptly named because it shall spawn *Client Cards* or *Country Cards* when
+ relevant commands are sent. Initially it will show you your local time, to the precise second and your own location.
+   
+     
+
+
+### View for Client
+
+The diagram below is what you should see upon viewing a particular client (i.e. firing up the command `client view 1
+`). It shows how to identify a particular  client's  `CLIENT_INDEX`, and an  associated note's `CLIENT_NOTE_INDEX`.
+
+![Annotated Client View UI Layout](/docs/images/command-screenshots/client_view_annotated.png)
+
+Here, the **Client Card** displaying the note that's tagged as `hobies` is referred to by the `CLIENT_INDEX` of `1`.
+
+Being able to identify these is key to adding, deleting and editing client notes as well as editing clients.
+
+### View for Country
+
+Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Card**:
+
+![Annoted Country View UI Layout](/docs/images/command-screenshots/country_note_view_annotated.png)
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
