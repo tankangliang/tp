@@ -1,7 +1,6 @@
 package seedu.address.commons.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
@@ -127,7 +126,7 @@ public class VersionTest {
         Version another;
 
         // basic equals tests
-        basicEqualsTests(new Version(1, 1,20, false));
+        basicEqualsTests(new Version(1, 1, 20, false));
 
         one = new Version(0, 0, 0, false);
         another = new Version(0, 0, 0, false);

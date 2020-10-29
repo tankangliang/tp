@@ -72,8 +72,7 @@ public class CountryNoteDeleteCommandTest {
         Index index = Index.fromOneBased(1);
         CountryNoteDeleteCommand countryNoteDeleteCommand = new CountryNoteDeleteCommand(index);
 
-        Model expectedModel = new ModelManager();
-        expectedModel.updateTagNoteMapWithNote(genericCountryNote.getTags(), genericCountryNote);
+        Model expectedModel = new ModelManager(getTypicalTbmManager(), new UserPrefs());
         String expectedMessage = String.format(CountryNoteDeleteCommand.MESSAGE_SUCCESS, index.getOneBased(),
                 genericCountryNote);
 

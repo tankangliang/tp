@@ -18,12 +18,12 @@ class NoteTest {
     private static final String NOTE_CONTENT_2 = "note content 2";
     private static final Tag TAG_1 = new Tag("tag1");
     private static final Tag TAG_2 = new Tag("tag2");
-    private Note NOTE_1;
+    private Note note1;
     private Set<Tag> tags;
 
     @BeforeEach
     public void setUp() {
-        NOTE_1 = new Note(NOTE_CONTENT_1);
+        note1 = new Note(NOTE_CONTENT_1);
         tags = new HashSet<>();
         tags.add(TAG_1);
         tags.add(TAG_2);
@@ -32,38 +32,38 @@ class NoteTest {
     @Test
     public void equals_basicTests() {
         // basic equals tests
-        basicEqualsTests(NOTE_1);
+        basicEqualsTests(note1);
     }
 
     @Test
     public void equals_sameNoteContents_returnTrue() {
         Note note1Duplicate = new Note(NOTE_CONTENT_1);
-        assertEquals(NOTE_1, note1Duplicate);
+        assertEquals(note1, note1Duplicate);
     }
 
     @Test
     public void equals_differentNoteContents_returnFalse() {
         Note note2 = new Note(NOTE_CONTENT_2);
-        assertNotEquals(NOTE_1, note2);
+        assertNotEquals(note1, note2);
     }
 
     @Test
     public void equals_sameNoteContentSameTags_returnTrue() {
         Note note1Duplicate = new Note(NOTE_CONTENT_1);
-        NOTE_1.setTags(tags);
+        note1.setTags(tags);
         note1Duplicate.setTags(tags);
-        assertEquals(NOTE_1, note1Duplicate);
+        assertEquals(note1, note1Duplicate);
     }
 
     @Test
     public void equals_sameNoteContentDifferentTags_returnFalse() {
         Note note1Duplicate = new Note(NOTE_CONTENT_1);
-        NOTE_1.setTags(tags);
+        note1.setTags(tags);
         note1Duplicate.setTags(tags);
         Set<Tag> rougeTags = new HashSet<>();
         rougeTags.add(new Tag("rogueTag"));
         note1Duplicate.setTags(rougeTags);
-        assertNotEquals(NOTE_1, note1Duplicate);
+        assertNotEquals(note1, note1Duplicate);
     }
 
 }

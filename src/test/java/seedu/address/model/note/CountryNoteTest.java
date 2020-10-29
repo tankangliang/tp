@@ -19,68 +19,68 @@ public class CountryNoteTest {
 
     private static final String COUNTRY_NOTE_CONTENT = "country note";
     private static final Country COUNTRY = new Country("SG");
-    private CountryNote COUNTRY_NOTE;
+    private CountryNote countryNote;
 
     @BeforeEach
     public void setUp() {
-        COUNTRY_NOTE = new CountryNote(COUNTRY_NOTE_CONTENT, COUNTRY);
+        countryNote = new CountryNote(COUNTRY_NOTE_CONTENT, COUNTRY);
     }
 
     @Test
     public void constructor() {
         assertThrows(NullPointerException.class, () -> new CountryNote(null, COUNTRY));
         assertThrows(NullPointerException.class, () -> new CountryNote(COUNTRY_NOTE_CONTENT, null));
-        assertEquals(COUNTRY, COUNTRY_NOTE.getCountry());
-        assertEquals(COUNTRY_NOTE_CONTENT, COUNTRY_NOTE.getNoteContent());
+        assertEquals(COUNTRY, countryNote.getCountry());
+        assertEquals(COUNTRY_NOTE_CONTENT, countryNote.getNoteContent());
     }
 
     @Test
     public void setTags() {
         Set<Tag> tags = Set.of(new Tag("tag1"));
-        COUNTRY_NOTE.setTags(tags);
-        assertEquals(COUNTRY_NOTE.getTags(), tags);
+        countryNote.setTags(tags);
+        assertEquals(countryNote.getTags(), tags);
     }
 
     @Test
     public void isClientNote_returnFalse() {
-        assertFalse(COUNTRY_NOTE.isClientNote());
+        assertFalse(countryNote.isClientNote());
     }
 
     @Test
     public void equals() {
         // basic equals tests
-        basicEqualsTests(COUNTRY_NOTE);
+        basicEqualsTests(countryNote);
 
         // same note content same country -> returns true
-        assertTrue(COUNTRY_NOTE.equals(new CountryNote(COUNTRY_NOTE_CONTENT, COUNTRY)));
+        assertTrue(countryNote.equals(new CountryNote(COUNTRY_NOTE_CONTENT, COUNTRY)));
 
         // different country -> returns false
-        assertTrue(COUNTRY_NOTE.equals(new CountryNote(COUNTRY_NOTE_CONTENT, new Country("AL"))));
+        assertFalse(countryNote.equals(new CountryNote(COUNTRY_NOTE_CONTENT, new Country("AL"))));
 
         // different note content -> returns false
-        assertTrue(COUNTRY_NOTE.equals(new CountryNote("new country note", COUNTRY)));
+        assertFalse(countryNote.equals(new CountryNote("new country note", COUNTRY)));
 
         // different tags -> return false
         CountryNote countryNoteWithTags = new CountryNote(COUNTRY_NOTE_CONTENT, COUNTRY);
         countryNoteWithTags.setTags(Set.of(new Tag("tag1")));
-        assertFalse(COUNTRY_NOTE.equals(countryNoteWithTags));
+        assertFalse(countryNote.equals(countryNoteWithTags));
     }
 
     @Test
     public void hashCode_test() {
         // same note content same country -> same hashcode
-        assertEquals(COUNTRY_NOTE.hashCode(), new CountryNote(COUNTRY_NOTE_CONTENT, COUNTRY).hashCode());
+        assertEquals(countryNote.hashCode(), new CountryNote(COUNTRY_NOTE_CONTENT, COUNTRY).hashCode());
 
         // different country -> different hashcode
-        assertNotEquals(COUNTRY_NOTE.hashCode(), new CountryNote(COUNTRY_NOTE_CONTENT, new Country("AL")).hashCode());
+        assertNotEquals(countryNote.hashCode(), new CountryNote(COUNTRY_NOTE_CONTENT, new Country("AL")).hashCode());
 
         // different note content -> different hashcode
-        assertNotEquals(COUNTRY_NOTE.hashCode(), new CountryNote("new country note", COUNTRY).hashCode());
+        assertNotEquals(countryNote.hashCode(), new CountryNote("new country note", COUNTRY).hashCode());
 
         // different tags -> different hashcode
         CountryNote countryNoteWithTags = new CountryNote(COUNTRY_NOTE_CONTENT, COUNTRY);
         countryNoteWithTags.setTags(Set.of(new Tag("tag1")));
-        assertNotEquals(COUNTRY_NOTE.hashCode(), countryNoteWithTags.hashCode());
+        assertNotEquals(countryNote.hashCode(), countryNoteWithTags.hashCode());
     }
 
 }
