@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.note.CountryNote;
 
