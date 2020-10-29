@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -21,7 +23,12 @@ import seedu.address.model.country.Country;
 public class CountryFilterCommandTest {
 
     private static final String[] COUNTRY_CODES = Locale.getISOCountries();
-    private Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+    }
 
     @Test
     public void execute_validCountries_matchesExpectedFilterResult() {
@@ -46,12 +53,12 @@ public class CountryFilterCommandTest {
     }
 
     @Test
-    public void equals_sameObj_returnTrue() {
+    public void equals_basicTests() {
         Country country = new Country("SG");
         ClientCountryMatchesInputCountryPredicate pred = new ClientCountryMatchesInputCountryPredicate(
                 country);
         CountryFilterCommand countryFilterCommand = new CountryFilterCommand(pred);
-        assertEquals(countryFilterCommand, countryFilterCommand);
+        basicEqualsTests(countryFilterCommand);
     }
 
     @Test

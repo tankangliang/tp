@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,17 +48,12 @@ public class TagTest {
     public void equals() {
         Tag tag1 = new Tag("tag1");
         Tag tag2 = new Tag("tag2");
-        // same object -> returns true
-        assertTrue(tag1.equals(tag1));
+
+        // basic equals tests
+        basicEqualsTests(tag1);
 
         // same tag name -> returns true
         assertTrue(tag1.equals(new Tag("tag1")));
-
-        // null -> returns false
-        assertFalse(tag1.equals(null));
-
-        // different class -> returns false
-        assertFalse(tag1.equals(2.0));
 
         // different tag name -> returns false
         assertFalse(tag1.equals(tag2));

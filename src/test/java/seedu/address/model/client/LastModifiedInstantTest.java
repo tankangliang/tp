@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -93,7 +94,9 @@ class LastModifiedInstantTest {
         LastModifiedInstant lastModifiedInstant1 = new LastModifiedInstant(VALID_INSTANT_1);
         LastModifiedInstant lastModifiedInstant2 = new LastModifiedInstant(VALID_INSTANT_2);
 
-        assertTrue(lastModifiedInstant1.equals(lastModifiedInstant1)); // same object
+        // basic equals tests
+        basicEqualsTests(lastModifiedInstant1);
+
         assertTrue(lastModifiedInstant1.equals(new LastModifiedInstant(VALID_INSTANT_1))); // same instant
         assertFalse(lastModifiedInstant1.equals(lastModifiedInstant2)); // different instant
     }

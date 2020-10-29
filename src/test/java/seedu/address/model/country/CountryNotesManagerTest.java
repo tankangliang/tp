@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import java.util.Locale;
 
@@ -112,17 +113,11 @@ public class CountryNotesManagerTest {
 
     @Test
     public void equals() {
-        // same object -> returns true
-        assertTrue(countryNotesManager.equals(countryNotesManager));
+        // basic equals tests
+        basicEqualsTests(countryNotesManager);
 
         // same clients and country notes -> returns true
         assertTrue(countryNotesManager.equals(new CountryNotesManager()));
-
-        // null -> returns false
-        assertFalse(countryNotesManager.equals(null));
-
-        // different class -> returns false
-        assertFalse(countryNotesManager.equals(1.0));
 
         // different country notes -> returns false
         CountryNotesManager countryNotesManagerWithCountryNote = new CountryNotesManager();
