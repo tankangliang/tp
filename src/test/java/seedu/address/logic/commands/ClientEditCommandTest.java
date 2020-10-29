@@ -17,6 +17,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -39,7 +40,12 @@ import seedu.address.testutil.EditClientDescriptorBuilder;
  */
 public class ClientEditCommandTest {
 
-    private final Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+    }
 
     @Test
     public void constructor_nullArgs_throwsNullPointerException() {
@@ -65,6 +71,7 @@ public class ClientEditCommandTest {
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
         Index indexLastClient = Index.fromOneBased(model.getSortedFilteredClientList().size());
         Client lastClient = model.getSortedFilteredClientList().get(indexLastClient.getZeroBased());
 
