@@ -68,7 +68,12 @@ public class CountryNote extends Note implements Comparable<CountryNote> {
 
     @Override
     public int compareTo(CountryNote countryNote) {
-        return this.getCountry().getCountryCode().compareTo(countryNote.getCountry().getCountryCode());
+        int countryCodeComparison = getCountry().getCountryCode().compareTo(countryNote.getCountry().getCountryCode());
+        if (countryCodeComparison != 0) {
+            return countryCodeComparison;
+        } else {
+            return getNoteContent().compareTo(countryNote.getNoteContent());
+        }
     }
 
 }

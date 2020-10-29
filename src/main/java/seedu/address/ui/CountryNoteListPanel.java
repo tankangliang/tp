@@ -53,7 +53,7 @@ public class CountryNoteListPanel extends UiPart<Region> {
 
         Country currCountry = null;
         CountryNoteListSubPanel countryNoteListSubPanel = new CountryNoteListSubPanel();
-        for (CountryNote countryNote : countryNoteObservableList.sorted()) {
+        for (CountryNote countryNote : countryNoteObservableList) {
             if (currCountry == null) {
                 currCountry = countryNote.getCountry();
             }

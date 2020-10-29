@@ -246,7 +246,7 @@ public class ClientAddCommandTest {
         }
 
         @Override
-        public ObservableList<CountryNote> getFilteredCountryNoteList() {
+        public ObservableList<CountryNote> getSortedFilteredCountryNoteList() {
             throw new AssertionError("This method should not be called.");
         }
 
