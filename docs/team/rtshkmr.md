@@ -3,9 +3,9 @@ layout: page
 title: Ritesh Kumar's Project Portfolio Page
 ---
 
-## Project: Travelling Businessman
+## Project: Travelling BusinessMan
 
-Travelling Businessman is a desktop application that manages notes and contacts across multiple
+Travelling BusinessMan is a desktop application that manages notes and contacts across multiple
 countries and timezones for businessmen who travels a lot.
 
 Given below are my contributions to the project.

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Travelling Businessman
+title: Travelling BusinessMan
 ---
 
 [![CI Status](https://github.com/AY2021S1-CS2103T-F11-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2021S1-CS2103T-F11-4/tp/actions)
@@ -8,10 +8,10 @@ title: Travelling Businessman
 
 ![Ui](images/Ui.png)
 
-**Travelling Businessman is a desktop application for managing your client contact details, organized with a focus on their country of residence.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
+**Travelling BusinessMan is a desktop application for managing your client contact details, organized with a focus on their country of residence.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-* If you are interested in using Travelling Businessman, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing Travelling Businessman, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using Travelling BusinessMan, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested about developing Travelling BusinessMan, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
 **Acknowledgements**
