@@ -60,6 +60,7 @@ public class ModelManager implements Model {
                 Comparator.comparing(CountryNote::getCountry)
                         .thenComparingInt(filteredCountryNotes::indexOf));
         this.tagNoteMap = new TagNoteMap();
+        this.initialiseTagNoteMap(); // init TagNoteMap upon construction of modelManager
     }
 
     public ModelManager() {
@@ -150,6 +151,7 @@ public class ModelManager implements Model {
     public void setClient(Client target, Client editedClient) {
         requireAllNonNull(target, editedClient);
         tbmManager.setClient(target, editedClient);
+        initialiseTagNoteMap();
     }
 
     @Override

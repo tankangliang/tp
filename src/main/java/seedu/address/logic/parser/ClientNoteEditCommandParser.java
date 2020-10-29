@@ -54,7 +54,8 @@ public class ClientNoteEditCommandParser implements Parser<ClientNoteEditCommand
             newNote.setTags(tags);
             return new ClientNoteEditCommand(targetClientIndex, targetClientNoteIndex, newNote);
         } catch (ParseException pe) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ClientNoteEditCommand.MESSAGE_USAGE));
         }
     }
 

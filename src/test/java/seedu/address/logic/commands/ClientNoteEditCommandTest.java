@@ -54,6 +54,9 @@ class ClientNoteEditCommandTest {
         assertCommandSuccess(clientNoteEditCommand, model, expectedResult, expectedModel);
     }
 
+    // todo: add test to show untagged tag removal (in future commit) behaviour is verified by json file
+
+
     @Test
     public void execute_validClientIdxValidNoteIdxNewTaggedNote_preservesTagHistory() {
         Tag oldTag = new Tag("historicalTag");

@@ -22,7 +22,7 @@ public class ClientFindCommand extends Command {
     private final NameContainsKeywordsPredicate predicate;
 
     /**
-     * Intializes a ClientFindCommand with a predicate of Client.
+     * Initializes a ClientFindCommand with a predicate of Client.
      *
      * @param predicate The predicate to filter Clients by.
      */
