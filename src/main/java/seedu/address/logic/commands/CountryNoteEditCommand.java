@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -57,7 +58,7 @@ public class CountryNoteEditCommand extends Command {
     public CountryNoteEditCommand(Index targetIndex, Set<Tag> tags) {
         requireAllNonNull(targetIndex, tags);
         this.targetIndex = targetIndex;
-        this.countryNote = null;
+        this.countryNote = CountryNote.NULL_COUNTRY_NOTE;
         this.tags = tags;
     }
 
@@ -74,10 +75,10 @@ public class CountryNoteEditCommand extends Command {
         CountryNote newCountryNote;
         tags.addAll(countryNoteToEdit.getTags());
 
-        if (countryNote == null) {
+        if (countryNote.equals(CountryNote.NULL_COUNTRY_NOTE)) {
             newCountryNote = new CountryNote(countryNoteToEdit);
         } else {
-            newCountryNote = countryNote.set(countryNoteToEdit.getCountry());
+            newCountryNote = countryNote.setCountry(countryNoteToEdit.getCountry());
             tags.addAll(countryNote.getTags());
         }
 
@@ -85,7 +86,7 @@ public class CountryNoteEditCommand extends Command {
             tags.remove(Tag.UNTAGGED);
         }
 
-        newCountryNote = newCountryNote.set(countryNoteToEdit.getCountry());
+        newCountryNote = newCountryNote.setCountry(countryNoteToEdit.getCountry());
         newCountryNote.setTags(tags);
 
         model.setCountryNote(countryNoteToEdit, newCountryNote);
@@ -103,7 +104,7 @@ public class CountryNoteEditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CountryNoteDeleteCommand)) {
+        if (!(other instanceof CountryNoteEditCommand)) {
             return false;
         }
 
@@ -111,5 +112,10 @@ public class CountryNoteEditCommand extends Command {
         CountryNoteEditCommand c = (CountryNoteEditCommand) other;
 
         return targetIndex.equals(c.targetIndex) && countryNote.equals(c.countryNote) && tags.equals(c.tags);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(targetIndex, countryNote, tags);
     }
 }

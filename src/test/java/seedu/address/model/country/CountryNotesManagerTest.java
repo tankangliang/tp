@@ -157,4 +157,26 @@ public class CountryNotesManagerTest {
         assertNotEquals(countryNotesManager.hashCode(), countryNotesManagerWithCountryNote.hashCode());
     }
 
+    @Test
+    public void setCountryNote_validOldAndNewCountryNote_replacesOldCountryNoteWithNewCountryNote() {
+        CountryNote oldCountryNote = new CountryNote("random", new Country("SG"));
+        CountryNote newCountryNote = new CountryNote("random2", new Country("MY"));
+
+        countryNotesManager.addCountryNote(oldCountryNote);
+        assertTrue(countryNotesManager.hasCountryNote(oldCountryNote));
+        assertFalse(countryNotesManager.hasCountryNote(newCountryNote));
+
+        countryNotesManager.setCountryNote(oldCountryNote, newCountryNote);
+        assertFalse(countryNotesManager.hasCountryNote(oldCountryNote));
+        assertTrue(countryNotesManager.hasCountryNote(newCountryNote));
+    }
+
+    @Test
+    public void setCountryNote_notExistsOldCountryNote_throwsAssertError() {
+        CountryNote oldCountryNote = new CountryNote("random", new Country("SG"));
+        CountryNote newCountryNote = new CountryNote("random2", new Country("MY"));
+        assertThrows(AssertionError.class,
+                () -> countryNotesManager.setCountryNote(oldCountryNote, newCountryNote));
+    }
+
 }
