@@ -5,12 +5,20 @@ body {
 }
 
 h2, h3, h4, h5, h6 {
-  color: #e46c0a;
+  color: #3a506b;
 }
 
 div > img {
   display: block;
   margin: auto;
+}
+
+table {
+  tr {
+    &:nth-child(odd) {
+      background-color: #fcfbf8;
+    }
+  }
 }
 
 a {
