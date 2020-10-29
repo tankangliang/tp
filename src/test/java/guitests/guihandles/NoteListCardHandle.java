@@ -6,7 +6,7 @@ import javafx.scene.text.Text;
 import seedu.address.model.note.Note;
 
 /**
- * Provides a handler for {@code CountryNoteCard}.
+ * Provides a handler for {@code NoteListCard}.
  */
 public class NoteListCardHandle extends NodeHandle<Node> {
 

@@ -114,7 +114,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        widgetViewBox = new WidgetViewBox();
+        widgetViewBox = new WidgetViewBox(logic.getFilteredClientList());
         countryNoteListPanel = new CountryNoteListPanel(logic.getSortedFilteredCountryNoteList());
         widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
 
@@ -192,7 +192,8 @@ public class MainWindow extends UiPart<Stage> {
                 logger.info("Toggling client view");
                 widgetPlaceholder.getChildren().clear();
                 widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
-                widgetViewBox.update(logic.getWidgetContent());
+                logger.info(logic.getWidgetClient().getName().fullName);
+                widgetViewBox.updateClientDisplay(logic.getWidgetClient());
             } else if (commandResult.shouldDisplayCountryNote()) {
                 logger.info("Toggling country notes view");
                 widgetPlaceholder.getChildren().clear();

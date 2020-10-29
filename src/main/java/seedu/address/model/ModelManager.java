@@ -24,7 +24,6 @@ import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.widget.WidgetModel;
-import seedu.address.model.widget.WidgetObject;
 
 /**
  * Represents the in-memory model of the TbmManager data.
@@ -126,13 +125,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setWidgetContent(Object content) {
-        widget.setContent(content);
+    public void setWidgetClient(Client client) {
+        widget.setWidgetClient(client);
     }
 
     @Override
-    public WidgetObject getWidgetContent() {
-        return widget.getWidgetContent();
+    public Client getWidgetClient() {
+        return widget.getWidgetClient();
     }
 
 
