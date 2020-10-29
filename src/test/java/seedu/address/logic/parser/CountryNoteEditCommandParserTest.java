@@ -23,7 +23,7 @@ public class CountryNoteEditCommandParserTest {
     private final CountryNoteEditCommandParser parser = new CountryNoteEditCommandParser(tagNoteMap);
 
     @Test
-    public void parse_WithIndexWithNoteWithTag_returnsExpected() {
+    public void parse_withIndexWithNoteWithTag_returnsExpected() {
         try {
             CountryNote c = new CountryNote("abc", Country.NULL_COUNTRY);
             Set<Tag> tags = new HashSet<>();

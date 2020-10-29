@@ -175,8 +175,8 @@ public class CountryNotesManagerTest {
     public void setCountryNote_notExistsOldCountryNote_throwsAssertError() {
         CountryNote oldCountryNote = new CountryNote("random", new Country("SG"));
         CountryNote newCountryNote = new CountryNote("random2", new Country("MY"));
-        assertThrows(AssertionError.class,
-                () -> countryNotesManager.setCountryNote(oldCountryNote, newCountryNote));
+        assertThrows(AssertionError.class, () ->
+                countryNotesManager.setCountryNote(oldCountryNote, newCountryNote));
     }
 
 }

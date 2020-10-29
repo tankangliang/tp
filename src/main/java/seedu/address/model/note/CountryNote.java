@@ -10,7 +10,8 @@ import seedu.address.model.country.Country;
  * Representation of a country note.
  */
 public class CountryNote extends Note implements Comparable<CountryNote> {
-    public static CountryNote NULL_COUNTRY_NOTE = new CountryNote("", Country.NULL_COUNTRY);
+
+    public static final CountryNote NULL_COUNTRY_NOTE = new CountryNote("", Country.NULL_COUNTRY);
 
     private final Country country;
 
