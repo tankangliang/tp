@@ -23,19 +23,24 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_MESSAGE = "For more information, refer to the user guide: ";
     public static final String HELP_TITLE = "Commonly used commands";
     public static final String COMMON_COMMANDS =
-            "client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY tz/TIMEZONE\n"
+            "list\n"
+            + "client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE [ce/CONTRACT_EXPIRY_DATE]\n"
+            + "client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_CODE) (tz/TIMEZONE) (ce/CONTRACT_EXPIRY_DATE)\n"
             + "client view INDEX\n"
             + "client find KEYWORD [MORE_KEYWORDS]\n"
-            + "client edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [c/COUNTRY] [tz/TIMEZONE]\n"
             + "client delete INDEX\n"
-            + "client note add CLIENT_INDEX t/TAG nt/NOTE_STRING\n"
+            + "client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...\n"
             + "client note delete CLIENT_INDEX NOTE_INDEX\n"
-            + "client note update CLIENT_INDEX NOTE_INDEX NOTE_STRING t/TAG\n"
+            + "client note edit CLIENT_INDEX NOTE_INDEX nt/NOTE_STRING [t/TAG]...\n"
             + "country filter c/COUNTRY_CODE\n"
             + "country note view [c/COUNTRY_CODE]\n"
             + "country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...\n"
+            + "country note edit INDEX (nt/NOTE_STRING) (t/TAG)...\n"
             + "country note delete INDEX\n"
-            + "country note edit INDEX (nt/NOTE_STRING) (t/TAG)...";
+            + "suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...\n"
+            + "clear\n"
+            + "exit\n"
+            + "help";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
