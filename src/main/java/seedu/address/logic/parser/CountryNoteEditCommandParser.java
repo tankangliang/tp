@@ -37,7 +37,8 @@ public class CountryNoteEditCommandParser implements Parser<CountryNoteEditComma
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NOTE, PREFIX_TAG);
 
-        if (argMultimap.getValue(PREFIX_NOTE).isEmpty() || argMultimap.getPreamble().isEmpty()) {
+        if ((argMultimap.getValue(PREFIX_NOTE).isEmpty() && argMultimap.getValue(PREFIX_TAG).isEmpty())
+                || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     CountryNoteEditCommand.MESSAGE_USAGE));
         }
@@ -47,6 +48,10 @@ public class CountryNoteEditCommandParser implements Parser<CountryNoteEditComma
         Set<Tag> tags = new HashSet<>();
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             tags.addAll(tagNoteMap.getUniqueTags(argMultimap.getAllValues(PREFIX_TAG)));
+        }
+
+        if (argMultimap.getValue(PREFIX_NOTE).isEmpty()) {
+            return new CountryNoteEditCommand(targetIndex, tags);
         }
 
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());

@@ -27,6 +27,16 @@ public class CountryNote extends Note implements Comparable<CountryNote> {
     }
 
     /**
+     * Initializes a country note by deep copying the given country note.
+     *
+     * @param countryNote The country note to deep copy.
+     */
+    public CountryNote(CountryNote countryNote) {
+        super(countryNote.getNoteContent());
+        this.country = countryNote.country;
+    }
+
+    /**
      * Gets the country that is being associated with this country note.
      *
      * @return The country that is being associated with this country note.
@@ -42,6 +52,7 @@ public class CountryNote extends Note implements Comparable<CountryNote> {
      * @return A new country note with the country set as the given country.
      */
     public CountryNote set(Country country) {
+        requireNonNull(country);
         return new CountryNote(getNoteContent(), country);
     }
 

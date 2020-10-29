@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -32,17 +33,32 @@ public class CountryNoteEditCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Edited country note at index %1$s: %2$s";
     private final Index targetIndex;
     private final CountryNote countryNote;
+    private final Set<Tag> tags;
 
     /**
-     * Initializes a CountryNoteDeleteCommand with the given targetIndex.
+     * Initializes a CountryNoteEditCommand with the given targetIndex.
      *
      * @param targetIndex The given targetIndex.
      * @param countryNote The country note that contains the new note content.
      */
     public CountryNoteEditCommand(Index targetIndex, CountryNote countryNote) {
-        requireNonNull(targetIndex);
+        requireAllNonNull(targetIndex);
         this.targetIndex = targetIndex;
         this.countryNote = countryNote;
+        this.tags = new HashSet<>();
+    }
+
+    /**
+     * Initializes a CountryNoteEditCommand with the given targetIndex.
+     *
+     * @param targetIndex The given targetIndex.
+     * @param tags The new tags to add to the country note at the existing targetIndex.
+     */
+    public CountryNoteEditCommand(Index targetIndex, Set<Tag> tags) {
+        requireAllNonNull(targetIndex, tags);
+        this.targetIndex = targetIndex;
+        this.countryNote = null;
+        this.tags = tags;
     }
 
     @Override
@@ -55,11 +71,16 @@ public class CountryNoteEditCommand extends Command {
         }
 
         CountryNote countryNoteToEdit = lastShownList.get(targetIndex.getZeroBased());
-
-        CountryNote newCountryNote = countryNote.set(countryNoteToEdit.getCountry());
-        Set<Tag> tags = new HashSet<>();
-        tags.addAll(countryNote.getTags());
+        CountryNote newCountryNote;
         tags.addAll(countryNoteToEdit.getTags());
+
+        if (countryNote == null) {
+            newCountryNote = new CountryNote(countryNoteToEdit);
+        } else {
+            newCountryNote = countryNote.set(countryNoteToEdit.getCountry());
+            tags.addAll(countryNote.getTags());
+        }
+
         if (tags.size() > 1 && tags.contains(Tag.UNTAGGED)) {
             tags.remove(Tag.UNTAGGED);
         }
