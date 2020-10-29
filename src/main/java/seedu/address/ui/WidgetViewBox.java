@@ -1,108 +1,141 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.Locale;
-import java.util.TimeZone;
+import java.util.logging.Logger;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.model.widget.WidgetObject;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.client.Client;
+import seedu.address.model.note.Note;
 
 /**
- * An Ui component that displays the information of {@code WidgetObject}.
+ * An Ui component that displays the information of {@code Client}.
  */
 public class WidgetViewBox extends UiPart<Region> {
+    private static Logger logger = LogsCenter.getLogger(WidgetViewBox.class);
     private static final String FXML = "WidgetViewBox.fxml";
     @FXML
     private VBox viewBox;
     @FXML
-    private Label header;
+    private Label name;
     @FXML
-    private Label divOne;
+    private Label phone;
     @FXML
-    private Label textOne;
+    private Label email;
     @FXML
-    private Label divTwo;
+    private Label country;
     @FXML
-    private Label textTwo;
+    private Label contractExpiryDate;
     @FXML
-    private Label textThree;
+    private Label noteTitle;
     @FXML
-    private Label divThree;
-    //TODO: This is a stop gap to display everything about the client's notes.
+    private ScrollPane clientNoteScrollPane;
     @FXML
-    private TextArea textFour;
-    @FXML
-    private Label footer;
-    private WidgetObject widgetObject;
+    private VBox clientNoteListView;
+    private final ObservableList<Client> clientObservableList;
+    private int displayedClientIndex;
+    private Client displayedClient;
     private TextClock textClock;
 
     /**
      * Creates a {@code WidgetViewBox} with the given {@code WidgetObject}.
      */
-    public WidgetViewBox() {
+    public WidgetViewBox(ObservableList<Client> clientObservableList) {
         super(FXML);
-        textClock = new TextClock(header);
-        textClock.play();
-        divOne.setText(Locale.getDefault().getDisplayCountry());
-        textOne.setText(TimeZone.getDefault().getDisplayName());
-        divTwo.setText("Travelling BusinessMan");
-        textTwo.setText("");
-        textThree.setText("");
-        divThree.setText("");
-        textFour.setText("");
-        footer.setText("Made in NUS");
+        this.clientObservableList = clientObservableList;
+
+        clientObservableList.addListener((ListChangeListener<Client>) c -> {
+            if (c.next()) {
+                if (c.wasUpdated() || c.wasReplaced()) {
+                    updateClientDisplay(clientObservableList.get(displayedClientIndex));
+                } else {
+                    for (int i = 0; i < clientObservableList.size(); i++) {
+                        Client client = clientObservableList.get(i);
+                        if (client.isSameClient(displayedClient)) {
+                            displayedClient = client;
+                            displayedClientIndex = i;
+                            return;
+                        }
+                    }
+                }
+            }
+        });
+        initDefault();
     }
 
     /**
-     * Private constructor for testing purposes.
+     * Updates the current client of the widget view box to the given client.
      *
-     * @param object Widget Object to be used in testing.
+     * @param client The new client to display.
      */
-    private WidgetViewBox(WidgetObject object) {
-        super(FXML);
-        this.widgetObject = object;
-        textClock = new TextClock(header);
-        header.setText(object.getHeader());
-        divOne.setText(object.getDivOne());
-        textOne.setText(object.getTextOne());
-        divTwo.setText(object.getDivTwo());
-        textTwo.setText(object.getTextTwo());
-        textThree.setText(object.getTextThree());
-        divThree.setText(object.getDivThree());
-        textFour.setText(object.getTextFour());
-        footer.setText(object.getFooter());
-    }
-
-    /**
-     * Updates the current content of the widget view box to the given content.
-     *
-     * @param other The new content.
-     */
-    public void update(WidgetObject other) {
-        this.widgetObject = other;
+    public void updateClientDisplay(Client client) {
         textClock.pause();
-        header.setText(other.getHeader());
-        divOne.setText(other.getDivOne());
-        textOne.setText(other.getTextOne());
-        divTwo.setText(other.getDivTwo());
-        textTwo.setText(other.getTextTwo());
-        textThree.setText(other.getTextThree());
-        divThree.setText(other.getDivThree());
-        textFour.setText(other.getTextFour());
-        footer.setText(other.getFooter());
+        displayedClient = client;
+        for (int i = 0; i < clientObservableList.size(); i++) {
+            if (clientObservableList.get(i).isSameClient(client)) {
+                displayedClient = clientObservableList.get(i);
+                displayedClientIndex = i;
+            }
+        }
+        name.setText(client.getName().toString());
+        phone.setText(client.getPhone().toString());
+        email.setText(client.getEmail().toString());
+        country.setText(client.getCountry().getCountryName());
+        contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
+        noteTitle.setText("Notes");
+
+        Platform.runLater(() -> updateClientNotesDisplay(client.getClientNotesAsList()));
+        drawPaneBorder();
     }
 
     /**
-     * Initialiser to bypass static initialising problem in Non-FXML testing of this class.
+     * Static factory for use in GUI testing.
      *
-     * @param object Any Widget Object to be used in testing.
-     * @return WidgeViewBox.
+     * @return WidgetViewBox
      */
-    public static WidgetViewBox init(WidgetObject object) {
-        return new WidgetViewBox(object);
+    public static WidgetViewBox init() {
+        return new WidgetViewBox(FXCollections.emptyObservableList());
+    }
+
+    /**
+     * Sets a default view for the view box.
+     */
+    private void initDefault() {
+        //TODO: Some better information
+        textClock = new TextClock(name);
+        country.setText(Locale.getDefault().getDisplayCountry());
+        textClock.play();
+    }
+
+    /**
+     * Updates the displayed notes.
+     *
+     * @param clientNotes The client notes to display.
+     */
+    private void updateClientNotesDisplay(List<Note> clientNotes) {
+        clearChildren();
+        int noteIdx = 1;
+        for (Note note : clientNotes) {
+            NoteListCard noteListCard = new NoteListCard(note, noteIdx++);
+            clientNoteListView.getChildren().add(noteListCard.getRoot());
+        }
+    }
+
+    /**
+     * Per fn name.
+     */
+    private void clearChildren() {
+        clientNoteListView.getChildren().clear();
     }
 
     @Override
@@ -118,8 +151,13 @@ public class WidgetViewBox extends UiPart<Region> {
         }
 
         // state check
-        WidgetViewBox other1 = (WidgetViewBox) other;
-        return widgetObject.equals(other1.widgetObject);
+        Client other1 = ((WidgetViewBox) other).displayedClient;
+        return displayedClient.equals(other1);
+    }
+
+    private void drawPaneBorder() {
+        clientNoteScrollPane.setStyle("-fx-border-color: #FF3333; -fx-border-radius: 5; -fx-border-width: 2;");
+        clientNoteListView.setPadding(new Insets(5, 5, 5, 10));
     }
 
 }

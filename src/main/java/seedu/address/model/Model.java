@@ -12,7 +12,6 @@ import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.TagNoteMap;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.widget.WidgetObject;
 
 /**
  * The API of the Model component.
@@ -75,16 +74,16 @@ public interface Model {
     void deleteClient(Client target);
 
     /**
-     * Sets the widget box contents to the given content.
+     * Sets the widget box contents to the given client.
      */
-    void setWidgetContent(Object content);
+    void setWidgetClient(Client client);
 
     /**
-     * Retrives the widget content object to be displayed in the widget.
+     * Retrives the client to be displayed in the widget.
      *
-     * @return WidgetObject.
+     * @return Client.
      */
-    WidgetObject getWidgetContent();
+    Client getWidgetClient();
 
 
     /**

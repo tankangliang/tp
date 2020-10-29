@@ -7,9 +7,10 @@ import javafx.scene.control.ListView;
 import seedu.address.model.note.CountryNote;
 
 /**
- * Provides a handle for {@code CountryNoteListPanel} containing the list of {@code CountryNoteCard}.
+ * Provides a handle for {@code CountryNoteListPanel} containing the list of {@code NoteListCard}.
  */
 public class CountryNoteListPanelHandle extends NodeHandle<ListView<CountryNote>> {
+    //TODO: This class looks like it is needed for testing but is not being used?
 
     private static final String COUNTRY_NOTE_LIST_VIEW_ID = "#countryNoteListView";
 
