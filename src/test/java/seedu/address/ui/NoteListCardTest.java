@@ -3,6 +3,7 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,14 +42,9 @@ public class NoteListCardTest extends GuiUnitTest {
     public void equals() {
         CountryNote countryNote = new CountryNote(DUMMY_NOTE_CONTENT, country);
         NoteListCard countryNoteCard = new NoteListCard(countryNote, 1);
-        // same object -> returns true
-        assertTrue(countryNoteCard.equals(countryNoteCard));
 
-        // null -> returns false
-        assertFalse(countryNoteCard.equals(null));
-
-        // different types -> returns false
-        assertFalse(countryNoteCard.equals(3.0));
+        // basic equals tests
+        basicEqualsTests(countryNoteCard);
 
         // different id -> returns false
         NoteListCard countryNoteCard2 = new NoteListCard(countryNote, 2);

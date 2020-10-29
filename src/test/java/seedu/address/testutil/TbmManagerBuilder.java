@@ -10,7 +10,7 @@ import seedu.address.model.client.Client;
  */
 public class TbmManagerBuilder {
 
-    private TbmManager tbmManager;
+    private final TbmManager tbmManager;
 
     public TbmManagerBuilder() {
         tbmManager = new TbmManager();

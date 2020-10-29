@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 
@@ -78,18 +79,12 @@ public class ClientNoteAddCommandTest {
         ClientNoteAddCommand addCommandDifferentNote = new ClientNoteAddCommand(idx1, clientNote2);
         ClientNoteAddCommand addCommandDifferentIndex = new ClientNoteAddCommand(idx2, clientNote1);
 
-        // same object -> returns true
-        assertTrue(addCommand.equals(addCommand));
+        // basic equals tests
+        basicEqualsTests(addCommand);
 
         // same values -> returns true
         ClientNoteAddCommand addCommandCopy = new ClientNoteAddCommand(idx1, clientNote1);
         assertTrue(addCommand.equals(addCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addCommand.equals(null));
 
         // different note or index -> returns false
         assertFalse(addCommand.equals(addCommandDifferentNote));

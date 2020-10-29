@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.ALICE;
 
 import java.nio.file.Path;
@@ -89,18 +90,12 @@ public class ClientAddCommandTest {
         ClientAddCommand addAliceCommand = new ClientAddCommand(alice);
         ClientAddCommand addBobCommand = new ClientAddCommand(bob);
 
-        // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        // basic equals tests
+        basicEqualsTests(addAliceCommand);
 
-        // same values -> returns true
+        // same client -> returns true
         ClientAddCommand addAliceCommandCopy = new ClientAddCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
-
-        // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
 
         // different client -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
@@ -206,6 +201,11 @@ public class ClientAddCommandTest {
         }
 
         @Override
+        public void setCountryNote(CountryNote oldCountryNote, CountryNote newCountryNote) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addClientNote(Client client, Note clientNote) {
             throw new AssertionError("This method should not be called.");
         }
@@ -246,7 +246,7 @@ public class ClientAddCommandTest {
         }
 
         @Override
-        public ObservableList<CountryNote> getFilteredCountryNoteList() {
+        public ObservableList<CountryNote> getSortedFilteredCountryNoteList() {
             throw new AssertionError("This method should not be called.");
         }
 

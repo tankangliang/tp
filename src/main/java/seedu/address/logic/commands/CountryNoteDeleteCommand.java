@@ -18,7 +18,7 @@ public class CountryNoteDeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "country note delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the country note that are associated with the last viewed country at the given index.\n"
+            + ": Deletes the country note at the given index in the last viewed country note list panel.\n"
             + "Parameters: INDEX\n"
             + "Example: " + COMMAND_WORD + " 1";
     public static final String MESSAGE_SUCCESS = "Deleted country note at index %1$s: %2$s";
@@ -30,13 +30,14 @@ public class CountryNoteDeleteCommand extends Command {
      * @param targetIndex The given targetIndex.
      */
     public CountryNoteDeleteCommand(Index targetIndex) {
+        requireNonNull(targetIndex);
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<CountryNote> lastShownList = model.getFilteredCountryNoteList();
+        List<CountryNote> lastShownList = model.getSortedFilteredCountryNoteList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_COUNTRY_NOTE_DISPLAYED_INDEX);

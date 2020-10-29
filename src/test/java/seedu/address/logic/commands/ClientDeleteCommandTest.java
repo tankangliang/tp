@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
@@ -81,18 +82,12 @@ public class ClientDeleteCommandTest {
         ClientDeleteCommand deleteFirstCommand = new ClientDeleteCommand(INDEX_FIRST_CLIENT);
         ClientDeleteCommand deleteSecondCommand = new ClientDeleteCommand(INDEX_SECOND_CLIENT);
 
-        // same object -> returns true
-        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        // basic equals test
+        basicEqualsTests(deleteFirstCommand);
 
         // same values -> returns true
         ClientDeleteCommand deleteFirstCommandCopy = new ClientDeleteCommand(INDEX_FIRST_CLIENT);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
-
-        // different types -> returns false
-        assertFalse(deleteFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(deleteFirstCommand.equals(null));
 
         // different client -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));

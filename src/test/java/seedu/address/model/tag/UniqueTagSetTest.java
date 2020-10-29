@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -150,17 +151,11 @@ public class UniqueTagSetTest {
 
     @Test
     public void equals() {
-        // same object -> returns true
-        assertTrue(uniqueTagSet.equals(uniqueTagSet));
+        // basic equals tests
+        basicEqualsTests(uniqueTagSet);
 
         // same tag name -> returns true
         assertTrue(uniqueTagSet.equals(new UniqueTagSet()));
-
-        // null -> returns false
-        assertFalse(uniqueTagSet.equals(null));
-
-        // different class -> returns false
-        assertFalse(uniqueTagSet.equals(2.0));
 
         // different tags -> returns false
         UniqueTagSet uniqueTagSetDifferentTags = new UniqueTagSet();

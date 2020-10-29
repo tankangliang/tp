@@ -26,6 +26,7 @@ import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
+
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
@@ -359,4 +360,5 @@ public class ParserUtilTest {
         assertEquals(ParserUtil.parseContractExpiryDate(minDate), new ContractExpiryDate(minDate));
         assertEquals(ParserUtil.parseContractExpiryDate(maxDate), new ContractExpiryDate(maxDate));
     }
+
 }

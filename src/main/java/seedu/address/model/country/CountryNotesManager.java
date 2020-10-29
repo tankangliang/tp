@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import seedu.address.model.note.CountryNote;
 
 /**
@@ -15,13 +14,8 @@ import seedu.address.model.note.CountryNote;
 public class CountryNotesManager {
 
     private final ObservableList<CountryNote> internalCountryNoteList = FXCollections.observableArrayList();
-    private final SortedList<CountryNote> internalCountryNoteSortedList = new SortedList<>(internalCountryNoteList);
     private final ObservableList<CountryNote> internalCountryNoteUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalCountryNoteSortedList);
-
-    public CountryNotesManager() {
-        internalCountryNoteSortedList.setComparator(CountryNote::compareTo);
-    }
+            FXCollections.unmodifiableObservableList(internalCountryNoteList);
 
     /**
      * Checks if {@code countryNote} already exists.
@@ -70,6 +64,18 @@ public class CountryNotesManager {
         assert hasCountryNote(countryNoteToDelete);
 
         internalCountryNoteList.remove(countryNoteToDelete);
+    }
+
+    /**
+     * Replaces the old country note with the new country note.
+     *
+     * @param oldCountryNote The old country note.
+     * @param newCountryNote The new country note.
+     */
+    public void setCountryNote(CountryNote oldCountryNote, CountryNote newCountryNote) {
+        assert hasCountryNote(oldCountryNote) : "old country note must exist in internal list";
+        int targetIndx = internalCountryNoteList.indexOf(oldCountryNote);
+        internalCountryNoteList.set(targetIndx, newCountryNote);
     }
 
     @Override
