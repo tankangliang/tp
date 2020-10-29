@@ -52,14 +52,12 @@ Now that you have started **_TBM_**,
 
 --------------------------------------------------------------------------------------------------------------------
 
-Main View  | List / Client Notes View | Country Notes View
-:----------------------: | :-------------------------------------: | :-----------------------: |
-![TBM_UI](images/UI.png) | ![Clients](images/command-screenshots/client_view.png) |  ![Country](images/command-screenshots/country_note_view.png)
+ ![Clients](images/command-screenshots/client_view.png) |  ![Country](images/command-screenshots/country_note_view.png)
 
 
 <div markdown="block" class="alert alert-info">
-Please refer to the [Introduction to the UI](#appendix-a---introduction-to-the-ui) if you're trying TBM out for the
- first  time.
+
+**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're  trying TBM out for the first  time.
 </div>
 
 ## Features
@@ -117,6 +115,11 @@ Example:
 ### Viewing a client: `client view`
 
 Views the client specified by the `INDEX` parameter.
+<div markdown="block" class="alert alert-info">
+
+**:information_source:** Please refer to the [this](#view-for-client) if you need to be re
+-acquainted with the UI for client related commands
+</div>
 
 Format: `client view INDEX`
 
@@ -306,6 +309,14 @@ Examples:
     Filters by contacts in Russia.
 
 ### Viewing notes for a country: `country note view`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source:** Please refer to the [this](#appendix-a---introduction-to-the-ui) if you need to be re
+-acquainted with the UI for country related commands
+</div>
+
+
 
 Views the list of country notes from the country specified by the country code.
 If no country code is given, all country notes in **_TBM_** will be shown.
