@@ -74,7 +74,7 @@ public class WidgetViewBox extends UiPart<Region> {
     }
 
     /**
-     * Updates the current content of the widget view box to the given content.
+     * Updates the current client of the widget view box to the given client.
      *
      * @param client The new client to display.
      */
