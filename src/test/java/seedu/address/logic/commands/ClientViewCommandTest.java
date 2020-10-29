@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showClientAtIndex;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_CLIENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_CLIENT;
@@ -19,7 +20,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.client.Client;
 
 public class ClientViewCommandTest {
-    private Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+
+    private final Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -75,22 +77,15 @@ public class ClientViewCommandTest {
         ClientViewCommand viewFirstCommand = new ClientViewCommand(INDEX_FIRST_CLIENT);
         ClientViewCommand viewSecondCommand = new ClientViewCommand(INDEX_SECOND_CLIENT);
 
-        // same object -> returns true
-        assertTrue(viewFirstCommand.equals(viewFirstCommand));
+        // basic equals tests
+        basicEqualsTests(viewFirstCommand);
 
         // same values -> returns true
         ClientViewCommand viewFirstCommandCopy = new ClientViewCommand(INDEX_FIRST_CLIENT);
         assertTrue(viewFirstCommand.equals(viewFirstCommandCopy));
 
-        // different types -> returns false
-        assertFalse(viewFirstCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(viewFirstCommand.equals(null));
-
         // different client -> returns false
         assertFalse(viewFirstCommand.equals(viewSecondCommand));
     }
-
 
 }

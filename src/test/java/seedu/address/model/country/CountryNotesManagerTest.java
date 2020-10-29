@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import java.util.Locale;
 
@@ -111,31 +112,12 @@ public class CountryNotesManagerTest {
     }
 
     @Test
-    public void asUnmodifiableObservableList_returnsListSortedByCountryCode() {
-        CountryNote countryNote1 = new CountryNote("random", new Country("SG"));
-        CountryNote countryNote2 = new CountryNote("random2", new Country("AL"));
-        CountryNote countryNote3 = new CountryNote("random2", new Country("RU"));
-        countryNotesManager.addCountryNote(countryNote1);
-        countryNotesManager.addCountryNote(countryNote2);
-        countryNotesManager.addCountryNote(countryNote3);
-        assertEquals(countryNotesManager.asUnmodifiableObservableList().get(0), countryNote2);
-        assertEquals(countryNotesManager.asUnmodifiableObservableList().get(1), countryNote3);
-        assertEquals(countryNotesManager.asUnmodifiableObservableList().get(2), countryNote1);
-    }
-
-    @Test
     public void equals() {
-        // same object -> returns true
-        assertTrue(countryNotesManager.equals(countryNotesManager));
+        // basic equals tests
+        basicEqualsTests(countryNotesManager);
 
         // same clients and country notes -> returns true
         assertTrue(countryNotesManager.equals(new CountryNotesManager()));
-
-        // null -> returns false
-        assertFalse(countryNotesManager.equals(null));
-
-        // different class -> returns false
-        assertFalse(countryNotesManager.equals(1.0));
 
         // different country notes -> returns false
         CountryNotesManager countryNotesManagerWithCountryNote = new CountryNotesManager();

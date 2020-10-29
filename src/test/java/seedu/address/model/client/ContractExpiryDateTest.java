@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +21,10 @@ public class ContractExpiryDateTest {
 
     @Test
     public void equals() {
-        // Same date, return true
         ContractExpiryDate contractExpiryDate = new ContractExpiryDate(TEST_DATE_1);
+        // basic equals tests
+        basicEqualsTests(contractExpiryDate);
+        // Same date, return true
         assertTrue(contractExpiryDate.equals(new ContractExpiryDate(TEST_DATE_1)));
         // Different date, return false
         assertFalse(contractExpiryDate.equals(new ContractExpiryDate(TEST_DATE_2)));

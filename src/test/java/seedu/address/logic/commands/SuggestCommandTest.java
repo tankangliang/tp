@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.Model;
@@ -24,7 +26,12 @@ import seedu.address.testutil.ClientBuilder;
 
 public class SuggestCommandTest {
 
-    private final Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+    }
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -86,18 +93,12 @@ public class SuggestCommandTest {
                 new SuggestionType(SuggestionType.BY_CONTRACT), new SuggestionType(SuggestionType.BY_AVAILABLE));
         SuggestCommand suggestCommand = new SuggestCommand(suggestionTypeSet);
 
-        // same object -> returns true
-        assertTrue(suggestCommand.equals(suggestCommand));
+        // basic equals tests
+        basicEqualsTests(suggestCommand);
 
         // same values -> returns true
         SuggestCommand suggestCommandCopy = new SuggestCommand(suggestionTypeSet);
         assertTrue(suggestCommand.equals(suggestCommandCopy));
-
-        // different types -> returns false
-        assertFalse(suggestCommand.equals(1));
-
-        // null -> returns false
-        assertFalse(suggestCommand.equals(null));
 
         // different suggestion type set -> returns false
         assertFalse(suggestCommand.equals(new SuggestCommand(Collections.emptySet())));

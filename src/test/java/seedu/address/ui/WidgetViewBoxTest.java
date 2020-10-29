@@ -1,8 +1,9 @@
 package seedu.address.ui;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -74,8 +75,18 @@ public class WidgetViewBoxTest extends GuiUnitTest {
     public void equals() {
         WidgetViewBox obj1 = WidgetViewBox.init(TEST_OBJECT);
         WidgetViewBox obj2 = WidgetViewBox.init(TEST_OBJECT);
+        WidgetObject differentWidgetObject = new WidgetObject();
+        differentWidgetObject.set("different");
+        WidgetViewBox obj3 = WidgetViewBox.init(differentWidgetObject);
 
-        assertEquals(obj1, obj2);
+        // basic equals tests
+        basicEqualsTests(obj1);
+
+        // same values -> returns true
+        assertTrue(obj1.equals(obj2));
+
+        // different values -> returns false
+        assertFalse(obj1.equals(obj3));
     }
 
     private void assertViewBoxDisplay(WidgetViewBox widgetViewBox , WidgetObject expectedObject) {

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import java.awt.Point;
 
@@ -36,11 +37,15 @@ public class GuiSettingsTest {
 
     @Test
     public void equals() {
-        assertTrue(defaultGuiSettings.equals(new GuiSettings()));
-        assertFalse(defaultGuiSettings.equals(null));
+        // basic equals tests
+        basicEqualsTests(defaultGuiSettings);
 
+        // same values -> returns true
+        assertTrue(defaultGuiSettings.equals(new GuiSettings()));
         GuiSettings guiSettings = new GuiSettings(1.0, 1.0, 5, 1);
         assertTrue(guiSettings.equals(guiSettings));
+
+        // different values -> returns false
         assertFalse(defaultGuiSettings.equals(guiSettings));
     }
 

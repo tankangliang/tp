@@ -60,12 +60,19 @@ public class CountryNote extends Note implements Comparable<CountryNote> {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (!super.equals(obj)) {
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (this == other) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CountryNote)) {
             return false;
         }
 
-        return country.equals(((CountryNote) obj).country);
+        // state check, super checks for note content and tags
+        return super.equals(other) && country.equals(((CountryNote) other).country);
     }
 
     @Override
@@ -80,6 +87,12 @@ public class CountryNote extends Note implements Comparable<CountryNote> {
 
     @Override
     public int compareTo(CountryNote countryNote) {
-        return this.getCountry().getCountryCode().compareTo(countryNote.getCountry().getCountryCode());
+        int countryCodeComparison = getCountry().getCountryCode().compareTo(countryNote.getCountry().getCountryCode());
+        if (countryCodeComparison != 0) {
+            return countryCodeComparison;
+        } else {
+            return getNoteContent().compareTo(countryNote.getNoteContent());
+        }
     }
+
 }

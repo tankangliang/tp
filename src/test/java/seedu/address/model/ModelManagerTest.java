@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BENSON;
 
@@ -161,19 +162,13 @@ public class ModelManagerTest {
         TbmManager differentTbmManager = new TbmManager();
         UserPrefs userPrefs = new UserPrefs();
 
+        // basic equals tests
+        basicEqualsTests(modelManager);
+
         // same values -> returns true
         modelManager = new ModelManager(tbmManager, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(tbmManager, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
-
-        // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
-
-        // null -> returns false
-        assertFalse(modelManager.equals(null));
-
-        // different types -> returns false
-        assertFalse(modelManager.equals(5));
 
         // different tbmManager -> returns false
         assertFalse(modelManager.equals(new ModelManager(differentTbmManager, userPrefs)));
@@ -224,36 +219,36 @@ public class ModelManagerTest {
 
     @Test
     public void updateFilteredCountryNoteList_truePredicate_showAllCountryNotes() {
-        int initialSize = modelManager.getFilteredCountryNoteList().size();
+        int initialSize = modelManager.getSortedFilteredCountryNoteList().size();
         modelManager.updateFilteredCountryNoteList(countryNote -> true);
-        assertEquals(initialSize, modelManager.getFilteredCountryNoteList().size());
+        assertEquals(initialSize, modelManager.getSortedFilteredCountryNoteList().size());
     }
 
     @Test
     public void updateFilteredCountryNoteList_falsePredicate_showNoneCountryNotes() {
         modelManager.updateFilteredCountryNoteList(countryNote -> false);
-        assertEquals(0, modelManager.getFilteredCountryNoteList().size());
+        assertEquals(0, modelManager.getSortedFilteredCountryNoteList().size());
     }
 
     @Test
     public void updateFilteredCountryNoteList_countryPredicate_showRelevantCountryNotes() {
         modelManager.addCountryNote(new CountryNote("random", new Country("SG")));
         modelManager.updateFilteredCountryNoteList(countryNote -> true);
-        int expect = (int) modelManager.getFilteredCountryNoteList()
+        int expect = (int) modelManager.getSortedFilteredCountryNoteList()
                 .stream()
                 .filter(countryNote -> countryNote.getCountry().equals(new Country("SG")))
                 .count();
         modelManager.updateFilteredCountryNoteList(countryNote -> countryNote.getCountry().equals(new Country("SG")));
-        assertEquals(expect, modelManager.getFilteredCountryNoteList().size());
+        assertEquals(expect, modelManager.getSortedFilteredCountryNoteList().size());
     }
 
     @Test
     public void deleteCountryNote_validCountryNote_updateCountryNoteList() {
         modelManager.addCountryNote(new CountryNote("random", new Country("SG")));
         modelManager.updateFilteredCountryNoteList(countryNote -> true);
-        int initial = modelManager.getFilteredCountryNoteList().size();
-        modelManager.deleteCountryNote(modelManager.getFilteredCountryNoteList().get(0));
-        assertEquals(initial - 1, modelManager.getFilteredCountryNoteList().size());
+        int initial = modelManager.getSortedFilteredCountryNoteList().size();
+        modelManager.deleteCountryNote(modelManager.getSortedFilteredCountryNoteList().get(0));
+        assertEquals(initial - 1, modelManager.getSortedFilteredCountryNoteList().size());
     }
 
     @Test

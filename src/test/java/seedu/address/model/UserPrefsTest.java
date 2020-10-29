@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import java.nio.file.Path;
 
@@ -51,17 +52,11 @@ public class UserPrefsTest {
 
     @Test
     public void equals() {
-        // same object -> returns true
-        assertTrue(defaultUserPrefs.equals(defaultUserPrefs));
+        // basic equals tests
+        basicEqualsTests(defaultUserPrefs);
 
         // same gui settings and file path -> returns true
         assertTrue(defaultUserPrefs.equals(new UserPrefs()));
-
-        // null -> returns false
-        assertFalse(defaultUserPrefs.equals(null));
-
-        // different class -> returns false
-        assertFalse(defaultUserPrefs.equals(2.0));
 
         // different gui settings -> returns false
         assertFalse(defaultUserPrefs.equals(userPrefsDifferentGuiSettings));

@@ -175,7 +175,7 @@ public interface Model {
     /**
      * Returns an unmodifiable view of the filtered country notes list.
      */
-    ObservableList<CountryNote> getFilteredCountryNoteList();
+    ObservableList<CountryNote> getSortedFilteredCountryNoteList();
 
     /**
      * Updates the filter of the filtered country notes list to filter by the given {@code predicate}.

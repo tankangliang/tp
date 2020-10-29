@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,18 +42,12 @@ public class IndexTest {
     public void equals() {
         final Index fifthClientIndex = Index.fromOneBased(5);
 
+        // basic equals tests
+        basicEqualsTests(fifthClientIndex);
+
         // same values -> returns true
         assertTrue(fifthClientIndex.equals(Index.fromOneBased(5)));
         assertTrue(fifthClientIndex.equals(Index.fromZeroBased(4)));
-
-        // same object -> returns true
-        assertTrue(fifthClientIndex.equals(fifthClientIndex));
-
-        // null -> returns false
-        assertFalse(fifthClientIndex.equals(null));
-
-        // different types -> returns false
-        assertFalse(fifthClientIndex.equals(5.0f));
 
         // different index -> returns false
         assertFalse(fifthClientIndex.equals(Index.fromOneBased(1)));

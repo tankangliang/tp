@@ -179,6 +179,7 @@ public class TagNoteMap {
         noteToTagsMap.put(note, currentTags);
         noteSet.add(note);
     }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object:
@@ -196,4 +197,5 @@ public class TagNoteMap {
                 && this.tagToNotesMap.equals(other.tagToNotesMap)
                 && this.noteToTagsMap.equals(other.noteToTagsMap);
     }
+
 }

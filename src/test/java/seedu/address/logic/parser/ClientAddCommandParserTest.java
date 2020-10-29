@@ -50,7 +50,8 @@ import seedu.address.model.country.CountryCodeVerifier;
 import seedu.address.testutil.ClientBuilder;
 
 public class ClientAddCommandParserTest {
-    private ClientAddCommandParser parser = new ClientAddCommandParser();
+
+    private final ClientAddCommandParser parser = new ClientAddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -185,4 +186,5 @@ public class ClientAddCommandParserTest {
                 + ADDRESS_DESC_BOB + COUNTRY_DESC_BOB + TIMEZONE_DESC_BOB + CONTRACT_EXPIRY_DATE_DESC_BOB,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClientAddCommand.MESSAGE_USAGE));
     }
+
 }
