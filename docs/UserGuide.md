@@ -534,7 +534,7 @@ never have to worry about not being able to see all your important clients at a 
      
 
 
-### View for Client
+### UI when Viewing Clients
 
 The diagram below is what you should see upon viewing a particular client (i.e. firing up the command `client view 1
 `). It shows how to identify a particular  client's  `CLIENT_INDEX`, and an  associated note's `CLIENT_NOTE_INDEX`.
@@ -545,7 +545,7 @@ Here, the **Client Card** displaying the note that's tagged as `hobbies` is refe
 
 Being able to identify these is key to adding, deleting and editing client notes as well as editing clients.
 
-### View for Country
+### UI when Viewing Country
 
 Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Card**:
 
@@ -553,8 +553,10 @@ Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the in
 
 
 <p align="center">
-   <strong><i>{End of Appendix A}</i></strong>
+   <strong><i>{End of Appendix A} <a href="#table-of-contents"> Please return to the Table of Contents</a>  </i
+   ></strong> 
 </p>
+
 
 
 
