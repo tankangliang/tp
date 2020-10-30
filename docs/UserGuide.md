@@ -63,8 +63,8 @@ Now that you have started **_TBM_**,
 1. ***(Recommended for new users)*** The [`help`](#Viewing-help-help) command will show a help page of some commonly
  used commands to fully utilise **_TBM_**.
 
-   * ***Either*** press the **F1** key on your keyboard, ***or*** type the **`help`** command in the command box and
-    press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   * ***Either*** press the **F1** key on your keyboard, ***or*** type the [`help`](#Viewing-help-help) command in the command box and
+    press Enter to execute it. e.g. typing [`help`](#Viewing-help-help) and pressing Enter will open the help window.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -223,7 +223,7 @@ Example:
 
 ### Saving data
 
-Your data automatically saved after every change. The file is saved in the ubiquitous `.json` format, which
+Your data is automatically saved after every change. The file is saved in the ubiquitous `.json` format, which
 allows you to edit the file manually without even opening **TBM** up.
 The location for this file is `./data/tbmManager.json` (indicated at the bottom left of the window), where the
  `.` represents the directory where you have saved `TBM.jar`. Here's a snippet of this editable text file:
