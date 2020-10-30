@@ -26,10 +26,6 @@ title: User Guide
  ![Clients](images/command-screenshots/client_view.png) 
  ![Country](images/command-screenshots/country_note_view.png)
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're  trying TBM out for the first  time.
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -41,6 +37,12 @@ title: User Guide
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quickstart
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're  trying TBM out for the first  time.
+</div>
+
 
 Before you start using **_TBM_**, 
 
