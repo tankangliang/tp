@@ -249,6 +249,11 @@ The location for this file is `./data/tbmManager.json` (indicated at the bottom 
 }
 ```
 
+<div markdown="block" class="alert alert-info">
+**:information_source:** Tweaking this file should be done <strong><i>only</i></strong> if you're familiar with JSON
+. If you're new to JSON, <a href="https://www.json.org/json-en.html">here's</a> a good place to learn more.
+</div>
+
 ### Adding client notes: `client note add`
 
 Format: `client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...`
