@@ -23,8 +23,8 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
- ![Clients](images/command-screenshots/client_view.png) 
- ![Country](images/command-screenshots/country_note_view.png)
+ ![Client Notes](images/command-screenshots/client_view.png) 
+ ![Country Notes](images/command-screenshots/country_note_view.png)
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ title: User Guide
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're  trying TBM out for the first  time.
+**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're trying TBM out for the first time.
 </div>
 
 
@@ -63,7 +63,7 @@ Now that you have started **_TBM_**,
 1. ***(Recommended for new users)*** The [`help`](#Viewing-help-help) command will show a help page of some commonly
  used commands to fully utilise **_TBM_**.
 
-   * ***Either*** press the **F1** key on your keyboard, ***or*** type the [`help`](#Viewing-help-help) command in the command box and
+   * **_Either_** press the **F1** key on your keyboard, **_or_** type the [`help`](#Viewing-help-help) command in the command box and
     press Enter to execute it. e.g. typing [`help`](#Viewing-help-help) and pressing Enter will open the help window.<br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -543,12 +543,12 @@ The diagram below shows the key UI elements of TBM upon first start-up.
 
 ![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
 
-* **Command Box** allows you to input  commands in their correct syntax to interact with TBM.
+* **Command Box** allows you to input commands in their correct syntax to interact with TBM.
 
-* **Client List Panel** will always allow you to view your client's information at a go. It's scrollable so that you 
+* **Client List Panel** will always allow you to view all your clients' information at a go. It's scrollable so that you 
 never have to worry about not being able to see all your important clients at a single glance!
 
-* **Client Card** will show you brief information a particular client. 
+* **Client Card** will show you brief information about a particular client. 
 
 * **Result Display** will show you the output of executing your command.
     * It indicates successful commands.
@@ -558,7 +558,7 @@ never have to worry about not being able to see all your important clients at a 
      ![Result Display slowing error message](images/command-screenshots/result_display_error_syntax.png)
      
 * **Generic Widget View Box** is aptly named because it shall spawn *Client Cards* or *Country Cards* when
- relevant commands are sent. Initially it will show you your local time, to the precise second and your own location.
+ relevant commands are sent. Initially it will show you your local time to the precise second, as well as your current location.
    
      
 
@@ -566,7 +566,7 @@ never have to worry about not being able to see all your important clients at a 
 ### UI when Viewing Clients
 
 The diagram below is what you should see upon viewing a particular client (i.e. firing up the command `client view 1
-`). It shows how to identify a particular  client's  `CLIENT_INDEX`, and an  associated note's `CLIENT_NOTE_INDEX`.
+`). It shows how to identify a particular client's `CLIENT_INDEX`, and an associated note's `CLIENT_NOTE_INDEX`.
 
 ![Annotated Client View UI Layout](images/command-screenshots/client_view_annotated.png)
 
@@ -578,18 +578,8 @@ Being able to identify these is key to adding, deleting and editing client notes
 
 Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Card**:
 
-![Annoted Country View UI Layout](./images/command-screenshots/country_note_view_annotated.png)
+![Annotated Country View UI Layout](images/command-screenshots/country_note_view_annotated.png)
 
 
-<p align="center">
-   <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> } </i
-   ></strong> 
-</p>
-
-
-
-
-
-
+<p align="center"> **_{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> }_**</p>
 --------------------------------------------------------------------------------------------------------------------
-
