@@ -586,5 +586,5 @@ Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the in
 This is what to expect when you type in the `help` command or pres `F1`: 
 ![help window](./images/command-screenshots/help_window.png)
 
-<p align="center"> **_\{End of Appendix A, please return to the[Table of Contents](#table-of-contents)\}_**</p>
+<p align="center"> **_End of Appendix A, please return to the[Table of Contents](#table-of-contents)_**</p>
 --------------------------------------------------------------------------------------------------------------------
