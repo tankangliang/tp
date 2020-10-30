@@ -10,7 +10,7 @@ title: Travelling BusinessMan
 
 **Travelling BusinessMan is a desktop application for managing your client contact details, organized with a focus on their country of residence.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-* If you are interested in using Travelling BusinessMan, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
+* If you are interested in using Travelling BusinessMan, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quickstart).
 * If you are interested about developing Travelling BusinessMan, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
 
 
