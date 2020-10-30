@@ -104,8 +104,7 @@ Format: `list`
 
 ### Viewing help: `help`
 
-Shows commonly used commands for **_TBM_** in a new help window. Pressing Esc will close this window.
-![help window](./images/command-screenshots/help_window.png)
+Shows commonly used commands for **_TBM_** in a [new help window](#help-window). Pressing Esc will close this window.
 
 Format: `help`
 
@@ -126,7 +125,7 @@ Example:
 Views the client specified by the `INDEX` parameter.
 <div markdown="block" class="alert alert-info">
 
-**:information_source:** Please refer to the [this](#view-for-client) if you need to be re-acquainted with the UI for client related commands
+**:information_source:** Please refer to [this](#ui-when-viewing-clients) if you need to be re-acquainted with the UI for client related commands
 </div>
 
 Format: `client view INDEX`
@@ -225,7 +224,7 @@ Example:
 
 Your data is automatically saved after every change. The file is saved in the ubiquitous `.json` format, which
 allows you to edit the file manually without even opening **TBM** up.
-The location for this file is `./data/tbmManager.json` (indicated at the bottom left of the window), where the
+The location for this file is `./data/tbmManager.json` (indicated at the bottom left of the application), where the
  `.` represents the directory where you have saved `TBM.jar`. Here's a snippet of this editable text file:
 
 ```json5
@@ -349,7 +348,7 @@ Examples:
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:** Please refer to the [this](#appendix-a---introduction-to-the-ui) if you need to be re-acquainted with the UI for country related commands
+**:information_source:** Please refer to [this](#ui-when-viewing-country) if you need to be re-acquainted with the UI for country related commands
 </div>
 
 
@@ -543,7 +542,7 @@ The diagram below shows the key UI elements of TBM upon first start-up.
 
 ![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
 
-* **Command Box** allows you to input commands in their correct syntax to interact with TBM.
+* **Command Box** allows you to input commands to interact with TBM.
 
 * **Client List Panel** will always allow you to view all your clients' information at a go. It's scrollable so that you 
 never have to worry about not being able to see all your important clients at a single glance!
@@ -557,7 +556,7 @@ never have to worry about not being able to see all your important clients at a 
  
      ![Result Display slowing error message](images/command-screenshots/result_display_error_syntax.png)
      
-* **Generic Widget View Box** is aptly named because it shall spawn *Client Cards* or *Country Cards* when
+* **Generic Widget View Box** is aptly named because it shall render *Client Cards* or *Country Cards* when
  relevant commands are sent. Initially it will show you your local time to the precise second, as well as your current location.
    
      
@@ -570,16 +569,21 @@ The diagram below is what you should see upon viewing a particular client (i.e. 
 
 ![Annotated Client View UI Layout](images/command-screenshots/client_view_annotated.png)
 
-Here, the **Client Card** displaying the note that's tagged as `hobbies` is referred to by the `CLIENT_INDEX` of `1`.
+Here, the **Client Note Card** displaying the note that's tagged as `hobbies` is referred to by the `CLIENT_INDEX` of `1`.
 
 Being able to identify these is key to adding, deleting and editing client notes as well as editing clients.
 
 ### UI when Viewing Country
 
-Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Card**:
+Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Note Card**:
 
 ![Annotated Country View UI Layout](images/command-screenshots/country_note_view_annotated.png)
 
+
+### Help Window
+
+This is what to expect when you type in the `help` command or pres `F1`: 
+![help window](./images/command-screenshots/help_window.png)
 
 <p align="center"> **_{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> }_**</p>
 --------------------------------------------------------------------------------------------------------------------
