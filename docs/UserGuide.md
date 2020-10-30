@@ -50,17 +50,19 @@ Before you start using **_TBM_**,
 
 1. Navigate to the directory that the application file was downloaded to. To start the application:
 
-    1. Double click on the `tbm.jar` file and the application will start shortly.
+    1. Double click on the `TBM.jar` file and the application will start shortly.
 
-    1. Alternatively, open any shell terminal in the current directory and run the command `java -jar tbm.jar`.
+    1. Alternatively, open any shell terminal in the current directory and run the command `java -jar TBM.jar`.
 
 Now that you have started **_TBM_**,
 
 1. Type any command in the command box and press Enter to execute it.
 
-1. (Recommended for new users) The [`help`](#Viewing-help-help) command will show a help page of some commonly used commands to fully utilise **_TBM_**.
+1. ***(Recommended for new users)*** The [`help`](#Viewing-help-help) command will show a help page of some commonly
+ used commands to fully utilise **_TBM_**.
 
-   * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   * ***Either*** press the **F1** key on your keyboard, ***or*** type the **`help`** command in the command box and
+    press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -101,6 +103,7 @@ Format: `list`
 ### Viewing help: `help`
 
 Shows commonly used commands for **_TBM_** in a new help window. Pressing Esc will close this window.
+![help window](./images/command-screenshots/help_window.png)
 
 Format: `help`
 
@@ -536,7 +539,7 @@ The diagram below is what you should see upon viewing a particular client (i.e. 
 
 ![Annotated Client View UI Layout](images/command-screenshots/client_view_annotated.png)
 
-Here, the **Client Card** displaying the note that's tagged as `hobies` is referred to by the `CLIENT_INDEX` of `1`.
+Here, the **Client Card** displaying the note that's tagged as `hobbies` is referred to by the `CLIENT_INDEX` of `1`.
 
 Being able to identify these is key to adding, deleting and editing client notes as well as editing clients.
 
@@ -545,6 +548,11 @@ Being able to identify these is key to adding, deleting and editing client notes
 Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Card**:
 
 ![Annoted Country View UI Layout](./images/command-screenshots/country_note_view_annotated.png)
+
+
+<p align="center">
+   <strong><i>{End of Appendix A}</i></strong>
+</p>
 
 
 
