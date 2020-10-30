@@ -24,6 +24,7 @@ title: User Guide
 --------------------------------------------------------------------------------------------------------------------
 
  ![Client Notes](images/command-screenshots/client_view.png) 
+ <br>
  ![Country Notes](images/command-screenshots/country_note_view.png)
 
 
@@ -60,11 +61,11 @@ Now that you have started **_TBM_**,
 
 1. Type any command in the command box and press Enter to execute it.
 
-1. ***(Recommended for new users)*** The [`help`](#Viewing-help-help) command will show a help page of some commonly
+1. ***(Recommended for new users)*** The [`help`](#help-window) command will show a help page of some commonly
  used commands to fully utilise **_TBM_**.
 
-   * **_Either_** press the **F1** key on your keyboard, **_or_** type the [`help`](#Viewing-help-help) command in the command box and
-    press Enter to execute it. e.g. typing [`help`](#Viewing-help-help) and pressing Enter will open the help window.<br>
+   * **_Either_** press the **F1** key on your keyboard, **_or_** type the [`help`](#help-window) command in the command box and
+    press Enter to execute it. e.g. typing [`help`](#help-window) and pressing Enter will open the help window.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -72,9 +73,9 @@ Now that you have started **_TBM_**,
 
 The following section outlines the commands supported by **_TBM_**. A short description is given for each command along with the format that they should be executed with. Complex commands also come with examples to demonstrate the purpose that the command serve.
 
-Certain commands require parameters and the summary of these parameters as well as their prefixes and constraints can be found in our [parameters summary table](#Parameter-constraints-summary)
+Certain commands require parameters and the summary of these parameters as well as their prefixes and constraints can be found in our [parameters summary table](#parameter-constraints-summary)
 
-A summary of all commands can be found in our [command summary table](#Command-summary)
+A summary of all commands can be found in our [command summary table](#command-summary)
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -585,5 +586,5 @@ Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the in
 This is what to expect when you type in the `help` command or pres `F1`: 
 ![help window](./images/command-screenshots/help_window.png)
 
-<p align="center"> **_{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> }_**</p>
+<p align="center"> **_\{End of Appendix A, please return to the[Table of Contents](#table-of-contents)\}_**</p>
 --------------------------------------------------------------------------------------------------------------------
