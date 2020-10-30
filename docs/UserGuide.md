@@ -223,7 +223,31 @@ Example:
 
 ### Saving data
 
-Automatically saved after every change.
+Your data automatically saved after every change. The file is saved in the ubiquitous `.json` format, which
+allows you to edit the file manually without even opening **TBM** up.
+The location for this file is `./data/tbmManager.json` (indicated at the bottom left of the window), where the
+ `.` represents the directory where you have saved `TBM.jar`. Here's a snippet of this editable text file:
+
+```json5
+{
+  "clients" : [ {
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "country" : "SG",
+    "timezone" : "GMT+8",
+    "contractExpiryDate" : "21-4-2022",
+    "lastModifiedInstant" : "2020-01-01T00:00:00Z",
+    "clientNotes" : [ {
+      "contents" : "Wants to take his wife to Norway for New Years' Day",
+      "countryCode" : "NULL_CC",
+      "tags" : [ "romantic", "holidayPlans", "travel" ]
+    } ]
+  } ]
+  . . . 
+}
+```
 
 ### Adding client notes: `client note add`
 
@@ -553,7 +577,7 @@ Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the in
 
 
 <p align="center">
-   <strong><i>{End of Appendix A} <a href="#table-of-contents"> Please return to the Table of Contents</a>  </i
+   <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> } </i
    ></strong> 
 </p>
 
