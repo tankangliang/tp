@@ -53,7 +53,7 @@ public class ClientViewCommand extends Command {
         model.setWidgetClient(clientToView);
 
         return new CommandResult(String.format(MESSAGE_VIEW_CLIENT_SUCCESS, clientToView.getName()),
-                false, false, WidgetViewOption.generateClientWidgetOption());
+                false, false, false, WidgetViewOption.generateClientWidgetOption());
     }
 
     @Override

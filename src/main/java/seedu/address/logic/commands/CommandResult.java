@@ -15,6 +15,9 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
+    /** The widget display should be reset to normal */
+    private final boolean resetWidget;
+
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
@@ -25,25 +28,24 @@ public class CommandResult {
     private final WidgetViewOption widgetViewOption;
 
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
-     */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
-        requireAllNonNull(feedbackToUser, showHelp, exit);
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
-        this.widgetViewOption = WidgetViewOption.generateNullWidgetOption();
-    }
-
-    /**
      * Constructs a {@code CommandResult} with the specified fields
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, WidgetViewOption widgetViewOption) {
+    public CommandResult(String feedbackToUser, boolean resetWidget, boolean showHelp, boolean exit,
+            WidgetViewOption widgetViewOption) {
         requireAllNonNull(feedbackToUser, showHelp, exit, widgetViewOption);
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.resetWidget = resetWidget;
         this.showHelp = showHelp;
         this.exit = exit;
         this.widgetViewOption = widgetViewOption;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields and {@code widgetViewOption}
+     * is set to its default value.
+     */
+    public CommandResult(String feedbackToUser, boolean resetWidget, boolean showHelp, boolean exit) {
+        this(feedbackToUser, resetWidget, showHelp, exit, WidgetViewOption.generateNullWidgetOption());
     }
 
     /**
@@ -51,11 +53,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, false, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public boolean isResetWidget() {
+        return resetWidget;
     }
 
     public boolean isShowHelp() {
@@ -115,13 +121,14 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
+                && resetWidget == otherCommandResult.resetWidget
                 && showHelp == otherCommandResult.showHelp
                 && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, resetWidget, showHelp, exit);
     }
 
 }

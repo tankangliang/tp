@@ -41,16 +41,12 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane widgetPlaceholder;
     @FXML
     private StackPane commandBoxPlaceholder;
-
     @FXML
     private MenuItem helpMenuItem;
-
     @FXML
     private StackPane clientListPanelPlaceholder;
-
     @FXML
     private StackPane resultDisplayPlaceholder;
-
     @FXML
     private StackPane statusbarPlaceholder;
 
@@ -199,6 +195,10 @@ public class MainWindow extends UiPart<Stage> {
                 widgetPlaceholder.getChildren().clear();
                 countryNoteListPanel.setHeader(commandResult.getCountry());
                 widgetPlaceholder.getChildren().add(countryNoteListPanel.getRoot());
+            }
+
+            if (commandResult.isResetWidget()) {
+                widgetViewBox.setToDefaultView();
             }
 
             if (commandResult.isShowHelp()) {

@@ -47,12 +47,12 @@ class TagNoteMapTest {
 
     @Test
     public void initTagNoteMapFromCountryNotes_validSetOfTaggedCountryNotes_doesNotThrowException() {
-        Set<Note> inputSet = new HashSet<>();
+        List<Note> inputList = new ArrayList<>();
         Tag tag = new Tag("tagName");
         Note countryNote1 = new Note("this country note will be tagged");
         countryNote1.setTags(tags);
-        inputSet.add(countryNote1);
-        assertDoesNotThrow(() -> this.tagNoteMap.initTagNoteMapFromCountryNotes(inputSet));
+        inputList.add(countryNote1);
+        assertDoesNotThrow(() -> this.tagNoteMap.initTagNoteMapFromCountryNotes(inputList));
     }
 
     @Test
@@ -62,7 +62,7 @@ class TagNoteMapTest {
         List<Client> clients = new ArrayList<>();
         clients.add(client);
         tagNoteMap.initTagNoteMapFromClients(clients);
-        Set<Note> expectedNotes = new HashSet<>();
+        List<Note> expectedNotes = new ArrayList<>();
         expectedNotes.add(TAGGED_NOTE);
         assertEquals(tagNoteMap.getNotesForTag(TEST_TAG), expectedNotes);
     }
@@ -82,7 +82,7 @@ class TagNoteMapTest {
     @Test
     public void deleteNote_deleteSoleNoteWithSoleTag_clearsTagToNotesMapAndUniqueTagEntriesReturnsTrue() {
         TAGGED_NOTE.setTags(tags);
-        Set<Note> expectedNotesSet = new HashSet<>();
+        List<Note> expectedNotesSet = new ArrayList<>();
         expectedNotesSet.add(TAGGED_NOTE);
         client.addClientNote(TAGGED_NOTE);
         List<Client> clients = new ArrayList<>();
@@ -102,16 +102,16 @@ class TagNoteMapTest {
         Tag newTag = new Tag("unprecedentedTag");
         newTagSet.add(newTag);
         newNote.setTags(newTagSet);
-        Set<Note> expectedNotesSet = new HashSet<>();
-        expectedNotesSet.add(newNote);
+        List<Note> expectedNotesList = new ArrayList<>();
+        expectedNotesList.add(newNote);
         client.addClientNote(TAGGED_NOTE);
         List<Client> clients = new ArrayList<>();
         clients.add(client);
         tagNoteMap.initTagNoteMapFromClients(clients);
         assertTrue(tagNoteMap.getTagsForNote(TAGGED_NOTE).equals(tags));
         tagNoteMap.editNote(TAGGED_NOTE, newNote);
-        assertFalse(tagNoteMap.getNotesForTag(TEST_TAG).equals(expectedNotesSet));
-        assertTrue(tagNoteMap.getNotesForTag(newTag).equals(expectedNotesSet));
+        assertFalse(tagNoteMap.getNotesForTag(TEST_TAG).equals(expectedNotesList));
+        assertTrue(tagNoteMap.getNotesForTag(newTag).equals(expectedNotesList));
     }
 
     @Test

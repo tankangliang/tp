@@ -1,9 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -76,7 +74,8 @@ class JsonAdaptedClient {
         timezone = source.getTimezone().toString();
         contractExpiryDate = source.getContractExpiryDate().value;
         lastModifiedInstant = source.getLastModifiedInstant().toString();
-        clientNotes.addAll(source.getClientNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toSet()));
+        clientNotes.addAll(source.getClientNotesAsUnmodifiableList().stream().map(JsonAdaptedNote::new)
+                .collect(Collectors.toSet()));
     }
 
     /**
@@ -85,7 +84,7 @@ class JsonAdaptedClient {
      * @throws IllegalValueException if there were any data constraints violated in the adapted client.
      */
     public Client toModelType() throws IllegalValueException {
-        final Set<Note> clientNotes = new HashSet<>();
+        final List<Note> clientNotes = new ArrayList<>();
         for (JsonAdaptedNote note : this.clientNotes) {
             clientNotes.add(note.toModelType());
         }

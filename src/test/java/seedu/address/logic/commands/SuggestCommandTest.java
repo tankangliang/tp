@@ -47,7 +47,7 @@ public class SuggestCommandTest {
     public void execute_emptySet_success() {
         List<Client> beforeClientList = new ArrayList<>(model.getSortedFilteredClientList());
         SuggestCommand suggestCommand = new SuggestCommand(Collections.emptySet());
-        CommandResult expectedResult = new CommandResult(SuggestCommand.MESSAGE_SUGGEST_SUCCESS);
+        CommandResult expectedResult = new CommandResult(SuggestCommand.MESSAGE_SUGGEST_SUCCESS, true, false, false);
         assertEquals(suggestCommand.execute(model), expectedResult);
         List<Client> afterClientList = new ArrayList<>(model.getSortedFilteredClientList());
         assertEquals(beforeClientList, afterClientList);
@@ -73,7 +73,7 @@ public class SuggestCommandTest {
         Set<SuggestionType> suggestionTypes = new LinkedHashSet<>();
         suggestionTypes.add(new SuggestionType(SuggestionType.BY_CONTRACT));
         SuggestCommand suggestCommand1 = new SuggestCommand(suggestionTypes);
-        CommandResult expectedResult = new CommandResult(SuggestCommand.MESSAGE_SUGGEST_SUCCESS);
+        CommandResult expectedResult = new CommandResult(SuggestCommand.MESSAGE_SUGGEST_SUCCESS, true, false, false);
         assertEquals(suggestCommand1.execute(newModel), expectedResult);
         assertEquals(newModel.getSortedFilteredClientList().size(), 3);
         assertEquals(newModel.getSortedFilteredClientList().get(0), client3);
