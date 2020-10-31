@@ -17,7 +17,6 @@ import seedu.address.model.client.Phone;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
-import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
 
 /**
