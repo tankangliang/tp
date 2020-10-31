@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalClients.ALICE;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -103,7 +102,7 @@ class TagNoteMapTest {
         Tag newTag = new Tag("unprecedentedTag");
         newTagSet.add(newTag);
         newNote.setTags(newTagSet);
-        List<Note> expectedNotesList = new LinkedList<>();
+        List<Note> expectedNotesList = new ArrayList<>();
         expectedNotesList.add(newNote);
         client.addClientNote(TAGGED_NOTE);
         List<Client> clients = new ArrayList<>();
