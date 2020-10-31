@@ -89,15 +89,6 @@ public class Client {
         return Collections.unmodifiableList(this.clientNotes);
     }
 
-    /**
-     * Gets the list of client notes associated with this client as an unmodifiable list.
-     *
-     * @return An unmodifiable list of client notes associated with this client.
-     */
-    public List<Note> getClientNotesAsList() {
-        return Collections.unmodifiableList(new ArrayList<>(getClientNotes()));
-    }
-
     public ObservableList<Note> getClientNotesAsObservableList() {
         return FXCollections.observableArrayList(clientNotes);
     }
