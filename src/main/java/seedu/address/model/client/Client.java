@@ -98,8 +98,15 @@ public class Client {
         return Collections.unmodifiableList(new ArrayList<>(getClientNotes()));
     }
 
+    /**
+     * Exposes the note list as an ObservableList of notes for {@code WidgetViewBox}.
+     * For purpose of adding a listener to the underlying note list of the client, this returns the list itself
+     * as a singleton object.
+     *
+     * @return ObservableList of Notes
+     */
     public ObservableList<Note> getClientNotesAsObservableList() {
-        return FXCollections.observableArrayList(clientNotes);
+        return clientNotes;
     }
     /**
      * Adds a client note for this client.
