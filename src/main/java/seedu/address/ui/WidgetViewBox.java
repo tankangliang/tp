@@ -88,9 +88,9 @@ public class WidgetViewBox extends UiPart<Region> {
             }
         }
         name.setText(client.getName().toString());
-        phone.setText(client.getPhone().toString());
-        email.setText(client.getEmail().toString());
-        country.setText(client.getCountry().getCountryName());
+        phone.setText("Phone: " + client.getPhone().toString());
+        email.setText("Email: " + client.getEmail().toString());
+        country.setText("Country: " + client.getCountry().getCountryName());
         contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
         noteTitle.setText("Notes");
 
