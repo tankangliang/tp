@@ -83,7 +83,7 @@ class TagNoteMapTest {
     @Test
     public void deleteNote_deleteSoleNoteWithSoleTag_clearsTagToNotesMapAndUniqueTagEntriesReturnsTrue() {
         TAGGED_NOTE.setTags(tags);
-        List<Note> expectedNotesSet = new LinkedList<>();
+        List<Note> expectedNotesSet = new ArrayList<>();
         expectedNotesSet.add(TAGGED_NOTE);
         client.addClientNote(TAGGED_NOTE);
         List<Client> clients = new ArrayList<>();

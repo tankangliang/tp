@@ -29,7 +29,6 @@ public class Client {
     private final Country country;
     private final Timezone timezone;
     private final ContractExpiryDate contractExpiryDate;
-    // private final LinkedHashSet<Note> clientNotes =new LinkedHashSet<>(); // this change will break the GUI updating
     private final ObservableList<Note> clientNotes = FXCollections.observableArrayList(new ArrayList<>());
     private final LastModifiedInstant lastModifiedInstant;
 
@@ -99,9 +98,8 @@ public class Client {
         return Collections.unmodifiableList(new ArrayList<>(getClientNotes()));
     }
 
-    public ObservableList<Note> getClientNotesAsObservableSet() {
+    public ObservableList<Note> getClientNotesAsObservableList() {
         return FXCollections.observableArrayList(clientNotes);
-        // return clientNotes;
     }
     /**
      * Adds a client note for this client.
@@ -134,8 +132,6 @@ public class Client {
         int targetIdx = clientNotes.indexOf(clientNote);
         clientNotes.set(targetIdx, newNote);
         assert(!clientNotes.contains(clientNote));
-        //        this.clientNotes.remove(clientNote);
-        //        this.clientNotes.add(newNote);
     }
 
     /**

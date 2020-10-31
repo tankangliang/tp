@@ -148,8 +148,7 @@ public class TagNoteMap {
         for (Tag tag : associatedTags) {
             List<Note> notes = this.tagToNotesMap.get(tag);
             notes.remove(noteToEdit);
-            // remove the tag from tagToNotesMap and uniqueTagMap if that tag has no associated notes left and is not
-            // default tag of Tag.UNTAGGED:
+            // other than default Tag.UNTAGGED, remove the tag itself from tagToNotesMap and uniqueTagMap:
             if (notes.isEmpty() && !tag.equals(Tag.UNTAGGED)) {
                 this.tagToNotesMap.remove(tag);
                 this.uniqueTagMap.remove(tag);
@@ -175,7 +174,6 @@ public class TagNoteMap {
             if (tagToNotesMap.containsKey(newTag)) { // if that tag exists
                 tagToNotesMap.get(newTag).add(note);
             } else { // new tag:
-                // todo: have to put into uniqueTagSet!!!
                 this.uniqueTagMap.put(newTag, newTag);
                 List<Note> notes = new ArrayList<>();
                 notes.add(note);
