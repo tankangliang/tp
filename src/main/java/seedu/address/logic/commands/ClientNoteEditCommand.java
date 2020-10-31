@@ -28,7 +28,8 @@ public class ClientNoteEditCommand extends Command {
             + "and the index number for client note in the displayed client notes list.\n"
             + "Parameters: CLIENT_INDEX CLIENT_NOTE_INDEX " + PREFIX_NOTE + "NOTE_STRING [" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_NOTE + "client note newly edited content";
-    public static final String MESSAGE_EDIT_CLIENT_NOTE_SUCCESS = "Successfully edited client note";
+    public static final String MESSAGE_EDIT_CLIENT_NOTE_SUCCESS = "Successfully edited note for %1$s: \n Before: "
+            + "%2$s\n After: %3$s";
     private static final String MESSAGE_INVALID_CLIENT_NOTE_DISPLAYED_INDEX = "The client note index provided is "
             + "invalid";
     private final Index targetClientIndex;
@@ -73,7 +74,8 @@ public class ClientNoteEditCommand extends Command {
         }
         newNote.setTags(accumulatedTags);
         model.editClientNote(associatedClient, noteToEdit, newNote);
-        return new CommandResult(MESSAGE_EDIT_CLIENT_NOTE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_NOTE_SUCCESS, associatedClient.getName(), noteToEdit,
+                newNote));
     }
 
     @Override
