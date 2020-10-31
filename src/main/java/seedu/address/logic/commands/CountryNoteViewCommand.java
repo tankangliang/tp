@@ -47,7 +47,7 @@ public class CountryNoteViewCommand extends Command {
             model.updateFilteredCountryNoteList(countryNote -> countryNote.getCountry().equals(country));
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                country.equals(Country.NULL_COUNTRY) ? "all countries" : country),
+                country.equals(Country.NULL_COUNTRY) ? "all countries" : country), false,
             false, false, WidgetViewOption.generateCountryNoteWidgetOption(country));
     }
 

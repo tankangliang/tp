@@ -62,6 +62,7 @@ public class TbmManager implements ReadOnlyTbmManager {
      * @param notes The given list of notes.
      */
     public void setNotes(List<Note> notes) {
+        countryNotesManager.clear();
         for (Note note: notes) {
             if (note.isClientNote()) {
                 // handle client notes
@@ -182,7 +183,7 @@ public class TbmManager implements ReadOnlyTbmManager {
     @Override
     public ObservableList<Note> getNoteList() {
         ArrayList<Note> accumulated = new ArrayList<>(getCountryNoteList());
-        this.clients.forEach(client -> accumulated.addAll(client.getClientNotes()));
+        this.clients.forEach(client -> accumulated.addAll(client.getClientNotesAsUnmodifiableList()));
         return FXCollections.observableArrayList(accumulated);
     }
 

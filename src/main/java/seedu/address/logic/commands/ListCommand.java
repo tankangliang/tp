@@ -11,14 +11,19 @@ import seedu.address.model.Model;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-
     public static final String MESSAGE_SUCCESS = "Listed all clients";
-
+    public static final String MESSAGE_SUCCESS_NO_CLIENTS = "No clients to list";
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        model.resetSortedFilteredClientListOrder();
+        if (model.getSortedFilteredClientList().size() == 0) {
+            return new CommandResult(MESSAGE_SUCCESS_NO_CLIENTS, true, false, false);
+        } else {
+            return new CommandResult(MESSAGE_SUCCESS, true, false, false);
+        }
     }
+
 }

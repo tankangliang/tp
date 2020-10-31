@@ -2,9 +2,11 @@ package seedu.address.model.note;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,18 +30,19 @@ public class TagNoteMap {
      * A map is used instead of a set because the set does not offer the option of getting objects inside it.
      */
     private final Map<Tag, Tag> uniqueTagMap = new HashMap<>();
-    private final Set<Note> noteSet = new HashSet<>(); // TODO: not really needed
-    private final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
-    private final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
+    private final LinkedHashSet<Note> noteSet = new LinkedHashSet<>(); // TODO: not really needed
+    private final Map<Tag, List<Note>> tagToNotesMap = new HashMap<>();
+    private final Map<Note, LinkedHashSet<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
 
     /**
      * Constructor ensures our unique tag map has the UNTAGGED tag.
      */
     public TagNoteMap() {
         uniqueTagMap.put(Tag.UNTAGGED, Tag.UNTAGGED);
+        tagToNotesMap.put(Tag.UNTAGGED, new ArrayList<>());
     }
 
-    private void initTagNoteMapFromNotes(Set<Note> notes) {
+    private void initTagNoteMapFromNotes(List<Note> notes) {
         noteSet.addAll(notes);
         for (Note clientNote : notes) {
             Set<Tag> tags = clientNote.getTags();
@@ -58,7 +61,7 @@ public class TagNoteMap {
     public void initTagNoteMapFromClients(List<Client> clients) {
         requireAllNonNull(clients);
         for (Client client : clients) {
-            Set<Note> clientNotes = client.getClientNotes();
+            List<Note> clientNotes = client.getClientNotesAsUnmodifiableList();
             initTagNoteMapFromNotes(clientNotes);
         }
         logger.info("--------------[TagNoteMap initialized from clients]");
@@ -69,7 +72,7 @@ public class TagNoteMap {
      *
      * @param countryNotes The set of countries, each containing their notes and associated tags.
      */
-    public void initTagNoteMapFromCountryNotes(Set<Note> countryNotes) {
+    public void initTagNoteMapFromCountryNotes(List<Note> countryNotes) {
         // todo: make init work when passed in a list of countryNotes
         requireAllNonNull(countryNotes);
         initTagNoteMapFromNotes(countryNotes);
@@ -99,11 +102,11 @@ public class TagNoteMap {
     }
 
     public Set<Tag> getTagsForNote(Note note) {
-        return Collections.unmodifiableSet(noteToTagsMap.getOrDefault(note, new HashSet<>()));
+        return Collections.unmodifiableSet(noteToTagsMap.getOrDefault(note, new LinkedHashSet<>()));
     }
 
-    public Set<Note> getNotesForTag(Tag tag) {
-        return Collections.unmodifiableSet(tagToNotesMap.getOrDefault(tag, new HashSet<>()));
+    public List<Note> getNotesForTag(Tag tag) {
+        return Collections.unmodifiableList(tagToNotesMap.getOrDefault(tag, new ArrayList<>()));
     }
 
     /**
@@ -118,9 +121,10 @@ public class TagNoteMap {
         noteSet.remove(note);
         Set<Tag> associatedTags = this.noteToTagsMap.get(note);
         for (Tag tag : associatedTags) { // remove note for relevant tags
-            Set<Note> notes = this.tagToNotesMap.get(tag);
+            List<Note> notes = this.tagToNotesMap.get(tag);
             notes.remove(note);
-            if (notes.isEmpty()) { // remove the tag itself from tagToNotesMap and uniqueTagMap:
+            if (notes.isEmpty() && !tag.equals(Tag.UNTAGGED)) {
+                // other than default Tag.UNTAGGED, remove the tag itself from tagToNotesMap and uniqueTagMap:
                 this.tagToNotesMap.remove(tag);
                 this.uniqueTagMap.remove(tag);
             }
@@ -140,17 +144,19 @@ public class TagNoteMap {
         assert noteToTagsMap.containsKey(noteToEdit) : "trying to remove note that doesn't exist in noteToTagsMap";
         noteSet.remove(noteToEdit);
         Set<Tag> associatedTags = this.noteToTagsMap.get(noteToEdit);
-        for (Tag tag : associatedTags) { // remove note for relevant tags
-            Set<Note> notes = this.tagToNotesMap.get(tag);
+        // remove this note's association for relevant tags:
+        for (Tag tag : associatedTags) {
+            List<Note> notes = this.tagToNotesMap.get(tag);
             notes.remove(noteToEdit);
-            if (notes.isEmpty()) { // remove the tag itself from tagToNotesMap and uniqueTagMap:
+            // other than default Tag.UNTAGGED, remove the tag itself from tagToNotesMap and uniqueTagMap:
+            if (notes.isEmpty() && !tag.equals(Tag.UNTAGGED)) {
                 this.tagToNotesMap.remove(tag);
                 this.uniqueTagMap.remove(tag);
             }
         }
         noteSet.add(newNote);
         noteToTagsMap.remove(noteToEdit);
-        addTagsForNote(newNote.getTags(), newNote); // todo: change this to retain past tags
+        addTagsForNote(newNote.getTags(), newNote);
     }
 
     /**
@@ -168,13 +174,14 @@ public class TagNoteMap {
             if (tagToNotesMap.containsKey(newTag)) { // if that tag exists
                 tagToNotesMap.get(newTag).add(note);
             } else { // new tag:
-                Set<Note> notes = new HashSet<>();
+                this.uniqueTagMap.put(newTag, newTag);
+                List<Note> notes = new ArrayList<>();
                 notes.add(note);
                 tagToNotesMap.put(newTag, notes);
             }
         }
         // update the tags set for the note:
-        Set<Tag> currentTags = noteToTagsMap.getOrDefault(note, new HashSet<>());
+        LinkedHashSet<Tag> currentTags = noteToTagsMap.getOrDefault(note, new LinkedHashSet<>());
         currentTags.addAll(newTags);
         noteToTagsMap.put(note, currentTags);
         noteSet.add(note);

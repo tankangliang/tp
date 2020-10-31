@@ -74,7 +74,7 @@ public class SuggestCommand extends Command {
         requireNonNull(model);
         model.updateFilteredClientList(suggestionTypePredicate);
         model.updateSortedFilteredClientList(suggestionTypeCombinedComparator);
-        return new CommandResult(MESSAGE_SUGGEST_SUCCESS);
+        return new CommandResult(MESSAGE_SUGGEST_SUCCESS, true, false, false);
     }
 
     @Override

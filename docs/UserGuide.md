@@ -21,6 +21,15 @@ title: User Guide
     </p>
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+
+ ![Client Notes](images/command-screenshots/client_view.png) 
+ <br>
+ ![Country Notes](images/command-screenshots/country_note_view.png)
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Table of Contents
 
 * Table of Contents
@@ -30,6 +39,12 @@ title: User Guide
 
 ## Quickstart
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're trying TBM out for the first time.
+</div>
+
+
 Before you start using **_TBM_**, 
 
 1. Ensure you have Java 11.
@@ -38,17 +53,19 @@ Before you start using **_TBM_**,
 
 1. Navigate to the directory that the application file was downloaded to. To start the application:
 
-    1. Double click on the `tbm.jar` file and the application will start shortly.
+    1. Double click on the `TBM.jar` file and the application will start shortly.
 
-    1. Alternatively, open any shell terminal in the current directory and run the command `java -jar tbm.jar`.
+    1. Alternatively, open any shell terminal in the current directory and run the command `java -jar TBM.jar`.
 
 Now that you have started **_TBM_**,
 
 1. Type any command in the command box and press Enter to execute it.
 
-1. (Recommended for new users) The [`help`](#Viewing-help-help) command will show a help page of some commonly used commands to fully utilise **_TBM_**.
+1. ***(Recommended for new users)*** The [`help`](#help-window) command will show a help page of some commonly
+ used commands to fully utilise **_TBM_**.
 
-   * Type the **`help`** command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   * **_Either_** press the **F1** key on your keyboard, **_or_** type the [`help`](#help-window) command in the command box and
+    press Enter to execute it. e.g. typing [`help`](#help-window) and pressing Enter will open the help window.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -56,9 +73,9 @@ Now that you have started **_TBM_**,
 
 The following section outlines the commands supported by **_TBM_**. A short description is given for each command along with the format that they should be executed with. Complex commands also come with examples to demonstrate the purpose that the command serve.
 
-Certain commands require parameters and the summary of these parameters as well as their prefixes and constraints can be found in our [parameters summary table](#Parameter-constraints-summary)
+Certain commands require parameters and the summary of these parameters as well as their prefixes and constraints can be found in our [parameters summary table](#parameter-constraints-summary)
 
-A summary of all commands can be found in our [command summary table](#Command-summary)
+A summary of all commands can be found in our [command summary table](#command-summary)
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -88,7 +105,7 @@ Format: `list`
 
 ### Viewing help: `help`
 
-Shows commonly used commands for **_TBM_** in a new help window. Pressing Esc will close this window.
+Shows commonly used commands for **_TBM_** in a [new help window](#help-window). Pressing Esc will close this window.
 
 Format: `help`
 
@@ -107,6 +124,10 @@ Example:
 ### Viewing a client: `client view`
 
 Views the client specified by the `INDEX` parameter.
+<div markdown="block" class="alert alert-info">
+
+**:information_source:** Please refer to [this](#ui-when-viewing-clients) if you need to be re-acquainted with the UI for client related commands
+</div>
 
 Format: `client view INDEX`
 
@@ -202,7 +223,36 @@ Example:
 
 ### Saving data
 
-Automatically saved after every change.
+Your data is automatically saved after every change. The file is saved in the ubiquitous `.json` format, which
+allows you to edit the file manually without even opening **TBM** up.
+The location for this file is `./data/tbmManager.json` (indicated at the bottom left of the application), where the
+ `.` represents the directory where you have saved `TBM.jar`. Here's a snippet of this editable text file:
+
+```json5
+{
+  "clients" : [ {
+    "name" : "Alex Yeoh",
+    "phone" : "87438807",
+    "email" : "alexyeoh@example.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "country" : "SG",
+    "timezone" : "GMT+8",
+    "contractExpiryDate" : "21-4-2022",
+    "lastModifiedInstant" : "2020-01-01T00:00:00Z",
+    "clientNotes" : [ {
+      "contents" : "Wants to take his wife to Norway for New Years' Day",
+      "countryCode" : "NULL_CC",
+      "tags" : [ "romantic", "holidayPlans", "travel" ]
+    } ]
+  } ]
+  . . . 
+}
+```
+
+<div markdown="block" class="alert alert-info">
+**:information_source:** Tweaking this file should be done <strong><i>only</i></strong> if you're familiar with JSON
+. If you're new to JSON, <a href="https://www.json.org/json-en.html">here's</a> a good place to learn more.
+</div>
 
 ### Adding client notes: `client note add`
 
@@ -296,6 +346,13 @@ Examples:
     Filters by contacts in Russia.
 
 ### Viewing notes for a country: `country note view`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source:** Please refer to [this](#ui-when-viewing-country) if you need to be re-acquainted with the UI for country related commands
+</div>
+
+
 
 Views the list of country notes from the country specified by the country code.
 If no country code is given, all country notes in **_TBM_** will be shown.
@@ -476,3 +533,61 @@ Parameter | Prefix | Constraints, Examples
 **TAG** | `t/` | Tags names should be alphanumeric and have a maximum of 45 characters. <br> e.g. `t/important`
 **SUGGESTION_TYPE** | `by/` | Suggestion types can only be either `available`, `contract` or `frequency`. <br> e.g. `by/available`
 **INDEX** | - | Index is a number greater than 0 that is based on the numberings beside each client or note. <br> e.g. `1` would refer to the first client or note.
+
+--------------------------------------------------------------------------------------------------------------------
+## Appendix A - Introduction to the UI
+
+### Start Page
+
+The diagram below shows the key UI elements of TBM upon first start-up.
+
+![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
+
+* **Command Box** allows you to input commands to interact with TBM.
+
+* **Client List Panel** will always allow you to view all your clients' information at a go. It's scrollable so that you 
+never have to worry about not being able to see all your important clients at a single glance!
+
+* **Client Card** will show you brief information about a particular client. 
+
+* **Result Display** will show you the output of executing your command.
+    * It indicates successful commands.
+    
+    * On the off-chance there's a syntax issue, TBM will remind you of the correct syntax it expects, something like this:
+ 
+     ![Result Display slowing error message](images/command-screenshots/result_display_error_syntax.png)
+     
+* **Generic Widget View Box** is aptly named because it shall render *Client Cards* or *Country Cards* when
+ relevant commands are sent. Initially it will show you your local time to the precise second, as well as your current location.
+   
+     
+
+
+### UI when Viewing Clients
+
+The diagram below is what you should see upon viewing a particular client (i.e. firing up the command `client view 1
+`). It shows how to identify a particular client's `CLIENT_INDEX`, and an associated note's `CLIENT_NOTE_INDEX`.
+
+![Annotated Client View UI Layout](images/command-screenshots/client_view_annotated.png)
+
+Here, the **Client Note Card** displaying the note that's tagged as `hobbies` is referred to by the `CLIENT_INDEX` of `1`.
+
+Being able to identify these is key to adding, deleting and editing client notes as well as editing clients.
+
+### UI when Viewing Country
+
+Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Note Card**:
+
+![Annotated Country View UI Layout](images/command-screenshots/country_note_view_annotated.png)
+
+
+### Help Window
+
+This is what to expect when you type in the `help` command or press `F1`: 
+![help window](./images/command-screenshots/help_window.png)
+
+<p align="center">
+   <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> } </i
+   ></strong> 
+</p>
+--------------------------------------------------------------------------------------------------------------------
