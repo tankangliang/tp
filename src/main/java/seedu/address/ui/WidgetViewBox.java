@@ -109,7 +109,7 @@ public class WidgetViewBox extends UiPart<Region> {
         address.setText(client.getAddress().toString());
         contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
         noteTitle.setText("Notes");
-        updateClientNotesDisplay(client.getClientNotesAsList());
+        updateClientNotesDisplay(client.getClientNotesAsUnmodifiableList());
         drawPaneBorder();
     }
 
