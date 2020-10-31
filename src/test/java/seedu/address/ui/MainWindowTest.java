@@ -116,7 +116,7 @@ public class MainWindowTest extends GuiUnitTest {
 
         terminal.inputCommand("client view 1");
         String resultMessage3 = getResultMessage();
-        String expectedMessage3 = String.format(MESSAGE_VIEW_CLIENT_SUCCESS, "Lim");
+        String expectedMessage3 = String.format(MESSAGE_VIEW_CLIENT_SUCCESS, "Jim");
         assertEquals(expectedMessage3, resultMessage3);
 
         // viewing clients
