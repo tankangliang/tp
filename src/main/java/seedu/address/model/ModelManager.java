@@ -139,7 +139,7 @@ public class ModelManager implements Model {
     public void addClient(Client client) {
         tbmManager.addClient(client);
         updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
-        List<Note> clientNotes = new ArrayList<>(client.getClientNotes());
+        List<Note> clientNotes = new ArrayList<>(client.getClientNotesAsUnmodifiableList());
         for (Note note : clientNotes) {
             Set<Tag> tags = note.getTags();
             updateTagNoteMapWithNote(tags, note);
@@ -241,7 +241,7 @@ public class ModelManager implements Model {
         // todo: depends on UI display of client notes and their index
         List<Note> clientNotes = new ArrayList<>();
         for (Client client : getSortedFilteredClientList()) {
-            clientNotes.addAll(client.getClientNotes());
+            clientNotes.addAll(client.getClientNotesAsUnmodifiableList());
         }
         return FXCollections.observableList(clientNotes);
     }

@@ -107,7 +107,7 @@ public class ClientEditCommand extends Command {
         ContractExpiryDate updatedContractExpiryDate =
                 editClientDescriptor.getContractExpiryDate().orElse(clientToEdit.getContractExpiryDate());
         LastModifiedInstant updatedLastModifiedInstant = new LastModifiedInstant();
-        ArrayList<Note> retainedClientNotes = new ArrayList<>(clientToEdit.getClientNotes());
+        ArrayList<Note> retainedClientNotes = new ArrayList<>(clientToEdit.getClientNotesAsUnmodifiableList());
         Client newClient = new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry,
                 updatedTimezone, updatedContractExpiryDate, updatedLastModifiedInstant);
         retainedClientNotes.forEach(clientNote -> newClient.addClientNote(clientNote));

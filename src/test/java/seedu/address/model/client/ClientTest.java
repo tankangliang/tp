@@ -152,7 +152,7 @@ public class ClientTest {
         Note clientNote = new Note("hell yes");
         client.addClientNote(clientNote);
         assertTrue(client.hasClientNote(clientNote));
-        List<Note> currentNotes = client.getClientNotes();
+        List<Note> currentNotes = client.getClientNotesAsUnmodifiableList();
         assertThrows(UnsupportedOperationException.class, () -> currentNotes.add(new Note("nice lahh")));
     }
 
@@ -160,7 +160,7 @@ public class ClientTest {
     public void getClientNotesAsList_modifyUnmodifiableList_throwsException() {
         Client client = new ClientBuilder(ALICE).build();
         client.addClientNote(new Note("hell yes"));
-        List<Note> currentNotes = client.getClientNotesAsList();
+        List<Note> currentNotes = client.getClientNotesAsUnmodifiableList();
         assertThrows(UnsupportedOperationException.class, () -> currentNotes.add(new Note("nice lahh")));
     }
 

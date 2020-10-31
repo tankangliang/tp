@@ -61,7 +61,7 @@ public class TagNoteMap {
     public void initTagNoteMapFromClients(List<Client> clients) {
         requireAllNonNull(clients);
         for (Client client : clients) {
-            List<Note> clientNotes = client.getClientNotes();
+            List<Note> clientNotes = client.getClientNotesAsUnmodifiableList();
             initTagNoteMapFromNotes(clientNotes);
         }
         logger.info("--------------[TagNoteMap initialized from clients]");
