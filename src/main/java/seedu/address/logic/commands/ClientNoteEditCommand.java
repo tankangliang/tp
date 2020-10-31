@@ -63,7 +63,8 @@ public class ClientNoteEditCommand extends Command {
         }
         Client associatedClient = lastShownClientList.get(targetClientIndex.getZeroBased());
         Note noteToEdit = associatedClient.getClientNotesAsUnmodifiableList().get(targetClientNoteIndex.getZeroBased());
-        assert associatedClient.hasClientNote(noteToEdit) : "attempting to edit client note that doesn't exist";
+        assert associatedClient.hasClientNote(noteToEdit) : "attempting to edit client"
+                + " note that doesn't exist";
         Set<Tag> accumulatedTags = new HashSet<>();
         accumulatedTags.addAll(noteToEdit.getTags()); // these are the previous tags, because we want to retain history
         accumulatedTags.addAll(newNote.getTags());

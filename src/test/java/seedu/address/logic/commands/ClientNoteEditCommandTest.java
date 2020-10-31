@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.ClientNoteEditCommand.MESSAGE_EDIT_CLIENT_NOTE_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
@@ -49,7 +50,8 @@ class ClientNoteEditCommandTest {
         expectedModel.addClientNote(client1Copy, newEditNote);
         expectedModel.addClientNote(client1Copy, clientNote2);
 
-        CommandResult expectedResult = new CommandResult(ClientNoteEditCommand.MESSAGE_EDIT_CLIENT_NOTE_SUCCESS);
+        CommandResult expectedResult = new CommandResult(String.format(MESSAGE_EDIT_CLIENT_NOTE_SUCCESS,
+                client1.getName(), clientNote1, newEditNote));
         ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx, clientNoteIdx, newEditNote);
         assertCommandSuccess(clientNoteEditCommand, model, expectedResult, expectedModel);
     }
@@ -79,7 +81,8 @@ class ClientNoteEditCommandTest {
 
         Index clientIdx = Index.fromOneBased(1);
         Index clientNoteIdx = Index.fromOneBased(1);
-        CommandResult expectedResult = new CommandResult(ClientNoteEditCommand.MESSAGE_EDIT_CLIENT_NOTE_SUCCESS);
+        CommandResult expectedResult = new CommandResult(String.format(MESSAGE_EDIT_CLIENT_NOTE_SUCCESS,
+                client.getName(), oldClientNote, newClientNote));
         ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx,
                 clientNoteIdx, newClientNote);
         assertCommandSuccess(clientNoteEditCommand, model, expectedResult, expectedModel);
@@ -116,7 +119,8 @@ class ClientNoteEditCommandTest {
 
         Index clientIdx = Index.fromOneBased(1);
         Index clientNoteIdx = Index.fromOneBased(1);
-        CommandResult expectedResult = new CommandResult(ClientNoteEditCommand.MESSAGE_EDIT_CLIENT_NOTE_SUCCESS);
+        CommandResult expectedResult = new CommandResult(String.format(MESSAGE_EDIT_CLIENT_NOTE_SUCCESS,
+                client1.getName(), oldClientNote, newClientNote));
         ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx,
                 clientNoteIdx, newClientNote);
         assertCommandSuccess(clientNoteEditCommand, model, expectedResult, expectedModel);
