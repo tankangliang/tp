@@ -178,15 +178,13 @@ public class ClientTest {
     @Test
     public void editClientNote_editExistingNote_noteIsEditedWithoutException() {
         Client client = new ClientBuilder(ALICE).build();
-        Note clientNote = new Note("hell yes");
+        Note oldNote = new Note("hell yes");
         Note newNote = new Note("this be a new note");
-        client.addClientNote(clientNote);
-        assertTrue(client.hasClientNote(clientNote));
+        client.addClientNote(oldNote);
+        assertTrue(client.hasClientNote(oldNote));
         assertFalse(client.hasClientNote(newNote));
-        assertDoesNotThrow(() -> client.editClientNote(clientNote, newNote));
-        client.editClientNote(clientNote, newNote);
-        assertFalse(client.hasClientNote(clientNote));
-        assertTrue(client.hasClientNote(newNote));
+        assertDoesNotThrow(() -> client.editClientNote(oldNote, newNote));
+        assertFalse(client.hasClientNote(oldNote));
     }
 
     @Test

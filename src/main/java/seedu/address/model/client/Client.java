@@ -131,8 +131,11 @@ public class Client {
      */
     public void editClientNote(Note clientNote, Note newNote) {
         requireNonNull(clientNote);
-        this.clientNotes.remove(clientNote);
-        this.clientNotes.add(newNote);
+        int targetIdx = clientNotes.indexOf(clientNote);
+        clientNotes.set(targetIdx, newNote);
+        assert(!clientNotes.contains(clientNote));
+        //        this.clientNotes.remove(clientNote);
+        //        this.clientNotes.add(newNote);
     }
 
     /**
