@@ -17,50 +17,49 @@
         <Image url="@/images/TBM.png"/>
     </icons>
     <scene>
-        <Scene>
-            <stylesheets>
-                <URL value="@DarkTheme.css"/>
-                <URL value="@Extensions.css"/>
-            </stylesheets>
+    <Scene>
+        <stylesheets>
+            <URL value="@DarkTheme.css"/>
+            <URL value="@Extensions.css"/>
+        </stylesheets>
+        <VBox styleClass="background">
+            <MenuBar fx:id="menuBar" VBox.vgrow="NEVER" styleClass="menubar">
+                <Menu fx:id="file" mnemonicParsing="false" text="File">
+                    <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
+                </Menu>
+                <Menu fx:id="help" mnemonicParsing="false" text="Help">
+                    <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help"/>
+                </Menu>
+            </MenuBar>
 
-            <VBox>
-                <MenuBar fx:id="menuBar" VBox.vgrow="NEVER" styleClass="menubar">
-                    <Menu fx:id="file" mnemonicParsing="false" text="File">
-                        <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#handleExit" text="Exit"/>
-                    </Menu>
-                    <Menu fx:id="help" mnemonicParsing="false" text="Help">
-                        <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help"/>
-                    </Menu>
-                </MenuBar>
+            <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
+                <padding>
+                    <Insets top="5" right="10" bottom="5" left="10"/>
+                </padding>
+            </StackPane>
 
-                <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
-                    <padding>
-                        <Insets top="5" right="10" bottom="5" left="10"/>
-                    </padding>
-                </StackPane>
+            <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+                       minHeight="80" prefHeight="100" maxHeight="120">
+                <padding>
+                    <Insets top="5" right="10" bottom="5" left="10"/>
+                </padding>
+            </StackPane>
 
-                <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                           minHeight="80" prefHeight="100" maxHeight="120">
-                    <padding>
-                        <Insets top="5" right="10" bottom="5" left="10"/>
-                    </padding>
-                </StackPane>
+            <HBox VBox.vgrow="ALWAYS">
+              <VBox styleClass="pane-with-border" prefHeight="340.0" minWidth="340.0" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+                <StackPane fx:id="widgetPlaceholder" VBox.vgrow="ALWAYS" prefHeight="340.0" minWidth="340.0"/>
+              </VBox>
 
-        <HBox VBox.vgrow="ALWAYS">
-          <VBox styleClass="pane-with-border" prefHeight="340.0" minWidth="340.0" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
-            <StackPane fx:id="widgetPlaceholder" VBox.vgrow="ALWAYS" prefHeight="340.0" minWidth="340.0"/>
-          </VBox>
-
-          <VBox fx:id="clientList" styleClass="pane-with-border" minWidth="350" prefWidth="340"
-                VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-          </VBox>
-        </HBox>
-        <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER"/>
-      </VBox>
+              <VBox fx:id="clientList" styleClass="pane-with-border" minWidth="350.0" prefWidth="340.0"
+                    VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+                <padding>
+                  <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              </VBox>
+            </HBox>
+            <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER"/>
+        </VBox>
     </Scene>
-  </scene>
+    </scene>
 </fx:root>
