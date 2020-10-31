@@ -369,7 +369,7 @@ Examples:
 
     Only country notes for **China** will be displayed.
     
-    ![Country Note View SG](images/command-screenshots/country-note-view-sg.png)
+    ![Country Note View SG](images/command-screenshots/country-note-view-sg.jpg)
 
 ### Adding notes for a country: `country note add`
 
@@ -385,7 +385,7 @@ Examples:
     - Content: **_has one of the lowest corporate taxes in the world_** 
     - Tag: **_tax_** 
     
-    ![Country Note Add SG](images/command-screenshots/country-note-add-sg.png)
+    ![Country Note Add SG](images/command-screenshots/country-note-add-sg.jpg)
 
 * Command: `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
 
@@ -393,14 +393,14 @@ Examples:
     - Content: **_building good relations (guanxi) is important when conducting business here_** 
     - Tag: **_intercultural_** 
     
-    ![Country Note Add CN](images/command-screenshots/country-note-add-cn.png)
+    ![Country Note Add CN](images/command-screenshots/country-note-add-cn.jpg)
 
 * Command: `country note add c/IN nt/is world's fastest growing economy`
 
     Adds a **note** for the country of **India** with the following specifications:
     - Content: **_is world's fastest growing economy_** 
     
-    ![Country Note Add IN](images/command-screenshots/country-note-add-in.png)
+    ![Country Note Add IN](images/command-screenshots/country-note-add-in.jpg)
 
 ### Editing notes for a country: `country note edit`
 
