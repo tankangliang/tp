@@ -46,8 +46,8 @@ public class CountryNoteDeleteCommand extends Command {
         CountryNote countryNoteToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteCountryNote(countryNoteToDelete);
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), countryNoteToDelete), false, false,
-                WidgetViewOption.generateNullWidgetOption());
+                String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), countryNoteToDelete), false,
+                false, false, WidgetViewOption.generateNullWidgetOption());
     }
 
     @Override

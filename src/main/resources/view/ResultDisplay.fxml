@@ -5,6 +5,5 @@
 
 <StackPane fx:id="resultDisplayWrapper" styleClass="placeHolder" xmlns="http://javafx.com/javafx/8"
            xmlns:fx="http://javafx.com/fxml/1">
-  <TextArea fx:id="resultDisplay" editable="false" styleClass="result-display" wrapText="true"
-            text="Waiting for command..."/>
+  <TextArea fx:id="resultDisplay" editable="false" wrapText="true" text="Waiting for command..."/>
 </StackPane>

@@ -87,8 +87,8 @@ public class CountryNoteEditCommand extends Command {
         model.setCountryNote(countryNoteToEdit, newCountryNote);
 
         return new CommandResult(
-                String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), newCountryNote), false, false,
-                WidgetViewOption.generateNullWidgetOption());
+                String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), newCountryNote), false,
+                false, false, WidgetViewOption.generateNullWidgetOption());
     }
 
     @Override

@@ -46,12 +46,9 @@
                     </padding>
                 </StackPane>
 
-        <HBox VBox.vgrow="ALWAYS" >
-          <VBox styleClass="pane-with-border" prefHeight="340" minWidth="340" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10"/>
-            </padding>
-            <StackPane fx:id="widgetPlaceholder" VBox.vgrow="ALWAYS"/>
+        <HBox VBox.vgrow="ALWAYS">
+          <VBox styleClass="pane-with-border" prefHeight="340.0" minWidth="340.0" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+            <StackPane fx:id="widgetPlaceholder" VBox.vgrow="ALWAYS" prefHeight="340.0" minWidth="340.0"/>
           </VBox>
 
           <VBox fx:id="clientList" styleClass="pane-with-border" minWidth="350" prefWidth="340"
