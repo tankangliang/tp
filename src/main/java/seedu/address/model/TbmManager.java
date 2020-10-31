@@ -178,7 +178,6 @@ public class TbmManager implements ReadOnlyTbmManager {
         return clients.asUnmodifiableObservableList();
     }
 
-    //TODO: add client notes also. NOTE: THIS ONLY RETURNS COUNTRY NOTES FOR NOW.
     @Override
     public ObservableList<Note> getNoteList() {
         ArrayList<Note> accumulated = new ArrayList<>(getCountryNoteList());

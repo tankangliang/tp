@@ -43,7 +43,6 @@ class JsonSerializableTbmManager {
      */
     public JsonSerializableTbmManager(ReadOnlyTbmManager source) {
         clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
-        //TODO: For storing JSON notes
         notes.addAll(source.getNoteList().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
     }
 
