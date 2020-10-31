@@ -2,6 +2,8 @@ package seedu.address.model.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.address.model.ReadOnlyTbmManager;
 import seedu.address.model.TbmManager;
@@ -16,6 +18,7 @@ import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code TbmManager} with sample data.
@@ -49,17 +52,25 @@ public class SampleDataUtil {
     }
 
     public static ArrayList<CountryNote> getSampleCountryNotes() {
-        return new ArrayList<>(Arrays.asList(
-            new CountryNote("This is a country note", new Country("SG")),
-            new CountryNote("This is another country note", new Country("MY"))
-        ));
-    }
+        CountryNote first = new CountryNote("Small domestic market as compared "
+                + "to rest of SEA countries", new Country("SG"));
+        Set<Tag> firstTags = new HashSet<>();
+        firstTags.add(new Tag("marketsize"));
+        first.setTags(firstTags);
 
-    public static ArrayList<Note> getSampleClientNotes() {
-        return new ArrayList<>(Arrays.asList(
-            new Note("This is a regular note"),
-            new Note("This is another regular note")
-        ));
+        CountryNote second = new CountryNote("Political unrest in the capital",
+                new Country("TH"));
+        Set<Tag> secondTags = new HashSet<>();
+        secondTags.add(new Tag("politics"));
+        second.setTags(secondTags);
+
+        CountryNote third = new CountryNote("A high-context country, hence building "
+                + "relationships is important for doing business", new Country("JP"));
+        Set<Tag> thirdTags = new HashSet<>();
+        thirdTags.add(new Tag("intercultural"));
+        second.setTags(thirdTags);
+
+        return new ArrayList<>(Arrays.asList(first, second, third));
     }
 
     public static ReadOnlyTbmManager getSampleTbmManager() {
@@ -68,8 +79,8 @@ public class SampleDataUtil {
             sampleTm.addClient(sampleClient);
         }
 
-        //TODO: have method to add client notes to TbmManager
-        for (Note note: getSampleClientNotes()) {
+        for (CountryNote countryNote : getSampleCountryNotes()) {
+            sampleTm.addCountryNote(countryNote);
         }
 
         return sampleTm;
