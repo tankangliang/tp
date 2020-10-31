@@ -80,7 +80,6 @@ public class Client {
         return lastModifiedInstant;
     }
 
-
     /**
      * Gets the list of client notes associated with this client.
      *
@@ -90,15 +89,8 @@ public class Client {
         return Collections.unmodifiableList(this.clientNotes);
     }
 
-    /**
-     * Exposes the note list as an ObservableList of notes for {@code WidgetViewBox}.
-     * For purpose of adding a listener to the underlying note list of the client, this returns the list itself
-     * as a singleton object.
-     *
-     * @return ObservableList of Notes
-     */
     public ObservableList<Note> getClientNotesAsObservableList() {
-        return clientNotes;
+        return FXCollections.observableArrayList(clientNotes);
     }
     /**
      * Adds a client note for this client.
