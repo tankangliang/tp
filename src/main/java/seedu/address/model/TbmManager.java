@@ -183,7 +183,7 @@ public class TbmManager implements ReadOnlyTbmManager {
     @Override
     public ObservableList<Note> getNoteList() {
         ArrayList<Note> accumulated = new ArrayList<>(getCountryNoteList());
-        this.clients.forEach(client -> accumulated.addAll(client.getClientNotes()));
+        this.clients.forEach(client -> accumulated.addAll(client.getClientNotesAsUnmodifiableList()));
         return FXCollections.observableArrayList(accumulated);
     }
 

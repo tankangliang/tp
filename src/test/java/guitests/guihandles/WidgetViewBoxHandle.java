@@ -1,7 +1,7 @@
 package guitests.guihandles;
 
 import javafx.scene.Node;
-import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 import seedu.address.model.client.Client;
 
 /**
@@ -11,13 +11,15 @@ public class WidgetViewBoxHandle extends NodeHandle<Node> {
     private static final String NAME_FIELD_ID = "#name";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
+    private static final String ADDRESS_FIELD_ID = "#address";
     private static final String COUNTRY_FIELD_ID = "#country";
     private static final String CONTRACT_EXPIRY_DATE_FIELD_ID = "#contractExpiryDate";
-    private final Label nameLabel;
-    private final Label phoneLabel;
-    private final Label emailLabel;
-    private final Label countryLabel;
-    private final Label contractExpiryDateLabel;
+    private final Text nameLabel;
+    private final Text phoneLabel;
+    private final Text emailLabel;
+    private final Text addressLabel;
+    private final Text countryLabel;
+    private final Text contractExpiryDateLabel;
 
     /**
      * Constructor for handler.
@@ -30,6 +32,7 @@ public class WidgetViewBoxHandle extends NodeHandle<Node> {
         nameLabel = getChildNode(NAME_FIELD_ID);
         phoneLabel = getChildNode(PHONE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
+        addressLabel = getChildNode(ADDRESS_FIELD_ID);
         countryLabel = getChildNode(COUNTRY_FIELD_ID);
         contractExpiryDateLabel = getChildNode(CONTRACT_EXPIRY_DATE_FIELD_ID);
     }
@@ -41,7 +44,9 @@ public class WidgetViewBoxHandle extends NodeHandle<Node> {
         return nameLabel.getText().equals(client.getName().toString())
                 && phoneLabel.getText().equals(client.getPhone().toString())
                 && emailLabel.getText().equals(client.getEmail().toString())
-                && countryLabel.getText().equals(client.getCountry().getCountryName())
+                && addressLabel.getText().equals(client.getAddress().toString())
+                && countryLabel.getText()
+                        .equals(client.getCountry().getCountryName() + " (" + client.getTimezone().toString() + ")")
                 && contractExpiryDateLabel.getText().equals("Expiry: " + client.getContractExpiryDate().displayValue);
     }
 
