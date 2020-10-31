@@ -59,6 +59,11 @@ public class MainWindowTest extends GuiUnitTest {
     }
 
     @Test
+    public void getPrimaryStage_returnsCorrectStage() {
+        assertEquals(stage, mainWindow.getPrimaryStage());
+    }
+
+    @Test
     public void main() throws Exception {
         guiRobot.pauseForHuman();
         assertTrue(mainWindowHandle.isShowing());
@@ -79,7 +84,20 @@ public class MainWindowTest extends GuiUnitTest {
         }
         guiRobot.pauseForHuman();
         guiRobot.push(KeyCode.ESCAPE);
+        assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
+
+        // checks if F1 opens the help window
+        guiRobot.push(KeyCode.F1);
+        assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
         guiRobot.pauseForHuman();
+        guiRobot.push(KeyCode.ESCAPE);
+        assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
+
+        // checks if help command opens the help window
+        terminal.inputCommand("help");
+        assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
+        guiRobot.pauseForHuman();
+        guiRobot.push(KeyCode.ESCAPE);
         assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
 
         // command execution by robot
@@ -127,11 +145,18 @@ public class MainWindowTest extends GuiUnitTest {
         terminal.inputCommand("client view 3");
         checkLabel("#name", "Sim");
 
+        // clearing display panel using list command
+        terminal.inputCommand("list");
+        checkLabel("#name", "");
+        checkLabel("#address", "");
+
         // viewing country
         terminal.inputCommand("country note view");
         //TODO
         pauseToEyeball();
 
+        terminal.inputCommand("exit");
+        assertEquals(guiRobot.listWindows().size(), 0);
     }
 
     private void checkLabel(String id, String value) {
