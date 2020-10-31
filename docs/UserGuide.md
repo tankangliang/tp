@@ -331,7 +331,7 @@ Notes:
 
 ### Filtering clients by country: `country filter`
 
-Filters the list of clients by a specified country.
+Filters the list of clients by the specified country.
 
 Format: `country filter c/COUNTRY_CODE`
 
@@ -349,12 +349,10 @@ Examples:
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:** Please refer to [this](#ui-when-viewing-country) if you need to be re-acquainted with the UI for country related commands
+**:information_source:** Please refer to [this](#ui-when-viewing-country) if you need to be re-acquainted with the UI for country note related commands
 </div>
 
-
-
-Views the list of country notes from the country specified by the country code.
+Views the list of country notes that are associated with the country which corresponds to the given country code.
 If no country code is given, all country notes in **_TBM_** will be shown.
 
 Format: `country note view [c/COUNTRY_CODE]`
@@ -364,18 +362,18 @@ Examples:
 * Command: `country note view`
 
     All country notes in **_TBM_** will be displayed.
+    
+    ![Country Note View](images/command-screenshots/country-note-view.jpg)
 
-* Command: `country note view c/SG`
+* Command: `country note view c/CN`
 
-    Only country notes for Singapore will be displayed.
-
-* Command: `country note view c/IN`
-
-    Only country notes for India will be displayed.
+    Only country notes for **China** will be displayed.
+    
+    ![Country Note View SG](images/command-screenshots/country-note-view-sg.png)
 
 ### Adding notes for a country: `country note add`
 
-Adds a note that is associated with a specific country.
+Adds a note that will be associated with the country which corresponds to the given country code.
 
 Format: `country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...`
 
@@ -383,21 +381,32 @@ Examples:
 
 * Command: `country note add c/SG nt/has one of the lowest corporate taxes in the world t/tax`
 
-    Adds a **note** with a **tag** for Singapore.
+    Adds a **note** for the country of **Singapore** with the following specifications: 
+    - Content: **_has one of the lowest corporate taxes in the world_** 
+    - Tag: **_tax_** 
+    
+    ![Country Note Add SG](images/command-screenshots/country-note-add-sg.png)
 
 * Command: `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
 
-    Adds a **note** with a **tag** for China.
+    Adds a **note** for the country of **China** with the following specifications: 
+    - Content: **_building good relations (guanxi) is important when conducting business here_** 
+    - Tag: **_intercultural_** 
+    
+    ![Country Note Add CN](images/command-screenshots/country-note-add-cn.png)
 
 * Command: `country note add c/IN nt/is world's fastest growing economy`
 
-    Adds a **note** for India.
+    Adds a **note** for the country of **India** with the following specifications:
+    - Content: **_is world's fastest growing economy_** 
+    
+    ![Country Note Add IN](images/command-screenshots/country-note-add-in.png)
 
 ### Editing notes for a country: `country note edit`
 
 Edits a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes. Supplying tags to the command will add the tags onto the current existing tags for that note.
 
-The country note list panel can be viewed using the command `country note view`.
+If the view on the [display panel](#start-page) is not showing the country notes, the country note to be edited will be the country note at the given index based on the **most recently viewed country note panel**. If you have not viewed the country notes panel before, the country note to be edited will be the country note at the given index based on the **country notes panel after issuing the command `country note view`**.
 
 Format: `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...`
 
