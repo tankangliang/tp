@@ -122,7 +122,7 @@ public class Client {
         requireNonNull(clientNote);
         int targetIdx = clientNotes.indexOf(clientNote);
         clientNotes.set(targetIdx, newNote);
-        assert(!clientNotes.contains(clientNote));
+        assert !clientNotes.contains(clientNote);
     }
 
     /**

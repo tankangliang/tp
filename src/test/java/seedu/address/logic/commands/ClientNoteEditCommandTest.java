@@ -53,7 +53,7 @@ class ClientNoteEditCommandTest {
         ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx, clientNoteIdx, newEditNote);
         assertCommandSuccess(clientNoteEditCommand, model, expectedResult, expectedModel);
     }
-    // test to show untagged tag removal (in future commit) behaviour is already verified by json file
+
     @Test
     public void execute_editExistingUntaggedNoteToAddTag_discardsDefaultUntaggedTag() {
         Tag oldTag = Tag.UNTAGGED;
