@@ -17,7 +17,7 @@
     </padding>
     <VBox fx:id="viewBox" maxHeight="Infinity">
         <VBox fx:id="tbmLogoContainer" alignment="CENTER">
-            <ImageView fx:id="tbmLogo" fitWidth="100.0" fitHeight="100.0">
+            <ImageView fx:id="tbmLogo" fitWidth="150.0" fitHeight="150.0">
                 <Image url="@../images/TBM_transparent.png"/>
             </ImageView>
             <Text fx:id="timer" styleClass="widget_header"/>
