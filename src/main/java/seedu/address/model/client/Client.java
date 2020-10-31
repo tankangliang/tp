@@ -99,7 +99,7 @@ public class Client {
     }
 
     public ObservableList<Note> getClientNotesAsObservableList() {
-        return FXCollections.observableArrayList(clientNotes);
+        return clientNotes;
     }
     /**
      * Adds a client note for this client.
