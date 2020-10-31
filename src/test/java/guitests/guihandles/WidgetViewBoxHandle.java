@@ -39,9 +39,9 @@ public class WidgetViewBoxHandle extends NodeHandle<Node> {
      */
     public boolean equals(Client client) {
         return nameLabel.getText().equals(client.getName().toString())
-                && phoneLabel.getText().equals(client.getPhone().toString())
-                && emailLabel.getText().equals(client.getEmail().toString())
-                && countryLabel.getText().equals(client.getCountry().getCountryName())
+                && phoneLabel.getText().equals("Phone: " + client.getPhone().toString())
+                && emailLabel.getText().equals("Email: " + client.getEmail().toString())
+                && countryLabel.getText().equals("Country: " + client.getCountry().getCountryName())
                 && contractExpiryDateLabel.getText().equals("Expiry: " + client.getContractExpiryDate().displayValue);
     }
 
