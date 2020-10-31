@@ -27,7 +27,7 @@ public class UniqueClientList implements Iterable<Client> {
 
     // Initialize observableArrayList with a Callback that monitors change in the clients' notes list
     private final ObservableList<Client> internalList = FXCollections.observableArrayList(client ->
-            new Observable[] { client.getClientNotesAsObservableSet() });
+            new Observable[] { client.getClientNotesAsObservableList() });
     private final ObservableList<Client> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
