@@ -94,7 +94,7 @@ public class WidgetViewBox extends UiPart<Region> {
         contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
         noteTitle.setText("Notes");
 
-        Platform.runLater(() -> updateClientNotesDisplay(client.getClientNotes()));
+        Platform.runLater(() -> updateClientNotesDisplay(client.getClientNotesAsList()));
         drawPaneBorder();
     }
 
