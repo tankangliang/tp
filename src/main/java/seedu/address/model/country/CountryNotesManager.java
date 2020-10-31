@@ -78,6 +78,13 @@ public class CountryNotesManager {
         internalCountryNoteList.set(targetIndx, newCountryNote);
     }
 
+    /**
+     * Clears all country notes.
+     */
+    public void clear() {
+        internalCountryNoteList.clear();
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
