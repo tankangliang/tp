@@ -76,6 +76,5 @@ public class ClientNoteDeleteCommand extends Command {
 
         return this.targetClientIndex.equals(c.targetClientIndex)
                 && this.targetClientNoteIndex.equals(c.targetClientNoteIndex);
-        // todo: question: is it better to check commmand equality using the ClientNote object or it's associated index?
     }
 }

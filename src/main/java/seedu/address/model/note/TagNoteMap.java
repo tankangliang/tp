@@ -39,6 +39,7 @@ public class TagNoteMap {
      */
     public TagNoteMap() {
         uniqueTagMap.put(Tag.UNTAGGED, Tag.UNTAGGED);
+        tagToNotesMap.put(Tag.UNTAGGED, new ArrayList<>());
     }
 
     private void initTagNoteMapFromNotes(List<Note> notes) {
@@ -122,7 +123,8 @@ public class TagNoteMap {
         for (Tag tag : associatedTags) { // remove note for relevant tags
             List<Note> notes = this.tagToNotesMap.get(tag);
             notes.remove(note);
-            if (notes.isEmpty()) { // remove the tag itself from tagToNotesMap and uniqueTagMap:
+            if (notes.isEmpty() && !tag.equals(Tag.UNTAGGED)) {
+                // other than default Tag.UNTAGGED, remove the tag itself from tagToNotesMap and uniqueTagMap:
                 this.tagToNotesMap.remove(tag);
                 this.uniqueTagMap.remove(tag);
             }
@@ -142,17 +144,20 @@ public class TagNoteMap {
         assert noteToTagsMap.containsKey(noteToEdit) : "trying to remove note that doesn't exist in noteToTagsMap";
         noteSet.remove(noteToEdit);
         Set<Tag> associatedTags = this.noteToTagsMap.get(noteToEdit);
-        for (Tag tag : associatedTags) { // remove note for relevant tags
+        // remove this note's association for relevant tags:
+        for (Tag tag : associatedTags) {
             List<Note> notes = this.tagToNotesMap.get(tag);
-            notes.remove(noteToEdit); // todo: this could be affecting the order of notes eventually, should to a put?
-            if (notes.isEmpty()) { // remove the tag itself from tagToNotesMap and uniqueTagMap:
+            notes.remove(noteToEdit);
+            // remove the tag from tagToNotesMap and uniqueTagMap if that tag has no associated notes left and is not
+            // default tag of Tag.UNTAGGED:
+            if (notes.isEmpty() && !tag.equals(Tag.UNTAGGED)) {
                 this.tagToNotesMap.remove(tag);
                 this.uniqueTagMap.remove(tag);
             }
         }
         noteSet.add(newNote);
         noteToTagsMap.remove(noteToEdit);
-        addTagsForNote(newNote.getTags(), newNote); // todo: change this to retain past tags
+        addTagsForNote(newNote.getTags(), newNote);
     }
 
     /**
@@ -170,6 +175,8 @@ public class TagNoteMap {
             if (tagToNotesMap.containsKey(newTag)) { // if that tag exists
                 tagToNotesMap.get(newTag).add(note);
             } else { // new tag:
+                // todo: have to put into uniqueTagSet!!!
+                this.uniqueTagMap.put(newTag, newTag);
                 List<Note> notes = new ArrayList<>();
                 notes.add(note);
                 tagToNotesMap.put(newTag, notes);
