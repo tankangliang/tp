@@ -27,6 +27,13 @@ public class ListCommandTest {
     }
 
     @Test
+    public void execute_listIsEmpty_displaysEmptyMessage() {
+        Model newModel = new ModelManager();
+        CommandResult expectedResult = new CommandResult(ListCommand.MESSAGE_SUCCESS_NO_CLIENTS, true, false, false);
+        assertCommandSuccess(new ListCommand(), newModel, expectedResult, newModel);
+    }
+
+    @Test
     public void execute_listIsNotFiltered_showsSameList() {
         CommandResult expectedResult = new CommandResult(ListCommand.MESSAGE_SUCCESS, true, false, false);
         assertCommandSuccess(new ListCommand(), model, expectedResult, expectedModel);
