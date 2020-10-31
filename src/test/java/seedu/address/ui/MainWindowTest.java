@@ -72,32 +72,30 @@ public class MainWindowTest extends GuiUnitTest {
                 .queryTextInputControl());
         terminal.inputCommand("clear");
 
-        // checks the interaction of copy url and url is correct
+        // help window tests
         guiRobot.clickOn("#help");
         guiRobot.clickOn("#helpMenuItem");
         guiRobot.pauseForHuman();
         assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
         guiRobot.clickOn("#copyButton");
         if (!guiRobot.isHeadlessMode()) {
+            // checks the interaction of copy url and url is correct
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             assertEquals(USERGUIDE_URL, clipboard.getData(DataFlavor.stringFlavor));
-        }
-        guiRobot.pauseForHuman();
-        guiRobot.push(KeyCode.ESCAPE);
-        assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
+            guiRobot.push(KeyCode.ESCAPE);
+            assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
 
-        // checks if F1 opens the help window, doesn't work in headless for some reason
-        if (!guiRobot.isHeadlessMode()) {
+            // checks if F1 opens the help window
             guiRobot.push(KeyCode.F1);
             assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
             guiRobot.pauseForHuman();
             guiRobot.push(KeyCode.ESCAPE);
             assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
-        }
 
-        // checks if help command opens the help window
-        terminal.inputCommand("help");
-        assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
+            // checks if help command opens the help window
+            terminal.inputCommand("help");
+            assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
+        }
         guiRobot.pauseForHuman();
         guiRobot.push(KeyCode.ESCAPE);
         assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
@@ -180,7 +178,8 @@ public class MainWindowTest extends GuiUnitTest {
      * For gui interaction.
      */
     private class InteractionTerminal {
-        private TextInputControl textInputControl;
+        private final TextInputControl textInputControl;
+
         public InteractionTerminal(TextInputControl textInputControl) {
             this.textInputControl = textInputControl;
         }
@@ -188,7 +187,7 @@ public class MainWindowTest extends GuiUnitTest {
         public void inputCommand(String command) {
             textInputControl.setText(command);
             guiRobot.pauseForHuman();
-            guiRobot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+            guiRobot.interact(() -> guiRobot.push(KeyCode.ENTER));
             guiRobot.pauseForHuman();
         }
     }
