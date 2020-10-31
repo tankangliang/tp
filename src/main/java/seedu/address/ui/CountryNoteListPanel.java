@@ -122,7 +122,7 @@ public class CountryNoteListPanel extends UiPart<Region> {
          */
         public CountryNoteListSubPanel() {
             super(FXML);
-            countryNoteListContainer.setStyle("-fx-border-color: #FF3333; -fx-border-radius: 20");
+            countryNoteListContainer.setStyle("-fx-border-color: #FF3333; -fx-border-radius: 20; -fx-padding: 10;");
             countryNoteScrollPane.setMinHeight(30.0);
             countryNoteScrollPane.setPrefHeight(200.0);
         }

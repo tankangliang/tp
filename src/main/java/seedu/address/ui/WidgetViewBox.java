@@ -1,20 +1,20 @@
 package seedu.address.ui;
 
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.logging.Logger;
+import java.util.TimeZone;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.commons.core.LogsCenter;
+import javafx.scene.text.Text;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
 
@@ -22,30 +22,40 @@ import seedu.address.model.note.Note;
  * An Ui component that displays the information of {@code Client}.
  */
 public class WidgetViewBox extends UiPart<Region> {
-    private static Logger logger = LogsCenter.getLogger(WidgetViewBox.class);
+
     private static final String FXML = "WidgetViewBox.fxml";
+
+    private final ObservableList<Client> clientObservableList;
+    private int displayedClientIndex = -1;
+    private Client displayedClient = null;
+    private TextClock textClock;
+
+    @FXML
+    private ScrollPane widgetScrollPane;
     @FXML
     private VBox viewBox;
     @FXML
-    private Label name;
+    private VBox tbmLogoContainer;
     @FXML
-    private Label phone;
+    private ImageView tbmLogo;
     @FXML
-    private Label email;
+    private Text timer;
     @FXML
-    private Label country;
+    private Text name;
     @FXML
-    private Label contractExpiryDate;
+    private Text country;
     @FXML
-    private Label noteTitle;
+    private Text phone;
     @FXML
-    private ScrollPane clientNoteScrollPane;
+    private Text email;
+    @FXML
+    private Text address;
+    @FXML
+    private Text contractExpiryDate;
+    @FXML
+    private Text noteTitle;
     @FXML
     private VBox clientNoteListView;
-    private final ObservableList<Client> clientObservableList;
-    private int displayedClientIndex;
-    private Client displayedClient;
-    private TextClock textClock;
 
     /**
      * Creates a {@code WidgetViewBox} with the given {@code WidgetObject}.
@@ -53,11 +63,12 @@ public class WidgetViewBox extends UiPart<Region> {
     public WidgetViewBox(ObservableList<Client> clientObservableList) {
         super(FXML);
         this.clientObservableList = clientObservableList;
-
         clientObservableList.addListener((ListChangeListener<Client>) c -> {
             if (c.next()) {
                 if (c.wasUpdated() || c.wasReplaced()) {
-                    updateClientDisplay(clientObservableList.get(displayedClientIndex));
+                    if (displayedClientIndex != -1) {
+                        updateClientDisplay(clientObservableList.get(displayedClientIndex));
+                    }
                 } else {
                     for (int i = 0; i < clientObservableList.size(); i++) {
                         Client client = clientObservableList.get(i);
@@ -67,10 +78,11 @@ public class WidgetViewBox extends UiPart<Region> {
                             return;
                         }
                     }
+                    setToDefaultView();
                 }
             }
         });
-        initDefault();
+        setToDefaultView();
     }
 
     /**
@@ -79,7 +91,10 @@ public class WidgetViewBox extends UiPart<Region> {
      * @param client The new client to display.
      */
     public void updateClientDisplay(Client client) {
+        widgetScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         textClock.pause();
+        tbmLogoContainer.getChildren().clear();
+        tbmLogoContainer.setStyle("-fx-padding: 0 0 0 0; -fx-spacing: 0;");
         displayedClient = client;
         for (int i = 0; i < clientObservableList.size(); i++) {
             if (clientObservableList.get(i).isSameClient(client)) {
@@ -87,18 +102,18 @@ public class WidgetViewBox extends UiPart<Region> {
                 displayedClientIndex = i;
             }
         }
+        country.setText(client.getCountry().getCountryName() + " (" + client.getTimezone().toString() + ")");
         name.setText(client.getName().toString());
         phone.setText(client.getPhone().toString());
         email.setText(client.getEmail().toString());
-        country.setText(client.getCountry().getCountryName());
+        address.setText(client.getAddress().toString());
         contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
         noteTitle.setText("Notes");
-
-        Platform.runLater(() -> updateClientNotesDisplay(client.getClientNotesAsUnmodifiableList()));
+        updateClientNotesDisplay(client.getClientNotesAsUnmodifiableList());
         drawPaneBorder();
     }
 
-    /**
+    /**client
      * Static factory for use in GUI testing.
      *
      * @return WidgetViewBox
@@ -108,13 +123,30 @@ public class WidgetViewBox extends UiPart<Region> {
     }
 
     /**
-     * Sets a default view for the view box.
+     * Sets the display to the default view for the view box.
      */
-    private void initDefault() {
+    public void setToDefaultView() {
         //TODO: Some better information
-        textClock = new TextClock(name);
-        country.setText(Locale.getDefault().getDisplayCountry());
+        widgetScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        tbmLogoContainer.getChildren().clear();
+        tbmLogoContainer.getChildren().add(tbmLogo);
+        tbmLogoContainer.getChildren().add(timer);
+        tbmLogoContainer.setStyle("-fx-padding: 20 0 25 0; -fx-spacing: 10");
+        textClock = new TextClock(timer);
         textClock.play();
+        name.setText("");
+        phone.setText("");
+        email.setText("");
+        address.setText("");
+        int offset = TimeZone.getTimeZone(ZoneId.systemDefault()).getOffset(new Date().getTime()) / 1000 / 60 / 60;
+        String offsetString = (offset < 0 ? "-" : "+") + offset;
+        country.setText(Locale.getDefault().getDisplayCountry() + " (GMT" + offsetString + ")");
+        contractExpiryDate.setText("");
+        noteTitle.setText("");
+        clientNoteListView.getChildren().clear();
+        clearPaneBorder();
+        displayedClient = null;
+        displayedClientIndex = -1;
     }
 
     /**
@@ -123,19 +155,12 @@ public class WidgetViewBox extends UiPart<Region> {
      * @param clientNotes The client notes to display.
      */
     private void updateClientNotesDisplay(List<Note> clientNotes) {
-        clearChildren();
+        clientNoteListView.getChildren().clear();
         int noteIdx = 1;
         for (Note note : clientNotes) {
             NoteListCard noteListCard = new NoteListCard(note, noteIdx++);
             clientNoteListView.getChildren().add(noteListCard.getRoot());
         }
-    }
-
-    /**
-     * Per fn name.
-     */
-    private void clearChildren() {
-        clientNoteListView.getChildren().clear();
     }
 
     @Override
@@ -156,8 +181,12 @@ public class WidgetViewBox extends UiPart<Region> {
     }
 
     private void drawPaneBorder() {
-        clientNoteScrollPane.setStyle("-fx-border-color: #FF3333; -fx-border-radius: 5; -fx-border-width: 2;");
-        clientNoteListView.setPadding(new Insets(5, 5, 5, 10));
+        clientNoteListView.setStyle("-fx-border-color: #FF3333; -fx-border-radius: 10; -fx-border-width: 2;"
+                + " -fx-padding: 10");
+    }
+
+    private void clearPaneBorder() {
+        clientNoteListView.setStyle("-fx-border-color: transparent; -fx-border-width: 0; -fx-padding: 0");
     }
 
 }

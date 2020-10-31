@@ -10,6 +10,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
@@ -23,42 +24,38 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_MESSAGE = "For more information, refer to the user guide: ";
     public static final String HELP_TITLE = "Commonly used commands";
     public static final String COMMON_COMMANDS =
-            "list\n"
-            + "client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE "
+            "* list\n"
+            + "* client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE "
             + "[ce/CONTRACT_EXPIRY_DATE]\n"
-            + "client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_CODE) (tz/TIMEZONE) "
+            + "* client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_CODE) (tz/TIMEZONE) "
             + "(ce/CONTRACT_EXPIRY_DATE)\n"
-            + "client view INDEX\n"
-            + "client find KEYWORD [MORE_KEYWORDS]\n"
-            + "client delete INDEX\n"
-            + "client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...\n"
-            + "client note delete CLIENT_INDEX NOTE_INDEX\n"
-            + "client note edit CLIENT_INDEX NOTE_INDEX nt/NOTE_STRING [t/TAG]...\n"
-            + "country filter c/COUNTRY_CODE\n"
-            + "country note view [c/COUNTRY_CODE]\n"
-            + "country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...\n"
-            + "country note edit INDEX (nt/NOTE_STRING) (t/TAG)...\n"
-            + "country note delete INDEX\n"
-            + "suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...\n"
-            + "clear\n"
-            + "exit\n"
-            + "help";
+            + "* client view INDEX\n"
+            + "* client find KEYWORD [MORE_KEYWORDS]\n"
+            + "* client delete INDEX\n"
+            + "* client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...\n"
+            + "* client note delete CLIENT_INDEX NOTE_INDEX\n"
+            + "* client note edit CLIENT_INDEX NOTE_INDEX nt/NOTE_STRING [t/TAG]...\n"
+            + "* country filter c/COUNTRY_CODE\n"
+            + "* country note view [c/COUNTRY_CODE]\n"
+            + "* country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...\n"
+            + "* country note edit INDEX (nt/NOTE_STRING) (t/TAG)...\n"
+            + "* country note delete INDEX\n"
+            + "* suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...\n"
+            + "* clear\n"
+            + "* exit\n"
+            + "* help";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML
     private Label helpTitle;
-
     @FXML
-    private Label commonCommands;
-
+    private Text commonCommands;
     @FXML
     private Label userGuideMessage;
-
     @FXML
     private Hyperlink userGuideUrl;
-
     @FXML
     private Button copyButton;
 

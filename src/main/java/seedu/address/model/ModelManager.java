@@ -35,6 +35,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Client> filteredClients;
     private final SortedList<Client> sortedFilteredClients;
+    private final Comparator<Client> defaultClientListOrder;
     private final FilteredList<CountryNote> filteredCountryNotes;
     private final SortedList<CountryNote> sortedFilteredCountryNotes;
     private final WidgetModel widget;
@@ -54,6 +55,7 @@ public class ModelManager implements Model {
         this.widget = WidgetModel.initWidget();
         filteredClients = new FilteredList<>(this.tbmManager.getClientList());
         sortedFilteredClients = new SortedList<>(filteredClients);
+        defaultClientListOrder = Comparator.comparing(filteredClients::indexOf);
         filteredCountryNotes = new FilteredList<>(this.tbmManager.getCountryNoteList());
         sortedFilteredCountryNotes = new SortedList<>(filteredCountryNotes,
                 Comparator.comparing(CountryNote::getCountry)
@@ -133,7 +135,6 @@ public class ModelManager implements Model {
     public Client getWidgetClient() {
         return widget.getWidgetClient();
     }
-
 
     @Override
     public void addClient(Client client) {
@@ -256,6 +257,11 @@ public class ModelManager implements Model {
     public void updateSortedFilteredClientList(Comparator<Client> comparator) {
         requireNonNull(comparator);
         sortedFilteredClients.setComparator(comparator);
+    }
+
+    @Override
+    public void resetSortedFilteredClientListOrder() {
+        sortedFilteredClients.setComparator(defaultClientListOrder);
     }
 
     @Override

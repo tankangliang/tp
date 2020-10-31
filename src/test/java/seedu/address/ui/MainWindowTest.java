@@ -59,6 +59,11 @@ public class MainWindowTest extends GuiUnitTest {
     }
 
     @Test
+    public void getPrimaryStage_returnsCorrectStage() {
+        assertEquals(stage, mainWindow.getPrimaryStage());
+    }
+
+    @Test
     public void main() throws Exception {
         guiRobot.pauseForHuman();
         assertTrue(mainWindowHandle.isShowing());
@@ -67,19 +72,32 @@ public class MainWindowTest extends GuiUnitTest {
                 .queryTextInputControl());
         terminal.inputCommand("clear");
 
-        // checks the interaction of copy url and url is correct
+        // help window tests
         guiRobot.clickOn("#help");
         guiRobot.clickOn("#helpMenuItem");
         guiRobot.pauseForHuman();
         assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
         guiRobot.clickOn("#copyButton");
         if (!guiRobot.isHeadlessMode()) {
+            // checks the interaction of copy url and url is correct
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             assertEquals(USERGUIDE_URL, clipboard.getData(DataFlavor.stringFlavor));
+            guiRobot.push(KeyCode.ESCAPE);
+            assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
+
+            // checks if F1 opens the help window
+            guiRobot.push(KeyCode.F1);
+            assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
+            guiRobot.pauseForHuman();
+            guiRobot.push(KeyCode.ESCAPE);
+            assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
+
+            // checks if help command opens the help window
+            terminal.inputCommand("help");
+            assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
         }
         guiRobot.pauseForHuman();
         guiRobot.push(KeyCode.ESCAPE);
-        guiRobot.pauseForHuman();
         assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
 
         // command execution by robot
@@ -127,15 +145,23 @@ public class MainWindowTest extends GuiUnitTest {
         terminal.inputCommand("client view 3");
         checkLabel("#name", "Sim");
 
+        // clearing display panel using list command
+        terminal.inputCommand("list");
+        checkLabel("#name", "");
+        checkLabel("#address", "");
+
         // viewing country
         terminal.inputCommand("country note view");
         //TODO
         pauseToEyeball();
 
+        terminal.inputCommand("exit");
+        assertEquals(guiRobot.listWindows().size(), 0);
     }
 
     private void checkLabel(String id, String value) {
-        assertEquals(value, guiRobot.lookup(id).queryLabeled().getText());
+        guiRobot.sleep(50);
+        assertEquals(value, guiRobot.lookup(id).queryText().getText());
     }
 
     private String getResultMessage() {
@@ -152,7 +178,8 @@ public class MainWindowTest extends GuiUnitTest {
      * For gui interaction.
      */
     private class InteractionTerminal {
-        private TextInputControl textInputControl;
+        private final TextInputControl textInputControl;
+
         public InteractionTerminal(TextInputControl textInputControl) {
             this.textInputControl = textInputControl;
         }
@@ -160,7 +187,7 @@ public class MainWindowTest extends GuiUnitTest {
         public void inputCommand(String command) {
             textInputControl.setText(command);
             guiRobot.pauseForHuman();
-            guiRobot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+            guiRobot.interact(() -> guiRobot.push(KeyCode.ENTER));
             guiRobot.pauseForHuman();
         }
     }
