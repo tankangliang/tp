@@ -3,17 +3,14 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.UniqueClientList;
 import seedu.address.model.country.CountryNotesManager;
 import seedu.address.model.note.CountryNote;
-import seedu.address.model.note.Note;
 
 /**
  * Wraps all data at TbmManager level
@@ -57,25 +54,13 @@ public class TbmManager implements ReadOnlyTbmManager {
     }
 
     /**
-     * Replaces all notes in TbmManager with the given list of notes.
+     * Replaces all country notes in TbmManager with the given list of country notes.
      *
-     * @param notes The given list of notes.
+     * @param countryNotes The given list of country notes.
      */
-    public void setNotes(List<Note> notes) {
-        for (Note note: notes) {
-            if (note.isClientNote()) {
-                // handle client notes
-                // todo:  =======================================================
-                //        decided to not store the client notes in a separete set
-                //        because the notes are going to be stored within clients
-                //        itself. The setClient function aldy does this. Adding in
-                //        a collection of client notes in this class would mean that
-                //        collection needs to be constantly updated. As such, it
-                //        might be good enough to just modify the getNoteList method
-                //        ===========================================================
-            } else {
-                countryNotesManager.addCountryNote((CountryNote) note);
-            }
+    public void setCountryNotes(List<CountryNote> countryNotes) {
+        for (CountryNote countryNote: countryNotes) {
+            countryNotesManager.addCountryNote(countryNote);
         }
     }
 
@@ -85,7 +70,7 @@ public class TbmManager implements ReadOnlyTbmManager {
     public void resetData(ReadOnlyTbmManager newData) {
         requireNonNull(newData);
         setClients(newData.getClientList());
-        setNotes(newData.getNoteList());
+        setCountryNotes(newData.getCountryNoteList());
     }
 
     //// client-level operations
@@ -176,13 +161,6 @@ public class TbmManager implements ReadOnlyTbmManager {
     @Override
     public ObservableList<Client> getClientList() {
         return clients.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Note> getNoteList() {
-        ArrayList<Note> accumulated = new ArrayList<>(getCountryNoteList());
-        this.clients.forEach(client -> accumulated.addAll(client.getClientNotesAsUnmodifiableList()));
-        return FXCollections.observableArrayList(accumulated);
     }
 
     /**
