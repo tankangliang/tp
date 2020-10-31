@@ -85,7 +85,6 @@ public interface Model {
      */
     Client getWidgetClient();
 
-
     /**
      * Adds the given client.
      * <p>
@@ -165,11 +164,16 @@ public interface Model {
     void updateFilteredClientList(Predicate<Client> predicate);
 
     /**
-     * Updates the order of the filtered client list using the give {@code comparator}.
+     * Updates the order of the filtered client list using the given {@code comparator}.
      *
      * @throws NullPointerException if {@code comparator} is null.
      */
     void updateSortedFilteredClientList(Comparator<Client> comparator);
+
+    /**
+     * Resets the order of the filtered client list to the default order.
+     */
+    void resetSortedFilteredClientListOrder();
 
     /**
      * Returns an unmodifiable view of the filtered country notes list.

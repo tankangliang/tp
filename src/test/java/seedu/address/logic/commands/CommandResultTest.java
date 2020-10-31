@@ -16,14 +16,16 @@ public class CommandResultTest {
     @Test
     public void constructor() {
         CommandResult defaultCommandResult = new CommandResult("test");
+        assertFalse(defaultCommandResult.isResetWidget());
         assertFalse(defaultCommandResult.isShowHelp());
         assertFalse(defaultCommandResult.isExit());
         assertEquals("NONE", defaultCommandResult.getWidgetViewOptionAsString());
         assertFalse(defaultCommandResult.shouldDisplayClient());
         assertFalse(defaultCommandResult.shouldDisplayCountryNote());
 
-        CommandResult customCommandResult = new CommandResult("test", true, false,
+        CommandResult customCommandResult = new CommandResult("test", false, true, false,
                 WidgetViewOption.generateClientWidgetOption());
+        assertFalse(customCommandResult.isResetWidget());
         assertTrue(customCommandResult.isShowHelp());
         assertFalse(customCommandResult.isExit());
         assertEquals("CLIENT", customCommandResult.getWidgetViewOptionAsString());
@@ -31,23 +33,32 @@ public class CommandResultTest {
         assertTrue(customCommandResult.shouldDisplayClient());
         assertFalse(customCommandResult.shouldDisplayCountryNote());
 
-        customCommandResult = new CommandResult("test", true, false,
+        customCommandResult = new CommandResult("test", false, false, true,
                 WidgetViewOption.generateCountryNoteWidgetOption(Country.NULL_COUNTRY));
+        assertFalse(customCommandResult.isResetWidget());
+        assertFalse(customCommandResult.isShowHelp());
+        assertTrue(customCommandResult.isExit());
         assertEquals("COUNTRY_NOTE", customCommandResult.getWidgetViewOptionAsString());
         assertFalse(customCommandResult.shouldDisplayClient());
         assertTrue(customCommandResult.shouldDisplayCountryNote());
+
+        customCommandResult = new CommandResult("test", true, false, false);
+        assertTrue(customCommandResult.isResetWidget());
+        assertFalse(customCommandResult.isShowHelp());
+        assertFalse(customCommandResult.isExit());
+
     }
 
     @Test
     public void getCountry_nullCountry_returnExpected() {
-        CommandResult commandResult = new CommandResult("test", false, false,
+        CommandResult commandResult = new CommandResult("test", false, false, false,
                 WidgetViewOption.generateCountryNoteWidgetOption(Country.NULL_COUNTRY));
         assertEquals(Country.NULL_COUNTRY, commandResult.getCountry());
     }
 
     @Test
     public void getCountry_validCountry_returnExpected() {
-        CommandResult commandResult = new CommandResult("test", false, false,
+        CommandResult commandResult = new CommandResult("test", false, false, false,
                 WidgetViewOption.generateCountryNoteWidgetOption(new Country("SG")));
         assertEquals(new Country("SG"), commandResult.getCountry());
     }
@@ -61,16 +72,19 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", false, false, false)));
 
         // different feedbackToUser value -> returns false
         assertFalse(commandResult.equals(new CommandResult("different")));
 
+        // different resetWidget value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", true, false, false)));
+
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, true, false)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", false, false, true)));
     }
 
     @Test
@@ -83,11 +97,14 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
+        // different resetWidget value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false, false).hashCode());
+
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true).hashCode());
     }
 
 }

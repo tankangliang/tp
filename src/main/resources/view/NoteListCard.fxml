@@ -9,9 +9,9 @@
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.scene.text.Text?>
 <VBox fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" prefHeight="0">
-    <HBox spacing="1" alignment="CENTER_LEFT" VBox.vgrow="ALWAYS">
+    <HBox spacing="1" alignment="TOP_CENTER" VBox.vgrow="ALWAYS">
         <FlowPane fx:id="tags" HBox.hgrow="ALWAYS"/>
-        <Label fx:id="id" styleClass="cell_big_label" HBox.hgrow="ALWAYS">
+        <Label fx:id="id" alignment="TOP_CENTER" styleClass="cell_big_label" HBox.hgrow="ALWAYS">
             <minWidth>
                 <!-- Ensures that the label text is never truncated -->
                 <Region fx:constant="USE_PREF_SIZE"/>
@@ -19,6 +19,6 @@
         </Label>
     </HBox>
     <TextFlow VBox.vgrow="ALWAYS">
-        <Text fx:id="noteContent" styleClass="cell_small_label" />
+        <Text fx:id="noteContent" styleClass="cell_small_text" />
     </TextFlow>
 </VBox>

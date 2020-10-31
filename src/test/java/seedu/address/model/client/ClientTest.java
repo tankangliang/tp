@@ -18,7 +18,6 @@ import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BOB;
 
 import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -153,7 +152,7 @@ public class ClientTest {
         Note clientNote = new Note("hell yes");
         client.addClientNote(clientNote);
         assertTrue(client.hasClientNote(clientNote));
-        Set<Note> currentNotes = client.getClientNotes();
+        List<Note> currentNotes = client.getClientNotesAsUnmodifiableList();
         assertThrows(UnsupportedOperationException.class, () -> currentNotes.add(new Note("nice lahh")));
     }
 
@@ -161,7 +160,7 @@ public class ClientTest {
     public void getClientNotesAsList_modifyUnmodifiableList_throwsException() {
         Client client = new ClientBuilder(ALICE).build();
         client.addClientNote(new Note("hell yes"));
-        List<Note> currentNotes = client.getClientNotesAsList();
+        List<Note> currentNotes = client.getClientNotesAsUnmodifiableList();
         assertThrows(UnsupportedOperationException.class, () -> currentNotes.add(new Note("nice lahh")));
     }
 
@@ -179,15 +178,13 @@ public class ClientTest {
     @Test
     public void editClientNote_editExistingNote_noteIsEditedWithoutException() {
         Client client = new ClientBuilder(ALICE).build();
-        Note clientNote = new Note("hell yes");
+        Note oldNote = new Note("hell yes");
         Note newNote = new Note("this be a new note");
-        client.addClientNote(clientNote);
-        assertTrue(client.hasClientNote(clientNote));
+        client.addClientNote(oldNote);
+        assertTrue(client.hasClientNote(oldNote));
         assertFalse(client.hasClientNote(newNote));
-        assertDoesNotThrow(() -> client.editClientNote(clientNote, newNote));
-        client.editClientNote(clientNote, newNote);
-        assertFalse(client.hasClientNote(clientNote));
-        assertTrue(client.hasClientNote(newNote));
+        assertDoesNotThrow(() -> client.editClientNote(oldNote, newNote));
+        assertFalse(client.hasClientNote(oldNote));
     }
 
     @Test
