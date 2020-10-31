@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,9 +29,9 @@ public class TagNoteMap {
      * A map is used instead of a set because the set does not offer the option of getting objects inside it.
      */
     private final Map<Tag, Tag> uniqueTagMap = new HashMap<>();
-    private final Set<Note> noteSet = new HashSet<>(); // TODO: not really needed
-    private final Map<Tag, Set<Note>> tagToNotesMap = new HashMap<>();
-    private final Map<Note, Set<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
+    private final LinkedHashSet<Note> noteSet = new LinkedHashSet<>(); // TODO: not really needed
+    private final Map<Tag, LinkedHashSet<Note>> tagToNotesMap = new HashMap<>();
+    private final Map<Note, LinkedHashSet<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
 
     /**
      * Constructor ensures our unique tag map has the UNTAGGED tag.
@@ -99,11 +100,11 @@ public class TagNoteMap {
     }
 
     public Set<Tag> getTagsForNote(Note note) {
-        return Collections.unmodifiableSet(noteToTagsMap.getOrDefault(note, new HashSet<>()));
+        return Collections.unmodifiableSet(noteToTagsMap.getOrDefault(note, new LinkedHashSet<>()));
     }
 
     public Set<Note> getNotesForTag(Tag tag) {
-        return Collections.unmodifiableSet(tagToNotesMap.getOrDefault(tag, new HashSet<>()));
+        return Collections.unmodifiableSet(tagToNotesMap.getOrDefault(tag, new LinkedHashSet<>()));
     }
 
     /**
@@ -141,8 +142,8 @@ public class TagNoteMap {
         noteSet.remove(noteToEdit);
         Set<Tag> associatedTags = this.noteToTagsMap.get(noteToEdit);
         for (Tag tag : associatedTags) { // remove note for relevant tags
-            Set<Note> notes = this.tagToNotesMap.get(tag);
-            notes.remove(noteToEdit);
+            LinkedHashSet<Note> notes = this.tagToNotesMap.get(tag);
+            notes.remove(noteToEdit); // todo: this could be affecting the order of notes eventually, should to a put?
             if (notes.isEmpty()) { // remove the tag itself from tagToNotesMap and uniqueTagMap:
                 this.tagToNotesMap.remove(tag);
                 this.uniqueTagMap.remove(tag);
@@ -168,13 +169,13 @@ public class TagNoteMap {
             if (tagToNotesMap.containsKey(newTag)) { // if that tag exists
                 tagToNotesMap.get(newTag).add(note);
             } else { // new tag:
-                Set<Note> notes = new HashSet<>();
+                LinkedHashSet<Note> notes = new LinkedHashSet<>();
                 notes.add(note);
                 tagToNotesMap.put(newTag, notes);
             }
         }
         // update the tags set for the note:
-        Set<Tag> currentTags = noteToTagsMap.getOrDefault(note, new HashSet<>());
+        LinkedHashSet<Tag> currentTags = noteToTagsMap.getOrDefault(note, new LinkedHashSet<>());
         currentTags.addAll(newTags);
         noteToTagsMap.put(note, currentTags);
         noteSet.add(note);

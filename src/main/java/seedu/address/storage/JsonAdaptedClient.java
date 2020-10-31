@@ -1,9 +1,8 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -85,7 +84,7 @@ class JsonAdaptedClient {
      * @throws IllegalValueException if there were any data constraints violated in the adapted client.
      */
     public Client toModelType() throws IllegalValueException {
-        final Set<Note> clientNotes = new HashSet<>();
+        final LinkedHashSet<Note> clientNotes = new LinkedHashSet<>();
         for (JsonAdaptedNote note : this.clientNotes) {
             clientNotes.add(note.toModelType());
         }

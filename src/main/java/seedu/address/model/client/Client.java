@@ -31,6 +31,7 @@ public class Client {
     private final Country country;
     private final Timezone timezone;
     private final ContractExpiryDate contractExpiryDate;
+    // private final LinkedHashSet<Note> clientNotes =new LinkedHashSet<>(); // this change will break the GUI updating
     private final ObservableSet<Note> clientNotes = FXCollections.observableSet(new LinkedHashSet<>());
     private final LastModifiedInstant lastModifiedInstant;
 
@@ -101,7 +102,8 @@ public class Client {
     }
 
     public ObservableSet<Note> getClientNotesAsObservableSet() {
-        return clientNotes;
+        return FXCollections.observableSet(clientNotes);
+        // return clientNotes;
     }
     /**
      * Adds a client note for this client.
@@ -133,7 +135,6 @@ public class Client {
         requireNonNull(clientNote);
         this.clientNotes.remove(clientNote);
         this.clientNotes.add(newNote);
-        // todo: keep existing tags.
     }
 
     /**

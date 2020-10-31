@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -140,7 +141,7 @@ public class ModelManager implements Model {
     public void addClient(Client client) {
         tbmManager.addClient(client);
         updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
-        Set<Note> clientNotes = client.getClientNotes();
+        LinkedHashSet<Note> clientNotes = new LinkedHashSet<>(client.getClientNotes());
         for (Note note : clientNotes) {
             Set<Tag> tags = note.getTags();
             updateTagNoteMapWithNote(tags, note);
