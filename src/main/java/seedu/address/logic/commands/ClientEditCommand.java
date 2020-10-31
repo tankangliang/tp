@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMEZONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -107,7 +107,7 @@ public class ClientEditCommand extends Command {
         ContractExpiryDate updatedContractExpiryDate =
                 editClientDescriptor.getContractExpiryDate().orElse(clientToEdit.getContractExpiryDate());
         LastModifiedInstant updatedLastModifiedInstant = new LastModifiedInstant();
-        LinkedHashSet<Note> retainedClientNotes = new LinkedHashSet<>(clientToEdit.getClientNotes());
+        ArrayList<Note> retainedClientNotes = new ArrayList<>(clientToEdit.getClientNotes());
         Client newClient = new Client(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedCountry,
                 updatedTimezone, updatedContractExpiryDate, updatedLastModifiedInstant);
         retainedClientNotes.forEach(clientNote -> newClient.addClientNote(clientNote));

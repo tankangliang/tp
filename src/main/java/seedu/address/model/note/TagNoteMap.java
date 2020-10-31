@@ -2,6 +2,7 @@ package seedu.address.model.note;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -30,7 +31,7 @@ public class TagNoteMap {
      */
     private final Map<Tag, Tag> uniqueTagMap = new HashMap<>();
     private final LinkedHashSet<Note> noteSet = new LinkedHashSet<>(); // TODO: not really needed
-    private final Map<Tag, LinkedHashSet<Note>> tagToNotesMap = new HashMap<>();
+    private final Map<Tag, List<Note>> tagToNotesMap = new HashMap<>();
     private final Map<Note, LinkedHashSet<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
 
     /**
@@ -40,7 +41,7 @@ public class TagNoteMap {
         uniqueTagMap.put(Tag.UNTAGGED, Tag.UNTAGGED);
     }
 
-    private void initTagNoteMapFromNotes(Set<Note> notes) {
+    private void initTagNoteMapFromNotes(List<Note> notes) {
         noteSet.addAll(notes);
         for (Note clientNote : notes) {
             Set<Tag> tags = clientNote.getTags();
@@ -59,7 +60,7 @@ public class TagNoteMap {
     public void initTagNoteMapFromClients(List<Client> clients) {
         requireAllNonNull(clients);
         for (Client client : clients) {
-            Set<Note> clientNotes = client.getClientNotes();
+            List<Note> clientNotes = client.getClientNotes();
             initTagNoteMapFromNotes(clientNotes);
         }
         logger.info("--------------[TagNoteMap initialized from clients]");
@@ -70,7 +71,7 @@ public class TagNoteMap {
      *
      * @param countryNotes The set of countries, each containing their notes and associated tags.
      */
-    public void initTagNoteMapFromCountryNotes(Set<Note> countryNotes) {
+    public void initTagNoteMapFromCountryNotes(List<Note> countryNotes) {
         // todo: make init work when passed in a list of countryNotes
         requireAllNonNull(countryNotes);
         initTagNoteMapFromNotes(countryNotes);
@@ -103,8 +104,8 @@ public class TagNoteMap {
         return Collections.unmodifiableSet(noteToTagsMap.getOrDefault(note, new LinkedHashSet<>()));
     }
 
-    public Set<Note> getNotesForTag(Tag tag) {
-        return Collections.unmodifiableSet(tagToNotesMap.getOrDefault(tag, new LinkedHashSet<>()));
+    public List<Note> getNotesForTag(Tag tag) {
+        return Collections.unmodifiableList(tagToNotesMap.getOrDefault(tag, new ArrayList<>()));
     }
 
     /**
@@ -119,7 +120,7 @@ public class TagNoteMap {
         noteSet.remove(note);
         Set<Tag> associatedTags = this.noteToTagsMap.get(note);
         for (Tag tag : associatedTags) { // remove note for relevant tags
-            Set<Note> notes = this.tagToNotesMap.get(tag);
+            List<Note> notes = this.tagToNotesMap.get(tag);
             notes.remove(note);
             if (notes.isEmpty()) { // remove the tag itself from tagToNotesMap and uniqueTagMap:
                 this.tagToNotesMap.remove(tag);
@@ -142,7 +143,7 @@ public class TagNoteMap {
         noteSet.remove(noteToEdit);
         Set<Tag> associatedTags = this.noteToTagsMap.get(noteToEdit);
         for (Tag tag : associatedTags) { // remove note for relevant tags
-            LinkedHashSet<Note> notes = this.tagToNotesMap.get(tag);
+            List<Note> notes = this.tagToNotesMap.get(tag);
             notes.remove(noteToEdit); // todo: this could be affecting the order of notes eventually, should to a put?
             if (notes.isEmpty()) { // remove the tag itself from tagToNotesMap and uniqueTagMap:
                 this.tagToNotesMap.remove(tag);
@@ -169,7 +170,7 @@ public class TagNoteMap {
             if (tagToNotesMap.containsKey(newTag)) { // if that tag exists
                 tagToNotesMap.get(newTag).add(note);
             } else { // new tag:
-                LinkedHashSet<Note> notes = new LinkedHashSet<>();
+                List<Note> notes = new ArrayList<>();
                 notes.add(note);
                 tagToNotesMap.put(newTag, notes);
             }

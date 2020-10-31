@@ -5,13 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableSet;
+import javafx.collections.ObservableList;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.Note;
 
@@ -32,7 +30,7 @@ public class Client {
     private final Timezone timezone;
     private final ContractExpiryDate contractExpiryDate;
     // private final LinkedHashSet<Note> clientNotes =new LinkedHashSet<>(); // this change will break the GUI updating
-    private final ObservableSet<Note> clientNotes = FXCollections.observableSet(new LinkedHashSet<>());
+    private final ObservableList<Note> clientNotes = FXCollections.observableArrayList(new ArrayList<>());
     private final LastModifiedInstant lastModifiedInstant;
 
     /**
@@ -88,8 +86,8 @@ public class Client {
      *
      * @return The list of client notes associated with this client.
      */
-    public Set<Note> getClientNotes() {
-        return Collections.unmodifiableSet(this.clientNotes);
+    public List<Note> getClientNotes() {
+        return Collections.unmodifiableList(this.clientNotes);
     }
 
     /**
@@ -101,8 +99,8 @@ public class Client {
         return Collections.unmodifiableList(new ArrayList<>(getClientNotes()));
     }
 
-    public ObservableSet<Note> getClientNotesAsObservableSet() {
-        return FXCollections.observableSet(clientNotes);
+    public ObservableList<Note> getClientNotesAsObservableSet() {
+        return FXCollections.observableArrayList(clientNotes);
         // return clientNotes;
     }
     /**

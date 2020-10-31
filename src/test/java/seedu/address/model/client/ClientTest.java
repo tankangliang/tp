@@ -18,7 +18,6 @@ import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BOB;
 
 import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -153,7 +152,7 @@ public class ClientTest {
         Note clientNote = new Note("hell yes");
         client.addClientNote(clientNote);
         assertTrue(client.hasClientNote(clientNote));
-        Set<Note> currentNotes = client.getClientNotes();
+        List<Note> currentNotes = client.getClientNotes();
         assertThrows(UnsupportedOperationException.class, () -> currentNotes.add(new Note("nice lahh")));
     }
 

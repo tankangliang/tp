@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -84,7 +83,7 @@ class JsonAdaptedClient {
      * @throws IllegalValueException if there were any data constraints violated in the adapted client.
      */
     public Client toModelType() throws IllegalValueException {
-        final LinkedHashSet<Note> clientNotes = new LinkedHashSet<>();
+        final List<Note> clientNotes = new ArrayList<>();
         for (JsonAdaptedNote note : this.clientNotes) {
             clientNotes.add(note.toModelType());
         }

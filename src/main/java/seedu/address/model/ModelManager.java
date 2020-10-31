@@ -6,7 +6,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -210,7 +209,7 @@ public class ModelManager implements Model {
     public void initialiseTagNoteMap() {
         this.tagNoteMap.initTagNoteMapFromClients(this.tbmManager.getClientList());
         // todo: initialiseTagNoteMap probably has to be changed to use TbmManager#getNoteList()
-        this.tagNoteMap.initTagNoteMapFromCountryNotes(new HashSet<>(this.tbmManager.getCountryNoteList()));
+        this.tagNoteMap.initTagNoteMapFromCountryNotes(new ArrayList<>(this.tbmManager.getCountryNoteList()));
     }
 
     public TagNoteMap getTagNoteMap() {
