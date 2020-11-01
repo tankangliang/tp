@@ -5,12 +5,17 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.TbmManager;
+import seedu.address.model.country.Country;
+import seedu.address.model.note.CountryNote;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TypicalClients;
 
 public class JsonSerializableTbmManagerTest {
@@ -26,6 +31,9 @@ public class JsonSerializableTbmManagerTest {
                 JsonSerializableTbmManager.class).get();
         TbmManager tbmManagerFromFile = dataFromFile.toModelType();
         TbmManager typicalClientsTbmManager = TypicalClients.getTypicalTbmManager();
+        Set<Tag> tags = new HashSet<>();
+        tags.add(new Tag("useful"));
+        typicalClientsTbmManager.addCountryNote(new CountryNote("likes to queue", new Country("SG"), tags));
         assertEquals(tbmManagerFromFile, typicalClientsTbmManager);
     }
 

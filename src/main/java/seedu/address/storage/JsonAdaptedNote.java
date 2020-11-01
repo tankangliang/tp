@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.client.Name;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryCodeVerifier;
 import seedu.address.model.note.CountryNote;

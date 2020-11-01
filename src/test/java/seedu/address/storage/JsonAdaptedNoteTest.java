@@ -2,18 +2,15 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.storage.JsonAdaptedNote.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.client.Name;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryCodeVerifier;
 import seedu.address.model.note.CountryNote;
@@ -25,6 +22,7 @@ public class JsonAdaptedNoteTest {
     private static final String INVALID_NOTE = "";
     private static final String INVALID_COUNTRY_CODE = "ZZ";
     private static final String NULL_COUNTRY_CODE = "NULL_CC";
+    private static final String INVALID_TAG = "@@@";
 
     private static final String VALID_NOTE = "some note";
     private static final String VALID_COUNTRY = "SG";
@@ -114,6 +112,15 @@ public class JsonAdaptedNoteTest {
         Set<JsonAdaptedTag> jsonAdaptedTagSet = getDefaultJsonAdaptedTagSet();
         JsonAdaptedNote jsonAdaptedNote = new JsonAdaptedNote(VALID_NOTE, null, jsonAdaptedTagSet);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, jsonAdaptedNote::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTags_throwsIllegalValueException() throws IllegalValueException {
+        Set<JsonAdaptedTag> jsonAdaptedTagSet = new HashSet<>();
+        jsonAdaptedTagSet.add(new JsonAdaptedTag(INVALID_TAG));
+        JsonAdaptedNote jsonAdaptedNote = new JsonAdaptedNote(VALID_NOTE, VALID_COUNTRY, jsonAdaptedTagSet);
+        String expectedMessage = Tag.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, jsonAdaptedNote::toModelType);
     }
 
