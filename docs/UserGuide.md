@@ -404,13 +404,13 @@ Example:
 
 Given the list of country notes in the country note list panel:
 
-![Country Note View All](images/command-screenshots/country-note-view-all.jpg)
+![Country Note View All](images/command-screenshots/country-note-view-all.png)
 
 Command: `country note edit 2 nt/Rising middle class with increased purchasing power t/spending`
 
 Edits the second country note in the country notes panel. In this case, it will be the first note under **Singapore**. The resulting list will look like:
 
-![Country Note Edit](images/command-screenshots/country-note-edit.jpg)
+![Country Note Edit](images/command-screenshots/country-note-edit.png)
 
 ### Deleting notes for a country: `country note delete`
 
