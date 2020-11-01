@@ -13,6 +13,7 @@ import seedu.address.commons.core.LogsCenter;
  * A class to encapsulate the history of commands entered by the user.
  */
 public class CommandHistory {
+
     private static final Logger logger = LogsCenter.getLogger(CommandHistory.class);
     private final List<String> history;
     private int pointer;
@@ -44,12 +45,13 @@ public class CommandHistory {
      * Gets the next command in history.
      *
      * @return The next command.
+     * @throws NoSuchElementException if there is no next command.
      */
     public String getNext() {
         if (hasNext()) {
             return history.get(moveForward());
-        } else if (hasRudimentary()) {
-            return getRudimentary();
+        } else if (hasIncompletelyTypedCommand()) {
+            return getIncompletelyTypedCommand();
         }
         throw new NoSuchElementException();
     }
@@ -58,9 +60,10 @@ public class CommandHistory {
      * Gets the previous command in history.
      *
      * @return The previous command.
+     * @throws NoSuchElementException if there is no previous command.
      */
     public String getPrevious(String command) {
-        rudimentaryAdd(command);
+        addIncompletelyTypedCommandToTempHistory(command);
 
         if (hasPrevious()) {
             return history.get(moveBack());
@@ -79,11 +82,11 @@ public class CommandHistory {
     }
 
     /**
-     * Checks if there is a rudimentary command in the history.
+     * Checks if there is a incompletely typed command that is currently in the temporary history.
      *
-     * @return True if there is a rudimentary command that is currently in the temporary history.
+     * @return True if there is a incompletely typed command, false otherwise.
      */
-    public boolean hasRudimentary() {
+    public boolean hasIncompletelyTypedCommand() {
         return temp != null;
     }
 
@@ -117,18 +120,18 @@ public class CommandHistory {
     }
 
     /**
-     * Adds the current rudimentary command to a temporary history.
+     * Adds the current incompletely typed command to a temporary history.
      */
-    private void rudimentaryAdd(String command) {
+    private void addIncompletelyTypedCommandToTempHistory(String command) {
         if (pointer == history.size()) {
             temp = command;
         }
     }
 
     /**
-     * Gets the temp command.
+     * Gets the incompletely typed command.
      */
-    private String getRudimentary() {
+    private String getIncompletelyTypedCommand() {
         pointer = history.size();
         return temp;
     }
