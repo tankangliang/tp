@@ -62,6 +62,7 @@ public class TbmManager implements ReadOnlyTbmManager {
      * @param notes The given list of notes.
      */
     public void setNotes(List<Note> notes) {
+        countryNotesManager.clear();
         for (Note note: notes) {
             if (note.isClientNote()) {
                 // handle client notes
