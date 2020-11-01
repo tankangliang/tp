@@ -27,6 +27,7 @@ public class WidgetViewBox extends UiPart<Region> {
 
     private final ObservableList<Client> clientObservableList;
     private int displayedClientIndex = -1;
+    private int clientListSize = -1;
     private Client displayedClient = null;
     private TextClock textClock;
 
@@ -63,18 +64,23 @@ public class WidgetViewBox extends UiPart<Region> {
     public WidgetViewBox(ObservableList<Client> clientObservableList) {
         super(FXML);
         this.clientObservableList = clientObservableList;
+        clientListSize = clientObservableList.size();
         clientObservableList.addListener((ListChangeListener<Client>) c -> {
             if (c.next()) {
-                if (c.wasUpdated() || c.wasReplaced()) {
-                    for (int i = 0; i < clientObservableList.size(); i++) {
-                        Client client = clientObservableList.get(i);
-                        if (client.isSameClient(displayedClient)) {
-                            displayedClient = client;
-                            displayedClientIndex = i;
-                            return;
+                if (clientObservableList.size() == clientListSize && !c.wasPermutated()) {
+                    if (displayedClientIndex != -1) {
+                        updateClientDisplay(clientObservableList.get(displayedClientIndex));
+                    } else {
+                        for (int i = 0; i < clientObservableList.size(); i++) {
+                            Client client = clientObservableList.get(i);
+                            if (client.isSameClient(displayedClient)) {
+                                displayedClient = client;
+                                displayedClientIndex = i;
+                                return;
+                            }
                         }
+                        setToDefaultView();
                     }
-                    setToDefaultView();
                 }
             }
         });
