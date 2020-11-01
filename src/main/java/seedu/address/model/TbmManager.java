@@ -59,6 +59,7 @@ public class TbmManager implements ReadOnlyTbmManager {
      * @param countryNotes The given list of country notes.
      */
     public void setCountryNotes(List<CountryNote> countryNotes) {
+        countryNotesManager.clear();
         for (CountryNote countryNote: countryNotes) {
             countryNotesManager.addCountryNote(countryNote);
         }

@@ -61,8 +61,8 @@ class JsonSerializableTbmManager {
             }
             tbmManager.addClient(client);
         }
-        for (JsonAdaptedNote note: countryNotes) {
-            Note modelNote = note.toModelType();
+        for (JsonAdaptedNote jsonAdaptedCountryNote : countryNotes) {
+            Note modelNote = jsonAdaptedCountryNote.toModelType();
             assert !modelNote.isClientNote(); // client notes are stored inside client only
             tbmManager.addCountryNote((CountryNote) modelNote);
         }
