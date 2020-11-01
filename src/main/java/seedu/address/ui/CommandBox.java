@@ -40,21 +40,26 @@ public class CommandBox extends UiPart<Region> {
             getPreviousCommand();
         } else if (keyEvent.getCode() == KeyCode.DOWN) {
             getNextCommand();
-        } else {
-
         }
     }
 
+    /**
+     * UP key event.
+     */
     private void getPreviousCommand() {
         if (history.hasPrevious()) {
-            String prevCommand = history.getPrevious();
+            String currentCommand = commandTextField.getText();
+            String prevCommand = history.getPrevious(currentCommand == null ? " " : currentCommand);
             commandTextField.setText(prevCommand);
             commandTextField.positionCaret(prevCommand.length());
         }
     }
 
+    /**
+     * DOWN key event.
+     */
     private void getNextCommand() {
-        if (history.hasNext()) {
+        if (history.hasNext() || history.hasRudimentary()) {
             String nextCommand = history.getNext();
             commandTextField.setText(nextCommand);
             commandTextField.positionCaret(nextCommand.length());

@@ -75,9 +75,20 @@ public class CommandBoxTest extends GuiUnitTest {
         commandBoxHandle.run(viewCommand1);
         commandBoxHandle.run(viewCommand2);
         guiRobot.pauseForHuman();
-        guiRobot.press(KeyCode.UP);
+        guiRobot.clickOn("#commandTextField");
+        guiRobot.press(KeyCode.UP).release(KeyCode.UP);
         String prevCommand = commandBoxHandle.getInput();
         assertEquals(viewCommand2, prevCommand);
+
+        guiRobot.clickOn("#commandTextField");
+        guiRobot.press(KeyCode.UP).release(KeyCode.UP);
+        String prevCommand2 = commandBoxHandle.getInput();
+        assertEquals(viewCommand1, prevCommand2);
+
+
+        guiRobot.press(KeyCode.DOWN).release(KeyCode.DOWN);
+        String nextCommand = commandBoxHandle.getInput();
+        assertEquals(viewCommand2, nextCommand);
     }
 
     /**

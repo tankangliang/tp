@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
+import javafx.scene.effect.Bloom;
 import seedu.address.commons.core.LogsCenter;
 
 /**
@@ -16,6 +17,8 @@ public class CommandHistory {
     private static final Logger logger = LogsCenter.getLogger(CommandHistory.class);
     private final List<String> history;
     private int pointer;
+    private boolean rudimentary;
+    private String temp;
 
     /**
      * Constructor for the history of commands entered.
@@ -26,6 +29,7 @@ public class CommandHistory {
         logger.info(history.toString());
         this.history = history;
         pointer = history.size();
+        setRudimentary(true);
     }
 
     public static CommandHistory init() {
@@ -39,8 +43,12 @@ public class CommandHistory {
      */
     public void add(String command) {
         requireAllNonNull(command);
+
+        clearTemp();
         history.add(command);
         pointer = history.size();
+        clearTemp();
+        setRudimentary(true);
     }
 
     /**
@@ -52,7 +60,11 @@ public class CommandHistory {
         if (hasNext()) {
             return history.get(moveForward());
         } else {
+            if (hasRudimentary()) {
+                return getRudimentary();
+            }
             throw new NoSuchElementException();
+
         }
     }
 
@@ -61,7 +73,9 @@ public class CommandHistory {
      *
      * @return The previous command.
      */
-    public String getPrevious() {
+    public String getPrevious(String command) {
+        rudimentaryAdd(command);
+
         if (hasPrevious()) {
             return history.get(moveBack());
         } else {
@@ -76,6 +90,10 @@ public class CommandHistory {
      */
     public boolean hasNext() {
         return pointer + 1 < history.size();
+    }
+
+    public boolean hasRudimentary() {
+        return temp != null;
     }
 
     /**
@@ -105,6 +123,39 @@ public class CommandHistory {
     private int moveForward() {
         assert pointer < history.size() - 1;
         return ++pointer;
+    }
+
+    /**
+     * Adds the current incomplete command to a temp
+     * history,
+     */
+    public void rudimentaryAdd(String command) {
+        if (rudimentary) {
+            temp = command;
+            setRudimentary(false);
+        }
+    }
+
+    /**
+     * Sets the rudimentary flag.
+     */
+    private void setRudimentary(boolean bool) {
+        rudimentary = bool;
+    }
+
+    /**
+     * Gets the temp command.
+     */
+    public String getRudimentary() {
+        pointer = history.size();
+        return temp;
+    }
+
+    /**
+     * Clears the temp history.
+     */
+    private void clearTemp() {
+        temp = null;
     }
 
 }
