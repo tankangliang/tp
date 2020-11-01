@@ -25,8 +25,8 @@ public class CountryNoteDeleteCommandParserTest {
     @Test
     public void parse_validIndex_returnsExpected() {
         try {
-            CountryNoteDeleteCommand expected = new CountryNoteDeleteCommand(Index.fromOneBased(1));
-            CountryNoteDeleteCommand actual = parser.parse(" 1");
+            new CountryNoteDeleteCommand(Index.fromOneBased(1));
+            parser.parse(" 1");
         } catch (Exception e) {
             fail();
         }
