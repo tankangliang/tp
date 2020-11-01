@@ -16,7 +16,6 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -91,7 +90,7 @@ public class MainParserTest {
     public void parseClientCommands_findClient() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         final String commandString = ClientFindCommand.COMMAND_WORD + " "
-                + keywords.stream().collect(Collectors.joining(" "));
+                + String.join(" ", keywords);
 
         ClientFindCommand command = (ClientFindCommand) parser.parseCommand(commandString);
         assertEquals(new ClientFindCommand(new NameContainsKeywordsPredicate(keywords)), command);
@@ -180,7 +179,6 @@ public class MainParserTest {
 
     @Test
     public void parseCountryNoteCommands_countryNoteEdit() throws Exception {
-        final String countryString = "SG";
         final String noteString = "is hot";
         final String commandString = CountryNoteEditCommand.COMMAND_WORD + " " + INDEX_FIRST_CLIENT.getOneBased()
                 + " " + PREFIX_NOTE + noteString;
