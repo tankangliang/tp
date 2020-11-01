@@ -11,14 +11,14 @@ import org.junit.jupiter.api.Test;
 public class CommandHistoryTest {
     @Test
     public void getNext_reachHistoryEnd_throwsNoSuchElementException() {
-        CommandHistory commandHistory = CommandHistory.init();
+        CommandHistory commandHistory = new CommandHistory();
         commandHistory.add("1");
         assertThrows(NoSuchElementException.class, () -> commandHistory.getNext());
     }
 
     @Test
     public void getPrevious_reachHistoryBeginning_throwsNoSuchElementException() {
-        CommandHistory commandHistory = CommandHistory.init();
+        CommandHistory commandHistory = new CommandHistory();
         commandHistory.add("1");
 
         commandHistory.getPrevious("");
@@ -27,7 +27,7 @@ public class CommandHistoryTest {
 
     @Test
     public void getPrevious_completeHistory_isMatching() {
-        CommandHistory commandHistory = CommandHistory.init();
+        CommandHistory commandHistory = new CommandHistory();
         commandHistory.add("1");
         commandHistory.add("2");
         commandHistory.add("3");
