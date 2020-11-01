@@ -10,14 +10,14 @@ Class CountryNotesManager
 Class CountryCodeVerifier
 Class Note
 Class CountryNote
-Class AddressBook
+Class TbmManager
 Interface Model <<Interface>>
 Class ModelManager
 }
 
 ModelManager .up.|> Model
-ModelManager -down-> "1" AddressBook
-AddressBook --> "1" CountryNotesManager
+ModelManager -down-> "1" TbmManager
+TbmManager --> "1" CountryNotesManager
 CountryNotesManager "1" -r-> "*" CountryNote
 CountryNote -up-|> Note
 CountryNote --> "1" Country
