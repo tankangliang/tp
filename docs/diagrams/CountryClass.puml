@@ -15,12 +15,12 @@ Interface Model <<Interface>>
 Class ModelManager
 }
 
-CountryNote -up-|> Note
-CountryNote -r-> "1" Country
-CountryNotesManager "1" -up-> "*" CountryNote
-Country .up.> CountryCodeVerifier
-AddressBook -left-> "1" CountryNotesManager
 ModelManager .up.|> Model
 ModelManager -down-> "1" AddressBook
+AddressBook --> "1" CountryNotesManager
+CountryNotesManager "1" -r-> "*" CountryNote
+CountryNote -up-|> Note
+CountryNote --> "1" Country
+Country ..> CountryCodeVerifier
 
 @enduml

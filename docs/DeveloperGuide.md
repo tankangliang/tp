@@ -193,7 +193,7 @@ It implements the following operations:
 * `CountryNotesManager#addCountryNote(CountryNote countryNote)`  — Adds the given `countryNote` to the internal `ObservableList<CountryNote>`.
 * `CountryNotesManager#deleteCountryNote(CountryNote countryNote)`  — Deletes the given `countryNote` from the internal `ObservableList<CountryNote>`.
 
-The following class diagram illustrates how the relevant classes in the `seedu.address.model` package are related to `CountryNote`.
+The following class diagram illustrates how the relevant classes in the `Model` component are related to `CountryNote`.
 
 ![Country Class Diagram](images/CountryClass.png)
 
