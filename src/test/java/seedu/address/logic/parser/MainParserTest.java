@@ -27,6 +27,7 @@ import seedu.address.logic.commands.ClientDeleteCommand;
 import seedu.address.logic.commands.ClientEditCommand;
 import seedu.address.logic.commands.ClientEditCommand.EditClientDescriptor;
 import seedu.address.logic.commands.ClientFindCommand;
+import seedu.address.logic.commands.ClientListCommand;
 import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.commands.ClientNoteDeleteCommand;
 import seedu.address.logic.commands.ClientNoteEditCommand;
@@ -38,7 +39,6 @@ import seedu.address.logic.commands.CountryNoteEditCommand;
 import seedu.address.logic.commands.CountryNoteViewCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SuggestCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Client;
@@ -292,9 +292,9 @@ public class MainParserTest {
     }
 
     @Test
-    public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    public void parseCommand_clientList() throws Exception {
+        assertTrue(parser.parseCommand(ClientListCommand.COMMAND_WORD) instanceof ClientListCommand);
+        assertTrue(parser.parseCommand(ClientListCommand.COMMAND_WORD + " 3") instanceof ClientListCommand);
     }
 
     @Test
