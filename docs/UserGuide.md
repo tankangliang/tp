@@ -362,14 +362,10 @@ Examples:
 * Command: `country note view`
 
     All country notes in **_TBM_** will be displayed.
-    
-    ![Country Note View](images/command-screenshots/country-note-view.jpg)
 
-* Command: `country note view c/CN`
+* Command: `country note view c/SG`
 
-    Only country notes for **China** will be displayed.
-    
-    ![Country Note View SG](images/command-screenshots/country-note-view-sg.jpg)
+    Only country notes for **Singapore** will be displayed.
 
 ### Adding notes for a country: `country note add`
 
@@ -385,28 +381,22 @@ Examples:
     - Content: **_has one of the lowest corporate taxes in the world_** 
     - Tag: **_tax_** 
     
-    ![Country Note Add SG](images/command-screenshots/country-note-add-sg.jpg)
-
 * Command: `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
 
     Adds a **note** for the country of **China** with the following specifications: 
     - Content: **_building good relations (guanxi) is important when conducting business here_** 
     - Tag: **_intercultural_** 
     
-    ![Country Note Add CN](images/command-screenshots/country-note-add-cn.jpg)
-
 * Command: `country note add c/IN nt/is world's fastest growing economy`
 
     Adds a **note** for the country of **India** with the following specifications:
     - Content: **_is world's fastest growing economy_** 
     
-    ![Country Note Add IN](images/command-screenshots/country-note-add-in.jpg)
-
 ### Editing notes for a country: `country note edit`
 
-Edits a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes. Supplying tags to the command will add the tags onto the current existing tags for that note.
+Edits a note that is associated with a specific country at the given index based on the **most recent view** of the [list panel displaying country notes](#ui-when-viewing-country). Supplying tags to the command will add the tags onto the current existing tags for that note.
 
-If the view on the [display panel](#start-page) is not showing the country notes, the country note to be edited will be the country note at the given index based on the **most recently viewed country note panel**. If you have not viewed the country notes panel before, the country note to be edited will be the country note at the given index based on the **country notes panel after issuing the command `country note view`**.
+It is possible to edit a country note even when the country notes list panel is not being displayed. 
 
 Format: `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...`
 
@@ -414,41 +404,19 @@ Example:
 
 Given the list of country notes in the country note list panel:
 
-```
-China
---------
-1. Speaks Mandarin [tag: language]
+![Country Note View All](images/command-screenshots/country-note-view-all.jpg)
 
-Russia
---------
-2. Speaks Russian [tag: language]
+Command: `country note edit 2 nt/Rising middle class with increased purchasing power t/spending`
 
-Singapore
---------
-3. Speaks English
-```
+Edits the second country note in the country notes panel. In this case, it will be the first note under **Singapore**. The resulting list will look like:
 
-Command: `country note edit 3 nt/Speaks Singlish t/language`
-
-Edits the third country note in the country notes panel. In this case, it will be the note under Singapore. The resulting list will look like:
-
-```
-China
---------
-1. Speaks Mandarin [tag: language]
-
-Russia
---------
-2. Speaks Russian [tag: language]
-
-Singapore
---------
-3. Speaks Singlish [tag: language]
-```
+![Country Note Edit](images/command-screenshots/country-note-edit.jpg)
 
 ### Deleting notes for a country: `country note delete`
 
-Deletes a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes.
+Deletes a note that is associated with a specific country at the given index based on the **most recent view** of the [list panel displaying country notes](#ui-when-viewing-country).
+
+It is possible to delete a country note even when the country notes list panel is not being displayed. 
 
 Format: `country note delete INDEX`
 
