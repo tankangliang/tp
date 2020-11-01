@@ -20,28 +20,21 @@ public class CommandHistory {
 
     /**
      * Constructor for the history of commands entered.
-     *
-     * @param history
      */
-    private CommandHistory(List<String> history) {
-        logger.info(history.toString());
-        this.history = history;
-        pointer = history.size();
-    }
-
-    public static CommandHistory init() {
-        return new CommandHistory(new ArrayList<String>());
+    public CommandHistory() {
+        this.history = new ArrayList<>();
+        pointer = 0;
     }
 
     /**
      * Adds the given command to the history of commands.
      *
-     * @param command
+     * @param command A command to be added to the history.
      */
     public void add(String command) {
         requireAllNonNull(command);
+        logger.info(history.toString());
 
-        clearTemp();
         history.add(command);
         pointer = history.size();
         clearTemp();
@@ -55,13 +48,10 @@ public class CommandHistory {
     public String getNext() {
         if (hasNext()) {
             return history.get(moveForward());
-        } else {
-            if (hasRudimentary()) {
-                return getRudimentary();
-            }
-            throw new NoSuchElementException();
-
+        } else if (hasRudimentary()) {
+            return getRudimentary();
         }
+        throw new NoSuchElementException();
     }
 
     /**
@@ -127,8 +117,7 @@ public class CommandHistory {
     }
 
     /**
-     * Adds the current incomplete command to a temp
-     * history,
+     * Adds the current rudimentary command to a temporary history.
      */
     private void rudimentaryAdd(String command) {
         if (pointer == history.size()) {
