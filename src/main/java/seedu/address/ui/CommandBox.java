@@ -36,6 +36,7 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.UP) {
+            commandTextField.end();
             getPreviousCommand();
         } else if (keyEvent.getCode() == KeyCode.DOWN) {
             getNextCommand();
@@ -50,7 +51,7 @@ public class CommandBox extends UiPart<Region> {
             String currentCommand = commandTextField.getText();
             String prevCommand = history.getPrevious(currentCommand);
             commandTextField.setText(prevCommand);
-            commandTextField.positionCaret(prevCommand.length());
+            commandTextField.end();
         }
     }
 
@@ -61,7 +62,7 @@ public class CommandBox extends UiPart<Region> {
         if (history.hasNext() || history.hasRudimentary()) {
             String nextCommand = history.getNext();
             commandTextField.setText(nextCommand);
-            commandTextField.positionCaret(nextCommand.length());
+            commandTextField.end();
         }
     }
 
