@@ -23,8 +23,8 @@ public class CommandHistoryTest {
         CommandHistory commandHistory = CommandHistory.init();
         commandHistory.add("1");
 
-        commandHistory.getPrevious();
-        assertThrows(NoSuchElementException.class, () -> commandHistory.getPrevious());
+        commandHistory.getPrevious("");
+        assertThrows(NoSuchElementException.class, () -> commandHistory.getPrevious(""));
     }
 
     @Test
@@ -33,9 +33,9 @@ public class CommandHistoryTest {
         commandHistory.add("1");
         commandHistory.add("2");
         commandHistory.add("3");
-        assertAll(() -> assertEquals("3", commandHistory.getPrevious()), () ->
-                        assertEquals("2", commandHistory.getPrevious()), () ->
-                    assertEquals("1", commandHistory.getPrevious()));
+        assertAll(() -> assertEquals("3", commandHistory.getPrevious("")), () ->
+                        assertEquals("2", commandHistory.getPrevious("")), () ->
+                    assertEquals("1", commandHistory.getPrevious("")));
     }
 
 }

@@ -40,6 +40,22 @@ public class CommandBoxHandle extends NodeHandle<TextField> {
     }
 
     /**
+     * Presses the UP button.
+     */
+    public void pressUp() {
+        click();
+        guiRobot.push(KeyCode.UP).release(KeyCode.UP);
+    }
+
+    /**
+     * Presses the DOWN button.
+     */
+    public void pressDown() {
+        click();
+        guiRobot.push(KeyCode.DOWN).release(KeyCode.DOWN);
+    }
+
+    /**
      * Returns the list of style classes present in the command box.
      */
     public ObservableList<String> getStyleClass() {

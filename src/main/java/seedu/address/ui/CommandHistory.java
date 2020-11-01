@@ -17,7 +17,6 @@ public class CommandHistory {
     private static final Logger logger = LogsCenter.getLogger(CommandHistory.class);
     private final List<String> history;
     private int pointer;
-    private boolean rudimentary;
     private String temp;
 
     /**
@@ -29,7 +28,6 @@ public class CommandHistory {
         logger.info(history.toString());
         this.history = history;
         pointer = history.size();
-        setRudimentary(true);
     }
 
     public static CommandHistory init() {
@@ -48,7 +46,6 @@ public class CommandHistory {
         history.add(command);
         pointer = history.size();
         clearTemp();
-        setRudimentary(true);
     }
 
     /**
@@ -92,6 +89,11 @@ public class CommandHistory {
         return pointer + 1 < history.size();
     }
 
+    /**
+     * Checks if there is a rudimentary command in the history.
+     *
+     * @return True if there is a rudimentary command that is currently in the temporary history.
+     */
     public boolean hasRudimentary() {
         return temp != null;
     }
@@ -129,24 +131,16 @@ public class CommandHistory {
      * Adds the current incomplete command to a temp
      * history,
      */
-    public void rudimentaryAdd(String command) {
-        if (rudimentary) {
+    private void rudimentaryAdd(String command) {
+        if (pointer == history.size()) {
             temp = command;
-            setRudimentary(false);
         }
-    }
-
-    /**
-     * Sets the rudimentary flag.
-     */
-    private void setRudimentary(boolean bool) {
-        rudimentary = bool;
     }
 
     /**
      * Gets the temp command.
      */
-    public String getRudimentary() {
+    private String getRudimentary() {
         pointer = history.size();
         return temp;
     }
