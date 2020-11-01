@@ -31,10 +31,7 @@ public class JsonSerializableTbmManagerTest {
                 JsonSerializableTbmManager.class).get();
         TbmManager tbmManagerFromFile = dataFromFile.toModelType();
         TbmManager typicalClientsTbmManager = TypicalClients.getTypicalTbmManager();
-        Set<Tag> tags = new HashSet<>();
-        tags.add(new Tag("useful"));
-        typicalClientsTbmManager.addCountryNote(new CountryNote("likes to queue", new Country("SG"), tags));
-        assertEquals(tbmManagerFromFile, typicalClientsTbmManager);
+        assertEquals(tbmManagerFromFile.getClientList(), typicalClientsTbmManager.getClientList());
     }
 
     @Test

@@ -75,25 +75,21 @@
       "timezone": "GMT-4",
       "contractExpiryDate": "2-8-2021"
     } ],
-  "notes": [ {
-      "contents": "lives in a pineapple",
-      "countryCode": "NULL_CC",
-      "tags": ["godLike"]
-    }, {
-      "contents": "likes to queue",
+  "countryNotes": [ {
+      "contents": "too hot, hot damn",
       "countryCode": "SG",
-      "tags": ["useful"]
-    },{
-      "contents": "secret to the best krabby patty is in the J.U.I.C.E.",
-      "countryCode": "NULL_CC",
-      "tags": ["seduction"]
+      "tags": ["sweaty"]
     }, {
-      "contents": "his son is the devil's incarnate",
-      "countryCode": "NULL_CC",
-      "tags": ["turnOff"]
+      "contents": "local food is just other countries' food",
+      "countryCode": "SG",
+      "tags": ["variety"]
     }, {
-      "contents": "snores a lot",
-      "countryCode": "NULL_CC",
-      "tags": ["turnOff"]
+      "contents": "political sides are dividing the country",
+      "countryCode": "US",
+      "tags": ["redBlue"]
+    }, {
+      "contents": "people there work a lot",
+      "countryCode": "JP",
+      "tags": ["sadLife"]
     } ]
 }

@@ -90,6 +90,7 @@ public class MainWindowTest extends GuiUnitTest {
             assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
             guiRobot.pauseForHuman();
             guiRobot.push(KeyCode.ESCAPE);
+            guiRobot.pauseForHuman();
             assertFalse(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
 
             // checks if help command opens the help window

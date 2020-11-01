@@ -75,7 +75,7 @@ class JsonAdaptedClient {
         contractExpiryDate = source.getContractExpiryDate().value;
         lastModifiedInstant = source.getLastModifiedInstant().toString();
         clientNotes.addAll(source.getClientNotesAsUnmodifiableList().stream().map(JsonAdaptedNote::new)
-                .collect(Collectors.toSet()));
+                .collect(Collectors.toList()));
     }
 
     /**
