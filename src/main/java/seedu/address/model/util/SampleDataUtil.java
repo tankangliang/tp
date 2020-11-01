@@ -67,7 +67,7 @@ public class SampleDataUtil {
                 + "relationships is important for doing business", new Country("JP"));
         Set<Tag> thirdTags = new HashSet<>();
         thirdTags.add(new Tag("intercultural"));
-        second.setTags(thirdTags);
+        third.setTags(thirdTags);
 
         return new ArrayList<>(Arrays.asList(first, second, third));
     }
