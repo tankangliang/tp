@@ -3,7 +3,6 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.NoSuchElementException;
 
@@ -15,7 +14,6 @@ public class CommandHistoryTest {
         CommandHistory commandHistory = CommandHistory.init();
         commandHistory.add("1");
         assertThrows(NoSuchElementException.class, () -> commandHistory.getNext());
-
     }
 
     @Test

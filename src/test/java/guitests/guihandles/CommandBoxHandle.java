@@ -44,7 +44,7 @@ public class CommandBoxHandle extends NodeHandle<TextField> {
      */
     public void pressUp() {
         click();
-        guiRobot.push(KeyCode.UP).release(KeyCode.UP);
+        guiRobot.type(KeyCode.UP);
     }
 
     /**
@@ -52,7 +52,7 @@ public class CommandBoxHandle extends NodeHandle<TextField> {
      */
     public void pressDown() {
         click();
-        guiRobot.push(KeyCode.DOWN).release(KeyCode.DOWN);
+        guiRobot.type(KeyCode.DOWN);
     }
 
     /**

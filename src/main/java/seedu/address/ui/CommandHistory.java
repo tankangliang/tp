@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
-import javafx.scene.effect.Bloom;
 import seedu.address.commons.core.LogsCenter;
 
 /**
