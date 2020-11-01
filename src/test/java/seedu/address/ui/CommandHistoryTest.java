@@ -33,7 +33,7 @@ public class CommandHistoryTest {
         commandHistory.add("3");
         assertAll(() -> assertEquals("3", commandHistory.getPrevious("")), () ->
                         assertEquals("2", commandHistory.getPrevious("")), () ->
-                    assertEquals("1", commandHistory.getPrevious("")));
+                        assertEquals("1", commandHistory.getPrevious("")));
     }
 
 }
