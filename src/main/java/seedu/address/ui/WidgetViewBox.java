@@ -66,10 +66,6 @@ public class WidgetViewBox extends UiPart<Region> {
         clientObservableList.addListener((ListChangeListener<Client>) c -> {
             if (c.next()) {
                 if (c.wasUpdated() || c.wasReplaced()) {
-                    if (displayedClientIndex != -1) {
-                        updateClientDisplay(clientObservableList.get(displayedClientIndex));
-                    }
-                } else {
                     for (int i = 0; i < clientObservableList.size(); i++) {
                         Client client = clientObservableList.get(i);
                         if (client.isSameClient(displayedClient)) {
