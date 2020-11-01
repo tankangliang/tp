@@ -404,13 +404,37 @@ Example:
 
 Given the list of country notes in the country note list panel:
 
-![Country Note View All](images/command-screenshots/country-note-view-all.png)
+```
+Japan
+--------
+1. A high-context country, hence building relationships is important for doing business [tag: intercultural]
+
+Singapore
+--------
+2. Small domestic market as compared to rest of SEA countries [tag: marketsize]
+
+Thailand
+--------
+3. Political unrest in the capital [tag: politics]
+```
 
 Command: `country note edit 2 nt/Rising middle class with increased purchasing power t/spending`
 
-Edits the second country note in the country notes panel. In this case, it will be the first note under **Singapore**. The resulting list will look like:
+Edits the second country note in the country notes panel. In this case, it will be the note under **Singapore**. The resulting list will look like:
 
-![Country Note Edit](images/command-screenshots/country-note-edit.png)
+```
+Japan
+--------
+1. A high-context country, hence building relationships is important for doing business [tag: intercultural]
+
+Singapore
+--------
+2. Rising middle class with increased purchasing power [tag: marketsize, spending]
+
+Thailand
+--------
+3. Political unrest in the capital [tag: politics]
+```
 
 ### Deleting notes for a country: `country note delete`
 
