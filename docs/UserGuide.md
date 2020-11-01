@@ -97,17 +97,17 @@ A summary of all commands can be found in our [command summary table](#command-s
 
 </div>
 
-### Viewing all saved clients: `list`
-
-Shows a list of all clients in **_TBM_**.
-
-Format: `list`
-
 ### Viewing help: `help`
 
 Shows commonly used commands for **_TBM_** in a [new help window](#help-window). Pressing Esc will close this window.
 
 Format: `help`
+
+### Viewing all saved clients: `client list`
+
+Shows a list of all clients in **_TBM_**.
+
+Format: `client list`
 
 ### Adding a client: `client add`
 
