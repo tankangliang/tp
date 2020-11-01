@@ -391,6 +391,7 @@ Examples:
 
     Adds a **note** for the country of **India** with the following specifications:
     - Content: **_is world's fastest growing economy_** 
+    - Tag: **_untagged_**
     
 ### Editing notes for a country: `country note edit`
 
