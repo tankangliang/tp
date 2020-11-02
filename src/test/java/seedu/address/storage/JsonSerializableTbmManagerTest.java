@@ -26,7 +26,7 @@ public class JsonSerializableTbmManagerTest {
                 JsonSerializableTbmManager.class).get();
         TbmManager tbmManagerFromFile = dataFromFile.toModelType();
         TbmManager typicalClientsTbmManager = TypicalClients.getTypicalTbmManager();
-        assertEquals(tbmManagerFromFile, typicalClientsTbmManager);
+        assertEquals(tbmManagerFromFile.getClientList(), typicalClientsTbmManager.getClientList());
     }
 
     @Test
