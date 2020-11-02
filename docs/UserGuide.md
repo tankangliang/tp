@@ -494,6 +494,14 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
+### Glossary
+
+* **Business Contact**: Synonymous with **Client**
+* **Client**: Refers to a person whom the user is conducting his/her business with
+* **GMT**: [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time)
+* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **_TBM_**: Initialism for Travelling BusinessMan
+
 ## Command summary
 
 Action | Format, Examples
