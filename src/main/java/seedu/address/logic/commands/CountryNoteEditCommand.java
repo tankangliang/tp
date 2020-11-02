@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -113,8 +112,4 @@ public class CountryNoteEditCommand extends Command {
         return targetIndex.equals(c.targetIndex) && countryNote.equals(c.countryNote) && tags.equals(c.tags);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(targetIndex, countryNote, tags);
-    }
 }
