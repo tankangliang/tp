@@ -40,7 +40,6 @@ title: User Guide
 **:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're trying TBM out for the first time.
 </div>
 
-
 Before you start using **_TBM_**, 
 
 1. Ensure you have Java 11.
@@ -241,7 +240,6 @@ The location for this file is `./data/tbmManager.json` (indicated at the bottom 
       "tags" : [ "romantic", "holidayPlans", "travel" ]
     } ]
   } ]
-  . . . 
 }
 ```
 
@@ -347,8 +345,6 @@ Examples:
 
 **:information_source:** Please refer to [this](#ui-when-viewing-country) if you need to be re-acquainted with the UI for country related commands
 </div>
-
-
 
 Views the list of country notes from the country specified by the country code.
 If no country code is given, all country notes in **_TBM_** will be shown.
@@ -513,7 +509,6 @@ Action | Format, Examples
 **Exit** | `exit`
 **Help** | `help`
 
-
 ## Parameter constraints summary
 
 Parameter | Prefix | Constraints, Examples
@@ -531,6 +526,7 @@ Parameter | Prefix | Constraints, Examples
 **INDEX** | - | Index is a number greater than 0 that is based on the numberings beside each client or note. <br> e.g. `1` would refer to the first client or note.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Appendix A - Introduction to the UI
 
 ### Start Page
@@ -576,7 +572,6 @@ Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the in
 
   ![Annotated Country Note View UI Layout](images/command-screenshots/country_note_view_annotated.png)
   Figure 5. Country Note View
-
 
 ### Help Window
 
