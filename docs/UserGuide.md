@@ -492,15 +492,15 @@ Format: `exit`
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous **_TBM_** home folder.<br>
 
---------------------------------------------------------------------------------------------------------------------
-
-### Glossary
+## Glossary
 
 * **Business Contact**: Synonymous with **Client**
 * **Client**: Refers to a person whom the user is conducting his/her business with
 * **GMT**: [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time)
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **_TBM_**: Initialism for Travelling BusinessMan
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
