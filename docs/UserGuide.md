@@ -25,12 +25,14 @@ title: User Guide
    Figure 1. TBM Application
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Table of Contents
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Quickstart
 
 <div markdown="block" class="alert alert-info">
@@ -61,6 +63,7 @@ Now that you have started **_TBM_**,
     press Enter to execute it. e.g. typing [`help`](#help-window) and pressing Enter will open the help window.<br>
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 The following section outlines the commands supported by **_TBM_**. A short description is given for each command along with the format that they should be executed with. Complex commands also come with examples to demonstrate the purpose that the command serve.
@@ -475,12 +478,14 @@ Exits the program.
 Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous **_TBM_** home folder.<br>
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Command summary
 
 Action | Format, Examples
@@ -521,6 +526,7 @@ Parameter | Prefix | Constraints, Examples
 **INDEX** | - | Index is a number greater than 0 that is based on the numberings beside each client or note. <br> e.g. `1` would refer to the first client or note.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Appendix A - Introduction to the UI
 
 ### Start Page
