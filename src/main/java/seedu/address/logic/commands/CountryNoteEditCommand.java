@@ -16,7 +16,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.WidgetViewOption;
 
 /**
  * A class that encapsulates the logic for editing country notes.
@@ -93,9 +92,7 @@ public class CountryNoteEditCommand extends Command {
 
         model.setCountryNote(countryNoteToEdit, newCountryNote);
 
-        return new CommandResult(
-                String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), newCountryNote), false,
-                false, false, WidgetViewOption.generateNullWidgetOption());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), newCountryNote));
     }
 
     @Override

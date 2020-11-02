@@ -9,7 +9,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.note.CountryNote;
-import seedu.address.ui.WidgetViewOption;
 
 /**
  * A class that encapsulates the logic for deleting country notes.
@@ -52,9 +51,7 @@ public class CountryNoteDeleteCommand extends Command {
 
         CountryNote countryNoteToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteCountryNote(countryNoteToDelete);
-        return new CommandResult(
-                String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), countryNoteToDelete), false,
-                false, false, WidgetViewOption.generateNullWidgetOption());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), countryNoteToDelete));
     }
 
     @Override
