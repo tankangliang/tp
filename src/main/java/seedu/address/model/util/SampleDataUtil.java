@@ -1,8 +1,8 @@
 package seedu.address.model.util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.ReadOnlyTbmManager;
@@ -50,7 +50,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ArrayList<CountryNote> getSampleCountryNotes() {
+    public static List<CountryNote> getSampleCountryNotes() {
         CountryNote first = new CountryNote("Small domestic market as compared "
                 + "to rest of SEA countries", new Country("SG"));
         Set<Tag> firstTags = new HashSet<>();
@@ -69,7 +69,7 @@ public class SampleDataUtil {
         thirdTags.add(new Tag("intercultural"));
         third.setTags(thirdTags);
 
-        return new ArrayList<>(Arrays.asList(first, second, third));
+        return Arrays.asList(first, second, third);
     }
 
     public static ReadOnlyTbmManager getSampleTbmManager() {
