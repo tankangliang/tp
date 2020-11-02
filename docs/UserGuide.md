@@ -23,8 +23,9 @@ title: User Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
- ![UI](images/command-screenshots/client_view.png) 
- Figure 1. TBM application
+ ![Client Notes](images/command-screenshots/client_view.png) 
+ <br>
+ ![Country Notes](images/command-screenshots/country_note_view.png)
 
 
 --------------------------------------------------------------------------------------------------------------------
