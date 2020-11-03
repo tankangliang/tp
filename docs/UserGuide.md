@@ -441,7 +441,7 @@ Thailand
 
 Deletes a note that is associated with a specific country at the given index based on the **current view** of the [list panel displaying country notes](#ui-when-viewing-country).
 
-Due to ambiguity, deleting of a country note when the country notes panel is not being displayed will not be allowed.
+Due to ambiguity, deleting of a country note when the country notes panel is not being displayed is not allowed, and an error message will be shown if this is attempted.
 
 Format: `country note delete INDEX`
 
