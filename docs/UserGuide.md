@@ -492,7 +492,7 @@ Format: `exit`
 * **Business Contact**: Synonymous with **Client**
 * **Client**: Refers to a person whom the user is conducting his/her business with
 * **GMT**: [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time)
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **_TBM_**: Initialism for Travelling BusinessMan
 
 ## FAQ
