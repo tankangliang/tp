@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
@@ -10,8 +11,8 @@ import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -26,6 +27,7 @@ public class CountryNoteDeleteCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
+        model.setCountryNotesListPanelIsVisible(true);
     }
 
     @Test
@@ -57,7 +59,7 @@ public class CountryNoteDeleteCommandTest {
         Index invalidCountryNoteIndex = Index.fromOneBased(model.getSortedFilteredCountryNoteList().size() + 1);
         CountryNoteDeleteCommand countryNoteDeleteCommand =
                 new CountryNoteDeleteCommand(invalidCountryNoteIndex);
-        assertThrows(CommandException.class, () -> countryNoteDeleteCommand.execute(model));
+        assertCommandFailure(countryNoteDeleteCommand, model, Messages.MESSAGE_INVALID_COUNTRY_NOTE_DISPLAYED_INDEX);
     }
 
     @Test
@@ -77,6 +79,16 @@ public class CountryNoteDeleteCommandTest {
                 genericCountryNote);
 
         assertCommandSuccess(countryNoteDeleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_countryNotesPanelNotVisible_throwsCommandException() {
+        model.setCountryNotesListPanelIsVisible(false);
+        model.addCountryNote(genericCountryNote);
+        Index index = Index.fromOneBased(1);
+        CountryNoteDeleteCommand countryNoteDeleteCommand = new CountryNoteDeleteCommand(index);
+        assertCommandFailure(countryNoteDeleteCommand, model,
+                CountryNoteDeleteCommand.MESSAGE_COUNTRY_NOTES_NOT_VISIBLE);
     }
 
 }

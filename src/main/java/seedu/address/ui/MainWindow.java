@@ -209,6 +209,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            logic.setCountryNotesListPanelIsVisible(widgetPlaceholder.getChildren()
+                    .contains(countryNoteListPanel.getRoot()));
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

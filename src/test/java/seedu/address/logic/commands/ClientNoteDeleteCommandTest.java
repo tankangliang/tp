@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -33,6 +34,25 @@ class ClientNoteDeleteCommandTest {
     }
 
     @Test
+    public void constructor_nulls_throwsNullPointerException() {
+        Index clientIdx = Index.fromOneBased(1);
+        Index clientNoteIdx = Index.fromOneBased(1);
+        // make sure args are valid before testing
+        assertDoesNotThrow(() -> new ClientNoteDeleteCommand(clientIdx, clientNoteIdx));
+        // change args to null one by one
+        assertThrows(NullPointerException.class, () -> new ClientNoteDeleteCommand(null, clientNoteIdx));
+        assertThrows(NullPointerException.class, () -> new ClientNoteDeleteCommand(clientIdx, null));
+    }
+
+    @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        Index clientIdx = Index.fromOneBased(1);
+        Index clientNoteIdx = Index.fromOneBased(1);
+        ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(clientIdx, clientNoteIdx);
+        assertThrows(NullPointerException.class, () -> clientNoteDeleteCommand.execute(null));
+    }
+
+    @Test
     public void execute_validClientIdxValidNoteIdx_generatesClientNoteDeleteCommandSuccessfully() {
         Index client2Idx = Index.fromOneBased(2);
         Index clientNoteIdx = Index.fromOneBased(1);
@@ -57,7 +77,6 @@ class ClientNoteDeleteCommandTest {
         ClientNoteDeleteCommand clientNoteDeleteCommand = new ClientNoteDeleteCommand(client2Idx, clientNoteIdx);
         assertCommandSuccess(clientNoteDeleteCommand, newModel, expectedResult, expectedModel);
     }
-
 
     @Test
     public void execute_invalidClientIndex_throwsCommandException() {

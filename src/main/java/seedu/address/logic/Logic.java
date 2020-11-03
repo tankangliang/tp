@@ -25,6 +25,11 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
+     * Sets the boolean that corresponds to whether the country notes list panel is currently visible.
+     */
+    void setCountryNotesListPanelIsVisible(boolean isVisible);
+
+    /**
      * Returns the TbmManager.
      *
      * @see seedu.address.model.Model#getTbmManager()
