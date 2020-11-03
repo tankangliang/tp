@@ -24,16 +24,16 @@ class JsonSerializableTbmManager {
     public static final String MESSAGE_DUPLICATE_CLIENT = "Clients list contains duplicate client(s).";
 
     private final List<JsonAdaptedClient> clients = new ArrayList<>();
-    private final List<JsonAdaptedNote> notes = new ArrayList<>();
+    private final List<JsonAdaptedNote> countryNotes = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableTbmManager} with the given clients.
      */
     @JsonCreator
     public JsonSerializableTbmManager(@JsonProperty("clients") List<JsonAdaptedClient> clients,
-                                      @JsonProperty("notes") List<JsonAdaptedNote> notes) {
+                                      @JsonProperty("countryNotes") List<JsonAdaptedNote> countryNotes) {
         this.clients.addAll(clients);
-        this.notes.addAll(notes);
+        this.countryNotes.addAll(countryNotes);
     }
 
     /**
@@ -43,8 +43,8 @@ class JsonSerializableTbmManager {
      */
     public JsonSerializableTbmManager(ReadOnlyTbmManager source) {
         clients.addAll(source.getClientList().stream().map(JsonAdaptedClient::new).collect(Collectors.toList()));
-        //TODO: For storing JSON notes
-        notes.addAll(source.getNoteList().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
+        countryNotes.addAll(source.getCountryNoteList().stream().map(JsonAdaptedNote::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -61,11 +61,10 @@ class JsonSerializableTbmManager {
             }
             tbmManager.addClient(client);
         }
-        for (JsonAdaptedNote note: notes) {
-            Note modelNote = note.toModelType();
-            if (!note.isClientNote()) { // i.e. it's a countryNote
-                tbmManager.addCountryNote((CountryNote) modelNote);
-            }
+        for (JsonAdaptedNote jsonAdaptedCountryNote : countryNotes) {
+            Note modelNote = jsonAdaptedCountryNote.toModelType();
+            assert !modelNote.isClientNote(); // client notes are stored inside client only
+            tbmManager.addCountryNote((CountryNote) modelNote);
         }
         return tbmManager;
     }

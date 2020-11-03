@@ -285,6 +285,17 @@ public class ModelManagerTest {
         assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client2);
     }
 
+    @Test
+    public void countryNotesListPanelIsVisible_setterAndGetter() {
+        // default is false
+        assertFalse(modelManager.getCountryNotesListPanelIsVisible());
+
+        modelManager.setCountryNotesListPanelIsVisible(true);
+        assertTrue(modelManager.getCountryNotesListPanelIsVisible());
+        modelManager.setCountryNotesListPanelIsVisible(false);
+        assertFalse(modelManager.getCountryNotesListPanelIsVisible());
+    }
+
     /* todo future tests:
      *  run coverage for model manager test and see what's missing:
      * 1. setClient

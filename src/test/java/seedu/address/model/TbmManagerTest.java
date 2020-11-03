@@ -25,7 +25,6 @@ import seedu.address.model.client.exceptions.ClientNotFoundException;
 import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
-import seedu.address.model.note.Note;
 import seedu.address.testutil.ClientBuilder;
 
 public class TbmManagerTest {
@@ -215,11 +214,6 @@ public class TbmManagerTest {
         @Override
         public ObservableList<Client> getClientList() {
             return clients;
-        }
-
-        @Override
-        public ObservableList<Note> getNoteList() {
-            return null;
         }
 
         @Override

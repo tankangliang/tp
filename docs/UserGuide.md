@@ -331,7 +331,7 @@ Notes:
 
 ### Filtering clients by country: `country filter`
 
-Filters the list of clients by a specified country.
+Filters the list of clients by the specified country.
 
 Format: `country filter c/COUNTRY_CODE`
 
@@ -349,12 +349,10 @@ Examples:
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:** Please refer to [this](#ui-when-viewing-country) if you need to be re-acquainted with the UI for country related commands
+**:information_source:** Please refer to [this](#ui-when-viewing-country) if you need to be re-acquainted with the UI for country note related commands
 </div>
 
-
-
-Views the list of country notes from the country specified by the country code.
+Views the list of country notes that are associated with the country corresponding to the country code supplied.
 If no country code is given, all country notes in **_TBM_** will be shown.
 
 Format: `country note view [c/COUNTRY_CODE]`
@@ -367,15 +365,11 @@ Examples:
 
 * Command: `country note view c/SG`
 
-    Only country notes for Singapore will be displayed.
-
-* Command: `country note view c/IN`
-
-    Only country notes for India will be displayed.
+    Only country notes for **Singapore** will be displayed.
 
 ### Adding notes for a country: `country note add`
 
-Adds a note that is associated with a specific country.
+Adds a note that will be associated with the country corresponding to the country code supplied.
 
 Format: `country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...`
 
@@ -383,21 +377,27 @@ Examples:
 
 * Command: `country note add c/SG nt/has one of the lowest corporate taxes in the world t/tax`
 
-    Adds a **note** with a **tag** for Singapore.
-
+    Adds a **note** for the country of **Singapore** with the following specifications: 
+    - Content: **_has one of the lowest corporate taxes in the world_** 
+    - Tag: **_tax_** 
+    
 * Command: `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
 
-    Adds a **note** with a **tag** for China.
-
+    Adds a **note** for the country of **China** with the following specifications: 
+    - Content: **_building good relations (guanxi) is important when conducting business here_** 
+    - Tag: **_intercultural_** 
+    
 * Command: `country note add c/IN nt/is world's fastest growing economy`
 
-    Adds a **note** for India.
-
+    Adds a **note** for the country of **India** with the following specifications:
+    - Content: **_is world's fastest growing economy_** 
+    - Tag: **_untagged_**
+    
 ### Editing notes for a country: `country note edit`
 
-Edits a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes. Supplying tags to the command will add the tags onto the current existing tags for that note.
+Edits a note that is associated with a specific country at the given index based on the **current view** of the [list panel displaying country notes](#ui-when-viewing-country). Supplying tags to the command will add the tags onto the current existing tags for that note.
 
-The country note list panel can be viewed using the command `country note view`.
+Due to ambiguity, editing of a country note when the country notes panel is not being displayed is not allowed, and an error message will be shown if this is attempted.
 
 Format: `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...`
 
@@ -406,40 +406,42 @@ Example:
 Given the list of country notes in the country note list panel:
 
 ```
-China
+Japan
 --------
-1. Speaks Mandarin [tag: language]
-
-Russia
---------
-2. Speaks Russian [tag: language]
+1. A high-context country, hence building relationships is important for doing business [tag: intercultural]
 
 Singapore
 --------
-3. Speaks English
+2. Small domestic market as compared to rest of SEA countries [tag: marketsize]
+
+Thailand
+--------
+3. Political unrest in the capital [tag: politics]
 ```
 
-Command: `country note edit 3 nt/Speaks Singlish t/language`
+Command: `country note edit 2 nt/Rising middle class with increased purchasing power t/spending`
 
-Edits the third country note in the country notes panel. In this case, it will be the note under Singapore. The resulting list will look like:
+Edits the second country note in the country notes panel. In this case, it will be the note under **Singapore**. The resulting list will look like:
 
 ```
-China
+Japan
 --------
-1. Speaks Mandarin [tag: language]
-
-Russia
---------
-2. Speaks Russian [tag: language]
+1. A high-context country, hence building relationships is important for doing business [tag: intercultural]
 
 Singapore
 --------
-3. Speaks Singlish [tag: language]
+2. Rising middle class with increased purchasing power [tag: marketsize, spending]
+
+Thailand
+--------
+3. Political unrest in the capital [tag: politics]
 ```
 
 ### Deleting notes for a country: `country note delete`
 
-Deletes a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes.
+Deletes a note that is associated with a specific country at the given index based on the **current view** of the [list panel displaying country notes](#ui-when-viewing-country).
+
+Due to ambiguity, deleting of a country note when the country notes panel is not being displayed is not allowed, and an error message will be shown if this is attempted.
 
 Format: `country note delete INDEX`
 
@@ -486,6 +488,14 @@ Exits the program.
 Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* **Business Contact**: Synonymous with **Client**
+* **Client**: Refers to a person whom the user is conducting his/her business with
+* **GMT**: [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time)
+* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **_TBM_**: Initialism for Travelling BusinessMan
 
 ## FAQ
 
