@@ -115,6 +115,16 @@ public class ClientAddCommandTest {
         }
 
         @Override
+        public void setCountryNotesListPanelIsVisible(boolean isVisible) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean getCountryNotesListPanelIsVisible() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }
