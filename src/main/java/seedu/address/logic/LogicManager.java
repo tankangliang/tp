@@ -60,6 +60,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public void setCountryNotesListPanelIsVisible(boolean isVisible) {
+        model.setCountryNotesListPanelIsVisible(isVisible);
+    }
+
+    @Override
     public ReadOnlyTbmManager getTbmManager() {
         return model.getTbmManager();
     }
