@@ -43,7 +43,7 @@ public class ClientNoteEditCommand extends Command {
      * @param newNote The newly edited note.
      */
     public ClientNoteEditCommand(Index targetClientIndex, Index targetClientNoteIndex, Note newNote) {
-        requireAllNonNull(targetClientIndex, targetClientNoteIndex);
+        requireAllNonNull(targetClientIndex, targetClientNoteIndex, newNote);
         this.targetClientIndex = targetClientIndex;
         this.targetClientNoteIndex = targetClientNoteIndex;
         this.newNote = newNote;
