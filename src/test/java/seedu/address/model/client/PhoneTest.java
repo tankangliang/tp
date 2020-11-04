@@ -58,7 +58,8 @@ public class PhoneTest {
         assertTrue(Phone.isValidPhone("+12381867752"));
         assertTrue(Phone.isValidPhone("+12381867752"));
         assertTrue(Phone.isValidPhone("81867752"));
-        assertTrue(Phone.isValidPhone("123456789123456")); // max length of 15 numbers in total (country code+num)
+        assertTrue(Phone.isValidPhone("123456789123")); // max length of 12 numbers if just phone num
+        assertTrue(Phone.isValidPhone("+65 123456789123")); // max length of 15 numbers if countrycode + phone num
 
         // weird but valid numbers:
         assertTrue(Phone.isValidPhone("+65-81867752"));
@@ -70,10 +71,10 @@ public class PhoneTest {
     public void hashCode_test() {
         assertEquals(new Phone("911").hashCode(), new Phone("911").hashCode());
         assertEquals(new Phone("93121534").hashCode(), new Phone("93121534").hashCode());
-        assertEquals(new Phone("124293842033123").hashCode(), new Phone("124293842033123").hashCode());
+        assertEquals(new Phone("293842033123").hashCode(), new Phone("293842033123").hashCode());
 
         assertNotEquals(new Phone("911").hashCode(), new Phone("912").hashCode());
         assertNotEquals(new Phone("911").hashCode(), new Phone("93121534").hashCode());
-        assertNotEquals(new Phone("911").hashCode(), new Phone("124293842033123").hashCode());
+        assertNotEquals(new Phone("911").hashCode(), new Phone("12429384203").hashCode());
     }
 }
