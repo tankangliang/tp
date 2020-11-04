@@ -51,17 +51,17 @@ public class PhoneTest {
         // valid phone numbers
         assertTrue(Phone.isValidPhone("911")); // exactly 3 numbers
         assertTrue(Phone.isValidPhone("+6 3456")); // min country code is 1 digit
-        assertTrue(Phone.isValidPhone("(+65) 81867752")); // bracketing and spacing
-        assertTrue(Phone.isValidPhone("(+65)81867752"));
+        assertTrue(Phone.isValidPhone("+65 81867752")); // bracketing and spacing
+        assertTrue(Phone.isValidPhone("+6581867752"));
         assertTrue(Phone.isValidPhone("+6581867752")); // without any spacing
-        assertTrue(Phone.isValidPhone("(+123) 81867752")); // max country code is 3 digits
-        assertTrue(Phone.isValidPhone("(+123)81867752"));
+        assertTrue(Phone.isValidPhone("+123 81867752")); // max country code is 3 digits
+        assertTrue(Phone.isValidPhone("+12381867752"));
         assertTrue(Phone.isValidPhone("+12381867752"));
         assertTrue(Phone.isValidPhone("81867752"));
         assertTrue(Phone.isValidPhone("123456789123456")); // max length of 15 numbers in total (country code+num)
 
         // weird but valid numbers:
-        assertTrue(Phone.isValidPhone("(+65)-81867752"));
+        assertTrue(Phone.isValidPhone("+65-81867752"));
         assertTrue(Phone.isValidPhone("+65 3456"));
         assertTrue(Phone.isValidPhone("+653456"));
     }

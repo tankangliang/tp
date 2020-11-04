@@ -535,7 +535,7 @@ Parameter | Prefix | Constraints, Examples
 **PHONE_NUMBER** | `p/` | Phone numbers should have at least 3 digits and at most 15 digits. <br> Please refer to [Appendix B](#appendix-b-international-standards-followed) for a comprehensive description. <br> e.g. `p/81867752` or `p/+65 81867752` 
 **EMAIL** | `e/` | Emails should be of the format local-part@domain. <br> e.g. `e/katya@yahoo.com`
 **ADDRESS** |`a/` | Addresses can take any values, and it should not be blank. <br> e.g. `Vladivostok, Nevelskogo, bld. 15, appt. 256`
-**COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification <br> [Here's the official search tool](https://www.iso.org/obp/ui/#search) for country codes. <br> e.g. `c/SG` (Singapore) 
+**COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification <br> This [finding tool](https://www.countrycode.org/) can be used. <br> e.g. `c/SG` (Singapore) 
 **TIMEZONE** | `tz/` | Timezone should be given in offsets relative to [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time). <br> e.g. `tz/GMT+8`
 **CONTRACT_EXPIRY_DATE** | `ce/` | Date should be given in the format "DD-MM-YYYY". <br> e.g. `ce/10-10-2020`
 **NOTE_STRING** | `nt/` | Notes can take any values, and it should not be blank. <br> e.g. `nt/Likes cats`
@@ -605,10 +605,9 @@ This is what to expect when you type in the `help` command or press `F1`:
 
 ## Appendix B: International Standards Followed 
 
-### Country Codes
+### ISO Country Codes
 
-**_TBM_** utilizes 2-letter country codes that follow the ISO3166 specification. This [list](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) contains most of these country codes.
-Alternatively, [the ISO Official Search tool](https://www.iso.org/obp/ui/#search) can be used (please select _"Country codes"_ when utilizing that search feature).
+**_TBM_** utilizes 2-letter country codes that follow the **_ISO3166_** specification. This [finding tool](https://www.countrycode.org/) can be used.
 
 ### Phone Numbers
 
@@ -622,8 +621,6 @@ Here are the alternative stylistic choices that you might make when writing out 
         * `+6581867742` is a valid phone number where `+65` is the country code for Singapore.
     * You may choose to put a space character between the country code and the rest of the phone number: 
         * `+65 81867742` with a space character is also a valid phone number. 
-    * Adding parentheses around the country-code is also valid: 
-        * `(+65) 81867742`, with the parentheses is valid.
 
 <p align="center">
    <strong><i>{End of Appendix B, please return to the <a href="#table-of-contents">Table of Contents</a>}</i></strong> 
