@@ -216,7 +216,7 @@ The mechanism to switch between displaying the Country Note Panel and displaying
 * `CommandResult#shouldDisplayClient()` — Returns true if the UI should display the client view, otherwise returns false.
 * `CommandResult#shouldDisplayCountryNote()` — Returns true if the UI should display the country notes view, otherwise returns false.
 
-The following activity diagram illustrates what happens to the Display Panel when the user inputs a command. 
+The following activity diagram illustrates what happens to the Display Panel when the user inputs a command.  
 
 ![Switching Country Note Panel and Client View](images/CountryNotePanelClientViewActDiag.png)
 
