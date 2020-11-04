@@ -21,12 +21,8 @@ title: User Guide
     </p>
 </div>
 
---------------------------------------------------------------------------------------------------------------------
-
- ![Client Notes](images/command-screenshots/client_view.png) 
- <br>
- ![Country Notes](images/command-screenshots/country_note_view.png)
-
+   ![Client Notes](images/command-screenshots/client_view.png) 
+   <p align="center"><i>Figure 1. TBM Application</i></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +39,6 @@ title: User Guide
 
 **:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're trying TBM out for the first time.
 </div>
-
 
 Before you start using **_TBM_**, 
 
@@ -245,7 +240,7 @@ The location for this file is `./data/tbmManager.json` (indicated at the bottom 
       "tags" : [ "romantic", "holidayPlans", "travel" ]
     } ]
   } ]
-  . . . 
+  . . .
 }
 ```
 
@@ -331,7 +326,7 @@ Notes:
 
 ### Filtering clients by country: `country filter`
 
-Filters the list of clients by a specified country.
+Filters the list of clients by the specified country.
 
 Format: `country filter c/COUNTRY_CODE`
 
@@ -349,12 +344,10 @@ Examples:
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:** Please refer to [this](#ui-when-viewing-country) if you need to be re-acquainted with the UI for country related commands
+**:information_source:** Please refer to [this](#ui-when-viewing-country) if you need to be re-acquainted with the UI for country note related commands
 </div>
 
-
-
-Views the list of country notes from the country specified by the country code.
+Views the list of country notes that are associated with the country corresponding to the country code supplied.
 If no country code is given, all country notes in **_TBM_** will be shown.
 
 Format: `country note view [c/COUNTRY_CODE]`
@@ -367,15 +360,11 @@ Examples:
 
 * Command: `country note view c/SG`
 
-    Only country notes for Singapore will be displayed.
-
-* Command: `country note view c/IN`
-
-    Only country notes for India will be displayed.
+    Only country notes for **Singapore** will be displayed.
 
 ### Adding notes for a country: `country note add`
 
-Adds a note that is associated with a specific country.
+Adds a note that will be associated with the country corresponding to the country code supplied.
 
 Format: `country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...`
 
@@ -383,21 +372,27 @@ Examples:
 
 * Command: `country note add c/SG nt/has one of the lowest corporate taxes in the world t/tax`
 
-    Adds a **note** with a **tag** for Singapore.
-
+    Adds a **note** for the country of **Singapore** with the following specifications: 
+    - Content: **_has one of the lowest corporate taxes in the world_** 
+    - Tag: **_tax_** 
+    
 * Command: `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
 
-    Adds a **note** with a **tag** for China.
-
+    Adds a **note** for the country of **China** with the following specifications: 
+    - Content: **_building good relations (guanxi) is important when conducting business here_** 
+    - Tag: **_intercultural_** 
+    
 * Command: `country note add c/IN nt/is world's fastest growing economy`
 
-    Adds a **note** for India.
-
+    Adds a **note** for the country of **India** with the following specifications:
+    - Content: **_is world's fastest growing economy_** 
+    - Tag: **_untagged_**
+    
 ### Editing notes for a country: `country note edit`
 
-Edits a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes. Supplying tags to the command will add the tags onto the current existing tags for that note.
+Edits a note that is associated with a specific country at the given index based on the **current view** of the [list panel displaying country notes](#ui-when-viewing-country). Supplying tags to the command will add the tags onto the current existing tags for that note.
 
-The country note list panel can be viewed using the command `country note view`.
+Due to ambiguity, editing of a country note when the country notes panel is not being displayed is not allowed, and an error message will be shown if this is attempted.
 
 Format: `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...`
 
@@ -406,40 +401,42 @@ Example:
 Given the list of country notes in the country note list panel:
 
 ```
-China
+Japan
 --------
-1. Speaks Mandarin [tag: language]
-
-Russia
---------
-2. Speaks Russian [tag: language]
+1. A high-context country, hence building relationships is important for doing business [tag: intercultural]
 
 Singapore
 --------
-3. Speaks English
+2. Small domestic market as compared to rest of SEA countries [tag: marketsize]
+
+Thailand
+--------
+3. Political unrest in the capital [tag: politics]
 ```
 
-Command: `country note edit 3 nt/Speaks Singlish t/language`
+Command: `country note edit 2 nt/Rising middle class with increased purchasing power t/spending`
 
-Edits the third country note in the country notes panel. In this case, it will be the note under Singapore. The resulting list will look like:
+Edits the second country note in the country notes panel. In this case, it will be the note under **Singapore**. The resulting list will look like:
 
 ```
-China
+Japan
 --------
-1. Speaks Mandarin [tag: language]
-
-Russia
---------
-2. Speaks Russian [tag: language]
+1. A high-context country, hence building relationships is important for doing business [tag: intercultural]
 
 Singapore
 --------
-3. Speaks Singlish [tag: language]
+2. Rising middle class with increased purchasing power [tag: marketsize, spending]
+
+Thailand
+--------
+3. Political unrest in the capital [tag: politics]
 ```
 
 ### Deleting notes for a country: `country note delete`
 
-Deletes a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes.
+Deletes a note that is associated with a specific country at the given index based on the **current view** of the [list panel displaying country notes](#ui-when-viewing-country).
+
+Due to ambiguity, deleting of a country note when the country notes panel is not being displayed is not allowed, and an error message will be shown if this is attempted.
 
 Format: `country note delete INDEX`
 
@@ -487,6 +484,14 @@ Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+
+* **Business Contact**: Synonymous with **Client**
+* **Client**: Refers to a person whom the user is conducting his/her business with
+* **GMT**: [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time)
+* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **_TBM_**: Initialism for Travelling BusinessMan
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -517,7 +522,6 @@ Action | Format, Examples
 **Exit** | `exit`
 **Help** | `help`
 
-
 ## Parameter constraints summary
 
 Parameter | Prefix | Constraints, Examples
@@ -535,13 +539,15 @@ Parameter | Prefix | Constraints, Examples
 **INDEX** | - | Index is a number greater than 0 that is based on the numberings beside each client or note. <br> e.g. `1` would refer to the first client or note.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Appendix A - Introduction to the UI
 
 ### Start Page
 
 The diagram below shows the key UI elements of TBM upon first start-up.
 
-![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
+  ![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
+  <p align="center"><i>Figure 2. Default View</i></p>
 
 * **Command Box** allows you to input commands to interact with TBM.
 
@@ -555,20 +561,18 @@ never have to worry about not being able to see all your important clients at a 
     
     * On the off-chance there's a syntax issue, TBM will remind you of the correct syntax it expects, something like this:
  
-     ![Result Display slowing error message](images/command-screenshots/result_display_error_syntax.png)
+     ![Result Display showing error message](images/command-screenshots/result_display_error_syntax.png)
+     <p align="center"><i>Figure 3. Error Display</i></p>
      
-* **Generic Widget View Box** is aptly named because it shall render *Client Cards* or *Country Cards* when
- relevant commands are sent. Initially it will show you your local time to the precise second, as well as your current location.
+* **Display Panel** shall render *Client Cards* or *Country Cards* when relevant commands are sent. The default view shows you your local time to the precise second, as well as your current location.
    
-     
-
-
 ### UI when Viewing Clients
 
 The diagram below is what you should see upon viewing a particular client (i.e. firing up the command `client view 1
 `). It shows how to identify a particular client's `CLIENT_INDEX`, and an associated note's `CLIENT_NOTE_INDEX`.
 
-![Annotated Client View UI Layout](images/command-screenshots/client_view_annotated.png)
+  ![Annotated Client View UI Layout](images/command-screenshots/client_view_annotated.png)
+  <p align="center"><i>Figure 4. Client View</i></p>
 
 Here, the **Client Note Card** displaying the note that's tagged as `hobbies` is referred to by the `CLIENT_INDEX` of `1`.
 
@@ -578,13 +582,15 @@ Being able to identify these is key to adding, deleting and editing client notes
 
 Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Note Card**:
 
-![Annotated Country View UI Layout](images/command-screenshots/country_note_view_annotated.png)
-
+  ![Annotated Country Note View UI Layout](images/command-screenshots/country_note_view_annotated.png)
+  <p align="center"><i>Figure 5. Country Note View</i></p>
 
 ### Help Window
 
 This is what to expect when you type in the `help` command or press `F1`: 
-![help window](./images/command-screenshots/help_window.png)
+
+  ![help window](./images/command-screenshots/help_window.png)
+  <p align="center"><i>Figure 6. Help Window</i></p>
 
 <p align="center">
    <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> } </i

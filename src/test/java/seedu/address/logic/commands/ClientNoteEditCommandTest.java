@@ -1,9 +1,11 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.ClientNoteEditCommand.MESSAGE_EDIT_CLIENT_NOTE_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import java.util.HashSet;
@@ -30,6 +32,28 @@ class ClientNoteEditCommandTest {
     @BeforeEach
     public void setUp() {
         model = new ModelManager();
+    }
+
+    @Test
+    public void constructor_nulls_throwsNullPointerException() {
+        Index clientIdx = Index.fromOneBased(1);
+        Index clientNoteIdx = Index.fromOneBased(1);
+        Note clientNote = new Note(NOTE_CONTENT_1);
+        // make sure all args are valid before doing negative tests
+        assertDoesNotThrow(() -> new ClientNoteEditCommand(clientIdx, clientNoteIdx, clientNote));
+        // change args to null one by one
+        assertThrows(NullPointerException.class, () -> new ClientNoteEditCommand(null, clientNoteIdx, clientNote));
+        assertThrows(NullPointerException.class, () -> new ClientNoteEditCommand(clientIdx, null, clientNote));
+        assertThrows(NullPointerException.class, () -> new ClientNoteEditCommand(clientIdx, clientNoteIdx, null));
+    }
+
+    @Test
+    public void execute_nullModel_throwsNullPointerException() {
+        Index clientIdx = Index.fromOneBased(1);
+        Index clientNoteIdx = Index.fromOneBased(1);
+        Note clientNote = new Note(NOTE_CONTENT_1);
+        ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx, clientNoteIdx, clientNote);
+        assertThrows(NullPointerException.class, () -> clientNoteEditCommand.execute(null));
     }
 
     @Test

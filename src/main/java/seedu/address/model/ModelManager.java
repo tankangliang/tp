@@ -41,6 +41,8 @@ public class ModelManager implements Model {
     private final WidgetModel widget;
     private final TagNoteMap tagNoteMap;
 
+    private boolean countryNotesListPanelIsVisible = false;
+
     /**
      * Initializes a ModelManager with the given tbmManager and userPrefs.
      */
@@ -273,6 +275,16 @@ public class ModelManager implements Model {
     public void updateFilteredCountryNoteList(Predicate<CountryNote> predicate) {
         requireNonNull(predicate);
         filteredCountryNotes.setPredicate(predicate);
+    }
+
+    @Override
+    public void setCountryNotesListPanelIsVisible(boolean isVisible) {
+        countryNotesListPanelIsVisible = isVisible;
+    }
+
+    @Override
+    public boolean getCountryNotesListPanelIsVisible() {
+        return countryNotesListPanelIsVisible;
     }
 
     @Override
