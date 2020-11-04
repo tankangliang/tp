@@ -37,7 +37,7 @@ title: User Guide
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're trying TBM out for the first time.
+**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're trying **_TBM_** out for the first time.
 </div>
 
 Before you start using **_TBM_**, 
@@ -109,6 +109,9 @@ Format: `help`
 Adds a new client to **_TBM_**.
 
 Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE [ce/CONTRACT_EXPIRY_DATE]`
+
+Please refer to [Appendix B](#appendix-b-international-standards-followed) to understand the International Standards that **_TBM_** follows for phone numbers and country codes.
+
 
 Example:
 
@@ -219,7 +222,7 @@ Example:
 ### Saving data
 
 Your data is automatically saved after every change. The file is saved in the ubiquitous `.json` format, which
-allows you to edit the file manually without even opening **TBM** up.
+allows you to edit the file manually without even opening **_TBM_** up.
 The location for this file is `./data/tbmManager.json` (indicated at the bottom left of the application), where the
  `.` represents the directory where you have saved `TBM.jar`. Here's a snippet of this editable text file:
 
@@ -527,10 +530,10 @@ Action | Format, Examples
 Parameter | Prefix | Constraints, Examples
 --------|------------------| ----------
 **NAME** | `n/` | Names should only contain alphanumeric characters and spaces, and it should not be blank. <br> e.g. `n/John Doe`
-**PHONE_NUMBER** | `p/` | Phone numbers should only contain numbers, and it should be at least 3 digits long. <br> e.g. `p/9123 4567`
+**PHONE_NUMBER** | `p/` | Phone numbers should have at least 3 digits and at most 15 digits. <br> Please refer to [Appendix B](#appendix-b-international-standards-followed) for a comprehensive description. <br> e.g. `p/81867752 or +65 81867752` 
 **EMAIL** | `e/` | Emails should be of the format local-part@domain. <br> e.g. `e/katya@yahoo.com`
 **ADDRESS** |`a/` | Addresses can take any values, and it should not be blank. <br> e.g. `Vladivostok, Nevelskogo, bld. 15, appt. 256`
-**COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes. <br> e.g. `c/SG` (Singapore)
+**COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification  <br> [Here's the official search tool](https://www.iso.org/obp/ui/#search) for country codes. <br> e.g. `c/SG` (Singapore) 
 **TIMEZONE** | `tz/` | Timezone should be given in offsets relative to [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time). <br> e.g. `tz/GMT+8`
 **CONTRACT_EXPIRY_DATE** | `ce/` | Date should be given in the format "DD-MM-YYYY". <br> e.g. `ce/10-10-2020`
 **NOTE_STRING** | `nt/` | Notes can take any values, and it should not be blank. <br> e.g. `nt/Likes cats`
@@ -544,12 +547,12 @@ Parameter | Prefix | Constraints, Examples
 
 ### Start Page
 
-The diagram below shows the key UI elements of TBM upon first start-up.
+The diagram below shows the key UI elements of **_TBM_** upon first start-up.
 
   ![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
   <p align="center"><i>Figure 2. Default View</i></p>
 
-* **Command Box** allows you to input commands to interact with TBM.
+* **Command Box** allows you to input commands to interact with **_TBM_**.
 
 * **Client List Panel** will always allow you to view all your clients' information at a go. It's scrollable so that you 
 never have to worry about not being able to see all your important clients at a single glance!
@@ -559,7 +562,7 @@ never have to worry about not being able to see all your important clients at a 
 * **Result Display** will show you the output of executing your command.
     * It indicates successful commands.
     
-    * On the off-chance there's a syntax issue, TBM will remind you of the correct syntax it expects, something like this:
+    * On the off-chance there's a syntax issue, **_TBM_** will remind you of the correct syntax it expects, something like this:
  
      ![Result Display showing error message](images/command-screenshots/result_display_error_syntax.png)
      <p align="center"><i>Figure 3. Error Display</i></p>
@@ -594,6 +597,25 @@ This is what to expect when you type in the `help` command or press `F1`:
 
 <p align="center">
    <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> } </i
+   ></strong> 
+</p>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix B: International Standards Followed 
+
+### Country Codes
+
+**_TBM_** follows 2-letter country codes that follow the ISO3166 specification.
+[Here's the Official Search tool](https://www.iso.org/obp/ui/#search) for country codes.
+
+### Phone Numbers
+
+**_TBM_**'s format for phone numbers is **_based_** on the [E.164 standard](https://en.wikipedia.org/wiki/E.164) as recommended by the _ITU Telecommunication Standardization Sector (ITU-T)_.
+**_However_**, **_TBM_** doesn't allow for spaces in between phone number fields. For example, `+65 8186 7742` may follow this international, but **_TBM_ requires you to remove spacing within the phone number field** so the correct way to input it would be `+65 81867742`. 
+
+<p align="center">
+   <strong><i>{End of Appendix B, please return to the <a href="#table-of-contents">Table of Contents</a> } </i
    ></strong> 
 </p>
 --------------------------------------------------------------------------------------------------------------------
