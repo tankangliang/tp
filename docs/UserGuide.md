@@ -567,8 +567,7 @@ never have to worry about not being able to see all your important clients at a 
  
      ![Result Display slowing error message](images/command-screenshots/result_display_error_syntax.png)
      
-* **Generic Widget View Box** is aptly named because it shall render *Client Cards* or *Country Cards* when
- relevant commands are sent. Initially it will show you your local time to the precise second, as well as your current location.
+* **Display Panel** shall render *Client Cards* or *Country Cards* when relevant commands are sent. The default view shows you your local time to the precise second, as well as your current location.
    
      
 
