@@ -82,6 +82,7 @@ public class TagNoteMap {
     /**
      * Get a set of unique tag objects, based on the tagStrings.
      * If any tag is not inside the tag set, we add it to the tag set.
+     * If tagStrings is empty, we return a set containing only the UNTAGGED tag.
      */
     public Set<Tag> getUniqueTags(List<String> tagStrings) throws ParseException {
         Set<Tag> uniqueTags = new HashSet<>();
@@ -199,6 +200,10 @@ public class TagNoteMap {
         }
         // state check:
         TagNoteMap other = (TagNoteMap) obj;
+        System.out.println(tagToNotesMap);
+        System.out.println(other.tagToNotesMap);
+        System.out.println(noteToTagsMap);
+        System.out.println(other.noteToTagsMap);
         return this.uniqueTagMap.equals(other.uniqueTagMap)
                 && this.noteSet.equals(other.noteSet)
                 && this.tagToNotesMap.equals(other.tagToNotesMap)
