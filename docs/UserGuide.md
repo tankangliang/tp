@@ -616,11 +616,15 @@ This is what to expect when you type in the `help` command or press `F1`:
 <p align="center">
 
 Here are the alternative stylistic choices that you might make when writing out phone numbers, all of which are valid:
-* Adding country-codes for the telephone numbers: <br>
-    * Country code numbers range from 1 to 3 digits and may be found from this [finding tool](https://www.countrycode.org/). You may prepend the country code with a `+` character.  
-        * `+6581867742` is a valid phone number where `+65` is the country code for Singapore.
-    * You may choose to put a space character between the country code and the rest of the phone number: 
-        * `+65 81867742` with a space character is also a valid phone number. 
+* Phone numbers can be grouped into `COUNTRY_CODE` and `NATIONAL_PHONE_NUMBER`. We shall refer to `NATIONAL_PHONE_NUMBER` simply as **_phone number field_** in this appendix.
+    * `COUNTRY_CODE` field is optional and may be omitted.
+        * Adding country-codes for the telephone numbers: <br>
+            * Country code numbers range from 1 to 3 digits and may be found from this [finding tool](https://www.countrycode.org/). You may prepend the country code with a `+` character.  
+                * `+6581867742` is a valid phone number where `+65` is the country code for Singapore.
+            * You may choose to put a space character between the country code and the rest of the phone number: 
+                * `+65 81867742` with a space character is also a valid phone number. 
+    * Please note that the **_phone number field_** may only have a **maximum of 12 digits**, all without spaces. The digit count restriction is as per the "global services specification" of **E.164**.
+
 
 <p align="center">
    <strong><i>{End of Appendix B, please return to the <a href="#table-of-contents">Table of Contents</a>}</i></strong> 
