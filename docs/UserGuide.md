@@ -533,7 +533,7 @@ Action | Format, Examples
 Parameter | Prefix | Constraints, Examples
 --------|------------------| ----------
 **NAME** | `n/` | Names should only contain alphanumeric characters and spaces, and it should not be blank. <br> e.g. `n/John Doe`
-**PHONE_NUMBER** | `p/` | Phone numbers should have at least 3 digits and at most 15 digits. <br> Please refer to [Appendix B](#appendix-b-international-standards-followed) for a comprehensive description. <br> e.g. `p/81867752 or +65 81867752` 
+**PHONE_NUMBER** | `p/` | Phone numbers should have at least 3 digits and at most 15 digits. <br> Please refer to [Appendix B](#appendix-b-international-standards-followed) for a comprehensive description. <br> e.g. `p/81867752` or `p/+65 81867752` 
 **EMAIL** | `e/` | Emails should be of the format local-part@domain. <br> e.g. `e/katya@yahoo.com`
 **ADDRESS** |`a/` | Addresses can take any values, and it should not be blank. <br> e.g. `Vladivostok, Nevelskogo, bld. 15, appt. 256`
 **COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification <br> [Here's the official search tool](https://www.iso.org/obp/ui/#search) for country codes. <br> e.g. `c/SG` (Singapore) 
