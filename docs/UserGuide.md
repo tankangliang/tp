@@ -598,7 +598,7 @@ This is what to expect when you type in the `help` command or press `F1`:
   <p align="center"><i>Figure 6. Help Window</i></p>
 
 <p align="center">
-   <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> }</i></strong> 
+   <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a>}</i></strong> 
 </p>
 
 --------------------------------------------------------------------------------------------------------------------
