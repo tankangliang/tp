@@ -68,7 +68,7 @@ class JsonAdaptedNote {
     public Note toModelType() throws IllegalValueException {
         if (contents == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "content"));
         }
 
         if (!Note.isValidNote(contents)) {
@@ -77,7 +77,7 @@ class JsonAdaptedNote {
 
         if (countryCode == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName().toLowerCase()));
         }
 
         Set<Tag> tags = new HashSet<>();

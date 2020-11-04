@@ -70,17 +70,17 @@ public class WidgetViewBox extends UiPart<Region> {
                 if (clientObservableList.size() == clientListSize && !c.wasPermutated()) {
                     if (displayedClientIndex != -1) {
                         updateClientDisplay(clientObservableList.get(displayedClientIndex));
-                    } else {
-                        for (int i = 0; i < clientObservableList.size(); i++) {
-                            Client client = clientObservableList.get(i);
-                            if (client.isSameClient(displayedClient)) {
-                                displayedClient = client;
-                                displayedClientIndex = i;
-                                return;
-                            }
-                        }
-                        setToDefaultView();
                     }
+                } else {
+                    for (int i = 0; i < clientObservableList.size(); i++) {
+                        Client client = clientObservableList.get(i);
+                        if (client.isSameClient(displayedClient)) {
+                            displayedClient = client;
+                            displayedClientIndex = i;
+                            return;
+                        }
+                    }
+                    setToDefaultView();
                 }
             }
         });
