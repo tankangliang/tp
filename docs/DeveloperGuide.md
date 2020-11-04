@@ -206,10 +206,23 @@ Hence, `CountryNoteAddCommand` stores a `CountryNote` object. For brevity, the a
 
 ![Country Note Add Sequence Diagram](images/CountryNoteAddSeqDiag.png)
 
-### Suggesting contacts
+### Switching between displaying the Country Note Panel and displaying the Client View
 
 #### Implementation
 
+The mechanism to switch between displaying the Country Note Panel and displaying the Client View is facilitated by the state of the `WidgetViewOption` object which is contained within `CommandResult`.
+
+`CommandResult` implements the following operations: 
+* `CommandResult#shouldDisplayClient()` — Returns true if the UI should display the client view, otherwise returns false.
+* `CommandResult#shouldDisplayCountryNote()` — Returns true if the UI should display the country notes view, otherwise returns false.
+
+The following activity diagram illustrates what happens when the user inputs a command that causes the UI to switch from displaying the Country Note Panel to displaying the Client View and vice-versa.
+
+![Switching Country Note Panel and Client View](images/CountryNotePanelClientViewActDiag.png)
+
+### Suggesting contacts
+
+#### Implementation
 
 The suggestion mechanism is facilitated by `filteredClients` in `ModelManager`. It is an instance of `javafx.collections.transformation.FilteredList<Client>`. It implements the following relevant operations:
 * `FilteredList<Client>#setPredicate(Predicate<? super Client> p)` — Filters out any clients that do not match the predicate in the list.
