@@ -13,7 +13,7 @@ public class Phone {
     public static final String MESSAGE_CONSTRAINTS =
             "Phone numbers should have at least 3 digits and at most 15 digits, please refer to our UserGuide for"
                     + "other acceptable variations.";
-    public static final String VALIDATION_REGEX = "^[\\+]?[(]?[0-9]{1,3}[)]?[-\\s\\.]?[0-9]{2,12}$";
+    public static final String VALIDATION_REGEX = "^[(]?[\\+]?[0-9]{1,3}[)]?[-\\s\\.]?[0-9]{2,12}$";
     public final String value;
 
     /**
