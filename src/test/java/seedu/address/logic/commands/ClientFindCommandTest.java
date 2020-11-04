@@ -16,6 +16,7 @@ import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -52,7 +53,7 @@ public class ClientFindCommandTest {
 
     @Test
     public void execute_zeroKeywords_noClientFound() {
-        String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 0, Messages.appendPluralChar(0));
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
         ClientFindCommand command = new ClientFindCommand(predicate);
         expectedModel.updateFilteredClientList(predicate);
@@ -62,7 +63,7 @@ public class ClientFindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleClientsFound() {
-        String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_CLIENTS_LISTED_OVERVIEW, 3, Messages.appendPluralChar(3));
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         ClientFindCommand command = new ClientFindCommand(predicate);
         expectedModel.updateFilteredClientList(predicate);

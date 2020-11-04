@@ -1,7 +1,9 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -79,6 +81,17 @@ public class LogicManagerTest {
         assertNotEquals(logic.getGuiSettings(), guiSettings);
         logic.setGuiSettings(guiSettings);
         assertEquals(logic.getGuiSettings(), guiSettings);
+    }
+
+    @Test
+    public void setCountryNotesListPanelIsVisible_propagatesToModel() {
+        // default value
+        assertFalse(model.getCountryNotesListPanelIsVisible());
+
+        logic.setCountryNotesListPanelIsVisible(true);
+        assertTrue(model.getCountryNotesListPanelIsVisible());
+        logic.setCountryNotesListPanelIsVisible(false);
+        assertFalse(model.getCountryNotesListPanelIsVisible());
     }
 
     @Test

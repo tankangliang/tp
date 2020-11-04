@@ -204,4 +204,14 @@ public interface Model {
      * @param note    The note to associate the tag with.
      */
     void updateTagNoteMapWithNote(Set<Tag> newTags, Note note);
+
+    /**
+     * Sets the boolean that corresponds to whether the country notes list panel is currently visible.
+     */
+    void setCountryNotesListPanelIsVisible(boolean isVisible);
+
+    /**
+     * Returns true if the country notes list panel is currently visible, false otherwise.
+     */
+    boolean getCountryNotesListPanelIsVisible();
 }
