@@ -37,7 +37,7 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("")); // empty string
         assertFalse(Phone.isValidPhone(" ")); // spaces only
         assertFalse(Phone.isValidPhone("91")); // less than 3 numbers
-        assertFalse(Phone.isValidPhone("65 81867742")); // less than 3 numbers
+        assertFalse(Phone.isValidPhone("65 81867742")); // country code not prepended with `+` char
         assertFalse(Phone.isValidPhone("+1234 81867752")); // more than 3 digits for country code
         assertFalse(Phone.isValidPhone("+ 81867752")); // invalid country code passed in
         assertFalse(Phone.isValidPhone("phone")); // non-numeric
