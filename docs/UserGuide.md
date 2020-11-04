@@ -22,7 +22,7 @@ title: User Guide
 </div>
 
    ![Client Notes](images/command-screenshots/client_view.png) 
-   Figure 1. TBM Application
+   _Figure 1. TBM Application_
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -547,7 +547,7 @@ Parameter | Prefix | Constraints, Examples
 The diagram below shows the key UI elements of TBM upon first start-up.
 
   ![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
-  Figure 2. Default View
+  _Figure 2. Default View_
 
 * **Command Box** allows you to input commands to interact with TBM.
 
@@ -562,7 +562,7 @@ never have to worry about not being able to see all your important clients at a 
     * On the off-chance there's a syntax issue, TBM will remind you of the correct syntax it expects, something like this:
  
      ![Result Display showing error message](images/command-screenshots/result_display_error_syntax.png)
-     Figure 3. Error Display
+     _Figure 3. Error Display_
      
 * **Display Panel** shall render *Client Cards* or *Country Cards* when relevant commands are sent. The default view shows you your local time to the precise second, as well as your current location.
    
@@ -572,7 +572,7 @@ The diagram below is what you should see upon viewing a particular client (i.e. 
 `). It shows how to identify a particular client's `CLIENT_INDEX`, and an associated note's `CLIENT_NOTE_INDEX`.
 
   ![Annotated Client View UI Layout](images/command-screenshots/client_view_annotated.png)
-  Figure 4. Client View
+  _Figure 4. Client View_
 
 Here, the **Client Note Card** displaying the note that's tagged as `hobbies` is referred to by the `CLIENT_INDEX` of `1`.
 
@@ -583,14 +583,14 @@ Being able to identify these is key to adding, deleting and editing client notes
 Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Note Card**:
 
   ![Annotated Country Note View UI Layout](images/command-screenshots/country_note_view_annotated.png)
-  Figure 5. Country Note View
+  _Figure 5. Country Note View_
 
 ### Help Window
 
 This is what to expect when you type in the `help` command or press `F1`: 
 
   ![help window](./images/command-screenshots/help_window.png)
-  Figure 6. Help Window
+  _Figure 6. Help Window_
 
 <p align="center">
    <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> } </i
