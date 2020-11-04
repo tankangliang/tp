@@ -113,7 +113,6 @@ Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TI
 
 Please refer to [Appendix B](#appendix-b-international-standards-followed) to understand the International Standards that **_TBM_** follows for phone numbers and country codes.
 
-
 Example:
 
 * Command: `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+3 ce/2-3-2020`<br>
@@ -221,7 +220,6 @@ Example:
     Deletes the client at index 5 of the list panel.
 
 ### Saving data
-
 
 Your data is automatically saved after every command you enter. The file is saved in the ubiquitous `.json` format, which
 allows you to edit the file manually without even opening **_TBM_** up.
@@ -538,7 +536,7 @@ Parameter | Prefix | Constraints, Examples
 **PHONE_NUMBER** | `p/` | Phone numbers should have at least 3 digits and at most 15 digits. <br> Please refer to [Appendix B](#appendix-b-international-standards-followed) for a comprehensive description. <br> e.g. `p/81867752 or +65 81867752` 
 **EMAIL** | `e/` | Emails should be of the format local-part@domain. <br> e.g. `e/katya@yahoo.com`
 **ADDRESS** |`a/` | Addresses can take any values, and it should not be blank. <br> e.g. `Vladivostok, Nevelskogo, bld. 15, appt. 256`
-**COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification  <br> [Here's the official search tool](https://www.iso.org/obp/ui/#search) for country codes. <br> e.g. `c/SG` (Singapore) 
+**COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification <br> [Here's the official search tool](https://www.iso.org/obp/ui/#search) for country codes. <br> e.g. `c/SG` (Singapore) 
 **TIMEZONE** | `tz/` | Timezone should be given in offsets relative to [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time). <br> e.g. `tz/GMT+8`
 **CONTRACT_EXPIRY_DATE** | `ce/` | Date should be given in the format "DD-MM-YYYY". <br> e.g. `ce/10-10-2020`
 **NOTE_STRING** | `nt/` | Notes can take any values, and it should not be blank. <br> e.g. `nt/Likes cats`
@@ -601,8 +599,7 @@ This is what to expect when you type in the `help` command or press `F1`:
   <p align="center"><i>Figure 6. Help Window</i></p>
 
 <p align="center">
-   <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> } </i
-   ></strong> 
+   <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> }</i></strong> 
 </p>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -617,10 +614,9 @@ This is what to expect when you type in the `help` command or press `F1`:
 ### Phone Numbers
 
 **_TBM_**'s format for phone numbers is **_based_** on the [E.164 standard](https://en.wikipedia.org/wiki/E.164) as recommended by the _ITU Telecommunication Standardization Sector (ITU-T)_.
-**_However_**, **_TBM_** doesn't allow for spaces in between phone number fields. For example, `+65 8186 7742` may follow this international, but **_TBM_ requires you to remove spacing within the phone number field** so the correct way to input it would be `+65 81867742`. 
+**_However_**, **_TBM_** doesn't allow for spaces in between phone number fields. For example, `+65 8186 7742` may follow this international standard, but **_TBM_ requires you to remove spacing within the phone number field** so the correct way to input it would be `+65 81867742`. 
 
 <p align="center">
-   <strong><i>{End of Appendix B, please return to the <a href="#table-of-contents">Table of Contents</a> } </i
-   ></strong> 
+   <strong><i>{End of Appendix B, please return to the <a href="#table-of-contents">Table of Contents</a> } </i></strong> 
 </p>
 --------------------------------------------------------------------------------------------------------------------
