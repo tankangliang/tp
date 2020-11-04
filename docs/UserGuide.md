@@ -92,17 +92,18 @@ A summary of all commands can be found in our [command summary table](#command-s
 
 </div>
 
-### Viewing all saved clients: `list`
-
-Shows a list of all clients in **_TBM_**.
-
-Format: `list`
-
 ### Viewing help: `help`
 
 Shows commonly used commands for **_TBM_** in a [new help window](#help-window). Pressing Esc will close this window.
 
 Format: `help`
+
+### Viewing all saved clients: `client list`
+
+Shows a list of all clients in **_TBM_**. If a client's data fields are too long, they may be cut off in the client card, but you can view them in full using the [`client view`](#viewing-a-client--client-view) command.
+This command will also reset the left display panel to its default view. 
+
+Format: `client list`
 
 ### Adding a client: `client add`
 
@@ -192,7 +193,7 @@ Timezone: GMT+8
 ```
 Command: `client edit 1 c/JP tz/GMT+7`
 
-Alex's **country** and **timezone** will be edited and the following will be the result.
+Alex's **country** and **timezone** will be edited, and the following will be the result.
 
 ```
 Client 1
@@ -218,7 +219,7 @@ Example:
 
 ### Saving data
 
-Your data is automatically saved after every change. The file is saved in the ubiquitous `.json` format, which
+Your data is automatically saved after every command you enter. The file is saved in the ubiquitous `.json` format, which
 allows you to edit the file manually without even opening **TBM** up.
 The location for this file is `./data/tbmManager.json` (indicated at the bottom left of the application), where the
  `.` represents the directory where you have saved `TBM.jar`. Here's a snippet of this editable text file:
@@ -250,6 +251,8 @@ The location for this file is `./data/tbmManager.json` (indicated at the bottom 
 </div>
 
 ### Adding client notes: `client note add`
+
+Adds a note to the client at the specified index in the list view. If a note with the exact same content and tags already exists, a "duplicate note" error will be displayed.
 
 Format: `client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...`
 
@@ -448,7 +451,7 @@ Example:
 
 ### Getting suggestions on clients: `suggest`
 
-Obtains a list of clients based on the suggestion type(s) passed in.
+Obtains a list of clients based on the suggestion type(s) passed in. This command will also reset the left display panel to its default view.
 
 Format: `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...`
 
@@ -472,7 +475,7 @@ Examples:
 
 ### Clearing all entries: `clear`
 
-Deletes all existing information from the application. The end result will be an application with no client/note/country data.
+Deletes all existing information from the application. The end result will be an application with no client/note/country data. The left display panel will be reset to its default view.
 
 Format: `clear`
 
