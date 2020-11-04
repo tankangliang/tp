@@ -95,7 +95,7 @@ public class JsonAdaptedNoteTest {
     public void toModelType_nullNote_throwsIllegalValueException() {
         Set<JsonAdaptedTag> jsonAdaptedTagSet = getDefaultJsonAdaptedTagSet();
         JsonAdaptedNote jsonAdaptedNote = new JsonAdaptedNote(null, VALID_COUNTRY, jsonAdaptedTagSet);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "content");
         assertThrows(IllegalValueException.class, expectedMessage, jsonAdaptedNote::toModelType);
     }
 
@@ -111,7 +111,8 @@ public class JsonAdaptedNoteTest {
     public void toModelType_nullCountry_throwsIllegalValueException() {
         Set<JsonAdaptedTag> jsonAdaptedTagSet = getDefaultJsonAdaptedTagSet();
         JsonAdaptedNote jsonAdaptedNote = new JsonAdaptedNote(VALID_NOTE, null, jsonAdaptedTagSet);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                Country.class.getSimpleName().toLowerCase());
         assertThrows(IllegalValueException.class, expectedMessage, jsonAdaptedNote::toModelType);
     }
 
