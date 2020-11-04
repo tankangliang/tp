@@ -200,10 +200,6 @@ public class TagNoteMap {
         }
         // state check:
         TagNoteMap other = (TagNoteMap) obj;
-        System.out.println(tagToNotesMap);
-        System.out.println(other.tagToNotesMap);
-        System.out.println(noteToTagsMap);
-        System.out.println(other.noteToTagsMap);
         return this.uniqueTagMap.equals(other.uniqueTagMap)
                 && this.noteSet.equals(other.noteSet)
                 && this.tagToNotesMap.equals(other.tagToNotesMap)
