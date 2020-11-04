@@ -104,7 +104,7 @@ public class WidgetViewBox extends UiPart<Region> {
             }
         }
         textClock.pause();
-        textClock = new TextClock(timer, client.getTimezone().getZoneId());
+        textClock = new TextClock(timer, client.getTimezone().getJavaTimeZone());
         textClock.play();
         country.setText(client.getCountry().getCountryName() + " (" + client.getTimezone().toString() + ")");
         name.setText(client.getName().toString());
@@ -138,7 +138,7 @@ public class WidgetViewBox extends UiPart<Region> {
         if (textClock != null) {
             textClock.pause();
         }
-        textClock = new TextClock(timer, ZoneId.systemDefault());
+        textClock = new TextClock(timer, TimeZone.getDefault());
         textClock.play();
         name.setText("");
         phone.setText("");

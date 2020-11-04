@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -23,10 +22,10 @@ public class TextClock {
      *
      * @param text A given Text object to set the time value to.
      */
-    public TextClock(Text text, ZoneId zoneId) {
+    public TextClock(Text text, TimeZone timeZone) {
         timeline = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
-            dateFormat.setTimeZone(TimeZone.getTimeZone(zoneId));
+            dateFormat.setTimeZone(timeZone);
             text.setText(dateFormat.format(new Date()));
         }), new KeyFrame(Duration.seconds(1)));
         timeline.setCycleCount(Animation.INDEFINITE);
