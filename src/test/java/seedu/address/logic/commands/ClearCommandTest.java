@@ -16,8 +16,9 @@ public class ClearCommandTest {
     public void execute_emptyTbmManager_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
+        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_SUCCESS, true, false, false);
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -25,8 +26,9 @@ public class ClearCommandTest {
         Model model = new ModelManager(getTypicalTbmManager(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalTbmManager(), new UserPrefs());
         expectedModel.setTbmManager(new TbmManager());
+        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_SUCCESS, true, false, false);
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, expectedCommandResult, expectedModel);
     }
 
 }

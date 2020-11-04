@@ -70,6 +70,13 @@ public class Note {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Returns true if a given string is a valid note.
+     */
+    public static boolean isValidNote(String test) {
+        return !test.trim().isEmpty();
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

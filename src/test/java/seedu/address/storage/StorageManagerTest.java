@@ -40,6 +40,7 @@ public class StorageManagerTest {
          * {@link JsonUserPrefsStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
          */
+        assertEquals(storageManager.getUserPrefsFilePath(), getTempFilePath("prefs"));
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(new GuiSettings(300, 600, 4, 6));
         storageManager.saveUserPrefs(original);

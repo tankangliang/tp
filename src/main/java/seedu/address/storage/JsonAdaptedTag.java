@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
@@ -28,11 +27,6 @@ class JsonAdaptedTag {
         tagName = source.tagName;
     }
 
-    @JsonValue
-    public String getTagName() {
-        return tagName;
-    }
-
     /**
      * Converts this Jackson-friendly adapted tag object into the model's {@code Tag} object.
      *
@@ -44,5 +38,4 @@ class JsonAdaptedTag {
         }
         return new Tag(tagName);
     }
-
 }
