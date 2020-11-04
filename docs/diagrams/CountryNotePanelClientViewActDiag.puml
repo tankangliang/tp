@@ -9,17 +9,17 @@ start
 and returns an instance of CommandResult;
 
 if () then ([commandResult.shouldDisplayClient()])
-    :Clear all children in the Container
-    class of the Display Panel;
-    :Add the Container class of the
-    Client View UI as a child of the
-    Container class of the Display Panel;
+    :Remove all child components in
+    the Display Panel Container;
+    :Add the Container of the
+    Client View UI as a child component
+    of the Display Panel Container;
 elseif () then ([commandResult.shouldDisplayCountryNote()])
-    :Clear all children in the Container
-    class of the Display Panel;
-    :Add the Container class of the
-    Country Note Panel UI as a child of the
-    Container class of the Display Panel;
+    :Remove all child components in
+    the Display Panel Container;
+    :Add the Container of the
+    Country Note Panel UI as a child component
+    of the Display Panel Container;
 else ([else])
 
 endif
