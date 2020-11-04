@@ -258,7 +258,7 @@ Format: `client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...`
 
 Examples:
 
-* Command: `client note add 1 t/pref nt/wants meetings to be as short as possible (preferably 30 mins)`
+* Command: `client note add 1 nt/wants meetings to be as short as possible (preferably 30 mins) t/pref`
 
     Adds a **note** with a **tag** to the **first** client in the list.
 
@@ -266,7 +266,7 @@ Examples:
 
     Adds a **note** to the **second** client in the list.
 
-* Command: `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
+* Command: `client note add 4 nt/need to slowly convince him to sign the contract t/meeting `
 
     Adds a **note** with a **tag** to the **fourth** client in the list.
 
