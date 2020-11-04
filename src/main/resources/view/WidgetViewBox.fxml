@@ -20,10 +20,12 @@
             <ImageView fx:id="tbmLogo" fitWidth="150.0" fitHeight="150.0">
                 <Image url="@../images/TBM_transparent.png"/>
             </ImageView>
-            <Text fx:id="timer" styleClass="widget_header"/>
         </VBox>
         <TextFlow textAlignment="CENTER">
             <Text fx:id="name" styleClass="widget_header"/>
+        </TextFlow>
+        <TextFlow textAlignment="CENTER">
+            <Text fx:id="timer" styleClass="widget_header"/>
         </TextFlow>
         <TextFlow textAlignment="CENTER">
             <Text fx:id="country" styleClass="widget_div"/>
