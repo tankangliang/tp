@@ -440,7 +440,7 @@ Thailand
 ### Deleting notes for a country: `country note delete`
 
 Deletes a note that is associated with a specific country at the given index based on the **current view** of the [list panel displaying country notes](#ui-when-viewing-country).
-
+from this [finding tool](https://www.countrycode.org/)
 Due to ambiguity, deleting of a country note when the country notes panel is not being displayed is not allowed, and an error message will be shown if this is attempted.
 
 Format: `country note delete INDEX`
@@ -615,6 +615,17 @@ Alternatively, [the ISO Official Search tool](https://www.iso.org/obp/ui/#search
 **_TBM_**'s format for phone numbers is **_based_** on the [E.164 standard](https://en.wikipedia.org/wiki/E.164) as recommended by the _ITU Telecommunication Standardization Sector (ITU-T)_.
 **_However_**, **_TBM_** doesn't allow for spaces in between phone number fields. For example, `+65 8186 7742` may follow this international standard, but **_TBM_ requires you to remove spacing within the phone number field** so the correct way to input it would be `+65 81867742`. 
 <p align="center">
-   <strong><i>{End of Appendix B, please return to the <a href="#table-of-contents">Table of Contents</a> } </i></strong> 
+
+Here are the alternative stylistic choices that you might make when writing out phone numbers, all of which are valid:
+* Adding country-codes for the telephone numbers: <br>
+    * Country code numbers range from 1 to 3 digits and may be found from this [finding tool](https://www.countrycode.org/). You may prepend the country code with a `+` character.  
+        * `+6581867742` is a valid phone number where `+65` is the country code for Singapore.
+    * You may choose to put a space character between the country code and the rest of the phone number: 
+        * `+65 81867742` with a space character is also a valid phone number. 
+    * Adding parentheses around the country-code is also valid: 
+        * `(+65) 81867742`, with the parentheses is valid.
+
+<p align="center">
+   <strong><i>{End of Appendix B, please return to the <a href="#table-of-contents">Table of Contents</a>}</i></strong> 
 </p>
 --------------------------------------------------------------------------------------------------------------------
