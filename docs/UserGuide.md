@@ -21,12 +21,8 @@ title: User Guide
     </p>
 </div>
 
---------------------------------------------------------------------------------------------------------------------
-
- ![Client Notes](images/command-screenshots/client_view.png) 
- <br>
- ![Country Notes](images/command-screenshots/country_note_view.png)
-
+   ![Client Notes](images/command-screenshots/client_view.png) 
+   <p align="center"><i>Figure 1. TBM Application</i></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -43,7 +39,6 @@ title: User Guide
 
 **:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're trying TBM out for the first time.
 </div>
-
 
 Before you start using **_TBM_**, 
 
@@ -245,7 +240,7 @@ The location for this file is `./data/tbmManager.json` (indicated at the bottom 
       "tags" : [ "romantic", "holidayPlans", "travel" ]
     } ]
   } ]
-  . . . 
+  . . .
 }
 ```
 
@@ -260,7 +255,7 @@ Format: `client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...`
 
 Examples:
 
-* Command: `client note add 1 t/pref nt/wants meetings to be as short as possible (preferably 30 mins)`
+* Command: `client note add 1 nt/wants meetings to be as short as possible (preferably 30 mins) t/pref`
 
     Adds a **note** with a **tag** to the **first** client in the list.
 
@@ -268,7 +263,7 @@ Examples:
 
     Adds a **note** to the **second** client in the list.
 
-* Command: `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
+* Command: `client note add 4 nt/need to slowly convince him to sign the contract t/meeting `
 
     Adds a **note** with a **tag** to the **fourth** client in the list.
 
@@ -527,7 +522,6 @@ Action | Format, Examples
 **Exit** | `exit`
 **Help** | `help`
 
-
 ## Parameter constraints summary
 
 Parameter | Prefix | Constraints, Examples
@@ -545,13 +539,15 @@ Parameter | Prefix | Constraints, Examples
 **INDEX** | - | Index is a number greater than 0 that is based on the numberings beside each client or note. <br> e.g. `1` would refer to the first client or note.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Appendix A - Introduction to the UI
 
 ### Start Page
 
 The diagram below shows the key UI elements of TBM upon first start-up.
 
-![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
+  ![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
+  <p align="center"><i>Figure 2. Default View</i></p>
 
 * **Command Box** allows you to input commands to interact with TBM.
 
@@ -565,19 +561,18 @@ never have to worry about not being able to see all your important clients at a 
     
     * On the off-chance there's a syntax issue, TBM will remind you of the correct syntax it expects, something like this:
  
-     ![Result Display slowing error message](images/command-screenshots/result_display_error_syntax.png)
+     ![Result Display showing error message](images/command-screenshots/result_display_error_syntax.png)
+     <p align="center"><i>Figure 3. Error Display</i></p>
      
 * **Display Panel** shall render *Client Cards* or *Country Cards* when relevant commands are sent. The default view shows you your local time to the precise second, as well as your current location.
    
-     
-
-
 ### UI when Viewing Clients
 
 The diagram below is what you should see upon viewing a particular client (i.e. firing up the command `client view 1
 `). It shows how to identify a particular client's `CLIENT_INDEX`, and an associated note's `CLIENT_NOTE_INDEX`.
 
-![Annotated Client View UI Layout](images/command-screenshots/client_view_annotated.png)
+  ![Annotated Client View UI Layout](images/command-screenshots/client_view_annotated.png)
+  <p align="center"><i>Figure 4. Client View</i></p>
 
 Here, the **Client Note Card** displaying the note that's tagged as `hobbies` is referred to by the `CLIENT_INDEX` of `1`.
 
@@ -587,13 +582,15 @@ Being able to identify these is key to adding, deleting and editing client notes
 
 Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Note Card**:
 
-![Annotated Country View UI Layout](images/command-screenshots/country_note_view_annotated.png)
-
+  ![Annotated Country Note View UI Layout](images/command-screenshots/country_note_view_annotated.png)
+  <p align="center"><i>Figure 5. Country Note View</i></p>
 
 ### Help Window
 
 This is what to expect when you type in the `help` command or press `F1`: 
-![help window](./images/command-screenshots/help_window.png)
+
+  ![help window](./images/command-screenshots/help_window.png)
+  <p align="center"><i>Figure 6. Help Window</i></p>
 
 <p align="center">
    <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> } </i

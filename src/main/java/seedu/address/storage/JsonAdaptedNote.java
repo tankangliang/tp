@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.country.Country;
+import seedu.address.model.country.CountryCodeVerifier;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
 import seedu.address.model.tag.Tag;
@@ -17,6 +18,9 @@ import seedu.address.model.tag.Tag;
  * Jackson-friendly version of {@link Note}.
  */
 class JsonAdaptedNote {
+
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Note's %s field is missing!";
+
     private static final String NULL_COUNTRY_CODE = "NULL_CC";
     private final String contents;
     private final String countryCode;
@@ -62,6 +66,20 @@ class JsonAdaptedNote {
      * @throws IllegalValueException if there were any data constraints violated in the adapted note.
      */
     public Note toModelType() throws IllegalValueException {
+        if (contents == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "content"));
+        }
+
+        if (!Note.isValidNote(contents)) {
+            throw new IllegalValueException(Note.MESSAGE_CONSTRAINTS);
+        }
+
+        if (countryCode == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Country.class.getSimpleName().toLowerCase()));
+        }
+
         Set<Tag> tags = new HashSet<>();
         for (JsonAdaptedTag tag : this.tags) {
             tags.add(tag.toModelType());
@@ -72,6 +90,10 @@ class JsonAdaptedNote {
             clientNote.setTags(tags);
             return clientNote;
         } else {
+            if (!CountryCodeVerifier.isValidCountryCode(countryCode)) {
+                throw new IllegalValueException(CountryCodeVerifier.MESSAGE_CONSTRAINTS);
+            }
+
             CountryNote countryNote = new CountryNote(contents, new Country(countryCode));
             countryNote.setTags(tags);
             return countryNote;
