@@ -1,7 +1,9 @@
 package seedu.address.ui;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -20,11 +22,11 @@ public class TextClock {
      *
      * @param text A given Text object to set the time value to.
      */
-    public TextClock(Text text) {
+    public TextClock(Text text, TimeZone timeZone) {
         timeline = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-            LocalTime localTime = LocalTime.now();
-            text.setText(localTime.format(formatter));
+            DateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
+            dateFormat.setTimeZone(timeZone);
+            text.setText(dateFormat.format(new Date()));
         }), new KeyFrame(Duration.seconds(1)));
         timeline.setCycleCount(Animation.INDEFINITE);
     }

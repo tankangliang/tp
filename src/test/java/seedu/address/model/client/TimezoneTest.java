@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.time.ZoneId;
+import java.util.TimeZone;
+
 import org.junit.jupiter.api.Test;
 
 public class TimezoneTest {
@@ -67,6 +70,16 @@ public class TimezoneTest {
             String value = "GMT" + (timezoneOffset >= 0 ? "+" : "") + timezoneOffset;
             assertEquals(currentHour, new Timezone(value).getCurrHourInTimezone());
         }
+    }
+
+    @Test
+    public void getTimeZone() {
+        assertEquals(TimeZone.getTimeZone(ZoneId.of("GMT+14")), new Timezone("GMT+14").getJavaTimeZone());
+        assertEquals(TimeZone.getTimeZone(ZoneId.of("GMT-12")), new Timezone("GMT-12").getJavaTimeZone());
+        assertEquals(TimeZone.getTimeZone(ZoneId.of("GMT+0")), new Timezone("GMT-0").getJavaTimeZone());
+        assertEquals(TimeZone.getTimeZone(ZoneId.of("GMT+0")), new Timezone("GMT+0").getJavaTimeZone());
+        assertEquals(TimeZone.getTimeZone(ZoneId.of("GMT+0")), new Timezone("GMT-00").getJavaTimeZone());
+        assertEquals(TimeZone.getTimeZone(ZoneId.of("GMT+0")), new Timezone("GMT+00").getJavaTimeZone());
     }
 
     @Test

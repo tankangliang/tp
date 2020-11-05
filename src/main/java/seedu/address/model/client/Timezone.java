@@ -4,10 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.OffsetDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 
 /**
  * Represents a Client's timezone in the address book.
@@ -29,7 +30,6 @@ public class Timezone {
     public static final String VALIDATION_REGEX = "^" + GMT_STRING + "(?<sign>[+-])(?<number>[\\d]+)";
 
     private static final Pattern TIMEZONE_FORMAT = Pattern.compile(VALIDATION_REGEX);
-
 
     public final int offsetValue;
 
@@ -81,6 +81,12 @@ public class Timezone {
         return date.getHour();
     }
 
+    /**
+     * Returns the corresponding java.time.TimeZone object for this Timezone object.
+     */
+    public TimeZone getJavaTimeZone() {
+        return TimeZone.getTimeZone(ZoneId.of(toString()));
+    }
 
     @Override
     public String toString() {
