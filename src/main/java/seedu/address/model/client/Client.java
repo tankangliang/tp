@@ -92,7 +92,7 @@ public class Client {
     /**
      * Gets the observable list of client notes associated with this client.
      *
-     * @return The Observable list of client notes associated with this client.
+     * @return The observable list of client notes associated with this client.
      */
     public ObservableList<Note> getClientNotesAsObservableList() {
         return clientNotes;
