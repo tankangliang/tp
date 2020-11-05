@@ -18,7 +18,7 @@ public class JsonUserPrefsStorage implements UserPrefsStorage {
 
     /**
      * Constructs a {@code JsonUserPrefsStorage} with an associated {@code Path} for storage.
-     * @param filePath {@code Path} where the {@code UserPrefs } shall be stored as JSON.
+     * @param filePath {@code Path} where the {@code UserPrefs} shall be stored as JSON.
      */
     public JsonUserPrefsStorage(Path filePath) {
         this.filePath = filePath;
