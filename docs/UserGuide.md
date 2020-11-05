@@ -68,7 +68,7 @@ Now that you have started **_TBM_**,
 
 The following section outlines the commands supported by **_TBM_**. A short description is given for each command along with the format that they should be executed with. Complex commands also come with examples to demonstrate the purpose that the command serve.
 
-Certain commands require parameters and the summary of these parameters as well as their prefixes and constraints can be found in our [parameters summary table](#parameter-constraints-summary)
+Certain commands require parameters and the summary of these parameters as well as their prefixes and constraints can be found in our [parameters summary table](#parameter-constraints-summary). **Note that parameter prefixes such as `t/` and `nt/` are special keywords and you should not use them for any other purposes except for indicating the start of a parameter.**
 
 A summary of all commands can be found in our [command summary table](#command-summary)
 <div markdown="block" class="alert alert-info">
@@ -612,21 +612,20 @@ This is what to expect when you type in the `help` command or press `F1`:
 
 **_TBM_**'s format for phone numbers is **_based_** on the [E.164 standard](https://en.wikipedia.org/wiki/E.164) as recommended by the _ITU Telecommunication Standardization Sector (ITU-T)_.
 **_However_**, **_TBM_** doesn't allow for spaces in between phone number fields. For example, `+65 8186 7742` may follow this international standard, but **_TBM_ requires you to remove spacing within the phone number field** so the correct way to input it would be `+65 81867742`. 
-<p align="center">
 
 Here are the alternative stylistic choices that you might make when writing out phone numbers, all of which are valid:
-* Phone numbers can be grouped into `COUNTRY_CODE` and `NATIONAL_PHONE_NUMBER`. We shall refer to `NATIONAL_PHONE_NUMBER` simply as **_phone number field_** in this appendix. <br/><br/>
+* Phone numbers can be grouped into `COUNTRY_CODE` and `NATIONAL_PHONE_NUMBER`. We shall refer to `NATIONAL_PHONE_NUMBER` simply as **_phone number field_** in this appendix.
     * Please note that the **_phone number field_** may only have a **maximum of 12 digits**, all without spaces. The digit count restriction is as per the "global services specification" of **E.164**.
     * `COUNTRY_CODE` field is optional and may be omitted by you. 
-        * Adding country codes for the telephone numbers:
-            * Country code numbers range from 1 to 3 digits and may be found from this [finding tool](https://www.countrycode.org/). You **must** prepend the country code with a `+` character.  
-                * `+6581867742` is a valid phone number where `+65` is the country code for Singapore.
-            * **If you wish to, you may also separate country code and phone number fields with a delimiter:** Valid delimiters include: ` ` (space character), `-` and `.`
-                * `+65 81867742` with a ` ` space character is also a valid phone number. 
-                * `+65-81867742` with a `-` character is also a valid phone number.
-                * `+65.81867742` with a `.` character is also a valid phone number.
+      * Adding country codes for the telephone numbers:
+        * Country code numbers range from 1 to 3 digits and may be found from this [finding tool](https://www.countrycode.org/). You **must** prepend the country code with a `+` character.  
+          * `+6581867742` is a valid phone number where `+65` is the country code for Singapore.
+        * **If you wish to, you may also separate country code and phone number fields with a delimiter:** Valid delimiters include: the " " character, "-", and "."
+          * `+65 81867742` with a " " character is also a valid phone number. 
+          * `+65-81867742` with a "-" character is also a valid phone number.
+          * `+65.81867742` with a "." character is also a valid phone number.
             
-             These options have been provided because we know that such delimiting is a matter of _cultural preference_.
+         These options have been provided because we know that such delimiting is a matter of _cultural preference_.
     
 
 
