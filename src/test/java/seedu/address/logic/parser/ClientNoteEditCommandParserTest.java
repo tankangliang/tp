@@ -84,7 +84,7 @@ class ClientNoteEditCommandParserTest {
         expectedTags.add(testTag);
         expectedClientNote.setTags(expectedTags);
         ClientNoteEditCommand expectedCommand = new ClientNoteEditCommand(CLIENT_INDEX, NOTE_INDEX, expectedClientNote);
-        String userInput =  CLIENT_INDEX_STRING + SPACE + NOTE_INDEX_STRING + SPACE + PREFIX_TAG + testTag.tagName;
+        String userInput = CLIENT_INDEX_STRING + SPACE + NOTE_INDEX_STRING + SPACE + PREFIX_TAG + testTag.tagName;
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
