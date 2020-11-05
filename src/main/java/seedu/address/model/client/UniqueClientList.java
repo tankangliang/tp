@@ -83,7 +83,7 @@ public class UniqueClientList implements Iterable<Client> {
     }
 
     /**
-     * Replaces the contents of this list with all contenst from the given {@code replacement}
+     * Replaces the contents of this list with the contents from the given {@code replacement}.
      *
      * @param replacement The UniqueClientList that replaces the current contents of this list.
      */
