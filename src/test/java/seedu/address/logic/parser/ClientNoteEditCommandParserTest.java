@@ -60,6 +60,17 @@ class ClientNoteEditCommandParserTest {
     }
 
     @Test
+    public void parse_passingOnlyASingleIndex_parseFailure() {
+        assertParseFailure(parser, CLIENT_INDEX_STRING + SPACE + PREFIX_NOTE
+                + SPACE + NOTE_STRING, EXPECTED_PARSE_FAILURE_MESSAGE);
+    }
+
+    @Test
+    public void parse_emptyString_parseFailure() {
+        assertParseFailure(parser, "", EXPECTED_PARSE_FAILURE_MESSAGE);
+    }
+
+    @Test
     public void parse_noClientIndexNoNoteIndexNoNote_parseFailure() {
         assertParseFailure(parser, NO_CLIENT_INDEX_NO_NOTE_INDEX_NO_NOTE, EXPECTED_PARSE_FAILURE_MESSAGE);
     }
@@ -85,6 +96,17 @@ class ClientNoteEditCommandParserTest {
         expectedClientNote.setTags(expectedTags);
         ClientNoteEditCommand expectedCommand = new ClientNoteEditCommand(CLIENT_INDEX, NOTE_INDEX, expectedClientNote);
         String userInput = CLIENT_INDEX_STRING + SPACE + NOTE_INDEX_STRING + SPACE + PREFIX_TAG + testTag.tagName;
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_validUntaggedNote_parseSuccess() {
+        Note expectedClientNote = new Note(NOTE_STRING);
+        Set<Tag> untaggedSet = new HashSet<>();
+        untaggedSet.add(Tag.UNTAGGED);
+        expectedClientNote.setTags(untaggedSet);
+        ClientNoteEditCommand expectedCommand = new ClientNoteEditCommand(CLIENT_INDEX, NOTE_INDEX, expectedClientNote);
+        String userInput = CLIENT_INDEX_STRING + SPACE + NOTE_INDEX_STRING + SPACE + PREFIX_NOTE + NOTE_STRING;
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

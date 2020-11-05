@@ -57,9 +57,6 @@ public class ClientNoteEditCommandParser implements Parser<ClientNoteEditCommand
             if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
                 newNote = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
             }
-            if (tags.isEmpty() && newNote.getNoteContent().equals("")) {
-                throw new ParseException(""); // exception is caught by the catch block
-            }
             if (tags.isEmpty()) {
                 tags.add(Tag.UNTAGGED);
             }
