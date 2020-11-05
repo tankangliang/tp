@@ -30,9 +30,9 @@ public class TagNoteMap {
      * A map is used instead of a set because the set does not offer the option of getting objects inside it.
      */
     private final Map<Tag, Tag> uniqueTagMap = new HashMap<>();
-    private final LinkedHashSet<Note> noteSet = new LinkedHashSet<>(); // TODO: not really needed
+    private final LinkedHashSet<Note> noteSet = new LinkedHashSet<>();
     private final Map<Tag, List<Note>> tagToNotesMap = new HashMap<>();
-    private final Map<Note, LinkedHashSet<Tag>> noteToTagsMap = new HashMap<>(); // TODO: not really needed
+    private final Map<Note, LinkedHashSet<Tag>> noteToTagsMap = new HashMap<>();
 
     /**
      * Constructor ensures our unique tag map has the UNTAGGED tag.
@@ -101,10 +101,20 @@ public class TagNoteMap {
         return Collections.unmodifiableSet(uniqueTags);
     }
 
+    /** Retrieves all {@code Tag} objects that are associated to a particular {@code Note}.
+     *
+     * @param note The particular {@code Note} to which tags are associated.
+     * @return Set of {@code Tag} objects that are associated to the note.
+     */
     public Set<Tag> getTagsForNote(Note note) {
         return Collections.unmodifiableSet(noteToTagsMap.getOrDefault(note, new LinkedHashSet<>()));
     }
 
+    /** Retrieves all {@code Note} objects that are associated to a particular {@code Tag}.
+     *
+     * @param tag The particular {@code Tag} to which notes are associated.
+     * @return List of {@code Note} objects that are associated to the tag.
+     */
     public List<Note> getNotesForTag(Tag tag) {
         return Collections.unmodifiableList(tagToNotesMap.getOrDefault(tag, new ArrayList<>()));
     }
