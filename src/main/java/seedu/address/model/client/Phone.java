@@ -11,8 +11,11 @@ public class Phone {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String VALIDATION_REGEX = "\\d{3,}";
+            "Phone numbers, excluding the country code, should have a min of 3 digits and a max of 12 digits. If a "
+                    + "country code is included, a maximum of 15 digits in total may be used (maximum 3 "
+                    + "digits for country code and 12 for phone number). Please refer to our UserGuide for other "
+                    + "acceptable variations.";
+    public static final String VALIDATION_REGEX = "(^[\\+][0-9]{1,3}[-\\s\\.]?[0-9]{3,12}$)|(^[0-9]{3,12}$)";
     public final String value;
 
     /**
