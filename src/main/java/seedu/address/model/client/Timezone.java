@@ -30,7 +30,6 @@ public class Timezone {
 
     private static final Pattern TIMEZONE_FORMAT = Pattern.compile(VALIDATION_REGEX);
 
-
     public final int offsetValue;
 
     /**
@@ -80,7 +79,6 @@ public class Timezone {
         OffsetDateTime date = OffsetDateTime.now(zoneOffSet);
         return date.getHour();
     }
-
 
     @Override
     public String toString() {

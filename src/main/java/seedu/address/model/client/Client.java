@@ -81,7 +81,7 @@ public class Client {
     }
 
     /**
-     * Gets the list of client notes associated with this client.
+     * Gets the unmodifiable list of client notes associated with this client.
      *
      * @return The list of client notes associated with this client.
      */
@@ -89,9 +89,15 @@ public class Client {
         return Collections.unmodifiableList(this.clientNotes);
     }
 
+    /**
+     * Gets the list of client notes associated with this client as an Observable List.
+     *
+     * @return The Observable list of client notes associated with this client.
+     */
     public ObservableList<Note> getClientNotesAsObservableList() {
         return clientNotes;
     }
+
     /**
      * Adds a client note for this client.
      *
