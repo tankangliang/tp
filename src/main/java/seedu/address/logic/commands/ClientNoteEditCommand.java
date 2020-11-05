@@ -34,19 +34,19 @@ public class ClientNoteEditCommand extends Command {
             + "invalid";
     private final Index targetClientIndex;
     private final Index targetClientNoteIndex;
-    private final Note newNote;
+    private final Note parsedNewNote;
 
     /**
      * Initializes a ClientNoteEditCommand.
      *  @param targetClientIndex The index of the client whom the clientNote is associated to.
      * @param targetClientNoteIndex  The index of the clientNote to be edited.
-     * @param newNote The newly edited note.
+     * @param parsedNewNote The newly edited note.
      */
-    public ClientNoteEditCommand(Index targetClientIndex, Index targetClientNoteIndex, Note newNote) {
-        requireAllNonNull(targetClientIndex, targetClientNoteIndex, newNote);
+    public ClientNoteEditCommand(Index targetClientIndex, Index targetClientNoteIndex, Note parsedNewNote) {
+        requireAllNonNull(targetClientIndex, targetClientNoteIndex, parsedNewNote);
         this.targetClientIndex = targetClientIndex;
         this.targetClientNoteIndex = targetClientNoteIndex;
-        this.newNote = newNote;
+        this.parsedNewNote = parsedNewNote;
     }
 
     @Override
@@ -62,21 +62,30 @@ public class ClientNoteEditCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_CLIENT_NOTE_DISPLAYED_INDEX);
         }
         Client associatedClient = lastShownClientList.get(targetClientIndex.getZeroBased());
-        Note noteToEdit = associatedClient.getClientNotesAsUnmodifiableList().get(targetClientNoteIndex.getZeroBased());
-        assert associatedClient.hasClientNote(noteToEdit) : "attempting to edit client"
+        Note existingNote = associatedClient.getClientNotesAsUnmodifiableList()
+                .get(targetClientNoteIndex.getZeroBased());
+        assert associatedClient.hasClientNote(existingNote) : "attempting to edit client"
                 + " note that doesn't exist";
+        String existingNoteContent = existingNote.getNoteContent();
         Set<Tag> accumulatedTags = new HashSet<>();
-        accumulatedTags.addAll(noteToEdit.getTags()); // these are the previous tags, because we want to retain history
-        accumulatedTags.addAll(newNote.getTags());
+        Note editedNote;
+        if (parsedNewNote.getNoteContent().equals("")) { // empty string implies only tags have been passed in
+            editedNote = new Note(existingNoteContent);
+        } else {
+            editedNote = parsedNewNote;
+        }
+        // add the previous tags, because we want to retain history of tags
+        accumulatedTags.addAll(existingNote.getTags());
+        accumulatedTags.addAll(parsedNewNote.getTags());
         // because parser used tagNoteMap#getUniqueTags, it is okay for there to be duplicates in previous tags and
         // new Note's tags. Overwriting will keep one of the two duplicates, and they are the same object reference.
         if (accumulatedTags.size() > 1) {
             accumulatedTags.remove(Tag.UNTAGGED);
         }
-        newNote.setTags(accumulatedTags);
-        model.editClientNote(associatedClient, noteToEdit, newNote);
-        return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_NOTE_SUCCESS, associatedClient.getName(), noteToEdit,
-                newNote));
+        editedNote.setTags(accumulatedTags);
+        model.editClientNote(associatedClient, existingNote, editedNote);
+        return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_NOTE_SUCCESS, associatedClient.getName(),
+                existingNote, editedNote));
     }
 
     @Override
@@ -96,6 +105,6 @@ public class ClientNoteEditCommand extends Command {
 
         return this.targetClientIndex.equals(c.targetClientIndex)
                 && this.targetClientNoteIndex.equals(c.targetClientNoteIndex)
-                && this.newNote.equals(c.newNote);
+                && this.parsedNewNote.equals(c.parsedNewNote);
     }
 }
