@@ -16,6 +16,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.note.Note;
 
 /**
@@ -77,6 +78,7 @@ public class WidgetViewBox extends UiPart<Region> {
                         if (client.isSameClient(displayedClient)) {
                             displayedClient = client;
                             displayedClientIndex = i;
+                            updateClientDisplay(displayedClient);
                             return;
                         }
                     }
@@ -111,7 +113,9 @@ public class WidgetViewBox extends UiPart<Region> {
         phone.setText(client.getPhone().toString());
         email.setText(client.getEmail().toString());
         address.setText(client.getAddress().toString());
-        contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
+        if (!client.getContractExpiryDate().equals(ContractExpiryDate.NULL_DATE)) {
+            contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
+        }
         noteTitle.setText("Notes");
         updateClientNotesDisplay(client.getClientNotesAsUnmodifiableList());
         drawPaneBorder();
