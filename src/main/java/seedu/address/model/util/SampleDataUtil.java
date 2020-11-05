@@ -48,8 +48,14 @@ public class SampleDataUtil {
                 new Address("Dhaka, Aleya Design, Lane "), new Country("BD"), new Timezone("GMT+6"),
                 new ContractExpiryDate("9-6-2024"), new LastModifiedInstant("2020-06-06T00:00:00.000000Z"));
 
+        Set<Tag> charlotteNote1Tags = new HashSet<>();
+        charlotteNote1Tags.add(new Tag("socialising"));
+        Note charlotteNote1 = new Note("Networking event at Ibiza");
+        charlotteNote1.setTags(charlotteNote1Tags);
+        charlotte.addClientNote(charlotteNote1);
+
         Set<Tag> berniceNote1Tags = new HashSet<>();
-        berniceNote1Tags.add(new Tag("Reminder"));
+        berniceNote1Tags.add(new Tag("reminder"));
         Note berniceNote1 = new Note("Birthday tomorrow.");
         berniceNote1.setTags(berniceNote1Tags);
         bernice.addClientNote(berniceNote1);
