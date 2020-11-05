@@ -8,9 +8,9 @@ import seedu.address.model.Model;
 /**
  * Lists all clients in the address book to the user.
  */
-public class ListCommand extends Command {
+public class ClientListCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "client list";
     public static final String MESSAGE_SUCCESS = "Listed all clients";
     public static final String MESSAGE_SUCCESS_NO_CLIENTS = "No clients to list";
 
