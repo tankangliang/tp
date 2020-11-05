@@ -37,7 +37,7 @@ title: User Guide
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're trying TBM out for the first time.
+**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're trying **_TBM_** out for the first time.
 </div>
 
 Before you start using **_TBM_**, 
@@ -111,6 +111,7 @@ Adds a new client to **_TBM_**.
 
 Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE [ce/CONTRACT_EXPIRY_DATE]`
 
+Please refer to [Appendix B](#appendix-b-international-standards-followed) to understand the International Standards that **_TBM_** follows for phone numbers and country codes.
 Example:
 
 * Command: `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+3 ce/2-3-2020`<br>
@@ -220,7 +221,8 @@ Example:
 ### Saving data
 
 Your data is automatically saved after every command you enter. The file is saved in the ubiquitous `.json` format, which
-allows you to edit the file manually without even opening **TBM** up.
+allows you to edit the file manually without even opening **_TBM_** up.
+
 The location for this file is `./data/tbmManager.json` (indicated at the bottom left of the application), where the
  `.` represents the directory where you have saved `TBM.jar`. Here's a snippet of this editable text file:
 
@@ -438,7 +440,6 @@ Thailand
 ### Deleting notes for a country: `country note delete`
 
 Deletes a note that is associated with a specific country at the given index based on the **current view** of the [list panel displaying country notes](#ui-when-viewing-country).
-
 Due to ambiguity, deleting of a country note when the country notes panel is not being displayed is not allowed, and an error message will be shown if this is attempted.
 
 Format: `country note delete INDEX`
@@ -530,10 +531,10 @@ Action | Format, Examples
 Parameter | Prefix | Constraints, Examples
 --------|------------------| ----------
 **NAME** | `n/` | Names should only contain alphanumeric characters and spaces, and it should not be blank. <br> e.g. `n/John Doe`
-**PHONE_NUMBER** | `p/` | Phone numbers should only contain numbers, and it should be at least 3 digits long. <br> e.g. `p/9123 4567`
+**PHONE_NUMBER** | `p/` | Phone numbers should have at least 3 digits and at most 15 digits. <br> Please refer to [Appendix B](#appendix-b-international-standards-followed) for a comprehensive description. <br> e.g. `p/81867752` or `p/+65 81867752` 
 **EMAIL** | `e/` | Emails should be of the format local-part@domain. <br> e.g. `e/katya@yahoo.com`
 **ADDRESS** |`a/` | Addresses can take any values, and it should not be blank. <br> e.g. `Vladivostok, Nevelskogo, bld. 15, appt. 256`
-**COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes. <br> e.g. `c/SG` (Singapore)
+**COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification <br> This [finding tool](https://www.countrycode.org/) can be used. <br> e.g. `c/SG` (Singapore) 
 **TIMEZONE** | `tz/` | Timezone should be given in offsets relative to [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time). <br> e.g. `tz/GMT+8`
 **CONTRACT_EXPIRY_DATE** | `ce/` | Date should be given in the format "DD-MM-YYYY". <br> e.g. `ce/10-10-2020`
 **NOTE_STRING** | `nt/` | Notes can take any values, and it should not be blank. <br> e.g. `nt/Likes cats`
@@ -547,12 +548,12 @@ Parameter | Prefix | Constraints, Examples
 
 ### Start Page
 
-The diagram below shows the key UI elements of TBM upon first start-up.
+The diagram below shows the key UI elements of **_TBM_** upon first start-up.
 
   ![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
   <p align="center"><i>Figure 2. Default View</i></p>
 
-* **Command Box** allows you to input commands to interact with TBM.
+* **Command Box** allows you to input commands to interact with **_TBM_**.
 
 * **Client List Panel** will always allow you to view all your clients' information at a go. It's scrollable so that you 
 never have to worry about not being able to see all your important clients at a single glance!
@@ -562,7 +563,7 @@ never have to worry about not being able to see all your important clients at a 
 * **Result Display** will show you the output of executing your command.
     * It indicates successful commands.
     
-    * On the off-chance there's a syntax issue, TBM will remind you of the correct syntax it expects, something like this:
+    * On the off-chance there's a syntax issue, **_TBM_** will remind you of the correct syntax it expects, something like this:
  
      ![Result Display showing error message](images/command-screenshots/result_display_error_syntax.png)
      <p align="center"><i>Figure 3. Error Display</i></p>
@@ -596,7 +597,40 @@ This is what to expect when you type in the `help` command or press `F1`:
   <p align="center"><i>Figure 6. Help Window</i></p>
 
 <p align="center">
-   <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> } </i
-   ></strong> 
+   <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a>}</i></strong> 
+</p>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix B: International Standards Followed 
+
+### ISO Country Codes
+
+**_TBM_** utilizes 2-letter country codes that follow the **_ISO3166_** specification. This [finding tool](https://www.countrycode.org/) can be used.
+
+### Phone Numbers
+
+**_TBM_**'s format for phone numbers is **_based_** on the [E.164 standard](https://en.wikipedia.org/wiki/E.164) as recommended by the _ITU Telecommunication Standardization Sector (ITU-T)_.
+**_However_**, **_TBM_** doesn't allow for spaces in between phone number fields. For example, `+65 8186 7742` may follow this international standard, but **_TBM_ requires you to remove spacing within the phone number field** so the correct way to input it would be `+65 81867742`. 
+<p align="center">
+
+Here are the alternative stylistic choices that you might make when writing out phone numbers, all of which are valid:
+* Phone numbers can be grouped into `COUNTRY_CODE` and `NATIONAL_PHONE_NUMBER`. We shall refer to `NATIONAL_PHONE_NUMBER` simply as **_phone number field_** in this appendix. <br/><br/>
+    * Please note that the **_phone number field_** may only have a **maximum of 12 digits**, all without spaces. The digit count restriction is as per the "global services specification" of **E.164**.
+    * `COUNTRY_CODE` field is optional and may be omitted by you. 
+        * Adding country codes for the telephone numbers:
+            * Country code numbers range from 1 to 3 digits and may be found from this [finding tool](https://www.countrycode.org/). You **must** prepend the country code with a `+` character.  
+                * `+6581867742` is a valid phone number where `+65` is the country code for Singapore.
+            * **If you wish to, you may also separate country code and phone number fields with a delimiter:** Valid delimiters include: ` ` (space character), `-` and `.`
+                * `+65 81867742` with a ` ` space character is also a valid phone number. 
+                * `+65-81867742` with a `-` character is also a valid phone number.
+                * `+65.81867742` with a `.` character is also a valid phone number.
+            
+             These options have been provided because we know that such delimiting is a matter of _cultural preference_.
+    
+
+
+<p align="center">
+   <strong><i>{End of Appendix B, please return to the <a href="#table-of-contents">Table of Contents</a>}</i></strong> 
 </p>
 --------------------------------------------------------------------------------------------------------------------
