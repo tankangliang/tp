@@ -16,6 +16,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.note.Note;
 
 /**
@@ -40,9 +41,9 @@ public class WidgetViewBox extends UiPart<Region> {
     @FXML
     private ImageView tbmLogo;
     @FXML
-    private Text timer;
-    @FXML
     private Text name;
+    @FXML
+    private Text timer;
     @FXML
     private Text country;
     @FXML
@@ -77,6 +78,7 @@ public class WidgetViewBox extends UiPart<Region> {
                         if (client.isSameClient(displayedClient)) {
                             displayedClient = client;
                             displayedClientIndex = i;
+                            updateClientDisplay(displayedClient);
                             return;
                         }
                     }
@@ -94,7 +96,6 @@ public class WidgetViewBox extends UiPart<Region> {
      */
     public void updateClientDisplay(Client client) {
         widgetScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        textClock.pause();
         tbmLogoContainer.getChildren().clear();
         tbmLogoContainer.setStyle("-fx-padding: 0 0 0 0; -fx-spacing: 0;");
         displayedClient = client;
@@ -104,12 +105,17 @@ public class WidgetViewBox extends UiPart<Region> {
                 displayedClientIndex = i;
             }
         }
+        textClock.pause();
+        textClock = new TextClock(timer, client.getTimezone().getJavaTimeZone());
+        textClock.play();
         country.setText(client.getCountry().getCountryName() + " (" + client.getTimezone().toString() + ")");
         name.setText(client.getName().toString());
-        phone.setText(client.getPhone().toString());
-        email.setText(client.getEmail().toString());
-        address.setText(client.getAddress().toString());
-        contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
+        phone.setText("Phone: " + client.getPhone().toString());
+        email.setText("Email: " + client.getEmail().toString());
+        address.setText("Address: " + client.getAddress().toString());
+        if (!client.getContractExpiryDate().equals(ContractExpiryDate.NULL_DATE)) {
+            contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
+        }
         noteTitle.setText("Notes");
         updateClientNotesDisplay(client.getClientNotesAsUnmodifiableList());
         drawPaneBorder();
@@ -132,17 +138,19 @@ public class WidgetViewBox extends UiPart<Region> {
         widgetScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         tbmLogoContainer.getChildren().clear();
         tbmLogoContainer.getChildren().add(tbmLogo);
-        tbmLogoContainer.getChildren().add(timer);
         tbmLogoContainer.setStyle("-fx-padding: 20 0 25 0; -fx-spacing: 10");
-        textClock = new TextClock(timer);
+        if (textClock != null) {
+            textClock.pause();
+        }
+        textClock = new TextClock(timer, TimeZone.getDefault());
         textClock.play();
         name.setText("");
         phone.setText("");
         email.setText("");
         address.setText("");
         int offset = TimeZone.getTimeZone(ZoneId.systemDefault()).getOffset(new Date().getTime()) / 1000 / 60 / 60;
-        String offsetString = (offset < 0 ? "-" : "+") + offset;
-        country.setText(Locale.getDefault().getDisplayCountry() + " (GMT" + offsetString + ")");
+        String offsetString = "GMT" + (offset < 0 ? "-" : "+") + offset;
+        country.setText(Locale.getDefault().getDisplayCountry() + " (" + offsetString + ")");
         contractExpiryDate.setText("");
         noteTitle.setText("");
         clientNoteListView.getChildren().clear();

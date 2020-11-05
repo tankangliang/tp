@@ -13,9 +13,9 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for ClientListCommand.
  */
-public class ListCommandTest {
+public class ClientListCommandTest {
 
     private Model model;
     private Model expectedModel;
@@ -29,21 +29,22 @@ public class ListCommandTest {
     @Test
     public void execute_listIsEmpty_displaysEmptyMessage() {
         Model newModel = new ModelManager();
-        CommandResult expectedResult = new CommandResult(ListCommand.MESSAGE_SUCCESS_NO_CLIENTS, true, false, false);
-        assertCommandSuccess(new ListCommand(), newModel, expectedResult, newModel);
+        CommandResult expectedResult = new CommandResult(ClientListCommand.MESSAGE_SUCCESS_NO_CLIENTS,
+                true, false, false);
+        assertCommandSuccess(new ClientListCommand(), newModel, expectedResult, newModel);
     }
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        CommandResult expectedResult = new CommandResult(ListCommand.MESSAGE_SUCCESS, true, false, false);
-        assertCommandSuccess(new ListCommand(), model, expectedResult, expectedModel);
+        CommandResult expectedResult = new CommandResult(ClientListCommand.MESSAGE_SUCCESS, true, false, false);
+        assertCommandSuccess(new ClientListCommand(), model, expectedResult, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showClientAtIndex(model, INDEX_FIRST_CLIENT);
-        CommandResult expectedResult = new CommandResult(ListCommand.MESSAGE_SUCCESS, true, false, false);
-        assertCommandSuccess(new ListCommand(), model, expectedResult, expectedModel);
+        CommandResult expectedResult = new CommandResult(ClientListCommand.MESSAGE_SUCCESS, true, false, false);
+        assertCommandSuccess(new ClientListCommand(), model, expectedResult, expectedModel);
     }
 
 }
