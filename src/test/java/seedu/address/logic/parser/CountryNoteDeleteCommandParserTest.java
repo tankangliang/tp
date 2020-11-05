@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -24,12 +25,8 @@ public class CountryNoteDeleteCommandParserTest {
 
     @Test
     public void parse_validIndex_returnsExpected() {
-        try {
-            new CountryNoteDeleteCommand(Index.fromOneBased(1));
-            parser.parse(" 1");
-        } catch (Exception e) {
-            fail();
-        }
+        new CountryNoteDeleteCommand(Index.fromOneBased(1));
+        assertDoesNotThrow(() -> parser.parse("1"));
     }
 
 }
