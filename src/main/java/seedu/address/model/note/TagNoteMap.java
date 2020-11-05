@@ -103,7 +103,7 @@ public class TagNoteMap {
 
     /** Retrieves all {@code Tag} objects that are associated to a particular {@code Note}.
      *
-     * @param note The particular {@code Note} to which tags are associated.
+     * @param note The particular {@code Note} to get associated tags for.
      * @return Set of {@code Tag} objects that are associated to the note.
      */
     public Set<Tag> getTagsForNote(Note note) {
@@ -112,7 +112,7 @@ public class TagNoteMap {
 
     /** Retrieves all {@code Note} objects that are associated to a particular {@code Tag}.
      *
-     * @param tag The particular {@code Tag} to which notes are associated.
+     * @param tag The particular {@code Tag} to get associated notes for.
      * @return List of {@code Note} objects that are associated to the tag.
      */
     public List<Note> getNotesForTag(Tag tag) {
