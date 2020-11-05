@@ -620,7 +620,7 @@ Here are the alternative stylistic choices that you might make when writing out 
       * Adding country codes for the telephone numbers:
         * Country code numbers range from 1 to 3 digits and may be found from this [finding tool](https://www.countrycode.org/). You **must** prepend the country code with a `+` character.  
           * `+6581867742` is a valid phone number where `+65` is the country code for Singapore.
-        * **If you wish to, you may also separate country code and phone number fields with a delimiter:** Valid delimiters include: the " " character, "-" and "."
+        * **If you wish to, you may also separate country code and phone number fields with a delimiter:** Valid delimiters include: the " " character, "-", and "."
           * `+65 81867742` with a " " character is also a valid phone number. 
           * `+65-81867742` with a "-" character is also a valid phone number.
           * `+65.81867742` with a "." character is also a valid phone number.
