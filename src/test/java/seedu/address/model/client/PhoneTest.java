@@ -44,10 +44,10 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("9011p041")); // alphabets within digits
         assertFalse(Phone.isValidPhone("9312 1534")); // spaces within digits
         assertFalse(Phone.isValidPhone("+65 9312 1534")); // spaces within the phone number
-        assertFalse(Phone.isValidPhone("1234567891234567")); // exceeds 15 digits total
+        assertFalse(Phone.isValidPhone("1234567891234567")); // exceeds 12 digits total
         assertFalse(Phone.isValidPhone("+65123456789123456")); // exceeds 15 digits total
-        assertFalse(Phone.isValidPhone("+(65) 81867752")); // exceeds 15 digits total
-        assertFalse(Phone.isValidPhone("+0 00")); // exceeds 15 digits total
+        assertFalse(Phone.isValidPhone("+(65) 81867752")); // uses parenthesis, not allowed
+        assertFalse(Phone.isValidPhone("+0 00")); // doesn't meet min 3 digits for phone number
 
 
         // valid phone numbers
