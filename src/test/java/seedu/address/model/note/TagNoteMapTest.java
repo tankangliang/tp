@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.ALICE;
 
@@ -48,7 +49,6 @@ class TagNoteMapTest {
     @Test
     public void initTagNoteMapFromCountryNotes_validSetOfTaggedCountryNotes_doesNotThrowException() {
         List<Note> inputList = new ArrayList<>();
-        Tag tag = new Tag("tagName");
         Note countryNote1 = new Note("this country note will be tagged");
         countryNote1.setTags(tags);
         inputList.add(countryNote1);
@@ -68,6 +68,13 @@ class TagNoteMapTest {
     }
 
     @Test
+    public void getUniqueTags_emptyList_returnsSetContainingOnlyUntaggedTag() throws ParseException {
+        Set<Tag> untaggedTagSet = new HashSet<>();
+        untaggedTagSet.add(Tag.UNTAGGED);
+        assertEquals(tagNoteMap.getUniqueTags(new ArrayList<>()), untaggedTagSet);
+    }
+
+    @Test
     public void getUniqueTags_verifyWithNewTag_doesNotThrowExceptionReturnsTrue() throws ParseException {
         Set<Tag> expectedResult = new HashSet<>();
         expectedResult.add(new Tag("unprecedentedTag"));
@@ -76,6 +83,11 @@ class TagNoteMapTest {
         assertDoesNotThrow(() -> this.tagNoteMap.getUniqueTags(tagNameStrings));
         Set<Tag> actualResult = this.tagNoteMap.getUniqueTags(tagNameStrings);
         assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void deleteNote_noteNotInNoteSet_throwAssertionError() {
+        assertThrows(AssertionError.class, () -> tagNoteMap.deleteNote(new Note("note")));
     }
 
     // also tests that when a tag doesn't have associated notes then it is removed from tagToNotesMap and uniqueTagsMap
@@ -92,6 +104,11 @@ class TagNoteMapTest {
         assertTrue(tagNoteMap.getNotesForTag(TEST_TAG).equals(expectedNotesSet));
         tagNoteMap.deleteNote(TAGGED_NOTE);
         assertFalse(tagNoteMap.getNotesForTag(TEST_TAG).equals(expectedNotesSet));
+    }
+
+    @Test
+    public void editNote_noteNotInNoteSet_throwAssertionError() {
+        assertThrows(AssertionError.class, () -> tagNoteMap.editNote(new Note("note"), new Note("another note")));
     }
 
     @Test
@@ -140,8 +157,20 @@ class TagNoteMapTest {
         assertTrue(newTagNoteMap.equals(this.tagNoteMap));
 
         // after adding a note -> returns false
-        newTagNoteMap.addTagsForNote(tags, new Note("note"));
+        Note note = new Note("note");
+        newTagNoteMap.addTagsForNote(tags, note);
         assertFalse(tagNoteMap.equals(newTagNoteMap));
+
+        // after deleting that note -> returns true
+        newTagNoteMap.deleteNote(note);
+        assertTrue(tagNoteMap.equals(newTagNoteMap));
+
+        // after editing an added note -> returns true if edited note is added to another tagNoteMap
+        Note untaggedNote = new Note("untagged note");
+        newTagNoteMap.addTagsForNote(tagNoteMap.getTagsForNote(untaggedNote), note);
+        newTagNoteMap.editNote(note, untaggedNote);
+        tagNoteMap.addTagsForNote(tagNoteMap.getTagsForNote(untaggedNote), untaggedNote);
+        assertTrue(tagNoteMap.equals(newTagNoteMap));
     }
 
 }
