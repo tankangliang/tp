@@ -73,7 +73,6 @@ public class TagNoteMap {
      * @param countryNotes The set of countries, each containing their notes and associated tags.
      */
     public void initTagNoteMapFromCountryNotes(List<Note> countryNotes) {
-        // todo: make init work when passed in a list of countryNotes
         requireAllNonNull(countryNotes);
         initTagNoteMapFromNotes(countryNotes);
         logger.info("--------------[TagNoteMap initialized from country notes]");
