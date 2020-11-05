@@ -23,10 +23,20 @@ public class Index {
         this.zeroBasedIndex = zeroBasedIndex;
     }
 
+    /**
+     * Returns a zero based version of the given index.
+     *
+     * @return Zero-based index.
+     */
     public int getZeroBased() {
         return zeroBasedIndex;
     }
 
+    /**
+     * Returns a one based version of the given index.
+     *
+     * @return One-based index.
+     */
     public int getOneBased() {
         return zeroBasedIndex + 1;
     }

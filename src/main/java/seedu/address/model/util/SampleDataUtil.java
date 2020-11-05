@@ -34,7 +34,7 @@ public class SampleDataUtil {
                 new Timezone("GMT+8"), new ContractExpiryDate("12-12-2021"),
                 new LastModifiedInstant("2020-02-02T00:00:00.000000Z"));
         Client charlotte = new Client(new Name("Charlotte Oliveiro"), new Phone("93210283"),
-                new Email("charlotte@example.com"), new Address("Calle de Miguel Ángel, 3, 28010 Madrid"),
+                new Email("charlotte@example.com"), new Address("Calle de Miguel Angel, 3, 28010 Madrid"),
                 new Country("ES"), new Timezone("GMT+1"), new ContractExpiryDate("1-4-2023"),
                 new LastModifiedInstant("2020-03-03T00:00:00.000000Z"));
         Client david = new Client(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
