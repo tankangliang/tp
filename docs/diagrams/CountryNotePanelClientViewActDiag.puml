@@ -14,14 +14,15 @@ if () then ([commandResult.shouldDisplayClient()])
     :Add the Container of the
     Client View UI as a child component
     of the Display Panel Container;
-elseif () then ([commandResult.shouldDisplayCountryNote()])
-    :Remove all child components in
-    the Display Panel Container;
-    :Add the Container of the
-    Country Note Panel UI as a child component
-    of the Display Panel Container;
 else ([else])
-
+  if () then ([commandResult.shouldDisplayCountryNote()])
+      :Remove all child components in
+      the Display Panel Container;
+      :Add the Container of the
+      Country Note Panel UI as a child component
+      of the Display Panel Container;
+  else ([else])
+  endif
 endif
 stop
 @enduml
