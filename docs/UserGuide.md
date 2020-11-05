@@ -621,9 +621,13 @@ Here are the alternative stylistic choices that you might make when writing out 
         * Adding country-codes for the telephone numbers: <br>
             * Country code numbers range from 1 to 3 digits and may be found from this [finding tool](https://www.countrycode.org/). You **must** prepend the country code with a `+` character.  
                 * `+6581867742` is a valid phone number where `+65` is the country code for Singapore.
-            * You may choose to put a space character or `-` between the country code and the rest of the phone number: 
+            * **How to separate/delimit country code and phone number fields:** <br>
+             Valid delimiters include: ` ` (space character), `-` and `.`
                 * `+65 81867742` with a space character is also a valid phone number. 
-                * `+65-81867742` with a space character is also a valid phone number.
+                * `+65-81867742` with a `-` character is also a valid phone number.
+                * `+65.81867742` with a `.` character is also a valid phone number.
+            
+             These options have been provided because we know that such delimiting is a matter of _cultural preference_.
     * Please note that the **_phone number field_** may only have a **maximum of 12 digits**, all without spaces. The digit count restriction is as per the "global services specification" of **E.164**.
 
 

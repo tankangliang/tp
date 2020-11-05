@@ -47,6 +47,7 @@ public class PhoneTest {
         assertFalse(Phone.isValidPhone("1234567891234567")); // exceeds 15 digits total
         assertFalse(Phone.isValidPhone("+65123456789123456")); // exceeds 15 digits total
         assertFalse(Phone.isValidPhone("+(65) 81867752")); // exceeds 15 digits total
+        assertFalse(Phone.isValidPhone("+0 00")); // exceeds 15 digits total
 
 
         // valid phone numbers
@@ -64,6 +65,7 @@ public class PhoneTest {
 
         // weird but valid numbers:
         assertTrue(Phone.isValidPhone("+65-81867752"));
+        assertTrue(Phone.isValidPhone("+1.203493")); // delimited by `.`
         assertTrue(Phone.isValidPhone("+65 3456"));
         assertTrue(Phone.isValidPhone("+653456"));
     }
