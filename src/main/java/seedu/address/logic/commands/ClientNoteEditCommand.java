@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CLIENT_NOTE_DISPLAYED_INDEX;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -9,7 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -30,8 +31,6 @@ public class ClientNoteEditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_NOTE + "client note newly edited content";
     public static final String MESSAGE_EDIT_CLIENT_NOTE_SUCCESS = "Successfully edited note for %1$s: \n Before: "
             + "%2$s\n After: %3$s";
-    private static final String MESSAGE_INVALID_CLIENT_NOTE_DISPLAYED_INDEX = "The client note index provided is "
-            + "invalid";
     private final Index targetClientIndex;
     private final Index targetClientNoteIndex;
     private final Note parsedNewNote;
@@ -54,7 +53,7 @@ public class ClientNoteEditCommand extends Command {
         requireNonNull(model);
         List<Client> lastShownClientList = model.getSortedFilteredClientList();
         if (targetClientIndex.getZeroBased() >= lastShownClientList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX);
         }
         List<Note> notesList = lastShownClientList.get(targetClientIndex.getZeroBased())
                 .getClientNotesAsUnmodifiableList();
