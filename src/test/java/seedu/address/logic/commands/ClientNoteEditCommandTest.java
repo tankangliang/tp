@@ -104,6 +104,34 @@ class ClientNoteEditCommandTest {
         assertCommandSuccess(clientNoteEditCommand, model, expectedResult, expectedModel);
     }
 
+    @Test
+    public void execute_onlyEditTags_commandSuccess() {
+        Index clientIdx = Index.fromOneBased(1);
+        Index clientNoteIdx = Index.fromOneBased(1);
+        Note clientNote1 = new Note(NOTE_CONTENT_1);
+        Client client1 = new ClientBuilder().withName("client1").build();
+        model.addClient(client1);
+        model.addClientNote(client1, clientNote1);
+
+        Note parsedNote = new Note("");
+        Note expectedNote = new Note(NOTE_CONTENT_1);
+        Tag testTag = new Tag("testTag");
+        Set<Tag> expectedTagSet = new HashSet<>();
+        expectedTagSet.add(testTag);
+
+        parsedNote.setTags(expectedTagSet);
+        expectedNote.setTags(expectedTagSet);
+        Model expectedModel = new ModelManager();
+        Client client1Copy = new ClientBuilder().withName("client1").build();
+        expectedModel.addClient(client1Copy);
+        expectedModel.addClientNote(client1Copy, expectedNote);
+
+        CommandResult expectedResult = new CommandResult(String.format(MESSAGE_EDIT_CLIENT_NOTE_SUCCESS,
+                client1.getName(), clientNote1, expectedNote));
+        ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx, clientNoteIdx, parsedNote);
+        assertCommandSuccess(clientNoteEditCommand, model, expectedResult, expectedModel);
+    }
+
 
     @Test
     public void execute_editExistingUntaggedNoteToAddTag_discardsDefaultUntaggedTag() {
