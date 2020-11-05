@@ -13,6 +13,7 @@ import seedu.address.logic.commands.ClientAddCommand;
 import seedu.address.logic.commands.ClientDeleteCommand;
 import seedu.address.logic.commands.ClientEditCommand;
 import seedu.address.logic.commands.ClientFindCommand;
+import seedu.address.logic.commands.ClientListCommand;
 import seedu.address.logic.commands.ClientNoteAddCommand;
 import seedu.address.logic.commands.ClientNoteDeleteCommand;
 import seedu.address.logic.commands.ClientNoteEditCommand;
@@ -25,7 +26,6 @@ import seedu.address.logic.commands.CountryNoteEditCommand;
 import seedu.address.logic.commands.CountryNoteViewCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SuggestCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.note.TagNoteMap;
@@ -84,9 +84,6 @@ public class MainParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
-
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -206,6 +203,9 @@ public class MainParser {
 
         case ClientViewCommand.COMMAND_WORD:
             return new ClientViewCommandParser().parse(restOfCommand);
+
+        case ClientListCommand.COMMAND_WORD:
+            return new ClientListCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

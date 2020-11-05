@@ -24,7 +24,7 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_MESSAGE = "For more information, refer to the user guide: ";
     public static final String HELP_TITLE = "Commonly used commands";
     public static final String COMMON_COMMANDS =
-            "* list\n"
+            "* client list\n"
             + "* client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE "
             + "[ce/CONTRACT_EXPIRY_DATE]\n"
             + "* client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_CODE) (tz/TIMEZONE) "

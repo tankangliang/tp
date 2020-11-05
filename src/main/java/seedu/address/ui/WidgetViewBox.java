@@ -110,9 +110,9 @@ public class WidgetViewBox extends UiPart<Region> {
         textClock.play();
         country.setText(client.getCountry().getCountryName() + " (" + client.getTimezone().toString() + ")");
         name.setText(client.getName().toString());
-        phone.setText(client.getPhone().toString());
-        email.setText(client.getEmail().toString());
-        address.setText(client.getAddress().toString());
+        phone.setText("Phone: " + client.getPhone().toString());
+        email.setText("Email: " + client.getEmail().toString());
+        address.setText("Address: " + client.getAddress().toString());
         if (!client.getContractExpiryDate().equals(ContractExpiryDate.NULL_DATE)) {
             contractExpiryDate.setText("Expiry: " + client.getContractExpiryDate().displayValue);
         }
