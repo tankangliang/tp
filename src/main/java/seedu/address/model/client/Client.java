@@ -81,7 +81,7 @@ public class Client {
     }
 
     /**
-     * Gets the unmodifiable list of client notes associated with this client.
+     * Gets the list of client notes associated with this client as an unmodifiable list.
      *
      * @return The list of client notes associated with this client.
      */
