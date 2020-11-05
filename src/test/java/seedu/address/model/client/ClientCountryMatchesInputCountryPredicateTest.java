@@ -32,6 +32,7 @@ public class ClientCountryMatchesInputCountryPredicateTest {
             Country country = new Country(COUNTRY_CODES[i]);
             ClientCountryMatchesInputCountryPredicate pred = new ClientCountryMatchesInputCountryPredicate(
                     country);
+            // predicate does not match with client that has different country than pred country
             assertFalse(pred.test(new ClientBuilder().withCountry(COUNTRY_CODES[i + 1]).build()));
         }
     }
