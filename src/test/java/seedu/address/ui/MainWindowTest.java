@@ -14,7 +14,6 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.nio.file.Path;
 
-import javafx.stage.Screen;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -24,6 +23,7 @@ import guitests.guihandles.HelpWindowHandle;
 import guitests.guihandles.MainWindowHandle;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.GuiSettings;
@@ -35,6 +35,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.storage.JsonTbmManagerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
+
 /**
  * This test class does not conduct a unit test.
  */
