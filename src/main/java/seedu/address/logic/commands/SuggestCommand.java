@@ -29,6 +29,7 @@ public class SuggestCommand extends Command {
             + "suggestion criteria:\n";
 
     public final String suggestTypeDescriptions;
+
     private final Set<SuggestionType> suggestionTypeOrderedSet;
     private final Predicate<Client> suggestionTypePredicate;
     private final Comparator<Client> suggestionTypeCombinedComparator;
