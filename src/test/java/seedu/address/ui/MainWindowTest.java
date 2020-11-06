@@ -73,7 +73,7 @@ public class MainWindowTest extends GuiUnitTest {
         terminal.inputCommand("clear");
 
         // help window tests
-        guiRobot.clickOn("#help");
+        guiRobot.interact(() -> guiRobot.clickOn("#help"));
         guiRobot.clickOn("#helpMenuItem");
         guiRobot.pauseForHuman();
         assertTrue(guiRobot.isWindowShown(HelpWindowHandle.HELP_WINDOW_TITLE));
