@@ -3,21 +3,17 @@ package seedu.address.ui;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
 import static seedu.address.testutil.TypicalClients.BENSON;
 
-import java.util.Set;
-
-import javafx.beans.Observable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
 import guitests.guihandles.WidgetViewBoxHandle;
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 import seedu.address.model.note.Note;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ClientBuilder;
 import seedu.address.testutil.TypicalClients;
 

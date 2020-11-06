@@ -5,7 +5,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import seedu.address.model.client.Client;
-import seedu.address.ui.NoteListCard;
 
 /**
  * Provides a handler to the widget view box.
