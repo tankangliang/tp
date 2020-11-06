@@ -7,18 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
-import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 
-import java.util.Set;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.ClientListCommand;
-import seedu.address.logic.commands.SuggestCommand;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.testutil.ClientBuilder;
 
 public class SuggestionTypeTest {
 
