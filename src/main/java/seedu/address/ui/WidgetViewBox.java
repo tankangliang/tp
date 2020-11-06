@@ -121,7 +121,7 @@ public class WidgetViewBox extends UiPart<Region> {
         drawPaneBorder();
     }
 
-    /**client
+    /**
      * Static factory for use in GUI testing.
      *
      * @return WidgetViewBox
