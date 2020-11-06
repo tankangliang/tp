@@ -143,11 +143,15 @@ public class MainWindow extends UiPart<Stage> {
         double truncatedWidth = Math.min(guiSettings.getWindowWidth(), screenWidth);
         primaryStage.setHeight(truncatedHeight);
         primaryStage.setWidth(truncatedWidth);
+        logger.info(String.format("Window width set to: %.2f", truncatedWidth));
+        logger.info(String.format("Window height set to: %.2f", truncatedHeight));
         if (guiSettings.getWindowCoordinates() != null) {
             double truncatedX = truncateDouble(guiSettings.getWindowCoordinates().getX(), minX, maxX);
             double truncatedY = truncateDouble(guiSettings.getWindowCoordinates().getY(), minY, maxY);
             primaryStage.setX(truncatedX);
             primaryStage.setY(truncatedY);
+            logger.info(String.format("Window x-position set to: %.2f", truncatedX));
+            logger.info(String.format("Window y-position set to: %.2f", truncatedY));
         }
     }
 
