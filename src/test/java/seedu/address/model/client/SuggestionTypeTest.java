@@ -7,8 +7,18 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
+import static seedu.address.testutil.TypicalClients.getTypicalTbmManager;
 
+import java.util.Set;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.address.logic.commands.ClientListCommand;
+import seedu.address.logic.commands.SuggestCommand;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.testutil.ClientBuilder;
 
 public class SuggestionTypeTest {
 
@@ -32,6 +42,16 @@ public class SuggestionTypeTest {
     public void getSuggestionPredicate_byContract_suggestContractPredicate() {
         SuggestionType contract = new SuggestionType(SuggestionType.BY_CONTRACT);
         assertTrue(contract.getSuggestionPredicate() instanceof SuggestContractPredicate);
+    }
+
+    @Test
+    public void getDescription_returnsCorrectDescription() {
+        assertEquals(new SuggestionType(SuggestionType.BY_CONTRACT).getDescription(),
+                SuggestionType.CONTRACT_DESCRIPTION);
+        assertEquals(new SuggestionType(SuggestionType.BY_FREQUENCY).getDescription(),
+                SuggestionType.FREQUENCY_DESCRIPTION);
+        assertEquals(new SuggestionType(SuggestionType.BY_AVAILABLE).getDescription(),
+                SuggestionType.AVAILABLE_DESCRIPTION);
     }
 
     @Test
