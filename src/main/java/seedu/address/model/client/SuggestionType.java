@@ -22,8 +22,8 @@ public class SuggestionType {
             + "higher up on list.";
     public static final String AVAILABLE_DESCRIPTION = "Availability: Only clients whose current time is 1800-2200H in "
             + "their time zone (off work hours) will be shown.";
-    public static final String CONTRACT_DESCRIPTION = "Contract expiry date: Clients whose contracts are expiring will "
-            + "be shown first.";
+    public static final String CONTRACT_DESCRIPTION = "Contract expiry date: Clients whose contracts are expiring "
+            + "earlier will appear higher up on the list.";
 
     public final String suggestionString;
 
