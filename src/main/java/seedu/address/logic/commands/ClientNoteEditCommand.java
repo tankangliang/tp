@@ -31,6 +31,7 @@ public class ClientNoteEditCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 1 " + PREFIX_NOTE + "client note newly edited content";
     public static final String MESSAGE_EDIT_CLIENT_NOTE_SUCCESS = "Successfully edited note for %1$s: \n Before: "
             + "%2$s\n After: %3$s";
+    public static final String MESSAGE_NOT_REAL_EDIT = "New edit doesn't value-add anything!";
     private final Index targetClientIndex;
     private final Index targetClientNoteIndex;
     private final Note parsedNewNote;
@@ -82,6 +83,9 @@ public class ClientNoteEditCommand extends Command {
             accumulatedTags.remove(Tag.UNTAGGED);
         }
         editedNote.setTags(accumulatedTags);
+        if (existingNote.equals(editedNote)) {
+            throw new CommandException(MESSAGE_NOT_REAL_EDIT);
+        }
         model.editClientNote(associatedClient, existingNote, editedNote);
         return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_NOTE_SUCCESS, associatedClient.getName(),
                 existingNote, editedNote));

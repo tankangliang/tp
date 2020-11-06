@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CLIENT_NOTE_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.ClientNoteEditCommand.MESSAGE_EDIT_CLIENT_NOTE_SUCCESS;
+import static seedu.address.logic.commands.ClientNoteEditCommand.MESSAGE_NOT_REAL_EDIT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -130,6 +131,23 @@ class ClientNoteEditCommandTest {
                 client1.getName(), clientNote1, expectedNote));
         ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx, clientNoteIdx, parsedNote);
         assertCommandSuccess(clientNoteEditCommand, model, expectedResult, expectedModel);
+    }
+
+    @Test
+    public void execute_notLogicallyARealEdit_commandFailure() {
+        Tag testTag = new Tag("testTag");
+        Set<Tag> testTagSet = new HashSet<>();
+        testTagSet.add(testTag);
+        Index clientIdx = Index.fromOneBased(1);
+        Index clientNoteIdx = Index.fromOneBased(1);
+        Note clientNote1 = new Note(NOTE_CONTENT_1);
+        clientNote1.setTags(testTagSet);
+        Client client1 = new ClientBuilder().withName("client1").build();
+        model.addClient(client1);
+        model.addClientNote(client1, clientNote1);
+        Note parsedNote = new Note(NOTE_CONTENT_1);
+        ClientNoteEditCommand clientNoteEditCommand = new ClientNoteEditCommand(clientIdx, clientNoteIdx, parsedNote);
+        assertCommandFailure(clientNoteEditCommand, model, MESSAGE_NOT_REAL_EDIT);
     }
 
 
