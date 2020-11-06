@@ -25,8 +25,10 @@ public class SuggestCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_SUGGEST + SuggestionType.BY_FREQUENCY + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_SUGGEST + SuggestionType.BY_AVAILABLE + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_SUGGEST + SuggestionType.BY_CONTRACT;
-    public static final String MESSAGE_SUGGEST_SUCCESS = "Showing clients based on suggestion criteria";
+    public static final String MESSAGE_SUGGEST_SUCCESS = "Showing clients based on the following "
+            + "suggestion criteria:\n";
 
+    public final String suggestTypeDescriptions;
     private final Set<SuggestionType> suggestionTypeOrderedSet;
     private final Predicate<Client> suggestionTypePredicate;
     private final Comparator<Client> suggestionTypeCombinedComparator;
@@ -37,6 +39,8 @@ public class SuggestCommand extends Command {
     public SuggestCommand(Set<SuggestionType> suggestionTypeOrderedSet) {
         requireNonNull(suggestionTypeOrderedSet);
         this.suggestionTypeOrderedSet = suggestionTypeOrderedSet;
+        suggestTypeDescriptions = suggestionTypeOrderedSet.stream().map(SuggestionType::getDescription)
+                .collect(Collectors.joining("\n"));
         this.suggestionTypePredicate = getCombinedPredicate(suggestionTypeOrderedSet);
         this.suggestionTypeCombinedComparator = getCombinedComparator(suggestionTypeOrderedSet);
     }
@@ -74,7 +78,7 @@ public class SuggestCommand extends Command {
         requireNonNull(model);
         model.updateFilteredClientList(suggestionTypePredicate);
         model.updateSortedFilteredClientList(suggestionTypeCombinedComparator);
-        return new CommandResult(MESSAGE_SUGGEST_SUCCESS, true, false, false);
+        return new CommandResult(MESSAGE_SUGGEST_SUCCESS + suggestTypeDescriptions, true, false, false);
     }
 
     @Override
