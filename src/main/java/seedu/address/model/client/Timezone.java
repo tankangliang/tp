@@ -4,12 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,12 +21,7 @@ import java.util.regex.Pattern;
  */
 public class Timezone {
 
-    /** Timezone must start with "GMT" */
-    private static final String GMT_STRING = "GMT";
-
-    private static final String VALIDATION_REGEX = "^" + GMT_STRING + "(?<offset>[+-]\\d\\d:\\d\\d)";
-
-    private static final Pattern TIMEZONE_FORMAT = Pattern.compile(VALIDATION_REGEX);
+    public static final String GMT_STRING = "GMT";
 
     public static final Set<String> VALID_TIMEZONES = new HashSet<>();
 
@@ -44,10 +37,14 @@ public class Timezone {
         VALID_TIMEZONES.add("+00:00");
     }
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "Timezone should be in the form \"" + GMT_STRING + "+HH:MM\" or \"" + GMT_STRING
-            + "-HH:MM\" where HH is the offset in hours and MM is the offset in minutes. The full list of valid "
-            + "timezones can be found at https://www.timeanddate.com/time/current-number-time-zones.html";
+    public static final String MESSAGE_CONSTRAINTS = "Timezone should be in the form \"" + GMT_STRING + "+HH:MM\" or \""
+            + GMT_STRING + "-HH:MM\" where HH is the offset in hours and MM is the offset in minutes. The full list of "
+            + "valid timezones can be found at https://www.timeanddate.com/time/current-number-time-zones.html";
+
+    /** Timezone must start with "GMT" */
+    private static final String VALIDATION_REGEX = "^" + GMT_STRING + "(?<offset>[+-]\\d\\d:\\d\\d)";
+
+    private static final Pattern TIMEZONE_FORMAT = Pattern.compile(VALIDATION_REGEX);
 
     public final ZoneId zoneOffsetId;
 
@@ -98,7 +95,7 @@ public class Timezone {
 
     @Override
     public String toString() {
-        String zoneOffsetIdString =  zoneOffsetId.toString();
+        String zoneOffsetIdString = zoneOffsetId.toString();
         if (zoneOffsetIdString.equals(GMT_STRING)) {
             zoneOffsetIdString = GMT_STRING + "+00:00";
         }

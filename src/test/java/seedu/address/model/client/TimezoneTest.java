@@ -78,7 +78,6 @@ public class TimezoneTest {
         assertTrue(Timezone.isValidTimezone("GMT-10:00"));
         assertTrue(Timezone.isValidTimezone("GMT-11:00"));
         assertTrue(Timezone.isValidTimezone("GMT-12:00"));
-
     }
 
     @Test
@@ -88,7 +87,6 @@ public class TimezoneTest {
         assertEquals("GMT+13:45", new Timezone("GMT+13:45").toString());
         assertEquals("GMT-09:30", new Timezone("GMT-09:30").toString());
         assertEquals("GMT+00:00", new Timezone("GMT+00:00").toString());
-
     }
 
     @Test
@@ -97,8 +95,8 @@ public class TimezoneTest {
         // adapted from https://www.w3resource.com/java-exercises/datatypes/java-datatype-exercise-5.php
         Timezone.VALID_TIMEZONES.forEach(timezoneOffsetString -> {
             // String is in format "+HH:MM"
-            String sign = timezoneOffsetString.substring(0,1);
-            String hoursOffsetString = timezoneOffsetString.substring(1,3);
+            String sign = timezoneOffsetString.substring(0, 1);
+            String hoursOffsetString = timezoneOffsetString.substring(1, 3);
             String minutesOffsetString = timezoneOffsetString.substring(4);
 
             int hoursOffset = Integer.parseInt(sign + hoursOffsetString);
@@ -113,7 +111,6 @@ public class TimezoneTest {
             String value = "GMT" + timezoneOffsetString;
             assertEquals(currentHour, new Timezone(value).getCurrHourInTimezone());
         });
-
     }
 
     @Test
@@ -132,7 +129,6 @@ public class TimezoneTest {
         assertEquals(new Timezone("GMT+13:45").hashCode(), new Timezone("GMT+13:45").hashCode());
         assertEquals(new Timezone("GMT-09:30").hashCode(), new Timezone("GMT-09:30").hashCode());
         assertEquals(new Timezone("GMT+00:00").hashCode(), new Timezone("GMT+00:00").hashCode());
-
 
         assertNotEquals(new Timezone("GMT+14:00").hashCode(), new Timezone("GMT-12:00").hashCode());
         assertNotEquals(new Timezone("GMT+13:45").hashCode(), new Timezone("GMT-09:30").hashCode());
