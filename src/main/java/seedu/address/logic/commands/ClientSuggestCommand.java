@@ -14,7 +14,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientSuggestionType;
 
 /**
- * Suggests a list of clients based on the specified suggestion types
+ * Suggests a list of clients based on the specified client suggestion types
  */
 public class ClientSuggestCommand extends Command {
 
@@ -47,8 +47,8 @@ public class ClientSuggestCommand extends Command {
     }
 
     /**
-     * Given an ordered set of suggestion types, returns a combined predicate that returns true only if the client
-     * passed in passes all the suggestion types' predicates.
+     * Given an ordered set of client suggestion types, returns a combined predicate that returns true if and only if
+     * the client passed in passes all the client suggestion types' predicates.
      */
     private static Predicate<Client> getCombinedPredicate(Set<ClientSuggestionType> clientSuggestionTypeOrderedSet) {
         return clientSuggestionTypeOrderedSet.stream()
@@ -57,8 +57,9 @@ public class ClientSuggestCommand extends Command {
     }
 
     /**
-     * Given an ordered set of suggestion types, returns a combined comparator that combines the suggestion types'
-     * comparators. Ordering of comparisons will be the same as the ordering of the ordered set passed in.
+     * Given an ordered set of client suggestion types, returns a combined comparator that combines the
+     * client suggestion types' comparators.
+     * Ordering of comparisons will be the same as the ordering of the ordered set passed in.
      */
     private static Comparator<Client> getCombinedComparator(Set<ClientSuggestionType> clientSuggestionTypeOrderedSet) {
         List<Comparator<Client>> suggestionTypeComparatorList = clientSuggestionTypeOrderedSet.stream()
