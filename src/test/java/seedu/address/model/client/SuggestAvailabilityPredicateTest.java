@@ -12,7 +12,7 @@ public class SuggestAvailabilityPredicateTest {
 
     @Test
     public void test_clientAt17_false() {
-        TimezoneStub fivePm = new TimezoneStub("GMT+8", 17);
+        TimezoneStub fivePm = new TimezoneStub("GMT+08:00", 17);
         Client client = new ClientBuilder().withTimezone(fivePm).build();
         SuggestAvailabilityPredicate suggestAvailabilityPredicate = new SuggestAvailabilityPredicate();
         assertFalse(suggestAvailabilityPredicate.test(client));
@@ -20,7 +20,7 @@ public class SuggestAvailabilityPredicateTest {
 
     @Test
     public void test_clientAt18_true() {
-        TimezoneStub sixPm = new TimezoneStub("GMT+8", 18);
+        TimezoneStub sixPm = new TimezoneStub("GMT+08:00", 18);
         Client client = new ClientBuilder().withTimezone(sixPm).build();
         SuggestAvailabilityPredicate suggestAvailabilityPredicate = new SuggestAvailabilityPredicate();
         assertTrue(suggestAvailabilityPredicate.test(client));
@@ -28,7 +28,7 @@ public class SuggestAvailabilityPredicateTest {
 
     @Test
     public void test_clientAt21_true() {
-        TimezoneStub tenPm = new TimezoneStub("GMT+8", 21);
+        TimezoneStub tenPm = new TimezoneStub("GMT+08:00", 21);
         Client client = new ClientBuilder().withTimezone(tenPm).build();
         SuggestAvailabilityPredicate suggestAvailabilityPredicate = new SuggestAvailabilityPredicate();
         assertTrue(suggestAvailabilityPredicate.test(client));
@@ -36,7 +36,7 @@ public class SuggestAvailabilityPredicateTest {
 
     @Test
     public void test_clientAt22_false() {
-        TimezoneStub elevenPm = new TimezoneStub("GMT+8", 22);
+        TimezoneStub elevenPm = new TimezoneStub("GMT+08:00", 22);
         Client client = new ClientBuilder().withTimezone(elevenPm).build();
         SuggestAvailabilityPredicate suggestAvailabilityPredicate = new SuggestAvailabilityPredicate();
         assertFalse(suggestAvailabilityPredicate.test(client));

@@ -44,7 +44,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_COUNTRY_CODE = "SG";
-    private static final String VALID_TIMEZONE = "GMT+8";
+    private static final String VALID_TIMEZONE = "GMT+08:00";
     private static final String VALID_NOTE_STRING = "likes cats";
     private static final String VALID_SUGGESTION_TYPE_1 = "available";
     private static final String VALID_SUGGESTION_TYPE_2 = "frequency";
