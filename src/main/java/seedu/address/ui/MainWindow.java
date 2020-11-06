@@ -129,7 +129,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets the default size based on {@code guiSettings}.
+     * Sets the default size based on {@code guiSettings}, truncating the width, height, and position of the window
+     * to some bounded values to ensure that the display of our application does not get messed up.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
         double screenHeight = Screen.getPrimary().getVisualBounds().getHeight();
