@@ -152,7 +152,7 @@ public class ClientEditCommand extends Command {
         private ContractExpiryDate contractExpiryDate;
 
         /**
-         * Empty constructor.
+         * Constructs an EditClientDescriptor. It is an empty constructor that takes in no arguments.
          */
         public EditClientDescriptor() {}
 
