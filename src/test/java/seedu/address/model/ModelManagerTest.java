@@ -20,8 +20,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.ClientSuggestionType;
 import seedu.address.model.client.NameContainsKeywordsPredicate;
-import seedu.address.model.client.SuggestionType;
 import seedu.address.model.country.Country;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.note.Note;
@@ -267,7 +267,7 @@ public class ModelManagerTest {
         ModelManager modelManagerCopy = new ModelManager(tbmManager, new UserPrefs());
         assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client1);
         modelManagerCopy.updateSortedFilteredClientList(
-                new SuggestionType(SuggestionType.BY_CONTRACT).getSuggestionComparator());
+                new ClientSuggestionType(ClientSuggestionType.BY_CONTRACT).getClientSuggestionComparator());
         assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client2);
     }
 
@@ -281,16 +281,18 @@ public class ModelManagerTest {
         ModelManager modelManagerCopy = new ModelManager(tbmManager, new UserPrefs());
         assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client1);
         modelManagerCopy.updateSortedFilteredClientList(
-                new SuggestionType(SuggestionType.BY_FREQUENCY).getSuggestionComparator());
+                new ClientSuggestionType(ClientSuggestionType.BY_FREQUENCY).getClientSuggestionComparator());
         assertEquals(modelManagerCopy.getSortedFilteredClientList().get(0), client2);
     }
 
-    /* todo future tests:
-     *  run coverage for model manager test and see what's missing:
-     * 1. setClient
-     * 2. widgetContent setter and gettter
-     * 3. getFilteredClientNotesList
-     *
-     * */
+    @Test
+    public void countryNotesListPanelIsVisible_setterAndGetter() {
+        // default is false
+        assertFalse(modelManager.getCountryNotesListPanelIsVisible());
 
+        modelManager.setCountryNotesListPanelIsVisible(true);
+        assertTrue(modelManager.getCountryNotesListPanelIsVisible());
+        modelManager.setCountryNotesListPanelIsVisible(false);
+        assertFalse(modelManager.getCountryNotesListPanelIsVisible());
+    }
 }

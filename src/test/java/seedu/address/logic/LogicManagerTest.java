@@ -1,7 +1,9 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_CLIENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -23,8 +25,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.ClientAddCommand;
+import seedu.address.logic.commands.ClientListCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -82,6 +84,17 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void setCountryNotesListPanelIsVisible_propagatesToModel() {
+        // default value
+        assertFalse(model.getCountryNotesListPanelIsVisible());
+
+        logic.setCountryNotesListPanelIsVisible(true);
+        assertTrue(model.getCountryNotesListPanelIsVisible());
+        logic.setCountryNotesListPanelIsVisible(false);
+        assertFalse(model.getCountryNotesListPanelIsVisible());
+    }
+
+    @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
         assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
@@ -95,8 +108,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_NO_CLIENTS, model);
+        String listCommand = ClientListCommand.COMMAND_WORD;
+        assertCommandSuccess(listCommand, ClientListCommand.MESSAGE_SUCCESS_NO_CLIENTS, model);
     }
 
     @Test

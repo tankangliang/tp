@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -30,27 +31,41 @@ public class ClientNoteEditCommandParser implements Parser<ClientNoteEditCommand
         this.tagNoteMap = tagNoteMap;
     }
 
+    /**
+     * Parses the given {@code args} in the context of the ClientNoteEditCommand and returns a ClientNoteEditCommand
+     * object for execution.
+     *
+     * @throws ParseException If the user input does not conform to the expected format.
+     */
     @Override
-    public ClientNoteEditCommand parse(String restOfCommand) throws ParseException {
-        requireNonNull(restOfCommand);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(restOfCommand, PREFIX_NOTE, PREFIX_TAG);
+    public ClientNoteEditCommand parse(String args) throws ParseException {
+        requireNonNull(args);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NOTE, PREFIX_TAG);
         // NEED TO PASS IN NOTE STRING AT LEAST, TAGS ARE OPTIONAL
-        if (!arePrefixesPresent(argMultimap, PREFIX_NOTE) || argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getPreamble().isEmpty() || !anyPrefixesPresent(argMultimap, PREFIX_NOTE, PREFIX_TAG)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ClientNoteEditCommand.MESSAGE_USAGE));
         }
         Index targetClientIndex;
         Index targetClientNoteIndex;
+        Set<Tag> tags = new HashSet<>();
+        Note newNote = new Note("");
         try {
             String[] splitPreamble = argMultimap.getPreamble().split(" ");
-            if (splitPreamble.length != 2) { // restOfCommand: 1 1 all space delimited ==> 2 elems only
+            if (splitPreamble.length != 2) { // args: 1 1 all space delimited ==> 2 elems only
                 throw new ParseException(""); // empty string, will be caught in the catch block
             }
             targetClientIndex = ParserUtil.parseIndex(splitPreamble[splitPreamble.length - 2]);
             targetClientNoteIndex = ParserUtil.parseIndex(splitPreamble[splitPreamble.length - 1]);
-            Set<Tag> tags = tagNoteMap.getUniqueTags(argMultimap.getAllValues(PREFIX_TAG));
-            Note newNote = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE)
-                    .orElseThrow(() -> new ParseException(""))); // empty string, will be caught in the catch block
+            if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+                tags = tagNoteMap.getUniqueTags(argMultimap.getAllValues(PREFIX_TAG));
+            }
+            if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
+                newNote = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).orElse(""));
+            }
+            if (tags.isEmpty()) {
+                tags.add(Tag.UNTAGGED);
+            }
             newNote.setTags(tags);
             return new ClientNoteEditCommand(targetClientIndex, targetClientNoteIndex, newNote);
         } catch (ParseException pe) {
@@ -63,7 +78,7 @@ public class ClientNoteEditCommandParser implements Parser<ClientNoteEditCommand
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    private static boolean anyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

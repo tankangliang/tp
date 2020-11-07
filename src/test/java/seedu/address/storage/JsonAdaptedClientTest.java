@@ -31,7 +31,7 @@ import seedu.address.testutil.ClientBuilder;
 public class JsonAdaptedClientTest {
 
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_PHONE = "99";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_COUNTRY = "ZZ";
@@ -179,7 +179,7 @@ public class JsonAdaptedClientTest {
     public void toModelType_emptyContractExpiryDate_doesNotThrowException() {
         JsonAdaptedClient client = new JsonAdaptedClient(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_COUNTRY, VALID_TIMEZONE, "", VALID_LAST_MODIFIED_INSTANT, clientNotes);
-        assertDoesNotThrow(() -> client.toModelType());
+        assertDoesNotThrow(client::toModelType);
     }
 
     @Test

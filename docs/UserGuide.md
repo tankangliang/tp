@@ -21,12 +21,8 @@ title: User Guide
     </p>
 </div>
 
---------------------------------------------------------------------------------------------------------------------
-
- ![Client Notes](images/command-screenshots/client_view.png) 
- <br>
- ![Country Notes](images/command-screenshots/country_note_view.png)
-
+   ![Client Notes](images/command-screenshots/client_view.png) 
+   <p align="center"><i>Figure 1. TBM Application</i></p>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -41,9 +37,8 @@ title: User Guide
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're trying TBM out for the first time.
+**:information_source:** Please refer to the [Introduction to UI](#appendix-a---introduction-to-the-ui) if you're trying **_TBM_** out for the first time.
 </div>
-
 
 Before you start using **_TBM_**, 
 
@@ -73,7 +68,7 @@ Now that you have started **_TBM_**,
 
 The following section outlines the commands supported by **_TBM_**. A short description is given for each command along with the format that they should be executed with. Complex commands also come with examples to demonstrate the purpose that the command serve.
 
-Certain commands require parameters and the summary of these parameters as well as their prefixes and constraints can be found in our [parameters summary table](#parameter-constraints-summary)
+Certain commands require parameters and the summary of these parameters as well as their prefixes and constraints can be found in our [parameters summary table](#parameter-constraints-summary). **Note that parameter prefixes such as `t/` and `nt/` are special keywords and you should not use them for any other purposes except for indicating the start of a parameter.**
 
 A summary of all commands can be found in our [command summary table](#command-summary)
 <div markdown="block" class="alert alert-info">
@@ -97,17 +92,18 @@ A summary of all commands can be found in our [command summary table](#command-s
 
 </div>
 
-### Viewing all saved clients: `list`
-
-Shows a list of all clients in **_TBM_**.
-
-Format: `list`
-
 ### Viewing help: `help`
 
 Shows commonly used commands for **_TBM_** in a [new help window](#help-window). Pressing Esc will close this window.
 
 Format: `help`
+
+### Viewing all saved clients: `client list`
+
+Shows a list of all clients in **_TBM_**. If a client's data fields are too long, they may be cut off in the client card, but you can view them in full using the [`client view`](#viewing-a-client--client-view) command.
+This command will also reset the left display panel to its default view. 
+
+Format: `client list`
 
 ### Adding a client: `client add`
 
@@ -115,11 +111,12 @@ Adds a new client to **_TBM_**.
 
 Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE [ce/CONTRACT_EXPIRY_DATE]`
 
+Please refer to [Appendix B](#appendix-b-international-standards-followed) to understand the International Standards that **_TBM_** follows for phone numbers and country codes.
 Example:
 
-* Command: `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+3 ce/2-3-2020`<br>
+* Command: `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/UTC+03:00 ce/2-3-2020`<br>
 
-  Adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok, Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+3**, contract expiry date **2 Mar 2020**.
+  Adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok, Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **UTC+03:00**, contract expiry date **2 Mar 2020**.
 
 ### Viewing a client: `client view`
 
@@ -180,9 +177,9 @@ Examples:
 
     Edits **name** to `Alek`, **phone number** to `34842097` and **email** to `dcsdcr@nus.edu.sg`, other fields remain the same.
 
-* Command: `client edit 1 c/JP tz/GMT+7`
+* Command: `client edit 1 c/JP tz/UTC+07:00`
 
-    Edits **country** to `Japan` and **timezone** to `GMT+7`, other fields remain the same.
+    Edits **country** to `Japan` and **timezone** to `UTC+07:00`, other fields remain the same.
 
 Given the client below:
 
@@ -192,12 +189,12 @@ Client 1
 Name: Alex
 Phone: 911
 Country: Singapore
-Timezone: GMT+8
+Timezone: UTC+08:00
 ...(other fields omitted)
 ```
-Command: `client edit 1 c/JP tz/GMT+7`
+Command: `client edit 1 c/JP tz/UTC+07:00`
 
-Alex's **country** and **timezone** will be edited and the following will be the result.
+Alex's **country** and **timezone** will be edited, and the following will be the result.
 
 ```
 Client 1
@@ -205,7 +202,7 @@ Client 1
 Name: Alex
 Phone: 911
 Country: Japan
-Timezone: GMT+7
+Timezone: UTC+07:00
 ...(other fields omitted)
 ```
 
@@ -223,8 +220,9 @@ Example:
 
 ### Saving data
 
-Your data is automatically saved after every change. The file is saved in the ubiquitous `.json` format, which
-allows you to edit the file manually without even opening **TBM** up.
+Your data is automatically saved after every command you enter. The file is saved in the ubiquitous `.json` format, which
+allows you to edit the file manually without even opening **_TBM_** up.
+
 The location for this file is `./data/tbmManager.json` (indicated at the bottom left of the application), where the
  `.` represents the directory where you have saved `TBM.jar`. Here's a snippet of this editable text file:
 
@@ -236,7 +234,7 @@ The location for this file is `./data/tbmManager.json` (indicated at the bottom 
     "email" : "alexyeoh@example.com",
     "address" : "Blk 30 Geylang Street 29, #06-40",
     "country" : "SG",
-    "timezone" : "GMT+8",
+    "timezone" : "UTC+08:00",
     "contractExpiryDate" : "21-4-2022",
     "lastModifiedInstant" : "2020-01-01T00:00:00Z",
     "clientNotes" : [ {
@@ -245,7 +243,7 @@ The location for this file is `./data/tbmManager.json` (indicated at the bottom 
       "tags" : [ "romantic", "holidayPlans", "travel" ]
     } ]
   } ]
-  . . . 
+  . . .
 }
 ```
 
@@ -256,11 +254,13 @@ The location for this file is `./data/tbmManager.json` (indicated at the bottom 
 
 ### Adding client notes: `client note add`
 
+Adds a note to the client at the specified index in the list view. If a note with the exact same content and tags already exists, a "duplicate note" error will be displayed.
+
 Format: `client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...`
 
 Examples:
 
-* Command: `client note add 1 t/pref nt/wants meetings to be as short as possible (preferably 30 mins)`
+* Command: `client note add 1 nt/wants meetings to be as short as possible (preferably 30 mins) t/pref`
 
     Adds a **note** with a **tag** to the **first** client in the list.
 
@@ -268,7 +268,7 @@ Examples:
 
     Adds a **note** to the **second** client in the list.
 
-* Command: `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
+* Command: `client note add 4 nt/need to slowly convince him to sign the contract t/meeting `
 
     Adds a **note** with a **tag** to the **fourth** client in the list.
 
@@ -303,7 +303,7 @@ Notes:
 
 Edits a note of a client (denoted by that client's index) by the note's index. Supplying tags to the command will add the tags onto the current existing tags for that note.
 
-Format: `client note edit CLIENT_INDEX NOTE_INDEX nt/NOTE_STRING [t/TAG]...`
+Format: `client note edit CLIENT_INDEX NOTE_INDEX (nt/NOTE_STRING) (t/TAG)...`
 
 Examples:
 
@@ -331,7 +331,7 @@ Notes:
 
 ### Filtering clients by country: `country filter`
 
-Filters the list of clients by a specified country.
+Filters the list of clients by the specified country.
 
 Format: `country filter c/COUNTRY_CODE`
 
@@ -349,12 +349,10 @@ Examples:
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source:** Please refer to [this](#ui-when-viewing-country) if you need to be re-acquainted with the UI for country related commands
+**:information_source:** Please refer to [this](#ui-when-viewing-country) if you need to be re-acquainted with the UI for country note related commands
 </div>
 
-
-
-Views the list of country notes from the country specified by the country code.
+Views the list of country notes that are associated with the country corresponding to the country code supplied.
 If no country code is given, all country notes in **_TBM_** will be shown.
 
 Format: `country note view [c/COUNTRY_CODE]`
@@ -367,15 +365,11 @@ Examples:
 
 * Command: `country note view c/SG`
 
-    Only country notes for Singapore will be displayed.
-
-* Command: `country note view c/IN`
-
-    Only country notes for India will be displayed.
+    Only country notes for **Singapore** will be displayed.
 
 ### Adding notes for a country: `country note add`
 
-Adds a note that is associated with a specific country.
+Adds a note that will be associated with the country corresponding to the country code supplied.
 
 Format: `country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...`
 
@@ -383,21 +377,27 @@ Examples:
 
 * Command: `country note add c/SG nt/has one of the lowest corporate taxes in the world t/tax`
 
-    Adds a **note** with a **tag** for Singapore.
-
+    Adds a **note** for the country of **Singapore** with the following specifications: 
+    - Content: **_has one of the lowest corporate taxes in the world_** 
+    - Tag: **_tax_** 
+    
 * Command: `country note add c/CN nt/building good relations (guanxi) is important when conducting business here t/intercultural`
 
-    Adds a **note** with a **tag** for China.
-
+    Adds a **note** for the country of **China** with the following specifications: 
+    - Content: **_building good relations (guanxi) is important when conducting business here_** 
+    - Tag: **_intercultural_** 
+    
 * Command: `country note add c/IN nt/is world's fastest growing economy`
 
-    Adds a **note** for India.
-
+    Adds a **note** for the country of **India** with the following specifications:
+    - Content: **_is world's fastest growing economy_** 
+    - Tag: **_untagged_**
+    
 ### Editing notes for a country: `country note edit`
 
-Edits a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes. Supplying tags to the command will add the tags onto the current existing tags for that note.
+Edits a note that is associated with a specific country at the given index based on the **current view** of the [list panel displaying country notes](#ui-when-viewing-country). Supplying tags to the command will add the tags onto the current existing tags for that note.
 
-The country note list panel can be viewed using the command `country note view`.
+Due to ambiguity, editing of a country note when the country notes panel is not being displayed is not allowed, and an error message will be shown if this is attempted.
 
 Format: `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...`
 
@@ -406,40 +406,42 @@ Example:
 Given the list of country notes in the country note list panel:
 
 ```
-China
+Japan
 --------
-1. Speaks Mandarin [tag: language]
-
-Russia
---------
-2. Speaks Russian [tag: language]
+1. A high-context country, hence building relationships is important for doing business [tag: intercultural]
 
 Singapore
 --------
-3. Speaks English
+2. Small domestic market as compared to rest of SEA countries [tag: marketsize]
+
+Thailand
+--------
+3. Political unrest in the capital [tag: politics]
 ```
 
-Command: `country note edit 3 nt/Speaks Singlish t/language`
+Command: `country note edit 2 nt/Rising middle class with increased purchasing power t/spending`
 
-Edits the third country note in the country notes panel. In this case, it will be the note under Singapore. The resulting list will look like:
+Edits the second country note in the country notes panel. In this case, it will be the note under **Singapore**. The resulting list will look like:
 
 ```
-China
+Japan
 --------
-1. Speaks Mandarin [tag: language]
-
-Russia
---------
-2. Speaks Russian [tag: language]
+1. A high-context country, hence building relationships is important for doing business [tag: intercultural]
 
 Singapore
 --------
-3. Speaks Singlish [tag: language]
+2. Rising middle class with increased purchasing power [tag: marketsize, spending]
+
+Thailand
+--------
+3. Political unrest in the capital [tag: politics]
 ```
 
 ### Deleting notes for a country: `country note delete`
 
-Deletes a note that is associated with a specific country at the given index based on the current view of the list panel displaying country notes.
+Deletes a note that is associated with a specific country at the given index based on the **current view** of the [list panel displaying country notes](#ui-when-viewing-country).
+
+Due to ambiguity, deleting of a country note when the country notes panel is not being displayed is not allowed, and an error message will be shown if this is attempted.
 
 Format: `country note delete INDEX`
 
@@ -449,33 +451,33 @@ Example:
 
     Deletes the country note at index 1 of the country notes list panel.
 
-### Getting suggestions on clients: `suggest`
+### Getting suggestions on clients: `client suggest`
 
-Obtains a list of clients based on the suggestion type(s) passed in.
+Obtains a list of clients based on the client suggestion type(s) passed in. This command will also reset the left display panel to its default view.
 
-Format: `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...`
+Format: `client suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...`
 
 Examples:
 
-* Command: `suggest by/available`
+* Command: `client suggest by/available`
 
     Obtains a list of clients where the time is 1800-2200 in the client's timezone (off work hours).
 
-* Command: `suggest by/frequency`
+* Command: `client suggest by/frequency`
 
     Obtains a list of clients based on the last time their details were edited in **_TBM_**. Clients who have not been contacted for a longer period will be the first in the list.
 
-* `suggest by/contract`
+* `client suggest by/contract`
 
     Obtains a list of clients based on their current contract details. Clients whose contracts are expiring will be shown first.
 
-* `suggest by/contract by/available`
+* `client suggest by/contract by/available`
 
     Obtains a list of clients based on their current contract details but only clients who are available will be shown. Clients whose contracts are expiring will be shown first.
 
 ### Clearing all entries: `clear`
 
-Deletes all existing information from the application. The end result will be an application with no client/note/country data.
+Deletes all existing information from the application. The end result will be an application with no client/note/country data. The left display panel will be reset to its default view.
 
 Format: `clear`
 
@@ -486,6 +488,14 @@ Exits the program.
 Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Glossary
+
+* **Business Contact**: Synonymous with **Client**
+* **Client**: Refers to a person whom the user is conducting his/her business with
+* **UTC**: [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
+* **Mainstream OS**: Windows, Linux, Unix, macOS
+* **_TBM_**: Initialism for Travelling BusinessMan
 
 ## FAQ
 
@@ -499,35 +509,34 @@ Format: `exit`
 Action | Format, Examples
 --------|------------------
 **List all clients** | `list`
-**Add client** | `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE [ce/CONTRACT_EXPIRY_DATE]` <br> e.g., `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+3 ce/22-12-2020`
-**Edit client** | `client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_CODE) (tz/TIMEZONE) (ce/CONTRACT_EXPIRY_DATE)`<br> e.g.,`client edit 3 c/JP tz/GMT+7`
+**Add client** | `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE [ce/CONTRACT_EXPIRY_DATE]` <br> e.g., `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/UTC+03:00 ce/22-12-2020`
+**Edit client** | `client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_CODE) (tz/TIMEZONE) (ce/CONTRACT_EXPIRY_DATE)`<br> e.g.,`client edit 3 c/JP tz/UTC+07:00`
 **View client** | `client view INDEX` <br> e.g., `client view 2`
 **Find client** | `client find KEYWORD [MORE_KEYWORDS]`<br> e.g., `client find Hans`
 **Delete client** | `client delete INDEX`<br> e.g., `client delete 3`
 **Add client note** | `client note add CLIENT_INDEX nt/NOTE_STRING [t/TAG]...` <br> e.g., `client note add 4 t/meeting nt/need to slowly convince him to sign the contract`
 **Delete client note** | `client note delete CLIENT_INDEX NOTE_INDEX` <br> e.g., `client note delete 3 2`
-**Edit client note** | `client note edit CLIENT_INDEX NOTE_INDEX nt/NOTE_STRING [t/TAG]...` <br> e.g., `client note edit 3 2 nt/Loves cats`
+**Edit client note** | `client note edit CLIENT_INDEX NOTE_INDEX (nt/NOTE_STRING) (t/TAG)...` <br> e.g., `client note edit 3 2 nt/Loves cats t/pets`
 **Filter by country** | `country filter c/COUNTRY_CODE` <br> e.g., `country filter c/SG`
 **View country note** | `country note view [c/COUNTRY_CODE]` <br> e.g., `country note view c/SG`
 **Add country note** | `country note add c/COUNTRY_CODE nt/NOTE_STRING [t/TAG]...` <br> e.g., `country note add c/SG nt/has one of the lowest coporate taxes in the world t/tax`
 **Edit country note** | `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...` <br> e.g., `country note edit 1 nt/has one of the lowest coporate taxes in the world t/tax`
 **Delete country note** | `country note delete INDEX` <br> e.g., `country note delete 1`
-**Get suggestions** | `suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...` <br> e.g., `suggest by/available by/frequency`
+**Get suggestions** | `client suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...` <br> e.g., `client suggest by/available by/frequency`
 **Clear** | `clear`
 **Exit** | `exit`
 **Help** | `help`
-
 
 ## Parameter constraints summary
 
 Parameter | Prefix | Constraints, Examples
 --------|------------------| ----------
 **NAME** | `n/` | Names should only contain alphanumeric characters and spaces, and it should not be blank. <br> e.g. `n/John Doe`
-**PHONE_NUMBER** | `p/` | Phone numbers should only contain numbers, and it should be at least 3 digits long. <br> e.g. `p/9123 4567`
+**PHONE_NUMBER** | `p/` | Phone numbers should have at least 3 digits and at most 15 digits. <br> Please refer to [Appendix B](#appendix-b-international-standards-followed) for a comprehensive description. <br> e.g. `p/81867752` or `p/+65 81867752` 
 **EMAIL** | `e/` | Emails should be of the format local-part@domain. <br> e.g. `e/katya@yahoo.com`
 **ADDRESS** |`a/` | Addresses can take any values, and it should not be blank. <br> e.g. `Vladivostok, Nevelskogo, bld. 15, appt. 256`
-**COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification. [List](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) of country codes. <br> e.g. `c/SG` (Singapore)
-**TIMEZONE** | `tz/` | Timezone should be given in offsets relative to [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time). <br> e.g. `tz/GMT+8`
+**COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification <br> This [finding tool](https://www.countrycode.org/) can be used. <br> e.g. `c/SG` (Singapore) 
+**TIMEZONE** | `tz/` | Timezone should be given in offsets relative to [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) in the format `UTC+HH:MM` where `HH` refers to the offset in hours and `MM` refers to the offset in minutes. The full list of valid timezones can be found [here](https://www.timeanddate.com/time/current-number-time-zones.html) <br> e.g. `tz/UTC+08:00
 **CONTRACT_EXPIRY_DATE** | `ce/` | Date should be given in the format "DD-MM-YYYY". <br> e.g. `ce/10-10-2020`
 **NOTE_STRING** | `nt/` | Notes can take any values, and it should not be blank. <br> e.g. `nt/Likes cats`
 **TAG** | `t/` | Tags names should be alphanumeric and have a maximum of 45 characters. <br> e.g. `t/important`
@@ -535,15 +544,17 @@ Parameter | Prefix | Constraints, Examples
 **INDEX** | - | Index is a number greater than 0 that is based on the numberings beside each client or note. <br> e.g. `1` would refer to the first client or note.
 
 --------------------------------------------------------------------------------------------------------------------
+
 ## Appendix A - Introduction to the UI
 
 ### Start Page
 
-The diagram below shows the key UI elements of TBM upon first start-up.
+The diagram below shows the key UI elements of **_TBM_** upon first start-up.
 
-![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
+  ![Annotated UI Default Page](images/command-screenshots/UI_annotated.png)
+  <p align="center"><i>Figure 2. Default View</i></p>
 
-* **Command Box** allows you to input commands to interact with TBM.
+* **Command Box** allows you to input commands to interact with **_TBM_**.
 
 * **Client List Panel** will always allow you to view all your clients' information at a go. It's scrollable so that you 
 never have to worry about not being able to see all your important clients at a single glance!
@@ -553,22 +564,20 @@ never have to worry about not being able to see all your important clients at a 
 * **Result Display** will show you the output of executing your command.
     * It indicates successful commands.
     
-    * On the off-chance there's a syntax issue, TBM will remind you of the correct syntax it expects, something like this:
+    * On the off-chance there's a syntax issue, **_TBM_** will remind you of the correct syntax it expects, something like this:
  
-     ![Result Display slowing error message](images/command-screenshots/result_display_error_syntax.png)
+     ![Result Display showing error message](images/command-screenshots/result_display_error_syntax.png)
+     <p align="center"><i>Figure 3. Error Display</i></p>
      
-* **Generic Widget View Box** is aptly named because it shall render *Client Cards* or *Country Cards* when
- relevant commands are sent. Initially it will show you your local time to the precise second, as well as your current location.
+* **Display Panel** shall render *Client Cards* or *Country Cards* when relevant commands are sent. The default view shows you your local time to the precise second, as well as your current location.
    
-     
-
-
 ### UI when Viewing Clients
 
 The diagram below is what you should see upon viewing a particular client (i.e. firing up the command `client view 1
 `). It shows how to identify a particular client's `CLIENT_INDEX`, and an associated note's `CLIENT_NOTE_INDEX`.
 
-![Annotated Client View UI Layout](images/command-screenshots/client_view_annotated.png)
+  ![Annotated Client View UI Layout](images/command-screenshots/client_view_annotated.png)
+  <p align="center"><i>Figure 4. Client View</i></p>
 
 Here, the **Client Note Card** displaying the note that's tagged as `hobbies` is referred to by the `CLIENT_INDEX` of `1`.
 
@@ -578,16 +587,50 @@ Being able to identify these is key to adding, deleting and editing client notes
 
 Similarly, `COUNTRY_NOTE_INDEX` can be identified like so by referring to the index indicated on the **Country Note Card**:
 
-![Annotated Country View UI Layout](images/command-screenshots/country_note_view_annotated.png)
-
+  ![Annotated Country Note View UI Layout](images/command-screenshots/country_note_view_annotated.png)
+  <p align="center"><i>Figure 5. Country Note View</i></p>
 
 ### Help Window
 
 This is what to expect when you type in the `help` command or press `F1`: 
-![help window](./images/command-screenshots/help_window.png)
+
+  ![help window](./images/command-screenshots/help_window.png)
+  <p align="center"><i>Figure 6. Help Window</i></p>
 
 <p align="center">
-   <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a> } </i
-   ></strong> 
+   <strong><i>{End of Appendix A, please return to the <a href="#table-of-contents">Table of Contents</a>}</i></strong> 
+</p>
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix B: International Standards Followed 
+
+### ISO Country Codes
+
+**_TBM_** utilizes 2-letter country codes that follow the **_ISO3166_** specification. This [finding tool](https://www.countrycode.org/) can be used.
+
+### Phone Numbers
+
+**_TBM_**'s format for phone numbers is **_based_** on the [E.164 standard](https://en.wikipedia.org/wiki/E.164) as recommended by the _ITU Telecommunication Standardization Sector (ITU-T)_.
+**_However_**, **_TBM_** doesn't allow for spaces in between phone number fields. For example, `+65 8186 7742` may follow this international standard, but **_TBM_ requires you to remove spacing within the phone number field** so the correct way to input it would be `+65 81867742`. 
+
+Here are the alternative stylistic choices that you might make when writing out phone numbers, all of which are valid:
+* Phone numbers can be grouped into `COUNTRY_CODE` and `NATIONAL_PHONE_NUMBER`. We shall refer to `NATIONAL_PHONE_NUMBER` simply as **_phone number field_** in this appendix.
+    * Please note that the **_phone number field_** may only have a **maximum of 12 digits**, all without spaces. The digit count restriction is as per the "global services specification" of **E.164**.
+    * `COUNTRY_CODE` field is optional and may be omitted by you. 
+      * Adding country codes for the telephone numbers:
+        * Country code numbers range from 1 to 3 digits and may be found from this [finding tool](https://www.countrycode.org/). You **must** prepend the country code with a `+` character.  
+          * `+6581867742` is a valid phone number where `+65` is the country code for Singapore.
+        * **If you wish to, you may also separate country code and phone number fields with a delimiter:** Valid delimiters include: the " " character, "-", and "."
+          * `+65 81867742` with a " " character is also a valid phone number. 
+          * `+65-81867742` with a "-" character is also a valid phone number.
+          * `+65.81867742` with a "." character is also a valid phone number.
+            
+         These options have been provided because we know that such delimiting is a matter of _cultural preference_.
+    
+
+
+<p align="center">
+   <strong><i>{End of Appendix B, please return to the <a href="#table-of-contents">Table of Contents</a>}</i></strong> 
 </p>
 --------------------------------------------------------------------------------------------------------------------

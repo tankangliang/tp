@@ -1,7 +1,10 @@
 package seedu.address.model.note;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
 
 import java.util.HashSet;
@@ -10,6 +13,7 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.client.Address;
 import seedu.address.model.tag.Tag;
 
 class NoteTest {
@@ -27,6 +31,20 @@ class NoteTest {
         tags = new HashSet<>();
         tags.add(TAG_1);
         tags.add(TAG_2);
+    }
+
+    @Test
+    public void isValidNote() {
+        // null note
+        assertThrows(NullPointerException.class, () -> Note.isValidNote(null));
+
+        // invalid note
+        assertFalse(Address.isValidAddress("")); // empty string
+        assertFalse(Address.isValidAddress(" ")); // spaces only
+
+        // valid notes
+        assertTrue(Address.isValidAddress("some note 123")); // alphanumeric characters
+        assertTrue(Address.isValidAddress("-")); // one character
     }
 
     @Test

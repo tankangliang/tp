@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -16,10 +15,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.note.CountryNote;
 import seedu.address.model.tag.Tag;
-import seedu.address.ui.WidgetViewOption;
 
 /**
- * A class that encapsulates the logic for editing country notes.
+ * Edits a CountryNote.
  */
 public class CountryNoteEditCommand extends Command {
 
@@ -29,14 +27,21 @@ public class CountryNoteEditCommand extends Command {
             + "Parameters: INDEX "
             + "(" + PREFIX_NOTE + "NOTE_STRING )"
             + " (" + PREFIX_TAG + "TAG)...\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NOTE + "better government stability in recent months";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_NOTE
+            + "better government stability in recent months";
     public static final String MESSAGE_SUCCESS = "Edited country note at index %1$s: %2$s";
+    public static final String MESSAGE_COUNTRY_NOTES_NOT_VISIBLE = "Country notes are not "
+            + "currently being displayed, thus this command will not be executed "
+            + "so as to prevent accidental modification of country notes.\n"
+            + "Please use the " + CountryNoteViewCommand.COMMAND_WORD + " command before using this command.";
+    public static final String MESSAGE_DUPLICATE_COUNTRY_NOTE_AFTER_EDIT = "The country note "
+            + "after editing already exists in TBM!";
     private final Index targetIndex;
     private final CountryNote countryNote;
     private final Set<Tag> tags;
 
     /**
-     * Initializes a CountryNoteEditCommand with the given targetIndex.
+     * Initializes a CountryNoteEditCommand with the given {@code targetIndex} and {@code countryNote}.
      *
      * @param targetIndex The given targetIndex.
      * @param countryNote The country note that contains the new note content.
@@ -49,7 +54,7 @@ public class CountryNoteEditCommand extends Command {
     }
 
     /**
-     * Initializes a CountryNoteEditCommand with the given targetIndex.
+     * Initializes a CountryNoteEditCommand with the given {@code targetIndex} and {@code tags}.
      *
      * @param targetIndex The given targetIndex.
      * @param tags The new tags to add to the country note at the existing targetIndex.
@@ -70,6 +75,10 @@ public class CountryNoteEditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_COUNTRY_NOTE_DISPLAYED_INDEX);
         }
 
+        if (!model.getCountryNotesListPanelIsVisible()) {
+            throw new CommandException(MESSAGE_COUNTRY_NOTES_NOT_VISIBLE);
+        }
+
         CountryNote countryNoteToEdit = lastShownList.get(targetIndex.getZeroBased());
         tags.addAll(countryNoteToEdit.getTags());
         tags.addAll(countryNote.getTags());
@@ -84,11 +93,13 @@ public class CountryNoteEditCommand extends Command {
                         ? countryNoteToEdit.getNoteContent() : countryNote.getNoteContent(),
                 countryNoteToEdit.getCountry(), tags);
 
+        if (model.hasCountryNote(newCountryNote)) {
+            throw new CommandException(MESSAGE_DUPLICATE_COUNTRY_NOTE_AFTER_EDIT);
+        }
+
         model.setCountryNote(countryNoteToEdit, newCountryNote);
 
-        return new CommandResult(
-                String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), newCountryNote), false,
-                false, false, WidgetViewOption.generateNullWidgetOption());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetIndex.getOneBased(), newCountryNote));
     }
 
     @Override
@@ -109,8 +120,4 @@ public class CountryNoteEditCommand extends Command {
         return targetIndex.equals(c.targetIndex) && countryNote.equals(c.countryNote) && tags.equals(c.tags);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(targetIndex, countryNote, tags);
-    }
 }

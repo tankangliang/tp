@@ -193,11 +193,11 @@ It implements the following operations:
 * `CountryNotesManager#addCountryNote(CountryNote countryNote)`  — Adds the given `countryNote` to the internal `ObservableList<CountryNote>`.
 * `CountryNotesManager#deleteCountryNote(CountryNote countryNote)`  — Deletes the given `countryNote` from the internal `ObservableList<CountryNote>`.
 
-The following class diagram illustrates how the relevant classes in the `seedu.address.model` package are related to `CountryNote`.
+The following class diagram illustrates how the relevant classes in the `Model` component are related to `CountryNote`.
 
 ![Country Class Diagram](images/CountryClass.png)
 
-Given below is a sequence diagram that shows how the `country note add` command works.
+Given below is a sequence diagram that shows how the `country note add` command works within the `Logic` component.
 
 For brevity, the full command `country note add c/COUNTRY_CODE nt/NOTE_STRING` will be substituted by `country note add`.
 
@@ -206,10 +206,23 @@ Hence, `CountryNoteAddCommand` stores a `CountryNote` object. For brevity, the a
 
 ![Country Note Add Sequence Diagram](images/CountryNoteAddSeqDiag.png)
 
-### Suggesting contacts
+### Switching between displaying the Country Note Panel and displaying the Client View
 
 #### Implementation
 
+The mechanism to switch between displaying the Country Note Panel and displaying the Client View is facilitated by the state of the `CommandResult` after executing the user command.
+
+`CommandResult` implements the following operations that are relevant to the Display Panel: 
+* `CommandResult#shouldDisplayClient()` — Returns true if the UI should display the client view, otherwise returns false.
+* `CommandResult#shouldDisplayCountryNote()` — Returns true if the UI should display the country notes view, otherwise returns false.
+
+The following activity diagram illustrates what happens to the Display Panel when the user inputs a command.  
+
+![Switching Country Note Panel and Client View](images/CountryNotePanelClientViewActDiag.png)
+
+### Suggesting contacts
+
+#### Implementation
 
 The suggestion mechanism is facilitated by `filteredClients` in `ModelManager`. It is an instance of `javafx.collections.transformation.FilteredList<Client>`. It implements the following relevant operations:
 * `FilteredList<Client>#setPredicate(Predicate<? super Client> p)` — Filters out any clients that do not match the predicate in the list.
@@ -217,27 +230,27 @@ The suggestion mechanism is facilitated by `filteredClients` in `ModelManager`. 
 
 These operations are exposed in the `Model` interface as `Model#updateFilteredClientList()` and `Model#sortFilteredClientList()` respectively.
 
-The following activity diagram summarizes what happens when a user inputs a `suggest` command.
+The following activity diagram summarizes what happens when a user inputs a `client suggest` command.
 
 ![Suggest Activity Diagram](images/SuggestActivityDiagram.png)
 
 Given below is an example usage scenario and how the suggestion mechanism behaves at each step.
 
-Step 1: The user executes `suggest by/contract` to list the suggested clients sorted by contract expiry dates. At this point, `filteredClients` is showing all clients.
+Step 1: The user executes `client suggest by/contract` to list the suggested clients sorted by contract expiry dates. At this point, `filteredClients` is showing all clients.
 
 ![SuggestState0](images/SuggestState0.png)
 
-Step 2: The `suggest` command calls `Model#updateFilteredClientList` with the contract expiry date predicate (which checks if a client has a contract expiry date). `Model` updates the `filteredClients` object with the contract expiry date predicate which filters out all clients without an existing contract expiry date.
+Step 2: The `client suggest` command calls `Model#updateFilteredClientList` with the contract expiry date predicate (which checks if a client has a contract expiry date). `Model` updates the `filteredClients` object with the contract expiry date predicate which filters out all clients without an existing contract expiry date.
 
 ![SuggestState1](images/SuggestState1.png)
 
-Step 3: The `suggest` command calls `Model#sortFilteredClientList` with the contract expiry date comparator (which sorts clients by earliest contract expiry date). `Model` updates the `filteredClients` object with the contract expiry date comparator which gives us clients in order of increasing contract expiry date.
+Step 3: The `client suggest` command calls `Model#sortFilteredClientList` with the contract expiry date comparator (which sorts clients by earliest contract expiry date). `Model` updates the `filteredClients` object with the contract expiry date comparator which gives us clients in order of increasing contract expiry date.
 
 ![SuggestState2](images/SuggestState2.png)
 
 Step 4: The change is then propagated to `Ui`, which updates the displayed clients in `ClientListPanel`.
 
-Step 5: The user decides to execute the command `list`, which resets the `filteredClients` objects to have all clients, and in turn resets the displayed clients in `ClientListPanel` as well.
+Step 5: The user decides to execute the command `client list`, which resets the `filteredClients` objects to have all clients, and in turn resets the displayed clients in `ClientListPanel` as well.
 
 The following sequence diagram shows how the suggest operation works:
 
@@ -504,7 +517,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 6.  **_TBM_** should be able to hold up to 5000 total client notes without a noticeable sluggishness in performance for typical usage.
 7.  **_TBM_** can handle at most 10000 business contacts and at most 50000 total client notes.
 8.  **_TBM_** will only accept countries that are specified by the [ISO3166](https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes) specification.
-9.  **_TBM_** will only accept [GMT](https://en.wikipedia.org/wiki/Greenwich_Mean_Time) timezones.
+9.  **_TBM_** will only accept the UTC offsets defined in this [list](https://www.timeanddate.com/time/current-number-time-zones.html).
 10. **_TBM_** is not required to validate that the timezone of a business contact correctly matches his/her country.
 11. **_TBM_** should retain all functionalities even when it is not connected to the internet.
 12. The size of the **_TBM_** _JAR_ file should not exceed 100Mb.
@@ -513,8 +526,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Business Contact**: Synonymous with **Client**
 * **Client**: Refers to a person whom the user is conducting his/her business with
-* **GMT**: [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time)
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **UTC**: [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **_TBM_**: Initialism for Travelling BusinessMan
 
 --------------------------------------------------------------------------------------------------------------------
