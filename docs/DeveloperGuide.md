@@ -256,6 +256,11 @@ The following sequence diagram shows how the suggest operation works:
 
 ![Suggest Sequence Diagram](images/SuggestSequenceDiagram.png)
 
+### Command History
+
+A command history will greatly optimise the user's productivity by removing the need to repetitively type out similar commands.
+Furthermore, it allows backwards viewing of previous commands given, which is similar to the CLI experience.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -340,10 +345,6 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### \[Proposed\] Command History
-
-A command history will greatly optimise the user's productivity by removing the need to repetitively type out similar commands.
-Furthermore, it allows backwards viewing of previous commands given, which is similar to the CLI experience.
 
 
 --------------------------------------------------------------------------------------------------------------------
