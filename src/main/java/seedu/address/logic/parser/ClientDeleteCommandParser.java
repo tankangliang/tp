@@ -15,7 +15,7 @@ public class ClientDeleteCommandParser implements Parser<ClientDeleteCommand> {
      * Parses the given {@code args} in the context of the ClientDeleteCommand and returns a ClientDeleteCommand
      * object for execution.
      *
-     * @throws ParseException If the user input does not conform the expected format.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public ClientDeleteCommand parse(String args) throws ParseException {
         try {

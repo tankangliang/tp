@@ -15,7 +15,7 @@ public class CountryNoteViewCommandParser implements Parser<CountryNoteViewComma
      * Parses the given {@code args} in the context of the CountryNoteViewCommand and returns a CountryNoteViewCommand
      * object for execution.
      *
-     * @throws ParseException If the user input does not conform the expected format.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     @Override
     public CountryNoteViewCommand parse(String args) throws ParseException {

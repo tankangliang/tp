@@ -11,7 +11,7 @@ public interface Parser<T extends Command> {
     /**
      * Parses {@code args} into a command and returns it.
      *
-     * @throws ParseException If {@code args} does not conform the expected format.
+     * @throws ParseException If {@code args} does not conform to the expected format.
      */
     T parse(String args) throws ParseException;
 }

@@ -17,7 +17,7 @@ public class CountryFilterCommandParser implements Parser<CountryFilterCommand> 
      * Parses the given {@code args} in the context of the CountryFilterCommand and returns a CountryFilterCommand
      * object for execution.
      *
-     * @throws ParseException If the user input does not conform the expected format.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public CountryFilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

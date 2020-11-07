@@ -34,7 +34,7 @@ public class CountryNoteAddCommandParser implements Parser<CountryNoteAddCommand
      * Parses the given {@code args} in the context of the CountryNoteAddCommand and returns a CountryNoteAddCommand
      * object for execution.
      *
-     * @throws ParseException If the user input does not conform the expected format.
+     * @throws ParseException If the user input does not conform to the expected format.
      */
     public CountryNoteAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

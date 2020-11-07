@@ -64,7 +64,7 @@ public class MainParser {
      *
      * @param userInput Full user input string.
      * @return The command based on the user input.
-     * @throws ParseException if the user input does not conform the expected format.
+     * @throws ParseException if the user input does not conform to the expected format.
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -104,7 +104,7 @@ public class MainParser {
      *
      * @param input User input with "client" stripped.
      * @return Command relating to client functions.
-     * @throws ParseException If input does not conform to expected format.
+     * @throws ParseException If input does not conform to the expected format.
      */
     private Command parseCountryCommands(String input) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
@@ -135,7 +135,7 @@ public class MainParser {
      *
      * @param input User input with "country note" stripped.
      * @return Command relating to country note functions.
-     * @throws ParseException If input does not conform to expected format.
+     * @throws ParseException If input does not conform to the expected format.
      */
     private Command parseCountryNoteCommands(String input) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
@@ -172,7 +172,7 @@ public class MainParser {
      *
      * @param input User input with "client" stripped.
      * @return Command relating to client functions.
-     * @throws ParseException If input does not conform to expected format.
+     * @throws ParseException If input does not conform to the expected format.
      */
     private Command parseClientCommands(String input) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
@@ -219,7 +219,7 @@ public class MainParser {
      *
      * @param input User input with "client note" stripped.
      * @return Command relating to client note functions.
-     * @throws ParseException If input does not conform to expected format.
+     * @throws ParseException If input does not conform to the expected format.
      */
     private Command parseClientNoteCommands(String input) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
