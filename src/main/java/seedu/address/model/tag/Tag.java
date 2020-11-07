@@ -13,7 +13,6 @@ public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and have a maximum of "
             + MAX_CHARACTERS + " characters. Also, the tag name \"untagged\" is reserved and should not be used.";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
-    public static final String UNTAGGED_TAG_NAME = "untagged";
     public static final Tag UNTAGGED = new Tag("untagged");
 
     public final String tagName;
@@ -33,9 +32,6 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        if (test.equals(UNTAGGED_TAG_NAME)) {
-            return false;
-        }
         return test.matches(VALIDATION_REGEX) && test.length() <= MAX_CHARACTERS;
     }
 
