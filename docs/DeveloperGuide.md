@@ -259,7 +259,7 @@ The following sequence diagram shows how the suggest operation works:
 ### Command History
 
 A command history greatly optimises the user's productivity by removing the need to repetitively type out similar commands.
-Furthermore, it allows backwards viewing of previous commands given, which is similar to the CLI experience. However, the difference between the traditional CLI history and TBM CLI history is that TBM's history only accepts valid commands. Invalid commands entered will not be included will not sppear in the command history.
+Furthermore, it allows backwards viewing of previous commands given, which is similar to the CLI experience. However, the difference between the traditional CLI history and TBM CLI history is that TBM's history only accepts valid commands. Invalid commands entered will not be included will not appear in the command history.
 The modification of previous commands in the history do not override the current command as well. The current input being edited is stored in a separate variable was the user scrolls through the command history. 
 
 This is proposed upgrade for the CLI history feature.
