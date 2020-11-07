@@ -38,7 +38,7 @@ public class MainParser {
     private static final Logger logger = LogsCenter.getLogger(MainParser.class);
 
     /**
-     * Different command type separators
+     * Different command type separators.
      */
     private static final String CLIENT_TYPE = "client";
     private static final String COUNTRY_TYPE = "country";
@@ -52,6 +52,9 @@ public class MainParser {
 
     private final TagNoteMap tagNoteMap;
 
+    /**
+     * Initializes a {@code MainParser} with the given {@code tagNoteMap}.
+     */
     public MainParser(TagNoteMap tagNoteMap) {
         this.tagNoteMap = tagNoteMap;
     }
@@ -59,9 +62,9 @@ public class MainParser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
+     * @param userInput Full user input string.
+     * @return The command based on the user input.
+     * @throws ParseException if the user input does not conform the expected format.
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -96,13 +99,12 @@ public class MainParser {
         }
     }
 
-
     /**
-     * Parses input given that command is of COUNTRY_TYPE (starts with "country")
+     * Parses input given that command is of COUNTRY_TYPE (starts with "country").
      *
-     * @param input user input with "client" stripped
-     * @return command relating to client functions
-     * @throws ParseException if input does not conform to expected format
+     * @param input User input with "client" stripped.
+     * @return Command relating to client functions.
+     * @throws ParseException If input does not conform to expected format.
      */
     private Command parseCountryCommands(String input) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
@@ -129,11 +131,11 @@ public class MainParser {
     }
 
     /**
-     * Parses input given that command is of COUNTRY_NOTE_TYPE (starts with "country note")
+     * Parses input given that command is of COUNTRY_NOTE_TYPE (starts with "country note").
      *
-     * @param input user input with "country note" stripped
-     * @return command relating to country note functions
-     * @throws ParseException if input does not conform to expected format
+     * @param input User input with "country note" stripped.
+     * @return Command relating to country note functions.
+     * @throws ParseException If input does not conform to expected format.
      */
     private Command parseCountryNoteCommands(String input) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
@@ -166,11 +168,11 @@ public class MainParser {
     }
 
     /**
-     * Parses input given that command is of CLIENT_TYPE (starts with "client")
+     * Parses input given that command is of CLIENT_TYPE (starts with "client").
      *
-     * @param input user input with "client" stripped
-     * @return command relating to client functions
-     * @throws ParseException if input does not conform to expected format
+     * @param input User input with "client" stripped.
+     * @return Command relating to client functions.
+     * @throws ParseException If input does not conform to expected format.
      */
     private Command parseClientCommands(String input) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
@@ -213,11 +215,11 @@ public class MainParser {
     }
 
     /**
-     * Parses input given that command is of CLIENT_TYPE + NOTE_TYPE (starts with "client note")
+     * Parses input given that command is of CLIENT_TYPE + NOTE_TYPE (starts with "client note").
      *
-     * @param input user input with "client note" stripped
-     * @return command relating to client note functions
-     * @throws ParseException if input does not conform to expected format
+     * @param input User input with "client note" stripped.
+     * @return Command relating to client note functions.
+     * @throws ParseException If input does not conform to expected format.
      */
     private Command parseClientNoteCommands(String input) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
