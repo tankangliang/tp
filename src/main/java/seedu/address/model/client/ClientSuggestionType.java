@@ -8,7 +8,7 @@ import java.util.function.Predicate;
 
 /**
  * Represents a ClientSuggestionType in the address book.
- * Guarantees: immutable; suggestion type is valid as declared in {@link #isValidClientSuggestionType(String)}
+ * Guarantees: immutable; client suggestion type is valid as declared in {@link #isValidClientSuggestionType(String)}
  */
 public class ClientSuggestionType {
 
@@ -73,7 +73,7 @@ public class ClientSuggestionType {
     }
 
     /**
-     * Returns this suggestion type's description.
+     * Returns this client suggestion type's description.
      */
     public String getDescription() {
         switch (suggestionString) {

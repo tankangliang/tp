@@ -452,7 +452,7 @@ Example:
 
 ### Getting suggestions on clients: `client suggest`
 
-Obtains a list of clients based on the suggestion type(s) passed in. This command will also reset the left display panel to its default view.
+Obtains a list of clients based on the client suggestion type(s) passed in. This command will also reset the left display panel to its default view.
 
 Format: `client suggest by/SUGGESTION_TYPE [by/SUGGESTION_TYPE]...`
 
