@@ -14,8 +14,11 @@ Given below are my contributions to the project.
   * `country filter` command
   * `country note add` command
   * `country note view` command
+  * `country note delete` command
+  * `country note edit` command
+  * `client suggest by/available` command
 
-* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=rayson&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByAuthors&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=zoom&zA=raysonkoh&zR=AY2021S1-CS2103T-F11-4%2Ftp%5Bmaster%5D&zACS=168&zS=2020-08-14&zFS=rayson&zU=2020-10-14&zMG=false&zFTF=commit&zFGS=groupByAuthors&zFR=false)
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=raysonkoh)
 
 * **Project management**:
   * Brainstorm user stories for `v1.1`
@@ -23,6 +26,9 @@ Given below are my contributions to the project.
   * Create follow-up issues relating to Country Note and Country Filter
 
 * **Enhancements to existing features**:
+  * Update existing `Saving Data` feature to include functionality to save Country Notes.
+  * Update existing Display Panel to toggle between Client View and Country Note Panel based on user command.
+  * Include sample country notes as part of the existing sample data that will be loaded for a first-time user. 
 
 * **Documentation**:
   * User Guide:
