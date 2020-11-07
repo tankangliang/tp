@@ -30,6 +30,7 @@ public class Timezone {
             String out = String.format("%s", offset);
             VALID_TIMEZONES.add(out);
         }
+        // The timezone represented by UTC+00:00 is shown as "Z" by default.
         VALID_TIMEZONES.remove("Z");
         VALID_TIMEZONES.add("+00:00");
     }
@@ -53,9 +54,9 @@ public class Timezone {
     public Timezone(String timezone) {
         requireNonNull(timezone);
         checkArgument(isValidTimezone(timezone), MESSAGE_CONSTRAINTS);
-        assert (VALID_TIMEZONES.contains(timezone.substring(UTC_STRING.length())));
+        String offset = timezone.substring(UTC_STRING.length());
 
-        this.zoneOffsetId = ZoneId.of(timezone);
+        this.zoneOffsetId = ZoneId.of(offset);
     }
 
     /**
@@ -93,11 +94,11 @@ public class Timezone {
     @Override
     public String toString() {
         String zoneOffsetIdString = zoneOffsetId.toString();
-        // The timezone for UTC+00:00 is shown as UTC by default. For standardization, we add a "+00:00" to the end.
-        if (zoneOffsetIdString.equals(UTC_STRING)) {
-            zoneOffsetIdString = UTC_STRING + "+00:00";
+        // The timezone for +00:00 is shown as "Z" by default.
+        if (zoneOffsetIdString.equals("Z")) {
+            zoneOffsetIdString = "+00:00";
         }
-        return zoneOffsetIdString;
+        return UTC_STRING + zoneOffsetIdString;
     }
 
     @Override

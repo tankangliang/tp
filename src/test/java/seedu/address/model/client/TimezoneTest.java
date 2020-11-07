@@ -122,11 +122,11 @@ public class TimezoneTest {
 
     @Test
     public void getTimeZone() {
-        assertEquals(TimeZone.getTimeZone(ZoneId.of("UTC+14:00")), new Timezone("UTC+14:00").getJavaTimeZone());
-        assertEquals(TimeZone.getTimeZone(ZoneId.of("UTC-12:00")), new Timezone("UTC-12:00").getJavaTimeZone());
-        assertEquals(TimeZone.getTimeZone(ZoneId.of("UTC+13:45")), new Timezone("UTC+13:45").getJavaTimeZone());
-        assertEquals(TimeZone.getTimeZone(ZoneId.of("UTC-09:30")), new Timezone("UTC-09:30").getJavaTimeZone());
-        assertEquals(TimeZone.getTimeZone(ZoneId.of("UTC+00:00")), new Timezone("UTC+00:00").getJavaTimeZone());
+        assertEquals(TimeZone.getTimeZone(ZoneId.of("+14:00")), new Timezone("UTC+14:00").getJavaTimeZone());
+        assertEquals(TimeZone.getTimeZone(ZoneId.of("-12:00")), new Timezone("UTC-12:00").getJavaTimeZone());
+        assertEquals(TimeZone.getTimeZone(ZoneId.of("+13:45")), new Timezone("UTC+13:45").getJavaTimeZone());
+        assertEquals(TimeZone.getTimeZone(ZoneId.of("-09:30")), new Timezone("UTC-09:30").getJavaTimeZone());
+        assertEquals(TimeZone.getTimeZone(ZoneId.of("+00:00")), new Timezone("UTC+00:00").getJavaTimeZone());
     }
 
     @Test

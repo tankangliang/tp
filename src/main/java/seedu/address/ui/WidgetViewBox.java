@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -151,8 +151,8 @@ public class WidgetViewBox extends UiPart<Region> {
         phone.setText("");
         email.setText("");
         address.setText("");
-        int offset = TimeZone.getTimeZone(ZoneId.systemDefault()).getOffset(new Date().getTime()) / 1000 / 60 / 60;
-        String offsetString = Timezone.UTC_STRING + (offset < 0 ? "-" : "+") + offset;
+        String offset = ZoneId.systemDefault().getRules().getOffset(LocalDateTime.now()).toString();
+        String offsetString = Timezone.UTC_STRING + offset;
         country.setText(Locale.getDefault().getDisplayCountry() + " (" + offsetString + ")");
         contractExpiryDate.setText("");
         noteTitle.setText("");
