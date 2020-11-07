@@ -43,8 +43,9 @@ Given below are my contributions to the project.
     * Add the Non-Functional Requirements (NFR) section
     * Add the use case for `Saving Data` 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): (examples: [\#121](https://github.com/AY2021S1-CS2103T-F11-4/tp/pull/121), [\#125](https://github.com/AY2021S1-CS2103T-F11-4/tp/pull/125), [\#134](https://github.com/AY2021S1-CS2103T-F11-4/tp/pull/134))
+  * PRs reviewed (with non-trivial review comments): (examples: [\#121](https://github.com/AY2021S1-CS2103T-F11-4/tp/pull/121), [\#125](https://github.com/AY2021S1-CS2103T-F11-4/tp/pull/125), [\#134](https://github.com/AY2021S1-CS2103T-F11-4/tp/pull/134), [\#150](https://github.com/AY2021S1-CS2103T-F11-4/tp/pull/150), [\#182](https://github.com/AY2021S1-CS2103T-F11-4/tp/pull/182), [\#235](https://github.com/AY2021S1-CS2103T-F11-4/tp/pull/235))
   * Contributed to forum discussions (examples: [\#125](https://github.com/nus-cs2103-AY2021S1/forum/issues/125), [\#161](https://github.com/nus-cs2103-AY2021S1/forum/issues/161))
+  * Reported bugs in other team's product (examples: [Bugs found during Practical Exam Dry-Run](https://github.com/raysonkoh/ped/issues))
 
 * **Tools**:
   * Gradle
