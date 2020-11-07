@@ -11,11 +11,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.client.Address;
+import seedu.address.model.client.ClientSuggestionType;
 import seedu.address.model.client.ContractExpiryDate;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.Name;
 import seedu.address.model.client.Phone;
-import seedu.address.model.client.SuggestionType;
 import seedu.address.model.client.Timezone;
 import seedu.address.model.country.Country;
 import seedu.address.model.country.CountryCodeVerifier;
@@ -180,29 +180,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String suggestionType} into a {@code SuggestionType}.
+     * Parses a {@code String clientSuggestionType} into a {@code ClientSuggestionType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code suggestionType} is invalid.
+     * @throws ParseException if the given {@code clientSuggestionType} is invalid.
      */
-    public static SuggestionType parseSuggestionType(String suggestionType) throws ParseException {
-        requireNonNull(suggestionType);
-        String trimmedSuggestionType = suggestionType.trim();
-        if (!SuggestionType.isValidSuggestionType(trimmedSuggestionType)) {
-            throw new ParseException(SuggestionType.MESSAGE_CONSTRAINTS);
+    public static ClientSuggestionType parseClientSuggestionType(String clientSuggestionType) throws ParseException {
+        requireNonNull(clientSuggestionType);
+        String trimmedSuggestionType = clientSuggestionType.trim();
+        if (!ClientSuggestionType.isValidClientSuggestionType(trimmedSuggestionType)) {
+            throw new ParseException(ClientSuggestionType.MESSAGE_CONSTRAINTS);
         }
-        return new SuggestionType(trimmedSuggestionType);
+        return new ClientSuggestionType(trimmedSuggestionType);
     }
 
 
     /**
-     * Parses {@code Collection<String> suggestionTypes} into a {@code Set<SuggestionType>}.
+     * Parses {@code Collection<String> clientSuggestionTypes} into a {@code Set<ClientSuggestionType>}.
      */
-    public static Set<SuggestionType> parseSuggestionTypes(Collection<String> suggestionTypes) throws ParseException {
-        requireNonNull(suggestionTypes);
-        final Set<SuggestionType> suggestionSet = new LinkedHashSet<>();
-        for (String suggestionType : suggestionTypes) {
-            suggestionSet.add(parseSuggestionType(suggestionType));
+    public static Set<ClientSuggestionType> parseClientSuggestionTypes(Collection<String> clientSuggestionTypes)
+            throws ParseException {
+        requireNonNull(clientSuggestionTypes);
+        final Set<ClientSuggestionType> suggestionSet = new LinkedHashSet<>();
+        for (String suggestionType : clientSuggestionTypes) {
+            suggestionSet.add(parseClientSuggestionType(suggestionType));
         }
         return suggestionSet;
     }
