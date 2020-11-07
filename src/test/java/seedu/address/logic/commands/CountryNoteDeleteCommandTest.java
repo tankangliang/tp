@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TestUtil.basicEqualsTests;
@@ -57,8 +59,7 @@ public class CountryNoteDeleteCommandTest {
     @Test
     public void execute_invalidCountryNoteIndex_throwsCommandException() {
         Index invalidCountryNoteIndex = Index.fromOneBased(model.getSortedFilteredCountryNoteList().size() + 1);
-        CountryNoteDeleteCommand countryNoteDeleteCommand =
-                new CountryNoteDeleteCommand(invalidCountryNoteIndex);
+        CountryNoteDeleteCommand countryNoteDeleteCommand = new CountryNoteDeleteCommand(invalidCountryNoteIndex);
         assertCommandFailure(countryNoteDeleteCommand, model, Messages.MESSAGE_INVALID_COUNTRY_NOTE_DISPLAYED_INDEX);
     }
 
