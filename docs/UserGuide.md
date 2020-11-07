@@ -114,9 +114,9 @@ Format: `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TI
 Please refer to [Appendix B](#appendix-b-international-standards-followed) to understand the International Standards that **_TBM_** follows for phone numbers and country codes.
 Example:
 
-* Command: `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+03:00 ce/2-3-2020`<br>
+* Command: `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/UTC+03:00 ce/2-3-2020`<br>
 
-  Adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok, Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **GMT+03:00**, contract expiry date **2 Mar 2020**.
+  Adds a new client with name **Katya**, phone number **98123456**, email **katya@yahoo.com**, address **Vladivostok, Nevelskogo, bld. 15, appt. 256**, country **Russia**, timezone **UTC+03:00**, contract expiry date **2 Mar 2020**.
 
 ### Viewing a client: `client view`
 
@@ -177,9 +177,9 @@ Examples:
 
     Edits **name** to `Alek`, **phone number** to `34842097` and **email** to `dcsdcr@nus.edu.sg`, other fields remain the same.
 
-* Command: `client edit 1 c/JP tz/GMT+07:00`
+* Command: `client edit 1 c/JP tz/UTC+07:00`
 
-    Edits **country** to `Japan` and **timezone** to `GMT+07:00`, other fields remain the same.
+    Edits **country** to `Japan` and **timezone** to `UTC+07:00`, other fields remain the same.
 
 Given the client below:
 
@@ -189,10 +189,10 @@ Client 1
 Name: Alex
 Phone: 911
 Country: Singapore
-Timezone: GMT+08:00
+Timezone: UTC+08:00
 ...(other fields omitted)
 ```
-Command: `client edit 1 c/JP tz/GMT+07:00`
+Command: `client edit 1 c/JP tz/UTC+07:00`
 
 Alex's **country** and **timezone** will be edited, and the following will be the result.
 
@@ -202,7 +202,7 @@ Client 1
 Name: Alex
 Phone: 911
 Country: Japan
-Timezone: GMT+07:00
+Timezone: UTC+07:00
 ...(other fields omitted)
 ```
 
@@ -234,7 +234,7 @@ The location for this file is `./data/tbmManager.json` (indicated at the bottom 
     "email" : "alexyeoh@example.com",
     "address" : "Blk 30 Geylang Street 29, #06-40",
     "country" : "SG",
-    "timezone" : "GMT+08:00",
+    "timezone" : "UTC+08:00",
     "contractExpiryDate" : "21-4-2022",
     "lastModifiedInstant" : "2020-01-01T00:00:00Z",
     "clientNotes" : [ {
@@ -493,7 +493,7 @@ Format: `exit`
 
 * **Business Contact**: Synonymous with **Client**
 * **Client**: Refers to a person whom the user is conducting his/her business with
-* **GMT**: [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time)
+* **UTC**: [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time)
 * **Mainstream OS**: Windows, Linux, Unix, macOS
 * **_TBM_**: Initialism for Travelling BusinessMan
 
@@ -509,8 +509,8 @@ Format: `exit`
 Action | Format, Examples
 --------|------------------
 **List all clients** | `list`
-**Add client** | `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE [ce/CONTRACT_EXPIRY_DATE]` <br> e.g., `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/GMT+03:00 ce/22-12-2020`
-**Edit client** | `client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_CODE) (tz/TIMEZONE) (ce/CONTRACT_EXPIRY_DATE)`<br> e.g.,`client edit 3 c/JP tz/GMT+07:00`
+**Add client** | `client add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS c/COUNTRY_CODE tz/TIMEZONE [ce/CONTRACT_EXPIRY_DATE]` <br> e.g., `client add n/Katya p/98123456 e/katya@yahoo.com a/Vladivostok, Nevelskogo, bld. 15, appt. 256 c/RU tz/UTC+03:00 ce/22-12-2020`
+**Edit client** | `client edit INDEX (n/NAME) (p/PHONE) (e/EMAIL) (a/ADDRESS) (c/COUNTRY_CODE) (tz/TIMEZONE) (ce/CONTRACT_EXPIRY_DATE)`<br> e.g.,`client edit 3 c/JP tz/UTC+07:00`
 **View client** | `client view INDEX` <br> e.g., `client view 2`
 **Find client** | `client find KEYWORD [MORE_KEYWORDS]`<br> e.g., `client find Hans`
 **Delete client** | `client delete INDEX`<br> e.g., `client delete 3`
@@ -536,7 +536,7 @@ Parameter | Prefix | Constraints, Examples
 **EMAIL** | `e/` | Emails should be of the format local-part@domain. <br> e.g. `e/katya@yahoo.com`
 **ADDRESS** |`a/` | Addresses can take any values, and it should not be blank. <br> e.g. `Vladivostok, Nevelskogo, bld. 15, appt. 256`
 **COUNTRY_CODE** | `c/` | A 2-letter country code that follows the ISO3166 specification <br> This [finding tool](https://www.countrycode.org/) can be used. <br> e.g. `c/SG` (Singapore) 
-**TIMEZONE** | `tz/` | Timezone should be given in offsets relative to [Greenwich Mean Time](https://en.wikipedia.org/wiki/Greenwich_Mean_Time) in the format `GMT+HH:MM` where `HH` refers to the offset in hours and `MM` refers to the offset in minutes. The full list of valid timezones can be found [here](https://www.timeanddate.com/time/current-number-time-zones.html) <br> e.g. `tz/GMT+08:00
+**TIMEZONE** | `tz/` | Timezone should be given in offsets relative to [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) in the format `UTC+HH:MM` where `HH` refers to the offset in hours and `MM` refers to the offset in minutes. The full list of valid timezones can be found [here](https://www.timeanddate.com/time/current-number-time-zones.html) <br> e.g. `tz/UTC+08:00
 **CONTRACT_EXPIRY_DATE** | `ce/` | Date should be given in the format "DD-MM-YYYY". <br> e.g. `ce/10-10-2020`
 **NOTE_STRING** | `nt/` | Notes can take any values, and it should not be blank. <br> e.g. `nt/Likes cats`
 **TAG** | `t/` | Tags names should be alphanumeric and have a maximum of 45 characters. <br> e.g. `t/important`

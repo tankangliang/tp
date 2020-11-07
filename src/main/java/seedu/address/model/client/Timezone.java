@@ -7,9 +7,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
@@ -21,14 +19,13 @@ import java.util.regex.Pattern;
  */
 public class Timezone {
 
-    public static final String GMT_STRING = "GMT";
+    public static final String UTC_STRING = "UTC";
 
     public static final Set<String> VALID_TIMEZONES = new HashSet<>();
 
     static {
         Set<String> allZones = ZoneId.getAvailableZoneIds();
-        List<String> zoneList = new ArrayList<>(allZones);
-        for (String s : zoneList) {
+        for (String s : allZones) {
             ZoneOffset offset = LocalDateTime.now().atZone(ZoneId.of(s)).getOffset();
             String out = String.format("%s", offset);
             VALID_TIMEZONES.add(out);
@@ -37,12 +34,12 @@ public class Timezone {
         VALID_TIMEZONES.add("+00:00");
     }
 
-    public static final String MESSAGE_CONSTRAINTS = "Timezone should be in the form \"" + GMT_STRING + "+HH:MM\" or \""
-            + GMT_STRING + "-HH:MM\" where HH is the offset in hours and MM is the offset in minutes. The full list of "
+    public static final String MESSAGE_CONSTRAINTS = "Timezone should be in the form \"" + UTC_STRING + "+HH:MM\" or \""
+            + UTC_STRING + "-HH:MM\" where HH is the offset in hours and MM is the offset in minutes. The full list of "
             + "valid timezones can be found at https://www.timeanddate.com/time/current-number-time-zones.html";
 
-    /** Timezone must start with "GMT" */
-    private static final String VALIDATION_REGEX = "^" + GMT_STRING + "(?<offset>[+-]\\d\\d:\\d\\d)";
+    /** Timezone must start with "UTC" */
+    private static final String VALIDATION_REGEX = "^" + UTC_STRING + "(?<offset>[+-]\\d\\d:\\d\\d)";
 
     private static final Pattern TIMEZONE_FORMAT = Pattern.compile(VALIDATION_REGEX);
 
@@ -56,7 +53,7 @@ public class Timezone {
     public Timezone(String timezone) {
         requireNonNull(timezone);
         checkArgument(isValidTimezone(timezone), MESSAGE_CONSTRAINTS);
-        assert (VALID_TIMEZONES.contains(timezone.substring(GMT_STRING.length())));
+        assert (VALID_TIMEZONES.contains(timezone.substring(UTC_STRING.length())));
 
         this.zoneOffsetId = ZoneId.of(timezone);
     }
@@ -96,8 +93,9 @@ public class Timezone {
     @Override
     public String toString() {
         String zoneOffsetIdString = zoneOffsetId.toString();
-        if (zoneOffsetIdString.equals(GMT_STRING)) {
-            zoneOffsetIdString = GMT_STRING + "+00:00";
+        // The timezone for UTC+00:00 is shown as UTC by default. For standardization, we add a "+00:00" to the end.
+        if (zoneOffsetIdString.equals(UTC_STRING)) {
+            zoneOffsetIdString = UTC_STRING + "+00:00";
         }
         return zoneOffsetIdString;
     }

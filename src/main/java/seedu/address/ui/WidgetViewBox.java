@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ContractExpiryDate;
+import seedu.address.model.client.Timezone;
 import seedu.address.model.note.Note;
 
 /**
@@ -151,7 +152,7 @@ public class WidgetViewBox extends UiPart<Region> {
         email.setText("");
         address.setText("");
         int offset = TimeZone.getTimeZone(ZoneId.systemDefault()).getOffset(new Date().getTime()) / 1000 / 60 / 60;
-        String offsetString = "GMT" + (offset < 0 ? "-" : "+") + offset;
+        String offsetString = Timezone.UTC_STRING + (offset < 0 ? "-" : "+") + offset;
         country.setText(Locale.getDefault().getDisplayCountry() + " (" + offsetString + ")");
         contractExpiryDate.setText("");
         noteTitle.setText("");
