@@ -399,6 +399,8 @@ Edits a note that is associated with a specific country at the given index based
 
 Due to ambiguity, editing of a country note when the country notes panel is not being displayed is not allowed, and an error message will be shown if this is attempted.
 
+The `untagged` tag is a reserved tag and should not be used in your command input.
+
 Format: `country note edit INDEX (nt/NOTE_STRING) (t/TAG)...`
 
 Example:
@@ -440,6 +442,7 @@ Thailand
 ### Deleting notes for a country: `country note delete`
 
 Deletes a note that is associated with a specific country at the given index based on the **current view** of the [list panel displaying country notes](#ui-when-viewing-country).
+
 Due to ambiguity, deleting of a country note when the country notes panel is not being displayed is not allowed, and an error message will be shown if this is attempted.
 
 Format: `country note delete INDEX`
