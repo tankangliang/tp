@@ -11,7 +11,7 @@ public class Tag {
 
     public static final int MAX_CHARACTERS = 45;
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric and have a maximum of "
-            + MAX_CHARACTERS + " characters. Also, the tag name \"untagged\" is reserved and should not be used.";
+            + MAX_CHARACTERS + " characters";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
     public static final Tag UNTAGGED = new Tag("untagged");
 
