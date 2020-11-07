@@ -13,6 +13,7 @@ Given below are my contributions to the project.
 * **New Feature**:
   * Client view - Ability to view a specific client's information in detail.
   * New GUI features (Viewing box)
+  * Commandline history
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=leeenhao&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=zoom&zA=LeeEnHao&zR=AY2021S1-CS2103T-F11-4%2Ftp%5Bmaster%5D&zACS=258.1984652947332&zS=2020-08-14&zFS=&zU=2020-10-14&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
