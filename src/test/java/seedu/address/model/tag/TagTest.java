@@ -23,6 +23,9 @@ public class TagTest {
 
         String invalidTagName2 = "pneumonoultramicroscopicsilicovolcanoconiosisk";
         assertThrows(IllegalArgumentException.class, Tag.MESSAGE_CONSTRAINTS, () -> new Tag(invalidTagName2));
+
+        String invalidTagName3 = "untagged"; // reserved tag name
+        assertThrows(IllegalArgumentException.class, Tag.MESSAGE_CONSTRAINTS, () -> new Tag(invalidTagName3));
     }
 
     @Test
@@ -36,6 +39,9 @@ public class TagTest {
         // non-alphanumeric tag name -> invalid
         assertFalse(Tag.isValidTagName("hello'"));
         assertFalse(Tag.isValidTagName("hello it me"));
+
+        // reserved tag name -> invalid
+        assertFalse(Tag.isValidTagName("untagged"));
 
         // tag name longer than 45 characters -> invalid
         assertFalse(Tag.isValidTagName("pneumonoultramicroscopicsilicovolcanoconiosisk"));
