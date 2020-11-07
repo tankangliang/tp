@@ -15,6 +15,7 @@ class JsonAdaptedTag {
 
     /**
      * Constructs a {@code JsonAdaptedTag} with the given tagName.
+     *
      * @param tagName String content of the tag.
      */
     @JsonCreator
