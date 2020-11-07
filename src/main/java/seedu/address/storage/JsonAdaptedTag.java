@@ -29,13 +29,9 @@ class JsonAdaptedTag {
         tagName = source.tagName;
     }
 
-    @JsonValue
-    public String getTagName() {
-        return tagName;
-    }
-
     /**
      * Returns the {@code tagName} for Jackson to use.
+     *
      * @return The {@code tagName} for the {@code Tag} object.
      */
     @JsonValue
