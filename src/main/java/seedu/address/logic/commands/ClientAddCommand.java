@@ -20,7 +20,7 @@ public class ClientAddCommand extends Command {
 
     public static final String COMMAND_WORD = "client add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -35,16 +35,16 @@ public class ClientAddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_COUNTRY + "SG "
-            + PREFIX_TIMEZONE + "GMT+8 "
+            + PREFIX_TIMEZONE + "UTC+08:00 "
             + PREFIX_CONTRACT_EXPIRY_DATE + "30-1-2023 ";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
-    public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists!";
 
     private final Client toAdd;
 
     /**
-     * Creates an ClientAddCommand to add the specified {@code Client}
+     * Creates a ClientAddCommand to add the specified {@code Client}.
      */
     public ClientAddCommand(Client client) {
         requireNonNull(client);
