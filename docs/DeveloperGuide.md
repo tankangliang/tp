@@ -266,7 +266,7 @@ Furthermore, the modification of previous commands in the history do not overrid
 
 The implementation of command history is backed by a list of strings `history`. Upon the entering of a valid command, the command history, `CommandHistory`.
 
-![User Command History Activity](images/CommandHistoryActivity.png))
+![User Command History Activity](images/CommandHistoryActivity.png)
 
 Below is a step-by-step description of what CommandHistory does.
 
