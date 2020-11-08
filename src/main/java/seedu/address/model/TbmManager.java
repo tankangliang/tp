@@ -38,7 +38,7 @@ public class TbmManager implements ReadOnlyTbmManager {
     public TbmManager() {}
 
     /**
-     * Creates an TbmManager using the clients in the {@code toBeCopied}
+     * Creates an TbmManager using the data in the {@code toBeCopied}
      */
     public TbmManager(ReadOnlyTbmManager toBeCopied) {
         this();
