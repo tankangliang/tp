@@ -24,7 +24,7 @@ public class Index {
     }
 
     /**
-     * Returns a zero based version of the given index.
+     * Returns a zero based version of this index object.
      *
      * @return Zero-based index.
      */
