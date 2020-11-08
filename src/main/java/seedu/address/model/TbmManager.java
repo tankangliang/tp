@@ -42,8 +42,6 @@ public class TbmManager implements ReadOnlyTbmManager {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
-
     /**
      * Replaces the contents of the client list with {@code clients} and the contents of the tag set with
      * the union over all client tags, then update client tag sets with unique tags.
@@ -110,10 +108,10 @@ public class TbmManager implements ReadOnlyTbmManager {
     }
 
     /**
-     * Checks whether the given country has the given countryNote.
+     * Checks whether the given country has the given note {@code countryNote}.
      *
-     * @param countryNote The given countryNote
-     * @return True if the given country has the given countryNote.
+     * @param countryNote The given country note.
+     * @return True if the given country has the given note {@code countryNote}.
      */
     public boolean hasCountryNote(CountryNote countryNote) {
         requireNonNull(countryNote);
@@ -121,9 +119,9 @@ public class TbmManager implements ReadOnlyTbmManager {
     }
 
     /**
-     * Adds the given countryNote to the given country.
+     * Adds the given note {@code countryNote} into the notes manager for country.
      *
-     * @param countryNote The given countryNote
+     * @param countryNote The given country note
      */
     public void addCountryNote(CountryNote countryNote) {
         requireNonNull(countryNote);
@@ -150,8 +148,6 @@ public class TbmManager implements ReadOnlyTbmManager {
         requireNonNull(countryNoteToDelete);
         countryNotesManager.deleteCountryNote(countryNoteToDelete);
     }
-
-    //// util methods
 
     @Override
     public String toString() {

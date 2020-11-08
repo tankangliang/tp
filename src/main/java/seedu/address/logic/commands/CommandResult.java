@@ -88,14 +88,14 @@ public class CommandResult {
      * Returns true if the UI should display the client view.
      */
     public boolean shouldDisplayClient() {
-        return widgetViewOption.isClient();
+        return widgetViewOption.isClientView();
     }
 
     /**
      * Returns true if the UI should display the country notes view.
      */
     public boolean shouldDisplayCountryNote() {
-        return widgetViewOption.isCountryNote();
+        return widgetViewOption.isCountryNoteView();
     }
 
     /**
