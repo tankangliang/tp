@@ -14,7 +14,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientSuggestionType;
 
 /**
- * Suggests a list of clients based on the specified client suggestion types
+ * Suggests a list of clients based on the specified client suggestion types.
  */
 public class ClientSuggestCommand extends Command {
 
@@ -35,7 +35,7 @@ public class ClientSuggestCommand extends Command {
     private final Comparator<Client> clientSuggestionTypeCombinedComparator;
 
     /**
-     * Initializes ClientSuggestCommand with a ClientSuggestionType
+     * Initializes ClientSuggestCommand with an ordered set of client suggestion types.
      */
     public ClientSuggestCommand(Set<ClientSuggestionType> clientSuggestionTypeOrderedSet) {
         requireNonNull(clientSuggestionTypeOrderedSet);
