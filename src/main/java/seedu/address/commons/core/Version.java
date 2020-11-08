@@ -33,27 +33,27 @@ public class Version implements Comparable<Version> {
     }
 
     /**
-     * Returns the MAJOR version number.
+     * Returns the major version number.
      *
-     * @return MAJOR number.
+     * @return major number.
      */
     public int getMajor() {
         return major;
     }
 
     /**
-     * Returns the MINOR version number.
+     * Returns the minor version number.
      *
-     * @return MINOR number.
+     * @return minor number.
      */
     public int getMinor() {
         return minor;
     }
 
     /**
-     * Returns the PATCH version number.
+     * Returns the patch version number.
      *
-     * @return PATCH number.
+     * @return patch number.
      */
     public int getPatch() {
         return patch;
