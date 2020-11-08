@@ -89,6 +89,7 @@ public class SampleDataUtil {
         alex.addClientNote(alexNote3);
         alex.addClientNote(alexNote4);
         alex.addClientNote(alexNote5);
+      
         return new Client[]{alex, bernice, charlotte, david, irfan, roy};
     }
 
