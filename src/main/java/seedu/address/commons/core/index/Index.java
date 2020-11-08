@@ -33,7 +33,7 @@ public class Index {
     }
 
     /**
-     * Returns a one based version of the given index.
+     * Returns a one based version of this index object.
      *
      * @return One-based index.
      */
