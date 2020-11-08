@@ -69,6 +69,9 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow(mainApp);
     }
 
+    /**
+     * Obtains the stage.
+     */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
@@ -79,6 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator.
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -213,13 +217,13 @@ public class MainWindow extends UiPart<Stage> {
 
             logger.info("Widget View Option: " + commandResult.getWidgetViewOptionAsString());
 
-            if (commandResult.shouldDisplayClient()) {
+            if (commandResult.shouldDisplayClientView()) {
                 logger.info("Toggling client view");
                 widgetPlaceholder.getChildren().clear();
                 widgetPlaceholder.getChildren().add(widgetViewBox.getRoot());
                 logger.info(logic.getWidgetClient().getName().fullName);
                 widgetViewBox.updateClientDisplay(logic.getWidgetClient());
-            } else if (commandResult.shouldDisplayCountryNote()) {
+            } else if (commandResult.shouldDisplayCountryNoteView()) {
                 logger.info("Toggling country notes view");
                 widgetPlaceholder.getChildren().clear();
                 countryNoteListPanel.setHeader(commandResult.getCountry());

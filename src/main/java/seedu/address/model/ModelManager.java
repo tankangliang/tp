@@ -65,6 +65,9 @@ public class ModelManager implements Model {
         this.initialiseTagNoteMap(); // init TagNoteMap upon construction of ModelManager
     }
 
+    /**
+     * Initializes a ModelManager with a new {@code TbmManager} and {@code UserPrefs}.
+     */
     public ModelManager() {
         this(new TbmManager(), new UserPrefs());
     }
@@ -203,9 +206,6 @@ public class ModelManager implements Model {
         this.tagNoteMap.addTagsForNote(newTags, note);
     }
 
-    /**
-     * Initialises TagNoteMap from client notes and country notes.
-     */
     @Override
     public void initialiseTagNoteMap() {
         this.tagNoteMap.initTagNoteMapFromClients(this.tbmManager.getClientList());

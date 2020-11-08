@@ -25,6 +25,9 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
+    /**
+     * Returns a standard list of sample client data.
+     */
     public static Client[] getSampleClients() {
         Client alex = new Client(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"), new Country("SG"), new Timezone("UTC+08:00"),
@@ -97,6 +100,9 @@ public class SampleDataUtil {
         return new Client[] { alex, bernice, charlotte, david, irfan, roy };
     }
 
+    /**
+     * Returns a standard list of sample country note data.
+     */
     public static List<CountryNote> getSampleCountryNotes() {
         CountryNote firstCountryNote = new CountryNote("Small domestic market as compared "
                 + "to rest of SEA countries", new Country("SG"));
@@ -119,6 +125,9 @@ public class SampleDataUtil {
         return Arrays.asList(firstCountryNote, secondCountryNote, thirdCountryNote);
     }
 
+    /**
+     * Returns TBM Manager with sample data.
+     */
     public static ReadOnlyTbmManager getSampleTbmManager() {
         TbmManager sampleTm = new TbmManager();
         for (Client sampleClient : getSampleClients()) {

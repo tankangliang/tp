@@ -128,6 +128,9 @@ public class CountryNoteListPanel extends UiPart<Region> {
             countryNoteScrollPane.setPrefHeight(200.0);
         }
 
+        /**
+         * Adds the {@code noteListCard} as one of the children to {@code countryNoteListView}.
+         */
         public void addNoteListCard(NoteListCard noteListCard) {
             countryNoteListView.getChildren().add(noteListCard.getRoot());
         }
@@ -135,6 +138,7 @@ public class CountryNoteListPanel extends UiPart<Region> {
 
     /**
      * Appends " notes" to the end of country to be used as header string.
+     *
      * @param country Country to be formatted as string.
      * @return Country's name with " notes" appended to the end.
      */

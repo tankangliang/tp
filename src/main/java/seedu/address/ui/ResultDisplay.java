@@ -23,6 +23,9 @@ public class ResultDisplay extends UiPart<Region> {
         super(FXML);
     }
 
+    /**
+     * Displays the string {@code feedbackToUser} in the result display to the user.
+     */
     public void setFeedbackToUser(String feedbackToUser) {
         requireNonNull(feedbackToUser);
         resultDisplay.setText(feedbackToUser);

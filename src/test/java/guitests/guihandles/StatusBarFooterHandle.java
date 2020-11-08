@@ -18,7 +18,7 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     /**
      * Constructor for handler.
      *
-     * @param statusBarFooterNode node to be passed in.
+     * @param statusBarFooterNode Node to be passed in.
      */
     public StatusBarFooterHandle(Node statusBarFooterNode) {
         super(statusBarFooterNode);

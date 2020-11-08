@@ -140,8 +140,8 @@ public interface Model {
      * Edits a note associated to a particular client.
      *
      * @param associatedClient Client that the note belongs to.
-     * @param noteToEdit     Note to be edited.
-     * @param  newNote     New note to be used.
+     * @param noteToEdit       Note to be edited.
+     * @param  newNote         New note to be used.
      */
     void editClientNote(Client associatedClient, Note noteToEdit, Note newNote);
 
@@ -187,7 +187,7 @@ public interface Model {
     void updateFilteredCountryNoteList(Predicate<CountryNote> predicate);
 
     /**
-     * Initialises TagNoteMap from Clients notes and Country notes.
+     * Initialises {@code TagNoteMap} from client notes and country notes.
      */
     void initialiseTagNoteMap();
 
